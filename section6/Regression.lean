@@ -5,6 +5,8 @@ open MeasureTheory
 open scoped BigOperators
 open CircularLawSection6 CircularLawSections56.Section6
 
+attribute [local instance] CircularLawSection4.iidMeasure_isProbability
+
 -- The zero polynomial and zero constant term do not break radial monotonicity.
 example : MonotoneOn (polynomialCircleMean 0) (Ioi 0) :=
   polynomialCircleMean_monotoneOn 0
@@ -167,3 +169,23 @@ example (z : ℂ) : MemLp (weightedRowsLogDet (1 : Matrix (Fin 1) (Fin 1) ℂ) z
     (by norm_num) (1 : Matrix (Fin 1) (Fin 1) ℂ) z (q := 1) zero_lt_one le_rfl
     (by intro i; simp) circularComplexGaussian_sq_integrable
     circularComplexGaussian_secondMoment.le).1
+
+-- Column reindexing preserves the actual IID law, including dimension one.
+example : MeasurePreserving (cyclicColumnSample 1) (cyclicAtomLaw 1 circularComplexGaussian)
+    (CircularLawSection4.iidMeasure (CircularLawSection4.iidMeasure circularComplexGaussian 1) 1) :=
+  cyclicColumnSample_measurePreserving 1 circularComplexGaussian
+
+-- The exact determinant identity also includes zero matrix scaling.
+example (q : ZMod 3 → ℝ) (z : ℂ) (ω : ZMod 3 × ZMod 3 → ℂ) :
+    weightedRowsLogDet (cyclicRowAmplitude 3 q 0) z (cyclicColumnSample 3 ω) =
+      cyclicRawLogDet 3 q 0 z ω := weightedRowsLogDet_cyclicColumnSample 3 q 0 z ω
+
+-- No logarithmic rate limit is left as an additional hypothesis.
+example : Tendsto (fun n : ℕ => (Real.log (Real.exp 1 * (n : ℝ))) ^ 2 / (n : ℝ))
+    atTop (𝓝 0) := tendsto_logEN_sq_div id tendsto_id
+
+-- Totalized zero normalization is preserved by the variance identity.
+example {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) (X : Ω → ℝ) :
+    ProbabilityTheory.variance (fun ω => X ω / 0) μ = 0 := by
+  rw [variance_div_const]
+  simp

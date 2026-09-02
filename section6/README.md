@@ -14,12 +14,14 @@ the publication-layout build, transitive axiom audit (306 declarations,
 the expected tail Jensen inequality for planar almost every parameter,
 with its integrability and nonvanishing inputs discharged by reuse.
 
-Five subsequent modules are the next validation batch, not part of that
+Eight subsequent modules are the next validation batch, not part of that
 checkpoint: Gaussian density/atom-log instantiation, exact compact-core
 finite-band identification, diagonal-only affine-log bounds, automatic
-row-resampling closure, and literal determinant row fibers. The affine-log
-and resampling modules have passed targeted local checks; integrated status
-must be read from the newer CI run.
+row-resampling closure, literal determinant row fibers, the reused uniform
+logarithmic constant, actual cyclic-to-row law transport, and normalized
+concentration. Gaussian density, affine-log, resampling and determinant
+row fibers have individually passed strict cloud checks; the full newer
+batch has not yet passed integration, audit and all 35 regressions.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the

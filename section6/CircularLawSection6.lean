@@ -25,3 +25,6 @@ import CircularLawSection6.CoreBandIdentification
 import CircularLawSection6.AffineLogFromDiagonal
 import CircularLawSection6.RowResamplingClosure
 import CircularLawSection6.DeterminantRowFibers
+import CircularLawSection6.RowLogUniformBound
+import CircularLawSection6.CyclicRowTransport
+import CircularLawSection6.NormalizedConcentration

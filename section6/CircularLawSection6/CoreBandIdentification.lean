@@ -97,9 +97,10 @@ theorem coreBandSample_measurePreserving (N d : ℕ) [NeZero N]
     (ν : Measure ℂ) [IsProbabilityMeasure ν] :
     MeasurePreserving (coreBandSample N d center) (cyclicAtomLaw N ν)
       (paperIndicatorSampleMeasure N d ν) := by
-  simpa only [coreBandSample, cyclicAtomLaw, paperIndicatorSampleMeasure, iidMeasure_eq_pi] using
-    measurePreserving_pi_restrict_injective (coreBandCoordinate N d center)
-      (coreBandCoordinate_injective N d hfit center) ν
+  unfold coreBandSample cyclicAtomLaw paperIndicatorSampleMeasure
+  rw [iidMeasure_eq_pi]
+  exact measurePreserving_pi_restrict_injective (coreBandCoordinate N d center)
+    (coreBandCoordinate_injective N d hfit center) ν
 
 namespace NoncompactProfile
 
