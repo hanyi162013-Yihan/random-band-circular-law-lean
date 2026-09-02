@@ -25,17 +25,20 @@ theorem ae_shifted_matrix_det_ne_zero {ι Ω : Type*} [Fintype ι] [DecidableEq 
     ∀ᵐ z ∂(volume : Measure ℂ), ∀ᵐ ω ∂μ, (A ω - z • 1).det ≠ 0 := by
   classical
   by_cases hn : Fintype.card ι = 0
-  · letI : IsEmpty ι := Fintype.card_eq_zero_iff.mp hn
+  · let : IsEmpty ι := Fintype.card_eq_zero_iff.mp hn
     exact ae_of_all _ (fun _ => ae_of_all _ (fun _ => by simp))
-  · letI : NeZero (Fintype.card ι) := ⟨hn⟩
+  · let : NeZero (Fintype.card ι) := ⟨hn⟩
     let e : ZMod (Fintype.card ι) ≃ ι := Fintype.equivOfCardEq (by simp)
     have h := ae_shifted_cyclic_det_ne_zero μ (Fintype.card ι)
       (fun ω => (A ω).submatrix e e)
       (fun i j => (measurable_pi_apply (e j)).comp ((measurable_pi_apply (e i)).comp hA))
     have heq (ω : Ω) (z : ℂ) :
         ((A ω).submatrix e e - z • 1).det = (A ω - z • 1).det := by
-      rw [← Matrix.submatrix_one_equiv e, ← Matrix.submatrix_smul,
-        ← Matrix.submatrix_sub, Matrix.det_submatrix_equiv_self]
+      have hm : (A ω).submatrix e e - z • 1 = (A ω - z • 1).submatrix e e := by
+        ext i j
+        simp only [Matrix.submatrix_apply, Matrix.sub_apply, Matrix.smul_apply,
+          Matrix.one_apply, e.injective.eq_iff]
+      rw [hm, Matrix.det_submatrix_equiv_self]
     simpa only [heq] using h
 
 theorem expected_shifted_matrixCutoff_difference_ae

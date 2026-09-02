@@ -128,7 +128,7 @@ theorem periodicization_expected_cutoff_ae
           matrixCutoffPotential (routedBandMatrix (periodicBlockRoute len H) b ω - z • 1) a|
         ∂Measure.pi (fun _ : ((j : Fin q) × Fin (len j)) × Fin (2 * H + 1) => ν)) ≤
           Real.sqrt (8 * (H : ℝ) / m₀) / a := by
-  letI : Nonempty ((j : Fin q) × Fin (len j)) := Fintype.card_pos_iff.mp (by
+  let : Nonempty ((j : Fin q) × Fin (len j)) := Fintype.card_pos_iff.mp (by
     simpa only [Fintype.card_sigma, Fintype.card_fin] using NeZero.pos (∑ j, len j))
   have hE := periodicization_expected_energy len hfit b hb ν hInt hMoment
   have hnorm := periodicization_expected_normalized_energy len hm₀ hmin hfit b hb ν hInt hMoment
