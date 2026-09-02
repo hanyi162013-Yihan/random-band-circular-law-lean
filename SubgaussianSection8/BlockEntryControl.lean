@@ -12,7 +12,8 @@ theorem opNormConstant_nonneg (A : Atom) : 0 ≤ opNormConstant A := by
   positivity
 
 theorem opNormConstant_one_le (A : Atom) : 1 ≤ opNormConstant A := by
-  have hs : (1 : ℝ) ≤ Real.sqrt (A.parameter + 1) := Real.one_le_sqrt.mpr (by positivity)
+  have hs : (1 : ℝ) ≤ Real.sqrt (A.parameter + 1) :=
+    Real.one_le_sqrt.mpr (le_add_of_nonneg_left (NNReal.coe_nonneg _))
   unfold opNormConstant
   linarith
 

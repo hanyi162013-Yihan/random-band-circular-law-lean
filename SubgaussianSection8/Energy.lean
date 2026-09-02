@@ -35,7 +35,9 @@ theorem intervalMeanAtomSquare_integral
   simp_rw [integral_finsetSum _ (fun a _ => hi _ a), he]
   simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul,
     mul_one, Nat.cast_mul]
-  field_simp
+  have hw : (W : ℝ) ≠ 0 := by exact_mod_cast hW.ne'
+  have hs' : (s : ℝ) ≠ 0 := by exact_mod_cast hs.ne'
+  field_simp [hw, hs']
 
 theorem cyclicMatrix_energy_integrable_and_integral
     (A : Atom) (W s : ℕ) (hW : 0 < W) :

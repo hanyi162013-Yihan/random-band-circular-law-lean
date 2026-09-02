@@ -1,6 +1,6 @@
 import SubgaussianSection8
 
--- Intermediate extension audit; the full logarithmic-bandwidth theorem is not yet present.
+-- The audit succeeds only after the complete extension has compiled.
 #print axioms SubgaussianSection8.Atom.integrable_sq
 #print axioms SubgaussianSection8.intervalMeanAtomSquare_integral
 #print axioms SubgaussianSection8.ring_energy_limit
@@ -9,3 +9,9 @@ import SubgaussianSection8
 #print axioms SubgaussianSection8.subgaussianInterval_clippedLog_eq_log_of_good
 #print axioms SubgaussianSection8.circular_law_of_log_potential
 #print axioms SubgaussianSection8.high_band_circular_law
+
+#print axioms SubgaussianSection8.subgaussianBoundarySmallBall
+#print axioms SubgaussianSection8.normalizedCellResetLoss_tendsto
+#print axioms SubgaussianSection8.subgaussian_normalizedCorePressure_tendsto
+#print axioms SubgaussianSection8.section8_subgaussian_log_potential
+#print axioms SubgaussianSection8.section8_subgaussian_circular_law
