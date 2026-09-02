@@ -1,14 +1,34 @@
 # Section 9 dependencies required by Section 8
 
-Audit date: 2026-09-02. Audited baseline:
+Audit date: 2026-09-02. **Historical audited baseline**:
 `d6c29a1e3f125da59c3da47f68848797259e2cf7`.
 Reference: Yi Han, [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
 The source statements checked are `part2_block.tex`, Section 8
 (`sec:gb-global-proof`), and the local statements and Section 9 proofs.
-This is a source/signature audit; it is not a replacement for the final
-integrated build, actual `#print axioms` run, or final-signature audit.
+The baseline findings below are historical. The current verification
+record is separate and refers to the completed Section 8 implementation.
 
-## Finding and subsequently authorized trust boundary
+## Current verification record
+
+Verified code commit: `15433d8765efd6c9767967140bb6969b6e31f643`.
+Successful [CI run 33676900277, job 100403792252](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33676900277/job/100403792252).
+
+- The normal scoped build of `BernoulliSection8` and its required
+  dependencies passed, including the final `lake build BernoulliSection8`.
+  This records Section 8 verification, not a full-repository build.
+- The strict `Section8/AxiomAudit.lean` audit passed with exactly **28
+  reports**. The only allowed logical axioms were `propext`,
+  `Classical.choice`, and `Quot.sound`.
+- `Section8/PublicSignatureAudit.lean` passed. Its actual `#print` output
+  confirms the external structures, literal matrix and sample law, and
+  both final theorem signatures described below.
+
+The audit output is available in the linked CI job's Section 8 audit step.
+The mathematical estimates explicitly supplied as Cook,
+Nguyen, and Section 3 parameters remain external inputs; the successful
+logical-axiom audit does not turn them into internally proved estimates.
+
+## Historical finding and subsequently authorized trust boundary
 
 After this audit identified the two explicit dependencies, the user
 authorized Nguyen and Cook to remain external mathematical inputs in this
@@ -17,15 +37,16 @@ of this task. The final external-input list is **Section 3, Cook, and
 Nguyen**; already proved source code may still be reused normally.
 Cook and Nguyen are therefore **permitted external estimates**. Concrete
 Rademacher model instantiations and the Section 8 assembly have now been
-written; their integrated Lean verification is still in progress. The earlier Section
-3/4-only boundary is superseded. No
+written and passed the scoped build and audits recorded above. The earlier
+Section 3/4-only boundary is historical and superseded. No
 reset, seam, pressure, reference, or replacement assumption is authorized
 by this change.
 
 The Section 9 probability development does **not** discharge Section 8
 inputs (L1) and (L2) from the atom-law assumptions alone. Its public definitions
 still take `NguyenBottomSingularInput` and/or
-`CookDeformedSquareInput`. A whole-repository search of Lean sources found
+`CookDeformedSquareInput`. At the historical baseline, a whole-repository
+search of Lean sources found
 133 references to these structures, all declarations or uses of parameters;
 no constructor, existence theorem, or Rademacher-specific proof discharging
 the required estimates was found in the audited baseline.
@@ -38,11 +59,11 @@ the requested final trust boundary.
 
 Their independent proofs remain absent from the audited formal source.
 The user's explicit authorization now permits using their precise types
-below. The current source signatures in `Section8Results.lean` retain Cook,
+below. The current compiled signatures in `Section8Results.lean` retain Cook,
 Nguyen, and `Section3SubgaussianHighBandInput rademacherLaw 1` visibly.
 The model, packet, parameter-range, conditioning, endpoint, pressure,
-and terminal callers have been written internally. Their presence is a
-source-level finding, pending the complete build and final axiom audit.
+and terminal callers have been constructed internally and verified by
+the successful scoped build and audits.
 Moving additional unproved conclusions into a
 reset, seam, pressure, or frame record would still violate the boundary.
 
@@ -138,7 +159,7 @@ conclusion, and supplies `rademacherLaw_isRealSubgaussianAtom` internally.
 | Physical terminal normalization | `section9PhysicalTerminalSmallBall` | Exact nonzero common-scaling identity; applies the raw theorem at `sigma * z` and `sigma • Q`. Cook remains. |
 | Fixed exterior degree and arbitrary orthonormal frames | `section9ArbitraryFrameSmallBall` | Cook plus `PaperEndpointGood`; latter contains concrete endpoint norm and positive determinant lower bounds. |
 | Predictable random endpoints/frames | `section9ArbitraryFrameSmallBallConditional` | Endpoint goodness for every outside parameter, measurable frames/endpoints, and fresh/outside independence are required. |
-| Combined interface and frame result | `section9InterfaceAndArbitraryFrameSmallBall` | Constructs endpoint data on the good event and explicitly takes Nguyen and Cook. The additional actual Section 8 reset callers are now written in `RademacherFrameSmallBall`, `ConditionalCappedReset`, and `IntervalResetLoss`, pending their integrated check. |
+| Combined interface and frame result | `section9InterfaceAndArbitraryFrameSmallBall` | Constructs endpoint data on the good event and explicitly takes Nguyen and Cook. The actual Section 8 reset callers in `RademacherFrameSmallBall`, `ConditionalCappedReset`, and `IntervalResetLoss` passed the scoped build. |
 
 The public terminal choice is `t = W`. Its exact bad probability is
 
@@ -157,8 +178,8 @@ matrix or random RRQR rank. These finite formulas have the strength
 needed for `p_W = O(sqrt(log W / W))`. The new `CookRates.lean`,
 `RademacherTerminalRates.lean`, and `AveragedRates.lean` contain the
 fixed-constant bounds and scalar limits used by the actual capped-reset
-assembly. This is internal asymptotic work, not an additional external
-small-ball input; the integrated caller remains under verification.
+assembly. This internal asymptotic work and its integrated caller passed
+verification; no additional external small-ball input was added.
 
 The base loss is the explicit sum
 `log threeBlockConcreteComparisonConstant + terminalUniformValueLoss +
@@ -199,8 +220,7 @@ absence. This theorem is for fixed `z`; the physical row-scaling
 substitution produces `sqrt(3W) * z`. The new `WidthLog.lean` and
 `RademacherBoundaryGrowth.lean` instead use the exact translation logarithm
 `3W log(1 + sqrt(3W) norm(z))` to retain one width logarithm. The scalar
-module has passed Lean checks; the endpoint caller is awaiting its
-normal dependency-ordered build.
+module and endpoint caller both passed the normal scoped build.
 
 The endpoint comparison is already explicit through
 `endpointCompoundCrudeBound W B =
@@ -208,8 +228,8 @@ The endpoint comparison is already explicit through
 For fixed `B` and determinants at least `exp(-CW)`, this has the
 needed `exp(O(W log W))` size. The Section 9 public interface supplies
 these finite constants; the new Section 8 endpoint-good wrapper and
-two-sided normalized coefficient/Gram comparison are written in
-`RademacherBoundaryGrowth.lean`, pending integrated verification.
+two-sided normalized coefficient/Gram comparison are proved in
+`RademacherBoundaryGrowth.lean` and passed integrated verification.
 
 The main full-block model has unit raw weights and uniform physical
 normalization. A general theorem for independently weighted entries
@@ -219,7 +239,7 @@ is not required to instantiate the stated unit-weight Bernoulli target.
 Uniform physical row scaling alone should not be described as a proof of
 the general weighted-profile theorem.
 
-## Discrete zero events and final assembly requirements
+## Discrete zero events and verified final assembly
 
 `cappedLogLoss T c w` explicitly equals `T` when `w = 0`.
 The local theorem proves a small **positive** bound on the zero event;
@@ -230,13 +250,12 @@ The cleared Fock identity remains valid at zero determinants, while
 `Real.log 0 = 0` in Lean. The current source now includes
 `rademacherCyclicFock_zero_probability_tendsto_zero` and the corresponding
 seam comparison in `RademacherSeamLimit.lean`. Together with the clipped
-good-event identities, these are the intended explicit treatment of the
-exceptional zero event. Their integrated verification is pending; no
+good-event identities, these provide the proved explicit treatment of the
+exceptional zero event and passed integrated verification. No
 almost-sure invertibility conclusion is imported from the density model.
 
-The previously missing assembly steps now have the following source
-declarations. This table records written implementations, not a release
-or successful integrated-build claim.
+The assembly steps missing at the historical baseline now have the
+following implementations, all included in the successful scoped build.
 
 | Assembly step | Current Section 8 source |
 |---|---|
@@ -249,35 +268,39 @@ or successful integrated-build claim.
 | Literal matrix energy and density-free circular-law reduction | `RademacherEnergy.lean`, `RademacherCircularReduction.lean`, `Section8Results.lean` |
 
 `section8_bernoulli_log_potential` and
-`section8_bernoulli_circular_law` are now written in `Section8Results.lean`.
-Their inspected source signatures take the named Cook, Nguyen, and
-Section 3 inputs; the Nguyen parameter-range condition; positive widths
+`section8_bernoulli_circular_law` are compiled in `Section8Results.lean`.
+Their actual CI `#print` signatures take `CookDeformedSquareInput.{0, 0}`,
+`NguyenBottomSingularInput.{0, 0}`, and
+`Section3SubgaussianHighBandInput rademacherLaw 1`; the condition
+`1 ≤ nguyen.subgaussianBound`; positive widths
 and outside-site counts; and `W → ∞`, `W/log N → ∞`, where
-`N=(s+3)W`. They do not take pressure convergence, a reset estimate, a seam
+`N=(s+3)W`. The logarithmic-potential theorem then quantifies over every
+`z : ℂ`. The circular-law theorem quantifies over every
+`f : BoundedContinuousFunction ℂ ℝ`, with **no additional smoothness or
+compact-support premise**. They do not take pressure convergence, a reset estimate, a seam
 estimate, a frame/endpoint certificate, an energy certificate, a
 replacement theorem, or a Section 4 paper assumption. The long-branch
 and calibration helpers accept reusable intermediate comparison
 hypotheses in some declarations, but `RademacherLogPotential.lean` passes
-the newly written actual comparisons to them.
+the proved actual comparisons to them.
 
-The remaining gate is verification: complete the normal dependency-ordered
-Section 8 Lake build and its final `lake build BernoulliSection8`, fix any elaboration or
-proof failures, then perform the placeholder scan, actual logical-axiom
-audit, and compiled public-signature audit. The current source signature
-inspection alone does not certify that the final declarations elaborate
-or that their proof dependencies contain no placeholder axioms.
+The normal scoped build, final target build, strict 28-report logical-axiom
+audit, and compiled public-signature audit are complete for the commit
+and CI run recorded above. These results supersede the earlier pending
+verification status; the historical source inspection alone was not the
+verification gate.
 
 ## Concrete Section 8 implementations added during this task
 
-The baseline absence above is distinct from the new callers written in
-this task. `BandwidthLedger.lean`, `FiniteSupport.lean`, `WidthLog.lean`, and
-`RademacherIntervalIID.lean` have passed direct Lean checks. They prove, respectively, the original
+The historical baseline absence above is distinct from the callers
+completed in this task. `BandwidthLedger.lean`, `FiniteSupport.lean`,
+`WidthLog.lean`, and `RademacherIntervalIID.lean` passed the scoped build.
+They prove, respectively, the original
 bandwidth-ratio equivalence (under `N >= 4W`) and finite-union exponential
 limit; the measurable finite-support construction and its exact probability
 identities; the pure scalar width-logarithm bounds; and the literal interval
-iid-square instances. The remaining modules below are
-under dependency-ordered checking; their presence alone is not a build
-claim.
+iid-square instances. The modules below likewise passed the normal
+scoped build and are covered by the verification record above.
 
 - `RademacherIntervalIID.lean` builds all three physical block squares
   from the literal product of the two-point measure. There is no

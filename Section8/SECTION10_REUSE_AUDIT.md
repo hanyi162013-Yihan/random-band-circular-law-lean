@@ -62,13 +62,25 @@ does not settle the full `W / log N → ∞` regime by itself.
 
 ## Verification status
 
-`RademacherEnergy`, `RademacherIID`, `PhysicalBoundaryScaling`,
-`RademacherCircularReduction` and `Section3HighBand` have each passed an
-independent Lean check and produced an `.olean`. These checks establish
-those modules only; they do not certify the remaining integration chain.
+The earlier independent checks of `RademacherEnergy`, `RademacherIID`,
+`PhysicalBoundaryScaling`, `RademacherCircularReduction` and
+`Section3HighBand` produced `.olean` files for those modules. Final scoped
+verification has now passed for source commit
+[`15433d8765efd6c9767967140bb6969b6e31f643`](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/commit/15433d8765efd6c9767967140bb6969b6e31f643),
+in [CI run 33676900277, job 100403792252](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33676900277/job/100403792252).
 
-The complete source chain through `Section8Results` is present. Normal
-serialized Lake verification is in progress, including dependencies and
-the final Section 8 target build. The boundary/frame, terminal-rate, reset,
-seam and final-assembly modules still require that verification to finish.
-This audit does not claim a completed release or a successful final build.
+- Normal `lake build BernoulliSection8` passed, reporting 4,132 Lake jobs.
+  The selected project dependency closure contains 271 modules, including
+  53 Section 8 modules and no `CircularLawSection4` module. Lake's job count
+  is distinct from this project-module count.
+- `python3 scripts/check_axioms.py --audit-file Section8/AxiomAudit.lean`
+  passed all 28 expected declaration reports. Every reported axiom belongs
+  to the strict allowlist: `propext`, `Classical.choice`, `Quot.sound`.
+- `lake env lean Section8/PublicSignatureAudit.lean` passed, including the
+  public input structures and final theorem signatures.
+- `python3 scripts/check_placeholders.py --path Section8` passed over all
+  55 Section 8 Lean files, including the two audit files.
+
+This verifies the complete Section 8 integration chain and its necessary
+dependencies at the cited source commit. The mathematical input boundary
+remains the explicit Section 3, Cook and Nguyen interfaces described above.
