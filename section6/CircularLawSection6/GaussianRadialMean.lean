@@ -71,6 +71,7 @@ theorem scaledUnitCore_phaseAverage_eq (p : NoncompactProfile) (N H : ℕ) [NeZe
   congr 1
   apply intervalIntegral.integral_congr
   intro θ _
+  dsimp only
   rw [affineDeterminantPolynomial_eval]
   unfold scaledUnitCoreLogDet
   rw [p.unitCoreMatrix_global_phase]
@@ -133,7 +134,7 @@ theorem gaussian_core_raw_mean_of_fixed_scales (p : NoncompactProfile)
   have hcont (z : ℂ) : ContinuousAt (fun r : ℝ => varianceScaledRadialPotential (r ^ 2) ‖z‖)
       (Real.sqrt v) := by
     exact (continuousAt_varianceScaledRadialPotential (radius := ‖z‖) (sq_pos_of_pos hroot)).comp
-      (g := fun r : ℝ => r ^ 2)
+      (f := fun r : ℝ => r ^ 2)
       (show ContinuousAt (fun r : ℝ => r ^ 2) (Real.sqrt v) from (continuous_id.pow 2).continuousAt)
   have h := ae_tendsto_varying_radius_of_countable_dense (volume : Measure ℂ) hS hCount
     (fun z n r => p.scaledUnitCoreMean (N n) (H n) (W n) r z)

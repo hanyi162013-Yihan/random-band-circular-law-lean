@@ -39,7 +39,8 @@ theorem gaussian_unitCore_cutoff_scaling_ae (p : NoncompactProfile)
   have hm : Measurable (p.unitCoreMatrix N H W) :=
     weightedCyclicMatrix_measurable_matrix N _
   have hms (t : ℝ) : Measurable (fun ω => (t : ℂ) • p.unitCoreMatrix N H W ω) := by
-    simpa only [Pi.smul_apply] using hm.const_smul (t : ℂ)
+    change Measurable ((t : ℂ) • p.unitCoreMatrix N H W)
+    exact hm.const_smul (t : ℂ)
   have hdet (t : ℝ) := ae_shifted_cyclic_det_ne_zero (gaussianProfileLaw N) N
     (fun ω => (t : ℂ) • p.unitCoreMatrix N H W ω)
     (fun i j => measurable_const.mul (weightedCyclicMatrix_measurable N
@@ -105,7 +106,8 @@ theorem gaussian_unitCore_cutoff_varying_scale (p : NoncompactProfile)
   filter_upwards [hall] with z hz
   apply squeeze_zero (fun _ => abs_nonneg _) (fun n => ?_)
     (show Tendsto (fun n => |r n - s| / a) atTop (𝓝 0) by
-      simpa only [sub_self, abs_zero, zero_div] using (hr.sub tendsto_const_nhds).abs.div_const a)
+      simpa only [sub_self, abs_zero, zero_div] using
+        (hr.sub (tendsto_const_nhds (x := s))).abs.div_const a)
   obtain ⟨hi, hj, hb⟩ := hz n a ha
   rw [← integral_sub hi hj]
   exact abs_integral_le_integral_abs.trans hb
