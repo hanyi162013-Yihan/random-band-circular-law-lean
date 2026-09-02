@@ -1,0 +1,35 @@
+import CircularLawSection4.PaperPressureAssumptionFree
+
+/-!
+# Focused kernel-dependency audit for assumption-free pressure concentration
+
+This audit covers the generic outer-integrability and global-`L²` closure
+lemmas, their paper-pressure specializations, and the final row/flat
+concentration statements.
+-/
+
+-- Generic closure mechanisms.
+#print axioms CircularLawSection4.iidRawResamplingOuter_integrable_of_fiber_memLp
+#print axioms CircularLawSection4.iidRawResamplingEnergy_le_four_mul_of_fiber_memLp_auto
+#print axioms CircularLawSection4.memLp_two_of_variance_symmetricClip_le
+#print axioms CircularLawSection4.memLp_two_of_iid_raw_replacement_integrable
+
+-- Paper-pressure closure of the two former technical hypotheses.
+#print axioms CircularLawSection4.PaperIndicatorWeights.complex_paperIndicatorOpenPressure_rawOuter_integrable
+#print axioms CircularLawSection4.PaperIndicatorWeights.real_paperIndicatorOpenPressure_rawOuter_integrable
+#print axioms CircularLawSection4.PaperIndicatorWeights.complex_paperIndicatorOpenPressure_rawResamplingEnergy_le_auto
+#print axioms CircularLawSection4.PaperIndicatorWeights.real_paperIndicatorOpenPressure_rawResamplingEnergy_le_auto
+#print axioms CircularLawSection4.PaperIndicatorWeights.complex_paperIndicatorOpenPressure_memLp_two
+#print axioms CircularLawSection4.PaperIndicatorWeights.real_paperIndicatorOpenPressure_memLp_two
+
+-- Final row-coordinate statements.
+#print axioms CircularLawSection4.PaperIndicatorWeights.variance_complex_paperIndicatorOpenPressure_le_auto
+#print axioms CircularLawSection4.PaperIndicatorWeights.variance_real_paperIndicatorOpenPressure_le_auto
+#print axioms CircularLawSection4.PaperIndicatorWeights.integral_max_complex_paperIndicatorOpenPressure_le_auto
+#print axioms CircularLawSection4.PaperIndicatorWeights.integral_max_real_paperIndicatorOpenPressure_le_auto
+
+-- Final flat random-matrix statements.
+#print axioms CircularLawSection4.PaperIndicatorWeights.variance_complex_paperIndicatorFlatOpenPressure_le_auto
+#print axioms CircularLawSection4.PaperIndicatorWeights.variance_real_paperIndicatorFlatOpenPressure_le_auto
+#print axioms CircularLawSection4.PaperIndicatorWeights.integral_max_complex_paperIndicatorFlatOpenPressure_le_auto
+#print axioms CircularLawSection4.PaperIndicatorWeights.integral_max_real_paperIndicatorFlatOpenPressure_le_auto

@@ -1,0 +1,20 @@
+import CircularLawSection4.PaperCompanionInvertibility
+
+/-!
+# Axiom audit for the paper companion determinant and invertibility bridge
+-/
+
+#print axioms CircularLawSection4.paperCyclicTransferMatrix_det
+#print axioms CircularLawSection4.paperCyclicTransferMatrix_det_of_even
+#print axioms CircularLawSection4.paperCyclicTransferMatrix_isUnit
+#print axioms CircularLawSection4.compound_isUnit_of_isUnit_det
+#print axioms CircularLawSection4.paperCyclicTransferMatrix_all_compounds_isUnit
+#print axioms CircularLawSection4.paperCyclicTransferMatrix_clearedCompound_isUnit
+#print axioms CircularLawSection4.rowCompanion_finLeftShift_det
+#print axioms CircularLawSection4.rowCompanion_finLeftShift_det_of_even
+#print axioms CircularLawSection4.rowCompanion_finLeftShift_isUnit
+#print axioms CircularLawSection4.rowCompanion_finLeftShift_compound_isUnit
+#print axioms CircularLawSection4.paperShiftedScalarTransfer_det_eq_leftEdge_div_rightEdge
+#print axioms CircularLawSection4.paperShiftedScalarTransfer_all_isUnit
+#print axioms CircularLawSection4.ae_paperIndicatorTransferMatrix_all_isUnit_complex_withDensity
+#print axioms CircularLawSection4.ae_paperIndicatorTransferMatrix_all_isUnit_real_withDensity
