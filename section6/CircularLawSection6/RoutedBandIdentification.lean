@@ -24,7 +24,11 @@ theorem finEquiv_cyclicFinSlot {N : ℕ} [NeZero N] (H : ℕ)
     (i : Fin N) (s : Fin (2 * H + 1)) :
     ZMod.finEquiv N (cyclicFinSlot H i s) =
       ZMod.finEquiv N i - (H : ZMod N) + (s.val : ZMod N) := by
-  simp only [cyclicFinSlot, map_add, map_sub, map_natCast]
+  have hcast (k : ℕ) : ZMod.finEquiv N (k : Fin N) = (k : ZMod N) := by
+    cases N with
+    | zero => exact (NeZero.ne 0 rfl).elim
+    | succ N => rfl
+  simp only [cyclicFinSlot, map_add, map_sub, hcast]
 
 end FinSlots
 

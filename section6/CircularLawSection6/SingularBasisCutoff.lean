@@ -52,7 +52,7 @@ theorem operatorCutoffPotential_smul (T : Module.End ℂ E) (hT : Function.Injec
   have hscale : Function.Injective ((r : ℂ) • T) := by
     intro x y h
     apply hT
-    exact smul_left_cancel₀ hrC h
+    exact (smul_right_injective E hrC) h
   have hv (i) : ((r : ℂ) • T) (v i) = ((r * T.singularValues i : ℝ) : ℂ) • u i := by
     simp only [LinearMap.smul_apply, hTv, smul_smul, Complex.ofReal_mul]
   have hu (i) : (((r : ℂ) • T).adjoint) (u i) =

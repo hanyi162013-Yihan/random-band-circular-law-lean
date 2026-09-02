@@ -403,3 +403,9 @@ example (ν : Measure ℂ) [IsProbabilityMeasure ν] :
       (Measure.pi (fun _ : ((b : Fin 2) × Fin 5) × Fin 3 => ν))
       (CircularLawSection4.paperIndicatorSampleMeasure 10 1 ν) :=
   fullBlockPaperSample_measurePreserving (fun _ : Fin 2 => 5) 1 1 (by decide) ν
+
+-- The cutoff of two nonsingular scalar blocks is their arithmetic mean.
+example (A : Fin 2 → Matrix (Fin 1) (Fin 1) ℂ) (hA : ∀ b, (A b).det ≠ 0) :
+    matrixCutoffPotential (Matrix.blockDiagonal' A) 1 =
+      (matrixCutoffPotential (A 0) 1 + matrixCutoffPotential (A 1) 1) / 2 := by
+  simpa [Fin.sum_univ_two] using matrixCutoffPotential_blockDiagonal A hA zero_lt_one
