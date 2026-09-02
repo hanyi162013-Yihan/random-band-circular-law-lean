@@ -54,8 +54,8 @@ jobs:
             lean-section8-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean') }}-
       - name: Build Section 8 and its required dependencies
         id: build
-        # Ends with normal `lake build BernoulliSection8`; no whole-repository build.
-        run: python3 scripts/build_serial.py --target BernoulliSection8
+        # Collect independent failures; check the normal target only if all modules pass.
+        run: python3 scripts/build_serial.py --target BernoulliSection8 --keep-going
       - name: Save completed Section 8 dependency modules
         # Fork PRs can read base caches, but this draft does not save their builds.
         # No continue-on-error is applied to the build or the axiom audit.

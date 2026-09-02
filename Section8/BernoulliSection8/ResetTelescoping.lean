@@ -24,7 +24,7 @@ theorem reverseMatrixProduct_nat_succ (A : ℕ → Matrix ι ι ℂ) (K : ℕ) :
       A K * reverseMatrixProduct (fun j : Fin K => A j.1) := by
   unfold reverseMatrixProduct
   rw [list_ofFn_fin_rev (fun j : Fin (K + 1) => A j.1),
-    List.ofFn_succ', List.reverse_concat, List.prod_cons]
+    List.ofFn_succ_last, List.reverse_concat, List.prod_cons]
   simp only [Fin.val_last, Fin.val_castSucc]
   rw [list_ofFn_fin_rev (fun j : Fin K => A j.1)]
 

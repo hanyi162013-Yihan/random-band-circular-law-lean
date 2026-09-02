@@ -62,8 +62,10 @@ theorem tendsto_anchor_dimension_ratio :
     dsimp [anchorSites]
     nlinarith
   have hi : Tendsto (fun W : ℕ => 3 / (anchorSites W : ℝ)) atTop (𝓝 0) := by
-    simpa only [div_eq_mul_inv] using
-      (tendsto_inv_atTop_zero.comp (tendsto_natCast_atTop_atTop.comp hsites)).const_mul 3
+    have hcast : Tendsto (fun W => (anchorSites W : ℝ)) atTop atTop :=
+      tendsto_natCast_atTop_atTop.comp hsites
+    simpa only [div_eq_mul_inv, Function.comp_def, mul_zero] using
+      (tendsto_inv_atTop_zero.comp hcast).const_mul (3 : ℝ)
   have h := (tendsto_const_nhds : Tendsto (fun _ : ℕ => (1 : ℝ)) atTop (𝓝 1)).sub hi
   simp only [sub_zero] at h
   apply h.congr'
@@ -122,7 +124,8 @@ theorem tendsto_longBranchDimensionRatio (W m : ℕ → ℕ)
   have hi : Tendsto (fun n => 2 * (1 / (W n : ℝ) ^ (1 / 200 : ℝ))) atTop (𝓝 0) := by
     have hp := (tendsto_rpow_atTop (by norm_num : (0 : ℝ) < 1 / 200)).comp
       (tendsto_natCast_atTop_atTop.comp hW)
-    simpa only [one_div] using (tendsto_inv_atTop_zero.comp hp).const_mul 2
+    simpa only [one_div, Function.comp_def, mul_zero] using
+      (tendsto_inv_atTop_zero.comp hp).const_mul (2 : ℝ)
   have hd : Tendsto (fun n => 1 - longBranchDimensionRatio (W n) (m n)) atTop (𝓝 0) := by
     apply squeeze_zero' _ _ hi
     · filter_upwards [hW.eventually (eventually_gt_atTop 0), hm] with n hn hmn

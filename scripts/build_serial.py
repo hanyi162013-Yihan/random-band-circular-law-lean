@@ -4,6 +4,9 @@
 With --target, build only those modules and their transitive project
 dependencies, then check the selected Lake targets. Without --target,
 build every project module and check Lake's default targets as before.
+With --keep-going, collect failures from independent branches and skip
+modules that depend on a failed module. Any failure suppresses the final
+Lake target check and returns a nonzero status.
 
 Requires Python 3.11+. Fetch the pinned dependency cache before running this
 script: project modules are serialized, but Lake manages external dependencies.
@@ -157,6 +160,8 @@ def main() -> int:
                         help="repository root (defaults to this script's parent repository)")
     parser.add_argument("--target", action="append", default=[], metavar="MODULE",
                         help="build this module root and its dependencies (repeatable)")
+    parser.add_argument("--keep-going", action="store_true",
+                        help="continue independent branches after a failed module")
     args = parser.parse_args()
     root = args.root.resolve()
     targets = list(dict.fromkeys(args.target))
@@ -172,9 +177,28 @@ def main() -> int:
         if args.dry_run:
             print("\n".join(order))
             return 0
+        failed = set()
+        skipped = set()
         for index, name in enumerate(order, 1):
+            blockers = dependencies[name] & (failed | skipped)
+            if blockers:
+                skipped.add(name)
+                print(f"[{index}/{len(order)}] Skipping {name}: failed dependency "
+                      f"{', '.join(sorted(blockers))}", flush=True)
+                continue
             print(f"[{index}/{len(order)}] lake build {name}", flush=True)
-            subprocess.run(["lake", "build", name], cwd=root, check=True)
+            try:
+                subprocess.run(["lake", "build", name], cwd=root, check=True)
+            except subprocess.CalledProcessError as error:
+                if not args.keep_going:
+                    raise
+                failed.add(name)
+                print(f"Failed {name} (exit {error.returncode})", file=sys.stderr, flush=True)
+        if failed:
+            print(f"Failed modules: {', '.join(sorted(failed))}", file=sys.stderr, flush=True)
+            print(f"Skipped {len(skipped)} dependent modules; final targets were not run.",
+                  file=sys.stderr, flush=True)
+            return 1
         final_command = ["lake", "build", *targets]
         if targets:
             print(f"Checking selected targets: {' '.join(final_command)}", flush=True)

@@ -27,4 +27,6 @@ lake env lean Section8/PublicSignatureAudit.lean
 python3 scripts/check_placeholders.py --path Section8
 ```
 
+CI adds `--keep-going` to the scoped build command to collect errors from independent modules in one run. Modules depending on a failure are skipped, the job still fails, and the final Lake target and audits run only after all required modules pass. Completed artifacts are saved for the next attempt.
+
 The placeholder scan masks comments and strings. Its `--path` argument must name an existing repository directory containing Lean sources; an invalid path or empty scan fails. Without `--path`, the script retains its repository-wide scan. Until the Section 8 gates pass, the public theorem source remains a work in progress.

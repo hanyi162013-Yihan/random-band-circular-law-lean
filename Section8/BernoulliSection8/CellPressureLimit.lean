@@ -1,5 +1,6 @@
 import BernoulliSection8.CellCoordinates
 import BernoulliSection8.MesoscopicScales
+import BernoulliSection10.PhysicalProbabilityInstances
 import BernoulliSection10.ProbabilityLimits
 
 /-! # The actual clipped core pressure law of large numbers -/
@@ -30,15 +31,20 @@ def completeCellCoreFluctuation (μ : Measure ℝ) (A : ℝ≥0) (W s K : ℕ) (
     (clippedCoreLog A W s z r (completeCellCore W s (x k)) - clippedCorePressure μ A W s z r)|)
 
 theorem completeCellCoreFluctuation_nonneg (μ : Measure ℝ) (A : ℝ≥0) (W s K : ℕ) (z : ℂ)
-    (x : Fin K → IntervalRows W (3 + s)) : 0 ≤ completeCellCoreFluctuation μ A W s K z x :=
-  (abs_nonneg _).trans (le_finitePressureMax _ (0 : Fin (2 * W + 1)))
+    (x : Fin K → IntervalRows W (3 + s)) : 0 ≤ completeCellCoreFluctuation μ A W s K z x := by
+  unfold completeCellCoreFluctuation
+  refine le_trans ?_ (le_finitePressureMax _ (0 : Fin (2 * W + 1)))
+  exact abs_nonneg _
 
 theorem cellClipBound_pos {C : ℝ≥0} (hC : 0 < C) {W : ℕ} (hW : 2 ≤ W) :
     0 < cellClipBound C W := by
   change 0 < (C : ℝ) * cellLength W * Real.log W
-  exact mul_pos (mul_pos (by exact_mod_cast hC) (by exact_mod_cast
-    cellLength_pos (by omega : 0 < W)))
-      (Real.log_pos (by exact_mod_cast (by omega : 1 < W)))
+  have hCpos : (0 : ℝ) < C := by exact_mod_cast hC
+  have hLpos : (0 : ℝ) < cellLength W := by
+    exact_mod_cast (cellLength_pos (by omega : 0 < W))
+  have hlog : 0 < Real.log W :=
+    Real.log_pos (by exact_mod_cast (by omega : 1 < W))
+  exact mul_pos (mul_pos hCpos hLpos) hlog
 
 /-- The normalized deviation of the maximal sum of actual core logs
 from its deterministic maximal pressure. Reset losses are separate. -/
@@ -135,15 +141,21 @@ theorem completeCellCoreFluctuation_tendsto
       intro x hx
       have ht := (div_lt_iff₀ hden).1
         ((normalized_cell_threshold_le hWn hKp C).trans_lt hsmall)
-      simp only [sub_zero, abs_div, abs_of_pos hden,
-        abs_of_nonneg (completeCellCoreFluctuation_nonneg μ _ _ _ _ z x)] at hx
-      exact ht.trans_le ((le_div_iff₀ hden).1 hx)
+      have hnonneg := completeCellCoreFluctuation_nonneg μ (cellClipBound C (W n))
+        (W n) (coreSites (W n)) (K n) z x
+      have hx' : ε ≤ completeCellCoreFluctuation μ (cellClipBound C (W n))
+          (W n) (coreSites (W n)) (K n) z x / ((K n : ℝ) * cellLength (W n)) := by
+        simpa only [Set.mem_ofPred_eq, sub_zero, abs_div, abs_of_pos hden,
+          abs_of_nonneg hnonneg] using hx
+      exact ht.trans_le ((le_div_iff₀ hden).1 hx')
     have h := (measureReal_mono hsub).trans hbound
     simpa only [Real.exp_neg, Real.exp_log (by exact_mod_cast hWp : (0 : ℝ) < W n),
       div_eq_mul_inv] using h
   have hzero : Tendsto (fun n => 2 / (W n : ℝ)) atTop (𝓝 0) := by
-    simpa only [div_eq_mul_inv] using
-      (tendsto_inv_atTop_zero.comp (tendsto_natCast_atTop_atTop.comp hW)).const_mul 2
+    have hcast : Tendsto (fun n => (W n : ℝ)) atTop atTop :=
+      tendsto_natCast_atTop_atTop.comp hW
+    simpa only [div_eq_mul_inv, Function.comp_def, mul_zero] using
+      (tendsto_inv_atTop_zero.comp hcast).const_mul (2 : ℝ)
   exact squeeze_zero' (Filter.Eventually.of_forall fun _ => measureReal_nonneg) hprob hzero
 
 /-- Concrete LLN for the actual clipped core sums in a complete-cell
@@ -157,10 +169,6 @@ theorem mesoscopicCorePressureError_tendsto
     TendstoInProbabilityTri
       (fun n => intervalRowsLaw (W n) (K n * (3 + coreSites (W n))) μ)
       (fun n => mesoscopicCorePressureError μ C (W n) (K n) z) 0 := by
-  letI (n : ℕ) : IsProbabilityMeasure
-      (intervalRowsLaw (W n) (K n * (3 + coreSites (W n))) μ) := by
-    unfold intervalRowsLaw physicalRowLaw
-    infer_instance
   intro ε hε
   have hRate : Tendsto (fun n => 6 * (C : ℝ) *
       ((Real.log (W n)) ^ (3 / 2 : ℝ) / Real.sqrt (K n))) atTop (𝓝 0) := by
@@ -200,8 +208,10 @@ theorem mesoscopicCorePressureError_tendsto
     simpa only [Real.exp_neg, Real.exp_log (by exact_mod_cast hWp : (0 : ℝ) < W n),
       div_eq_mul_inv] using h
   have hzero : Tendsto (fun n => 2 / (W n : ℝ)) atTop (𝓝 0) := by
-    simpa only [div_eq_mul_inv] using
-      (tendsto_inv_atTop_zero.comp (tendsto_natCast_atTop_atTop.comp hW)).const_mul 2
+    have hcast : Tendsto (fun n => (W n : ℝ)) atTop atTop :=
+      tendsto_natCast_atTop_atTop.comp hW
+    simpa only [div_eq_mul_inv, Function.comp_def, mul_zero] using
+      (tendsto_inv_atTop_zero.comp hcast).const_mul (2 : ℝ)
   exact squeeze_zero' (Filter.Eventually.of_forall fun _ => measureReal_nonneg) hprob hzero
 
 /-- Pullback of a probability limit under literal law-preserving maps.
@@ -303,12 +313,17 @@ theorem longBranchCorePressureError_tendsto
   apply squeeze_zero' (Filter.Eventually.of_forall fun _ => measureReal_nonneg) _ (h ε hε)
   filter_upwards [hW.eventually (eventually_gt_atTop 0)] with n hWn
   by_cases hn : anchorSize (W n) ≤ m n * W n
-  · have hKn : K n = targetCells (m n) (W n) :=
-      max_eq_right (anchorCells_le_targetCells hWn hn)
-    simp only [longBranchCorePressureError, if_pos hn, hKn]
-    exact measurePreserving_real_preimage_le
+  · have hCells : coreSites (W n) ≤ targetCells (m n) (W n) :=
+      anchorCells_le_targetCells hWn hn
+    have hKn : K n = targetCells (m n) (W n) := Nat.max_eq_right hCells
+    let F : ℕ → ℝ := fun k =>
+      (intervalRowsLaw (W n) (k * (3 + coreSites (W n))) μ).real
+        {x | ε ≤ |mesoscopicCorePressureError μ C (W n) k z x - 0|}
+    have hPull := measurePreserving_real_preimage_le
       (physicalRestriction_measurePreserving μ (targetCompleteCellsEmbedding (W n) (m n)))
       {x | ε ≤ |mesoscopicCorePressureError μ C (W n) (targetCells (m n) (W n)) z x - 0|}
+    simp only [longBranchCorePressureError, if_pos hn]
+    exact hPull.trans_eq (congrArg F hKn).symm
   · simp only [longBranchCorePressureError, if_neg hn, sub_self, abs_zero]
     have he : {x : IntervalRows (W n) (m n) | ε ≤ (0 : ℝ)} = ∅ := by
       ext x
