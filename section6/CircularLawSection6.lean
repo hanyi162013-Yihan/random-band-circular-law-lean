@@ -36,3 +36,6 @@ import CircularLawSection6.TriangularLawTransport
 import CircularLawSection6.CompactCoreRawBridge
 import CircularLawSection6.WeightedSpectralCoupling
 import CircularLawSection6.HermitianSpectralCoupling
+import CircularLawSection6.PositiveSingularBasis
+import CircularLawSection6.SingularSpectralCoupling
+import CircularLawSection6.LogCutoffComparison

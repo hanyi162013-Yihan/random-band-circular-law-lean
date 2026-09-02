@@ -236,3 +236,19 @@ example {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) (X : Ω → ℝ) :
     ProbabilityTheory.variance (fun ω => X ω / 0) μ = 0 := by
   rw [variance_div_const]
   simp
+
+-- The cutoff contraction is global, including negative test arguments.
+example (x y : ℝ) :
+    |Real.log (max x 1) - Real.log (max y 1)| ≤ |x - y| := by
+  simpa using log_max_lipschitz zero_lt_one x y
+
+-- The singular-coefficient cost allows zero values without dividing by them.
+example (t : ℝ) (ht : 0 ≤ t) (a b : ℂ) :
+    (‖a‖ ^ 2 + ‖b‖ ^ 2) * (0 - t) ^ 2 ≤
+      ‖(0 : ℂ) * a - (t : ℂ) * b‖ ^ 2 +
+        ‖(0 : ℂ) * b - (t : ℂ) * a‖ ^ 2 :=
+  complex_two_coefficient_cost 0 t le_rfl ht a b
+
+-- Dimension normalization is exact, not only an asymptotic constant bound.
+example (e : ℝ) : Real.sqrt (4 * e) / 4 = Real.sqrt e / 2 := by
+  simpa using sqrt_mul_div_dimension (e := e) (by norm_num : (0 : ℝ) < 4)

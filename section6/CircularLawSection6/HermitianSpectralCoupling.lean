@@ -66,7 +66,8 @@ theorem hermitian_eigenvector_coupling_cost (A B : Module.End ℂ E)
     dsimp only [u, v]
     rw [hA.apply_eigenvectorBasis rfl i, hB.apply_eigenvectorBasis rfl j]
     rw [inner_smul_left (𝕜 := ℂ), inner_smul_right (𝕜 := ℂ)]
-    simp only [Complex.conj_ofReal, Complex.ofReal_sub, sub_mul]
+    simp only [RCLike.conj_ofReal, Complex.ofReal_sub, sub_mul]
+    rfl
   calc
     _ = ∑ i, ∑ j, ‖⟪u i, (A - B) (v j)⟫_ℂ‖ ^ 2 := by
       apply Finset.sum_congr rfl
