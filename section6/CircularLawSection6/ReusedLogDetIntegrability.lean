@@ -1,4 +1,4 @@
-import CircularLawSections56.Section5.LiteralNonvanishing
+import CircularLawSections56.Section6.PhysicalReplacementBridge
 import CircularLawSection6.CyclicMatrix
 
 /-! # Reusing Section 5 / replacement logarithmic-potential estimates
@@ -11,6 +11,7 @@ small-ball theorem is needed for this a.e.-parameter conclusion.
 
 open MeasureTheory Set Filter
 open TaoVuReplacement CircularLawSections56.Section6
+open scoped ENNReal
 
 noncomputable section
 
@@ -51,11 +52,12 @@ theorem normalizedLogDet_sq_integrable_prod {Ω : Type*} [MeasurableSpace Ω]
   constructor
   · exact ae_of_all _ (fun ω => normalizedLogDet_sq_integrableOn_closedBall (A ω) R)
   · obtain ⟨C, _, hb⟩ := exists_integral_normalizedLogDet_sq_le R hR
-    apply ((hE.const_add 1).const_mul C).mono'
+    apply (((integrable_const (1 : ℝ)).add hE).const_mul C).mono'
     · exact hm.aestronglyMeasurable.norm.integral_prod_right'
     · filter_upwards with ω
-      simp only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _)]
-      rw [abs_of_nonneg (integral_nonneg (fun z => sq_nonneg _))]
+      simp only [Real.norm_eq_abs]
+      simp_rw [abs_of_nonneg (sq_nonneg (normalizedLogDet (A ω) _))]
+      rw [abs_of_nonneg (integral_nonneg (fun z => sq_nonneg (normalizedLogDet (A ω) z)))]
       exact hb (A ω)
 
 theorem ae_normalizedLogDet_integrable {Ω : Type*} [MeasurableSpace Ω]
@@ -77,6 +79,7 @@ theorem ae_normalizedLogDet_integrable {Ω : Type*} [MeasurableSpace Ω]
 
 /-- The same nonvanishing theorem already used by Section 5, with cyclic
 indices and physical (already normalized) matrices. -/
+set_option backward.isDefEq.respectTransparency false in
 theorem ae_shifted_cyclic_det_ne_zero {Ω : Type*} [MeasurableSpace Ω]
     (μ : Measure Ω) [IsFiniteMeasure μ] (N : ℕ) [NeZero N]
     (A : Ω → Matrix (ZMod N) (ZMod N) ℂ)
@@ -85,13 +88,16 @@ theorem ae_shifted_cyclic_det_ne_zero {Ω : Type*} [MeasurableSpace Ω]
   cases N with
   | zero => exact (NeZero.ne 0 rfl).elim
   | succ k =>
-    have h := ae_ae_normalizedShiftDet_ne_zero_of_entrywise μ
-      (fun ω => undoPhysicalNormalization (A ω))
+    have h := ae_ae_normalizedShiftDet_ne_zero_of_entrywise (k := k) μ
+      (fun ω => undoPhysicalNormalization (k := k) (A ω))
       (fun i j => measurable_const.mul (hA i j))
-    simpa only [normalizedShiftDet, normalizedMatrix_undoPhysicalNormalization] using h
+    have heq (ω : Ω) : normalizedMatrix (undoPhysicalNormalization (k := k) (A ω)) = A ω :=
+      normalizedMatrix_undoPhysicalNormalization (A ω)
+    simpa only [normalizedShiftDet, heq] using h
 
 /-- A finite expected energy is enough for the raw shifted determinant's
 logarithm to be integrable for almost every `z`; no density input is required. -/
+set_option backward.isDefEq.respectTransparency false in
 theorem ae_cyclic_rawLogDet_integrable {Ω : Type*} [MeasurableSpace Ω]
     (μ : Measure Ω) [IsFiniteMeasure μ] (N : ℕ) [NeZero N]
     (A : Ω → Matrix (ZMod N) (ZMod N) ℂ)
@@ -101,14 +107,20 @@ theorem ae_cyclic_rawLogDet_integrable {Ω : Type*} [MeasurableSpace Ω]
   cases N with
   | zero => exact (NeZero.ne 0 rfl).elim
   | succ k =>
-    have hEn : Integrable (fun ω => normalizedHilbertSchmidtSq (undoPhysicalNormalization (A ω))) μ := by
-      simpa only [normalizedEnergy_undoPhysicalNormalization, physicalEnergy,
-        cyclicEnergy, Nat.cast_add, Nat.cast_one] using hE
-    have h := ae_normalizedLogDet_integrable μ (fun ω => undoPhysicalNormalization (A ω))
+    have hEn : Integrable (fun ω => normalizedHilbertSchmidtSq
+        (undoPhysicalNormalization (k := k) (A ω))) μ := by
+      apply hE.congr
+      filter_upwards with ω
+      simpa only [physicalEnergy, cyclicEnergy, Nat.cast_add, Nat.cast_one] using
+        (normalizedEnergy_undoPhysicalNormalization (k := k) (A ω)).symm
+    have h := ae_normalizedLogDet_integrable (k := k) μ
+      (fun ω => undoPhysicalNormalization (k := k) (A ω))
       (fun i j => measurable_const.mul (hA i j)) hEn
     filter_upwards [h] with z hz
     have hn : (k + 1 : ℝ) ≠ 0 := by positivity
-    simpa only [normalizedLogDet_undoPhysicalNormalization, physicalLogPotential,
-      div_mul_cancel₀ hn] using hz.mul_const (k + 1 : ℝ)
+    apply (hz.mul_const (k + 1 : ℝ)).congr
+    filter_upwards with ω
+    rw [normalizedLogDet_undoPhysicalNormalization (k := k) (A ω)]
+    exact div_mul_cancel₀ _ hn
 
 end CircularLawSection6

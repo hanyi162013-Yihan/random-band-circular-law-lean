@@ -29,7 +29,7 @@ theorem limitingCoreMass_add_limitingTailMass (p : NoncompactProfile)
     {R : ℝ} (hR : 0 ≤ R) : p.limitingCoreMass R + p.limitingTailMass R = 1 := by
   have hset : {x : ℝ | R < |x|} = (Icc (-R) R)ᶜ := by
     ext x
-    simp only [mem_setOf_eq, mem_compl_iff, mem_Icc, ← abs_le, not_le]
+    simp only [mem_ofPred_eq, mem_compl_iff, mem_Icc, ← abs_le, not_le]
   rw [p.limitingCoreMass_eq_setIntegral hR, limitingTailMass, hset,
     integral_add_compl measurableSet_Icc p.integrable, p.integral_one]
 
@@ -45,10 +45,29 @@ theorem limitingCoreMass_pos (p : NoncompactProfile) {R : ℝ} (hR : 0 < R) :
 theorem limitingTailMass_nonneg (p : NoncompactProfile) (R : ℝ) :
     0 ≤ p.limitingTailMass R := integral_nonneg (fun x => (p.positive x).le)
 
+/-- Strict positivity of the noncompact profile makes every finite-radius
+tail positive, so the fourth-root cutoff never divides by zero. -/
+theorem limitingTailMass_pos (p : NoncompactProfile) (R : ℝ) :
+    0 < p.limitingTailMass R := by
+  have hpos : 0 < ∫ x in Ioc R (R + 1), p.f x := by
+    rw [← intervalIntegral.integral_of_le (by linarith : R ≤ R + 1)]
+    exact intervalIntegral.intervalIntegral_pos_of_pos p.integrable.intervalIntegrable
+      p.positive (by linarith)
+  apply hpos.trans_le
+  exact setIntegral_mono_set p.integrable.integrableOn
+    (ae_of_all _ (fun x => (p.positive x).le))
+    (Eventually.of_forall (fun x hx => hx.1.trans_le (le_abs_self x)))
+
 theorem limitingCoreMass_le_one (p : NoncompactProfile) {R : ℝ} (hR : 0 ≤ R) :
     p.limitingCoreMass R ≤ 1 := by
   have hm := p.limitingCoreMass_add_limitingTailMass hR
   have ht := p.limitingTailMass_nonneg R
+  linarith
+
+theorem limitingCoreMass_lt_one (p : NoncompactProfile) {R : ℝ} (hR : 0 ≤ R) :
+    p.limitingCoreMass R < 1 := by
+  have hm := p.limitingCoreMass_add_limitingTailMass hR
+  have ht := p.limitingTailMass_pos R
   linarith
 
 theorem limitingCoreMass_monotoneOn (p : NoncompactProfile) :
@@ -83,7 +102,7 @@ theorem limitingCoreMass_eventually_half (p : NoncompactProfile) :
 
 theorem limitingCoreRadius_tendsto_one (p : NoncompactProfile) :
     Tendsto (fun R : ℕ => Real.sqrt (p.limitingCoreMass R)) atTop (𝓝 1) := by
-  simpa only [Real.sqrt_one] using Real.continuous_sqrt.continuousAt.tendsto.comp
+  simpa only [Function.comp_def, limitingCoreMass, Real.sqrt_one] using Real.continuous_sqrt.continuousAt.tendsto.comp
     p.limitingCoreMass_tendsto_one
 
 end CircularLawSection6.NoncompactProfile

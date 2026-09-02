@@ -24,8 +24,8 @@ theorem tailRotation_joint_measurable (N : ℕ) [NeZero N] (S : Finset (ZMod N))
   by_cases hk : k.2 ∈ S <;>
     simp only [tailRotation, rotateCyclicAtoms, hk, if_true, if_false, Circle.coe_one, one_mul]
   · exact (measurable_pi_apply k).comp measurable_snd
-  · exact (((measurable_subtype_coe.comp Circle.exp.continuous.measurable).comp measurable_fst).mul
-      ((measurable_pi_apply k).comp measurable_snd))
+  · simp only [Circle.coe_exp]
+    fun_prop
 
 theorem measurable_log_norm_matrix_det {Ω : Type*} [MeasurableSpace Ω]
     {ι : Type*} [Fintype ι] [DecidableEq ι] (A : Ω → Matrix ι ι ℂ)
@@ -64,6 +64,7 @@ theorem phaseAverage_rawProfileLogDet_eq (p : NoncompactProfile) (N H : ℕ) [Ne
   apply intervalIntegral.integral_congr
   intro θ _
   unfold rawProfileLogDet
+  dsimp only
   rw [p.matrix_tailRotation]
   congr 3
   simp only [circleMap_zero, Complex.ofReal_one, one_mul, Circle.coe_exp]
