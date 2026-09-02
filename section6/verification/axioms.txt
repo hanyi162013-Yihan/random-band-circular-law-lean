@@ -1,1 +1,1 @@
-Section 6 axiom audit PASSED: 680 declarations, 594 theorems.
+Section 6 axiom audit PASSED: 743 declarations, 652 theorems.

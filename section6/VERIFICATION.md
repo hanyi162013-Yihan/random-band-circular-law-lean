@@ -1,5 +1,33 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified sixty-three-module checkpoint
+
+Commit: `a70292fe16ee856c49d1de272798ecacf8a2cf2b`.
+[Dedicated GitHub run 33695166043](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33695166043),
+job `100462369108`: **success** on 2026-09-02.
+
+- All 63 modules plus umbrella compiled: 4107 dependency-inclusive jobs.
+- The transitive audit passed: 743 declarations, 652 theorem declarations;
+  only `propext`, `Classical.choice`, and `Quot.sound` are permitted.
+- All 74 strict regressions, the 596-file source-token scan, cache saving,
+  and verification-log retention passed. Section 6 warnings are errors.
+
+The new verified layer contains exact positive cutoff scaling, uniform
+block-length averaging, and the explicit full-route identification with
+the Section 4/5 matrix and its finite IID law. It constructs block
+orthonormal singular bases and proves the exact dimension-weighted cutoff
+identity. The actual periodicized matrix has that block decomposition;
+finite atom second moment implies shifted cutoff integrability, and
+sample-law transport gives the exact expected block average. The scaled
+periodicization error is `r * sqrt(8H/m0) / a`, for every positive scale
+and cutoff and planar-a.e. spectral parameter.
+
+This is still a partial Section 6 result. Genuine compact squared-singular-law
+comparison and fixed-cutoff convergence, the shifted-Ginibre limiting-law
+hard-edge estimate, source-input/finite-prefix assembly, and the final
+dense/sparse replacement endpoint remain unfinished. The six-hour continuation
+was paused at its agreed deadline; that does not assert mathematical completion.
+
 ## Verified fifty-seven-module checkpoint
 
 Commit: `7aac27608ac3c01df69267834182a31a8d549c46`.
@@ -14,9 +42,10 @@ job `100454825726`: **success** on 2026-09-02.
 The contiguous full/block cyclic routes, balanced block partition, arbitrary
 finite-index parameter nonvanishing, actual block IID marginal law, and
 the normalized `8H/m0` energy / `sqrt(8H/m0)/a` cutoff errors are checked.
-The newest scaling, uniform averaging, and physical route-identification
-modules are not included in this checkpoint. Exact spectral block averaging,
-compact cutoff comparison/limit, hard-edge control, and final assembly remain.
+The subsequent scaling, uniform averaging, physical route-identification,
+spectral block averaging and expected cutoff modules are covered by the
+newer 63-module checkpoint above, not by this historical run. Compact cutoff
+comparison/limit, hard-edge control, and final assembly remain unfinished.
 
 ## Verified fifty-four-module checkpoint
 
