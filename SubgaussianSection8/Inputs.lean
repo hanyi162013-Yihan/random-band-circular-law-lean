@@ -9,7 +9,7 @@ open BernoulliSection9
 structure CookInput (A : Atom) extends CookDeformedSquareInput.{0, 0} where
   parameter_le : A.parameter ≤ subgaussianBound
 
-instance (A : Atom) : Coe (CookInput A) CookDeformedSquareInput.{0, 0} :=
+instance (A : Atom) : CoeOut (CookInput A) CookDeformedSquareInput.{0, 0} :=
   ⟨CookInput.toCookDeformedSquareInput⟩
 
 end SubgaussianSection8
