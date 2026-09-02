@@ -18,6 +18,14 @@ srcDir = "Section9"
 name = "BernoulliSection10"
 srcDir = "Section10"
 
+[[lean_lib]]
+name = "TaoVuReplacement"
+srcDir = "vendor/tao-vu-replacement"
+
+[[lean_lib]]
+name = "ShortRingAnchor"
+srcDir = "vendor/short-ring-analysis"
+
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"

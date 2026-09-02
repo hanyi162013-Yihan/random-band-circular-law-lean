@@ -33,13 +33,88 @@ import BernoulliSection10.PacketTensorReverse
 import BernoulliSection10.PacketReset
 import BernoulliSection10.SeamComparison
 import BernoulliSection10.SeamProbability
+import BernoulliSection10.AsymptoticScales
+import BernoulliSection10.AsymptoticErrors
+import BernoulliSection10.FinitePressure
+import BernoulliSection10.AnchorScales
+import BernoulliSection10.CellDimensionLimit
+import BernoulliSection10.CircularLawFromPotential
+import BernoulliSection10.ClearedSingularTest
+import BernoulliSection10.ConcentrationScale
+import BernoulliSection10.ConcretePressure
+import BernoulliSection10.ConditionalReset
+import BernoulliSection10.CutoffRemoval
+import BernoulliSection10.CyclicEntryGeometry
+import BernoulliSection10.CyclicPhysicalModel
+import BernoulliSection10.CyclicPressureComparison
+import BernoulliSection10.CyclicSeamAssembly
+import BernoulliSection10.CyclicStitchedPressure
+import BernoulliSection10.DensityCircularLaw
+import BernoulliSection10.DensityEnergyLimit
+import BernoulliSection10.DensityPressureLimit
+import BernoulliSection10.DiagonalDiskReference
+import BernoulliSection10.DimensionReplacement
+import BernoulliSection10.DiskReferenceLaw
+import BernoulliSection10.ExteriorFrameRelabel
+import BernoulliSection10.ExteriorSingularFrames
+import BernoulliSection10.FiniteIIDCoordinates
+import BernoulliSection10.FiniteIIDLawOfLargeNumbers
+import BernoulliSection10.FullBlockHighBandProfile
+import BernoulliSection10.IntervalConcatenation
+import BernoulliSection10.IntervalMeanHodge
+import BernoulliSection10.IntervalRestriction
+import BernoulliSection10.IntervalTransfer
+import BernoulliSection10.LongPressureError
+import BernoulliSection10.LongRingLimit
+import BernoulliSection10.MeanStitching
+import BernoulliSection10.OutsidePressureIdentification
+import BernoulliSection10.PacketLawTransport
+import BernoulliSection10.PacketPhysicalIdentification
+import BernoulliSection10.PhysicalAtomEnergy
+import BernoulliSection10.PhysicalBoundaryExpression
+import BernoulliSection10.PhysicalIIDEmbedding
+import BernoulliSection10.PhysicalInputLaw
+import BernoulliSection10.PhysicalMatrixEntries
+import BernoulliSection10.PhysicalPacketReset
+import BernoulliSection10.PhysicalProbabilityInstances
+import BernoulliSection10.PhysicalProfile
+import BernoulliSection10.PhysicalReplacement
+import BernoulliSection10.PhysicalSeam
+import BernoulliSection10.PositiveMatrixIndex
+import BernoulliSection10.PressureCalibration
+import BernoulliSection10.ProbabilityLimits
+import BernoulliSection10.ProbabilityTransport
+import BernoulliSection10.ProfileMoments
+import BernoulliSection10.ReferenceTruncation
+import BernoulliSection10.RemainderControl
+import BernoulliSection10.RemainderL1
+import BernoulliSection10.RemainderProbability
+import BernoulliSection10.ResetSandwichLaw
+import BernoulliSection10.SandwichIntegrability
+import BernoulliSection10.ScalarBandGeometry
+import BernoulliSection10.ScalarReferenceProfile
+import BernoulliSection10.Section3Bulk
+import BernoulliSection10.Section3Counting
+import BernoulliSection10.Section3HardEdge
+import BernoulliSection10.Section3Inputs
+import BernoulliSection10.SingularCoefficient
+import BernoulliSection10.SingularFrames
+import BernoulliSection10.SpectralLimitAssembly
+import BernoulliSection10.StitchedPressure
+import BernoulliSection10.TargetRingLimit
+import BernoulliSection10.VarianceProfiles
+import BernoulliSection10.WeakCircularLaw
 
 /-!
-# Local bounded-density estimates from arXiv:2609.01295v1, Section 10
+# Bounded-density estimates and circular-law closure, Section 10
 
 This is the chapter-library root for the real i.i.d. atom specialization of
-items 10.2--10.10, including the nine-block seam expectation and fixed-degree
-packet reset. The new Proposition 10.1, the later asymptotic arguments, and
-the complex/directional-density extensions are outside this library's scope.
+items 10.1--10.10 and the closure in Sections 10.4--10.6, including the actual
+cyclic full-block model, pressure calibration, mean stitching, remainder,
+log-potential limit, Hilbert--Schmidt weak law, and empirical spectral limit.
+The final API is `density_circular_law`; its source theorem inputs are exactly
+the permitted Section 3 statements, passed as propositions rather than axioms.
+See the formalization map and audit log for the current verification status.
+The complex/directional-density atom extensions are not covered.
 The deterministic linear algebra is imported from the Section9 library.
 -/

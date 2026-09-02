@@ -1,78 +1,98 @@
 # Reproducibility and trust audit
 
-This records the real i.i.d. specialization of items 10.2--10.10 in
-[arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1). Exact source alignment,
-retained hypotheses, and uncovered extensions are in `FORMALIZATION_MAP.md`.
-Commands below run from the repository root, using Lean/mathlib `v4.33.0`
-and the committed dependency manifest. The deterministic dependency is the
-repository's `BernoulliLinearAlgebra` library in `Section9/`.
+Scope: the real IID bounded-density finite-third-moment branch of
+[arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1), Section 10,
+through its circular-law conclusion. Exact mathematical inputs and
+uncovered atom-law extensions are listed in
+[ASSUMPTIONS.md](ASSUMPTIONS.md) and [FORMALIZATION_MAP.md](FORMALIZATION_MAP.md).
 
-## Full default build
+## Completion verification checkpoint — 2026-09-02
 
-```sh
-lake build BernoulliSection10
-lake build
-```
+| Check | Status and scope |
+|---|---|
+| Complete new proof chain through `density_circular_law` | **PASS**, development build, including `CompletionAxiomAudit` |
+| Completion audit | **PASS**, all **343** actual `#print axioms` reports matched their declarations and used only the allowlist below |
+| Source placeholder scan | **PASS**, all **381** released Lean source files, including tracked and newly added files |
+| Release dependency graph | **PASS**, **373** library modules, no missing local import or cycle |
+| Full release-root serial build and final `lake build` | **In progress**; not yet reported as a new full-release pass |
+| Fresh repository-wide axiom audit | **Pending full release verification**; expected **857** reports across **11** audit files |
 
-Publication status: **PASS**, on 2026-09-02. The
-[integrated GitHub Actions run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33590358281)
-checked source commit `48a1556090a0944a8f06b85bd220116ada66129b` using a clean
-standard Ubuntu runner. All 257 repository library modules, including all
-38 Section 10 Lean files, compiled, followed by the full default `lake build`.
-The complete run, including setup and audits, took 25 minutes 35 seconds.
+The development completion build finished at approximately 10:12 UTC.
+The 343-report allowlist check used the actual Lean compiler messages
+preserved in Lake's nonsynthetic completion-audit trace; only their
+source-location/severity formatting was normalized for the audit parser.
+No build metadata, proof artifact, or axiom report was rewritten.
+The full release checks below execute the audit files afresh.
 
-The chapter includes the
-continuous-density, probability, Hodge-integrability, packet-probability,
-concrete simultaneous one-site and interval Hodge-envelope, the improved
-single-cost maximum-over-exterior-degrees Hodge family, its concrete
-zero/one-hot corner and complementary-minor coefficient-tensor bounds, the
-fully explicit `C_z W log(eW)` simultaneous tensor/forward first-moment bound,
-the common `C_{L,z}` one-site and interval conclusion completing Lemma 10.6,
-measure-preserving product-marginal, endpoint-determinant, deterministic
-packet-frame, raw/normalized tensor comparison, complete nine-block seam,
-and fixed-degree packet-reset modules.
+Subsequent Lean edits at this checkpoint correct application comments in
+`ProbabilityLimits.lean` and trailing whitespace in `RemainderProbability.lean`;
+no proof term or statement changes. The vendored Tao–Vu files retain the
+documented extra final blank line; their exact release hashes are recorded.
 
-## Placeholder scan
+## Reproducible full verification
 
-The scan covers all Lean sources in this chapter and excludes generated
-`.lake` contents.
+Run from the repository root with Lean `v4.33.0`, the committed
+mathlib manifest (`db584cd6d46c92f209a44c0f1c829460d327499d`), and
+Python 3.11 or newer:
 
 ```sh
-rg -n --glob '*.lean' \
-  '\bsorry\b|\badmit\b|^[[:space:]]*(axiom|opaque)[[:space:]]' Section10
+lake exe cache get
+python3 scripts/check_axioms.py --self-test
+python3 scripts/check_placeholders.py
+python3 scripts/build_serial.py
+python3 scripts/check_axioms.py
 ```
 
-Publication status: **PASS**, checked for the publication sources on
-2026-09-02. The scan returned no matches (ripgrep exit status `1`).
-It covers all 38 Lean files: 37 modules and the umbrella import.
-The public API follows items 10.2--10.10 of the cited arXiv source.
+The serial builder checks every library module in dependency order and
+then runs the complete default `lake build`. Serializing project modules
+limits peak memory; it does not omit modules or replace kernel checking.
 
-## Axiom audit
+The source scan masks comments and strings, checks both tracked and
+untracked source, and also supports source-only archives without Git metadata.
+Generated `.lake/` dependency/build trees are excluded.
 
-```sh
-lake env lean Section10/BernoulliSection10/AxiomAudit.lean
-```
-
-Publication status: **PASS**, in the integrated run above. All 64 reports
-from this chapter matched their audit commands and used only the three
-foundational axioms listed below. The repository-wide total was 475 reports
-across nine audit files. This checks the public results for 10.2,
-10.3, 10.5, 10.7--10.10, the endpoint determinant estimates, the concrete one-site
-and interval Hodge envelopes (including the improved maximum-over-degrees
-versions), their first/second moments, the concrete tensor corner bound and
-the explicit `C_z W log(eW)` forward estimate and common
-`C_{L,z} s W log(eW)` Hodge bound, the finite-product
-marginal theorem, the deterministic 10.10 frame/nonvanishing layer, both
-raw/normalized packet-tensor comparisons, and the final iterated expectation
-theorems. Every audited declaration must depend only on the
-standard foundational principles already used by mathlib:
+The axiom checker discovers all `*AxiomAudit.lean` files, runs Lean on
+each, verifies exact declaration/report multiplicities, and rejects a
+missing report, malformed report, Lean error, or non-allowlisted dependency.
+Its allowlist is exactly:
 
 ```text
-[propext, Classical.choice, Quot.sound]
+propext
+Classical.choice
+Quot.sound
 ```
 
-No `sorryAx` or project-defined axiom is permitted in the audited declarations.
-The nine proof chains are complete for the documented real i.i.d. scope;
-this is not a claim that all of the extended arXiv v1 Section 10 is covered.
-An axiom audit verifies dependencies, not the faithfulness of an informal
-statement's translation; the source map and theorem signatures remain essential.
+Neither `sorryAx` nor any project-defined axiom is permitted.
+These three logical foundations are not manuscript assumptions.
+
+## Chapter audit inventory
+
+| File | Reports | Purpose |
+|---|---:|---|
+| `BernoulliSection10/AxiomAudit.lean` | 64 | Established local estimates 10.2–10.10 and their concrete analytical/algebraic dependencies |
+| `BernoulliSection10/AsymptoticAxiomAudit.lean` | 39 | Ceiling scales, finite maxima, integer division, and vanishing explicit errors |
+| `BernoulliSection10/CompletionAxiomAudit.lean` | 343 | Concrete coordinate laws, singular frames, conditional reset, stitching, seam, remainder, Section 3 adapters, high-band and target limits, energy, replacement, and the final circular law |
+
+The chapter total is 446 reports. The repository-wide total is 857,
+including the unchanged Section 4 and Section 9 audits. Repeated reports
+across audit files are intentional and are not described as distinct theorems.
+
+The completion audit also prints `SourceInputs.Section3Inputs` and checks
+the full explicit signatures of the seven principal endpoints. This
+statement inspection matters: an allowed axiom list alone cannot show
+that an informal theorem was translated faithfully or that unwanted
+hypotheses were not inserted as parameters.
+
+## Previously published baseline
+
+The [integrated GitHub Actions run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33590358281)
+passed for source commit `48a1556090a0944a8f06b85bd220116ada66129b`
+on 2026-09-02. That clean Ubuntu run checked 257 library modules, the
+complete default build, and 475 reports across nine audit files, in
+25 minutes 35 seconds. It verifies the older local-results baseline,
+not the later continuation recorded above.
+
+The stable Section 4/9 sources and the earlier local 10.2–10.10 proofs were
+not modified by this continuation. New modules import them through the
+repository's library boundaries. Dependency provenance and source hashes
+are recorded in `PROVENANCE.md` and the two vendored proof directories.

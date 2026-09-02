@@ -7,7 +7,7 @@ periodic profile and discrete law*](https://arxiv.org/abs/2609.01295).
 This is a paper-wide repository. It contains **Section 4,
 “Exterior transfer and local density tools”**, **Section 9 libraries for
 deterministic linear algebra and local small-ball arguments**, and
-**Section 10 local bounded-density estimates for real i.i.d. atoms**.
+**the Section 10 bounded-density circular-law proof for real i.i.d. atoms**.
 References in the Section 9 and 10 libraries use
 [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
 Sections 5–6 are not included or claimed as proved here.
@@ -48,17 +48,26 @@ bounds are supplied as explicit finite expressions. See the
 public-theorem axiom audits passed on 2026-09-02; this verifies the documented
 formal scope, not a complete translation of every paper statement.
 
-The Section 10 library contains 37 modules and an umbrella import, covering
-the real i.i.d. specialization of Lemma 10.2 through Proposition 10.10.
-It includes affine-log and multiaffine estimates, physical-row concentration,
-integrated Hodge control, and the nine-block seam/reset expectation estimates,
-with explicit constants. It imports the Section 9 algebra directly.
-Proposition 10.1, the subsequent asymptotic arguments, the
-planar-complex/directional-density alternatives, and the heterogeneous-law
-generality of 10.2--10.3 are not claimed. See the
+The Section 10 library contains 111 Lean source files: 107 mathematical
+modules, three audit modules, and its umbrella import. It covers the real IID
+specialization of Proposition 10.1 through Proposition 10.10, equations
+10.30–10.57, and the final circular-law conclusion of Theorem 2.10. The public
+endpoint is `BernoulliSection10.density_circular_law`.
+
+The final theorem retains only the original real-IID bounded-density,
+finite-third-moment model assumptions and the exact permitted Section 3
+statements (3.1, 3.3, 3.4, 3.5). The full-block high-band limit, actual
+pressure/reset/seam/remainder assembly, and reference ensemble are proved
+internally. Tao–Vu is a proved source dependency, not an extra assumption.
+The development proof chain has compiled and its 343-report completion audit
+passes the logical-axiom allowlist; full-release verification is recorded
+separately in the chapter audit. Planar-complex/directional-density atoms and
+the heterogeneous-law generality of 10.2–10.3 are not claimed. See the
 [Section 10 overview](Section10/README.md),
 [exact source and scope map](Section10/FORMALIZATION_MAP.md), and
 [build and axiom audit](Section10/AUDIT.md).
+The [explicit assumption list](Section10/ASSUMPTIONS.md) and
+[proof provenance](Section10/PROVENANCE.md) document the final trust boundary.
 
 This release does **not** assert a full formalization of the paper.
 Coverage is stated at the level of the named proof chains; exact formulations,
@@ -101,10 +110,15 @@ Section9/
   SMALL_BALL_*.md
 Section10/
   BernoulliSection10.lean      # arXiv v1 numbering; public umbrella import
-  BernoulliSection10/          # 37 modules, including AxiomAudit.lean
+  BernoulliSection10/          # 107 mathematical modules and three audits
   README.md
   FORMALIZATION_MAP.md
   AUDIT.md
+  ASSUMPTIONS.md
+  PROVENANCE.md
+vendor/
+  tao-vu-replacement/          # 13 proved modules, pinned provenance/license
+  short-ring-analysis/        # 30 proved generic modules, SHA-256 manifest
 ```
 
 All libraries use the same Lake project and dependency cache. Later chapters
@@ -130,7 +144,7 @@ lake build BernoulliLinearAlgebra
 # Optional: build the local small-ball proof chains and their dependencies.
 lake build BernoulliSection9
 
-# Optional: build only the local Section 10 estimates and their dependencies.
+# Optional: build the complete real-IID Section 10 proof and its dependencies.
 lake build BernoulliSection10
 ```
 
@@ -139,6 +153,19 @@ objects, scratch files, and local filesystem paths are not part of the release.
 The cache download is not needed merely to read or download the source.
 Do not run `lake update` for routine checking: the committed manifest records
 the dependency versions used for this release.
+
+For a memory-constrained machine, serialize project modules and run all checks:
+
+```sh
+python3 scripts/check_axioms.py --self-test
+python3 scripts/check_placeholders.py
+python3 scripts/build_serial.py
+python3 scripts/check_axioms.py
+```
+
+Python 3.11 or newer is required. The serial builder checks every declared
+library module, then runs the complete default `lake build`. The source scan
+also supports source-only archives without Git metadata.
 
 ### Automated verification
 
@@ -177,6 +204,8 @@ lake env lean Section4/Section4CompleteAxiomAudit.lean
 lake env lean Section9/AxiomAudit.lean
 lake env lean Section9/SmallBallAxiomAudit.lean
 lake env lean Section10/BernoulliSection10/AxiomAudit.lean
+lake env lean Section10/BernoulliSection10/AsymptoticAxiomAudit.lean
+lake env lean Section10/BernoulliSection10/CompletionAxiomAudit.lean
 ```
 
 These audits supplement kernel checking; they are not a proof that an informal
@@ -191,3 +220,5 @@ specific formalization snapshot.
 
 No repository license has been selected for this initial publication.
 Lean and mathlib retain their own licenses and are not vendored here.
+The proved Tao–Vu source dependency preserves its upstream Apache-2.0 license
+under `vendor/tao-vu-replacement/`.

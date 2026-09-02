@@ -14,9 +14,13 @@ the downloaded v1 PDF is
 `c09843c706aebf8a33358d870a7c9d11d7c52926b0132605fa2ffd7eed4f512d`.
 The manuscript itself is not duplicated in this source-only release.
 
-This library covers the nine local proof chains in **10.2--10.10**:
-four lemmas, one corollary, and four propositions. The high-band
-Proposition 10.1 is outside this chapter library's scope.
+This library covers the real-IID bounded-density branch from
+**Proposition 10.1 through Proposition 10.10**, the subsequent equations
+**10.30–10.57**, and their assembly into **Theorem 2.10**. The final
+theorem retains only the original model hypotheses and the exact permitted
+Section 3 inputs; all concrete auxiliary conditions are discharged.
+The development proof chain has compiled. The separate full-release build
+and trust-audit status is recorded in `AUDIT.md`.
 
 **Coverage qualification:** the probabilistic implementation uses one
 law `μ : Measure ℝ` and its finite i.i.d. products. It covers the real i.i.d.
@@ -48,6 +52,7 @@ All names in this index belong to the namespace `BernoulliSection10`.
 
 | arXiv v1 item | Public entry point | Implementation module |
 |---|---|---|
+| Proposition 10.1 | `density_high_band_ring_log_limit`, `SourceInputs.fullBlockHighBand_profile_log_limit` | `DensityPressureLimit.lean`, `FullBlockHighBandProfile.lean` |
 | Lemma 10.2 | `lemma_10_2_rho_lintegral_le`, `lemma_10_2_resampling_integral_le_of_pos` | `AffineLog.lean` |
 | Corollary 10.3 | `corollary_10_3` | `MultiAffine.lean` |
 | Lemma 10.4 | `clearedStepCompound_isAffineInPhysicalRow` | `PhysicalRows.lean` |
@@ -57,6 +62,36 @@ All names in this index belong to the namespace `BernoulliSection10`.
 | Proposition 10.8 | `proposition_10_8_integrated_endpoint_comparison` | `PacketComparisonGrowth.lean` |
 | Proposition 10.9 | `proposition_10_9` | `PacketProbability.lean` |
 | Proposition 10.10 | `proposition_10_10_packet_reset` | `PacketReset.lean` |
+| Equations 10.30–10.57 | See the continuation table below | Pressure, remainder, limit, and energy modules |
+| Theorem 2.10, real-IID branch | `density_circular_law` | `DensityCircularLaw.lean` |
+
+### 10.1 — Finite-third-moment high-band limit for full-block rings
+
+- **Source:** arXiv v1 pp. 68–69; `part2_block.tex`, label
+  `prop:density-block-high-band`, statement line 3361.
+- **Printed assumptions:** the actual normalized cyclic full-block model,
+  centered variance-one IID atoms with bounded density, finite third moment,
+  `0<ω<1/9`, `W≥N^(8/9+ω)`, and `W,N→∞`.
+- **Lean statement:** `density_high_band_ring_log_limit` gives the same
+  normalized log-determinant limit for the literal finite physical-row laws.
+  Its only extra theorem parameter is `Section3Inputs μ L`, the explicitly
+  permitted statements of 3.1, 3.3, 3.4, and 3.5; see `ASSUMPTIONS.md`.
+  `N=(s+3)W`, so `N→∞` follows from `W→∞` and is not a missing premise.
+- **Modules and dependencies:** `PhysicalProfile`, `ScalarBandGeometry`,
+  `ScalarReferenceProfile`, `VarianceProfiles`, `ProfileMoments`,
+  `CutoffRemoval`, `Section3HardEdge`, `Section3Counting`, `Section3Bulk`,
+  `ReferenceTruncation`, `FullBlockHighBandProfile`, and `PhysicalInputLaw`.
+- **Proof representation:** both variance profiles and scalar band lower
+  bounds are computed from their entries. The 3.1 Hilbert–Schmidt cutoff is
+  removed using the actual normalized energy expectation. A deterministic
+  cutoff `min(1,N^(τ−β/8))` is used in place of the paper's profile-specific
+  cutoff; it eventually exceeds the counting threshold, and its hard-edge
+  error still tends to zero. Two applications of 3.4 cancel the same
+  Ginibre reference. The comparison model is the genuine scalar-indicator
+  ring of width `floor((N−1)/2)`, whose full-log limit is precisely 3.5.
+  Thus no separate Ginibre log-limit or negative-moment theorem is assumed.
+- **Status:** **complete (real i.i.d.)**. No full-block high-band,
+  integrability, variance-profile, or reference-model certificate remains.
 
 ### 10.2 — Scale-free concentration of random affine logarithms
 
@@ -405,22 +440,93 @@ One small typesetting issue occurs in v1's proof of 10.5: in
 an intervening `+`. The Lean resampling proof uses the valid sum bound.
 No manuscript file is altered by this upload.
 
+## Continuation: equations 10.30–10.57 and the final circular law
+
+The following rows are proved in the real-IID scope. The complete public
+proof chain has passed the development build; release-root verification
+and audit records are maintained separately in `AUDIT.md`.
+
+Common notation: real IID law `μ`, mean zero, second moment one, density
+bounded by `L`; fixed `z : ℂ`; `W ≥ 1`; `m=s+3` block sites; dimension
+`N=mW`. The paper assumes `m≥4`; the implementation also allows `m=3`.
+Third-moment integrability and the exact Section 3 inputs are used only in
+the high-band limit and the subsequent results which depend on that limit.
+
+| Source item | Original hypotheses / conclusion | Lean representation and dependencies | Status |
+|---|---|---|---|
+| Proposition 10.1 | Finite third moment, `0<ω<1/9`, `W≥N^(8/9+ω)`, `W,N→∞`; normalized log determinant tends to circular potential | `density_high_band_ring_log_limit` on literal finite row laws; `SourceInputs.fullBlockHighBand_profile_log_limit`, `VarianceProfiles`, `Section3HardEdge`, `Section3Counting`, `Section3Bulk`, `ReferenceTruncation` | Proved |
+| 10.30 | `s_W=ceil(W^(1/200))`, `c_W=s_W+3`, `ell_W=c_W W` | Literal `densityCoreSites`, `densityCellSites`, `densityAnchorSize`; lower/upper power bounds in `AsymptoticScales` | Proved |
+| 10.31 | Actual chronological cleared exterior product over `s_W` sites; finite mean | `densityCorePressure`, `densityMaxCorePressure`, `intervalDegreeLog_integrable`; `ConcretePressure` | Proved |
+| 10.32 | The actual anchor ring of size `ell_W`; third-moment high-band input | `DensityPressureLimit` applies `fullBlockHighBand_profile_log_limit` at `ω=1/20`, with `eventually_density_anchor_highBand` and exact law transport | Proved |
+| 10.33 | Anchor log determinant differs from maximum core mean by `O_L1(W log(eW)+sqrt(W ell_W)log(eW))` | `cyclicPressure_L1_bound`, `cyclicPressure_normalized_L1_bound`; actual joint terminal packet and outside coordinates, no seam certificate | Proved |
+| 10.34 | Divide the preceding error by `ell_W`; both displayed power-log terms vanish | `densityCore_fluctuation_div_anchor_le`, `tendsto_densityAnchor_seam_scale`, `tendsto_densityAnchor_fluctuation_scale`, `tendsto_cyclicAnchorPressureError` | Proved |
+| 10.35 | Deterministic maximum mean divided by `ell_W` tends to circular potential | `densityCorePressureDensity_limit`; `PressureCalibration` discharges deterministic calibration, `DensityPressureLimit` supplies the concrete anchor internally | Proved |
+| 10.36 | Choose the least maximizing exterior degree | `densityOptimizingDegree_maximizes`, `densityOptimizingDegree_minimal`; exact minimum of the finite argmax | Proved |
+| 10.37 | Decomposable singular wedges give the scalar-reset lower test | `exists_cleared_exterior_product_scalar_test`, `interval_product_scalar_test_ae`; `SingularFrames`, `ExteriorSingularFrames`, `ClearedSingularTest` | Proved |
+| 10.38 | Conditional/fiber lower bound across a fresh three-site reset | `resetSandwichDegreeLog_integral_bounds_ae`, lower half; proved for the actual frozen core and past operators, sufficient to integrate the mean recurrence directly | Proved |
+| 10.39 | Complementary upper cell-mean estimate | Upper half of `resetSandwichDegreeLog_integral_bounds_ae`; `IntervalMeanHodge` and submultiplicativity | Proved |
+| 10.40 | Lower mean bound for `K` cells at the fixed maximizing degree | `densityCorePressure_mean_stitching` plus `densityOptimizingDegree_maximizes`; a two-sided bound is proved for every degree | Proved |
+| 10.41 | Upper mean bound for `K` cells, all degrees | `intervalPressure_complete_cells`, `densityCorePressure_mean_stitching`; exact independent concatenation, Fubini, and induction | Proved |
+| 10.42 | Maximum whole-product log norm is `K F_*` plus the stated probability error | `stitchedPressure_L1_bound`, `stitchedPressure_markov`; stronger explicit L1 form at the same scale, using one whole-product concentration bound | Proved |
+| 10.43 | Chronological remainder product on `q<c_W` sites | `intervalClearedProduct` restricted by `intervalSuffixRows`; exact factorization in `IntervalRestriction` / `IntervalConcatenation` | Proved |
+| 10.44 | Simultaneous forward/inverse exterior control on the full-measure invertible event | `intervalClearedProduct_det_isUnit_ae`, `interval_remainder_log_change_le_ae`; actual summed Hodge envelope from 10.6 | Proved |
+| 10.45 | Two-sided pathwise change in log operator norm after multiplying by the remainder | `matrix_logNorm_mul_bounds`, `abs_matrix_logNorm_mul_sub_le_hodgeLoss`; no probabilistic premise in the matrix inequality | Proved |
+| 10.46 | Maximum over degrees changes by at most a common remainder envelope | `interval_remainder_max_change_le_ae`, `intervalRemainderMaxDifference_le_ae`; finite-maximum perturbation with no degree-count loss | Proved |
+| 10.47 | Expected remainder envelope is at most `C qW log(eW)`, hence `C ell_W log(eW)` | `suffixHodgeEnvelope_integral_le`, `intervalRemainderMaxDifference_L1_bound`; exact suffix marginal | Proved |
+| 10.48 | Markov probability bound for normalized remainder | `intervalRemainderMaxDifference_normalized_markov` | Proved |
+| 10.49 | Normalized remainder tends to zero on the long branch | `densityRemainder_normalized_tendsto`; `tendsto_densityRemainderErrorScale` | Proved |
+| 10.50 | Long-branch condition `N>W^(101/100)` | `density_long_ring_log_limit` is proved under the slightly weaker eventual non-strict inequality | Proved |
+| 10.51 | Integer division of the outside arc into `K_N` complete cells and remainder `q_N` | `densityCellCount`, `densityRemainderSites_eq_sub`, `densityRemainderSites_lt`, `densityCell_partition` | Proved |
+| 10.52 | Occupied-cell dimension ratio tends to one | `densityCell_dimension_ratio`, `tendsto_densityCell_dimension_ratio`; exact three-site seam deficit and remainder bound | Proved |
+| 10.53 | Actual long-ring normalized log determinant tends to circular potential | `density_long_ring_log_limit` on finite row laws; `density_long_profile_log_limit` on the explicit Section 3 product space | Proved |
+| 10.54 | The five explicit normalized error terms vanish, with the anchor limit remaining qualitative | Literal `densityTargetErrorScale`; `cyclicStitchedPressureError_div_le`, `tendsto_cyclicStitchedPressureError_div`, `tendsto_densityTargetErrorScale`. No rate for the Section 3.5 anchor limit is asserted | Proved |
+| 10.55 | Direct-branch condition `N≤W^(101/100)` | `densityDirectCondition`, `density_direct_highBand` | Proved |
+| 10.56 | Direct-branch log limit and closure for every `W→∞` sequence | `densityDirectAuxSites_highBand`, `density_profile_log_limit`, `density_ring_log_limit`; pointwise branch selection covers oscillating sequences as well | Proved |
+| 10.57 | Actual normalized Hilbert–Schmidt square is the average of `3WN` atom squares and tends to one; only second moment one | `densityCyclicMatrix_normalized_energy`, `density_ring_energy_limit_of_second_moment`; `PhysicalAtomEnergy`, `FiniteIIDLawOfLargeNumbers`, `DensityEnergyLimit` | Proved |
+| Theorem 2.10, real IID density branch | Original model assumptions, finite third moment, `W→∞`; circular empirical spectral limit | `density_circular_law`, for every real bounded continuous test function, on the actual real-IID infinite-sequence realization. Only `IsBoundedDensityAtom`, third moment, exact `Section3Inputs`, and dimensions remain | Proved |
+
+### Representation qualifications, not additional mathematical inputs
+
+- Independent physical coordinates are identified with square-array and
+  infinite-IID realizations by explicit measure-preserving maps. A single
+  probability space is a realization choice, not an independence condition
+  between different matrix sizes.
+- The mean-stitching proof freezes core and past, chooses singular frames
+  pointwise, and integrates the measurable operator-norm statistic. This
+  proves the required recurrence without assuming a measurable frame-selection
+  theorem or accepting a frame certificate from the caller.
+- Tao–Vu is proved code. A diagonal IID uniform-disk comparison ensemble,
+  its logarithmic potential, energy, and spectral limit are constructed
+  internally; its auxiliary sample is removed from the conclusion.
+- The circular-law conclusion is formulated through all bounded continuous
+  real test functions (weak convergence in probability), not merely compactly
+  supported tests. The compact cutoff controlling escape of mass is proved.
+- The planar-complex/directional atom extensions and heterogeneous-law
+  generality of local 10.2–10.3 remain outside the agreed real-IID branch.
+
 ## Not covered by this chapter library
 
-- Proposition 10.1 (the high-band asymptotic input).
-- Sections 10.4--10.6 (anchor, pressure lifting, and final asymptotic circular law).
 - Planar-complex and directional conditional-density atom laws.
-- The heterogeneous independent-law version of 10.2--10.3.
-- An additional wrapper stated on a global random outside probability space:
-  10.7 here is the uniform fixed-outside-data integral inequality, with
-  explicit `c ≠ 0` and `IsUnit R.det`. Likewise 10.10 is presented in unitary
-  frame coordinates, not as a new abstract exterior-algebra API.
+- The heterogeneous independent-law generality of local 10.2–10.3.
+- Other chapters' final theorems, except for the proved dependencies or
+  exact Section 3 statements explicitly documented here.
 
-These are explicit scope boundaries, not axioms added to the proved theorems.
+There is no remaining pressure, seam, reset, remainder, comparison-ensemble,
+energy, or replacement-principle assumption in `density_circular_law`.
+The theorem is conditional on the permitted Section 3 statements and the
+paper's original real-IID model hypotheses; it does not assert an
+assumption-free proof of those Section 3 statements.
 
-## Checkpoint audit
+The fixed-outside-data form of the earlier 10.7 API is supplemented by the
+actual random outside construction and integration in `PhysicalSeam` and
+`CyclicSeamAssembly`. The unitary-frame form of 10.10 is instantiated using
+singular frames in `ClearedSingularTest` and `ConditionalReset`. These are
+proved concrete applications, not remaining mathematical gaps.
 
-The current build and trust status is recorded in `AUDIT.md`. The nine
-real-atom proof chains are documented above. Their completion must be read
-together with the atom-law and representation qualifications above, and is
-not a claim that all of arXiv v1's Section 10 has been formalized.
+## Verification and explicit assumptions
+
+See `AUDIT.md` for build and axiom-check records, and `ASSUMPTIONS.md` for
+the exact final trust boundary. `CompletionAxiomAudit.lean` checks the full
+explicit types of the principal endpoints as well as their transitive axioms.
+Equivalent coordinate realizations, explicit constants, and test-function
+formulations are not counted as proof omissions.

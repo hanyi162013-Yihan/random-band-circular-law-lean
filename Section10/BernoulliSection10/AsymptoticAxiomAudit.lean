@@ -1,0 +1,51 @@
+import BernoulliSection10.AsymptoticErrors
+import BernoulliSection10.FinitePressure
+
+/-!
+# Audit of the Section 10 asymptotic foundations
+
+This separate audit can be run without rebuilding the established local
+bounded-density estimates. It covers every theorem in the three new modules.
+-/
+
+#print axioms BernoulliSection10.densityCellSites_pos
+#print axioms BernoulliSection10.densityCoreSites_pos
+#print axioms BernoulliSection10.densityAnchorSize_pos
+#print axioms BernoulliSection10.rpow_le_densityCellSites
+#print axioms BernoulliSection10.densityCellSites_le_five_mul_rpow
+#print axioms BernoulliSection10.rpow_anchor_exponent
+#print axioms BernoulliSection10.rpow_le_densityAnchorSize
+#print axioms BernoulliSection10.densityAnchorSize_le_five_mul_rpow
+#print axioms BernoulliSection10.densityRemainderSites_lt
+#print axioms BernoulliSection10.densityRemainderSites_eq_sub
+#print axioms BernoulliSection10.densityCell_partition
+#print axioms BernoulliSection10.densityCell_dimension_ratio
+#print axioms BernoulliSection10.densityLogScale_eq
+#print axioms BernoulliSection10.densityLogScale_nonneg
+#print axioms BernoulliSection10.tendsto_densityLogScale_div_rpow
+#print axioms BernoulliSection10.density_direct_highBand
+#print axioms BernoulliSection10.eventually_density_anchor_highBand
+
+#print axioms BernoulliSection10.density_rpow_ratio
+#print axioms BernoulliSection10.densityWidth_div_anchor_le
+#print axioms BernoulliSection10.densityAnchor_div_long_dimension_le
+#print axioms BernoulliSection10.densityWidth_div_long_dimension_le
+#print axioms BernoulliSection10.densitySqrtWidth_div_long_dimension_le
+#print axioms BernoulliSection10.densityTargetErrorScale_nonneg
+#print axioms BernoulliSection10.densityTargetErrorScale_le
+#print axioms BernoulliSection10.tendsto_densityTargetErrorScale
+#print axioms BernoulliSection10.tendsto_densityRemainderErrorScale
+
+#print axioms BernoulliSection10.le_finitePressureMax
+#print axioms BernoulliSection10.finitePressureMax_le
+#print axioms BernoulliSection10.finitePressureMax_attained
+#print axioms BernoulliSection10.mem_pressureMaximizers
+#print axioms BernoulliSection10.pressureMaximizers_nonempty
+#print axioms BernoulliSection10.pressureOptimizingDegree_maximizes
+#print axioms BernoulliSection10.pressureOptimizingDegree_le
+#print axioms BernoulliSection10.finitePressureMax_mono
+#print axioms BernoulliSection10.abs_finitePressureMax_sub_le
+#print axioms BernoulliSection10.abs_finitePressureMax_sub_le_max_deviation
+#print axioms BernoulliSection10.finitePressureMax_const
+#print axioms BernoulliSection10.finitePressureMax_add_const
+#print axioms BernoulliSection10.finitePressureMax_mul_nonneg

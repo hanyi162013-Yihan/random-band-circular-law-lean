@@ -1,121 +1,109 @@
-# BernoulliSection10 — local bounded-density estimates
+# BernoulliSection10 — the real-IID bounded-density circular law
 
-Lean 4 source for the real i.i.d. atom specialization of items **10.2--10.10**
-in Section 10 of Yi Han's
-[*The circular law for non-Hermitian random band matrices: optimal bandwidth,
-periodic profile and discrete law*, arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
-The corresponding preprint pages are 69--74, with deferred proofs on pages
-78--82. The formalization has explicit constants and constructs its coefficient,
-nonvanishing, multiaffinity, integrability, and random-endpoint-invertibility
-proofs internally. See [the item-by-item map](FORMALIZATION_MAP.md) for exact
-statements and retained hypotheses.
+Lean 4 formalization of the real IID bounded-density branch of Section 10 in
+Yi Han's [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
+It covers Proposition 10.1, the nine local results 10.2–10.10, equations
+10.30–10.57, and their assembly into the circular-law conclusion of
+Theorem 2.10.
 
-This chapter is a separate Lean library in the repository's shared Lake
-project. It imports `BernoulliLinearAlgebra` from `Section9/`; it does not
-vendor mathlib or require any machine-specific path.
+The complete development proof chain has compiled. The completion audit's
+343 actual compiler reports satisfy the standard logical-axiom allowlist.
+Whole-release build and audit status is recorded separately in [AUDIT.md](AUDIT.md);
+a successful development check is not presented as a fresh whole-repository run.
 
-## Scope of this upload
+## Public endpoints
 
-- The nine proof chains use the arXiv numbering. The namespace, imports,
-  theorem names, numbered helper constants, comments, and documentation use
-  `BernoulliSection10` and items 10.2--10.10.
-- The probability model is `IsBoundedDensityAtom μ L` with `μ : Measure ℝ`:
-  independent copies of one centered, variance-one real bounded-density law.
-  The target spaces and matrix coefficients may be complex; this does **not**
-  make the random atom law complex.
-- The broader planar-complex and directional conditional-density alternatives
-  in arXiv v1 are **not formalized by this library**. Nor does its single-law
-  API claim the independent, non-identically-distributed generality of 10.2
-  and 10.3. The deterministic row-affinity result 10.4 has no atom-law restriction.
-- Proposition 10.1, the high-band input at the start of this section,
-  and the asymptotic arguments in Sections 10.4--10.6 are outside
-  this upload. This is not a full formalization of the entire Section 10.
-- Proposition 10.7 uses fixed conditioned outside data `c ≠ 0` and invertible
-  `R`; Proposition 10.10 uses unitary-frame coordinates for its decomposable
-  wedges. These representations and their exact signatures are documented
-  in the map, rather than concealed behind a completeness percentage.
+All names below are in `BernoulliSection10`.
 
-## Toolchain
+| Entry point | Conclusion | Source |
+|---|---|---|
+| `density_high_band_ring_log_limit` | Actual full-block high-band log limit | Proposition 10.1 |
+| `densityCorePressureDensity_limit` | Deterministic core pressure calibration | (10.35) |
+| `density_long_ring_log_limit` | Actual long-ring log-determinant limit | (10.53) |
+| `density_ring_log_limit` | Log limit for every growing-bandwidth sequence | (10.56) |
+| `density_ring_energy_limit_of_second_moment` | Actual normalized matrix energy tends to one | (10.57) |
+| `density_circular_law` | Circular empirical spectral limit against every bounded continuous real test function | Theorem 2.10, real-IID branch |
 
-- Lean `v4.33.0`
-- mathlib `v4.33.0`, pinned in the repository-root manifest
+The final statement is in
+[DensityCircularLaw.lean](BernoulliSection10/DensityCircularLaw.lean).
+It uses the literal normalized cyclic matrix `densityCyclicMatrix`, not an
+abstract model certificate. Matrix dimensions are `N_n=(s_n+3)W_n`, and the
+entries are selected from one infinite IID real sequence. The finite
+physical-row marginals are proved to be exactly the paper's product laws.
+No independence between different matrix sizes is required.
 
-## Layout
+## Exactly what remains as input
 
-- `BoundedDensity.lean`: the scalar atom law and one-dimensional density
-  estimates;
-- `AffineLog.lean`: Lemma 10.2;
-- `MultiAffine.lean`: Corollary 10.3;
-- `MultiAffineSecondMoment.lean`: recursive `L²` control used to close 10.5;
-- `PhysicalRows.lean`: Lemma 10.4;
-- `PhysicalModel.lean`, `PhysicalAffinity.lean`, `EfronStein.lean`,
-  `HodgeIntegrability.lean`, and `RowConcentration.lean`: the concrete row
-  model and completed caller-facing Lemma 10.5;
-- `IntegratedHodge.lean`: deterministic Hodge identities for Lemma 10.6;
-- `EndpointDeterminant.lean`: concrete normalized endpoint determinant
-  deviation, almost-sure invertibility, and explicit negative-log estimate;
-- `EndpointExteriorGrowth.lean`, `EndpointConditioningGrowth.lean`, and
-  `EndpointConditioningScale.lean`: the simultaneous forward exterior family
-  of the two actual endpoint blocks, its measure-preserving row-law model,
-  Hodge--Jacobi inverse control, and the explicit certificate-free
-  `C_L W log(eW)` exact-conditioning estimate;
-- `HodgeEnvelope.lean`: concrete forward coefficient tensors, one-site
-  interface determinant estimates, simultaneous forward/inverse Hodge
-  envelope, its explicit first-moment bound, and finite second moment;
-- `HodgeFamily.lean`: all exterior degrees packaged into one dependent
-  finite product, so Corollary 10.3 controls their maximum with a single row
-  cost; includes the improved one-site Hodge envelope, first moment, finite
-  second moment, and almost-sure control;
-- `TensorCornerBound.lean`, `HodgeFamilyGrowth.lean`: zero/one-hot corner
-  bounds for canonical multiaffine tensors, concrete complementary-minor and
-  Frobenius estimates, an explicit `C_z W log(eW)` tensor estimate, and the
-  completed certificate-free `C_{L,z} s W log(eW)` one-site/interval
-  first-moment bounds for Lemma 10.6;
-- `ProductMarginal.lean`: measure-preserving restriction of finite i.i.d.
-  products to an injectively selected coordinate family;
-- `IntervalHodge.lean`: the concrete interval envelope, lossless site
-  marginals, both the original sum-over-degrees and improved
-  maximum-over-degrees envelopes, linear-in-length first-moment bounds,
-  finite second moments, and almost-sure forward/inverse product control for
-  Lemma 10.6;
-- `HodgeIntegrability.lean`: recursive/flat row equivalence, internal nonzero
-  witness, and concrete interval-log `L²` theorem;
-- `PacketBoundary.lean`, `PacketComparisonGrowth.lean`,
-  `PacketMultiaffine.lean`, and `PacketProbability.lean`: deterministic
-  packet comparison, completed endpoint integration for Proposition 10.8,
-  physical-row grouping, and completed Proposition 10.9;
-- `MultiAffineGrowth.lean`, `RademacherTensor.lean`, and
-  `SquarefreeRademacher.lean`: deterministic tensor evaluation bounds and
-  the exact Rademacher lower bound for a complete squarefree coefficient
-  vector;
-- `PacketTensorScaling.lean`, `PacketTensorReverse.lean`: both directions of
-  comparison between raw squarefree coefficients and the canonical tensor
-  of normalized `3W` physical rows, with explicit `O(W log(eW))` logarithmic
-  loss;
-- `SeamComparison.lean`, `SeamProbability.lean`: deterministic
-  Gram-volume/exterior-pressure comparison and the complete nine-block
-  conditional expectation theorem of Proposition 10.7;
-- `PacketFrame.lean`: checked frame, coefficient-limit, exact Gram-energy,
-  and scalar-polynomial nonvanishing layer for Proposition 10.10;
-- `PacketFrameProbability.lean`: physical-row affinity through the frame
-  limit, concrete Corollary 10.3 evaluation, and the positive inverse-log
-  reduction for the scalar 10.10 polynomial;
-- `PacketReset.lean`: endpoint integration and the complete iterated packet
-  expectation theorem of Proposition 10.10;
-- `FORMALIZATION_MAP.md`: precise source-to-Lean map;
-- `AUDIT.md`: reproducible build, placeholder, and axiom audit.
+- A real probability law with mean zero, second moment one, and density
+  bounded by `L`, encoded by `IsBoundedDensityAtom μ L`.
+- Finite third moment.
+- Positive integer bandwidths `W_n→∞`; the number of block sites may vary.
+- `SourceInputs.Section3Inputs μ L`: the exact specialized statements of
+  Theorem 3.1, Proposition 3.3, Lemma 3.4, and Proposition 3.5.
 
-## Build
+There is no assumed Proposition 10.1, pressure calibration, reset or seam
+bound, remainder estimate, reference spectral limit, or Tao–Vu principle.
+The permitted Section 3 statements are ordinary theorem parameters, not
+custom axioms. No additional Section 4 parameter is needed.
 
-From the **repository root**, run:
+See [ASSUMPTIONS.md](ASSUMPTIONS.md) for the full trust boundary and
+[FORMALIZATION_MAP.md](FORMALIZATION_MAP.md) for each source statement,
+its hypotheses, Lean representation, dependencies, and coverage status.
+
+## Module boundaries
+
+The chapter contains 111 Lean files: 107 mathematical modules, three audit
+modules, and the public umbrella. The main groups follow mathematical roles:
+
+| Role | Main modules |
+|---|---|
+| Density and measure theory | `BoundedDensity`, `AffineLog`, `MultiAffine`, `MultiAffineSecondMoment`, `ProductMarginal` |
+| Physical rows and deterministic exterior algebra | `PhysicalRows`, `PhysicalModel`, `IntegratedHodge`, `SingularFrames`, `ExteriorSingularFrames`, `ClearedSingularTest` |
+| Concentration, Hodge control, and packets | `RowConcentration`, `HodgeFamilyGrowth`, `IntervalHodge`, `PacketComparisonGrowth`, `PacketReset`, `PhysicalPacketReset` |
+| Concrete probability laws and stitching | `FiniteIIDCoordinates`, `PacketLawTransport`, `IntervalConcatenation`, `ConditionalReset`, `MeanStitching`, `StitchedPressure` |
+| Cyclic seam and remainder | `CyclicPhysicalModel`, `PhysicalSeam`, `CyclicSeamAssembly`, `RemainderControl`, `RemainderL1`, `CyclicStitchedPressure` |
+| High-band input and pressure limits | `Section3Inputs`, `VarianceProfiles`, `Section3HardEdge`, `Section3Counting`, `Section3Bulk`, `ReferenceTruncation`, `FullBlockHighBandProfile`, `DensityPressureLimit` |
+| Arbitrary bandwidth and spectral closure | `LongRingLimit`, `TargetRingLimit`, `DensityEnergyLimit`, `DimensionReplacement`, `DiagonalDiskReference`, `WeakCircularLaw`, `DensityCircularLaw` |
+
+The stable `BernoulliLinearAlgebra` library is imported from `Section9/`.
+The user's proved Tao–Vu library and 30 generic analysis modules are included
+under `vendor/`, with provenance and SHA-256 manifests. The original
+external projects were not edited. No machine-specific dependency path is
+required. See [PROVENANCE.md](PROVENANCE.md).
+
+## Precise scope boundaries
+
+The atom law is real and IID. Planar-complex atoms, directional conditional
+density alternatives, and the heterogeneous-law generality of 10.2–10.3
+are not asserted. Complex matrix coefficients, complex shifts, and complex
+eigenvalues are already included.
+
+The final conclusion is the bounded-continuous-test formulation of weak
+convergence in probability, not just compactly supported tests. The
+implementation also permits three block sites, whereas the paper assumes
+at least four. Coordinate changes, explicit constants, and pointwise singular
+frames are representation choices, not additional hypotheses or proof gaps.
+
+## Reproduce the verification
+
+Use the repository root, Lean `v4.33.0`, the committed mathlib manifest,
+and Python 3.11 or newer:
 
 ```sh
+# On a fresh machine:
+lake exe cache get
+
+# Full memory-bounded build, including the final default lake build:
+python3 scripts/build_serial.py
+python3 scripts/check_placeholders.py
+python3 scripts/check_axioms.py
+
+# Chapter-only entry:
 lake build BernoulliSection10
-lake env lean Section10/BernoulliSection10/AxiomAudit.lean
-# All released chapters:
-lake build
 ```
 
-On a fresh machine, first follow the root README's dependency/cache setup.
-The audit commands and their recorded status are in [AUDIT.md](AUDIT.md).
-The public umbrella import is `import BernoulliSection10`.
+The public import is `import BernoulliSection10`. The three chapter audit
+files are `AxiomAudit.lean`, `AsymptoticAxiomAudit.lean`, and
+`CompletionAxiomAudit.lean`, all under `Section10/BernoulliSection10/`.
+The completion audit also checks the full explicit types of the principal
+caller-facing theorems.

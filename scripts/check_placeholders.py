@@ -6,6 +6,7 @@ This is a lexical safeguard, not a substitute for checking compiled axioms.
 """
 
 import re
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -50,12 +51,26 @@ def code_only(source: str) -> str:
 
 def main() -> int:
     root = Path(__file__).resolve().parent.parent
-    paths = subprocess.check_output(
-        ["git", "ls-files", "-z", "--", "*.lean"], cwd=root
-    ).decode().split("\0")
+    # Include newly written source before it is staged; a tracked-only scan
+    # can otherwise silently omit the very proofs being checked locally.
+    if (root / ".git").exists():
+        paths = subprocess.check_output(
+            ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z", "--", "*.lean"],
+            cwd=root,
+        ).decode().split("\0")
+        mode = "tracked and new"
+    else:
+        # Source-only archives have no Git metadata. Exclude generated
+        # dependency/build trees even after the user has fetched the cache.
+        paths = []
+        for directory, dirs, files in os.walk(root):
+            dirs[:] = [name for name in dirs if name not in {".git", ".lake"}]
+            paths.extend(str((Path(directory) / name).relative_to(root))
+                         for name in files if name.endswith(".lean"))
+        mode = "source archive"
     failed = False
     count = 0
-    for relative in filter(None, paths):
+    for relative in sorted(set(filter(None, paths))):
         count += 1
         code = code_only((root / relative).read_text())
         for match in re.finditer(r"\b(sorry|admit|axiom)\b", code):
@@ -63,10 +78,10 @@ def main() -> int:
             print(f"{relative}:{line}: forbidden token {match.group()}")
             failed = True
     if not count:
-        print("No tracked Lean files found", file=sys.stderr)
+        print("No workspace Lean files found", file=sys.stderr)
         return 1
     if not failed:
-        print(f"Source-token scan passed: {count} tracked Lean files")
+        print(f"Source-token scan passed: {count} workspace Lean files ({mode})")
     return int(failed)
 
 
