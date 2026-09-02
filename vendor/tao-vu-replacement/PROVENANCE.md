@@ -7,9 +7,11 @@ Retrieved from the user's clean local checkout on 2026-09-02.
 License: Apache-2.0; the original license is included.
 Toolchain and mathlib: v4.33.0, matching this project.
 
-The 13 library modules required by `TaoVuReplacement.ReplacementPrinciple`
-are included locally for reproducible, network-independent source delivery.
-They are proof dependencies, not additional mathematical assumptions.
+The 13 upstream library modules are included locally for reproducible,
+network-independent source delivery. Twelve form the transitive module
+closure of `TaoVuReplacement.ReplacementPrinciple`; `SourceStatement` retains
+the upstream bibliographic identifiers. They introduce no additional
+mathematical assumptions.
 The upstream audit driver is not copied; the integrated Section 10 audit
 checks the final theorems and their complete transitive axiom dependencies.
 

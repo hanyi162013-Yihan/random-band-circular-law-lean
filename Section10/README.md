@@ -6,10 +6,11 @@ It covers Proposition 10.1, the nine local results 10.2–10.10, equations
 10.30–10.57, and their assembly into the circular-law conclusion of
 Theorem 2.10.
 
-The complete development proof chain has compiled. The completion audit's
-343 actual compiler reports satisfy the standard logical-axiom allowlist.
-Whole-release build and audit status is recorded separately in [AUDIT.md](AUDIT.md);
-a successful development check is not presented as a fresh whole-repository run.
+The clean full-repository build has passed: 373 library modules and the final
+default `lake build`, followed by 857 actual axiom reports across 11 audits.
+Section 10 contributes 446 reports, including the 343-report completion audit.
+All satisfy the standard logical-axiom allowlist. [AUDIT.md](AUDIT.md) records
+the verified source commit, successful run, full final signature, and scope.
 
 ## Public endpoints
 

@@ -59,9 +59,9 @@ finite-third-moment model assumptions and the exact permitted Section 3
 statements (3.1, 3.3, 3.4, 3.5). The full-block high-band limit, actual
 pressure/reset/seam/remainder assembly, and reference ensemble are proved
 internally. Tao–Vu is a proved source dependency, not an extra assumption.
-The development proof chain has compiled and its 343-report completion audit
-passes the logical-axiom allowlist; full-release verification is recorded
-separately in the chapter audit. Planar-complex/directional-density atoms and
+The clean full-repository build and all 857 axiom reports have passed;
+Section 10 contributes 446 reports, including its 343-report completion audit.
+The exact verification record is in the chapter audit. Planar-complex/directional-density atoms and
 the heterogeneous-law generality of 10.2–10.3 are not claimed. See the
 [Section 10 overview](Section10/README.md),
 [exact source and scope map](Section10/FORMALIZATION_MAP.md), and
@@ -132,7 +132,7 @@ The toolchain is pinned to `leanprover/lean4:v4.33.0`; mathlib is pinned by the
 manifest to `db584cd6d46c92f209a44c0f1c829460d327499d` (tag `v4.33.0`).
 
 ```sh
-git clone https://github.com/hanyi162013-Yihan/random-band-circular-law-lean.git
+git clone --branch section10-asymptotic-completion https://github.com/hanyi162013-Yihan/random-band-circular-law-lean.git
 cd random-band-circular-law-lean
 # On a new machine, this downloads the mathlib compiled cache (potentially large).
 # Skip it if the matching dependencies and compiled cache are already available.
@@ -147,6 +147,11 @@ lake build BernoulliSection9
 # Optional: build the complete real-IID Section 10 proof and its dependencies.
 lake build BernoulliSection10
 ```
+
+The completion is published on `section10-asymptotic-completion`; the clone
+command selects that branch explicitly rather than the earlier `main`
+snapshot. For an immutable verification snapshot, check out the full source
+commit recorded in [Section10/AUDIT.md](Section10/AUDIT.md).
 
 Only source and documentation are committed. Lean, mathlib, `.lake/`, compiled
 objects, scratch files, and local filesystem paths are not part of the release.
@@ -169,11 +174,13 @@ also supports source-only archives without Git metadata.
 
 ### Automated verification
 
-The [integrated verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33590358281)
-passed for source commit `48a1556090a0944a8f06b85bd220116ada66129b` on
-2026-09-02: 257 library modules, the complete default `lake build`, and
-475 axiom reports across nine audit files. The clean run took 25 minutes
-35 seconds, including toolchain/cache setup and audits.
+The [complete Section 10 verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33620303116)
+passed for source commit `1cb4a34cd6867cda79b26a9c8e4bded4cdabb515` on
+2026-09-02: **373** library modules, the complete default `lake build`,
+**381** Lean files in the placeholder scan, and **857** axiom reports across
+**11** audit files. The clean job took **35 minutes 13 seconds**, including
+toolchain/cache setup and audits. See [Section10/AUDIT.md](Section10/AUDIT.md)
+for exact scope, the final printed signature, and the earlier baseline record.
 
 The `Lean verification` GitHub Actions workflow runs on pushes and pull requests,
 and can also be started manually. It installs the pinned Lean toolchain,

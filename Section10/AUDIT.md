@@ -6,28 +6,71 @@ through its circular-law conclusion. Exact mathematical inputs and
 uncovered atom-law extensions are listed in
 [ASSUMPTIONS.md](ASSUMPTIONS.md) and [FORMALIZATION_MAP.md](FORMALIZATION_MAP.md).
 
-## Completion verification checkpoint — 2026-09-02
+## Verified completion — 2026-09-02
+
+The [clean GitHub Actions run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33620303116)
+passed for source commit **`1cb4a34cd6867cda79b26a9c8e4bded4cdabb515`**.
+Its Ubuntu 24.04 job ran from 10:36:11 to 11:11:24 UTC, **35 minutes 13 seconds**.
+It installed the pinned toolchain and dependency cache, built the released
+libraries from source, and then executed every audit file afresh.
 
 | Check | Status and scope |
 |---|---|
-| Complete new proof chain through `density_circular_law` | **PASS**, development build, including `CompletionAxiomAudit` |
-| Completion audit | **PASS**, all **343** actual `#print axioms` reports matched their declarations and used only the allowlist below |
-| Source placeholder scan | **PASS**, all **381** released Lean source files, including tracked and newly added files |
+| Complete proof chain through `density_circular_law` | **PASS**, clean release build and independent development compilation |
+| Full release-root serial build and final `lake build` | **PASS**, all **373** distinct library modules, followed by the complete default build |
+| Fresh repository-wide axiom audit | **PASS**, **857** actual reports across **11** audit files; exact declaration/report multiplicities and the allowlist below |
+| Section 10 audits within that run | **PASS**, **446** reports: 64 local, 39 asymptotic, and 343 completion reports |
+| Source placeholder scan | **PASS**, all **381** released Lean source files |
 | Release dependency graph | **PASS**, **373** library modules, no missing local import or cycle |
-| Full release-root serial build and final `lake build` | **In progress**; not yet reported as a new full-release pass |
-| Fresh repository-wide axiom audit | **Pending full release verification**; expected **857** reports across **11** audit files |
+| Public statement inspection | **PASS**, the four Section 3 fields and seven principal endpoint signatures were printed by Lean |
+| Source-only archive checks | **PASS**, archive-mode source scan, dependency discovery, parser tests, vendor hashes, and exact committed-file comparison |
 
-The development completion build finished at approximately 10:12 UTC.
-The 343-report allowlist check used the actual Lean compiler messages
-preserved in Lake's nonsynthetic completion-audit trace; only their
-source-location/severity formatting was normalized for the audit parser.
-No build metadata, proof artifact, or axiom report was rewritten.
-The full release checks below execute the audit files afresh.
+The downloaded clean-run log was independently parsed again: all 373
+module targets and the final default-build success were present, and all
+857 fresh compiler axiom reports matched the released audit declarations.
+Only GitHub's job/step/timestamp prefix was removed; report text was unchanged.
 
-Subsequent Lean edits at this checkpoint correct application comments in
-`ProbabilityLimits.lean` and trailing whitespace in `RemainderProbability.lean`;
-no proof term or statement changes. The vendored Tao–Vu files retain the
-documented extra final blank line; their exact release hashes are recorded.
+The earlier development completion check finished at approximately 10:12 UTC
+and validated 343 actual compiler reports. The later clean release run also
+checks the intervening comment and whitespace corrections. The full-release
+pass reported here is the clean Ubuntu run, not the memory-constrained Mac's
+separate all-library rebuild. Subsequent completion-record edits are
+documentation only; no Lean source, dependency pin, build configuration,
+verification script, or workflow was changed after this verified source commit.
+
+The vendored Tao–Vu files retain the documented extra final blank line;
+their exact release hashes are recorded. Section 4/9 source and the original
+external proof projects were not edited by this continuation.
+
+### Final public signature
+
+The clean compiler printed the following complete type. In particular, no
+pressure, reset, seam, remainder, reference-law, energy, or replacement
+certificate is an argument:
+
+```text
+@BernoulliSection10.density_circular_law : ∀ {μ : MeasureTheory.Measure ℝ} {L : ℝ},
+  BernoulliSection10.IsBoundedDensityAtom μ L →
+    MeasureTheory.Integrable (fun x => |x| ^ 3) μ →
+      BernoulliSection10.SourceInputs.Section3Inputs μ L →
+        ∀ (W s : ℕ → ℕ),
+          (∀ (n : ℕ), 0 < W n) →
+            Filter.Tendsto W Filter.atTop Filter.atTop →
+              ∀ (f : BoundedContinuousFunction ℂ ℝ),
+                MeasureTheory.TendstoInMeasure (MeasureTheory.Measure.infinitePi fun x => μ)
+                  (fun n ω =>
+                    TaoVuReplacement.realEsdTest
+                      (BernoulliSection10.densityCyclicMatrix (W n) (s n)
+                        (BernoulliSection10.physicalRowsFromSequence (W n) (s n) ω))
+                      ⇑f)
+                  Filter.atTop fun x => ∫ (z : ℂ), f z ∂BernoulliSection10.DiskReference.circularMeasure
+```
+
+Statement review also checked the literal variance normalization, algebraic
+eigenvalue multiplicities, normalized planar disk law, arbitrary diverging
+dimension sequences, second-moment-only energy conclusion, and the separate
+qualitative anchor error. These checks supplement, not replace, the detailed
+source mapping and explicit scope qualifications.
 
 ## Reproducible full verification
 

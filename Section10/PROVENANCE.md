@@ -27,6 +27,10 @@ The following Section 10 modules adapt proofs from the user's
 `circularlawsections5-6` workspace, rather than importing that workspace or
 its abstract model certificates:
 
+The Section 5/6 labels in this provenance table identify the original
+workspace's modules, not the chapter number of the present paper. All
+current results and source-item mappings use arXiv v1's Section 10 numbering.
+
 | Section 10 module | Source proof / adaptation |
 |---|---|
 | `ProbabilityLimits` | Section 5 triangular probability convergence and deterministic calibration; local concrete measure types |

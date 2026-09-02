@@ -19,8 +19,8 @@ This library covers the real-IID bounded-density branch from
 **10.30–10.57**, and their assembly into **Theorem 2.10**. The final
 theorem retains only the original model hypotheses and the exact permitted
 Section 3 inputs; all concrete auxiliary conditions are discharged.
-The development proof chain has compiled. The separate full-release build
-and trust-audit status is recorded in `AUDIT.md`.
+The clean full-release build and all 857 repository-wide axiom reports have
+passed. The verified commit and detailed trust-audit record are in `AUDIT.md`.
 
 **Coverage qualification:** the probabilistic implementation uses one
 law `μ : Measure ℝ` and its finite i.i.d. products. It covers the real i.i.d.
@@ -443,8 +443,8 @@ No manuscript file is altered by this upload.
 ## Continuation: equations 10.30–10.57 and the final circular law
 
 The following rows are proved in the real-IID scope. The complete public
-proof chain has passed the development build; release-root verification
-and audit records are maintained separately in `AUDIT.md`.
+proof chain has passed the clean release-root build and fresh axiom audits;
+the exact verification record is maintained in `AUDIT.md`.
 
 Common notation: real IID law `μ`, mean zero, second moment one, density
 bounded by `L`; fixed `z : ℂ`; `W ≥ 1`; `m=s+3` block sites; dimension

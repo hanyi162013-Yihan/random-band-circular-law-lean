@@ -1,8 +1,9 @@
 # Section 10 proof architecture
 
 This file retains its historical name for existing links. The continuation's
-mathematical proof chain is now implemented and has passed the development
-build. Full-release verification status belongs to [AUDIT.md](AUDIT.md).
+mathematical proof chain is complete in the stated real-IID scope and has
+passed the clean full-release build and axiom audits. The exact verification
+record belongs to [AUDIT.md](AUDIT.md).
 
 Source: [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1),
 Proposition 10.1 and Sections 10.4–10.6. There are no further numbered
