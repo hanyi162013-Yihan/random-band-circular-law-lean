@@ -26,7 +26,8 @@ theorem abs_log_sub_log_le_div {a x y : ℝ} (ha : 0 < a) (hx : a ≤ x) (hy : a
     rw [Real.log_div hxpos.ne' hypos.ne'] at h
     calc
       _ ≤ (x - y) / y := by
-        convert h using 1 <;> field_simp <;> ring
+        have heq : x / y - 1 = (x - y) / y := by field_simp
+        exact h.trans_eq heq
       _ ≤ _ := div_le_div_of_nonneg_left (sub_nonneg.mpr hyx) ha hay
   rcases le_total y x with h | h
   · rw [abs_of_nonneg (sub_nonneg.mpr (Real.log_le_log (ha.trans_le hy) h)),
@@ -57,7 +58,7 @@ theorem operatorCutoffPotential_difference_le (A B : Module.End ℂ E)
       (a⁻¹ * Real.sqrt ((Module.finrank ℂ E : ℝ) * operatorHilbertSchmidtSq (A - B))) /
         (Module.finrank ℂ E : ℝ) := by
   unfold operatorCutoffPotential
-  rw [← sub_div, abs_div, abs_of_nonneg (Nat.cast_nonneg _)]
+  rw [← sub_div, abs_div, abs_of_nonneg (Nat.cast_nonneg (Module.finrank ℂ E))]
   exact div_le_div_of_nonneg_right
     (singularValues_lipschitz_sum A B hA hB (fun x => Real.log (max x a))
       (inv_nonneg.mpr ha.le) (log_max_lipschitz ha)) (Nat.cast_nonneg _)
@@ -68,7 +69,8 @@ theorem sqrt_mul_div_dimension {n e : ℝ} (hn : 0 < n) :
   have hs := Real.sq_sqrt hn.le
   have hsn : Real.sqrt n ≠ 0 := (Real.sqrt_pos.mpr hn).ne'
   field_simp
-  nlinarith
+  rw [hs]
+  ring
 
 theorem operatorCutoffPotential_difference_le_normalized (A B : Module.End ℂ E)
     (hA : Function.Injective A) (hB : Function.Injective B)
@@ -78,6 +80,7 @@ theorem operatorCutoffPotential_difference_le_normalized (A B : Module.End ℂ E
         (a * Real.sqrt (Module.finrank ℂ E : ℝ)) := by
   have h := operatorCutoffPotential_difference_le A B hA hB ha
   rw [mul_div_assoc, sqrt_mul_div_dimension (Nat.cast_pos.mpr hdim)] at h
-  convert h using 1 <;> ring
+  convert h using 1
+  ring
 
 end CircularLawSection6
