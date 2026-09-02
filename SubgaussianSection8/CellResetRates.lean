@@ -49,7 +49,7 @@ theorem subgaussianCellClipBound_ge_budget (Ξ : Atom) (I : NguyenBottomSingular
     (W : ℕ) (hW : 0 < W) (z : ℂ) (hlog : 1 ≤ Real.log W) :
     (cellTransferBudget Ξ) I W (coreSites W) z ≤ cellClipBound ((subgaussianCellClipConstant Ξ) I z) W := by
   have ht := (subgaussianTransferLogConstant_nonneg Ξ) I z
-  rw [(cellTransferBudget Ξ), one_add_posLog_nat_eq_log_e_mul W hW, ← densityLogScale]
+  rw [cellTransferBudget, one_add_posLog_nat_eq_log_e_mul W hW, ← densityLogScale]
   rw [densityLogScale_eq hW]
   change (subgaussianTransferLogConstant Ξ) I z * ((coreSites W * W : ℕ) : ℝ) *
     (1 + Real.log W) ≤ 2 * ((subgaussianTransferLogConstant Ξ) I z + 1) *
@@ -68,8 +68,8 @@ theorem subgaussianResetCap_ge_budget (Ξ : Atom) (I : NguyenBottomSingularInput
       (subgaussianResetCap Ξ) I W z := by
   have ht := (subgaussianTransferLogConstant_nonneg Ξ) I z
   have hl := densityLogScale_nonneg hW
-  simp only [(cellTransferBudget Ξ), one_add_posLog_nat_eq_log_e_mul W hW,
-    (subgaussianResetCap Ξ), (subgaussianResetCapConstant Ξ), cellLength, cellSites,
+  simp only [cellTransferBudget, one_add_posLog_nat_eq_log_e_mul W hW,
+    subgaussianResetCap, subgaussianResetCapConstant, cellLength, cellSites,
     Nat.cast_mul, Nat.cast_add, Nat.cast_ofNat]
   change 2 * ((subgaussianTransferLogConstant Ξ) I z * ((coreSites W : ℝ) * W) * densityLogScale W) +
     (subgaussianTransferLogConstant Ξ) I z * (3 * W) * densityLogScale W ≤
@@ -97,7 +97,7 @@ theorem integrable_cellIntervalResetLoss (Ξ : Atom) (W s K : ℕ) (j : Fin K)
     ((measurable_cellIntervalResetLoss Ξ) W s K j z r T).aestronglyMeasurable
   apply ae_of_all
   intro x
-  rw [Real.norm_of_nonneg (show 0 ≤ (cellIntervalResetLoss Ξ) W s K j z r T x from
+  rw [Real.norm_of_nonneg (show 0 ≤ cellIntervalResetLoss W s K j z r T x from
     cappedSpliceLoss_nonneg hT _ _ _)]
   exact cappedSpliceLoss_le_cap _ _ _ _
 

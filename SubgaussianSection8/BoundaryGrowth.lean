@@ -45,6 +45,7 @@ theorem subgaussianScaledEndpointGood (Ξ : Atom)
       (interfaceDeterminantLowerBound I W)) :
     PaperEndpointGood ((packetRowScale W) • CL) ((packetRowScale W) • BR)
       (3 * W * (opNormConstant Ξ)) (interfaceDeterminantLowerBound I W) := by
+  have hK := opNormConstant_nonneg Ξ
   have hs := (packetRowScale_norm_bounds Ξ) W hW
   have hscale : 1 ≤ ‖packetRowScale W‖ ^ W := one_le_pow₀ hs.1
   refine ⟨?_, ?_, hgood.delta_pos, ?_, ?_⟩
@@ -141,7 +142,7 @@ theorem log_scaled_endpointExteriorConstant_le (Ξ : Atom)
     nlinarith [mul_le_mul_of_nonneg_left hscale
       (show 0 ≤ 2 * D * (W : ℝ) by positivity)]
   change Real.log (exactExteriorConditioningConstant _) ≤ _
-  dsimp only [(subgaussianEndpointLogConstant Ξ), F, B, D] at *
+  dsimp only [subgaussianEndpointLogConstant, F, B, D] at *
   nlinarith
 
 def subgaussianBoundaryLogConstant (Ξ : Atom) (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ) : ℝ :=

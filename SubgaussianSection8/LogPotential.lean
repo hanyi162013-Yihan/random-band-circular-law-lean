@@ -54,8 +54,8 @@ theorem subgaussian_long_log_potential_comparison (Ξ : Atom)
   have h := (hs.add μ hr).add μ hp
   apply h.congr
   · intro n x
-    dsimp [cyclicSeamDifference, (subgaussianRemainderDifference Ξ),
-      (embeddedCompleteCellPressureError Ξ), targetPressureCenter]
+    dsimp [cyclicSeamDifference, subgaussianRemainderDifference,
+      embeddedCompleteCellPressureError, targetPressureCenter]
     simp only [Nat.cast_mul]
     ring
   · simp
@@ -82,7 +82,7 @@ theorem subgaussian_anchor_pressure_comparison (Ξ : Atom)
     (fun n => anchorCells (W n) * cellSites (W n)) hW hWtop
     (Filter.Eventually.of_forall fun n => by simp [anchorSize, anchorSites, Nat.mul_comm])
     (tendsto_log_anchorSites_mul_width_div_width W hWtop) z
-  simpa only [(anchorLogPotential Ξ), (anchorPressureCenter_eq_target Ξ),
+  simpa only [anchorLogPotential, (anchorPressureCenter_eq_target Ξ),
     anchorSize, anchorSites, Nat.mul_comm] using h
 
 /-- The pressure limit obtained from the actual many-cell anchor and
@@ -178,14 +178,14 @@ theorem subgaussian_long_branch_log_potential (Ξ : Atom)
           ε ≤ |densityCyclicLogDet (W n) q z x /
             (((q + 3) * W n : ℕ) : ℝ) - circularLogPotential z|}
     have hsites : (longOrAnchorCoreSites Ξ) (W n) (s n) = s n := by
-      simp only [(longOrAnchorCoreSites Ξ), if_pos hn]
+      simp only [longOrAnchorCoreSites, if_pos hn]
     have hvalue : (intervalRowsLaw (W n) (s n + 3) Ξ.law).real
         {x : IntervalRows (W n) (s n + 3) |
           ε ≤ |(longBranchLogPotential Ξ) (W n) (s n) z x - circularLogPotential z|} =
         F (s n) := by
-      simp only [F, (longBranchLogPotential Ξ), if_pos hn]
+      simp only [F, longBranchLogPotential, if_pos hn]
     exact (hvalue.trans (congrArg F hsites).symm).le
-  · simp only [(longBranchLogPotential Ξ), if_neg hn, sub_self, abs_zero]
+  · simp only [longBranchLogPotential, if_neg hn, sub_self, abs_zero]
     have he : {x : IntervalRows (W n) (s n + 3) | ε ≤ (0 : ℝ)} = ∅ := by
       ext x
       simp [not_le_of_gt hε]
@@ -215,9 +215,9 @@ theorem subgaussian_rows_log_potential (Ξ : Atom)
   apply h.congr
   · intro n x
     by_cases hn : (s n + 3) * W n < anchorSize (W n)
-    · simp [branchSelectedTri, (directBranchLogPotential Ξ), hn]
+    · simp [branchSelectedTri, directBranchLogPotential, hn]
     · have hl := Nat.le_of_not_gt hn
-      simp [branchSelectedTri, (longBranchLogPotential Ξ), hn, hl]
+      simp [branchSelectedTri, longBranchLogPotential, hn, hl]
   · rfl
 
 /-- Caller-facing convergence on the actual IID subgaussian sequence. -/

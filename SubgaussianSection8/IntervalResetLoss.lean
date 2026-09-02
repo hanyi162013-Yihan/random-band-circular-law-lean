@@ -55,13 +55,13 @@ theorem intervalResetLoss_resetSandwichRowsFlat (Ξ : Atom) (W p q : ℕ) (z : �
     (intervalResetLoss Ξ) W p q z r T (resetSandwichRowsFlat W p q v) =
       (resetLossFlat Ξ) W p q z r T v := by
   have hc : (intervalLastCore Ξ) W p q (resetSandwichRowsFlat W p q v) = v.1.1 := by
-    simp [(intervalLastCore Ξ), resetSandwichRowsFlat, resetSandwichRows]
+    simp [intervalLastCore, resetSandwichRowsFlat, resetSandwichRows]
   have hp : (intervalPastBeforeReset Ξ) W p q (resetSandwichRowsFlat W p q v) = v.1.2 := by
-    simp [(intervalPastBeforeReset Ξ), resetSandwichRowsFlat, resetSandwichRows]
+    simp [intervalPastBeforeReset, resetSandwichRowsFlat, resetSandwichRows]
   unfold intervalResetLoss
   rw [hc, hp]
   simp only [resetSandwichRowsFlat,
-    intervalClearedProduct_resetSandwichRows, (resetLossFlat Ξ), (physicalCappedResetLoss Ξ)]
+    intervalClearedProduct_resetSandwichRows, resetLossFlat, physicalCappedResetLoss]
 
 /-- The coefficient-norm estimate is discharged here by the explicit
 Nguyen endpoint constant. Only Cook and Nguyen remain as input objects. -/

@@ -91,7 +91,7 @@ theorem subgaussian_anchor_log_potential (Ξ : Atom)
     (1 / 20) (by norm_num) (by norm_num) hb z
   apply h.congr
   · intro n x
-    simp only [(anchorLogPotential Ξ), anchorSize, anchorSites, Nat.mul_comm]
+    simp only [anchorLogPotential, anchorSize, anchorSites, Nat.mul_comm]
   · rfl
 
 /-- Source lengths for the direct branch, with anchors at the other
@@ -152,14 +152,14 @@ theorem subgaussian_direct_branch_log_potential (Ξ : Atom)
           ε ≤ |densityCyclicLogDet (W n) q z x /
             (((q + 3) * W n : ℕ) : ℝ) - circularLogPotential z|}
     have hsites : (directOrAnchorCoreSites Ξ) (W n) (s n) = s n := by
-      simp only [(directOrAnchorCoreSites Ξ), if_pos hn]
+      simp only [directOrAnchorCoreSites, if_pos hn]
     have hvalue : (intervalRowsLaw (W n) (s n + 3) Ξ.law).real
         {x : IntervalRows (W n) (s n + 3) |
           ε ≤ |(directBranchLogPotential Ξ) (W n) (s n) z x - circularLogPotential z|} =
         F (s n) := by
-      simp only [F, (directBranchLogPotential Ξ), if_pos hn]
+      simp only [F, directBranchLogPotential, if_pos hn]
     exact (hvalue.trans (congrArg F hsites).symm).le
-  · simp only [(directBranchLogPotential Ξ), if_neg hn, sub_self, abs_zero]
+  · simp only [directBranchLogPotential, if_neg hn, sub_self, abs_zero]
     have he : {x : IntervalRows (W n) (s n + 3) | ε ≤ (0 : ℝ)} = ∅ := by
       ext x
       simp [not_le_of_gt hε]

@@ -77,6 +77,8 @@ def blockBadEvent (A : Atom) (I : NguyenBottomSingularInput.{0, 0})
 theorem measurableSet_blockBadEvent (A : Atom) (I : NguyenBottomSingularInput.{0, 0})
     (W s : ℕ) (j : Fin s) (b : Fin 3) :
     MeasurableSet (blockBadEvent A I W s j b) := by
+  letI : MeasurableSpace (Matrix (Fin W) (Fin W) ℂ) := borel _
+  letI : BorelSpace (Matrix (Fin W) (Fin W) ℂ) := ⟨rfl⟩
   let T := fun x => normalizedInterfaceMatrix (intervalSquare A W s j b) x
   have hT : Continuous T := by
     apply continuous_pi
@@ -130,7 +132,7 @@ theorem subgaussianInterfaceBadEvent_probability_le (A : Atom)
     ((subgaussianSiteBadEvent A) I W s)
     (3 * Real.exp (-(interfaceCombinedRate I / 2) * (W : ℝ)))
     (fun j => (subgaussianSiteBadEvent_probability_le A) I hI W s j hW)
-  simpa only [(subgaussianInterfaceBadEvent A), mul_left_comm, mul_assoc] using h
+  simpa only [subgaussianInterfaceBadEvent, mul_left_comm, mul_assoc] using h
 
 /-- Every actual normalized block has its quantitative interface estimates
 outside the explicitly defined finite exceptional event. -/

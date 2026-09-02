@@ -103,7 +103,7 @@ theorem tendsto_subgaussianBoundaryBadProbability_mul_logScale (Ξ : Atom)
     (cook.cookC (terminalCanonicalSecondCookExponent cook 1))
     (cook.c_pos (terminalCanonicalSecondCookExponent cook 1))
   convert h0.add (h1.add h2) using 1 <;>
-    simp [(subgaussianBoundaryBadProbability Ξ), terminalUniformBadProbability, add_mul]
+    simp [subgaussianBoundaryBadProbability, terminalUniformBadProbability, add_mul]
 
 theorem tendsto_subgaussianBoundaryBadProbability (Ξ : Atom) (cook : CookInput Ξ) :
     Tendsto ((subgaussianBoundaryBadProbability Ξ) cook) atTop (𝓝 0) := by

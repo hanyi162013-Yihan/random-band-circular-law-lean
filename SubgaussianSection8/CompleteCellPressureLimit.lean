@@ -112,7 +112,7 @@ theorem completeCellPressureError_tendsto (Ξ : Atom)
     have hWne : (W n : ℝ) ≠ 0 := by exact_mod_cast (hW n).ne'
     have hcne : (cellSites (W n) : ℝ) ≠ 0 := by
       exact_mod_cast (cellSites_pos (W n)).ne'
-    dsimp [b, (cellTransferBudget Ξ)]
+    dsimp [b, cellTransferBudget]
     rw [one_add_posLog_nat_eq_log_e_mul (W n) (hW n)]
     simp only [cellLength, Nat.cast_mul, Nat.cast_ofNat]
     change _ = 3 * (subgaussianTransferLogConstant Ξ) I z *
@@ -123,7 +123,7 @@ theorem completeCellPressureError_tendsto (Ξ : Atom)
   simp only [sub_div, add_div, hbudget] at hlo hup
   have habs : |(completeCellPressureError Ξ) I (W n) (K n) z x| ≤ F n x + R n x + b n := by
     apply abs_le.mpr
-    dsimp [(completeCellPressureError Ξ), F, R]
+    dsimp [completeCellPressureError, F, R]
     rw [sub_div]
     constructor <;> linarith [div_nonneg hfn hden.le, div_nonneg hrn hden.le]
   have hf0 : 0 ≤ F n x := div_nonneg hfn hden.le
@@ -199,7 +199,7 @@ theorem embeddedCompleteCellPressureError_tendsto (Ξ : Atom)
   have hWne : (W n : ℝ) ≠ 0 := by exact_mod_cast (hW n).ne'
   have hmne : (m n : ℝ) ≠ 0 := by
     exact_mod_cast ((Nat.mul_pos hKn (cellSites_pos (W n))).trans_le hmn).ne'
-  dsimp [a, (completeCellPressureError Ξ), (embeddedCompleteCellPressureError Ξ)]
+  dsimp [a, completeCellPressureError, embeddedCompleteCellPressureError]
   rw [flatten_unflatten_completeCells]
   field_simp [hKne, hLne, hWne, hmne] <;> ring
 

@@ -160,7 +160,7 @@ theorem subgaussianPacketBoundaryCoefficient_gram_lower (Ξ : Atom)
     Theta hTheta).1
   rw [rademacherPacketBoundaryCoefficient,
     normalizedPacketBoundaryCoefficient_eq_scaled _ hsigma]
-  simpa only [Fintype.card_fin, (subgaussianBoundaryInverseGamma Ξ),
+  simpa only [Fintype.card_fin, subgaussianBoundaryInverseGamma,
     packetEndpointComparisonConstant, mul_assoc] using
       mul_le_mul_of_nonneg_left h (norm_nonneg ((packetRowScale W)⁻¹ ^ (3 * W)))
 

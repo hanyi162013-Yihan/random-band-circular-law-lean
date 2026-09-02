@@ -75,13 +75,13 @@ theorem intervalLastCore_cellThroughResetRows (Ξ : Atom) (W s K : ℕ) (j : Fin
   change (intervalLastCore Ξ) W s (j.val * (3 + s)) ((cellThroughResetRows Ξ) W s K j x)
       (intervalRowIndex k a) =
     completeCellCore W s (x j) (intervalRowIndex k a)
-  simp only [(intervalLastCore Ξ), (cellThroughResetRows Ξ), completeCellCore,
+  simp only [intervalLastCore, cellThroughResetRows, completeCellCore,
     intervalRestriction, Function.comp_apply, intervalRowEmbedding_rowIndex]
   have hsite : (cellThroughResetEmbedding Ξ) s K j
       ((Fin.natAddEmb (j.val * (3 + s) + 3)) k) =
       completeCellSite j ((Fin.natAddEmb 3) k) := by
     apply Fin.ext
-    simp [(cellThroughResetEmbedding Ξ), completeCellSite, finProdFinEquiv]
+    simp [cellThroughResetEmbedding, completeCellSite, finProdFinEquiv]
     ring
   rw [hsite, (flattenCompleteCells_row Ξ)]
 
@@ -94,7 +94,7 @@ theorem intervalPast_cellThroughResetRows (Ξ : Atom) (W s K : ℕ) (j : Fin K)
   change (intervalPastBeforeReset Ξ) W s (j.val * (3 + s))
       ((cellThroughResetRows Ξ) W s K j x) (intervalRowIndex k a) =
     (cellPastRows Ξ) W s K j x (intervalRowIndex k a)
-  simp only [(intervalPastBeforeReset Ξ), (cellThroughResetRows Ξ), (cellPastRows Ξ),
+  simp only [intervalPastBeforeReset, cellThroughResetRows, cellPastRows,
     intervalRestriction, Function.comp_apply, intervalRowEmbedding_rowIndex]
   have hsite : (cellThroughResetEmbedding Ξ) s K j
       ((Fin.castAddEmb s) ((Fin.castAddEmb 3) k)) = (cellPastEmbedding Ξ) s K j k := by
@@ -113,13 +113,13 @@ theorem intervalResetPacket_cellThroughResetRows (Ξ : Atom) (W s K : ℕ) (j : 
       (intervalRestriction (Fin.castAddEmb s) ((cellThroughResetRows Ξ) W s K j x))
       (intervalRowIndex k a) =
     completeCellReset W s (x j) (intervalRowIndex k a)
-  simp only [(cellThroughResetRows Ξ), completeCellReset, intervalRestriction,
+  simp only [cellThroughResetRows, completeCellReset, intervalRestriction,
     Function.comp_apply, intervalRowEmbedding_rowIndex]
   have hsite : (cellThroughResetEmbedding Ξ) s K j
       ((Fin.castAddEmb s) ((Fin.natAddEmb (j.val * (3 + s))) k)) =
       completeCellSite j ((Fin.castAddEmb s) k) := by
     apply Fin.ext
-    simp [(cellThroughResetEmbedding Ξ), completeCellSite, finProdFinEquiv]
+    simp [cellThroughResetEmbedding, completeCellSite, finProdFinEquiv]
     ring
   rw [hsite, (flattenCompleteCells_row Ξ)]
 
@@ -173,13 +173,13 @@ def cellResetProducts (Ξ : Atom) (W s K : ℕ) (z : ℂ) (r : Fin (2 * W + 1))
     (x : Fin K → IntervalRows W (3 + s)) (j : Fin K) :
     (cellCoreProducts Ξ) W s K z r x j.val =
       intervalClearedProduct W s z (completeCellCore W s (x j)) r := by
-  simp [(cellCoreProducts Ξ), j.isLt]
+  simp [cellCoreProducts, j.isLt]
 
 @[simp] theorem cellResetProducts_val (Ξ : Atom) (W s K : ℕ) (z : ℂ) (r : Fin (2 * W + 1))
     (x : Fin K → IntervalRows W (3 + s)) (j : Fin K) :
     (cellResetProducts Ξ) W s K z r x j.val =
       intervalClearedProduct W 3 z (completeCellReset W s (x j)) r := by
-  simp [(cellResetProducts Ξ), j.isLt]
+  simp [cellResetProducts, j.isLt]
 
 theorem intervalClearedProduct_flatten_eq_resetPrefixProduct (Ξ : Atom)
     (W s K : ℕ) (z : ℂ) (x : Fin K → IntervalRows W (3 + s)) (r : Fin (2 * W + 1)) :
@@ -211,7 +211,7 @@ theorem intervalClearedProduct_cellPastRows_eq_resetPrefixProduct (Ξ : Atom)
   congr 1
   funext k
   have hk : k.val < K := lt_of_lt_of_le k.isLt j.isLt.le
-  simp [(cellCoreProducts Ξ), (cellResetProducts Ξ), hk, Fin.castLE]
+  simp [cellCoreProducts, cellResetProducts, hk, Fin.castLE]
 
 theorem intervalClearedProduct_cellThroughResetRows_eq_resetPrefixProduct (Ξ : Atom)
     (W s K : ℕ) (j : Fin K) (z : ℂ)
@@ -238,7 +238,7 @@ theorem cellIntervalResetLoss_eq_intervalResetLoss (Ξ : Atom) (W s K : ℕ) (j 
     (r : Fin (2 * W + 1)) (T : ℝ) (x : Fin K → IntervalRows W (3 + s)) :
     (cellIntervalResetLoss Ξ) W s K j z r T x =
       (intervalResetLoss Ξ) W s (j.val * (3 + s)) z r T ((cellThroughResetRows Ξ) W s K j x) := by
-  simp only [(cellIntervalResetLoss Ξ), (intervalResetLoss Ξ),
+  simp only [cellIntervalResetLoss, intervalResetLoss,
     (intervalLastCore_cellThroughResetRows Ξ), (intervalPast_cellThroughResetRows Ξ)]
 
 /-- The precise random variable used by the telescoping theorem is (Ξ : Atom) the
@@ -248,7 +248,7 @@ theorem prefixResetLoss_eq_cellIntervalResetLoss (Ξ : Atom)
     (x : Fin K → IntervalRows W (3 + s)) :
     prefixResetLoss ((cellCoreProducts Ξ) W s K z r x) ((cellResetProducts Ξ) W s K z r x) T j.val =
       (cellIntervalResetLoss Ξ) W s K j z r T x := by
-  simp only [prefixResetLoss, (cellIntervalResetLoss Ξ), (cellCoreProducts_val Ξ),
+  simp only [prefixResetLoss, cellIntervalResetLoss, (cellCoreProducts_val Ξ),
     (intervalClearedProduct_cellPastRows_eq_resetPrefixProduct Ξ),
     (intervalClearedProduct_cellThroughResetRows_eq_resetPrefixProduct Ξ)]
 

@@ -153,7 +153,7 @@ theorem cyclicSeamBadEvent_probability_le (Ξ : Atom)
           (intervalClearingFactor W s z outside * physicalBoundaryExpression W 3 z packet
             (intervalTransferProduct W s z outside))} := by
       ext packet
-      simp only [(cyclicSeamBadEvent Ξ), Set.mem_setOf_eq, cyclicFockValue_terminalPacket W s z
+      simp only [cyclicSeamBadEvent, Set.mem_setOf_eq, cyclicFockValue_terminalPacket W s z
         outside packet hB, cyclicSeamDifference, intervalRestriction_concat_prefix,
         densityCyclicLogDet_terminalPacket W s z outside packet hB, hp, absoluteLogDeviation]
     rw [heq]

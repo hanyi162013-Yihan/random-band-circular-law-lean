@@ -41,7 +41,7 @@ theorem subgaussian_remainder_log_change_le (Ξ : Atom)
     have hprefix := (subgaussianInterfaceGoodEvent_subset_subinterval Ξ) I (Fin.castAddEmb q) hx
     have htail := (subgaussianInterfaceGoodEvent_subset_subinterval Ξ) I (Fin.natAddEmb p) hx
     have hdet := (subgaussianInterface_dets_isUnit_of_good Ξ) I hI W q hW
-      (intervalRestriction (Fin.natAddEmb p) x) htail.2 z
+      (intervalRestriction (Fin.natAddEmb p) x) htail z
     have hu := intervalClearedProduct_det_isUnit W q z _
       (fun j => (hdet j).1) (fun j => (hdet j).2) r
     have hprefix0 := ((subgaussianInterval_norm_pos_of_good Ξ) I hI W p hW z _ hprefix r).ne'
@@ -55,10 +55,7 @@ theorem subgaussian_remainder_log_change_le (Ξ : Atom)
       (intervalClearedProduct W q z (intervalRestriction (Fin.natAddEmb p) x) r)
       (intervalClearedProduct W p z (intervalRestriction (Fin.castAddEmb q) x) r) hu hpne
     apply h.trans
-    have hb : ∀ i a, |intervalRestriction (Fin.natAddEmb p) x i a| ≤ 1 := by
-      intro i a
-      rcases htail.1 i a with hh | hh <;> rw [hh] <;> norm_num
-    have hh := (subgaussianInterval_hodgeLoss_le_of_good Ξ) I hI W q hW hqpos z _ htail.2 hb r
+    have hh := (subgaussianInterval_hodgeLoss_le_of_good Ξ) I hI W q hW hqpos z _ htail r
     rwa [one_add_posLog_nat_eq_log_e_mul W (interfaceCanonicalLargeWConditions I hW).1] at hh
 
 theorem subgaussian_remainder_maxPressure_change_le (Ξ : Atom)

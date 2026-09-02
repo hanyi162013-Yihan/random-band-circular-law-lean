@@ -61,9 +61,7 @@ theorem interval_hodgeLoss_le_cellTransferBudget (Ξ : Atom)
     (z : ℂ) (x : IntervalRows W s) (hx : x ∈ (subgaussianInterfaceGoodEvent Ξ) I W s)
     (r : Fin (2 * W + 1)) :
     matrixHodgeLoss (intervalClearedProduct W s z x r) ≤ (cellTransferBudget Ξ) I W s z := by
-  apply (subgaussianInterval_hodgeLoss_le_of_good Ξ) I hI W s hW hs z x hx
-  intro i a
-  rcases hx.1 i a with hh | hh <;> rw [hh] <;> norm_num
+  exact (subgaussianInterval_hodgeLoss_le_of_good Ξ) I hI W s hW hs z x hx r
 
 theorem interval_product_det_isUnit_of_good (Ξ : Atom)
     (I : NguyenBottomSingularInput.{0, 0}) (hI : Ξ.parameter ≤ I.subgaussianBound)
@@ -113,16 +111,16 @@ theorem complete_cell_pressure_sandwich (Ξ : Atom)
     (clippedCoreLog_eq_log_on_good Ξ) I hI W s hW z _ (hcgood k) A hA r
   have hunitc (r : Fin (2 * W + 1)) (j : ℕ) (hj : j < K) :
       IsUnit ((cellCoreProducts Ξ) W s K z r x j).det := by
-    simpa only [(cellCoreProducts Ξ), dif_pos hj] using
+    simpa only [cellCoreProducts, dif_pos hj] using
       (interval_product_det_isUnit_of_good Ξ) I hI W s hW z _ (hcgood ⟨j, hj⟩) r
   have hunitr (r : Fin (2 * W + 1)) (j : ℕ) (hj : j < K) :
       IsUnit ((cellResetProducts Ξ) W s K z r x j).det := by
-    simpa only [(cellResetProducts Ξ), dif_pos hj] using
+    simpa only [cellResetProducts, dif_pos hj] using
       (interval_product_det_isUnit_of_good Ξ) I hI W 3 hW z _ (hrgood ⟨j, hj⟩) r
   have hcap (r : Fin (2 * W + 1)) (j : ℕ) (hj : j < K) :
       2 * matrixHodgeLoss ((cellCoreProducts Ξ) W s K z r x j) +
         matrixHodgeLoss ((cellResetProducts Ξ) W s K z r x j) ≤ T := by
-    simp only [(cellCoreProducts Ξ), (cellResetProducts Ξ), dif_pos hj]
+    simp only [cellCoreProducts, cellResetProducts, dif_pos hj]
     have hc := (interval_hodgeLoss_le_cellTransferBudget Ξ) I hI W s hW hs z _ (hcgood ⟨j, hj⟩) r
     have hr := (interval_hodgeLoss_le_cellTransferBudget Ξ) I hI W 3 hW (by omega) z _ (hrgood ⟨j, hj⟩) r
     linarith

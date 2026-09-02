@@ -6,7 +6,7 @@ open MeasureTheory Filter Topology
 open scoped BigOperators
 noncomputable section
 namespace SubgaussianSection8
-open BernoulliSection10
+open BernoulliSection10 BernoulliSection10.ProbabilityLimits
 
 set_option backward.isDefEq.respectTransparency false
 

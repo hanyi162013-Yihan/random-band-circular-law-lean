@@ -143,7 +143,7 @@ theorem subgaussianPacketFrameCoefficient_parseval (Ξ : Atom)
   simp_rw [(packetScalarCoefficientEval_eq_scaled_raw Ξ) W r hW z CL BR U V s,
     norm_mul, mul_pow, (eval_packetFramePolynomial_eq_evalSquarefree Ξ)]
   rw [integral_const_mul, hp]
-  simp only [(subgaussianPacketFrameCoefficient Ξ), packetScalarMatrixCoefficientNorm, mul_pow]
+  simp only [subgaussianPacketFrameCoefficient, packetScalarMatrixCoefficientNorm, mul_pow]
 
 theorem tendsto_subgaussianPacketBoundaryCoefficient_frame (Ξ : Atom)
     (W r : ℕ) (hW : 0 < W) (z : ℂ)

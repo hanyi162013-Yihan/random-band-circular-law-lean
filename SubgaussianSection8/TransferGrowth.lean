@@ -53,7 +53,7 @@ theorem posLog_inv_le_of_exp_neg_le {a D : ℝ} (hD : 0 ≤ D)
   exact max_le hD (by linarith)
 
 /-- The one-site Hodge envelope has the required W log(eW) size under
-literal atom bounds and endpoint determinant lower bounds. -/
+normalized block-entry bounds and endpoint determinant lower bounds. -/
 theorem oneSiteMaxHodgeEnvelope_le_of_bounded_blocks
     (W : ℕ) (hW : 0 < W) (z : ℂ) (x : IntervalRows W 1)
     (q : ℂ)
