@@ -177,6 +177,7 @@ theorem complete_cell_pressure_sandwich
     simp only [Finset.sum_sub_distrib, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
       nsmul_eq_mul]
   rw [he]
+  unfold completeCellCoreFluctuation
   exact le_finitePressureMax _ r
 
 end BernoulliSection8
