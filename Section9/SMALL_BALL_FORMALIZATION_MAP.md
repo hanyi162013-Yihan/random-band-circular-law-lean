@@ -15,7 +15,8 @@ are listed in [SMALL_BALL_REFERENCE_MAP.md](SMALL_BALL_REFERENCE_MAP.md).
 The status terms mean:
 
 - **implemented**: the declaration and its proof are present in the current
-  source; publication-wide build and audit verification is pending;
+  source and passed integrated compilation; selected public dependencies are
+  checked by the accompanying axiom audits;
 - **external input**: a field of a literature-input structure in
   `ExternalInputs.lean`, supplied as a theorem parameter;
 - **bundled dependency**: imported from the `BernoulliLinearAlgebra` library
@@ -310,7 +311,10 @@ constructs endpoint goodness internally from Nguyen's interface input.  The
 optional conditional-expectation Parseval reformulation additionally needs
 integrability and is not part of the core conclusion.
 
-Publication verification status: **pending**.
+Publication verification status: **passed**, on 2026-09-02 at source commit
+`48a1556090a0944a8f06b85bd220116ada66129b`. The full build and all 16 small-ball
+axiom reports passed in the
+[integrated run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33590358281).
 
 The publication tree must pass the complete `lake build`, the local-source
 placeholder scan, and `Section9/SmallBallAxiomAudit.lean`. The audit prints

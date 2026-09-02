@@ -9,7 +9,7 @@ Section 9. Lean names are in `BernoulliSection9` unless identified as part
 of the supporting `BernoulliLinearAlgebra` library.
 
 The source correspondence below does not replace publication verification.
-The complete build and public-signature audit are pending; see
+The complete build and public-signature audit passed on 2026-09-02; see
 [SMALL_BALL_AUDIT.md](SMALL_BALL_AUDIT.md). For theorem hypotheses and precise
 coverage, see [SMALL_BALL_FORMALIZATION_MAP.md](SMALL_BALL_FORMALIZATION_MAP.md).
 

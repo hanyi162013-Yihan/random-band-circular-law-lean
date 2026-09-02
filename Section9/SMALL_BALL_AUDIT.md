@@ -7,22 +7,30 @@ The local statements are in Section 7; their technical proofs are in Section 9.
 
 ## Verification status
 
-Publication preparation is in progress, using Lean 4.33.0 and the
-repository's pinned mathlib dependency.
+Verification passed on 2026-09-02, using Lean 4.33.0 and the repository's
+pinned mathlib dependency. The
+[integrated GitHub Actions run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33590358281)
+checked source commit `48a1556090a0944a8f06b85bd220116ada66129b` on a clean
+standard Ubuntu runner, in 25 minutes 35 seconds. It built all 257 repository
+library modules in dependency order, then ran the full default `lake build`.
 
 | Check | Result |
 | --- | --- |
 | `ExternalInputs.lean` standalone Lean elaboration | Passed; unused-variable warnings only |
 | `lake build BernoulliSection9.ExternalInputs` | Passed (3150 build jobs, including cached dependencies) |
 | Subgaussian/profile bounds at all five direct literature-estimate calls | Source review passed |
-| Caller-facing bounds and square-restriction propagation | Source review passed; compilation pending |
+| Caller-facing bounds and square-restriction propagation | Source review and integrated compilation passed |
 | Placeholder/custom-axiom scan of small-ball Lean sources | Passed |
 | Current-paper numbering and machine-local-path scans | Passed |
-| Full repository build | Pending |
-| Public-theorem `#print axioms` audit for this source tree | Pending |
+| Full repository build | Passed, including all four default libraries |
+| Public-theorem `#print axioms` audit for this source tree | Passed: 16 small-ball reports; all six public interfaces included |
 
-The module checks are not reported as a full library build. Neither source
-review nor a placeholder scan replaces Lean checking of the complete call chain.
+All nine repository audit files passed, with 475 reports in total. Every
+report matched a source audit command and used only `propext`,
+`Classical.choice`, and `Quot.sound`. Both external-input structures and the
+six public signatures were also printed. No `sorryAx` or project axiom was
+permitted. These checks establish compilation and audited logical dependencies;
+the scope qualifications below remain essential for interpreting the results.
 
 ## Explicit mathematical inputs
 
@@ -107,7 +115,7 @@ The width thresholds explicitly enforce large-width and Nguyen cutoff
 conditions. The passage from entrywise exterior limits to operator-norm
 limits is also proved.
 
-## Publication checks
+## Reproducible checks
 
 1. Compile all changed probability-input applications and caller-facing
    signatures.
@@ -118,4 +126,4 @@ limits is also proved.
 4. Scan the publication files for placeholders, incorrect paper references,
    machine-local paths, secrets, build caches, and unintended changes to
    existing repository libraries.
-5. Record the actual results before publishing.
+5. Record the checked source commit and actual results, as above.

@@ -29,7 +29,7 @@ vendor mathlib or require any machine-specific path.
   and 10.3. The deterministic row-affinity result 10.4 has no atom-law restriction.
 - Proposition 10.1, the high-band input at the start of this section,
   and the asymptotic arguments in Sections 10.4--10.6 are outside
-  this upload. This is not a full formalization of the entire new Section 10.
+  this upload. This is not a full formalization of the entire Section 10.
 - Proposition 10.7 uses fixed conditioned outside data `c ≠ 0` and invertible
   `R`; Proposition 10.10 uses unitary-frame coordinates for its decomposable
   wedges. These representations and their exact signatures are documented

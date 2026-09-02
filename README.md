@@ -44,8 +44,9 @@ The RRQR exponent is 16 (Lemma 9.1 states 4), and small-ball losses and failure
 bounds are supplied as explicit finite expressions. See the
 [small-ball overview](Section9/SMALL_BALL_README.md),
 [formula map](Section9/SMALL_BALL_FORMALIZATION_MAP.md), and
-[verification audit](Section9/SMALL_BALL_AUDIT.md). Publication-wide verification
-of this library is in progress; it is not reported as complete.
+[verification audit](Section9/SMALL_BALL_AUDIT.md). The integrated build and
+public-theorem axiom audits passed on 2026-09-02; this verifies the documented
+formal scope, not a complete translation of every paper statement.
 
 The Section 10 library contains 37 modules and an umbrella import, covering
 the real i.i.d. specialization of Lemma 10.2 through Proposition 10.10.
@@ -140,6 +141,12 @@ Do not run `lake update` for routine checking: the committed manifest records
 the dependency versions used for this release.
 
 ### Automated verification
+
+The [integrated verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33590358281)
+passed for source commit `48a1556090a0944a8f06b85bd220116ada66129b` on
+2026-09-02: 257 library modules, the complete default `lake build`, and
+475 axiom reports across nine audit files. The clean run took 25 minutes
+35 seconds, including toolchain/cache setup and audits.
 
 The `Lean verification` GitHub Actions workflow runs on pushes and pull requests,
 and can also be started manually. It installs the pinned Lean toolchain,
