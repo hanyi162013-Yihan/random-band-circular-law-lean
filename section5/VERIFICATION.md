@@ -56,3 +56,12 @@ and child libraries and could not find the parent copies. Its log reports no
 Lean proof error. The packaging fix places identical copies under the existing
 parent library, removes duplicate child registration, and checks copy integrity
 before compilation. This is a path/ownership repair, not a change to any theorem.
+
+The second remote run, [33655593512](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33655593512),
+completed the **entire 4079-job repository-layout build successfully** at
+16:43:58 UTC on 2026-09-02. The audit phase did not start: its manifest preflight
+failed because the runner did not provide `rg`. The script now uses standard
+`grep`/`find`, exposes a lightweight `check` phase, and prints an audit's failing
+log before exiting. CI saves successful build outputs before starting audits.
+The second run is evidence of successful integrated compilation, not yet a
+successful remote axiom audit or regression run.

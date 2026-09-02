@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Local-only sequential validation. Run from this project directory.
+# Sequential validation using standard shell utilities, locally or in CI.
 set -eu
 export LEAN_NUM_THREADS=1
 
@@ -13,7 +13,7 @@ if [ ! -d "$section5_log_dir" ]; then
   echo 'The supplied log directory does not exist.' >&2
   exit 2
 fi
-case "$section5_phase" in build|strict|audit|kernel|all) ;; *) exit 2 ;; esac
+case "$section5_phase" in check|build|strict|audit|kernel|all) ;; *) exit 2 ;; esac
 echo "Section 5 validation phase: $section5_phase; logs: $section5_log_dir"
 
 if [ -n "$(LC_ALL=C sort Section5ValidationModules.txt | uniq -d)" ]; then
@@ -23,7 +23,7 @@ fi
 while IFS= read -r section5_module || [ -n "$section5_module" ]; do
   [ -n "$section5_module" ] || continue
   if [ ! -f "CircularLawSections56/Section5/$section5_module.lean" ] ||
-    ! rg -Fqx "import CircularLawSections56.Section5.$section5_module" CircularLawSections56/Section5.lean; then
+    ! grep -Fqx "import CircularLawSections56.Section5.$section5_module" CircularLawSections56/Section5.lean; then
     echo "Missing source or umbrella import: $section5_module" >&2
     exit 2
   fi
@@ -53,8 +53,12 @@ fi
 
 if [ "$section5_phase" = audit ] || [ "$section5_phase" = all ]; then
   for section5_check in AxiomAudit FullSection5AxiomAudit Section5Regression; do
-    lake --no-cache env lean -DwarningAsError=true "$section5_check.lean" \
-      > "$section5_log_dir/$section5_check.log" 2>&1
+    if ! lake --no-cache env lean -DwarningAsError=true "$section5_check.lean" \
+      > "$section5_log_dir/$section5_check.log" 2>&1; then
+      echo "FAIL $section5_check"
+      tail -100 "$section5_log_dir/$section5_check.log"
+      exit 1
+    fi
     echo "PASS $section5_check"
   done
 fi
@@ -71,20 +75,20 @@ if [ "$section5_phase" = kernel ] || [ "$section5_phase" = all ]; then
   # A replaying line is not a success by itself; this coverage check is reached
   # only after the checker has returned exit status zero.
   section5_expected=1
-  if ! rg -Fqx 'replaying CircularLawSections56.Section5' "$section5_log_dir/kernel-all.log"; then
+  if ! grep -Fqx 'replaying CircularLawSections56.Section5' "$section5_log_dir/kernel-all.log"; then
     echo 'FAIL kernel coverage: missing Section 5 umbrella'
     exit 1
   fi
   while IFS= read -r section5_path; do
     section5_module="${section5_path%.lean}"
     section5_module="${section5_module//\//.}"
-    if ! rg -Fqx "replaying $section5_module" "$section5_log_dir/kernel-all.log"; then
+    if ! grep -Fqx "replaying $section5_module" "$section5_log_dir/kernel-all.log"; then
       echo "FAIL kernel coverage: missing $section5_module"
       exit 1
     fi
     section5_expected=$((section5_expected + 1))
-  done < <(rg --files CircularLawSections56/Section5 -g '*.lean' | LC_ALL=C sort)
-  section5_replayed="$(rg -c '^replaying ' "$section5_log_dir/kernel-all.log" || true)"
+  done < <(find CircularLawSections56/Section5 -type f -name '*.lean' | LC_ALL=C sort)
+  section5_replayed="$(grep -c '^replaying ' "$section5_log_dir/kernel-all.log" || true)"
   if [ "${section5_replayed:-0}" -ne "$section5_expected" ]; then
     echo "FAIL kernel coverage: expected $section5_expected modules, saw ${section5_replayed:-0}"
     exit 1

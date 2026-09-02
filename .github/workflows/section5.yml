@@ -48,6 +48,7 @@ jobs:
             cmp "upstream/ShortRingAnchor/$module.lean" "../vendor/short-ring-analysis/ShortRingAnchor/$module.lean"
           done
       - name: Restore project build caches
+        id: project-cache
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: |
@@ -72,6 +73,14 @@ jobs:
           set -o pipefail
           mkdir -p verification-ci
           lake --no-cache build CircularLawSections56 2>&1 | tee verification-ci/build.log
+      - name: Save successful build before audits
+        if: steps.project-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            .lake/build
+            section5/.lake/build
+          key: section5-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'section5/lake-manifest.json', 'section5/lakefile.toml') }}-${{ github.sha }}
       - name: Audit axioms and check boundary regressions
         working-directory: section5
         shell: bash
