@@ -1,0 +1,1 @@
+Section 5 exhaustive axiom audit PASSED: 1561 declarations, 1215 theorems. Allowed foundations only: propext, Classical.choice, Quot.sound.

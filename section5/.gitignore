@@ -1,0 +1,11 @@
+.lake/
+verification-ci/
+.DS_Store
+*.olean
+*.olean.private
+*.olean.server
+*.ilean
+*.trace
+*.log
+.env
+.env.*

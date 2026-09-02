@@ -1,0 +1,2 @@
+Section 5 validation phase: kernel; logs: /tmp/section5-validation.wfYBa5
+PASS kernel replay: 118 modules; exact source/umbrella coverage

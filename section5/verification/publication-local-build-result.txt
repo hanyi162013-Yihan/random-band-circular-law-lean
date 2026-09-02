@@ -1,0 +1,6 @@
+Repository-layout local build: intentionally interrupted, not passed.
+Date: 2026-09-02, approximately 15:56 UTC.
+Exit status: 130 after the user requested GitHub-hosted compilation.
+No proof error was reported before interruption; local caches were retained.
+The original mathematical snapshot had already passed the full verification.
+The remaining repository-layout build and audit are performed by Section 5 verification on GitHub Actions.

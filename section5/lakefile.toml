@@ -1,0 +1,18 @@
+name = "CircularLawSections56"
+version = "0.1.0"
+defaultTargets = ["CircularLawSections56"]
+packagesDir = "../.lake/packages"
+
+[[lean_lib]]
+name = "CircularLawSections56"
+
+# Only the five Section 3 support modules absent from the parent snapshot.
+[[lean_lib]]
+name = "Section5ShortRingSupport"
+srcDir = "upstream"
+roots = ["ShortRingAnchor.AtomAssumption21", "ShortRingAnchor.NormalizedGinibre", "ShortRingAnchor.Proposition36Source", "ShortRingAnchor.CutoffDominance", "ShortRingAnchor.Proposition36"]
+
+# Reuse the existing Section 4, replacement and short-ring support libraries.
+[[require]]
+name = "RandomBandCircularLaw"
+path = ".."

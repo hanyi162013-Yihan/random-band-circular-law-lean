@@ -1,0 +1,85 @@
+name: Section 5 verification
+
+on:
+  push:
+    paths:
+      - "section5/**"
+      - "Section4/**"
+      - "vendor/**"
+      - "lakefile.toml"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+      - ".github/workflows/section5.yml"
+  pull_request:
+    paths:
+      - "section5/**"
+      - "Section4/**"
+      - "vendor/**"
+      - "lakefile.toml"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+      - ".github/workflows/section5.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: section5-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-section5:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      LEAN_NUM_THREADS: "2"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Check source integrity and shell syntax
+        working-directory: section5
+        run: |
+          sha256sum -c SOURCE_SHA256SUMS
+          bash -n verify_section5.sh
+      - name: Restore project build caches
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            .lake/build
+            section5/.lake/build
+          key: section5-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'section5/lake-manifest.json', 'section5/lakefile.toml') }}-${{ github.sha }}
+          restore-keys: |
+            section5-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'section5/lake-manifest.json', 'section5/lakefile.toml') }}-
+      - name: Install pinned Lean and fetch shared mathlib cache
+        uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: true
+          use-github-cache: false
+      - name: Build Section 5 repository layout
+        working-directory: section5
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p verification-ci
+          lake --no-cache build CircularLawSections56 2>&1 | tee verification-ci/build.log
+      - name: Audit axioms and check boundary regressions
+        working-directory: section5
+        shell: bash
+        run: |
+          set -o pipefail
+          bash verify_section5.sh audit "$PWD/verification-ci" 2>&1 | tee verification-ci/audit-result.log
+      - name: Retain verification logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: section5-verification-${{ github.run_id }}
+          path: section5/verification-ci/*.log
+          if-no-files-found: ignore
+          retention-days: 7

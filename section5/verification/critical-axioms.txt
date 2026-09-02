@@ -1,0 +1,644 @@
+'CircularLawSections56.Section5.balanced_cell_division_spec' depends on axioms: [propext, Quot.sound]
+'CircularLawSections56.Section5.circularMeasure_log_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.circularMeasure_log_potential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.circularSample_average_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.realEsdTest_diagonal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section5.diagonalDiskReference_energy_integrable_and_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.diagonalDiskReference_logPotential_limit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.diagonalDiskReference_esd_limit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.physical_circularLaw_of_logPotential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.triangular_circularLaw_of_logPotential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_indicator_logPotential_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_indicator_actual_logPotential_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_indicator_circularLaw_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literal_indicator_circularLaw_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.reversedCompanion_mul_companion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.companion_inverse_eq_reversed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.compound_permMatrix_norm_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.norm_clearedCompanion_inverse_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_exterior_row_inverse_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.section4ComplementaryInverseInput_of_literal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_exterior_row_isUnit_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_row_pressure_increment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_open_mean_pressure_succ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_open_mean_pressure_terminal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.literalCalibrationRows_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.literalModelPressure_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section6.literalCalibrationRows_full_eq_suffix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.literalModel_completedSection4Data' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.literalModel_logPotential_branch' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.literal_indicator_replacement_of_identifiedSection4' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.literal_indicator_remove_filler' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literalPaperExteriorCell_mean_le_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literalPhysicalCellError_le_uniform_logEW' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_row_pressure_increment_of_section4_inverse' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.finite_pressure_terminal_remainder' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.balanced_pressure_remainder_of_row_increments' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.CompletedSection4LongBranchData.toPhysical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.completedSection4_literalCertificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_fluctuation_le_completed_constant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.completedSection4PressureInput_of_literal_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.completedLiteral_physical_cell_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.completedLiteral_terminal_matrix_increments' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.replacement_of_completedSection4' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.max_pressure_lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section5.global_pressure_on_cell_multiples' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.global_pressure_on_cell_multiples_varyingDegrees' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.global_pressure_on_cell_multiples_varyingDegrees_eventually' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.pathwise_remainder_log_inequality' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.target_pressure_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section5.tendstoInProbabilityTri_of_L1' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.deterministic_center_tendsto_of_tri_anchor_and_two_L1_seams' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_logPotential_nearEndToEnd_tri' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_circularLaw_nearEndToEnd_tri_of_replacement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.tendstoInMeasure_of_secondMoment_bound_and_center_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_branchwise_logPotential_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_circularLaw_of_branchwise_errors' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_circularLaw_of_probability_inputs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.selected_taperedNormalizedWeight_product_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSection4.PaperIndicatorWeights.log_norm_paperIndicatorXSubZI_det_eq_log_norm_freshZ_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSection4.PaperIndicatorWeights.log_norm_paperIndicatorXSubZI_det_eq_log_norm_freshZ_cyclicStart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSection4.PaperIndicatorWeights.complex_paperIndicatorFlatFreshZ_rawJointClosure_withDensity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSection4.assembleNonfreshWithFreshFull_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.log_exteriorFamilyMaxL2OpNorm_eq_finiteSignedMax_log_norm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.integral_abs_randomMax_complex_paperIndicatorFlatOpenPressure_sub_mean_le_auto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_iidFreshCellPressure_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_iidFreshCell_cumulative_telescope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_adaptedFreshCell_integrable_and_pressure_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_adaptedFreshCell_cumulative_telescope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_fullFlatAdaptedFreshCell_integrable_and_pressure_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.iidMatrixCellProduct_expectedLog_telescope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.exists_unit_mulVec_norm_eq_l2_opNorm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.iidMatrixCellProduct_expectedLog_telescope_autoDirection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.iidMatrixCellProduct_expectedLog_telescope_autoDirection_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.exists_uniform_paperProjectiveFreshPolynomial_topCoeff_lower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literalPaperCellRows_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPaperExteriorCell_logOpNorm_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPaperExteriorCell_vector_logDeficit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPaperExteriorCell_hOneLower_of_logExcess' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPaperExteriorCell_hOneLower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPaperExteriorCell_oneCellInputs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.ae_literalPaperExteriorCell_isUnit_complex_withDensity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literalIidCellRows_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.iidMatrixCellProduct_literalPaperExteriorCell_eq_openProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPaperExteriorCell_iidMatrixCellLogPotential_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPaperExteriorCell_expectedLog_telescope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_paperIndicatorCyclicStartExteriorCell_expectedLog_telescope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.real_literalPaperExteriorCell_expectedLog_telescope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPaperExteriorCellWithLeft_vector_hOneLower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalRandomOutsideExteriorCell_expectedLog_telescope_autoUnits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literalPhysicalIidCellRows_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.iidMatrixCellProduct_literalPhysicalMesoscopicCell_eq_openProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPhysicalMesoscopicCell_global_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPhysicalMesoscopicCell_expectedLog_telescope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_paperIndicatorFlatFreshZ_rawJointClosure_ae_withDensity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.measurable_log_norm_paperIndicatorXSubZI_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literalPhysicalRingSample_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPhysicalDeterminant_absLog_seam_withDensity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_paperIndicatorXSubZI_det_suffixPressure_absLog_seam_withDensity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.pressure_memLp_and_maxCenteredAbs_of_restriction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPhysicalPressure_restriction_inputs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complex_literalPhysicalPressureSequence_cell_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.balanced_physical_division_spec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.balanced_physical_normalized_remainder_le_paperRate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literalNearEndToEndCertificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_logPotential_literal_nearEndToEnd_tri' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.pressureLiftToTargetInputVarying_of_literal_component_scales' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.paperMesoscopicScaleChoice_of_tendsto_of_eventually_longBranch' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSection4.PaperIndicatorWeights.paperIndicatorOutsideClearedProductZero_eq_suffixOpenExteriorProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSection4.paperIndicatorSuffixFlatSampleZero_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSection4.PaperIndicatorWeights.log_exteriorFamilyMaxL2OpNorm_outsideZero_eq_finiteSignedMax_suffixFlatOpenPressure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSection4.PaperIndicatorWeights.ae_log_exteriorFamilyMaxL2OpNorm_outsideZero_eq_finiteSignedMax_suffixFlatOpenPressure_complex_withDensity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.twoStepL1ApproximationTri_of_raw_div_scale_inactiveFill' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.pressureLiftToTargetInputVarying_inactiveFill' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.rawLogPotential_le_truncatedLogPotential' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.gaussian_logdet_variance_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section6.deterministic_center_tendsto_of_section3_anchor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.compact_gaussian_core' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section6.section5_long_l1Approximation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.section5_long_l1_tendsto_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.section5_long_expectation_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.compact_gaussian_core_of_section5_finalClosure' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.literalFinalClosure_l1_tendsto_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.literalFinalClosure_expectation_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.compact_gaussian_core_of_literalCertificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.rawCoreTailMass_tendsto_of_riemannSums' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.circleMean_radial_monotone_of_eq_jensenRootExpression' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.meanSqueeze_fourthRoot_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.sparse_mean_limit_of_core_mass' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.gaussian_profile_circularLaw_of_replacement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.gaussian_profile_circularLaw_of_uniform_hs_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.rawSeamLoss_le_uniform_logEW' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section5.fiberSquare_le_uniform_logEW' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section5.complexLiteralProjectiveCellLoss_le_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.matrix_pathwise_remainder' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section5.expected_matrix_row_increment_le_complementary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.expected_matrix_terminal_remainder' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.negativeLog_weighted_atom_integrable_and_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.positiveLog_paperIndicatorOpenExteriorRow_integrable_and_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'TaoVuReplacement.taoVuReplacementPrinciple_inProbability' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section6.physical_replacement_of_literalCertificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.triangular_physical_replacement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.esd_limit_of_replacement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section6.literalIndicatorMatrix_energy_integrable_and_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section6.literal_indicator_replacement_of_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.norm_compound_inverse_eq_complement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.norm_clearedCompanion_inverse_eq_complement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_exterior_row_inverse_eq_complement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_exterior_row_inverse_eq_complement_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_row_cost_integrable_and_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_row_forward_inverse_expectation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.realSampleComplexify_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.realSamplesComplexify_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.real_section5_original_samples' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_physical_telescope_uniform_atom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_row_increment_uniform_atom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literalModel_completedSection4Data_of_atom_log' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_canonical_profile_endpoint_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.real_literal_indicator_endpoint_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.tapered_canonical_real_endpoint_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.tapered_canonical_complex_endpoint_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_real_full_of_quantitative_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_complex_full_of_quantitative_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.tapered_real_full_of_quantitative_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.tapered_complex_full_of_quantitative_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_original_real_full_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.tapered_original_real_full_of_section34' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.circularLaw_boundedContinuousMap_of_compactSupport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literalIndicatorMatrix_expected_energy_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.taperedMatrix_expected_energy_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_indicator_normalized_hilbertSchmidt_tight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_indicator_determinant_nonzero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.real_literal_indicator_determinant_nonzero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.section5_spectral_difference_under_coupling' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.section5_spectral_difference_on_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.section5_logPotential_difference_under_triangular_coupling' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.QuantitativeSection4PressureInput.of_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.Section3IndicatorAnchorsTri.of_measurePreserving' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.realLiteralSection3Inputs_complexify' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.OriginalRealSection34Inputs.calibration_complexify' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.OriginalRealSection34Inputs.finalSize_complexify' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.OriginalRealSection34Inputs.anchors_complexify' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.finite_uniform_limit_of_all_selections' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.uniform_calibration_of_triangular_anchors_and_two_seams' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.completedSection4_mesoscopic_calibration' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.completedSection4_uniform_mesoscopic_calibration' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_uniform_mesoscopic_calibration' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.PolynomialTaperProfile.mass_linear_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.PolynomialTaperProfile.weight_lower_polynomial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.PolynomialTaperProfile.varianceMatrix_doubly_stochastic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.PolynomialTaperProfile.varianceMatrix_inner_halfband_lower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.PolynomialTaperProfile.effectiveBandwidth_comparable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.taperedMatrix_expected_entry_eq_varianceMatrix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.eventually_taper_high_band_margin' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.triangleTaper_boundedVariation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.triangleTaperProfile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section5.logarithmic_raw_seam_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CircularLawSections56.Section5.realPaperPressureFiberL2Bound_le_logarithmic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.complexPaperPressureFiberL2Bound_le_logarithmic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.RealQuantitativeSection4PressureInput.toCompleted' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.ComplexQuantitativeSection4PressureInput.toCompleted' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.PolynomialTaperProfile.selected_amplitude_exponential_lower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_row_forward_inverse_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.real_iid_row_forward_inverse_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.tapered_real_row_forward_inverse_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_max_pressure_lift_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_global_pressure_uniform_in_cells' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_row_simultaneous_complement_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_rows_simultaneous_complement_ae' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.natural_short_branch_high_band' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.eventually_all_mesoscopic_lengths_high_band' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.eventually_mesoscopic_ring_band_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.indicator_original_real_full_of_source_assumptions' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.tapered_original_real_full_of_source_assumptions' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.taperedMatrix_maxExpectedEntry_eq_maxWeight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.taperedMatrix_effectiveBandwidth_comparable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.eventually_paperBandCellCount_ge_on_long' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.paperBandCellCount_tendsto_of_eventually_long' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.real_source_moments_complexify' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.PolynomialTaperProfile.hardEdgeCutoff_le_sourceCutoff_eventually' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.section3_short_ring_of_taper_estimates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.literal_source_centered_row_moments' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.tapered_short_ring_of_section3_estimates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.exists_taper_section3_parameters' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CircularLawSections56.Section5.section3_sequence_conclusion_to_physical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

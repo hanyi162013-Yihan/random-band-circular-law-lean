@@ -1,0 +1,4 @@
+Section 5 validation phase: audit; logs: /tmp/section5-validation.wfYBa5
+PASS AxiomAudit
+PASS FullSection5AxiomAudit
+PASS Section5Regression

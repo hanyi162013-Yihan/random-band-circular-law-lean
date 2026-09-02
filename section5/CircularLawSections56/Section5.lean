@@ -1,0 +1,154 @@
+import CircularLawSections56.Section5.BalancedDivision
+import CircularLawSections56.Section5.BalancedPhysicalScaleAdapter
+import CircularLawSections56.Section5.CalibrationAndClosure
+import CircularLawSections56.Section5.IndicatorClosure
+import CircularLawSections56.Section5.InverseAndRemainder
+import CircularLawSections56.Section5.MatrixInverseRowCost
+import CircularLawSections56.Section5.LiteralRowLogMoments
+import CircularLawSections56.Section5.LiteralFreshMeanBound
+import CircularLawSections56.Section5.Section4CompletedInverse
+import CircularLawSections56.Section5.Section4CompletedAssembly
+import CircularLawSections56.Section5.CompletedSection4UniformInputs
+import CircularLawSections56.Section5.CompanionInverseNorm
+import CircularLawSections56.Section5.LiteralComplementaryInverse
+import CircularLawSections56.Section5.LiteralTerminalPressure
+import CircularLawSections56.Section5.UniformPaperConstants
+import CircularLawSections56.Section5.LiteralGlobalIntegrabilityAdapter
+import CircularLawSections56.Section5.LiteralAdaptedCellJointAdapter
+import CircularLawSections56.Section5.LiteralAERawSeamAdapter
+import CircularLawSections56.Section5.LiteralCenteredMatrixCellAdapter
+import CircularLawSections56.Section5.LiteralCenteredMesoscopicTelescope
+import CircularLawSections56.Section5.LiteralCyclicStartAdapter
+import CircularLawSections56.Section5.LiteralDeterminantFreshAdapter
+import CircularLawSections56.Section5.LiteralFreshCoordinateTransport
+import CircularLawSections56.Section5.LiteralIidCellAdapter
+import CircularLawSections56.Section5.LiteralIidCellInvertibilityAdapter
+import CircularLawSections56.Section5.LiteralIidCellTelescopeAdapter
+import CircularLawSections56.Section5.LiteralIidMatrixCellProductAdapter
+import CircularLawSections56.Section5.LiteralIidMatrixCellAEAdapter
+import CircularLawSections56.Section5.LiteralOutsidePressureBridge
+import CircularLawSections56.Section5.LiteralNearEndToEndAssembly
+import CircularLawSections56.Section5.LiteralPhysicalDeterminantSeam
+import CircularLawSections56.Section5.LiteralPhysicalMesoscopicCellAdapter
+import CircularLawSections56.Section5.LiteralPhysicalPressureFluctuation
+import CircularLawSections56.Section5.LiteralPhysicalPressureSequence
+import CircularLawSections56.Section5.LiteralPressureAdapter
+import CircularLawSections56.Section5.LiteralPressureAsymptoticClosure
+import CircularLawSections56.Section5.LiteralProjectiveCellInputAdapter
+import CircularLawSections56.Section5.LiteralRealCellPackage
+import CircularLawSections56.Section5.NearEndToEnd
+import CircularLawSections56.Section5.ProbabilityBridges
+import CircularLawSections56.Section5.ProbabilityInputs
+import CircularLawSections56.Section5.PressureAsymptotics
+import CircularLawSections56.Section5.PressureLifting
+import CircularLawSections56.Section5.PaperMesoscopicScaleLimits
+import CircularLawSections56.Section5.Section4NormalizationAndFillers
+import CircularLawSections56.Section5.TaperedWeights
+import CircularLawSections56.Section5.TargetPressure
+import CircularLawSections56.Section5.TriangularProbability
+import CircularLawSections56.Section5.LiteralCircularLaw
+import CircularLawSections56.Section5.ComplementaryExteriorNorm
+import CircularLawSections56.Section5.LiteralExactComplement
+import CircularLawSections56.Section5.RealAtomLogMoments
+import CircularLawSections56.Section5.PolynomialTaperProfile
+import CircularLawSections56.Section5.TaperedPaperWeights
+import CircularLawSections56.Section5.LiteralAtomRowCost
+import CircularLawSections56.Section5.LiteralAtomProductIntegrability
+import CircularLawSections56.Section5.AtomLogControl
+import CircularLawSections56.Section5.RealCenteredFreshCell
+import CircularLawSections56.Section5.GenericCenteredFreshCell
+import CircularLawSections56.Section5.LiteralAtomPressure
+import CircularLawSections56.Section5.GenericPhysicalCell
+import CircularLawSections56.Section5.UniformLogarithmicWeights
+import CircularLawSections56.Section5.AtomFreshFinite
+import CircularLawSections56.Section5.UniformAtomPressure
+import CircularLawSections56.Section5.Section4ConstantEnlargement
+import CircularLawSections56.Section5.GenericLiteralModel
+import CircularLawSections56.Section5.LogarithmicProfileCircularLaw
+import CircularLawSections56.Section5.AtomSection5Endpoint
+import CircularLawSections56.Section5.RealSection5Endpoint
+import CircularLawSections56.Section5.TaperLiteralProfile
+import CircularLawSections56.Section5.LiteralExactRowCost
+import CircularLawSections56.Section5.RealSampleTransport
+import CircularLawSections56.Section5.TaperSection5Endpoint
+import CircularLawSections56.Section5.TaperAtomEndpoints
+import CircularLawSections56.Section5.RealOriginalEndpoints
+import CircularLawSections56.Section5.TaperDiscreteAsymptotics
+import CircularLawSections56.Section5.PaperLiteralGeometry
+import CircularLawSections56.Section5.CanonicalSection5Endpoint
+import CircularLawSections56.Section5.TaperCanonicalEndpoint
+import CircularLawSections56.Section5.TaperCanonicalAtomEndpoints
+import CircularLawSections56.Section5.TaperVarianceProfile
+import CircularLawSections56.Section5.LiteralEnergyTightness
+import CircularLawSections56.Section5.LiteralEnergyIdentity
+import CircularLawSections56.Section5.WeakCircularLaw
+import CircularLawSections56.Section5.LiteralNonvanishing
+import CircularLawSections56.Section5.LogarithmicSection4Bounds
+import CircularLawSections56.Section5.QuantitativeSection4Inputs
+import CircularLawSections56.Section5.Section5Conclusions
+import CircularLawSections56.Section5.IndicatorFullEndpoints
+import CircularLawSections56.Section5.TaperFullEndpoints
+import CircularLawSections56.Section5.UniformMesoscopicCalibration
+import CircularLawSections56.Section5.RealUpstreamTransport
+import CircularLawSections56.Section5.TaperModelVariance
+import CircularLawSections56.Section5.RealSection3Transport
+import CircularLawSections56.Section5.TwoModelComparison
+import CircularLawSections56.Section5.RealSection34Inputs
+import CircularLawSections56.Section5.OriginalRealFullEndpoints
+import CircularLawSections56.Section5.TaperInnerBand
+import CircularLawSections56.Section5.TriangleTaperExample
+import CircularLawSections56.Section5.CompletedMesoscopicCalibration
+import CircularLawSections56.Section5.LiteralUniformMesoscopic
+import CircularLawSections56.Section5.TaperMonomialLoss
+import CircularLawSections56.Section5.UniformExactRowCost
+import CircularLawSections56.Section5.LiteralGlobalPressureUniform
+import CircularLawSections56.Section5.SimultaneousComplement
+import CircularLawSections56.Section5.Section3ScaleEligibility
+import CircularLawSections56.Section5.SourceAtomMoments
+import CircularLawSections56.Section5.SourceRealFullEndpoints
+import CircularLawSections56.Section5.TaperEffectiveBandwidth
+import CircularLawSections56.Section5.PaperCellCountGrowth
+import CircularLawSections56.Section5.TaperCutoffDominance
+import CircularLawSections56.Section5.TaperSection3Estimates
+import CircularLawSections56.Section5.LiteralSourceMoments
+import CircularLawSections56.Section5.TaperShortRingSource
+
+/-!
+# Section 5: mesoscopic calibration and global pressure lifting
+
+This umbrella module collects the formalized internal proof chain of Section 5 of the
+combined circular-law manuscript.  Inputs proved in Section 4, and genuinely external
+high-band/random-matrix inputs, are kept as explicit theorem hypotheses.
+
+The literal Section 4 adapter layer includes determinant-to-`FreshZ` at every cyclic
+start, exact IID coordinate transport, random-max/mean comparison, complex and real
+matrix-cell packages, and normalization/inactive-branch plumbing.  Its finite-cell
+theorems use the genuine chronological matrix product; finite-dimensional norm attainment
+constructs the adapted directions, while the AE variants accept the almost-sure
+invertibility supplied by continuous atom laws.
+
+The paper-centered cell is also retained literally as `B * Q`: after randomizing the
+outside factor, its one-cell and finite-cell telescope are centered at `∫ log ‖B‖`, with
+only the projective/fresh terms in the error.  Finally, the manuscript choice
+`m₀(W) = ⌈W^(1+δ)⌉` and the long-branch inequality prove all cell, seam, and balanced
+remainder limits from `0 < δ < γ < 1/8` and `W → ∞`.  The physical complex cell package
+identifies IID outside/fresh cells with one `q*(d+1+ell)` open-row block and automatically
+discharges all product-integrability and almost-sure invertibility premises.  Balanced
+full cell length `m` is related by `ell = m-(d+1)`; calibration outside pressure is
+normalized by full `m`, not by `ell`.  The literal final constructor retains an `L¹`
+certificate, which also supplies the expectation-strength Section 6 bridge.
+The literal complex-row inverse estimate and its actual IID terminal telescope are
+proved. Section 3 anchors and the two completed Section 4 pressure estimates remain
+explicit inputs rather than hidden axioms. The existing model-identification helpers
+are reused by `LiteralCircularLaw`, whose reference ensemble, energy bound, potential
+limit, and ESD limit are proved internally. The final Section 5 endpoint is the
+original matrix's circular-area test-function limit, not an ESD difference.
+No Gaussian-profile theorem from Section 6 is needed for this endpoint.
+
+The completed real and taper endpoints use quantitative Section 4 finite inputs and
+masked Section 3 anchors. Their conclusions cover every bounded continuous real test,
+with energy tightness and a.e.-parameter nonvanishing supplied internally. Exact
+complementary exterior norms, interval-uniform calibration and cell-count-uniform
+pressure lifting are also exported. See `SECTION5_COVERAGE.md` for the precise current
+source-to-theorem map and for the accepted taper short-ring input boundary.
+-/
