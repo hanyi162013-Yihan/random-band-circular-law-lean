@@ -63,7 +63,7 @@ theorem weightedCyclicMatrix_core_tail_independent
     by_cases hs : j - i ∈ S <;>
       simp [weightedCyclicMatrix, zeroExtendAtoms, I, activeAtomIndices, maskedWeight, hs]
   have htail : (fun ω : ZMod N × ZMod N → ℂ =>
-      weightedCyclicMatrix N q (zeroExtendAtoms Iᶜ (fun i : Iᶜ => ω i))) =
+      weightedCyclicMatrix N q (zeroExtendAtoms Iᶜ (fun i : ↥(Iᶜ) => ω i))) =
         weightedCyclicMatrix N (maskedWeight Sᶜ q) := by
     funext ω i j
     by_cases hs : j - i ∈ S <;>
