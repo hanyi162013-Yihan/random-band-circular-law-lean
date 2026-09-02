@@ -403,7 +403,7 @@ local instance : NeZero (∑ _ : Fin 2, (5 : ℕ)) := ⟨by norm_num [Fin.sum_un
 
 example (ν : Measure ℂ) [IsProbabilityMeasure ν] :
     MeasurePreserving (fullBlockPaperSample (fun _ : Fin 2 => 5) 1 1 (by decide))
-      (Measure.pi (fun _ : ((b : Fin 2) × Fin 5) × Fin 3 => ν))
+      (Measure.pi (fun _ : ((_b : Fin 2) × Fin 5) × Fin 3 => ν))
       (CircularLawSection4.paperIndicatorSampleMeasure 10 1 ν) :=
   fullBlockPaperSample_measurePreserving (fun _ : Fin 2 => 5) 1 1 (by decide) ν
 end
