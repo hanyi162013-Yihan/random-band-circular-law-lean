@@ -27,7 +27,7 @@ Existing short-ring support modules matched byte-for-byte.
 
 ## Five additional short-ring support modules
 
-The parent snapshot lacks these files used by Section 5:
+The original parent snapshot lacked these files used by Section 5:
 
 - `ShortRingAnchor.AtomAssumption21`
 - `ShortRingAnchor.NormalizedGinibre`
@@ -36,8 +36,13 @@ The parent snapshot lacks these files used by Section 5:
 - `ShortRingAnchor.Proposition36`
 
 Exact copies of the locally checked source files are included under `upstream/`
-(49,222 bytes total). The `Section5ShortRingSupport` library registers precisely
-these five roots, without replacing the parent's existing support library.
+(49,222 bytes total). Their build locations are now in the parent's
+`vendor/short-ring-analysis/ShortRingAnchor/` directory, so the existing
+`ShortRingAnchor` library owns every module in this namespace. CI checks that
+the five build copies are byte-identical to the checksummed `upstream/` copies.
+An initial attempt to register them in a second, child library caused Lake to
+look for the same modules under the parent library as well; that duplicate
+registration has been removed. No pre-existing parent source was replaced.
 Their generic estimates remain explicit hypotheses. This is not a claim that
 Section 3, or its full short-ring input, has been proved.
 

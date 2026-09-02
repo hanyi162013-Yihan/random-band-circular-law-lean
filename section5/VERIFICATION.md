@@ -49,3 +49,10 @@ that a queued or running CI job has passed; consult the actual run conclusion.
 The original verification records above are retained as evidence for the
 unchanged mathematical sources, rather than being presented as results of a
 second kernel replay in the publication layout.
+
+The first remote run, [33653845698](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33653845698),
+failed because Lake assigned five `ShortRingAnchor` modules to both the parent
+and child libraries and could not find the parent copies. Its log reports no
+Lean proof error. The packaging fix places identical copies under the existing
+parent library, removes duplicate child registration, and checks copy integrity
+before compilation. This is a path/ownership repair, not a change to any theorem.
