@@ -301,5 +301,5 @@ example (p : NoncompactProfile) (N H : ℕ) [NeZero N] (W : ℝ) :
         matrixCutoffPotential ((1 : ℂ) • p.unitCoreMatrix N H W ω - z • 1) 1|
         ∂gaussianProfileLaw N) ≤ 1 := by
   filter_upwards [p.gaussian_unitCore_cutoff_scaling_ae N H W 0 1] with z hz
-  simpa only [sub_zero, zero_sub, abs_neg, abs_one, div_one, Complex.ofReal_zero,
+  simpa only [zero_sub, abs_neg, abs_one, div_one, Complex.ofReal_zero,
     Complex.ofReal_one] using (hz 1 zero_lt_one).2.2

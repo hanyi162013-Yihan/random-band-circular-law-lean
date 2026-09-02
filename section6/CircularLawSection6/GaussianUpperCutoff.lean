@@ -36,13 +36,14 @@ theorem expected_raw_le_cutoff_of_error
         |matrixCutoffPotential (A ω) a - matrixCutoffPotential (B ω) a| ∂μ := by
       apply integral_mono_ae hraw (hcore.add hdiff)
       filter_upwards [hdet] with ω hω
+      dsimp only [Pi.add_apply]
       have h := matrixRawPotential_le_cutoff (A ω) hω a
       have h' := le_abs_self (matrixCutoffPotential (A ω) a - matrixCutoffPotential (B ω) a)
       linarith
     _ = (∫ ω, matrixCutoffPotential (B ω) a ∂μ) +
         ∫ ω, |matrixCutoffPotential (A ω) a - matrixCutoffPotential (B ω) a| ∂μ :=
       integral_add hcore hdiff
-    _ ≤ _ := add_le_add_left herror _
+    _ ≤ _ := add_le_add le_rfl herror
 
 theorem integrable_hilbertSchmidtSq_of_cyclicEnergy
     {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) (N : ℕ) [NeZero N]

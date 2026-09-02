@@ -13,7 +13,7 @@ Jensen monotonicity then applies to the original matrix expectation.
 This discharges the monotonicity premise in the varying-radius argument.
 -/
 
-open MeasureTheory Filter Topology Set
+open MeasureTheory Filter Topology Set Real
 open CircularLawSections56.Section6
 
 noncomputable section
@@ -45,7 +45,9 @@ theorem scaledUnitCoreLogDet_memLp (p : NoncompactProfile) (N H : ℕ) [NeZero N
       p.diagonal_normalizedCoreWeight_ge N H W
   have h := (gaussian_cyclic_memLp_and_variance_all N _
     p.diagonalComparisonConstant_pos hr z hq).1
-  simpa only [scaledUnitCoreLogDet, unitCoreMatrix, gaussianProfileLaw, cyclicRawLogDet] using h
+  unfold scaledUnitCoreLogDet unitCoreMatrix gaussianProfileLaw
+  unfold cyclicRawLogDet at h
+  exact h
 
 theorem unitCoreMatrix_global_phase (p : NoncompactProfile) (N H : ℕ) [NeZero N]
     (W : ℝ) (a : Circle) (ω : ZMod N × ZMod N → ℂ) :
@@ -53,7 +55,11 @@ theorem unitCoreMatrix_global_phase (p : NoncompactProfile) (N H : ℕ) [NeZero 
       (a : ℂ) • p.unitCoreMatrix N H W ω := by
   have h := tailMatrix_tailRotation N ∅
     (maskedWeight (coreOffsets N H) (p.normalizedCoreWeight N H W)) a ω
-  simpa only [Finset.compl_empty, maskedWeight, Finset.mem_univ, if_true, unitCoreMatrix] using h
+  have hmask (q : ZMod N → ℝ) : maskedWeight Finset.univ q = q := by
+    funext t
+    simp [maskedWeight]
+  rw [Finset.compl_empty, hmask] at h
+  exact h
 
 theorem scaledUnitCore_phaseAverage_eq (p : NoncompactProfile) (N H : ℕ) [NeZero N]
     (W r : ℝ) (z : ℂ) (ω : ZMod N × ZMod N → ℂ) :
@@ -95,6 +101,7 @@ theorem scaledUnitCoreMean_monotoneOn (p : NoncompactProfile) (N H : ℕ) [NeZer
   have hir := p.scaledUnitCore_phase_integral N H W hr z
   have his := p.scaledUnitCore_phase_integral N H W hs z
   unfold scaledUnitCoreMean
+  dsimp only
   rw [← hir.2, ← his.2]
   apply div_le_div_of_nonneg_right _ (Nat.cast_nonneg N)
   exact integral_mono hir.1 his.1 (fun ω => polynomialCircleMean_monotoneOn
@@ -123,14 +130,17 @@ theorem gaussian_core_raw_mean_of_fixed_scales (p : NoncompactProfile)
         ∂gaussianProfileLaw (N n)) / (N n : ℝ)) atTop
         (𝓝 (varianceScaledRadialPotential v ‖z‖)) := by
   have hroot : 0 < Real.sqrt v := Real.sqrt_pos.mpr hv
+  have hcont (z : ℂ) : ContinuousAt (fun r : ℝ => varianceScaledRadialPotential (r ^ 2) ‖z‖)
+      (Real.sqrt v) := by
+    exact (continuousAt_varianceScaledRadialPotential (radius := ‖z‖) (sq_pos_of_pos hroot)).comp
+      (g := fun r : ℝ => r ^ 2)
+      (show ContinuousAt (fun r : ℝ => r ^ 2) (Real.sqrt v) from (continuous_id.pow 2).continuousAt)
   have h := ae_tendsto_varying_radius_of_countable_dense (volume : Measure ℂ) hS hCount
     (fun z n r => p.scaledUnitCoreMean (N n) (H n) (W n) r z)
     (fun z r => varianceScaledRadialPotential (r ^ 2) ‖z‖)
     (fun n => Real.sqrt (p.coreMass (N n) (H n) (W n))) hroot hmass.sqrt
     (ae_of_all _ fun z n => p.scaledUnitCoreMean_monotoneOn (N n) (H n) (W n) z)
-    hfixed (ae_of_all _ fun z =>
-      (continuousAt_varianceScaledRadialPotential (radius := ‖z‖) (sq_pos_of_pos hroot)).comp
-        (continuousAt_id.pow 2))
+    hfixed (ae_of_all _ hcont)
   simpa only [p.rawCoreMean_eq_scaledUnitCoreMean, Real.sq_sqrt hv.le] using h
 
 end CircularLawSection6.NoncompactProfile
