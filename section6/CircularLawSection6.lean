@@ -12,3 +12,6 @@ import CircularLawSection6.GaussianProfile
 import CircularLawSection6.BVQuadrature
 import CircularLawSection6.CenteredMesh
 import CircularLawSection6.ProfileQuadrature
+import CircularLawSection6.ProfileMassLimits
+import CircularLawSection6.SparseProfileGeometry
+import CircularLawSection6.ProfileComparability

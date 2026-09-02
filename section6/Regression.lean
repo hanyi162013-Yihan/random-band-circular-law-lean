@@ -90,3 +90,23 @@ example {f : ℝ → ℝ} (hf : Continuous f) (hBV : BoundedVariationOn f univ)
     |(0 : ℝ) * (∑ i ∈ Finset.range n, f (a + i * 0)) -
         ∫ x in a..a + n * 0, f x| ≤ 0 := by
   simpa only [zero_mul] using uniformMesh_error_le hf hBV a n (δ := 0) le_rfl
+
+-- A zero cutoff radius has zero limiting core mass, despite its finite diagonal.
+example (p : NoncompactProfile) (N : ℕ → ℕ) [∀ n, NeZero (N n)]
+    (hN : Tendsto N atTop atTop) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
+    (hWlim : Tendsto W atTop atTop)
+    (hsparse : Tendsto (fun n => W n / (N n : ℝ)) atTop (𝓝 0)) :
+    Tendsto (fun n => p.coreMass (N n) 0 (W n)) atTop (𝓝 0) := by
+  simpa using p.coreMass_tendsto_sparse N hN W hW hWlim hsparse (R := 0) le_rfl
+
+-- Radius exhaustion is a separate limit after the fixed-radius matrix-size limit.
+example (p : NoncompactProfile) :
+    Tendsto (fun R : ℕ => 1 - ∫ x in -(R : ℝ)..(R : ℝ), p.f x) atTop (𝓝 0) :=
+  p.limitingTailMass_tendsto_zero
+
+-- Dense comparison has constants uniform over dimensions and bandwidths.
+example (p : NoncompactProfile) :
+    ∃ c C : ℝ, 0 < c ∧ 0 < C ∧
+      ∀ (N : ℕ) [NeZero N] (W : ℝ), (N : ℝ) ≤ W →
+        ∀ s : ZMod N, c / (N : ℝ) ≤ p.weight N W s ∧ p.weight N W s ≤ C / (N : ℝ) := by
+  simpa only [one_mul] using p.dense_weights_comparable (κ := 1) zero_lt_one

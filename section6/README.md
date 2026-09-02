@@ -7,12 +7,11 @@ No second mathlib checkout or large local download is needed.
 
 ## New proof layer
 
-The current development batch adds literal sampled profiles, cyclic matrices,
-product-law independence, normalized complex Gaussians, core/tail energies,
-tail rotations and a uniform BV quadrature estimate. `SampledProfile` and
-`CyclicMatrix` have passed targeted local strict checks. The rest of this
-batch is undergoing compilation; it is not yet a verified checkpoint.
-The earlier five-module checkpoint below remains separately recorded.
+The fourteen-module checkpoint at commit `0dce34d` passed the dedicated
+[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33667008094):
+the publication-layout build, transitive axiom audit, and all 20 regression
+examples. Three subsequent modules (`ProfileMassLimits`, `SparseProfileGeometry`,
+`ProfileComparability`) are a new development batch, not covered by that run.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the
@@ -26,15 +25,24 @@ The earlier five-module checkpoint below remains separately recorded.
   identity, circle integrability, and normalized Jensen lower bound.
 - `VaryingNormalization`: varying-radius convergence from fixed radii in
   a dense set, and the countable a.e. version with one common full-measure set.
+- `SampledProfile`, `CenteredMesh`: the actual centered cyclic sampling,
+  normalized variance weights, exact core cardinality and integer-sum identities.
+- `CyclicMatrix`, `ProfileMatrices`: concrete core/tail matrices, exact energy
+  identities, variance normalization and product-law expected energies.
+- `ComplexGaussian`, `CyclicIndependence`, `GaussianProfile`: the actual normalized
+  circular complex Gaussian, atomlessness, independent core/tail matrices,
+  and law-preserving tail rotations.
+- `BVQuadrature`, `ProfileQuadrature`: uniform mesh error bounded by total
+  variation times mesh size, specialized to the literal full and core sums.
 
 These are proved lemmas, not new axioms. This directory does **not** yet assert
 the full noncompact Gaussian-profile circular-law theorem.
 
 ## Remaining mathematical boundaries
 
-The new literal Gaussian model connections and BV quadrature require completion
-of their current verification. BV Riemann-sum limits, compact-core cutoff
-periodicization and singular-value comparison, Gaussian affine-log/cofactor
+BV Riemann-sum limits and dense/core weight comparability are being checked in
+the next batch. Compact-core cutoff periodicization and singular-value
+comparison, Gaussian affine-log/cofactor
 concentration, rotation-invariant expectation/Fubini transport, finite-matrix
 Mirsky estimate, hard-edge input, and final sparse/dense replacement assembly
 still need their full source-to-model connections. The existing conditional
@@ -44,9 +52,10 @@ the indicator-model results, not the noncompact-profile conclusion itself.
 
 ## Verification
 
-The targeted local checks, axiom audit, and seven regression examples have
-passed. [VERIFICATION.md](VERIFICATION.md) records their scope; the separate
-GitHub workflow checks the published repository layout.
+[VERIFICATION.md](VERIFICATION.md) records the exact verified commit and scope:
+14 modules, 215 audited declarations (173 theorem declarations, including
+generated declarations), and 20 regression examples. This is not a proof of
+the entire manuscript section.
 
 For an integrated build in this repository layout:
 

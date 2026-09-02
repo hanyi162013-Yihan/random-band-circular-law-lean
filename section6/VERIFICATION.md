@@ -1,13 +1,33 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
-## Development batch pending verification
+## Verified fourteen-module checkpoint
 
-Seven additional modules are being integrated after the checkpoint below.
-Only `SampledProfile` and `CyclicMatrix` have passed targeted strict local
-checks so far. The remaining new modules, combined entry point, expanded
-axiom audit and regressions must pass before treating this batch as verified.
-Local memory contention makes the dedicated GitHub workflow the preferred
-full-layout check. The historical results below are not results for this batch.
+Commit: `0dce34d3de176151db96ee1da21bb18b57a7dfb6`.
+[Dedicated GitHub run 33667008094](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33667008094),
+job `100371135774`: **success** on 2026-09-02.
+
+- All 14 Section 6 modules and the combined entry point compiled in the actual
+  publication layout. Lean reported 3244 build jobs, including dependencies.
+- New Section 6 modules treat warnings as errors.
+- The transitive audit passed: 215 declarations, 173 theorem declarations
+  (including generated declarations). Only `propext`, `Classical.choice`,
+  and `Quot.sound` are allowed.
+- All 20 strict regression examples passed, including even-size offset ties,
+  the one-dimensional core, empty tails, Gaussian normalization, actual matrix
+  independence, and zero-length quadrature.
+- The repository placeholder-proof scanner passed.
+
+This checkpoint now includes the literal Gaussian/profile model, finite
+normalization and energy identities, product independence, tail rotations,
+centered mesh identification, and actual BV quadrature estimates. It does not
+yet prove the compact-core analytic inputs or the noncompact circular law.
+
+The next three modules (`ProfileMassLimits`, `SparseProfileGeometry`, and
+`ProfileComparability`) and their added regressions are pending a separate
+integrated check. They are not covered by the successful run above.
+
+No large local dependency download was performed; the cloud job uses its own
+runner and cache. Local checks reused existing pinned dependencies.
 
 ## Earlier verified checkpoint
 
@@ -20,7 +40,7 @@ Local checks against the existing pinned Lean 4.33.0/mathlib installation:
 - Their combined `CircularLawSection6.lean` entry point passed the same check.
 - The transitive axiom audit passed: 21 declarations, 19 theorems (including
   generated declarations). Only `propext`, `Classical.choice`, and `Quot.sound`
-  are allowed. The audit result is retained in `verification/axioms.txt`.
+  are allowed. `verification/axioms.txt` now records the newer checkpoint.
 - All seven regression examples passed with warnings treated as errors.
 - The repository source-token scanner passed on all 538 current Lean files.
 - The child manifest uses relative paths and reuses `../.lake/packages`.
