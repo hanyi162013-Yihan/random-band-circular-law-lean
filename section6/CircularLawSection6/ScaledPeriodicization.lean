@@ -57,6 +57,6 @@ theorem periodicization_expected_scaled_cutoff_ae
   have h := hzerror (a / r) (div_pos ha hr)
   refine ⟨h.1.congr heq.symm, ?_⟩
   rw [integral_congr_ae heq]
-  exact h.2.trans_eq (by field_simp; ring)
+  exact h.2.trans_eq (by field_simp)
 
 end CircularLawSection6
