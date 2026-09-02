@@ -248,7 +248,8 @@ theorem rademacherPacketFrame_capped_and_zero
     simpa only [hcapSign] using hlimit
   refine ⟨hcapped, ?_⟩
   apply zeroProbability_of_all_capped_bounds
-    (TerminalAssembly.terminalUniformBaseLoss_nonneg cook 1 _ _ _)
+    (baseLoss := rademacherBoundaryBaseLoss cook W z)
+    (rademacherBoundaryBaseLoss_nonneg cook W z)
   intro T hT
   exact (cap_mul_zeroProbability_le_integral (packetAtomRowsLaw W rademacherLaw)
     T c hT.le hc value (measurable_packetScalarCoefficientEval W r z CL BR U V s)).trans

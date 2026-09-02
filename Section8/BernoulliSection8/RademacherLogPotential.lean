@@ -172,7 +172,6 @@ theorem rademacher_long_branch_log_potential
   intro n
   by_cases hn : anchorSize (W n) ≤ (s n + 3) * W n
   · simp only [longBranchLogPotential, longOrAnchorCoreSites, if_pos hn]
-    exact le_rfl
   · simp only [longBranchLogPotential, if_neg hn, sub_self, abs_zero]
     have he : {x : IntervalRows (W n) (s n + 3) | ε ≤ (0 : ℝ)} = ∅ := by
       ext x

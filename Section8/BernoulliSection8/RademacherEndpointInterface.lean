@@ -91,6 +91,8 @@ theorem rademacherEndpointGoodEvent_compl_probability_le
       hpacket.measureReal_preimage
         (measurableSet_rademacherInterfaceGoodEvent I W 3).compl.nullMeasurableSet
     _ ≤ 9 * Real.exp (-(interfaceCombinedRate I / 2) * (W : ℝ)) := by
-      simpa using rademacherInterfaceGoodEvent_compl_probability_le I hI W 3 hW
+      have h := rademacherInterfaceGoodEvent_compl_probability_le I hI W 3 hW
+      norm_num at h
+      simpa using h
 
 end BernoulliSection8

@@ -48,7 +48,8 @@ theorem oneSiteForwardMaxLoss_le_of_bounded_atoms
     have hcommon := posLog_oneSiteCommonDegreeBound_le W z
     have hb : 0 ≤ (W : ℝ) * Real.posLog (1 + 2 * (3 * W : ℝ)) :=
       mul_nonneg (Nat.cast_nonneg _) Real.posLog_nonneg
-    have hc : 0 ≤ Real.log (2 * W + 1 : ℝ) := Real.log_nonneg (by positivity)
+    have hc : 0 ≤ Real.log (2 * W + 1 : ℝ) :=
+      Real.log_nonneg (le_add_of_nonneg_left (by positivity))
     unfold oneSiteTensorLogBound
     linarith
   exact ((Real.posLog_le_posLog (norm_nonneg _) hfamily).trans hlog).trans

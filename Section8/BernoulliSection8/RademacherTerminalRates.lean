@@ -211,7 +211,9 @@ theorem rademacherBoundaryBaseLoss_le
       12 * W * Real.log (W : ℝ) := by
     calc
       _ ≤ 3 * (W : ℝ) * Real.log (terminalComparisonPolynomialBase (Fin W) (packetRowScale W * z)) := hc
-      _ ≤ 3 * (W : ℝ) * (4 * Real.log (W : ℝ)) := by gcongr
+      _ ≤ 3 * (W : ℝ) * (4 * Real.log (W : ℝ)) := by
+        apply mul_le_mul_of_nonneg_left _ (mul_nonneg (by norm_num) hw0)
+        simpa only [Nat.cast_ofNat] using hcp
       _ = _ := by ring
   have hrl : terminalReverseLoss (Fin W) (packetRowScale W * z)
       (terminalConcreteExposureThreshold (rademacherPacketFamily W) W) ≤
@@ -219,7 +221,9 @@ theorem rademacherBoundaryBaseLoss_le
     calc
       _ ≤ 3 * (W : ℝ) * Real.log (terminalReversePolynomialBase (Fin W)
           (packetRowScale W * z) (terminalConcreteExposureThreshold (rademacherPacketFamily W) W)) := hr
-      _ ≤ 3 * (W : ℝ) * (5 * Real.log (W : ℝ)) := by gcongr
+      _ ≤ 3 * (W : ℝ) * (5 * Real.log (W : ℝ)) := by
+        apply mul_le_mul_of_nonneg_left _ (mul_nonneg (by norm_num) hw0)
+        simpa only [Nat.cast_ofNat] using hrp
       _ = _ := by ring
   have hl0 : 0 ≤ Real.log (W : ℝ) :=
     Real.log_nonneg (by exact_mod_cast (show 1 ≤ W by omega))
