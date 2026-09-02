@@ -1,4 +1,5 @@
 import CircularLawSection6.ProfileMassLimits
+import Mathlib.Algebra.Order.Floor.Semifield
 
 /-! # Sparse-regime sampling geometry
 
@@ -16,7 +17,7 @@ theorem half_dimension_ratio_tendsto (N : ℕ → ℕ) (hN : Tendsto N atTop atT
     (tendsto_natCast_atTop_atTop.comp hN)
   have heq (n : ℕ) : ⌊(1 / 2 : ℝ) * (N n : ℝ)⌋₊ = N n / 2 := by
     rw [one_div, inv_mul_eq_div, Nat.floor_div_ofNat, Nat.floor_natCast]
-  simpa only [heq] using h
+  simpa only [Function.comp_apply, heq] using h
 
 theorem dimension_over_bandwidth_tendsto (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
@@ -26,7 +27,7 @@ theorem dimension_over_bandwidth_tendsto (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     div_pos (hW n) (by exact_mod_cast NeZero.pos (N n))
   have h := tendsto_inv_nhdsGT_zero.comp
     (tendsto_nhdsWithin_iff.2 ⟨hsparse, Filter.Eventually.of_forall hpos⟩)
-  simpa only [inv_div] using h
+  simpa only [Function.comp_apply, inv_div] using h
 
 theorem sparse_centered_window_exhausts (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     (hN : Tendsto N atTop atTop) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
@@ -41,7 +42,7 @@ theorem sparse_centered_window_exhausts (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     have hN0 : (N n : ℝ) ≠ 0 := by exact_mod_cast NeZero.ne (N n)
     field_simp [hN0]
   constructor
-  · simpa only [neg_div] using tendsto_neg_atTop_atBot.comp hhalf
+  · simpa only [Function.comp_apply, neg_div] using tendsto_neg_atTop_atBot.comp hhalf
   · apply tendsto_atTop_mono _ hhalf
     intro n
     apply div_le_div_of_nonneg_right _ (hW n).le
@@ -64,7 +65,7 @@ theorem sparse_floor_core_fits (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     funext n
     have hN0 : (N n : ℝ) ≠ 0 := by exact_mod_cast NeZero.ne (N n)
     push_cast
-    field_simp [(hW n).ne', hN0] <;> ring
+    field_simp [(hW n).ne', hN0]
   filter_upwards [hcount.eventually (gt_mem_nhds (show (0 : ℝ) < 1 by norm_num))] with n hn
   have hNpos : (0 : ℝ) < N n := by exact_mod_cast NeZero.pos (N n)
   have h := (div_lt_one hNpos).1 hn
@@ -100,7 +101,7 @@ theorem NoncompactProfile.coreMass_tendsto_sparse (p : NoncompactProfile)
   have heq (n : ℕ) : (p.rawCoreMass (N n) ⌊R * W n⌋₊ (W n) / W n) /
       (p.normalizer (N n) (W n) / W n) = p.coreMass (N n) ⌊R * W n⌋₊ (W n) := by
     rw [div_div_div_cancel_right₀ (hW n).ne', p.coreMass_eq_ratio]
-  simpa only [heq, div_one] using h
+  simpa only [Pi.div_apply, heq, div_one] using h
 
 theorem NoncompactProfile.tailMass_tendsto_sparse (p : NoncompactProfile)
     (N : ℕ → ℕ) [∀ n, NeZero (N n)] (hN : Tendsto N atTop atTop)
@@ -118,11 +119,12 @@ theorem NoncompactProfile.tailMass_tendsto_sparse (p : NoncompactProfile)
 
 theorem NoncompactProfile.limitingCoreMass_tendsto_one (p : NoncompactProfile) :
     Tendsto (fun R : ℕ => ∫ x in -(R : ℝ)..(R : ℝ), p.f x) atTop (𝓝 1) := by
-  simpa only [p.integral_one] using MeasureTheory.intervalIntegral_tendsto_integral p.integrable
+  simpa only [Function.comp_apply, p.integral_one] using MeasureTheory.intervalIntegral_tendsto_integral p.integrable
     (tendsto_neg_atTop_atBot.comp tendsto_natCast_atTop_atTop) tendsto_natCast_atTop_atTop
 
 theorem NoncompactProfile.limitingTailMass_tendsto_zero (p : NoncompactProfile) :
     Tendsto (fun R : ℕ => 1 - ∫ x in -(R : ℝ)..(R : ℝ), p.f x) atTop (𝓝 0) := by
-  simpa only [sub_self] using tendsto_const_nhds.sub p.limitingCoreMass_tendsto_one
+  simpa only [sub_self] using
+    (tendsto_const_nhds (x := (1 : ℝ))).sub p.limitingCoreMass_tendsto_one
 
 end CircularLawSection6
