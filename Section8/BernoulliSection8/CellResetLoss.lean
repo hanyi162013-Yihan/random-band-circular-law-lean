@@ -38,7 +38,9 @@ theorem intervalRestriction_flatten_prefix (W c K n : ℕ) (hn : n ≤ K)
       (intervalRowIndex (completeCellSite k l) a)) = _
   rw [intervalRowEmbedding_rowIndex]
   change flattenCompleteCells W c K x
-    (intervalRowIndex (completeCellSite (Fin.castLE hn k) l) a) = _
+    (intervalRowIndex (completeCellSite (Fin.castLE hn k) l) a) =
+      flattenCompleteCells W c n (fun k => x (Fin.castLE hn k))
+        (intervalRowIndex (completeCellSite k l) a)
   simp only [flattenCompleteCells_row]
 
 def cellPastEmbedding (s K : ℕ) (j : Fin K) :
@@ -69,6 +71,9 @@ theorem intervalLastCore_cellThroughResetRows (W s K : ℕ) (j : Fin K)
       completeCellCore W s (x j) := by
   funext i
   obtain ⟨⟨k, a⟩, rfl⟩ := finProdFinEquiv.surjective i
+  change intervalLastCore W s (j.val * (3 + s)) (cellThroughResetRows W s K j x)
+      (intervalRowIndex k a) =
+    completeCellCore W s (x j) (intervalRowIndex k a)
   simp only [intervalLastCore, cellThroughResetRows, completeCellCore,
     intervalRestriction, Function.comp_apply, intervalRowEmbedding_rowIndex]
   have hsite : cellThroughResetEmbedding s K j
@@ -85,9 +90,16 @@ theorem intervalPast_cellThroughResetRows (W s K : ℕ) (j : Fin K)
       (cellThroughResetRows W s K j x) = cellPastRows W s K j x := by
   funext i
   obtain ⟨⟨k, a⟩, rfl⟩ := finProdFinEquiv.surjective i
+  change intervalPastBeforeReset W s (j.val * (3 + s))
+      (cellThroughResetRows W s K j x) (intervalRowIndex k a) =
+    cellPastRows W s K j x (intervalRowIndex k a)
   simp only [intervalPastBeforeReset, cellThroughResetRows, cellPastRows,
     intervalRestriction, Function.comp_apply, intervalRowEmbedding_rowIndex]
-  rfl
+  have hsite : cellThroughResetEmbedding s K j
+      ((Fin.castAddEmb s) ((Fin.castAddEmb 3) k)) = cellPastEmbedding s K j k := by
+    apply Fin.ext
+    rfl
+  rw [hsite]
 
 theorem intervalResetPacket_cellThroughResetRows (W s K : ℕ) (j : Fin K)
     (x : Fin K → IntervalRows W (3 + s)) :
@@ -96,6 +108,10 @@ theorem intervalResetPacket_cellThroughResetRows (W s K : ℕ) (j : Fin K)
       completeCellReset W s (x j) := by
   funext i
   obtain ⟨⟨k, a⟩, rfl⟩ := finProdFinEquiv.surjective i
+  change intervalRestriction (Fin.natAddEmb (j.val * (3 + s)))
+      (intervalRestriction (Fin.castAddEmb s) (cellThroughResetRows W s K j x))
+      (intervalRowIndex k a) =
+    completeCellReset W s (x j) (intervalRowIndex k a)
   simp only [cellThroughResetRows, completeCellReset, intervalRestriction,
     Function.comp_apply, intervalRowEmbedding_rowIndex]
   have hsite : cellThroughResetEmbedding s K j
@@ -169,6 +185,11 @@ theorem intervalClearedProduct_flatten_eq_resetPrefixProduct
     intervalClearedProduct W (K * (3 + s)) z (flattenCompleteCells W (3 + s) K x) r =
       resetPrefixProduct (cellCoreProducts W s K z r x)
         (cellResetProducts W s K z r x) K := by
+  letI : Nonempty (Set.powersetCard (Fin W ⊕ Fin W) r.val) := by
+    rw [← Finite.card_pos_iff, Set.powersetCard.card, Nat.card_eq_fintype_card]
+    apply Nat.choose_pos
+    simp only [Fintype.card_sum, Fintype.card_fin]
+    omega
   rw [intervalClearedProduct_flatten_core_reset, ← reverseMatrixProduct_eq_resetPrefixProduct]
   congr 1
   funext k
@@ -180,11 +201,16 @@ theorem intervalClearedProduct_cellPastRows_eq_resetPrefixProduct
     intervalClearedProduct W (j.val * (3 + s)) z (cellPastRows W s K j x) r =
       resetPrefixProduct (cellCoreProducts W s K z r x)
         (cellResetProducts W s K z r x) j.val := by
+  letI : Nonempty (Set.powersetCard (Fin W ⊕ Fin W) r.val) := by
+    rw [← Finite.card_pos_iff, Set.powersetCard.card, Nat.card_eq_fintype_card]
+    apply Nat.choose_pos
+    simp only [Fintype.card_sum, Fintype.card_fin]
+    omega
   rw [intervalClearedProduct_cellPastRows, ← reverseMatrixProduct_eq_resetPrefixProduct]
   congr 1
   funext k
   have hk : k.val < K := lt_of_lt_of_le k.isLt j.isLt.le
-  simp [cellCoreProducts, cellResetProducts, hk]
+  simp [cellCoreProducts, cellResetProducts, hk, Fin.castLE]
 
 theorem intervalClearedProduct_cellThroughResetRows_eq_resetPrefixProduct
     (W s K : ℕ) (j : Fin K) (z : ℂ)
