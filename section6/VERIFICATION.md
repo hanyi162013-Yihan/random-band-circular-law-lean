@@ -1,5 +1,29 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified fifty-four-module checkpoint
+
+Commit: `fd5a513c6cf229c467bf3f37415e8270ebcf609a`.
+[Dedicated GitHub run 33690819600](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33690819600),
+job `100448909669`: **success** on 2026-09-02.
+
+- All 54 modules plus umbrella compiled: 4098 dependency-inclusive jobs.
+- The transitive audit passed: 622 declarations, 541 theorem declarations;
+  only `propext`, `Classical.choice`, and `Quot.sound` are permitted.
+- All 59 strict regressions, source scanning, cache saving and log retention
+  passed, with warnings as errors in Section 6.
+
+This checks the canonical finite-band geometry and weights, actual fixed
+positive scaling of the Section 5 probability-to-mean result, the varying
+raw core mean with the actual limiting mass, cutoff normalization transport,
+and the common-atom boundary routing energy. Section 5's literal probability
+conclusion and the genuine fixed compact-cutoff limit remain explicit input
+boundaries; no final Section 6 circular law is claimed.
+
+The next three modules, `ContiguousBlockRouting`,
+`MatrixParameterNonvanishing`, and `PeriodicizationEnergy`, are under cloud
+validation, as is the expanded 64-example regression suite. The first of
+these independently passed a strict local check using existing mathlib.
+
 ## Verified fifty-module checkpoint
 
 Commit: `e177c08ea43c85343d80fc68ab260b54734b9423`.
@@ -18,10 +42,10 @@ raw-full / cutoff-core sandwich. The actual radial Gaussian mean is proved
 monotone using rotation invariance and Jensen; varying-scale cutoff errors
 are proved from the unit-core energy, including zero comparison scales.
 
-Four subsequent modules are under validation and are NOT part of this
-checkpoint: `CanonicalCoreBand`, `FixedScaleCoreBridge`, and
-`CanonicalCoreLimits`, and `RoutedBandCoupling`. The enlarged 59-example regression suite is also
-pending. The full Section 6 theorem is still incomplete.
+Four subsequent modules, `CanonicalCoreBand`, `FixedScaleCoreBridge`,
+`CanonicalCoreLimits`, and `RoutedBandCoupling`, and the 59-example regression
+suite are now covered by the newer 54-module checkpoint above. They are not
+part of this historical 50-module run. The full Section 6 theorem is still incomplete.
 
 ## Verified forty-three-module checkpoint
 

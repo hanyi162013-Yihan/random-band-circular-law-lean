@@ -7,10 +7,10 @@ No second mathlib checkout or large local download is needed.
 
 ## New proof layer
 
-The fifty-module checkpoint at commit `e177c08` passed the dedicated
-[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33689098945):
-the publication-layout build, transitive axiom audit (584 declarations,
-507 theorem declarations), and all 53 regression examples.
+The fifty-four-module checkpoint at commit `fd5a513` passed the dedicated
+[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33690819600):
+the publication-layout build, transitive axiom audit (622 declarations,
+541 theorem declarations), and all 59 regression examples.
 
 This includes the actual Gaussian density and atom-log control, core model
 identification, all-positive-dimension determinant concentration, and the
@@ -26,12 +26,18 @@ determinant/singular-log and scaling identities, and the actual expected
 core/full sandwich, varying-scale cutoff stability, and actual radial mean
 monotonicity and normalization. They are included in the 50-module checkpoint.
 
-The next four modules (54 total, 59 regression examples) connect the
+Four further verified modules connect the
 canonical floor-radius band geometry, positive fixed-scale Section 5 mean
 transport, the actual raw core mass limit, and varying cutoff normalization.
 They also construct a common-atom routing coupling and prove its expected
-boundary-row energy bound. These four modules are under validation, not
-included in the checkpoint; the contiguous-block geometry remains pending.
+boundary-row energy bound. These are included in the 54-module checkpoint.
+
+The next three modules (57 total, 64 regression examples) construct the
+actual contiguous-block routes, balanced block lengths and boundary count,
+transport parameter nonvanishing to general finite indices, and derive
+the actual block marginal law and expected HS/cutoff periodicization error.
+These additions are under cloud validation; the routing geometry alone
+has passed a strict local check against the existing mathlib installation.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the
@@ -91,8 +97,10 @@ expected tail Jensen inequality are checked. No stronger every-parameter
 claim is needed for that Jensen connection.
 Gaussian affine-log/cofactor concentration, the literal Section 5 probability
 to core-mean implication, and finite-matrix singular-value comparison are
-checked. Canonical radius/scale and eventual-geometry assembly of the core
-endpoint, compact-core cutoff periodicization, the cited direct comparison,
+checked. Canonical radius/scale transport and eventual geometry are now
+checked too, while the final Section 3/4-to-core instantiation and finite-prefix
+assembly still need completion. Compact-core cutoff periodicization is under
+validation; the cited direct comparison,
 hard-edge control, and final sparse/dense replacement assembly still need
 their full source-to-model connections. The existing conditional
 helpers under `CircularLawSections56.Section6` are reused but are not counted
@@ -102,8 +110,8 @@ the indicator-model results, not the noncompact-profile conclusion itself.
 ## Verification
 
 [VERIFICATION.md](VERIFICATION.md) records the exact verified commit and scope:
-50 modules, 584 audited declarations (507 theorem declarations, including
-generated declarations), and 53 regression examples. This is not a proof of
+54 modules, 622 audited declarations (541 theorem declarations, including
+generated declarations), and 59 regression examples. This is not a proof of
 the entire manuscript section.
 
 For an integrated build in this repository layout:

@@ -52,3 +52,6 @@ import CircularLawSection6.CanonicalCoreBand
 import CircularLawSection6.FixedScaleCoreBridge
 import CircularLawSection6.CanonicalCoreLimits
 import CircularLawSection6.RoutedBandCoupling
+import CircularLawSection6.ContiguousBlockRouting
+import CircularLawSection6.MatrixParameterNonvanishing
+import CircularLawSection6.PeriodicizationEnergy

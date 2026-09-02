@@ -343,3 +343,30 @@ example {ι : Type*} [Fintype ι] [DecidableEq ι]
     routedBandMatrix route b ω = 0 := by
   ext i j
   simp [routedBandMatrix]
+
+-- Negative displacement at the first row really wraps to the last column.
+example : cyclicFinSlot 1 (0 : Fin 5) (0 : Fin 3) = 4 := by decide
+
+-- Two length-five blocks have four boundary rows for half-width one.
+example : (blockBoundaryRows (fun _ : Fin 2 => 5) 1).card = 4 := by decide
+
+-- A nonzero remainder is absorbed into an actual block, without a terminal filler.
+example : ∃ (q : ℕ) (len : Fin q → ℕ), 0 < q ∧ (∑ b, len b) = 10 ∧
+    ∀ b, 3 ≤ len b ∧ len b < 6 :=
+  exists_periodic_block_lengths (by decide : 0 < 3) (by decide : 3 ≤ 10)
+
+-- Parameter nonvanishing includes empty matrices, whose determinant is one.
+example {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) [IsFiniteMeasure μ] :
+    ∀ᵐ z ∂(volume : Measure ℂ), ∀ᵐ _ω ∂μ,
+      ((0 : Matrix (Fin 0) (Fin 0) ℂ) - z • 1).det ≠ 0 :=
+  ae_shifted_matrix_det_ne_zero μ (fun _ => 0) measurable_const
+
+-- Half-width zero changes no matrix entries under block periodicization.
+example {q : ℕ} (len : Fin q → ℕ) [∀ j, NeZero (len j)] [NeZero (∑ j, len j)] :
+    (∫ ω, TaoVuReplacement.hilbertSchmidtSq
+      (routedBandMatrix (fullBlockRoute len 0) (fun _ => (1 : ℂ)) ω -
+        routedBandMatrix (periodicBlockRoute len 0) (fun _ => (1 : ℂ)) ω)
+      ∂Measure.pi (fun _ : ((j : Fin q) × Fin (len j)) × Fin 1 => circularComplexGaussian)) ≤ 0 := by
+  simpa using (periodicization_expected_energy len (H := 0) (fun j => NeZero.pos (len j))
+    (fun _ => 1) (by simp) circularComplexGaussian
+    circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment).2
