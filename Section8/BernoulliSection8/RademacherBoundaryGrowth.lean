@@ -2,6 +2,7 @@ import BernoulliSection8.BoundaryGrowthCore
 import BernoulliSection10.PacketComparisonGrowth
 import BernoulliSection8.RademacherBoundarySmallBall
 import BernoulliSection8.RademacherEndpointInterface
+import BernoulliSection9.ArbitraryFrameQuantitative
 
 /-! # W log(eW) boundary comparison on the Nguyen endpoint event
 
@@ -10,7 +11,7 @@ common row scale are estimated before applying the width bound, so the
 result contains only one logarithm of the width.
 -/
 
-open scoped BigOperators Matrix Matrix.Norms.Frobenius
+open scoped BigOperators Matrix
 
 noncomputable section
 
@@ -46,15 +47,17 @@ theorem rademacherScaledEndpointGood
   have hscale : 1 ≤ ‖packetRowScale W‖ ^ W := one_le_pow₀ hs.1
   refine ⟨?_, ?_, hgood.delta_pos, ?_, ?_⟩
   · rw [norm_smul]
-    exact mul_le_mul hs.2 hgood.norm_CL_le (norm_nonneg _) (by positivity)
+    exact mul_le_mul hs.2 hgood.norm_CL_le (norm_nonneg CL) (by positivity)
   · rw [norm_smul]
-    exact mul_le_mul hs.2 hgood.norm_BR_le (norm_nonneg _) (by positivity)
+    exact mul_le_mul hs.2 hgood.norm_BR_le (norm_nonneg BR) (by positivity)
   · rw [Matrix.det_smul, Fintype.card_fin, norm_mul, norm_pow]
     exact hgood.delta_le_norm_det_CL.trans
       (by nlinarith [mul_le_mul_of_nonneg_right hscale (norm_nonneg CL.det)])
   · rw [Matrix.det_smul, Fintype.card_fin, norm_mul, norm_pow]
     exact hgood.delta_le_norm_det_BR.trans
       (by nlinarith [mul_le_mul_of_nonneg_right hscale (norm_nonneg BR.det)])
+
+open scoped Matrix.Norms.Frobenius
 
 def rademacherEndpointLogConstant (I : NguyenBottomSingularInput.{0, 0}) : ℝ :=
   Real.log 7 + 1 + (2 * Real.log (24 * (40 * Real.sqrt 2)) + 6) +
@@ -251,7 +254,7 @@ theorem rademacherPacketBoundaryCoefficient_log_gramVolume_le
         |Real.log (packetBoundaryCoefficientNorm (packetRowScale W * z)
           ((packetRowScale W) • CL) ((packetRowScale W) • BR) Theta) -
           Real.log (gramVolume Theta)| := by
-      simpa only [add_sub_assoc] using abs_add
+      simpa only [add_sub_assoc] using abs_add_le
         (Real.log ‖(packetRowScale W)⁻¹ ^ (3 * W)‖)
         (Real.log (packetBoundaryCoefficientNorm (packetRowScale W * z)
           ((packetRowScale W) • CL) ((packetRowScale W) • BR) Theta) -

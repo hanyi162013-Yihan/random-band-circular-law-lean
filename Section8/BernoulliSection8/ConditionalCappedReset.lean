@@ -105,9 +105,11 @@ theorem physicalCappedResetLoss_fresh_integral_le
       (measurable_const.prodMk measurable_id)
   apply integral_cappedSpliceLoss_le (packetAtomRowsLaw W rademacherLaw)
     hT.le hA0 hB0 hc.2 hD hcLower
-  · exact (((continuous_const.matrix_mul
-      (continuous_intervalClearedProduct W 3 z r)).matrix_mul
-        continuous_const).norm).measurable.comp hpacket
+  · have hproduct : Continuous (fun reset : IntervalRows W 3 =>
+        A * intervalClearedProduct W 3 z reset r * B) :=
+      (continuous_const.matrix_mul
+        (continuous_intervalClearedProduct W 3 z r)).matrix_mul continuous_const
+    exact hproduct.norm.measurable.comp hpacket
   · exact (continuous_physicalPacketCoefficient W z r U V s).measurable.comp hpacket
   · intro x
     exact htest (intervalClearedProduct W 3 z (packetPhysicalRows W (ep, x)) r)

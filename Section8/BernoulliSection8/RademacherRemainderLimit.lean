@@ -89,7 +89,8 @@ theorem rademacherRemainderDifference_abs_le_on_good
     (mul_le_mul_of_nonneg_left hlen (rademacherTransferLogConstant_nonneg I z))
     (densityLogScale_nonneg hWpos)
   unfold rademacherRemainderDifference
-  rw [abs_div, abs_of_nonneg (Nat.cast_nonneg _)]
+  rw [abs_div, abs_of_nonneg
+    (Nat.cast_nonneg ((s + 3) * W) : (0 : ℝ) ≤ (((s + 3) * W : ℕ) : ℝ))]
   calc
     _ ≤ (rademacherTransferLogConstant I z *
       ((remainderSites (s + 3) W * W : ℕ) : ℝ) * densityLogScale W) /
@@ -130,6 +131,7 @@ theorem rademacherRemainderDifference_tendsto
     (intervalRowsLaw (W n) (s n + 3) rademacherLaw) _)
   intro x hx hgood
   have hb := rademacherRemainderDifference_abs_le_on_good I hI (W n) (s n) hn z x hgood
-  exact (not_le_of_gt (hb.trans_lt hεn)) (by simpa only [sub_zero] using hx)
+  exact (not_le_of_gt (hb.trans_lt hεn))
+    (by simpa only [Set.mem_setOf_eq, sub_zero] using hx)
 
 end BernoulliSection8

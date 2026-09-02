@@ -171,7 +171,19 @@ theorem rademacher_long_branch_log_potential
     (fun n : ℕ => measureReal_nonneg) ?_ (h ε hε)
   intro n
   by_cases hn : anchorSize (W n) ≤ (s n + 3) * W n
-  · simp only [longBranchLogPotential, longOrAnchorCoreSites, if_pos hn]
+  · let F : ℕ → ℝ := fun q =>
+      (intervalRowsLaw (W n) (q + 3) rademacherLaw).real
+        {x : IntervalRows (W n) (q + 3) |
+          ε ≤ |densityCyclicLogDet (W n) q z x /
+            (((q + 3) * W n : ℕ) : ℝ) - circularLogPotential z|}
+    have hsites : longOrAnchorCoreSites (W n) (s n) = s n := by
+      simp only [longOrAnchorCoreSites, if_pos hn]
+    have hvalue : (intervalRowsLaw (W n) (s n + 3) rademacherLaw).real
+        {x : IntervalRows (W n) (s n + 3) |
+          ε ≤ |longBranchLogPotential (W n) (s n) z x - circularLogPotential z|} =
+        F (s n) := by
+      simp only [F, longBranchLogPotential, if_pos hn]
+    exact (hvalue.trans (congrArg F hsites).symm).le
   · simp only [longBranchLogPotential, if_neg hn, sub_self, abs_zero]
     have he : {x : IntervalRows (W n) (s n + 3) | ε ≤ (0 : ℝ)} = ∅ := by
       ext x
