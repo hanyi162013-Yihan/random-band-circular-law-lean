@@ -1,6 +1,7 @@
 import CircularLawSection6.GaussianRadialMean
 import CircularLawSection6.RawPotentialScaling
 import CircularLawSection6.CompactCoreRawBridge
+import CircularLawSection6.ReusedLogDetIntegrability
 import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
 
 /-! # Fixed positive scaling of the actual Section 5 core endpoint
@@ -21,10 +22,14 @@ set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
 
+instance gaussianPaperIndicatorSample_isProbability (N d : ℕ) [NeZero N] :
+    IsProbabilityMeasure (paperIndicatorSampleMeasure N d circularComplexGaussian) :=
+  iidMeasure_isProbability circularComplexGaussian _
+
 theorem ae_div_real {P : ℂ → Prop} {r : ℝ} (hr : r ≠ 0)
     (hP : ∀ᵐ z ∂(volume : Measure ℂ), P z) :
     ∀ᵐ z ∂(volume : Measure ℂ), P (z / (r : ℂ)) := by
-  have h := (quasiMeasurePreserving_smul (volume : Measure ℂ) (inv_ne_zero hr)).ae hP
+  have h := (Measure.quasiMeasurePreserving_smul (volume : Measure ℂ) (inv_ne_zero hr)).ae hP
   have heq (z : ℂ) : r⁻¹ • z = z / (r : ℂ) := by
     rw [Complex.real_smul, Complex.ofReal_inv, div_eq_mul_inv, mul_comm]
   simpa only [heq] using h
@@ -40,7 +45,7 @@ theorem scaledUnitCoreMean_eq_log_add_ae (p : NoncompactProfile)
       (maskedWeight (coreOffsets N H) (p.normalizedCoreWeight N H W)) i j)
   filter_upwards [ae_div_real hr.ne' hdet] with z hz
   have hu0 := (p.scaledUnitCoreLogDet_memLp N H W (r := 1) zero_lt_one (z / (r : ℂ))).integrable
-    (by norm_num : (1 : ℝ≥0∞) ≤ 2)
+    (by norm_num)
   have hu : Integrable (p.unitCoreLogPotential N H W (z / (r : ℂ))) (gaussianProfileLaw N) := by
     unfold scaledUnitCoreLogDet at hu0
     unfold unitCoreLogPotential

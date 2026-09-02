@@ -327,3 +327,19 @@ example (p : NoncompactProfile) (N H : ℕ → ℕ) [∀ n, NeZero (N n)] (W : �
             p.unitCoreMatrix (N n) (H n) (W n) ω - z • 1) 1
             ∂gaussianProfileLaw (N n)|) atTop (𝓝 0) :=
   p.gaussian_core_cutoff_normalization_error N H W hmass zero_lt_one
+
+-- With no changed rows, the common-atom coupling has exactly zero error bound.
+example {ι κ : Type*} [Fintype ι] [DecidableEq ι] [Fintype κ]
+    (r₁ r₂ : ι → κ → ι) (h₁ : ∀ i, Function.Injective (r₁ i))
+    (h₂ : ∀ i, Function.Injective (r₂ i)) (h : ∀ i s, r₁ i s = r₂ i s)
+    (b : κ → ℂ) (ω : ι × κ → ℂ) :
+    TaoVuReplacement.hilbertSchmidtSq (routedBandMatrix r₁ b ω - routedBandMatrix r₂ b ω) ≤ 0 := by
+  simpa only [Finset.sum_empty, mul_zero] using
+    routedBand_difference_energy_le r₁ r₂ h₁ h₂ ∅ (fun i _ s => h i s) b ω
+
+-- The finite routing constructor also allows an empty slot set.
+example {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (route : ι → Fin 0 → ι) (b : Fin 0 → ℂ) (ω : ι × Fin 0 → ℂ) :
+    routedBandMatrix route b ω = 0 := by
+  ext i j
+  simp [routedBandMatrix]

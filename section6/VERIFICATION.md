@@ -18,9 +18,9 @@ raw-full / cutoff-core sandwich. The actual radial Gaussian mean is proved
 monotone using rotation invariance and Jensen; varying-scale cutoff errors
 are proved from the unit-core energy, including zero comparison scales.
 
-Three subsequent modules are under validation and are NOT part of this
+Four subsequent modules are under validation and are NOT part of this
 checkpoint: `CanonicalCoreBand`, `FixedScaleCoreBridge`, and
-`CanonicalCoreLimits`. The enlarged 57-example regression suite is also
+`CanonicalCoreLimits`, and `RoutedBandCoupling`. The enlarged 59-example regression suite is also
 pending. The full Section 6 theorem is still incomplete.
 
 ## Verified forty-three-module checkpoint

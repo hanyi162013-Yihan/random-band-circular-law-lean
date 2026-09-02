@@ -26,10 +26,12 @@ determinant/singular-log and scaling identities, and the actual expected
 core/full sandwich, varying-scale cutoff stability, and actual radial mean
 monotonicity and normalization. They are included in the 50-module checkpoint.
 
-The next three modules (53 total, 57 regression examples) connect the
+The next four modules (54 total, 59 regression examples) connect the
 canonical floor-radius band geometry, positive fixed-scale Section 5 mean
 transport, the actual raw core mass limit, and varying cutoff normalization.
-These three modules are under validation, not included in the checkpoint.
+They also construct a common-atom routing coupling and prove its expected
+boundary-row energy bound. These four modules are under validation, not
+included in the checkpoint; the contiguous-block geometry remains pending.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the

@@ -51,3 +51,4 @@ import CircularLawSection6.GaussianRadialMean
 import CircularLawSection6.CanonicalCoreBand
 import CircularLawSection6.FixedScaleCoreBridge
 import CircularLawSection6.CanonicalCoreLimits
+import CircularLawSection6.RoutedBandCoupling
