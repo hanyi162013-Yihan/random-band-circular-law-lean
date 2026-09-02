@@ -25,6 +25,6 @@ The directly measurable interface event replaces the finite-support event of the
 
 ## Validation
 
-GitHub has compiled Atom, Inputs, SourceInputs and IID. Other modules are being checked incrementally. The import audit currently selects 32 new library modules plus their existing dependencies, with zero Section 4 imports. Only new modules are explicitly built when a baseline cache is restored; Lake checks their actual dependency artifacts. Independent modules continue after a failure, while descendants of a failed module are deferred.
+GitHub has compiled 17 of the 32 new modules, including Energy, Interface, BoundarySmallBall, FrameSmallBall, ConditionalCappedReset, ResetAveraging, TerminalRates, HighBandTransport and PressureCalibration. The remaining modules are being checked incrementally after a scalar-inference fix in BlockEntryControl. The import audit currently selects 32 new library modules plus their existing dependencies, with zero Section 4 imports. Only new modules are explicitly built when a baseline cache is restored; Lake checks their actual dependency artifacts. Independent modules continue after a failure, while descendants of a failed module are deferred.
 
 Acceptance requires the normal `lake build SubgaussianSection8` target to succeed, followed by strict axiom and public-signature audits. A source placeholder scan alone does not establish completion.

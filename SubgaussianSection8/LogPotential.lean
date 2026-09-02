@@ -5,7 +5,7 @@ import SubgaussianSection8.RemainderLimit
 import SubgaussianSection8.SeamLimit
 
 /-!
-# The actual Bernoulli logarithmic potential
+# The actual subgaussian logarithmic potential
 
 The local capped reset bounds, independent core concentration, incomplete
 cell estimate, and terminal packet comparison are assembled before the
@@ -192,7 +192,7 @@ theorem subgaussian_long_branch_log_potential (Ξ : Atom)
     rw [he, measureReal_empty]
     exact measureReal_nonneg
 
-/-- Actual finite-row Bernoulli logarithmic potential, including arbitrary
+/-- Actual finite-row subgaussian logarithmic potential, including arbitrary
 alternation of the high-band and long branches. -/
 theorem subgaussian_rows_log_potential (Ξ : Atom)
     (cook : CookInput Ξ) (I : NguyenBottomSingularInput.{0, 0})

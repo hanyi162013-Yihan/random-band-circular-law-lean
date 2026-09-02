@@ -3,7 +3,7 @@ import SubgaussianSection8.FrameSmallBall
 import BernoulliSection10.ClearedSingularTest
 
 /-!
-# A fresh physical Bernoulli reset, with core and past frozen
+# A fresh physical subgaussian reset, with core and past frozen
 
 The scalar test is selected inside this fixed-fiber proof. The final
 integrand is the norm of the actual physical product. The coefficient

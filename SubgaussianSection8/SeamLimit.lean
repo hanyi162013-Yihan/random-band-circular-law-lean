@@ -6,7 +6,7 @@ import BernoulliSection10.AsymptoticErrors
 import BernoulliSection10.ProbabilityTransport
 import BernoulliSection10.PhysicalProbabilityInstances
 
-/-! # Vanishing seam error on the actual Bernoulli ring
+/-! # Vanishing seam error on the actual subgaussian ring
 
 The long branch is the literal `N ≥ M_W` branch from Section 8. The
 terminal cap is `εN/2`; its base loss and deterministic centering cost
@@ -196,7 +196,7 @@ theorem subgaussian_cyclicSeamDifference_tendstoInProbabilityTri (Ξ : Atom)
   have h := (le_div_iff₀ hN).mp hx
   linarith
 
-/-- The same statement on the fixed, actual infinite IID Bernoulli
+/-- The same statement on the fixed, actual infinite IID subgaussian
 sample space used by the final circular-law reduction. -/
 theorem subgaussian_cyclicSeamDifference_tendstoInMeasure (Ξ : Atom)
     (cook : CookInput Ξ) (I : NguyenBottomSingularInput.{0, 0})

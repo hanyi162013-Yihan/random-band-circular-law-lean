@@ -12,7 +12,7 @@ local instance transferBoundsSumOrder (W : ℕ) : LinearOrder (Fin W ⊕ Fin W) 
   LinearOrder.lift' (fun x : Fin W ⊕ Fin W => (toLex x : Fin W ⊕ₗ Fin W))
     (fun _ _ h => toLex.injective h)
 
-/-- All constants are fixed by the named Nguyen input and the spectral
+/-- All constants are fixed by the atom law, the named Nguyen input and the spectral
 parameter; none depends on the ring length. -/
 def subgaussianTransferLogConstant (Ξ : Atom) (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ) : ℝ :=
   2 * (oneSiteTensorLogConstant (growthParameter Ξ z) +
@@ -107,8 +107,8 @@ theorem subgaussianInterval_abs_logNorm_le_of_good (Ξ : Atom)
   exact h.trans ((subgaussianInterval_hodgeLoss_le_of_good Ξ) I hI W s hW hs z x hx r)
 
 open scoped Matrix.Norms.L2Operator in
-/-- Atom boundedness is discharged from the subgaussian law in this
-probabilistic caller, leaving only the explicitly constructed good event. -/
+/-- The deterministic good-event bound also holds almost everywhere under
+the fixed subgaussian product law. -/
 theorem subgaussianInterval_abs_logNorm_le_ae_on_good (Ξ : Atom)
     (I : NguyenBottomSingularInput.{0, 0}) (hI : Ξ.parameter ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W) (hs : 0 < s)

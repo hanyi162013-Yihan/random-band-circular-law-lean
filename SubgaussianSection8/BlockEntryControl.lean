@@ -21,8 +21,10 @@ def growthParameter (A : Atom) (z : ℂ) : ℂ := (3 * opNormConstant A + ‖z�
 
 theorem growthParameter_norm (A : Atom) (z : ℂ) :
     ‖growthParameter A z‖ = 3 * opNormConstant A + ‖z‖ := by
-  simp only [growthParameter, Complex.norm_real, Real.norm_eq_abs,
-    abs_of_nonneg (add_nonneg (mul_nonneg (by norm_num) (opNormConstant_nonneg A)) (norm_nonneg z))]
+  have hnonneg : 0 ≤ 3 * opNormConstant A + ‖z‖ :=
+    add_nonneg (mul_nonneg (by norm_num : (0 : ℝ) ≤ 3) (opNormConstant_nonneg A))
+      (norm_nonneg z)
+  simp only [growthParameter, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hnonneg]
 
 theorem step_entry_bounds_of_norm_sum_le
     {W : ℕ} (B D C : Matrix (Fin W) (Fin W) ℂ) (q : ℂ)
