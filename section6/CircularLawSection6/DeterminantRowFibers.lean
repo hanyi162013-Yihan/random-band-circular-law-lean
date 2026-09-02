@@ -13,8 +13,11 @@ open MeasureTheory ProbabilityTheory CircularLawSection4
 open scoped BigOperators ENNReal
 
 noncomputable section
+set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
+
+attribute [local instance] iidMeasure_isProbability
 
 def weightedRowsMatrix {n : ℕ} (b : Matrix (Fin n) (Fin n) ℂ)
     (rows : Fin n → Fin n → ℂ) : Matrix (Fin n) (Fin n) ℂ :=
@@ -41,9 +44,9 @@ theorem det_updateRow_affine {n : ℕ} (A : Matrix (Fin n) (Fin n) ℂ)
     (A.updateRow i (fun j => b j * η j - if i = j then z else 0)).det =
       (∑ j, (b j * η j) * A.adjugate j i) - z * A.adjugate i i := by
   rw [← Matrix.cramer_transpose_apply, Matrix.cramer_eq_adjugate_mulVec,
-    Matrix.adjugate_transpose]
+    ← Matrix.adjugate_transpose]
   simp [Matrix.mulVec, dotProduct, mul_sub, Finset.sum_sub_distrib,
-    mul_ite, mul_comm, mul_left_comm, mul_assoc]
+    mul_ite, mul_comm, mul_assoc]
 
 theorem norm_operatorAffine_cofactor {n : ℕ} (A : Matrix (Fin n) (Fin n) ℂ)
     (i : Fin n) (b η : Fin n → ℂ) (z : ℂ) :
@@ -63,8 +66,8 @@ theorem weightedRowsMatrix_update {n : ℕ} (b : Matrix (Fin n) (Fin n) ℂ)
   by_cases hk : k = i
   · subst k
     by_cases hj : i = j <;>
-      simp [weightedRowsMatrix, Matrix.updateRow, Matrix.one_apply, hj]
-  · simp [weightedRowsMatrix, Matrix.updateRow, hk, Ne.symm hk]
+      simp [weightedRowsMatrix, Matrix.updateRow, hj]
+  · simp [weightedRowsMatrix, Matrix.updateRow, hk]
 
 def frozenRowMatrix {n : ℕ} (b : Matrix (Fin (n + 1)) (Fin (n + 1)) ℂ)
     (z : ℂ) (i : Fin (n + 1)) (y : Fin n → Fin (n + 1) → ℂ) :
@@ -116,7 +119,6 @@ theorem weightedRowsLogDet_memLp_and_variance {n : ℕ}
     MemLp (weightedRowsLogDet b z) 2 (iidMeasure (iidMeasure ν (n + 1)) (n + 1)) ∧
       variance (weightedRowsLogDet b z) (iidMeasure (iidMeasure ν (n + 1)) (n + 1)) ≤
         2 * (n + 1 : ℝ) * affineRowLogBound n q L z := by
-  let : IsProbabilityMeasure (iidMeasure ν (n + 1)) := iidMeasure_isProbability ν (n + 1)
   exact memLp_and_variance_le_of_uniform_fibers (iidMeasure ν (n + 1))
     (weightedRowsLogDet b z) (weightedRowsLogDet_measurable b z) (rowLogCenter b z)
     (affineRowLogBound n q L z)

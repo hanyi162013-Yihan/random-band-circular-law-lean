@@ -15,6 +15,7 @@ open MeasureTheory CircularLawSection4
 open scoped BigOperators
 
 noncomputable section
+set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
 
@@ -37,7 +38,7 @@ theorem bandSlotOffset_injective (N d : ℕ) [NeZero N]
   intro s t h
   apply Fin.ext
   exact CharP.natCast_injOn_Iio (ZMod N) N
-    (s.isLt.trans_le hfit) (t.isLt.trans_le hfit) (sub_right_inj.1 h)
+    (s.isLt.trans_le hfit) (t.isLt.trans_le hfit) (sub_left_inj.1 h)
 
 theorem centeredOffset_bandSlot (N d : ℕ) [NeZero N]
     (hfit : d + 2 ≤ N) (center : Fin (d + 1)) (hsym : d + 1 = 2 * center.val)
@@ -78,7 +79,7 @@ theorem coreBandCoordinate_injective (N d : ℕ) [NeZero N]
   intro a b h
   apply (paperIndicatorIndexEquiv N d).injective
   apply Prod.ext
-  · exact congrArg Prod.fst h
+  · simpa only [coreBandCoordinate] using congrArg Prod.fst h
   · exact bandSlotOffset_injective N d hfit center (congrArg Prod.snd h)
 
 def coreBandSample (N d : ℕ) [NeZero N] (center : Fin (d + 1))
@@ -127,14 +128,16 @@ def corePaperWeights (p : NoncompactProfile) (N d : ℕ) [NeZero N]
     have hwidth : 2 * center.val + 1 = d + 2 := by omega
     have h := (p.core_weight_bounds_of_raw_bounds N center.val (by omega) W hm hb
       (bandSlotOffset N d center s) (bandSlotOffset_mem_core N d hfit center hsym s)).1
-    simpa only [coreBandWeight, hwidth, Nat.cast_add, Nat.cast_one, Nat.cast_ofNat,
-      div_div, mul_comm, add_assoc] using h
+    rw [hwidth] at h
+    simpa only [coreBandWeight, Nat.cast_add, Nat.cast_one, Nat.cast_ofNat,
+      div_div, mul_comm, add_assoc, one_add_one_eq_two] using h
   upper s := by
     have hwidth : 2 * center.val + 1 = d + 2 := by omega
     have h := (p.core_weight_bounds_of_raw_bounds N center.val (by omega) W hm hb
       (bandSlotOffset N d center s) (bandSlotOffset_mem_core N d hfit center hsym s)).2
-    simpa only [coreBandWeight, hwidth, Nat.cast_add, Nat.cast_one, Nat.cast_ofNat,
-      div_div, mul_comm, add_assoc] using h
+    rw [hwidth] at h
+    simpa only [coreBandWeight, Nat.cast_add, Nat.cast_one, Nat.cast_ofNat,
+      div_div, mul_comm, add_assoc, one_add_one_eq_two] using h
 
 theorem unitCoreMatrix_eq_paperIndicatorX (p : NoncompactProfile)
     (N d : ℕ) [NeZero N] (hfit : d + 2 ≤ N)
