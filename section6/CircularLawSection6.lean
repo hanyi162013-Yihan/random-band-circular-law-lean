@@ -63,3 +63,4 @@ import CircularLawSection6.PeriodicBlockCutoff
 import CircularLawSection6.ScaledPeriodicization
 import CircularLawSection6.BoundedProbabilityExpectation
 import CircularLawSection6.ClippedCutoffTail
+import CircularLawSection6.MatrixClippedCutoff

@@ -474,3 +474,14 @@ example (s : ℝ) (hs : 0 ≤ s) :
 -- The compact test stays bounded even for negative squared-law arguments.
 example (x : ℝ) : |ShortRingAnchor.clippedLog 1 2 x| ≤ max |Real.log 1| |Real.log 2| :=
   clippedLog_abs_le zero_lt_one (by norm_num) x
+
+-- The bounded squared-singular test is an exact difference of matrix cutoffs.
+example (A : Matrix (Fin 2) (Fin 2) ℂ) :
+    matrixClippedPotential A 1 2 = matrixCutoffPotential A 1 - matrixCutoffPotential A 2 + Real.log 2 :=
+  matrixClippedPotential_eq_cutoff_difference A zero_lt_one (by norm_num)
+
+-- A two-dimensional matrix upper error is normalized by both dimension and cutoff.
+example (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A.det ≠ 0) :
+    |matrixCutoffPotential A 1 - matrixClippedPotential A 1 2| ≤ hilbertSchmidtSq A / (2 * 2) := by
+  simpa using matrixCutoff_clipped_error_le A hA zero_lt_one (by norm_num : (1 : ℝ) ≤ 2)
+    (by norm_num)

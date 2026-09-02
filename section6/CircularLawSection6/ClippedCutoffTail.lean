@@ -14,6 +14,7 @@ open MeasureTheory Filter Topology Set ShortRingAnchor
 open scoped BigOperators
 
 noncomputable section
+set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
 
@@ -35,6 +36,7 @@ theorem clippedLog_abs_le {a R : ℝ} (ha : 0 < a) (haR : a ≤ R) (x : ℝ) :
   have hl := Real.log_le_log (sq_pos_of_pos ha) hlo
   have hu := Real.log_le_log hp hhi
   rw [Real.log_pow] at hl hu
+  norm_num only [Nat.cast_ofNat] at hl hu
   have hla := le_max_left |Real.log a| |Real.log R|
   have hRa := le_max_right |Real.log a| |Real.log R|
   have h1 := neg_abs_le (Real.log a)
@@ -103,11 +105,12 @@ theorem expected_cutoffLog_clipped_error {Ω : Type*} [MeasurableSpace Ω]
   have herr : Integrable (fun ω => Real.log (max (s ω) a) - clippedLog a R (s ω ^ 2)) μ := by
     apply (hsecond.div_const R).mono' hm.aestronglyMeasurable
     filter_upwards [hspos] with ω hω
-    simpa only [Real.norm_eq_abs] using cutoffLog_clipped_abs_error_le_sq_div ha haR hR hω
+    simpa only [Real.norm_eq_abs, Pi.sub_apply, Function.comp_apply] using
+      cutoffLog_clipped_abs_error_le_sq_div ha haR hR hω
   have hint : Integrable (fun ω => Real.log (max (s ω) a)) μ := by
-    convert herr.add hclip using 1
-    ext ω
-    exact (sub_add_cancel _ _).symm
+    apply (herr.add hclip).congr
+    filter_upwards with ω
+    exact sub_add_cancel _ _
   refine ⟨hint, ?_⟩
   rw [← integral_sub hint hclip]
   calc
