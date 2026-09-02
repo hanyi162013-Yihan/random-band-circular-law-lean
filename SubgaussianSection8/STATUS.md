@@ -1,6 +1,6 @@
-# General subgaussian extension — validation in progress
+# General subgaussian extension — verified
 
-The full logarithmic-bandwidth proof now has a first source draft. It is not yet a verified result.
+The full logarithmic-bandwidth proof is verified at source commit `d29fd6f0cefcaa4ec3afe09f14c54df3e16842d4` by [GitHub Actions run 33688229894](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33688229894/job/100440674643).
 
 The extension is in `codex/section8-subgaussian` of the existing `random-band-circular-law-lean` repository, based on verified Rademacher commit `24a1e37550a7e471bec4bb668ce4bde92fae3cbb`. It is developed in a separate local checkout.
 
@@ -8,7 +8,7 @@ The extension is in `codex/section8-subgaussian` of the existing `random-band-ci
 
 The fixed real atom law is a probability measure with mean zero, second moment one, and a finite subgaussian MGF parameter. No bounded-support, symmetry, or density hypothesis is imposed. Cook, Nguyen, and Section 3 Proposition 3.8 remain explicit external inputs, with the two quantitative input ranges covering the atom's parameter.
 
-The draft conclusion uses the exact cyclic-band dimension `N=(s+3)W`, physical normalization `1/sqrt(3W)`, `W → ∞`, and `W/log N → ∞`. It covers every bounded continuous real test function on the complex plane.
+The conclusion uses the exact cyclic-band dimension `N=(s+3)W`, physical normalization `1/sqrt(3W)`, `W → ∞`, and `W/log N → ∞`. It covers every bounded continuous real test function on the complex plane.
 
 ## Proof stages
 
@@ -25,6 +25,10 @@ The directly measurable interface event replaces the finite-support event of the
 
 ## Validation
 
-GitHub has compiled 28 of the 32 new modules, including all measurable interface, Cook terminal, deterministic transfer, seam and remainder estimates. The four remaining modules are the reset-rate and final pressure/potential/result assembly; a missing atom argument in the reset-rate proof has been corrected for the next CI run. The import audit currently selects 32 new library modules plus their existing dependencies, with zero Section 4 imports. Only new modules are explicitly built when a baseline cache is restored; Lake checks their actual dependency artifacts. Independent modules continue after a failure, while descendants of a failed module are deferred.
+All 32 new library modules and the normal `lake build SubgaussianSection8` target passed. The import audit selects 282 project modules in total, of which 32 belong to the new library, plus its root module. Section 4 contributes zero modules; existing imported dependencies use verified cached artifacts. Only new modules are explicitly checked by the serial warm-cache runner, followed by the normal scoped root build.
 
-Acceptance requires the normal `lake build SubgaussianSection8` target to succeed, followed by strict axiom and public-signature audits. A source placeholder scan alone does not establish completion.
+The source placeholder scan passed for all 34 files in `SubgaussianSection8`, including its two audit files. Thirteen strict axiom reports passed with only `propext`, `Classical.choice` and `Quot.sound`. The compiled public signatures confirm that the final statements require only the atom, Cook and Nguyen inputs covering its parameter, the permitted Section 3 input, and the ordinary positive-dimension and logarithmic-bandwidth assumptions.
+
+The successful run restored the extension's own cache. Its new Lean compilations were exactly CellResetRates, CompleteCellPressureLimit, LogPotential, Results and the root import module. The earlier 28 new modules were reused from cache. No baseline source files were changed.
+
+Subsequent documentation-only commits do not change the verified Lean source or build configuration.
