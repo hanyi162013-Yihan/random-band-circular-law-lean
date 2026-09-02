@@ -28,3 +28,6 @@ import CircularLawSection6.DeterminantRowFibers
 import CircularLawSection6.RowLogUniformBound
 import CircularLawSection6.CyclicRowTransport
 import CircularLawSection6.NormalizedConcentration
+import CircularLawSection6.ProfileDiagonalBound
+import CircularLawSection6.GaussianCyclicConcentration
+import CircularLawSection6.ProfileConcentration

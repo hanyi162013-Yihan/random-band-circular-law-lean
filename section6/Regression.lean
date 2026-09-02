@@ -7,6 +7,32 @@ open CircularLawSection6 CircularLawSections56.Section6
 
 attribute [local instance] CircularLawSection4.iidMeasure_isProbability
 
+-- The diagonal comparison does not require a positive bandwidth input.
+example (p : NoncompactProfile) (N : ℕ) [NeZero N] :
+    p.diagonalComparisonConstant / (N : ℝ) ≤ p.weight N 0 0 :=
+  p.diagonal_weight_ge N 0
+
+-- A radius-zero normalized core remains covered by the same bound.
+example (p : NoncompactProfile) (N : ℕ) [NeZero N] (W : ℝ) :
+    p.diagonalComparisonConstant / (N : ℝ) ≤ p.normalizedCoreWeight N 0 W 0 :=
+  p.diagonal_normalizedCoreWeight_ge N 0 W
+
+example : scaledDiagonalConstant 2 1 = 1 := by norm_num [scaledDiagonalConstant]
+
+-- Two-dimensional literal Gaussian log determinants already have finite L².
+example (p : NoncompactProfile) (W : ℝ) (z : ℂ) :
+    MemLp (p.rawProfileLogDet 2 W z) 2 (gaussianProfileLaw 2) :=
+  p.rawProfileLogDet_memLp 0 W z
+
+-- Concentration needs no asymptotic assumptions on the bandwidth sequence.
+example (p : NoncompactProfile) (d : ℕ → ℕ)
+    (hd : Tendsto (fun n => d n + 2) atTop atTop) (W : ℕ → ℝ) (z : ℂ) :
+    CircularLawSections56.Section5.TendstoInProbabilityTri (fun n => gaussianProfileLaw (d n + 2))
+      (fun n ω => p.rawProfileLogDet (d n + 2) (W n) z ω / (d n + 2 : ℝ) -
+        ∫ x, p.rawProfileLogDet (d n + 2) (W n) z x / (d n + 2 : ℝ)
+          ∂gaussianProfileLaw (d n + 2)) 0 :=
+  p.full_profile_concentration d hd W z
+
 -- The zero polynomial and zero constant term do not break radial monotonicity.
 example : MonotoneOn (polynomialCircleMean 0) (Ioi 0) :=
   polynomialCircleMean_monotoneOn 0

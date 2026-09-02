@@ -44,10 +44,15 @@ theorem cyclicColumnSample_measurePreserving (N : ℕ) [NeZero N]
   have hr := measurePreserving_pi_restrict_injective (cyclicColumnCoordinate N)
     (cyclicColumnCoordinate_injective N) ν
   have hc := measurePreserving_curry_fin_iid N N ν
-  unfold cyclicColumnSample cyclicAtomLaw
+  have hfun : (MeasurableEquiv.curry (Fin N) (Fin N) ℂ) ∘
+      (fun ω : ZMod N × ZMod N → ℂ => fun k => ω (cyclicColumnCoordinate N k)) =
+      cyclicColumnSample N := rfl
+  have h := hc.comp hr
+  rw [hfun] at h
+  unfold cyclicAtomLaw
   rw [iidMeasure_eq_pi]
   simp_rw [iidMeasure_eq_pi ν N]
-  simpa only [MeasurableEquiv.coe_curry, Function.curry, Function.comp_def] using hc.comp hr
+  exact h
 
 def cyclicRowAmplitude (N : ℕ) [NeZero N] (q : ZMod N → ℝ) (r : ℝ) :
     Matrix (Fin N) (Fin N) ℂ :=
@@ -68,7 +73,11 @@ theorem weightedRowsLogDet_cyclicColumnSample (N : ℕ) [NeZero N]
     simp [weightedRowsMatrix, cyclicRowAmplitude, cyclicColumnSample, cyclicColumnCoordinate,
       weightedCyclicMatrix, Matrix.submatrix, Matrix.one_apply, mul_assoc]
   unfold weightedRowsLogDet cyclicRawLogDet
-  rw [he, Matrix.det_submatrix_equiv_self (ZMod.finEquiv N).toEquiv]
+  rw [he]
+  convert congrArg (fun t : ℂ => Real.log ‖t‖)
+    (Matrix.det_submatrix_equiv_self (ZMod.finEquiv N).toEquiv
+      ((r : ℂ) • weightedCyclicMatrix N q ω - z • 1)) using 1
+  rfl
 
 theorem cyclicRowAmplitude_diagonal (N : ℕ) [NeZero N]
     (q : ZMod N → ℝ) {r : ℝ} (hr : 0 ≤ r) (i : Fin N) :
