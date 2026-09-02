@@ -32,7 +32,8 @@ jobs:
       - name: Check for placeholder proofs
         run: python3 scripts/check_placeholders.py
       - name: Restore project build caches
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: project_cache
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: |
             .lake/build
@@ -51,6 +52,7 @@ jobs:
           use-mathlib-cache: true
           use-github-cache: false
       - name: Compile the Section 6 continuation and audit its axioms
+        id: section6_build
         working-directory: section6
         shell: bash
         run: |
@@ -59,6 +61,17 @@ jobs:
           lake --no-cache build CircularLawSection6 2>&1 | tee verification-ci/build.log
           lake --no-cache env lean -DwarningAsError=true AxiomAudit.lean 2>&1 | tee verification-ci/axioms.log
           lake --no-cache env lean -DwarningAsError=true Regression.lean 2>&1 | tee verification-ci/regression.log
+      # Failed new modules must not discard already-built Section 4/5 dependencies.
+      # Lake still validates source hashes; saving this cache does not change the job result.
+      - name: Preserve completed dependency builds
+        if: ${{ !cancelled() && steps.project_cache.outputs.cache-hit != 'true' && (steps.section6_build.outcome == 'success' || steps.section6_build.outcome == 'failure') }}
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            .lake/build
+            section5/.lake/build
+            section6/.lake/build
+          key: ${{ steps.project_cache.outputs.cache-primary-key }}
       - name: Retain verification logs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

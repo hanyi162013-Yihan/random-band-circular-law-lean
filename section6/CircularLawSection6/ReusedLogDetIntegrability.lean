@@ -77,9 +77,9 @@ theorem ae_normalizedLogDet_integrable {Ω : Type*} [MeasurableSpace Ω]
     (fun z => Integrable (fun ω => normalizedLogDet (A ω) z) μ)).2 hball
   simpa only [Metric.iUnion_closedBall_nat, Measure.restrict_univ] using h
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The same nonvanishing theorem already used by Section 5, with cyclic
 indices and physical (already normalized) matrices. -/
-set_option backward.isDefEq.respectTransparency false in
 theorem ae_shifted_cyclic_det_ne_zero {Ω : Type*} [MeasurableSpace Ω]
     (μ : Measure Ω) [IsFiniteMeasure μ] (N : ℕ) [NeZero N]
     (A : Ω → Matrix (ZMod N) (ZMod N) ℂ)
@@ -95,9 +95,9 @@ theorem ae_shifted_cyclic_det_ne_zero {Ω : Type*} [MeasurableSpace Ω]
       normalizedMatrix_undoPhysicalNormalization (A ω)
     simpa only [normalizedShiftDet, heq] using h
 
+set_option backward.isDefEq.respectTransparency false in
 /-- A finite expected energy is enough for the raw shifted determinant's
 logarithm to be integrable for almost every `z`; no density input is required. -/
-set_option backward.isDefEq.respectTransparency false in
 theorem ae_cyclic_rawLogDet_integrable {Ω : Type*} [MeasurableSpace Ω]
     (μ : Measure Ω) [IsFiniteMeasure μ] (N : ℕ) [NeZero N]
     (A : Ω → Matrix (ZMod N) (ZMod N) ℂ)
