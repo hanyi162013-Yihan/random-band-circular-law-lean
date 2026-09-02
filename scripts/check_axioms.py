@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run every section axiom audit and enforce the logical-axiom allowlist.
+"""Run selected or all section axiom audits and enforce the logical-axiom allowlist.
 
 Lean's ``#print axioms`` is informational, so a successful Lean exit alone
 does not establish that the printed dependencies satisfy an allowlist.
@@ -8,18 +8,24 @@ repeated commands in an audit are counted separately.
 
 The two report formats are those emitted by ``printAxiomsOf`` in
 Lean 4.33.0's ``Lean/Elab/Print.lean``. Lists may wrap across lines.
-``--self-test`` exercises only the parser and never invokes Lean.
+Repeat ``--audit-file PATH`` to run only the named repository files. Without
+that option, discover every section audit as before.
+``--self-test`` exercises parsing and file selection without invoking Lean.
 """
 
 from __future__ import annotations
 
 import argparse
 from collections import Counter
+from contextlib import redirect_stdout
+import io
 from pathlib import Path
 import re
 import subprocess
 import sys
+import tempfile
 import unittest
+from unittest import mock
 
 
 ALLOWED_AXIOMS = frozenset({"propext", "Classical.choice", "Quot.sound"})
@@ -164,8 +170,27 @@ def discover_audits(root: Path) -> list[Path]:
     return sorted(audits, key=lambda path: path.relative_to(root).as_posix())
 
 
-def run_audits(root: Path) -> None:
-    audits = discover_audits(root)
+def select_audits(root: Path, audit_files: list[Path] | None = None) -> list[Path]:
+    """Validate every explicit path before running Lean; preserve requested order."""
+    root = root.resolve()
+    if audit_files is None:
+        return discover_audits(root)
+    if not audit_files:
+        raise AuditError("no audit files specified")
+    audits = []
+    for requested in audit_files:
+        path = (root / requested).resolve()
+        if not path.is_relative_to(root):
+            raise AuditError(f"audit file is outside the repository: {requested}")
+        if not path.is_file():
+            raise AuditError(f"audit file does not exist or is not a file: {requested}")
+        audits.append(path)
+    return audits
+
+
+def run_audits(root: Path, audit_files: list[Path] | None = None) -> None:
+    root = root.resolve()
+    audits = select_audits(root, audit_files)
     total = 0
     for path in audits:
         relative = path.relative_to(root).as_posix()
@@ -259,17 +284,78 @@ class ParserTests(unittest.TestCase):
             expected_declarations("/- #print axioms Demo.one\n")
 
 
+class AuditSelectionTests(unittest.TestCase):
+    def setUp(self) -> None:
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name).resolve() / "repo"
+        self.root.mkdir()
+        self.section8 = Path("Section8/AxiomAudit.lean")
+        self.section9 = Path("Section9/AxiomAudit.lean")
+        for relative in (Path("AxiomAudit.lean"), self.section8, self.section9):
+            path = self.root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("#print axioms Demo.one\n" * 2, encoding="utf-8")
+
+    def test_default_discovery(self) -> None:
+        self.assertEqual(select_audits(self.root), [
+            self.root / "AxiomAudit.lean", self.root / self.section8,
+            self.root / self.section9,
+        ])
+
+    def test_explicit_order_and_repetition(self) -> None:
+        requested = [self.section9, self.root / self.section8, self.section9]
+        self.assertEqual(select_audits(self.root, requested), [
+            self.root / self.section9, self.root / self.section8,
+            self.root / self.section9,
+        ])
+
+    def test_reject_invalid_paths_before_invoking_lean(self) -> None:
+        outside = self.root.parent / "Outside.lean"
+        outside.write_text("#print axioms Demo.one\n", encoding="utf-8")
+        link = self.root / "Escape.lean"
+        link.symlink_to(outside)
+        for invalid in (Path("missing.lean"), Path("Section8"),
+                        outside, Path("../Outside.lean"), Path("Escape.lean")):
+            with self.subTest(path=invalid), mock.patch.object(subprocess, "run") as run:
+                with self.assertRaises(AuditError):
+                    run_audits(self.root, [self.section8, invalid])
+                run.assert_not_called()
+        with self.assertRaises(AuditError):
+            select_audits(self.root, [])
+
+    def test_selected_run_preserves_report_counts_and_allowlist(self) -> None:
+        output = "'Demo.one' depends on axioms: [propext]\n" * 2
+        completed = subprocess.CompletedProcess([], 0, stdout=output, stderr="")
+        captured = io.StringIO()
+        with mock.patch.object(subprocess, "run", return_value=completed) as run:
+            with redirect_stdout(captured):
+                run_audits(self.root, [self.section8])
+            self.assertEqual(run.call_count, 1)
+            self.assertEqual(run.call_args.args[0],
+                             ["lake", "env", "lean", self.section8.as_posix()])
+            self.assertEqual(run.call_args.kwargs["cwd"], self.root)
+        self.assertIn("PASS: 1 files, 2 reports", captured.getvalue())
+        completed.stdout = output.replace("propext", "sorryAx")
+        with mock.patch.object(subprocess, "run", return_value=completed):
+            with redirect_stdout(io.StringIO()), self.assertRaises(AuditError):
+                run_audits(self.root, [self.section8])
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--self-test", action="store_true", help="test parsers without invoking Lean")
+    parser.add_argument("--self-test", action="store_true",
+                        help="test parsing and file selection without invoking Lean")
+    parser.add_argument("--audit-file", action="append", type=Path, metavar="PATH",
+                        help="audit only this repository file (repeatable; paths are relative to the repository)")
     args = parser.parse_args()
     if args.self_test:
         result = unittest.TextTestRunner(verbosity=2).run(
-            unittest.defaultTestLoader.loadTestsFromTestCase(ParserTests)
+            unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__])
         )
         return 0 if result.wasSuccessful() else 1
     try:
-        run_audits(Path(__file__).resolve().parent.parent)
+        run_audits(Path(__file__).resolve().parent.parent, args.audit_file)
     except (AuditError, OSError, UnicodeError) as error:
         print(f"[axiom-audit] FAIL: {error}", file=sys.stderr, flush=True)
         return 1

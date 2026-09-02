@@ -27,11 +27,15 @@ Path abbreviations in the tables are:
 - `S9/`: `Section9/BernoulliSection9/`, namespace `BernoulliSection9`
   or a subnamespace displayed in the source.
 
-Verification is tied to
+The earlier local verification evidence is tied to
 `../normal-lake-verification.log` relative to the repository root, i.e.
-the task's `work/normal-lake-verification.log`. That run uses the normal
-`scripts/build_serial.py` workflow and finishes with ordinary `lake build`.
-The current snapshot for this map has reached target 79 of 426; the log
+the task's `work/normal-lake-verification.log`. That full-repository run
+was stopped when verification moved to GitHub. The user subsequently
+requested Section 8-only verification, so the active gate is now
+`scripts/build_serial.py --target BernoulliSection8`, ending with
+ordinary `lake build BernoulliSection8`. Its 270-module dependency
+closure contains no `CircularLawSection4` modules.
+The earlier snapshot used for this map had reached target 79 of 426; the log
 explicitly records successful normal builds of `LA/AllMinors.lean`,
 `S10/FinitePressure.lean`, `S10/SingularFrames.lean`, and
 `S8/ClippedLog.lean`, and `S8/MesoscopicScales.lean`, among the preceding
@@ -198,7 +202,8 @@ checked source crosswalk; they are not generated Lean declarations. -->
 The source and declaration correspondence is complete, including all
 69 equation numbers and the four numbered results. This does **not** mean
 that all corresponding Lean modules have passed. The normal serialized
-build, its final ordinary `lake build`, and final axiom/caller-signature
+Section 8 build, its final ordinary `lake build BernoulliSection8`, and
+Section 8 axiom/caller-signature
 audits are still pending. Earlier development oleans establish only the
 limited `D` evidence recorded above. Any compiler error must be fixed and
 its normal build repeated before promoting the affected entries.

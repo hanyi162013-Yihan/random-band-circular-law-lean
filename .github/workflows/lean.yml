@@ -1,6 +1,6 @@
 # This variant requires Section8/PublicSignatureAudit.lean from the Section 8 branch.
 # Older branches need a branch-aware signature policy before adopting this variant.
-name: Lean verification
+name: Section 8 verification
 
 "on":
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: lean-${{ github.workflow }}-${{ github.ref }}
+  group: section8-${{ github.ref }}
   # Let the active run reach the save step; newer pushes wait in this group.
   cancel-in-progress: false
 
@@ -26,11 +26,11 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
-      - name: Check verification scripts
+      - name: Check Section 8 verification scripts and sources
         run: |
           python3 scripts/check_axioms.py --self-test
-          python3 scripts/build_serial.py --dry-run
-          python3 scripts/check_placeholders.py
+          python3 scripts/build_serial.py --target BernoulliSection8 --dry-run
+          python3 scripts/check_placeholders.py --path Section8
       - name: Install pinned Lean and fetch mathlib cache
         uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
         with:
@@ -47,26 +47,26 @@ jobs:
         with:
           path: .lake/build
           # Each attempt gets a fresh immutable entry, even after a failed build.
-          key: lean-build-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean', '.github/workflows/lean.yml', 'scripts/build_serial.py') }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
-          # Never restore across a toolchain, dependency, or build-config change.
+          key: lean-section8-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean') }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          # Lake checks source/dependency traces after restoring this build cache.
           restore-keys: |
-            lean-build-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean', '.github/workflows/lean.yml', 'scripts/build_serial.py') }}-${{ github.sha }}-
-            lean-build-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean', '.github/workflows/lean.yml', 'scripts/build_serial.py') }}-
-      - name: Build all libraries and all default targets
+            lean-section8-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean') }}-${{ github.sha }}-
+            lean-section8-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean') }}-
+      - name: Build Section 8 and its required dependencies
         id: build
-        # Always run: this script ends with the ordinary complete `lake build`.
-        run: python3 scripts/build_serial.py
-      - name: Save completed modules, including after an ordinary build failure
+        # Ends with normal `lake build BernoulliSection8`; no whole-repository build.
+        run: python3 scripts/build_serial.py --target BernoulliSection8
+      - name: Save completed Section 8 dependency modules
         # Fork PRs can read base caches, but this draft does not save their builds.
         # No continue-on-error is applied to the build or the axiom audit.
-        if: ${{ !cancelled() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure') && steps.project-cache.outputs.cache-primary-key != '' && steps.project-cache.outputs.cache-hit != 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+        if: ${{ always() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure' || steps.build.outcome == 'cancelled') && steps.project-cache.outputs.cache-primary-key != '' && steps.project-cache.outputs.cache-hit != 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
           path: .lake/build
           key: ${{ steps.project-cache.outputs.cache-primary-key }}
-      - name: Audit public axioms and print signatures
+      - name: Audit Section 8 axioms and public signatures
         # A cache hit never skips this audit. A failed build remains a failed job.
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: |
-          python3 scripts/check_axioms.py
+          python3 scripts/check_axioms.py --audit-file Section8/AxiomAudit.lean
           lake env lean Section8/PublicSignatureAudit.lean

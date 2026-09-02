@@ -9,4 +9,4 @@ The mathematical source is the fixed arXiv `2609.01295v1` snapshot already provi
 - Lean: `4.33.0`
 - Mathlib checkout: `db584cd6d46c92f209a44c0f1c829460d327499d`
 
-The task uses its own checkout and build outputs. The concurrent publication checkout is read-only for this task. Previously compiled dependencies were reused for development only when their source code and toolchain matched; the few algebra modules with documentation-only differences were compared after masking comments. No Lake trace or hash files were fabricated. A normal full build remains a required final gate.
+The task uses its own checkout and build outputs. The concurrent publication checkout is read-only for this task. Previously compiled dependencies were reused for development only when their source code and toolchain matched; the few algebra modules with documentation-only differences were compared after masking comments. No Lake trace or hash files were fabricated. The required build gate is now the normal Section 8 target and its necessary dependencies, as requested by the user; unrelated library targets are not part of this task's verification.

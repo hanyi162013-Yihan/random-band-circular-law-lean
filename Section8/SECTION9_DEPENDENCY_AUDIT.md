@@ -261,7 +261,7 @@ hypotheses in some declarations, but `RademacherLogPotential.lean` passes
 the newly written actual comparisons to them.
 
 The remaining gate is verification: complete the normal dependency-ordered
-Lake build and its final integrated `lake build`, fix any elaboration or
+Section 8 Lake build and its final `lake build BernoulliSection8`, fix any elaboration or
 proof failures, then perform the placeholder scan, actual logical-axiom
 audit, and compiled public-signature audit. The current source signature
 inspection alone does not certify that the final declarations elaborate

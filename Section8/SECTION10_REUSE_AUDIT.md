@@ -69,6 +69,6 @@ those modules only; they do not certify the remaining integration chain.
 
 The complete source chain through `Section8Results` is present. Normal
 serialized Lake verification is in progress, including dependencies and
-the final whole-project build. The boundary/frame, terminal-rate, reset,
+the final Section 8 target build. The boundary/frame, terminal-rate, reset,
 seam and final-assembly modules still require that verification to finish.
 This audit does not claim a completed release or a successful final build.

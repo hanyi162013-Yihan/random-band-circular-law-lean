@@ -18,4 +18,13 @@ The reset argument integrates each capped loss before summing. Cook's slower err
 
 See `SOURCE_MAP.md` for the source-equation correspondence, `SECTION9_DEPENDENCY_AUDIT.md` for local terminal and interface reuse, and `SECTION10_REUSE_AUDIT.md` for the deterministic and circular-law reduction reuse.
 
-Verification gates for a completed release are a full `lake build`, the repository's strict `scripts/check_axioms.py` audit, a placeholder scan that masks comments and strings, and inspection of `PublicSignatureAudit.lean`. Until these gates pass, the public theorem source is a work in progress.
+Run these verification gates from the repository root. The build checks Section 8 and its necessary dependencies; the source scan, strict public axiom audit, and signature printout target Section 8.
+
+```sh
+python3 scripts/build_serial.py --target BernoulliSection8
+python3 scripts/check_axioms.py --audit-file Section8/AxiomAudit.lean
+lake env lean Section8/PublicSignatureAudit.lean
+python3 scripts/check_placeholders.py --path Section8
+```
+
+The placeholder scan masks comments and strings. Its `--path` argument must name an existing repository directory containing Lean sources; an invalid path or empty scan fails. Without `--path`, the script retains its repository-wide scan. Until the Section 8 gates pass, the public theorem source remains a work in progress.
