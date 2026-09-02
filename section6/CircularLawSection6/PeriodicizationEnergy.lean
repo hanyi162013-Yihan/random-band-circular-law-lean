@@ -38,7 +38,11 @@ theorem periodicBlockAtoms_measurePreserving (H : ℕ) (b : Fin q)
     (fun k : Fin (len b) × Fin (2 * H + 1) =>
       ((⟨b, k.1⟩ : (j : Fin q) × Fin (len j)), k.2))
   intro x y h
-  exact Prod.ext (sigma_mk_injective (congrArg Prod.fst h)) (congrArg Prod.snd h)
+  have hf : (⟨b, x.1⟩ : (j : Fin q) × Fin (len j)) = ⟨b, y.1⟩ :=
+    congrArg (fun k : ((j : Fin q) × Fin (len j)) × Fin (2 * H + 1) => k.1) h
+  have hs : x.2 = y.2 :=
+    congrArg (fun k : ((j : Fin q) × Fin (len j)) × Fin (2 * H + 1) => k.2) h
+  exact Prod.ext (@sigma_mk_injective (Fin q) (fun j => Fin (len j)) b _ _ hf) hs
 
 theorem periodicBlockMatrix_diagonal_block [∀ b, NeZero (len b)] (H : ℕ)
     (b : Fin q) (a : Fin (2 * H + 1) → ℂ)
