@@ -58,7 +58,9 @@ theorem operatorCutoffPotential_difference_le (A B : Module.End ℂ E)
       (a⁻¹ * Real.sqrt ((Module.finrank ℂ E : ℝ) * operatorHilbertSchmidtSq (A - B))) /
         (Module.finrank ℂ E : ℝ) := by
   unfold operatorCutoffPotential
-  rw [← sub_div, abs_div, abs_of_nonneg (Nat.cast_nonneg (Module.finrank ℂ E))]
+  have hnabs : |(Module.finrank ℂ E : ℝ)| = (Module.finrank ℂ E : ℝ) :=
+    abs_of_nonneg (Nat.cast_nonneg _)
+  rw [← sub_div, abs_div, hnabs]
   exact div_le_div_of_nonneg_right
     (singularValues_lipschitz_sum A B hA hB (fun x => Real.log (max x a))
       (inv_nonneg.mpr ha.le) (log_max_lipschitz ha)) (Nat.cast_nonneg _)

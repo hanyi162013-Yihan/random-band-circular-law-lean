@@ -21,6 +21,7 @@ namespace CircularLawSection6
 
 variable {ι : Type*} [Fintype ι] [DecidableEq ι] [Nonempty ι]
 
+omit [DecidableEq ι] [Nonempty ι] in
 theorem continuous_hilbertSchmidtSq :
     Continuous (hilbertSchmidtSq : Matrix ι ι ℂ → ℝ) := by
   unfold hilbertSchmidtSq
@@ -28,7 +29,7 @@ theorem continuous_hilbertSchmidtSq :
 
 theorem continuousOn_matrixCutoffPotential {a : ℝ} (ha : 0 < a) :
     ContinuousOn (fun A : Matrix ι ι ℂ => matrixCutoffPotential A a) {A | A.det ≠ 0} := by
-  rw [continuousOn_iff_continuous_restrict]
+  rw [continuousOn_iff_continuous_domRestrict]
   apply continuous_iff_continuousAt.mpr
   intro A
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
