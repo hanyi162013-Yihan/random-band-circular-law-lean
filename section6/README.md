@@ -7,26 +7,24 @@ No second mathlib checkout or large local download is needed.
 
 ## New proof layer
 
-The thirty-three-module checkpoint at commit `62b56b1` passed the dedicated
-[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33678501518):
-the publication-layout build, transitive axiom audit (433 declarations,
-367 theorem declarations), and all 40 regression examples. This includes
-the expected tail Jensen inequality for planar almost every parameter,
-with its integrability and nonvanishing inputs discharged by reuse.
+The forty-three-module checkpoint at commit `f7ddb83` passed the dedicated
+[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33686124314):
+the publication-layout build, transitive axiom audit (517 declarations,
+443 theorem declarations), and all 46 regression examples.
 
-The newer checked layer also instantiates Gaussian density and atom-log
-control, identifies the compact core with the actual Section 5 finite-band
-model, and proves determinant concentration on the original cyclic sample
-space. Its constant is uniform in dimension and bandwidth. The Gaussian
-finite variance bound currently covers dimensions at least two, which
-suffices for the checked limits; an all-positive-dimensions extension is
-under validation separately.
+This includes the actual Gaussian density and atom-log control, core model
+identification, all-positive-dimension determinant concentration, and the
+Section 5 probability-to-core-mean bridge. It also proves the singular-value
+Lipschitz comparison using canonical singular bases and their overlap
+energies, the exact logarithmic cutoff constant, the literal matrix energy
+identification, and cutoff measurability on the nonsingular event. No Mirsky
+inequality or measurable singular-frame choice is supplied as a premise.
 
-The next five-module batch extends the estimate to all positive dimensions,
-transports Section 5's literal probability limit to the compact-core mean,
-and constructs an actual Hermitian eigenvector coupling with its exact
-Hilbert--Schmidt cost. These additions are not part of the 33-module checkpoint;
-the 38-module integration and all 43 regressions are pending.
+The next five modules (48 total, 51 regression examples) derive expected
+cutoff stability and integrability, the literal Gaussian tail error, the
+determinant/singular-log and scaling identities, and the actual expected
+core/full sandwich. These additions are under validation and are not part
+of the 43-module verified checkpoint.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the
@@ -66,6 +64,15 @@ the 38-module integration and all 43 regressions are pending.
   `ProfileDiagonalBound`, `ProfileConcentration`: original cyclic-law
   concentration, the proved logarithmic rate limit, a bandwidth-uniform
   diagonal lower bound, and full/core/normalized-core model instantiations.
+- `GaussianAllDimensions`, `TriangularLawTransport`, `CompactCoreRawBridge`:
+  the dimension-one case, measure-preserving probability transport, and the
+  literal Section 5 probability-to-core-mean implication with concentration proved.
+- `WeightedSpectralCoupling`, `HermitianSpectralCoupling`, `PositiveSingularBasis`,
+  `SingularSpectralCoupling`: actual orthonormal frames and overlap-energy
+  comparisons, including the singular-value Lipschitz sum bound.
+- `LogCutoffComparison`, `MatrixCutoffComparison`, `CutoffMeasurability`:
+  the exact cutoff constant and normalization, shifted/scaled matrix bounds,
+  and a measurable representative agreeing off the singular event.
 
 These are proved lemmas, not new axioms. This directory does **not** yet assert
 the full noncompact Gaussian-profile circular-law theorem.
@@ -75,9 +82,10 @@ the full noncompact Gaussian-profile circular-law theorem.
 BV Riemann-sum limits, dense/core weight comparability, and the a.e.-parameter
 expected tail Jensen inequality are checked. No stronger every-parameter
 claim is needed for that Jensen connection.
-Gaussian affine-log/cofactor concentration is now proved. The compact-core
-raw-mean connection to the Section 5 endpoint is under validation.
-Compact-core cutoff periodicization, finite-matrix singular-value comparison,
+Gaussian affine-log/cofactor concentration, the literal Section 5 probability
+to core-mean implication, and finite-matrix singular-value comparison are
+checked. Canonical radius/scale and eventual-geometry assembly of the core
+endpoint, compact-core cutoff periodicization, the cited direct comparison,
 hard-edge control, and final sparse/dense replacement assembly still need
 their full source-to-model connections. The existing conditional
 helpers under `CircularLawSections56.Section6` are reused but are not counted
@@ -87,8 +95,8 @@ the indicator-model results, not the noncompact-profile conclusion itself.
 ## Verification
 
 [VERIFICATION.md](VERIFICATION.md) records the exact verified commit and scope:
-33 modules, 433 audited declarations (367 theorem declarations, including
-generated declarations), and 40 regression examples. This is not a proof of
+43 modules, 517 audited declarations (443 theorem declarations, including
+generated declarations), and 46 regression examples. This is not a proof of
 the entire manuscript section.
 
 For an integrated build in this repository layout:

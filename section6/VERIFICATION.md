@@ -1,5 +1,31 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified forty-three-module checkpoint
+
+Commit: `f7ddb8382fda21a3e5697013e082a97ceab29bc7`.
+[Dedicated GitHub run 33686124314](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33686124314),
+job `100433942111`: **success** on 2026-09-02.
+
+- All 43 modules and the umbrella compiled: 4079 jobs including dependencies.
+- The transitive audit passed: 517 declarations, 443 theorem declarations
+  including generated declarations, with only `propext`, `Classical.choice`,
+  and `Quot.sound` permitted.
+- All 46 strict regression examples passed. Section 6 warnings are errors.
+- The source scan, dependency-cache save, and verification-log retention passed.
+
+New verified results include the all-positive-dimension Gaussian estimate,
+literal Section 5 probability-to-core-mean transport, actual Hermitian and
+singular frame-overlap energy bounds, the `1/a` cutoff comparison on actual
+shifted/scaled matrices, and cutoff measurability on the nonsingular event.
+The latter uses the entrywise Borel structure, without a measurable choice
+of singular vectors. A small local matrix-Borel/subtraction probe also passed.
+
+The following five modules are a subsequent, unverified batch:
+`ExpectedCutoffComparison`, `CutoffIntegrability`, `GaussianTailCutoff`,
+`RawPotentialScaling`, and `GaussianUpperCutoff`. Neither those modules nor
+the new 51-example regression suite is covered by this 43-module checkpoint.
+The full Section 6 theorem remains incomplete; see the README boundaries.
+
 ## Verified thirty-three-module checkpoint
 
 Commit: `62b56b1a99377faf9e2a671c7c87b05d0f3a780a`.

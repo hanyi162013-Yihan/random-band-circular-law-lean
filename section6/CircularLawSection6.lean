@@ -41,3 +41,8 @@ import CircularLawSection6.SingularSpectralCoupling
 import CircularLawSection6.LogCutoffComparison
 import CircularLawSection6.MatrixCutoffComparison
 import CircularLawSection6.CutoffMeasurability
+import CircularLawSection6.ExpectedCutoffComparison
+import CircularLawSection6.CutoffIntegrability
+import CircularLawSection6.GaussianTailCutoff
+import CircularLawSection6.RawPotentialScaling
+import CircularLawSection6.GaussianUpperCutoff

@@ -253,3 +253,38 @@ example (t : ℝ) (ht : 0 ≤ t) (a b : ℂ) :
 example (e : ℝ) : Real.sqrt (4 * e) / 4 = Real.sqrt e / 2 := by
   have h4 : Real.sqrt (4 : ℝ) = 2 := by norm_num
   simpa only [h4] using sqrt_mul_div_dimension (e := e) (by norm_num : (0 : ℝ) < 4)
+
+-- Empty raw potentials are totalized, but positive-dimension scaling is not asserted for them.
+example (A : Matrix (Fin 0) (Fin 0) ℂ) : matrixRawPotential A = 0 := by
+  simp [matrixRawPotential]
+
+-- Positive scaling is exact already for a one-dimensional nonsingular matrix.
+example (A : Matrix (Fin 1) (Fin 1) ℂ) (hA : A.det ≠ 0) :
+    matrixRawPotential ((2 : ℂ) • A) = Real.log 2 + matrixRawPotential A :=
+  matrixRawPotential_smul A hA (by norm_num)
+
+-- A zero energy does not require a separate strictly-positive Cauchy--Schwarz case.
+example {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) [IsProbabilityMeasure μ] :
+    MemLp (fun _ : Ω => Real.sqrt 0) 2 μ :=
+  memLp_sqrt_of_integrable_nonneg μ (fun _ => 0) (integrable_const _)
+    (ae_of_all _ fun _ => le_rfl)
+
+-- In dimension one the radius-zero core is already the whole matrix and the tail error vanishes.
+example (p : NoncompactProfile) (W : ℝ) :
+    ∀ᵐ z ∂(volume : Measure ℂ), ∀ a : ℝ, 0 < a →
+      (∫ ω, |matrixCutoffPotential (p.matrix 1 W ω - z • 1) a -
+        matrixCutoffPotential (p.coreMatrix 1 0 W ω - z • 1) a| ∂gaussianProfileLaw 1) ≤ 0 := by
+  have hs : coreOffsets 1 0 = Finset.univ := by decide
+  filter_upwards [p.gaussian_expected_tail_cutoff_ae 1 0 W] with z hz
+  intro a ha
+  simpa only [NoncompactProfile.tailMass, hs, Finset.compl_univ, Finset.sum_empty,
+    Real.sqrt_zero, zero_div] using (hz a ha).2
+
+-- The actual upper comparison has no supplied singular-value, energy, or integrability premise.
+example (p : NoncompactProfile) (N H : ℕ) [NeZero N] (W : ℝ) :
+    ∀ᵐ z ∂(volume : Measure ℂ),
+      (∫ ω, p.rawProfileLogDet N W z ω ∂gaussianProfileLaw N) / (N : ℝ) ≤
+        (∫ ω, matrixCutoffPotential (p.coreMatrix N H W ω - z • 1) 1 ∂gaussianProfileLaw N) +
+          Real.sqrt (p.tailMass N H W) := by
+  filter_upwards [p.gaussian_expected_core_full_cutoff_sandwich_ae N H W] with z hz
+  simpa only [div_one] using (hz 1 zero_lt_one).2.2
