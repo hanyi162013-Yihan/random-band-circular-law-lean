@@ -5,8 +5,9 @@ Lean 4 formalization accompanying Yi Han's paper
 periodic profile and discrete law*](https://arxiv.org/abs/2609.01295).
 
 This is a paper-wide repository. It contains **Section 4,
-“Exterior transfer and local density tools”**, and a separate **Section 9
-deterministic linear-algebra library**. References in the Section 9 library use
+“Exterior transfer and local density tools”**, a separate **Section 9
+deterministic linear-algebra library**, and **Section 10 local bounded-density
+estimates for real i.i.d. atoms**. References in the Section 9 and 10 libraries use
 [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
 Sections 5–6 and the remaining probabilistic Section 9 arguments are not
 included or claimed as proved in this release.
@@ -33,6 +34,18 @@ Lemmas 7.5 and 7.7. See the [Section 9 overview](Section9/README.md),
 [coverage map](Section9/FORMALIZATION_MAP.md), and
 [paper reference map](Section9/PAPER_REFERENCES.md).
 The Section 9 library introduces no Cook, Nguyen, or RRQR axiom.
+
+The Section 10 library contains 37 modules and an umbrella import, covering
+the real i.i.d. specialization of Lemma 10.2 through Proposition 10.10.
+It includes affine-log and multiaffine estimates, physical-row concentration,
+integrated Hodge control, and the nine-block seam/reset expectation estimates,
+with explicit constants. It imports the Section 9 algebra directly.
+The newly inserted Proposition 10.1, the later asymptotic arguments, the
+planar-complex/directional-density alternatives, and the heterogeneous-law
+generality of 10.2--10.3 are not claimed. See the
+[Section 10 overview](Section10/README.md),
+[exact source and scope map](Section10/FORMALIZATION_MAP.md), and
+[build and axiom audit](Section10/AUDIT.md).
 
 This release does **not** assert a full formalization of the paper.
 Coverage is stated at the level of the named proof chains; exact formulations,
@@ -69,9 +82,15 @@ Section9/
   README.md
   FORMALIZATION_MAP.md
   PAPER_REFERENCES.md
+Section10/
+  BernoulliSection10.lean      # arXiv v1 numbering; public umbrella import
+  BernoulliSection10/          # 37 modules, including AxiomAudit.lean
+  README.md
+  FORMALIZATION_MAP.md
+  AUDIT.md
 ```
 
-Both libraries use the same Lake project and dependency cache. Later chapters
+All three libraries use the same Lake project and dependency cache. Later chapters
 can be added with their own source directories and can import either library;
 there is no need for a separate mathlib checkout per chapter.
 
@@ -91,6 +110,9 @@ lake build
 
 # Optional: build only the deterministic Section 9 library.
 lake build BernoulliLinearAlgebra
+
+# Optional: build only the local Section 10 estimates and their dependencies.
+lake build BernoulliSection10
 ```
 
 Only source and documentation are committed. Lean, mathlib, `.lake/`, compiled
@@ -111,6 +133,7 @@ lake env lean Section4/FlatAxiomAudit.lean
 lake env lean Section4/FourGapsAxiomAudit.lean
 lake env lean Section4/Section4CompleteAxiomAudit.lean
 lake env lean Section9/AxiomAudit.lean
+lake env lean Section10/BernoulliSection10/AxiomAudit.lean
 ```
 
 These audits supplement kernel checking; they are not a proof that an informal
