@@ -1,5 +1,32 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified twenty-two-module checkpoint
+
+Commit: `38f265785c8639566a5ab48e6c2079265012650a`.
+[Dedicated GitHub run 33673278846](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33673278846),
+job `100391788123`: **success** on 2026-09-02.
+
+- All 22 modules and their entry point compiled in the publication layout:
+  3996 build jobs including dependencies, with Section 6 warnings as errors.
+- The transitive audit passed: 306 declarations, 259 theorem declarations
+  (including generated declarations), with only `propext`, `Classical.choice`,
+  and `Quot.sound` permitted.
+- All 26 strict regression examples passed.
+- The source-token scan and verification-log retention passed.
+- Completed dependency builds were successfully cached on GitHub; the new
+  restore/save split also retains useful compiled dependencies after a later
+  failure without changing the validation result.
+
+This adds actual sparse Riemann-mass limits and radius exhaustion, uniform
+weight comparisons, exact limiting core/tail identities, invariant angular
+averaging, and the expected Gaussian tail Jensen inequality. The latter's
+log-integrability and nonvanishing premises are proved from the previously
+available Section 5 / replacement estimates. The spectral parameter is
+planar-a.e., not every `z`, which is sufficient for the final replacement step.
+
+The next model-identification and row-concentration batch is not covered by
+this run. In particular, this checkpoint is not the full Section 6 circular law.
+
 ## Verified fourteen-module checkpoint
 
 Commit: `0dce34d3de176151db96ee1da21bb18b57a7dfb6`.
@@ -22,8 +49,8 @@ normalization and energy identities, product independence, tail rotations,
 centered mesh identification, and actual BV quadrature estimates. It does not
 yet prove the compact-core analytic inputs or the noncompact circular law.
 
-The next eight modules and their added regressions are pending a separate
-integrated check. They are not covered by the successful run above.
+The eight modules subsequently added to this historical checkpoint are now
+included in the verified twenty-two-module checkpoint above.
 These extend the mass-limit/comparability work with literal limiting mass
 identities and the expected Gaussian tail Jensen inequality. The latter
 reuses Section 5 / replacement's a.e.-parameter nonvanishing and local L²

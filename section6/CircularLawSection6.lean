@@ -20,3 +20,8 @@ import CircularLawSection6.InvariantPhaseAverage
 import CircularLawSection6.GaussianTailJensen
 import CircularLawSection6.ReusedLogDetIntegrability
 import CircularLawSection6.GaussianTailJensenAE
+import CircularLawSection6.GaussianDensityBounds
+import CircularLawSection6.CoreBandIdentification
+import CircularLawSection6.AffineLogFromDiagonal
+import CircularLawSection6.RowResamplingClosure
+import CircularLawSection6.DeterminantRowFibers

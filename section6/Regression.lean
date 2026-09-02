@@ -130,3 +130,40 @@ example {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) [IsFiniteMeasure μ]
     (hE : Integrable (fun ω => cyclicEnergy N (A ω)) μ) :
     ∀ᵐ z ∂(volume : Measure ℂ), Integrable (fun ω => Real.log ‖(A ω - z • 1).det‖) μ :=
   ae_cyclic_rawLogDet_integrable μ N A hA hE
+
+-- The actual normalized Gaussian discharges the old bounded-density input.
+example : CircularLawSection4.ComplexBallBound circularComplexGaussian (ENNReal.ofReal 2) :=
+  circularComplexGaussian_ballBound
+
+-- At the exact full-width threshold the unit core is the literal Section 5 model.
+example (p : NoncompactProfile) (W : ℝ) (ω : ZMod 5 × ZMod 5 → ℂ) :
+    p.unitCoreMatrix 5 2 W ω = CircularLawSection4.paperIndicatorX 5 3 (2 : Fin 4)
+      (fun s => (Real.sqrt (p.coreBandWeight 5 3 (2 : Fin 4) W s) : ℂ))
+      (coreBandSample 5 3 (2 : Fin 4) ω) :=
+  p.unitCoreMatrix_eq_paperIndicatorX 5 3 (by decide) (2 : Fin 4) (by decide) W ω
+
+-- A proper subset of the original atoms still has the exact smaller IID law.
+example : MeasurePreserving (coreBandSample 7 3 (2 : Fin 4))
+    (cyclicAtomLaw 7 circularComplexGaussian)
+    (CircularLawSection4.paperIndicatorSampleMeasure 7 3 circularComplexGaussian) :=
+  coreBandSample_measurePreserving 7 3 (by decide) (2 : Fin 4) circularComplexGaussian
+
+-- Zero cofactor families use the checked all-scales branch, not a positivity premise.
+example (z : ℂ) : MemLp (fun η : Fin 1 → ℂ =>
+    |Real.log ‖CircularLawSection4.operatorAffine (fun _ : Fin 1 => (1 : ℂ)) η
+      (fun _ : Fin 1 => (0 : ℂ →L[ℂ] ℂ)) z 0‖ -
+      Real.log (CircularLawSection4.operatorAffineScale (0 : Fin 1)
+        (fun _ => (1 : ℂ)) (fun _ => (0 : ℂ →L[ℂ] ℂ)))|)
+    2 (CircularLawSection4.iidMeasure circularComplexGaussian 1) :=
+  (complex_affine_log_memLp_of_diagonal_all_scales circularComplexGaussian
+    circularComplexGaussian_ballBound (by norm_num) (0 : Fin 1) (fun _ => 1)
+    (fun _ => (0 : ℂ →L[ℂ] ℂ)) z (q := 1) zero_lt_one le_rfl (by norm_num)
+    circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment.le).1
+
+-- Actual shifted determinants are square-integrable even in dimension one.
+example (z : ℂ) : MemLp (weightedRowsLogDet (1 : Matrix (Fin 1) (Fin 1) ℂ) z) 2
+    (CircularLawSection4.iidMeasure (CircularLawSection4.iidMeasure circularComplexGaussian 1) 1) :=
+  (weightedRowsLogDet_memLp_and_variance circularComplexGaussian circularComplexGaussian_ballBound
+    (by norm_num) (1 : Matrix (Fin 1) (Fin 1) ℂ) z (q := 1) zero_lt_one le_rfl
+    (by intro i; simp) circularComplexGaussian_sq_integrable
+    circularComplexGaussian_secondMoment.le).1

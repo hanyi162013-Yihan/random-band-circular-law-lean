@@ -7,13 +7,19 @@ No second mathlib checkout or large local download is needed.
 
 ## New proof layer
 
-The fourteen-module checkpoint at commit `0dce34d` passed the dedicated
-[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33667008094):
-the publication-layout build, transitive axiom audit, and all 20 regression
-examples. Eight subsequent modules are a new development batch, not covered
-by that run: profile mass limits, sparse geometry, weight comparability,
-limiting mass identities, invariant angular averaging, and the tail Jensen
-connection reusing Section 5 / replacement's nonvanishing and local L² estimates.
+The twenty-two-module checkpoint at commit `38f2657` passed the dedicated
+[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33673278846):
+the publication-layout build, transitive axiom audit (306 declarations,
+259 theorem declarations), and all 26 regression examples. This includes
+the expected tail Jensen inequality for planar almost every parameter,
+with its integrability and nonvanishing inputs discharged by reuse.
+
+Five subsequent modules are the next validation batch, not part of that
+checkpoint: Gaussian density/atom-log instantiation, exact compact-core
+finite-band identification, diagonal-only affine-log bounds, automatic
+row-resampling closure, and literal determinant row fibers. The affine-log
+and resampling modules have passed targeted local checks; integrated status
+must be read from the newer CI run.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the
@@ -36,6 +42,14 @@ connection reusing Section 5 / replacement's nonvanishing and local L² estimate
   and law-preserving tail rotations.
 - `BVQuadrature`, `ProfileQuadrature`: uniform mesh error bounded by total
   variation times mesh size, specialized to the literal full and core sums.
+- `ProfileMassLimits`, `SparseProfileGeometry`, `LimitingProfileMass`: actual
+  normalized core/tail limits, sparse unwrapping, positive finite-radius
+  tails, monotonicity and radius exhaustion.
+- `ProfileComparability`: uniform dense and fixed-core variance bounds.
+- `InvariantPhaseAverage`, `GaussianTailJensen`, `ReusedLogDetIntegrability`,
+  `GaussianTailJensenAE`: invariant Fubini averaging, replacement local L²
+  estimates transported to random samples, and the actual expected Jensen
+  inequality on a common full-measure set for all sizes and integer radii.
 
 These are proved lemmas, not new axioms. This directory does **not** yet assert
 the full noncompact Gaussian-profile circular-law theorem.
@@ -43,9 +57,8 @@ the full noncompact Gaussian-profile circular-law theorem.
 ## Remaining mathematical boundaries
 
 BV Riemann-sum limits, dense/core weight comparability, and the a.e.-parameter
-expected tail Jensen inequality are being checked in the next batch.
-The latter reuses existing results to discharge raw-log integrability and
-nonvanishing; no stronger every-parameter claim is needed there.
+expected tail Jensen inequality are checked. No stronger every-parameter
+claim is needed for that Jensen connection.
 Compact-core cutoff periodicization and singular-value comparison,
 Gaussian affine-log/cofactor concentration, finite-matrix
 Mirsky estimate, hard-edge input, and final sparse/dense replacement assembly
@@ -57,8 +70,8 @@ the indicator-model results, not the noncompact-profile conclusion itself.
 ## Verification
 
 [VERIFICATION.md](VERIFICATION.md) records the exact verified commit and scope:
-14 modules, 215 audited declarations (173 theorem declarations, including
-generated declarations), and 20 regression examples. This is not a proof of
+22 modules, 306 audited declarations (259 theorem declarations, including
+generated declarations), and 26 regression examples. This is not a proof of
 the entire manuscript section.
 
 For an integrated build in this repository layout:
