@@ -24,14 +24,17 @@ variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 def orthonormalCoupling (u v : OrthonormalBasis ι ℂ E) (i j : ι) : ℝ :=
   ‖⟪u i, v j⟫_ℂ‖ ^ 2
 
+omit [FiniteDimensional ℂ E] [DecidableEq ι] in
 theorem orthonormalCoupling_nonneg (u v : OrthonormalBasis ι ℂ E) (i j : ι) :
     0 ≤ orthonormalCoupling u v i j := sq_nonneg _
 
+omit [FiniteDimensional ℂ E] [DecidableEq ι] in
 theorem orthonormalCoupling_row (u v : OrthonormalBasis ι ℂ E) (i : ι) :
     ∑ j, orthonormalCoupling u v i j = 1 := by
   simpa only [orthonormalCoupling, u.orthonormal.1 i, one_pow] using
     v.sum_sq_norm_inner_left (u i)
 
+omit [FiniteDimensional ℂ E] [DecidableEq ι] in
 theorem orthonormalCoupling_column (u v : OrthonormalBasis ι ℂ E) (j : ι) :
     ∑ i, orthonormalCoupling u v i j = 1 := by
   simpa only [orthonormalCoupling, v.orthonormal.1 j, one_pow] using
@@ -62,7 +65,8 @@ theorem hermitian_eigenvector_coupling_cost (A B : Module.End ℂ E)
     rw [LinearMap.sub_apply, inner_sub_right, ← hA (u i) (v j)]
     dsimp only [u, v]
     rw [hA.apply_eigenvectorBasis rfl i, hB.apply_eigenvectorBasis rfl j]
-    simp [inner_smul_left, inner_smul_right, Complex.ofReal_sub, sub_mul]
+    rw [inner_smul_left (𝕜 := ℂ), inner_smul_right (𝕜 := ℂ)]
+    simp only [Complex.conj_ofReal, Complex.ofReal_sub, sub_mul]
   calc
     _ = ∑ i, ∑ j, ‖⟪u i, (A - B) (v j)⟫_ℂ‖ ^ 2 := by
       apply Finset.sum_congr rfl
