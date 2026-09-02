@@ -29,6 +29,6 @@ python3 scripts/check_placeholders.py --path Section8
 
 CI adds `--keep-going` to the scoped build command to collect errors from independent modules in one run. Modules depending on a failure are skipped, the job still fails, and the final Lake target and audits run only after all required modules pass. Completed artifacts are saved for the next attempt.
 
-When a project cache is restored, this draft starts the per-module commands at `BernoulliSection8.HighBandTransport`. The `--start-at` option only omits earlier individual commands: each remaining Lake build still checks all its dependencies, and the final normal Section 8 target is mandatory. A cache miss retains the full serial dependency order.
+When a project cache is restored, this draft starts the per-module commands at `BernoulliSection8.PressureCalibration`. The `--start-at` option only omits earlier individual commands: each remaining Lake build still checks all its dependencies, and the final normal Section 8 target is mandatory. A cache miss retains the full serial dependency order.
 
 The placeholder scan masks comments and strings. Its `--path` argument must name an existing repository directory containing Lean sources; an invalid path or empty scan fails. Without `--path`, the script retains its repository-wide scan. Until the Section 8 gates pass, the public theorem source remains a work in progress.

@@ -18,7 +18,7 @@ noncomputable section
 namespace BernoulliSection8
 
 open BernoulliSection10 BernoulliSection10.ProbabilityLimits
-open BernoulliSection10.DiskReference
+open BernoulliSection10.DiskReference ShortRingAnchor
 
 set_option backward.isDefEq.respectTransparency false
 
@@ -105,11 +105,14 @@ theorem normalizedCorePressure_tendsto_of_anchor_comparison
   simp only [div_one] at h
   convert h using 1
   funext n
-  rw [anchorPressureCenter_factor _ _ _ (hW n)]
+  change normalizedCorePressure rademacherLaw C (W n) z =
+    anchorPressureCenter rademacherLaw C (W n) z /
+      ((anchorCells (W n) : ℝ) * cellLength (W n) / anchorSize (W n))
+  rw [anchorPressureCenter_factor rademacherLaw C (W n) (hW n) z]
   have hK : (anchorCells (W n) : ℝ) ≠ 0 := by exact_mod_cast (anchorCells_pos (hW n)).ne'
   have hL : (cellLength (W n) : ℝ) ≠ 0 := by exact_mod_cast (cellLength_pos (hW n)).ne'
   have hM : (anchorSize (W n) : ℝ) ≠ 0 := by exact_mod_cast (anchorSize_pos (hW n)).ne'
-  field_simp <;> ring
+  field_simp [hK, hL, hM] <;> ring
 
 /-- The target normalization is filled by one on the unused direct
 branch, so arbitrary alternation causes no subsequence premise. -/

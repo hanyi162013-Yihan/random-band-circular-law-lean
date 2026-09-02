@@ -21,7 +21,7 @@ noncomputable section
 namespace BernoulliSection8
 
 open BernoulliSection9 BernoulliSection10 BernoulliSection10.ProbabilityLimits
-open BernoulliSection10.DiskReference
+open BernoulliSection10.DiskReference ShortRingAnchor
 
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1200000

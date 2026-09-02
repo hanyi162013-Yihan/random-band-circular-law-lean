@@ -57,7 +57,9 @@ theorem intervalResetLoss_resetSandwichRowsFlat (W p q : ℕ) (z : ℂ)
     simp [intervalLastCore, resetSandwichRowsFlat, resetSandwichRows]
   have hp : intervalPastBeforeReset W p q (resetSandwichRowsFlat W p q v) = v.1.2 := by
     simp [intervalPastBeforeReset, resetSandwichRowsFlat, resetSandwichRows]
-  simp only [intervalResetLoss, hc, hp, resetSandwichRowsFlat,
+  unfold intervalResetLoss
+  rw [hc, hp]
+  simp only [resetSandwichRowsFlat,
     intervalClearedProduct_resetSandwichRows, resetLossFlat, physicalCappedResetLoss]
 
 /-- The coefficient-norm estimate is discharged here by the explicit

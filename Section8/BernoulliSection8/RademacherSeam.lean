@@ -102,14 +102,15 @@ theorem rademacherSeam_packet_probability_le
     (fun ep hep => rademacherSeam_fresh_probability_le cook I W z hW ep
       (by simpa using hep) a ha R hR ht)
   rw [hmp.measureReal_preimage hE.nullMeasurableSet] at h
-  exact h.trans (add_le_add_left
-    (rademacherEndpointGoodEvent_compl_probability_le I hI W hWI) _)
+  exact h.trans (add_le_add le_rfl
+    (rademacherEndpointGoodEvent_compl_probability_le I hI W hWI))
 
 theorem continuous_cyclicFockValue (W s : ℕ) (z : ℂ) :
     Continuous (cyclicFockValue W s z) := by
-  simpa only [cyclicFockValue, physicalBoundaryExpression, polynomialClearedBoundaryTrace,
-    polynomialClearedSignedCompoundTrace, compound_one, Matrix.mul_one] using
-      continuous_physicalBoundaryExpression W (s + 3) z 1
+  refine (continuous_physicalBoundaryExpression W (s + 3) z 1).congr ?_
+  intro x
+  simp only [cyclicFockValue, physicalBoundaryExpression, polynomialClearedBoundaryTrace,
+    polynomialClearedSignedCompoundTrace, compound_one, Matrix.mul_one]
 
 def cyclicSeamBadEvent (I : NguyenBottomSingularInput.{0, 0}) (W s : ℕ) (z : ℂ) (t : ℝ) :
     Set (IntervalRows W (s + 3)) :=
