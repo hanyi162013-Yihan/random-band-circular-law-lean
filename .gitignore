@@ -1,0 +1,21 @@
+# Local dependencies and build products, including future chapter packages.
+**/.lake/
+*.olean
+*.olean.private
+*.olean.server
+*.ilean
+*.ir
+*.trace
+*.o
+*.a
+*.so
+*.dylib
+*.log
+
+# Local editor/OS state and unpublished experiments.
+.DS_Store
+.vscode/
+Scratch*.lean
+Check*.lean
+*.zip
+*.tar.gz
