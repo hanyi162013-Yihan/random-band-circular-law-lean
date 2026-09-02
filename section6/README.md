@@ -7,10 +7,10 @@ No second mathlib checkout or large local download is needed.
 
 ## New proof layer
 
-The forty-three-module checkpoint at commit `f7ddb83` passed the dedicated
-[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33686124314):
-the publication-layout build, transitive axiom audit (517 declarations,
-443 theorem declarations), and all 46 regression examples.
+The fifty-module checkpoint at commit `e177c08` passed the dedicated
+[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33689098945):
+the publication-layout build, transitive axiom audit (584 declarations,
+507 theorem declarations), and all 53 regression examples.
 
 This includes the actual Gaussian density and atom-log control, core model
 identification, all-positive-dimension determinant concentration, and the
@@ -20,12 +20,16 @@ energies, the exact logarithmic cutoff constant, the literal matrix energy
 identification, and cutoff measurability on the nonsingular event. No Mirsky
 inequality or measurable singular-frame choice is supplied as a premise.
 
-The next seven modules (50 total, 53 regression examples) derive expected
+Seven further verified modules derive expected
 cutoff stability and integrability, the literal Gaussian tail error, the
 determinant/singular-log and scaling identities, and the actual expected
 core/full sandwich, varying-scale cutoff stability, and actual radial mean
-monotonicity and normalization. These additions are under validation and are not part
-of the 43-module verified checkpoint.
+monotonicity and normalization. They are included in the 50-module checkpoint.
+
+The next three modules (53 total, 57 regression examples) connect the
+canonical floor-radius band geometry, positive fixed-scale Section 5 mean
+transport, the actual raw core mass limit, and varying cutoff normalization.
+These three modules are under validation, not included in the checkpoint.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the
@@ -96,8 +100,8 @@ the indicator-model results, not the noncompact-profile conclusion itself.
 ## Verification
 
 [VERIFICATION.md](VERIFICATION.md) records the exact verified commit and scope:
-43 modules, 517 audited declarations (443 theorem declarations, including
-generated declarations), and 46 regression examples. This is not a proof of
+50 modules, 584 audited declarations (507 theorem declarations, including
+generated declarations), and 53 regression examples. This is not a proof of
 the entire manuscript section.
 
 For an integrated build in this repository layout:

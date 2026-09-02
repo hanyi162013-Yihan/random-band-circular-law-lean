@@ -48,3 +48,6 @@ import CircularLawSection6.RawPotentialScaling
 import CircularLawSection6.GaussianUpperCutoff
 import CircularLawSection6.VaryingCoreCutoff
 import CircularLawSection6.GaussianRadialMean
+import CircularLawSection6.CanonicalCoreBand
+import CircularLawSection6.FixedScaleCoreBridge
+import CircularLawSection6.CanonicalCoreLimits

@@ -303,3 +303,27 @@ example (p : NoncompactProfile) (N H : ℕ) [NeZero N] (W : ℝ) :
   filter_upwards [p.gaussian_unitCore_cutoff_scaling_ae N H W 0 1] with z hz
   simpa only [zero_sub, abs_neg, abs_one, div_one, Complex.ofReal_zero,
     Complex.ofReal_one] using (hz 1 zero_lt_one).2.2
+
+-- The first positive half-width has exactly three active offsets.
+example : canonicalCoreBand 1 + 2 = 3 := canonicalCoreBand_width (by norm_num)
+
+-- The center is the actual half-width, not a dummy boundary filler.
+example : (canonicalCoreCenter 1 (by norm_num)).val = 1 := rfl
+
+-- Positive fixed-scale expectation transport also covers the one-dimensional core.
+example (p : NoncompactProfile) (W : ℝ) :
+    ∀ᵐ z ∂(volume : Measure ℂ), p.scaledUnitCoreMean 1 0 W 2 z =
+      Real.log 2 + ∫ ω, p.unitCoreLogPotential 1 0 W (z / (2 : ℂ)) ω ∂gaussianProfileLaw 1 :=
+  p.scaledUnitCoreMean_eq_log_add_ae 1 0 W (by norm_num)
+
+-- The cutoff normalization transport itself does not assume a positive limiting mass.
+example (p : NoncompactProfile) (N H : ℕ → ℕ) [∀ n, NeZero (N n)] (W : ℕ → ℝ)
+    (hmass : Tendsto (fun n => p.coreMass (N n) (H n) (W n)) atTop (𝓝 0)) :
+    ∀ᵐ z ∂(volume : Measure ℂ),
+      Tendsto (fun n =>
+        |(∫ ω, matrixCutoffPotential (p.coreMatrix (N n) (H n) (W n) ω - z • 1) 1
+          ∂gaussianProfileLaw (N n)) -
+          ∫ ω, matrixCutoffPotential ((Real.sqrt 0 : ℂ) •
+            p.unitCoreMatrix (N n) (H n) (W n) ω - z • 1) 1
+            ∂gaussianProfileLaw (N n)|) atTop (𝓝 0) :=
+  p.gaussian_core_cutoff_normalization_error N H W hmass zero_lt_one

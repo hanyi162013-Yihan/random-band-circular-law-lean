@@ -1,5 +1,28 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified fifty-module checkpoint
+
+Commit: `e177c08ea43c85343d80fc68ab260b54734b9423`.
+[Dedicated GitHub run 33689098945](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33689098945),
+job `100443457688`: **success** on 2026-09-02.
+
+- All 50 modules and the umbrella compiled: 4094 dependency-inclusive jobs.
+- The transitive audit passed: 584 declarations, 507 theorem declarations;
+  only `propext`, `Classical.choice`, and `Quot.sound` are permitted.
+- All 53 strict regression examples, source scanning, cache saving, and
+  verification-log retention passed. Warnings are errors in Section 6.
+
+This adds actual expected cutoff stability and integrability, the Gaussian
+tail-energy error, exact raw-potential scaling, and the expected raw-core /
+raw-full / cutoff-core sandwich. The actual radial Gaussian mean is proved
+monotone using rotation invariance and Jensen; varying-scale cutoff errors
+are proved from the unit-core energy, including zero comparison scales.
+
+Three subsequent modules are under validation and are NOT part of this
+checkpoint: `CanonicalCoreBand`, `FixedScaleCoreBridge`, and
+`CanonicalCoreLimits`. The enlarged 57-example regression suite is also
+pending. The full Section 6 theorem is still incomplete.
+
 ## Verified forty-three-module checkpoint
 
 Commit: `f7ddb8382fda21a3e5697013e082a97ceab29bc7`.
@@ -20,11 +43,11 @@ shifted/scaled matrices, and cutoff measurability on the nonsingular event.
 The latter uses the entrywise Borel structure, without a measurable choice
 of singular vectors. A small local matrix-Borel/subtraction probe also passed.
 
-The following seven modules are a subsequent, unverified batch:
+The following seven modules were subsequent to this historical checkpoint:
 `ExpectedCutoffComparison`, `CutoffIntegrability`, `GaussianTailCutoff`,
 `RawPotentialScaling`, `GaussianUpperCutoff`, `VaryingCoreCutoff`, and
-`GaussianRadialMean`. Neither those modules nor the new 53-example regression
-suite is covered by this 43-module checkpoint.
+`GaussianRadialMean`. They and the 53-example regression suite are now covered
+by the fifty-module checkpoint above, not by this historical 43-module run.
 The full Section 6 theorem remains incomplete; see the README boundaries.
 
 ## Verified thirty-three-module checkpoint
