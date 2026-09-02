@@ -195,7 +195,8 @@ theorem normalizedCellResetLoss_tendsto
         cellIntervalResetLoss (W n) (coreSites (W n)) (K n) j z (r n)
           (rademacherResetCap I (W n) z) x} := by
     ext x
-    simp only [sub_zero, abs_of_nonneg (div_nonneg (hn x) hden.le), le_div_iff₀ hden]
+    simp only [Set.mem_setOf_eq, sub_zero,
+      abs_of_nonneg (div_nonneg (hn x) hden.le), le_div_iff₀ hden]
   rw [he]
   apply hp.trans_eq
   simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]
