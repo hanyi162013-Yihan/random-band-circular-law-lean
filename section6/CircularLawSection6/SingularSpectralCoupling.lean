@@ -14,6 +14,7 @@ open scoped BigOperators InnerProductSpace
 open TaoVuReplacement
 
 noncomputable section
+set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
 
@@ -26,7 +27,7 @@ theorem complex_two_coefficient_cost (s t : ℝ) (hs : 0 ≤ s) (ht : 0 ≤ t)
     (add_nonneg (sq_nonneg (a.re - b.re)) (sq_nonneg (a.im - b.im)))
   simp only [← Complex.normSq_eq_norm_sq, Complex.normSq_apply,
     Complex.sub_re, Complex.sub_im, Complex.mul_re, Complex.mul_im,
-    Complex.ofReal_re, Complex.ofReal_im, zero_mul, mul_zero, sub_zero, add_zero]
+    Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero, add_zero]
   nlinarith
 
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
@@ -50,17 +51,25 @@ theorem singular_basis_lipschitz_sum (A B : Module.End ℂ E)
     (add_nonneg (orthonormalCoupling_nonneg _ _ _ _) (orthonormalCoupling_nonneg _ _ _ _))
     (by norm_num)
   have hrow (i) : ∑ j, w i j = 1 := by
-    simp [w, Finset.sum_div, Finset.sum_add_distrib, orthonormalCoupling_row]
+    simp only [w]
+    rw [← Finset.sum_div, Finset.sum_add_distrib, orthonormalCoupling_row,
+      orthonormalCoupling_row]
+    norm_num
   have hcol (j) : ∑ i, w i j = 1 := by
-    simp [w, Finset.sum_div, Finset.sum_add_distrib, orthonormalCoupling_column]
+    simp only [w]
+    rw [← Finset.sum_div, Finset.sum_add_distrib, orthonormalCoupling_column,
+      orthonormalCoupling_column]
+    norm_num
   have hx (i j) : ⟪u i, (A - B) (q j)⟫_ℂ =
       (s i : ℂ) * ⟪v i, q j⟫_ℂ - (t j : ℂ) * ⟪u i, p j⟫_ℂ := by
     rw [LinearMap.sub_apply, inner_sub_right, ← A.adjoint_inner_left, hAu, hBq,
-      inner_smul_left (𝕜 := ℂ), inner_smul_right (𝕜 := ℂ), RCLike.conj_ofReal]
+      inner_smul_left (𝕜 := ℂ), inner_smul_right (𝕜 := ℂ)]
+    rw [show (starRingEnd ℂ) (s i : ℂ) = (s i : ℂ) from Complex.conj_ofReal _]
   have hy (i j) : ⟪(A - B) (v i), p j⟫_ℂ =
       (s i : ℂ) * ⟪u i, p j⟫_ℂ - (t j : ℂ) * ⟪v i, q j⟫_ℂ := by
     rw [LinearMap.sub_apply, inner_sub_left, hAv, ← B.adjoint_inner_right, hBp,
-      inner_smul_left (𝕜 := ℂ), inner_smul_right (𝕜 := ℂ), RCLike.conj_ofReal]
+      inner_smul_left (𝕜 := ℂ), inner_smul_right (𝕜 := ℂ)]
+    rw [show (starRingEnd ℂ) (s i : ℂ) = (s i : ℂ) from Complex.conj_ofReal _]
   have hpair (i j) : w i j * (s i - t j) ^ 2 ≤
       (‖⟪u i, (A - B) (q j)⟫_ℂ‖ ^ 2 + ‖⟪p j, (A - B) (v i)⟫_ℂ‖ ^ 2) / 2 := by
     rw [norm_inner_symm (p j) ((A - B) (v i)), hx, hy]
@@ -72,7 +81,7 @@ theorem singular_basis_lipschitz_sum (A B : Module.End ℂ E)
       operatorHilbertSchmidtSq (A - B) := by
     have h := Finset.sum_le_sum (s := Finset.univ) (fun i _ =>
       Finset.sum_le_sum (s := Finset.univ) (fun j _ => hpair i j))
-    simp_rw [Finset.sum_div, Finset.sum_add_distrib] at h
+    simp_rw [← Finset.sum_div, Finset.sum_add_distrib] at h
     rw [crossBasis_energy_eq u q, Finset.sum_comm (f := fun i j =>
       ‖⟪p j, (A - B) (v i)⟫_ℂ‖ ^ 2), crossBasis_energy_eq p v] at h
     linarith
