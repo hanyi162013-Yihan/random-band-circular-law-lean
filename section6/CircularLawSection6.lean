@@ -61,3 +61,5 @@ import CircularLawSection6.RoutedBandIdentification
 import CircularLawSection6.BlockSingularCutoff
 import CircularLawSection6.PeriodicBlockCutoff
 import CircularLawSection6.ScaledPeriodicization
+import CircularLawSection6.BoundedProbabilityExpectation
+import CircularLawSection6.ClippedCutoffTail

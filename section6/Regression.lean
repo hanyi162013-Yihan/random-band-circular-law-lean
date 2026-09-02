@@ -451,3 +451,26 @@ example {q : ℕ} (len : Fin q → ℕ) [∀ b, NeZero (len b)] [NeZero (∑ b, 
     circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment (r := 2) (by norm_num)]
     with z hz
   simpa using (hz 1 zero_lt_one).2
+
+-- Bounded triangular probability convergence gives the actual expectation limit.
+example {Ω : ℕ → Type*} [∀ n, MeasurableSpace (Ω n)]
+    (μ : ∀ n, Measure (Ω n)) [∀ n, IsProbabilityMeasure (μ n)]
+    (X : ∀ n, Ω n → ℝ) (hX : ∀ n, Measurable (X n))
+    (hB : ∀ n, ∀ᵐ ω ∂μ n, |X n ω| ≤ 1)
+    (hp : CircularLawSections56.Section5.TendstoInProbabilityTri μ X 0) :
+    Tendsto (fun n => ∫ ω, X n ω ∂μ n) atTop (𝓝 0) :=
+  tendsto_expectation_of_bounded_probability μ X hX 1 0 hB hp
+
+-- A zero singular value is allowed in the exact cutoff decomposition.
+example : Real.log (max (0 : ℝ) 1) =
+    ShortRingAnchor.clippedLog 1 2 (0 ^ 2) + ShortRingAnchor.upperLogCorrection 2 0 :=
+  cutoffLog_eq_clippedLog_add_upper zero_lt_one (by norm_num) le_rfl
+
+-- The upper-tail error uses only the second moment, not a hard-edge estimate.
+example (s : ℝ) (hs : 0 ≤ s) :
+    |Real.log (max s 1) - ShortRingAnchor.clippedLog 1 2 (s ^ 2)| ≤ s ^ 2 / 2 :=
+  cutoffLog_clipped_abs_error_le_sq_div zero_lt_one (by norm_num) (by norm_num) hs
+
+-- The compact test stays bounded even for negative squared-law arguments.
+example (x : ℝ) : |ShortRingAnchor.clippedLog 1 2 x| ≤ max |Real.log 1| |Real.log 2| :=
+  clippedLog_abs_le zero_lt_one (by norm_num) x
