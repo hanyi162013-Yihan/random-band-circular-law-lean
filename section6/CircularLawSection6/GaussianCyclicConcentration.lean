@@ -93,7 +93,8 @@ theorem gaussian_cyclic_concentration (d : ℕ → ℕ)
     (fun n => cyclicRawLogDet (d n + 2) (q n) r z) (fun n => d n + 2)
     (fun _ => by omega) hd (gaussianCyclicVarianceConstant c r z)
     (fun n => (gaussian_cyclic_memLp_and_variance (d n) (q n) hc hr z (hq n)).1)
-    (fun n => (gaussian_cyclic_memLp_and_variance (d n) (q n) hc hr z (hq n)).2)
+    (fun n => by simpa only [Nat.cast_add, Nat.cast_ofNat] using
+      (gaussian_cyclic_memLp_and_variance (d n) (q n) hc hr z (hq n)).2)
   simpa only [Nat.cast_add, Nat.cast_ofNat] using h
 
 end CircularLawSection6
