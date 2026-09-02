@@ -1,5 +1,5 @@
 name: General subgaussian Section 8
-# Draft PR base codex/section8-bernoulli permits restoring its verified artifact cache.
+# Prefer matching extension artifacts, with the verified baseline as a fallback.
 "on":
   pull_request:
   workflow_dispatch:

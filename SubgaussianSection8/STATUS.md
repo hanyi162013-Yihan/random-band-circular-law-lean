@@ -2,7 +2,7 @@
 
 The full logarithmic-bandwidth proof is verified at source commit `d29fd6f0cefcaa4ec3afe09f14c54df3e16842d4` by [GitHub Actions run 33688229894](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33688229894/job/100440674643).
 
-The extension is in `codex/section8-subgaussian` of the existing `random-band-circular-law-lean` repository, based on verified Rademacher commit `24a1e37550a7e471bec4bb668ce4bde92fae3cbb`. It is developed in a separate local checkout.
+The extension belongs to the root Lake project of `random-band-circular-law-lean`. [PR #1](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/pull/1) integrates it and the verified Rademacher baseline `24a1e37550a7e471bec4bb668ce4bde92fae3cbb` into `main`. The development branch is `codex/section8-subgaussian`, in a separate local checkout.
 
 ## Scope
 

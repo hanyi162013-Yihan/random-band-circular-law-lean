@@ -4,7 +4,7 @@ Verified extension of the Rademacher specialization to every fixed real IID law 
 
 The final results are `SubgaussianSection8.section8_subgaussian_log_potential` and `SubgaussianSection8.section8_subgaussian_circular_law` in [Results.lean](Results.lean). For the exact cyclic-band dimension `N=(s+3)W`, they assume positive widths and core-site counts, `W → ∞` and `W/log N → ∞`. The circular-law result covers every bounded continuous real test function on the complex plane. The quantitative Cook and Nguyen ranges must cover the fixed atom parameter.
 
-This library is developed in a separate local checkout on `codex/section8-subgaussian` of the existing `random-band-circular-law-lean` repository. It extends verified Rademacher commit `24a1e37550a7e471bec4bb668ce4bde92fae3cbb`; baseline Section 4/8/9/10 and vendor source files are unchanged.
+This library belongs to the root Lake project of `random-band-circular-law-lean`. [PR #1](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/pull/1) integrates both the verified Rademacher specialization and this general extension into `main`. Development uses a separate local checkout on `codex/section8-subgaussian`. It extends verified Rademacher commit `24a1e37550a7e471bec4bb668ce4bde92fae3cbb`; existing Section 4/8/9/10 and vendor source files are unchanged by the extension.
 
 ## Verification
 
