@@ -409,3 +409,12 @@ example (A : Fin 2 → Matrix (Fin 1) (Fin 1) ℂ) (hA : ∀ b, (A b).det ≠ 0)
     matrixCutoffPotential (Matrix.blockDiagonal' A) 1 =
       (matrixCutoffPotential (A 0) 1 + matrixCutoffPotential (A 1) 1) / 2 := by
   simpa [Fin.sum_univ_two] using matrixCutoffPotential_blockDiagonal A hA zero_lt_one
+
+-- Actual one-dimensional routed Gaussian blocks have integrable cutoffs at every positive threshold.
+example : ∀ᵐ z ∂(volume : Measure ℂ), ∀ t : ℝ, 0 < t →
+    Integrable (fun ω => matrixCutoffPotential
+      (routedBandMatrix (cyclicFinSlot (N := 1) 0) (fun _ => (1 : ℂ)) ω - z • 1) t)
+      (Measure.pi (fun _ : Fin 1 × Fin 1 => circularComplexGaussian)) :=
+  routedBand_shifted_cutoff_integrable_ae (cyclicFinSlot 0)
+    (cyclicFinSlot_injective (by decide)) (fun _ => 1) circularComplexGaussian
+    circularComplexGaussian_sq_integrable

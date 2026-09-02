@@ -84,7 +84,7 @@ theorem blockDiagonal_map_basis {κ : β → Type*} [∀ b, Fintype (κ b)]
     LinearIsometryEquiv.apply_symm_apply, map_smul, Pi.orthonormalBasis_apply]
   by_cases h : b = c
   · subst c
-    simpa only [PiLp.single_eq_same] using hv b i
+    simpa only [PiLp.smul_apply, PiLp.single_eq_same] using hv b i
   · simp [h]
 
 theorem blockDiagonal_singularValues_sum (A : ∀ b, Matrix (ι b) (ι b) ℂ)
