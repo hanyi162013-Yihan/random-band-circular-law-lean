@@ -5,6 +5,7 @@ packagesDir = "../.lake/packages"
 
 [[lean_lib]]
 name = "CircularLawSection6"
+moreLeanArgs = ["-DwarningAsError=true"]
 
 [[require]]
 name = "CircularLawSections56"

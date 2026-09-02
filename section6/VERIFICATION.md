@@ -1,5 +1,16 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Development batch pending verification
+
+Seven additional modules are being integrated after the checkpoint below.
+Only `SampledProfile` and `CyclicMatrix` have passed targeted strict local
+checks so far. The remaining new modules, combined entry point, expanded
+axiom audit and regressions must pass before treating this batch as verified.
+Local memory contention makes the dedicated GitHub workflow the preferred
+full-layout check. The historical results below are not results for this batch.
+
+## Earlier verified checkpoint
+
 This record concerns the five new modules in `CircularLawSection6`, not all of
 the manuscript's Section 6. See `README.md` for the remaining mathematical inputs.
 

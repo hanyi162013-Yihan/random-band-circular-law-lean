@@ -7,6 +7,13 @@ No second mathlib checkout or large local download is needed.
 
 ## New proof layer
 
+The current development batch adds literal sampled profiles, cyclic matrices,
+product-law independence, normalized complex Gaussians, core/tail energies,
+tail rotations and a uniform BV quadrature estimate. `SampledProfile` and
+`CyclicMatrix` have passed targeted local strict checks. The rest of this
+batch is undergoing compilation; it is not yet a verified checkpoint.
+The earlier five-module checkpoint below remains separately recorded.
+
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the
   fourth-root tail cutoff. No uniform-in-radius convergence is assumed.
@@ -25,7 +32,8 @@ the full noncompact Gaussian-profile circular-law theorem.
 
 ## Remaining mathematical boundaries
 
-The literal Gaussian model, BV Riemann-sum limits, compact-core cutoff
+The new literal Gaussian model connections and BV quadrature require completion
+of their current verification. BV Riemann-sum limits, compact-core cutoff
 periodicization and singular-value comparison, Gaussian affine-log/cofactor
 concentration, rotation-invariant expectation/Fubini transport, finite-matrix
 Mirsky estimate, hard-edge input, and final sparse/dense replacement assembly
