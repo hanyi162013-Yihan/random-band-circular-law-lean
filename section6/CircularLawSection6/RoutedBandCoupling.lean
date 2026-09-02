@@ -37,7 +37,9 @@ theorem routedBandMatrix_measurable (route : ι → κ → ι) (b : κ → ℂ) 
   apply Finset.measurable_sum
   intro s _
   by_cases h : j = route i s
-  · simpa only [if_pos h] using measurable_const.mul (measurable_pi_apply (i, s))
+  · simp only [if_pos h]
+    change Measurable ((fun _ : ι × κ → ℂ => b s) * (fun ω => ω (i, s)))
+    exact measurable_const.mul (measurable_pi_apply (i, s))
   · simpa only [if_neg h] using (measurable_const : Measurable (fun _ : ι × κ → ℂ => (0 : ℂ)))
 
 theorem routedBand_row_energy (route : ι → κ → ι)
@@ -79,7 +81,8 @@ theorem routedBand_difference_energy_le
     (maskMatrixRows S (routedBandMatrix route₂ b ω))
   simp_rw [maskMatrixRows_hilbertSchmidtSq, routedBand_row_energy route₁ h₁,
     routedBand_row_energy route₂ h₂] at h
-  convert h using 1 <;> ring
+  convert h using 1
+  ring
 
 omit [DecidableEq ι] in
 theorem routedAtoms_expected_boundary_energy (S : Finset ι) (b : κ → ℂ)
@@ -111,7 +114,6 @@ theorem routedAtoms_expected_boundary_energy (S : Finset ι) (b : κ → ℂ)
   rw [integral_finsetSum _ (fun i _ => integrable_finsetSum _ (fun s _ => ht i s))]
   simp_rw [integral_finsetSum _ (fun s _ => ht _ s), integral_const_mul, hc]
   simp only [← Finset.sum_mul, Finset.sum_const, nsmul_eq_mul]
-  ring
 
 theorem routedBand_expected_difference_energy_le
     (route₁ route₂ : ι → κ → ι)
