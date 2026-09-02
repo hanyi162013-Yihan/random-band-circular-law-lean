@@ -52,7 +52,7 @@ the real i.i.d. specialization of Lemma 10.2 through Proposition 10.10.
 It includes affine-log and multiaffine estimates, physical-row concentration,
 integrated Hodge control, and the nine-block seam/reset expectation estimates,
 with explicit constants. It imports the Section 9 algebra directly.
-The newly inserted Proposition 10.1, the later asymptotic arguments, the
+Proposition 10.1, the subsequent asymptotic arguments, the
 planar-complex/directional-density alternatives, and the heterogeneous-law
 generality of 10.2--10.3 are not claimed. See the
 [Section 10 overview](Section10/README.md),
