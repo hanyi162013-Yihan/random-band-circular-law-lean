@@ -32,7 +32,7 @@ theorem integral_sqrt_le_sqrt_integral {Ω : Type*} [MeasurableSpace Ω]
   have hcs := integral_mul_le_Lp_mul_Lq_of_nonneg (μ := μ)
     Real.HolderConjugate.two_two (ae_of_all _ fun ω => Real.sqrt_nonneg (f ω))
     (ae_of_all _ fun _ : Ω => (zero_le_one : (0 : ℝ) ≤ 1))
-    (memLp_sqrt_of_integrable_nonneg μ f hf hpos)
+    (by simpa using memLp_sqrt_of_integrable_nonneg μ f hf hpos)
     (by simpa using (memLp_const (1 : ℝ) : MemLp (fun _ : Ω => (1 : ℝ)) 2 μ))
   have h : (∫ ω, Real.sqrt (f ω) ∂μ) ≤
       Real.sqrt (∫ ω, (Real.sqrt (f ω)) ^ 2 ∂μ) := by
@@ -63,16 +63,19 @@ theorem expected_matrixCutoff_difference_le {Ω : Type*} [MeasurableSpace Ω]
     (aestronglyMeasurable_matrixCutoffPotential μ B hB hBdet ha)).norm
   have hm' : AEStronglyMeasurable (fun ω =>
       |matrixCutoffPotential (A ω) a - matrixCutoffPotential (B ω) a|) μ := by
-    simpa only [Real.norm_eq_abs] using hm
-  have hb : (fun ω => |matrixCutoffPotential (A ω) a - matrixCutoffPotential (B ω) a|) ≤ᵐ[μ]
-      (fun ω => Real.sqrt (e ω) / (a * Real.sqrt (Fintype.card ι : ℝ))) := by
+    simpa only [Real.norm_eq_abs, Pi.sub_apply] using hm
+  have hb : ∀ᵐ ω ∂μ,
+      |matrixCutoffPotential (A ω) a - matrixCutoffPotential (B ω) a| ≤
+        Real.sqrt (e ω) / (a * Real.sqrt (Fintype.card ι : ℝ)) := by
     filter_upwards [hAdet, hBdet] with ω hω hω'
     exact matrixCutoffPotential_difference_le _ _ hω hω' ha
-  have hi := hbound.mono' hm' (by simpa only [Real.norm_eq_abs, abs_abs] using hb)
+  have hi := hbound.mono' hm' (by
+    filter_upwards [hb] with ω hω
+    simpa only [Real.norm_eq_abs, abs_abs] using hω)
   refine ⟨hi, ?_⟩
   calc
     _ ≤ ∫ ω, Real.sqrt (e ω) / (a * Real.sqrt (Fintype.card ι : ℝ)) ∂μ := integral_mono_ae hi hbound hb
-    _ = (∫ ω, Real.sqrt (e ω) ∂μ) / (a * Real.sqrt (Fintype.card ι : ℝ)) := integral_div_const _ _
+    _ = (∫ ω, Real.sqrt (e ω) ∂μ) / (a * Real.sqrt (Fintype.card ι : ℝ)) := integral_div _ _
     _ ≤ _ := div_le_div_of_nonneg_right (integral_sqrt_le_sqrt_integral μ e hE hpos)
       (mul_nonneg ha.le (Real.sqrt_nonneg _))
 

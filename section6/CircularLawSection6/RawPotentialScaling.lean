@@ -42,13 +42,14 @@ theorem matrixRawPotential_le_cutoff
     matrixRawPotential A ≤ matrixCutoffPotential A a := by
   unfold matrixRawPotential matrixCutoffPotential operatorCutoffPotential
   rw [matrix_log_norm_det_eq_sum_log_singularValues A hA]
-  simp only [finrank_euclideanSpace]
+  simp only [Fin.sum_univ_eq_sum_range, finrank_euclideanSpace]
   apply div_le_div_of_nonneg_right _ (Nat.cast_nonneg _)
   apply Finset.sum_le_sum
-  intro i _
+  intro i hi
   apply Real.log_le_log
   · exact A.toEuclideanLin.injective_iff_forall_lt_finrank_singularValues_pos.mp
-      (toEuclideanLin_injective_of_det_ne_zero A hA) i (by simpa using i.isLt)
+      (toEuclideanLin_injective_of_det_ne_zero A hA) i
+      (by simpa only [finrank_euclideanSpace] using Finset.mem_range.mp hi)
   · exact le_max_left _ _
 
 theorem matrixRawPotential_smul [Nonempty ι]

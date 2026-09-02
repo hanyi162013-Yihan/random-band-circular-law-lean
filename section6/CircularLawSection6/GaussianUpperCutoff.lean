@@ -93,7 +93,7 @@ theorem gaussian_expected_core_full_cutoff_sandwich_ae (p : NoncompactProfile)
   have h := expected_raw_le_cutoff_of_error (gaussianProfileLaw N)
     (fun ω => p.matrix N W ω - z • 1) (fun ω => p.coreMatrix N H W ω - z • 1)
     a (Real.sqrt (p.tailMass N H W) / a) hfull hraw' hcutoff (hdiff a ha).1 (hdiff a ha).2
-  simpa only [matrixRawPotential, ZMod.card, rawProfileLogDet, integral_div_const] using h
+  simpa only [matrixRawPotential, ZMod.card, rawProfileLogDet, integral_div] using h
 
 /-- A single full-measure parameter set supports every size, integer core
 radius, and positive cutoff, including choices depending on the size. -/
