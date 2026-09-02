@@ -1,6 +1,6 @@
 import CircularLawSection6.MatrixCutoffComparison
 import Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
-import Mathlib.Topology.Algebra.Group.Matrix
+import Mathlib.Topology.Instances.Matrix
 import Mathlib.Tactic.FunProp
 
 /-! # Measurability of the actual cutoff on the nonsingular event
@@ -19,6 +19,13 @@ noncomputable section
 set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
+
+instance complexMatrixMeasurableSpace (ι κ : Type*) : MeasurableSpace (Matrix ι κ ℂ) :=
+  inferInstanceAs (MeasurableSpace (ι → κ → ℂ))
+
+instance complexMatrixBorelSpace (ι κ : Type*) [Fintype ι] [Fintype κ] :
+    BorelSpace (Matrix ι κ ℂ) :=
+  inferInstanceAs (BorelSpace (ι → κ → ℂ))
 
 variable {ι : Type*} [Fintype ι] [DecidableEq ι] [Nonempty ι]
 
@@ -53,7 +60,7 @@ def goodMatrixCutoffPotential (a : ℝ) (A : Matrix ι ι ℂ) : ℝ :=
 theorem measurable_goodMatrixCutoffPotential {a : ℝ} (ha : 0 < a) :
     Measurable (goodMatrixCutoffPotential (ι := ι) a) := by
   have hS : MeasurableSet {A : Matrix ι ι ℂ | A.det ≠ 0} :=
-    (isClosed_eq Matrix.continuous_det continuous_const).isOpen_compl.measurableSet
+    (isClosed_eq continuous_id.matrix_det continuous_const).isOpen_compl.measurableSet
   exact (continuousOn_matrixCutoffPotential (ι := ι) ha).measurable_piecewise
     continuousOn_const hS
 
