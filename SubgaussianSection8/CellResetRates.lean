@@ -97,7 +97,7 @@ theorem integrable_cellIntervalResetLoss (Ξ : Atom) (W s K : ℕ) (j : Fin K)
     ((measurable_cellIntervalResetLoss Ξ) W s K j z r T).aestronglyMeasurable
   apply ae_of_all
   intro x
-  rw [Real.norm_of_nonneg (show 0 ≤ cellIntervalResetLoss W s K j z r T x from
+  rw [Real.norm_of_nonneg (show 0 ≤ cellIntervalResetLoss Ξ W s K j z r T x from
     cappedSpliceLoss_nonneg hT _ _ _)]
   exact cappedSpliceLoss_le_cap _ _ _ _
 
