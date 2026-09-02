@@ -44,7 +44,9 @@ theorem matrixCutoffPotential_difference_le [Nonempty ι]
     (toEuclideanLin_injective_of_det_ne_zero A hA)
     (toEuclideanLin_injective_of_det_ne_zero B hB)
     (by simpa using Fintype.card_pos (α := ι)) ha
-  rw [← Matrix.toEuclideanLin.map_sub, operatorHilbertSchmidtSq_toEuclideanLin] at h
+  have hm : (A - B).toEuclideanLin = A.toEuclideanLin - B.toEuclideanLin :=
+    Matrix.toEuclideanLin.map_sub A B
+  rw [← hm, operatorHilbertSchmidtSq_toEuclideanLin] at h
   simpa only [matrixCutoffPotential, Module.finrank_euclideanSpace] using h
 
 theorem matrixShiftedCutoff_difference_le [Nonempty ι]
