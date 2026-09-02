@@ -1,0 +1,11 @@
+import BernoulliSection8
+
+set_option pp.universes true
+set_option pp.explicit false
+#print BernoulliSection8.Section3SubgaussianHighBandInput
+#print BernoulliSection9.NguyenBottomSingularInput
+#print BernoulliSection9.CookDeformedSquareInput
+#print BernoulliSection8.rademacherMatrix
+#print BernoulliSection8.rademacherSequenceLaw
+#print BernoulliSection8.section8_bernoulli_log_potential
+#print BernoulliSection8.section8_bernoulli_circular_law

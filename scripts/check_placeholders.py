@@ -3,8 +3,10 @@
 
 Ignore Lean comments (including nested block comments) and string literals.
 This is a lexical safeguard, not a substitute for checking compiled axioms.
+Use --path to restrict the scan to one directory inside the repository.
 """
 
+import argparse
 import re
 import os
 import subprocess
@@ -50,7 +52,22 @@ def code_only(source: str) -> str:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--path", type=Path,
+        help="scan only this directory (relative to the repository root)",
+    )
+    args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
+    selected = None
+    if args.path is not None:
+        directory = (root / args.path).resolve()
+        try:
+            selected = directory.relative_to(root)
+        except ValueError:
+            parser.error(f"scan directory is outside the repository: {args.path}")
+        if not directory.is_dir():
+            parser.error(f"scan directory does not exist or is not a directory: {args.path}")
     # Include newly written source before it is staged; a tracked-only scan
     # can otherwise silently omit the very proofs being checked locally.
     if (root / ".git").exists():
@@ -71,6 +88,8 @@ def main() -> int:
     failed = False
     count = 0
     for relative in sorted(set(filter(None, paths))):
+        if selected is not None and not Path(relative).is_relative_to(selected):
+            continue
         count += 1
         code = code_only((root / relative).read_text())
         for match in re.finditer(r"\b(sorry|admit|axiom)\b", code):
@@ -78,10 +97,12 @@ def main() -> int:
             print(f"{relative}:{line}: forbidden token {match.group()}")
             failed = True
     if not count:
-        print("No workspace Lean files found", file=sys.stderr)
+        scope = "workspace" if selected is None else str(selected)
+        print(f"No {scope} Lean files found", file=sys.stderr)
         return 1
     if not failed:
-        print(f"Source-token scan passed: {count} workspace Lean files ({mode})")
+        scope = "workspace" if selected is None else str(selected)
+        print(f"Source-token scan passed: {count} {scope} Lean files ({mode})")
     return int(failed)
 
 

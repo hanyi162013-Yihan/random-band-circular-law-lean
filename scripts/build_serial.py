@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
-"""Build every project module in dependency order, then check Lake's defaults.
+"""Build project modules serially, optionally limited to selected roots.
+
+With --target, build only those modules and their transitive project
+dependencies, then check the selected Lake targets. Without --target,
+build every project module and check Lake's default targets as before.
+With --keep-going, collect failures from independent branches and skip
+modules that depend on a failed module. Any failure suppresses the final
+Lake target check and returns a nonzero status.
+With --start-at MODULE, still compute the full selected dependency closure,
+but omit earlier per-module commands. Every remaining command and the final
+target check uses normal Lake dependency validation; omitted modules are
+never treated as successfully verified by this script.
 
 Requires Python 3.11+. Fetch the pinned dependency cache before running this
 script: project modules are serialized, but Lake manages external dependencies.
@@ -130,27 +141,85 @@ def dependency_order(dependencies: dict[str, set[str]]) -> list[str]:
     return order
 
 
+def dependency_closure(dependencies: dict[str, set[str]], targets: list[str]) -> dict[str, set[str]]:
+    """Keep exactly the selected roots and their transitive dependencies."""
+    for target in targets:
+        if target not in dependencies:
+            raise ValueError(f"unknown project module target: {target!r}")
+    selected = set()
+    pending = list(targets)
+    while pending:
+        name = pending.pop()
+        if name in selected:
+            continue
+        selected.add(name)
+        pending.extend(dependencies[name] - selected)
+    return {name: dependencies[name] for name in sorted(selected)}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dry-run", action="store_true", help="print module order; do not run Lake")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1],
                         help="repository root (defaults to this script's parent repository)")
+    parser.add_argument("--target", action="append", default=[], metavar="MODULE",
+                        help="build this module root and its dependencies (repeatable)")
+    parser.add_argument("--keep-going", action="store_true",
+                        help="continue independent branches after a failed module")
+    parser.add_argument("--start-at", metavar="MODULE",
+                        help="start per-module commands here; normal Lake dependency and final checks remain")
     args = parser.parse_args()
     root = args.root.resolve()
+    targets = list(dict.fromkeys(args.target))
     try:
         modules = discover_modules(root)
-        order = dependency_order({
+        dependencies = {
             name: header_imports(path.read_text(encoding="utf-8")) & modules.keys()
             for name, path in sorted(modules.items())
-        })
+        }
+        if targets:
+            dependencies = dependency_closure(dependencies, targets)
+        order = dependency_order(dependencies)
+        start_index = 0
+        if args.start_at is not None:
+            if args.start_at not in dependencies:
+                raise ValueError(f"start module is not in the selected dependency closure: {args.start_at!r}")
+            start_index = order.index(args.start_at)
+        commands = order[start_index:]
         if args.dry_run:
-            print("\n".join(order))
+            print("\n".join(commands))
             return 0
-        for index, name in enumerate(order, 1):
+        if start_index:
+            print(f"Starting at {args.start_at}; omitting {start_index} earlier per-module commands. "
+                  "Lake still validates dependencies and final targets.", flush=True)
+        failed = set()
+        skipped = set()
+        for index, name in enumerate(commands, start_index + 1):
+            blockers = dependencies[name] & (failed | skipped)
+            if blockers:
+                skipped.add(name)
+                print(f"[{index}/{len(order)}] Skipping {name}: failed dependency "
+                      f"{', '.join(sorted(blockers))}", flush=True)
+                continue
             print(f"[{index}/{len(order)}] lake build {name}", flush=True)
-            subprocess.run(["lake", "build", name], cwd=root, check=True)
-        print("Checking all default targets: lake build", flush=True)
-        subprocess.run(["lake", "build"], cwd=root, check=True)
+            try:
+                subprocess.run(["lake", "build", name], cwd=root, check=True)
+            except subprocess.CalledProcessError as error:
+                if not args.keep_going:
+                    raise
+                failed.add(name)
+                print(f"Failed {name} (exit {error.returncode})", file=sys.stderr, flush=True)
+        if failed:
+            print(f"Failed modules: {', '.join(sorted(failed))}", file=sys.stderr, flush=True)
+            print(f"Skipped {len(skipped)} dependent modules; final targets were not run.",
+                  file=sys.stderr, flush=True)
+            return 1
+        final_command = ["lake", "build", *targets]
+        if targets:
+            print(f"Checking selected targets: {' '.join(final_command)}", flush=True)
+        else:
+            print("Checking all default targets: lake build", flush=True)
+        subprocess.run(final_command, cwd=root, check=True)
     except subprocess.CalledProcessError as error:
         return error.returncode if error.returncode > 0 else 1
     except (OSError, ValueError, KeyError, TypeError, graphlib.CycleError) as error:

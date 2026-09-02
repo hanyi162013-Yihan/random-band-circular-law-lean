@@ -5,14 +5,28 @@ Lean 4 formalization accompanying Yi Han's paper
 periodic profile and discrete law*](https://arxiv.org/abs/2609.01295).
 
 This is a paper-wide repository. It contains **Section 4,
-“Exterior transfer and local density tools”**, **Section 9 libraries for
-deterministic linear algebra and local small-ball arguments**, and
-**the Section 10 bounded-density circular-law proof for real i.i.d. atoms**.
+“Exterior transfer and local density tools”**, **Section 5**, **Section 8 for
+real IID subgaussian atoms**, **Section 9 libraries for deterministic linear
+algebra and local small-ball arguments**, and **the Section 10 bounded-density
+circular-law proof for real i.i.d. atoms**.
 References in the Section 9 and 10 libraries use
 [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
-Sections 5–6 are not included or claimed as proved here.
+Section 5 has its own [subproject and verification record](section5/README.md).
+The included Section 6 helper modules do not claim completion of Section 6.
 
 ## Scope and status
+
+Section 8 proves the logarithmic-potential limit and circular law for every
+fixed real IID law with mean zero, second moment one, and a finite subgaussian
+MGF parameter, under `W → ∞` and `W/log N → ∞`, where `N=(s+3)W`.
+Cook, Nguyen, and Section 3 Proposition 3.8 remain explicit external inputs.
+The general theorem is
+`SubgaussianSection8.section8_subgaussian_circular_law`; its proof requires no
+bounded-support, symmetry, or density hypothesis. The Rademacher proof remains
+available in `Section8/BernoulliSection8`. See the
+[general Section 8 overview](SubgaussianSection8/README.md),
+[proof and verification map](SubgaussianSection8/STATUS.md), and
+[Rademacher overview](Section8/README.md).
 
 The Section 4 library contains 104 modules, with proof chains corresponding to
 the nine named results in Section 4: row-linearity, the periodic
@@ -97,6 +111,16 @@ Section4/
   *AxiomAudit.lean              # six audit entry points
   README.md
   FORMALIZATION_MAP.md
+section5/                      # Section 5 subproject; see its own README
+Section8/
+  BernoulliSection8.lean      # Rademacher specialization
+  BernoulliSection8/          # proof modules and shared Section 8 lemmas
+  README.md
+SubgaussianSection8.lean       # general real-IID subgaussian public import
+SubgaussianSection8/
+  Results.lean               # final log-potential and circular-law theorems
+  README.md
+  STATUS.md
 Section9/
   BernoulliLinearAlgebra.lean   # public umbrella import
   BernoulliLinearAlgebra/       # deterministic proof modules; imports preserved
@@ -121,9 +145,9 @@ vendor/
   short-ring-analysis/        # 30 proved generic modules, SHA-256 manifest
 ```
 
-All libraries use the same Lake project and dependency cache. Later chapters
-can be added with their own source directories and can import these libraries;
-there is no need for a separate mathlib checkout per chapter.
+The root libraries use the same Lake project and dependency cache. Section 5
+is a subproject that depends on this root project and shares its mathlib
+package directory; see [its build instructions](section5/README.md).
 
 ## Build
 
@@ -137,7 +161,11 @@ cd random-band-circular-law-lean
 # On a new machine, this downloads the mathlib compiled cache (potentially large).
 # Skip it if the matching dependencies and compiled cache are already available.
 lake exe cache get
-lake build
+# Build Section 8 and its actual imports. This is also the default target.
+lake build SubgaussianSection8
+
+# Optional: build the Rademacher specialization.
+lake build BernoulliSection8
 
 # Optional: build only the deterministic Section 9 library.
 lake build BernoulliLinearAlgebra
@@ -160,20 +188,36 @@ The cache download is not needed merely to read or download the source.
 Do not run `lake update` for routine checking: the committed manifest records
 the dependency versions used for this release.
 
-For a memory-constrained machine, serialize project modules and run all checks:
+For a memory-constrained machine, serialize the Section 8 import closure:
 
 ```sh
 python3 scripts/check_axioms.py --self-test
-python3 scripts/check_placeholders.py
-python3 scripts/build_serial.py
-python3 scripts/check_axioms.py
+python3 scripts/check_placeholders.py --path SubgaussianSection8
+python3 scripts/build_subgaussian.py --target SubgaussianSection8
+python3 scripts/check_axioms.py --audit-file SubgaussianSection8/AxiomAudit.lean
+lake env lean SubgaussianSection8/PublicSignatureAudit.lean
 ```
 
-Python 3.11 or newer is required. The serial builder checks every declared
-library module, then runs the complete default `lake build`. The source scan
-also supports source-only archives without Git metadata.
+Python 3.11 or newer is required. This serial builder checks only the selected
+import closure, then runs the normal `lake build SubgaussianSection8` target.
+The closure contains zero Section 4 modules. Existing `.lake` artifacts are
+reused by Lake. The source scan also supports archives without Git metadata.
 
 ### Automated verification
+
+The [general Section 8 verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33688229894/job/100440674643)
+passed at proof-source commit `d29fd6f0cefcaa4ec3afe09f14c54df3e16842d4`:
+32 new modules, the normal `lake build SubgaussianSection8`, 34 extension
+files without placeholders, 13 strict axiom reports, and compiled public
+signatures. All reported axioms were `propext`, `Classical.choice`, or
+`Quot.sound`. The [Rademacher baseline run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33677989986/job/100407373237)
+also passed independently. These checks cover the documented Section 8
+scope; they do not claim completion of the entire paper.
+
+The `General subgaussian Section 8` workflow runs for pull requests or manual
+dispatch. It restores compiled artifacts and builds only Section 8 and its
+required imports. Section 5 retains its independent workflow. Routine
+Section 8 verification does not require a complete repository build.
 
 The [complete Section 10 verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33620303116)
 passed for source commit `1cb4a34cd6867cda79b26a9c8e4bded4cdabb515` on
@@ -183,20 +227,11 @@ passed for source commit `1cb4a34cd6867cda79b26a9c8e4bded4cdabb515` on
 toolchain/cache setup and audits. See [Section10/AUDIT.md](Section10/AUDIT.md)
 for exact scope, the final printed signature, and the earlier baseline record.
 
-The `Lean verification` GitHub Actions workflow runs on pushes and pull requests,
-and can also be started manually. It installs the pinned Lean toolchain,
-downloads the matching mathlib cache, builds every library, and checks all
-`*AxiomAudit.lean` entry points. Axiom reports must match their audit declarations
-and use only `propext`, `Classical.choice`, and `Quot.sound`; a Lean error or an
-unexpected dependency fails the job. The workflow also scans for proof
-placeholders and project axioms.
-
-Verification uses a standard GitHub-hosted Ubuntu runner, with no paid larger
-runner, GitHub build-cache storage, or uploaded build artifacts. Modules are
-built in dependency order to bound peak memory, followed by a complete
-`lake build`. A successful job verifies the checked commit, not later edits or
-the completeness of the paper translation. Submit changes on a verification
-branch and review the successful check before merging into `main`.
+The Section 10 run above is a historical full-build record, not a requirement
+to repeat all chapters for Section 8 changes. A successful job verifies its
+checked source, not arbitrary later edits or completeness of the paper
+translation. Axiom reports must match their audit declarations and use only
+the three standard Lean foundations listed above.
 
 ## Audit
 

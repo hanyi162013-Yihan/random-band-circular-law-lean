@@ -19,3 +19,8 @@ Scratch*.lean
 Check*.lean
 *.zip
 *.tar.gz
+
+# General subgaussian local development and review artifacts.
+work/
+outputs/
+__pycache__/
