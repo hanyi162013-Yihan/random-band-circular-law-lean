@@ -10,3 +10,5 @@ import CircularLawSection6.ComplexGaussian
 import CircularLawSection6.CyclicIndependence
 import CircularLawSection6.GaussianProfile
 import CircularLawSection6.BVQuadrature
+import CircularLawSection6.CenteredMesh
+import CircularLawSection6.ProfileQuadrature

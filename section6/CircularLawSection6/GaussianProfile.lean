@@ -33,9 +33,10 @@ theorem rotateCyclicAtoms_measurable (N : ℕ) (a : ZMod N × ZMod N → Circle)
 theorem gaussianProfileLaw_rotation (N : ℕ) [NeZero N]
     (a : ZMod N × ZMod N → Circle) :
     (gaussianProfileLaw N).map (rotateCyclicAtoms N a) = gaussianProfileLaw N := by
-  unfold gaussianProfileLaw cyclicAtomLaw rotateCyclicAtoms
-  rw [Measure.pi_map_pi (fun _ => (measurable_const.mul measurable_id).aemeasurable)]
-  simp_rw [circularComplexGaussian_rotation]
+  have h := Measure.pi_map_pi
+    (μ := fun _ : ZMod N × ZMod N => circularComplexGaussian)
+    (f := fun k (z : ℂ) => (a k : ℂ) * z) (fun _ => by fun_prop)
+  simpa only [circularComplexGaussian_rotation] using h
 
 theorem gaussianProfileLaw_rotation_preserving (N : ℕ) [NeZero N]
     (a : ZMod N × ZMod N → Circle) :

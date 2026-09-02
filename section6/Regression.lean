@@ -44,6 +44,13 @@ example : centeredOffset 5 (2 : ZMod 5) = 2 := by decide
 
 example : centeredOffset 5 (3 : ZMod 5) = -2 := by decide
 
+-- At the exact odd-size threshold, the core still has exactly 2 H + 1 offsets.
+example : (coreOffsets 5 2).card = 5 := by
+  simpa using card_coreOffsets 5 2 (by decide)
+
+-- Beyond the unwrapping condition, the even-size core saturates at N entries.
+example : (coreOffsets 4 2).card = 4 := by decide
+
 -- A one-dimensional matrix has one active diagonal even at zero truncation radius.
 example : coreOffsets 1 0 = Finset.univ := by
   ext s
