@@ -35,6 +35,9 @@ theorem intervalRestriction_flatten_cell (W c K : ℕ) (k : Fin K)
       x k := by
   funext i
   obtain ⟨⟨j, a⟩, rfl⟩ := finProdFinEquiv.surjective i
+  change intervalRestriction (completeCellSiteEmbedding c K k)
+      (flattenCompleteCells W c K x) (intervalRowIndex j a) =
+    x k (intervalRowIndex j a)
   simp only [intervalRestriction, Function.comp_apply, intervalRowEmbedding_rowIndex]
   exact flattenCompleteCells_row W c K x k j a
 
@@ -156,7 +159,11 @@ theorem complete_cell_pressure_sandwich
           exact (le_abs_self _).trans
             (rademacherInterval_abs_logNorm_le_on_measurable_good I hI W 3 hW z _ (hrgood k) r)
         _ = _ := by simp
-    have h' := h.trans (add_le_add_left hreset _)
+    have h' : Real.log ‖intervalClearedProduct W (K * (3 + s)) z
+        (flattenCompleteCells W (3 + s) K x) r‖ ≤
+        (∑ k : Fin K, Real.log ‖intervalClearedProduct W s z (completeCellCore W s (x k)) r‖) +
+          (K : ℝ) * cellTransferBudget I W 3 z :=
+      h.trans (add_le_add (le_refl _) hreset)
     simpa only [intervalDegreeLog, ← hclip] using h'
   apply finite_pressure_sandwich (clippedCorePressure μ A W s z)
     (fun r => ∑ k, clippedCoreLog A W s z r (completeCellCore W s (x k)))

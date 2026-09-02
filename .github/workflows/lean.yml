@@ -59,7 +59,7 @@ jobs:
           RESTORED_PROJECT_CACHE: ${{ steps.project-cache.outputs.cache-matched-key }}
         run: |
           if [ -n "$RESTORED_PROJECT_CACHE" ]; then
-            python3 scripts/build_serial.py --target BernoulliSection8 --keep-going --start-at BernoulliSection8.CellResetLoss
+            python3 scripts/build_serial.py --target BernoulliSection8 --keep-going --start-at BernoulliSection8.CellPressureSandwich
           else
             python3 scripts/build_serial.py --target BernoulliSection8 --keep-going
           fi
