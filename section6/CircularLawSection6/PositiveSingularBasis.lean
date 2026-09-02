@@ -34,7 +34,8 @@ theorem exists_canonical_positive_singular_bases (T : Module.End ℂ E)
     have h := T.isSymmetric_adjoint_comp_self.apply_eigenvectorBasis rfl i
     rw [← T.sq_singularValues_fin rfl i] at h
     simp only [LinearMap.comp_apply, RCLike.ofReal_pow] at h
-    convert h using 1 <;> rfl
+    convert h using 1
+    rfl
   let u₀ : Fin (Module.finrank ℂ E) → E := fun i => (s i : ℂ)⁻¹ • T (v i)
   have hu : Orthonormal ℂ u₀ := by
     rw [orthonormal_iff_ite]
