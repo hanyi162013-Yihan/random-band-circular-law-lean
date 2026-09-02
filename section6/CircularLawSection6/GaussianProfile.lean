@@ -36,7 +36,8 @@ theorem gaussianProfileLaw_rotation (N : ℕ) [NeZero N]
   have h := Measure.pi_map_pi
     (μ := fun _ : ZMod N × ZMod N => circularComplexGaussian)
     (f := fun k (z : ℂ) => (a k : ℂ) * z) (fun _ => by fun_prop)
-  simpa only [circularComplexGaussian_rotation] using h
+  simpa only [gaussianProfileLaw, cyclicAtomLaw, rotateCyclicAtoms,
+    circularComplexGaussian_rotation] using h
 
 theorem gaussianProfileLaw_rotation_preserving (N : ℕ) [NeZero N]
     (a : ZMod N × ZMod N → Circle) :
