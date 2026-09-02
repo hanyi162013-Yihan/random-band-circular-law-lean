@@ -54,8 +54,9 @@ example : (coreOffsets 4 2).card = 4 := by decide
 -- A one-dimensional matrix has one active diagonal even at zero truncation radius.
 example : coreOffsets 1 0 = Finset.univ := by
   ext s
-  have : s = 0 := Subsingleton.elim _ _
-  simp [this]
+  simp only [Finset.mem_univ, iff_true]
+  rw [Subsingleton.elim s 0]
+  exact zero_mem_coreOffsets 1 0
 
 -- Empty tails are zero; they do not require division by a positive tail mass.
 example (N : ℕ) [NeZero N] (q : ZMod N → ℝ) (ω : ZMod N × ZMod N → ℂ) :
