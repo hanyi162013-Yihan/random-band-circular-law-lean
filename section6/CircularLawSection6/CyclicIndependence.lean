@@ -13,6 +13,11 @@ noncomputable section
 
 namespace CircularLawSection6
 
+/-- The product sigma-algebra on the finitely indexed matrix entries. -/
+instance cyclicMatrix_measurableSpace (N : ℕ) :
+    MeasurableSpace (Matrix (ZMod N) (ZMod N) ℂ) :=
+  inferInstanceAs (MeasurableSpace (ZMod N → ZMod N → ℂ))
+
 def zeroExtendAtoms {ι : Type*} [DecidableEq ι] (S : Finset ι)
     (x : S → ℂ) (i : ι) : ℂ :=
   if hi : i ∈ S then x ⟨i, hi⟩ else 0
@@ -46,7 +51,7 @@ theorem weightedCyclicMatrix_core_tail_independent
       (weightedCyclicMatrix N (maskedWeight Sᶜ q)) (cyclicAtomLaw N ν) := by
   let I := activeAtomIndices N S
   have hInd := (cyclicAtoms_independent N ν).indepFun_finset I Iᶜ
-    Finset.disjoint_compl_right (fun _ => measurable_pi_apply _)
+    disjoint_compl_right (fun _ => measurable_pi_apply _)
   have hm (J : Finset (ZMod N × ZMod N)) :
       Measurable (fun x : J → ℂ => weightedCyclicMatrix N q (zeroExtendAtoms J x)) :=
     (weightedCyclicMatrix_measurable_matrix N q).comp (zeroExtendAtoms_measurable J)

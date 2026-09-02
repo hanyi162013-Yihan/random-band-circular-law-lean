@@ -28,7 +28,7 @@ theorem leftRectangle_error_le {f : ℝ → ℝ} (hf : Continuous f)
     |(b - a) * f a - ∫ x in a..b, f x| ≤
       (b - a) * (eVariationOn f (Icc a b)).toReal := by
   have heq : (b - a) * f a - ∫ x in a..b, f x = ∫ x in a..b, f a - f x := by
-    rw [intervalIntegral.integral_sub intervalIntegrable_const hf.intervalIntegrable,
+    rw [intervalIntegral.integral_sub intervalIntegrable_const (hf.intervalIntegrable a b),
       intervalIntegral.integral_const]
     rfl
   rw [heq, ← Real.norm_eq_abs]
@@ -49,7 +49,7 @@ theorem leftRectangleSum_error_le {f : ℝ → ℝ} (hf : Continuous f)
   have hcell (i : ℕ) : BoundedVariationOn f (Icc (u i) (u (i + 1))) :=
     hBV.mono (subset_univ _)
   have hint := intervalIntegral.sum_integral_adjacent_intervals
-    (a := u) (n := n) (fun _ _ => hf.intervalIntegrable)
+    (a := u) (n := n) (μ := volume) (fun _ _ => hf.intervalIntegrable _ _)
   have hvar : (∑ i ∈ Finset.range n,
       (eVariationOn f (Icc (u i) (u (i + 1)))).toReal) =
         (eVariationOn f (Icc (u 0) (u n))).toReal := by
@@ -73,7 +73,8 @@ theorem uniformMesh_error_le {f : ℝ → ℝ} (hf : Continuous f)
         ∫ x in a..a + n * δ, f x| ≤ δ * (eVariationOn f univ).toReal := by
   have hu : Monotone (fun i : ℕ => a + i * δ) := by
     intro i j hij
-    exact add_le_add_left (mul_le_mul_of_nonneg_right (by exact_mod_cast hij) hδ) a
+    have hijR : (i : ℝ) ≤ (j : ℝ) := by exact_mod_cast hij
+    exact add_le_add le_rfl (mul_le_mul_of_nonneg_right hijR hδ)
   have hstep (i : ℕ) : (a + (i + 1 : ℕ) * δ) - (a + i * δ) = δ := by
     push_cast
     ring

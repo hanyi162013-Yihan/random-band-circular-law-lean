@@ -96,4 +96,14 @@ theorem circularComplexGaussian_rotation_preserving (a : Circle) :
       circularComplexGaussian circularComplexGaussian :=
   ⟨by fun_prop, circularComplexGaussian_rotation a⟩
 
+/-- Atomlessness follows from the concrete Gaussian law and its nonzero second
+moment; it is needed later in the diagonal/cofactor nonvanishing argument. -/
+instance circularComplexGaussian_nullSingleton : NullSingletonClass circularComplexGaussian := by
+  apply IsGaussian.nullSingletonClass
+  intro z hz
+  have hm := circularComplexGaussian_mean
+  have hs := circularComplexGaussian_secondMoment
+  rw [hz, integral_dirac] at hm hs
+  simp [hm] at hs
+
 end CircularLawSection6
