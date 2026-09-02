@@ -44,10 +44,10 @@ theorem cyclicColumnSample_measurePreserving (N : ℕ) [NeZero N]
   have hr := measurePreserving_pi_restrict_injective (cyclicColumnCoordinate N)
     (cyclicColumnCoordinate_injective N) ν
   have hc := measurePreserving_curry_fin_iid N N ν
+  unfold cyclicColumnSample cyclicAtomLaw
   rw [iidMeasure_eq_pi]
   simp_rw [iidMeasure_eq_pi ν N]
-  simpa only [cyclicColumnSample, cyclicAtomLaw, MeasurableEquiv.curry_apply,
-    Function.comp_def] using hc.comp hr
+  simpa only [MeasurableEquiv.coe_curry, Function.curry, Function.comp_def] using hc.comp hr
 
 def cyclicRowAmplitude (N : ℕ) [NeZero N] (q : ZMod N → ℝ) (r : ℝ) :
     Matrix (Fin N) (Fin N) ℂ :=
@@ -68,7 +68,7 @@ theorem weightedRowsLogDet_cyclicColumnSample (N : ℕ) [NeZero N]
     simp [weightedRowsMatrix, cyclicRowAmplitude, cyclicColumnSample, cyclicColumnCoordinate,
       weightedCyclicMatrix, Matrix.submatrix, Matrix.one_apply, mul_assoc]
   unfold weightedRowsLogDet cyclicRawLogDet
-  rw [he, Matrix.det_submatrix_equiv_self]
+  rw [he, Matrix.det_submatrix_equiv_self (ZMod.finEquiv N).toEquiv]
 
 theorem cyclicRowAmplitude_diagonal (N : ℕ) [NeZero N]
     (q : ZMod N → ℝ) {r : ℝ} (hr : 0 ≤ r) (i : Fin N) :

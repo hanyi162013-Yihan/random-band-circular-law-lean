@@ -46,7 +46,7 @@ theorem normalized_variance_le {Ω : Type*} [MeasurableSpace Ω]
   calc
     _ ≤ (C * N * (Real.log (Real.exp 1 * N)) ^ 2) / N ^ 2 :=
       div_le_div_of_nonneg_right hV (sq_nonneg N)
-    _ = _ := by field_simp [hN.ne']; ring
+    _ = _ := by field_simp [hN.ne']
 
 /-- `N log²(eN)` variance gives normalized `L¹` concentration on the literal
 varying sample spaces, and hence convergence in probability. -/
@@ -63,7 +63,8 @@ theorem concentration_of_logarithmic_variance
     TendstoInProbabilityTri μ (fun n ω =>
       X n ω / (N n : ℝ) - ∫ x, X n x / (N n : ℝ) ∂μ n) 0 := by
   let Y : ∀ n, Ω n → ℝ := fun n ω => X n ω / (N n : ℝ)
-  have hY (n : ℕ) : MemLp (Y n) 2 (μ n) := (hX n).div_const _
+  have hY (n : ℕ) : MemLp (Y n) 2 (μ n) := by
+    simpa only [Y, div_eq_mul_inv] using (hX n).mul_const ((N n : ℝ)⁻¹)
   have hv0 : Tendsto (fun n => variance (Y n) (μ n)) atTop (𝓝 0) := by
     apply squeeze_zero (fun _ => variance_nonneg _ _)
       (fun n => normalized_variance_le (μ n) (X n) (by exact_mod_cast hNpos n) (hV n))
@@ -77,7 +78,7 @@ theorem concentration_of_logarithmic_variance
   apply tendstoInProbabilityTri_of_L1 μ _ 0
     (fun n => ∫ ω, |Y n ω - ∫ x, Y n x ∂μ n| ∂μ n)
   · intro n
-    simpa only [sub_zero] using
+    simpa only [sub_zero, Pi.sub_apply, Y] using
       (((hY n).integrable (by norm_num : (1 : ENNReal) ≤ 2)).sub (integrable_const _)).abs
   · intro n
     simp only [sub_zero]
