@@ -27,6 +27,10 @@ instance complexMatrixBorelSpace (ι κ : Type*) [Fintype ι] [Fintype κ] :
     BorelSpace (Matrix ι κ ℂ) :=
   inferInstanceAs (BorelSpace (ι → κ → ℂ))
 
+instance complexMatrixSecondCountable (ι κ : Type*) [Fintype ι] [Fintype κ] :
+    SecondCountableTopology (Matrix ι κ ℂ) :=
+  inferInstanceAs (SecondCountableTopology (ι → κ → ℂ))
+
 variable {ι : Type*} [Fintype ι] [DecidableEq ι] [Nonempty ι]
 
 omit [DecidableEq ι] [Nonempty ι] in

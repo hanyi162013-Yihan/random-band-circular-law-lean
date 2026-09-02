@@ -251,4 +251,5 @@ example (t : ℝ) (ht : 0 ≤ t) (a b : ℂ) :
 
 -- Dimension normalization is exact, not only an asymptotic constant bound.
 example (e : ℝ) : Real.sqrt (4 * e) / 4 = Real.sqrt e / 2 := by
-  simpa using sqrt_mul_div_dimension (e := e) (by norm_num : (0 : ℝ) < 4)
+  have h4 : Real.sqrt (4 : ℝ) = 2 := by norm_num
+  simpa only [h4] using sqrt_mul_div_dimension (e := e) (by norm_num : (0 : ℝ) < 4)
