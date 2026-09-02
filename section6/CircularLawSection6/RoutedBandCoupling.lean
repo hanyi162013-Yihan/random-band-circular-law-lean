@@ -26,6 +26,7 @@ variable {ι κ : Type*} [Fintype ι] [DecidableEq ι] [Fintype κ]
 def routedBandMatrix (route : ι → κ → ι) (b : κ → ℂ) (ω : ι × κ → ℂ) : Matrix ι ι ℂ :=
   fun i j => ∑ s, if j = route i s then b s * ω (i, s) else 0
 
+omit [Fintype ι] in
 theorem routedBandMatrix_measurable (route : ι → κ → ι) (b : κ → ℂ) :
     Measurable (routedBandMatrix route b) := by
   classical
