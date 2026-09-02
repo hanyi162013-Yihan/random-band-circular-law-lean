@@ -288,3 +288,18 @@ example (p : NoncompactProfile) (N H : ℕ) [NeZero N] (W : ℝ) :
           Real.sqrt (p.tailMass N H W) := by
   filter_upwards [p.gaussian_expected_core_full_cutoff_sandwich_ae N H W] with z hz
   simpa only [div_one] using (hz 1 zero_lt_one).2.2
+
+-- Actual radial mean monotonicity includes dimension one and spectral parameter zero.
+example (p : NoncompactProfile) (W : ℝ) :
+    MonotoneOn (fun r => p.scaledUnitCoreMean 1 0 W r 0) (Ioi 0) :=
+  p.scaledUnitCoreMean_monotoneOn 1 0 W 0
+
+-- Cutoff scaling permits a zero comparison scale; nonsingularity is a.e. in the parameter.
+example (p : NoncompactProfile) (N H : ℕ) [NeZero N] (W : ℝ) :
+    ∀ᵐ z ∂(volume : Measure ℂ),
+      (∫ ω, |matrixCutoffPotential ((0 : ℂ) • p.unitCoreMatrix N H W ω - z • 1) 1 -
+        matrixCutoffPotential ((1 : ℂ) • p.unitCoreMatrix N H W ω - z • 1) 1|
+        ∂gaussianProfileLaw N) ≤ 1 := by
+  filter_upwards [p.gaussian_unitCore_cutoff_scaling_ae N H W 0 1] with z hz
+  simpa only [sub_zero, zero_sub, abs_neg, abs_one, div_one, Complex.ofReal_zero,
+    Complex.ofReal_one] using (hz 1 zero_lt_one).2.2

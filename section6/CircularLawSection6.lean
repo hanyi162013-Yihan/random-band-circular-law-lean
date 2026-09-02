@@ -46,3 +46,5 @@ import CircularLawSection6.CutoffIntegrability
 import CircularLawSection6.GaussianTailCutoff
 import CircularLawSection6.RawPotentialScaling
 import CircularLawSection6.GaussianUpperCutoff
+import CircularLawSection6.VaryingCoreCutoff
+import CircularLawSection6.GaussianRadialMean

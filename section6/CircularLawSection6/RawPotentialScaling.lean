@@ -50,8 +50,13 @@ theorem matrixRawPotential_le_cutoff
         (by simpa only [finrank_euclideanSpace] using i.isLt)
     · exact le_max_left _ _
   have h := div_le_div_of_nonneg_right hsum (Nat.cast_nonneg (α := ℝ) (Fintype.card ι))
-  simpa only [matrixRawPotential, matrix_log_norm_det_eq_sum_log_singularValues A hA,
-    matrixCutoffPotential, operatorCutoffPotential, finrank_euclideanSpace] using h
+  have hindex : (∑ i : Fin (Module.finrank ℂ (EuclideanSpace ℂ ι)),
+      Real.log (max (A.toEuclideanLin.singularValues i) a)) =
+      ∑ i : Fin (Fintype.card ι), Real.log (max (A.toEuclideanLin.singularValues i) a) :=
+    Fintype.sum_equiv (finCongr (finrank_euclideanSpace (𝕜 := ℂ) (ι := ι))) _ _ (fun _ => rfl)
+  unfold matrixRawPotential matrixCutoffPotential operatorCutoffPotential
+  rw [matrix_log_norm_det_eq_sum_log_singularValues A hA, hindex, finrank_euclideanSpace]
+  exact h
 
 theorem matrixRawPotential_smul [Nonempty ι]
     (A : Matrix ι ι ℂ) (hA : A.det ≠ 0) {r : ℝ} (hr : 0 < r) :

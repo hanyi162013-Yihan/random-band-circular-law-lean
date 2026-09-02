@@ -20,10 +20,11 @@ energies, the exact logarithmic cutoff constant, the literal matrix energy
 identification, and cutoff measurability on the nonsingular event. No Mirsky
 inequality or measurable singular-frame choice is supplied as a premise.
 
-The next five modules (48 total, 51 regression examples) derive expected
+The next seven modules (50 total, 53 regression examples) derive expected
 cutoff stability and integrability, the literal Gaussian tail error, the
 determinant/singular-log and scaling identities, and the actual expected
-core/full sandwich. These additions are under validation and are not part
+core/full sandwich, varying-scale cutoff stability, and actual radial mean
+monotonicity and normalization. These additions are under validation and are not part
 of the 43-module verified checkpoint.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,

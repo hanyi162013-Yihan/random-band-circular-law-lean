@@ -20,10 +20,11 @@ shifted/scaled matrices, and cutoff measurability on the nonsingular event.
 The latter uses the entrywise Borel structure, without a measurable choice
 of singular vectors. A small local matrix-Borel/subtraction probe also passed.
 
-The following five modules are a subsequent, unverified batch:
+The following seven modules are a subsequent, unverified batch:
 `ExpectedCutoffComparison`, `CutoffIntegrability`, `GaussianTailCutoff`,
-`RawPotentialScaling`, and `GaussianUpperCutoff`. Neither those modules nor
-the new 51-example regression suite is covered by this 43-module checkpoint.
+`RawPotentialScaling`, `GaussianUpperCutoff`, `VaryingCoreCutoff`, and
+`GaussianRadialMean`. Neither those modules nor the new 53-example regression
+suite is covered by this 43-module checkpoint.
 The full Section 6 theorem remains incomplete; see the README boundaries.
 
 ## Verified thirty-three-module checkpoint
