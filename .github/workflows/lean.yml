@@ -1,0 +1,43 @@
+name: Lean verification
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lean-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      LEAN_NUM_THREADS: "2"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Check verification scripts
+        run: |
+          python3 scripts/check_axioms.py --self-test
+          python3 scripts/build_serial.py --dry-run
+          python3 scripts/check_placeholders.py
+      - name: Install pinned Lean and fetch mathlib cache
+        uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: true
+          use-github-cache: false
+      - name: Build all libraries
+        run: python3 scripts/build_serial.py
+      - name: Audit public axioms and print signatures
+        run: python3 scripts/check_axioms.py

@@ -5,11 +5,11 @@ Lean 4 formalization accompanying Yi Han's paper
 periodic profile and discrete law*](https://arxiv.org/abs/2609.01295).
 
 This is a paper-wide repository. It contains **Section 4,
-“Exterior transfer and local density tools”**, and a separate **Section 9
-deterministic linear-algebra library**. References in the Section 9 library use
+“Exterior transfer and local density tools”**, and **Section 9 libraries for
+deterministic linear algebra and local small-ball arguments**. References in
+the Section 9 libraries use
 [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
-Sections 5–6 and the remaining probabilistic Section 9 arguments are not
-included or claimed as proved in this release.
+Sections 5–6 are not included or claimed as proved here.
 
 ## Scope and status
 
@@ -34,6 +34,18 @@ Lemmas 7.5 and 7.7. See the [Section 9 overview](Section9/README.md),
 [paper reference map](Section9/PAPER_REFERENCES.md).
 The Section 9 library introduces no Cook, Nguyen, or RRQR axiom.
 
+The `BernoulliSection9` library contains 75 modules for interface control,
+the terminal packet, and the arbitrary-frame deduction in §§9.1–9.2.
+Cook and Nguyen estimates are explicit inputs with fixed subgaussian ranges;
+Cook also fixes the profile bounds. The public signatures use those ranges
+directly. RRQR and the two-square/CUR constructions are proved internally.
+The RRQR exponent is 16 (Lemma 9.1 states 4), and small-ball losses and failure
+bounds are supplied as explicit finite expressions. See the
+[small-ball overview](Section9/SMALL_BALL_README.md),
+[formula map](Section9/SMALL_BALL_FORMALIZATION_MAP.md), and
+[verification audit](Section9/SMALL_BALL_AUDIT.md). Publication-wide verification
+of this library is in progress; it is not reported as complete.
+
 This release does **not** assert a full formalization of the paper.
 Coverage is stated at the level of the named proof chains; exact formulations,
 constants, and hypotheses are documented in the Lean statements and coverage map.
@@ -41,7 +53,7 @@ constants, and hypotheses are documented in the Lean statements and coverage map
 Formal theorem statements are authoritative. Probability-law assumptions
 (including normalization, independence, density or directional conditional
 density, second moments, positive weights, and required nondegeneracy) remain
-explicit theorem parameters. Legacy conditional APIs are retained alongside
+explicit theorem parameters. General conditional APIs are provided alongside
 the final paper-specific theorems; the presence of an interface theorem alone
 does not establish an unconditional result.
 
@@ -65,14 +77,18 @@ Section4/
 Section9/
   BernoulliLinearAlgebra.lean   # public umbrella import
   BernoulliLinearAlgebra/       # deterministic proof modules; imports preserved
+  BernoulliSection9.lean        # small-ball public umbrella import
+  BernoulliSection9/            # 75 interface/terminal/frame proof modules
   AxiomAudit.lean
+  SmallBallAxiomAudit.lean
   README.md
   FORMALIZATION_MAP.md
   PAPER_REFERENCES.md
+  SMALL_BALL_*.md
 ```
 
-Both libraries use the same Lake project and dependency cache. Later chapters
-can be added with their own source directories and can import either library;
+All libraries use the same Lake project and dependency cache. Later chapters
+can be added with their own source directories and can import these libraries;
 there is no need for a separate mathlib checkout per chapter.
 
 ## Build
@@ -91,6 +107,8 @@ lake build
 
 # Optional: build only the deterministic Section 9 library.
 lake build BernoulliLinearAlgebra
+# Optional: build the local small-ball proof chains and their dependencies.
+lake build BernoulliSection9
 ```
 
 Only source and documentation are committed. Lean, mathlib, `.lake/`, compiled
@@ -98,6 +116,23 @@ objects, scratch files, and local filesystem paths are not part of the release.
 The cache download is not needed merely to read or download the source.
 Do not run `lake update` for routine checking: the committed manifest records
 the dependency versions used for this release.
+
+### Automated verification
+
+The `Lean verification` GitHub Actions workflow runs on pushes and pull requests,
+and can also be started manually. It installs the pinned Lean toolchain,
+downloads the matching mathlib cache, builds every library, and checks all
+`*AxiomAudit.lean` entry points. Axiom reports must match their audit declarations
+and use only `propext`, `Classical.choice`, and `Quot.sound`; a Lean error or an
+unexpected dependency fails the job. The workflow also scans for proof
+placeholders and project axioms.
+
+Verification uses a standard GitHub-hosted Ubuntu runner, with no paid larger
+runner, GitHub build-cache storage, or uploaded build artifacts. Modules are
+built in dependency order to bound peak memory, followed by a complete
+`lake build`. A successful job verifies the checked commit, not later edits or
+the completeness of the paper translation. Submit changes on a verification
+branch and review the successful check before merging into `main`.
 
 ## Audit
 
@@ -111,6 +146,7 @@ lake env lean Section4/FlatAxiomAudit.lean
 lake env lean Section4/FourGapsAxiomAudit.lean
 lake env lean Section4/Section4CompleteAxiomAudit.lean
 lake env lean Section9/AxiomAudit.lean
+lake env lean Section9/SmallBallAxiomAudit.lean
 ```
 
 These audits supplement kernel checking; they are not a proof that an informal
