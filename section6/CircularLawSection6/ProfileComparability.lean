@@ -22,7 +22,7 @@ theorem compact_bounds (p : NoncompactProfile) {R : ℝ} (hR : 0 ≤ R) :
     (s := Icc (-R) R) ⟨0, by simpa using hR⟩ p.continuous.continuousOn
   refine ⟨m, p.f y, hm, p.positive y, ?_⟩
   intro x hx
-  exact ⟨hml x (abs_le.1 hx), hmy x (abs_le.1 hx)⟩
+  exact ⟨hml x (abs_le.1 hx), hmy (abs_le.1 hx)⟩
 
 theorem raw_bounds_of_window (p : NoncompactProfile) (N : ℕ) (W : ℝ)
     {R m M : ℝ} (hbounds : ∀ x, |x| ≤ R → m ≤ p.f x ∧ p.f x ≤ M)
@@ -79,7 +79,7 @@ theorem dense_sample_window (N : ℕ) [NeZero N] {W κ : ℝ}
   apply (div_le_div_iff₀ hWpos hκ).2
   calc
     _ ≤ (N : ℝ) * κ := mul_le_mul_of_nonneg_right (centeredOffset_abs_le_dimension N s) hκ.le
-    _ ≤ _ := by simpa only [one_mul, mul_comm] using hW
+    _ ≤ _ := by simpa only [one_mul, mul_one, mul_comm] using hW
 
 /-- The dense branch has entry variances comparable with `1/N`, with constants
 depending only on the profile and the fixed lower bound for `W/N`. -/
@@ -110,7 +110,7 @@ theorem core_weights_comparable (p : NoncompactProfile) {R : ℝ} (hR : 0 < R) :
   have hk : 0 < k := by dsimp [k]; positivity
   have hfloor : (H : ℝ) ≤ R * W := Nat.floor_le (mul_nonneg hR.le hWpos.le)
   have hfloor' : R * W < (H : ℝ) + 1 := Nat.lt_floor_add_one (R * W)
-  have hkLower : R * W ≤ k := by dsimp [k]; push_cast; nlinarith [Nat.cast_nonneg (R := ℝ) H]
+  have hkLower : R * W ≤ k := by dsimp [k]; push_cast; nlinarith [Nat.cast_nonneg (α := ℝ) H]
   have hkUpper : k ≤ (2 * R + 1) * W := by dsimp [k]; push_cast; nlinarith
   have hraw : ∀ t ∈ coreOffsets N H, m ≤ p.raw N W t ∧ p.raw N W t ≤ M := by
     intro t ht

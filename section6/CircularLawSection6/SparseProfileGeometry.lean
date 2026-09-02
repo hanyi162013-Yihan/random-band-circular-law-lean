@@ -64,8 +64,7 @@ theorem sparse_floor_core_fits (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     funext n
     have hN0 : (N n : ℝ) ≠ 0 := by exact_mod_cast NeZero.ne (N n)
     push_cast
-    field_simp [(hW n).ne', hN0]
-    ring
+    field_simp [(hW n).ne', hN0] <;> ring
   filter_upwards [hcount.eventually (gt_mem_nhds (show (0 : ℝ) < 1 by norm_num))] with n hn
   have hNpos : (0 : ℝ) < N n := by exact_mod_cast NeZero.pos (N n)
   have h := (div_lt_one hNpos).1 hn

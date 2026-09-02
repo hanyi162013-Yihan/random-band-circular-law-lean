@@ -24,7 +24,8 @@ theorem intervalIntegral_tendsto_of_endpoints {f : ℝ → ℝ} (hf : Integrable
   have heq (c d : ℝ) : (∫ x in 0..d, f x) - (∫ x in 0..c, f x) =
       ∫ x in c..d, f x :=
     intervalIntegral.integral_interval_sub_left hf.intervalIntegrable hf.intervalIntegrable
-  simpa only [heq] using ((hc.tendsto b₀).comp hb).sub ((hc.tendsto a₀).comp ha)
+  simpa only [Function.comp_apply, heq] using
+    ((hc.tendsto b₀).comp hb).sub ((hc.tendsto a₀).comp ha)
 
 namespace NoncompactProfile
 
@@ -61,7 +62,8 @@ theorem rawCoreMass_tendsto_of_scaled_radius (p : NoncompactProfile)
   have ha : Tendsto (fun n => -(H n : ℝ) / W n) atTop (𝓝 (-R)) := by
     simpa only [neg_div] using hR.neg
   have hb : Tendsto (fun n => ((H n : ℝ) + 1) / W n) atTop (𝓝 R) := by
-    simpa only [add_div, one_div, add_zero] using hR.add (tendsto_inv_atTop_zero.comp hWlim)
+    simpa only [Function.comp_apply, add_div, one_div, add_zero] using
+      hR.add (tendsto_inv_atTop_zero.comp hWlim)
   have hint := intervalIntegral_tendsto_of_endpoints p.integrable ha hb
   have herr : Tendsto (fun n => p.rawCoreMass (N n) (H n) (W n) / W n -
       ∫ x in -(H n : ℝ) / W n..((H n : ℝ) + 1) / W n, p.f x) atTop (𝓝 0) := by
