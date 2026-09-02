@@ -370,3 +370,36 @@ example {q : ℕ} (len : Fin q → ℕ) [∀ j, NeZero (len j)] [NeZero (∑ j, 
   simpa using (periodicization_expected_energy len (H := 0) (fun j => NeZero.pos (len j))
     (fun _ => 1) (by simp) circularComplexGaussian
     circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment).2
+
+-- Exact cutoff scaling includes a threshold change, not just an additive logarithm.
+example (A : Matrix (Fin 1) (Fin 1) ℂ) (hA : A.det ≠ 0) :
+    matrixCutoffPotential ((2 : ℂ) • A) 1 =
+      Real.log 2 + matrixCutoffPotential A (1 / 2) :=
+  matrixCutoffPotential_smul A hA (by norm_num) zero_lt_one
+
+-- The scalar logarithmic identity holds even below the truncation threshold.
+example : Real.log (max ((2 : ℝ) * 0) 1) =
+    Real.log 2 + Real.log (max (0 : ℝ) (1 / 2)) :=
+  log_max_positive_scale (by norm_num) zero_lt_one 0
+
+-- Dimension weights normalize for unequal block lengths as well.
+example : (∑ b : Fin 2, ((![3, 7] b : ℕ) : ℝ) / 10) = 1 :=
+  dimension_weights_sum_one ![3, 7] (by norm_num) (by norm_num [Fin.sum_univ_two])
+
+-- A convex block average inherits the common error without a block-count factor.
+example {q : ℕ} (w x : Fin q → ℝ) (hw : ∀ b, 0 ≤ w b) (hsum : ∑ b, w b = 1)
+    (target : ℝ) (hx : ∀ b, |x b - target| ≤ (1 : ℝ) / 10) :
+    |(∑ b, w b * x b) - target| ≤ (1 : ℝ) / 10 :=
+  weighted_block_error_le w x hw hsum target (1 / 10) hx
+
+-- Cyclic displacement agrees with the paper's ZMod indexing, including wraparound.
+example : ZMod.finEquiv 5 (cyclicFinSlot 1 (0 : Fin 5) (0 : Fin 3)) =
+    ZMod.finEquiv 5 0 - (1 : ZMod 5) + 0 :=
+  finEquiv_cyclicFinSlot 1 0 0
+
+-- The flattened sample used for the original full route has the exact IID law.
+example (ν : Measure ℂ) [IsProbabilityMeasure ν] :
+    MeasurePreserving (fullBlockPaperSample (fun _ : Fin 2 => 5) 1 1 (by decide))
+      (Measure.pi (fun _ : ((b : Fin 2) × Fin 5) × Fin 3 => ν))
+      (CircularLawSection4.paperIndicatorSampleMeasure 10 1 ν) :=
+  fullBlockPaperSample_measurePreserving (fun _ : Fin 2 => 5) 1 1 (by decide) ν

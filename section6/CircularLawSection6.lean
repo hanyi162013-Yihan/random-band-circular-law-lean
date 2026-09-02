@@ -55,3 +55,6 @@ import CircularLawSection6.RoutedBandCoupling
 import CircularLawSection6.ContiguousBlockRouting
 import CircularLawSection6.MatrixParameterNonvanishing
 import CircularLawSection6.PeriodicizationEnergy
+import CircularLawSection6.SingularBasisCutoff
+import CircularLawSection6.UniformBlockAverages
+import CircularLawSection6.RoutedBandIdentification

@@ -1,5 +1,23 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified fifty-seven-module checkpoint
+
+Commit: `7aac27608ac3c01df69267834182a31a8d549c46`.
+[Dedicated GitHub run 33692718717](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33692718717),
+job `100454825726`: **success** on 2026-09-02.
+
+- All 57 modules plus umbrella compiled: 4101 dependency-inclusive jobs.
+- The transitive audit passed: 680 declarations, 594 theorem declarations;
+  only `propext`, `Classical.choice`, and `Quot.sound` are permitted.
+- All 64 strict regressions, source scanning, cache saving and log retention passed.
+
+The contiguous full/block cyclic routes, balanced block partition, arbitrary
+finite-index parameter nonvanishing, actual block IID marginal law, and
+the normalized `8H/m0` energy / `sqrt(8H/m0)/a` cutoff errors are checked.
+The newest scaling, uniform averaging, and physical route-identification
+modules are not included in this checkpoint. Exact spectral block averaging,
+compact cutoff comparison/limit, hard-edge control, and final assembly remain.
+
 ## Verified fifty-four-module checkpoint
 
 Commit: `fd5a513c6cf229c467bf3f37415e8270ebcf609a`.
@@ -19,10 +37,9 @@ and the common-atom boundary routing energy. Section 5's literal probability
 conclusion and the genuine fixed compact-cutoff limit remain explicit input
 boundaries; no final Section 6 circular law is claimed.
 
-The next three modules, `ContiguousBlockRouting`,
-`MatrixParameterNonvanishing`, and `PeriodicizationEnergy`, are under cloud
-validation, as is the expanded 64-example regression suite. The first of
-these independently passed a strict local check using existing mathlib.
+The three subsequent modules, `ContiguousBlockRouting`,
+`MatrixParameterNonvanishing`, and `PeriodicizationEnergy`, and the expanded
+64-example regression suite are covered by the newer 57-module checkpoint above.
 
 ## Verified fifty-module checkpoint
 

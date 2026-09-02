@@ -7,10 +7,10 @@ No second mathlib checkout or large local download is needed.
 
 ## New proof layer
 
-The fifty-four-module checkpoint at commit `fd5a513` passed the dedicated
-[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33690819600):
-the publication-layout build, transitive axiom audit (622 declarations,
-541 theorem declarations), and all 59 regression examples.
+The fifty-seven-module checkpoint at commit `7aac276` passed the dedicated
+[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33692718717):
+the publication-layout build, transitive axiom audit (680 declarations,
+594 theorem declarations), and all 64 regression examples.
 
 This includes the actual Gaussian density and atom-log control, core model
 identification, all-positive-dimension determinant concentration, and the
@@ -32,12 +32,14 @@ transport, the actual raw core mass limit, and varying cutoff normalization.
 They also construct a common-atom routing coupling and prove its expected
 boundary-row energy bound. These are included in the 54-module checkpoint.
 
-The next three modules (57 total, 64 regression examples) construct the
+Three further verified modules (57 total, 64 regression examples) construct the
 actual contiguous-block routes, balanced block lengths and boundary count,
 transport parameter nonvanishing to general finite indices, and derive
 the actual block marginal law and expected HS/cutoff periodicization error.
-These additions are under cloud validation; the routing geometry alone
-has passed a strict local check against the existing mathlib installation.
+These additions passed the complete cloud verification. The next batch
+adds exact positive cutoff scaling, uniform block-length averaging, and
+the full-route identification with the actual Section 4/5 finite-band
+matrix and IID law. These newest additions are not yet a verified checkpoint.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the
@@ -99,8 +101,8 @@ Gaussian affine-log/cofactor concentration, the literal Section 5 probability
 to core-mean implication, and finite-matrix singular-value comparison are
 checked. Canonical radius/scale transport and eventual geometry are now
 checked too, while the final Section 3/4-to-core instantiation and finite-prefix
-assembly still need completion. Compact-core cutoff periodicization is under
-validation; the cited direct comparison,
+assembly still need completion. The constructed periodicization energy and
+cutoff error are checked; exact spectral block averaging, the cited direct comparison,
 hard-edge control, and final sparse/dense replacement assembly still need
 their full source-to-model connections. The existing conditional
 helpers under `CircularLawSections56.Section6` are reused but are not counted
