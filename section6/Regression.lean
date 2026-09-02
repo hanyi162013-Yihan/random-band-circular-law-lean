@@ -436,3 +436,18 @@ example {q : ℕ} (len : Fin q → ℕ) [∀ b, NeZero (len b)]
   filter_upwards [periodicBlockMatrix_expected_cutoff_average_ae len hfit a circularComplexGaussian
     circularComplexGaussian_sq_integrable] with z hz
   exact (hz 1 zero_lt_one).2
+
+-- Scaling by two still gives zero periodicization error for a diagonal band.
+example {q : ℕ} (len : Fin q → ℕ) [∀ b, NeZero (len b)] [NeZero (∑ b, len b)] :
+    ∀ᵐ z ∂(volume : Measure ℂ),
+      (∫ ω, |matrixCutoffPotential
+        ((2 : ℂ) • routedBandMatrix (fullBlockRoute len 0) (fun _ => 1) ω - z • 1) 1 -
+        matrixCutoffPotential
+          ((2 : ℂ) • routedBandMatrix (periodicBlockRoute len 0) (fun _ => 1) ω - z • 1) 1|
+        ∂Measure.pi (fun _ : ((b : Fin q) × Fin (len b)) × Fin 1 => circularComplexGaussian)) ≤ 0 := by
+  filter_upwards [periodicization_expected_scaled_cutoff_ae len (m₀ := 1) zero_lt_one
+    (fun b => NeZero.pos (len b)) (H := 0) (fun b => NeZero.pos (len b))
+    (fun _ => 1) (by simp) circularComplexGaussian
+    circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment (r := 2) (by norm_num)]
+    with z hz
+  simpa using (hz 1 zero_lt_one).2

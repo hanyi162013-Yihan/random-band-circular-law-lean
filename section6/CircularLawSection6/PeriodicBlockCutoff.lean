@@ -130,5 +130,6 @@ theorem periodicBlockMatrix_expected_cutoff_average_ae {H : ℕ}
   rw [integral_congr_ae heq, integral_div,
     integral_finsetSum _ (fun b _ => (hiComp b).const_mul (len b : ℝ))]
   simp only [integral_const_mul, hmean]
+  rfl
 
 end CircularLawSection6
