@@ -64,11 +64,11 @@ theorem NoncompactProfile.normalizer_eq_integerSum
     (p : NoncompactProfile) (N : ℕ) [NeZero N] (W : ℝ) :
     p.normalizer N W =
       ∑ z ∈ Finset.Ico (-((N / 2 : ℕ) : ℤ)) (((N + 1) / 2 : ℕ) : ℤ), p.f (z / W) :=
-  sum_centeredOffset N _
+  sum_centeredOffset N (fun z : ℤ => p.f ((z : ℝ) / W))
 
 theorem NoncompactProfile.rawCoreMass_eq_integerSum
     (p : NoncompactProfile) (N H : ℕ) [NeZero N] (hsize : 2 * H + 1 ≤ N) (W : ℝ) :
     p.rawCoreMass N H W = ∑ z ∈ Finset.Icc (-(H : ℤ)) (H : ℤ), p.f (z / W) :=
-  sum_coreOffsets N H hsize _
+  sum_coreOffsets N H hsize (fun z : ℤ => p.f ((z : ℝ) / W))
 
 end CircularLawSection6
