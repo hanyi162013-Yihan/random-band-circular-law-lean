@@ -1,6 +1,6 @@
 name = "RandomBandCircularLaw"
 version = "0.1.0"
-defaultTargets = ["CircularLawSection4", "BernoulliLinearAlgebra", "BernoulliSection9", "BernoulliSection10", "BernoulliSection8"]
+defaultTargets = ["SubgaussianSection8"]
 
 [[lean_lib]]
 name = "CircularLawSection4"
@@ -34,3 +34,6 @@ srcDir = "vendor/short-ring-analysis"
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
 rev = "v4.33.0"
+
+[[lean_lib]]
+name = "SubgaussianSection8"

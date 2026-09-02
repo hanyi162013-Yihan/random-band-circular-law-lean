@@ -1,20 +1,13 @@
-# This variant requires Section8/PublicSignatureAudit.lean from the Section 8 branch.
-# Older branches need a branch-aware signature policy before adopting this variant.
-name: Section 8 verification
-
+name: General subgaussian Section 8
+# Draft PR base codex/section8-bernoulli permits restoring its verified artifact cache.
 "on":
-  push:
   pull_request:
   workflow_dispatch:
-
 permissions:
   contents: read
-
 concurrency:
-  group: section8-${{ github.ref }}
-  # Let the active run reach the save step; newer pushes wait in this group.
+  group: subgaussian-section8-${{ github.ref }}
   cancel-in-progress: false
-
 jobs:
   verify:
     runs-on: ubuntu-24.04
@@ -22,58 +15,51 @@ jobs:
     env:
       LEAN_NUM_THREADS: "2"
     steps:
-      - name: Check out source
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Check Section 8 verification scripts and sources
-        run: |
-          python3 scripts/check_axioms.py --self-test
-          python3 scripts/build_serial.py --target BernoulliSection8 --dry-run
-          python3 scripts/check_placeholders.py --path Section8
-      - name: Install pinned Lean and fetch mathlib cache
-        uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
+      - name: Install pinned Lean and restore Mathlib
+        uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596
         with:
           auto-config: false
           build: false
           test: false
           lint: false
           use-mathlib-cache: true
-          # Keep dependency checkouts out of the project artifact snapshot.
           use-github-cache: false
-      - name: Restore compatible project build artifacts
-        id: project-cache
-        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
-        with:
-          path: .lake/build
-          # Each attempt gets a fresh immutable entry, even after a failed build.
-          key: lean-section8-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean') }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
-          # Lake checks source/dependency traces after restoring this build cache.
-          restore-keys: |
-            lean-section8-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean') }}-${{ github.sha }}-
-            lean-section8-v1-ubuntu24-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'lakefile.lean') }}-
-      - name: Build Section 8 and its required dependencies
-        id: build
-        # Collect independent failures; check the normal target only if all modules pass.
-        env:
-          RESTORED_PROJECT_CACHE: ${{ steps.project-cache.outputs.cache-matched-key }}
+      - name: Check selected import scope and placeholders
         run: |
-          if [ -n "$RESTORED_PROJECT_CACHE" ]; then
-            python3 scripts/build_serial.py --target BernoulliSection8 --keep-going --start-at BernoulliSection8.CellResetRates
-          else
-            python3 scripts/build_serial.py --target BernoulliSection8 --keep-going
-          fi
-      - name: Save completed Section 8 dependency modules
-        # Fork PRs can read base caches, but this draft does not save their builds.
-        # No continue-on-error is applied to the build or the axiom audit.
-        if: ${{ always() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure' || steps.build.outcome == 'cancelled') && steps.project-cache.outputs.cache-primary-key != '' && steps.project-cache.outputs.cache-hit != 'true' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
-        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+          python3 scripts/check_axioms.py --self-test
+          python3 scripts/build_subgaussian.py --target SubgaussianSection8 --dry-run
+          python3 scripts/check_placeholders.py --path SubgaussianSection8
+      - uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        id: cache
         with:
-          path: .lake/build
-          key: ${{ steps.project-cache.outputs.cache-primary-key }}
-      - name: Audit Section 8 axioms and public signatures
-        # A cache hit never skips this audit. A failed build remains a failed job.
+          path: |
+            .lake/build
+          key: subgaussian-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            subgaussian-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+            lean-section8-v1-ubuntu24-Linux-X64-0026f85b3cb0162890f706e8ff3b62ab296e1ba0eaa74f972b8781159c008d4d-24a1e37550a7e471bec4bb668ce4bde92fae3cbb-33677989986-1
+      - name: Scoped serial build
+        id: build
+        env:
+          RESTORED_CACHE: ${{ steps.cache.outputs.cache-matched-key }}
+        run: |
+          if [ -n "$RESTORED_CACHE" ]; then
+            python3 scripts/build_subgaussian.py --target SubgaussianSection8 --start-at SubgaussianSection8.Atom
+          else
+            python3 scripts/build_subgaussian.py --target SubgaussianSection8
+          fi
+      - name: Save completed build artifacts
+        if: ${{ always() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure') && steps.cache.outputs.cache-primary-key != '' }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            .lake/build
+          key: ${{ steps.cache.outputs.cache-primary-key }}
+      - name: Audit this extension
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: |
-          python3 scripts/check_axioms.py --audit-file Section8/AxiomAudit.lean
-          lake env lean Section8/PublicSignatureAudit.lean
+          python3 scripts/check_axioms.py --audit-file SubgaussianSection8/AxiomAudit.lean
+          lake env lean SubgaussianSection8/PublicSignatureAudit.lean
