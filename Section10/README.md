@@ -16,9 +16,9 @@ vendor mathlib or require any machine-specific path.
 
 ## Scope of this upload
 
-- All nine existing proof chains have been migrated to the arXiv numbering.
-  The namespace, imports, theorem names, numbered helper constants, comments,
-  and documentation now use `BernoulliSection10` and items 10.2--10.10.
+- The nine proof chains use the arXiv numbering. The namespace, imports,
+  theorem names, numbered helper constants, comments, and documentation use
+  `BernoulliSection10` and items 10.2--10.10.
 - The probability model is `IsBoundedDensityAtom μ L` with `μ : Measure ℝ`:
   independent copies of one centered, variance-one real bounded-density law.
   The target spaces and matrix coefficients may be complex; this does **not**
@@ -27,8 +27,8 @@ vendor mathlib or require any machine-specific path.
   in arXiv v1 are **not formalized by this library**. Nor does its single-law
   API claim the independent, non-identically-distributed generality of 10.2
   and 10.3. The deterministic row-affinity result 10.4 has no atom-law restriction.
-- Proposition 10.1, the high-band input newly placed at the start of this
-  section, and the asymptotic arguments in Sections 10.4--10.6 are outside
+- Proposition 10.1, the high-band input at the start of this section,
+  and the asymptotic arguments in Sections 10.4--10.6 are outside
   this upload. This is not a full formalization of the entire new Section 10.
 - Proposition 10.7 uses fixed conditioned outside data `c ≠ 0` and invertible
   `R`; Proposition 10.10 uses unitary-frame coordinates for its decomposable

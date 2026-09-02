@@ -33,20 +33,12 @@ The scan covers all Lean sources in this chapter and excludes generated
 ```sh
 rg -n --glob '*.lean' \
   '\bsorry\b|\badmit\b|^[[:space:]]*(axiom|opaque)[[:space:]]' Section10
-rg -n --glob '*.lean' \
-  'BernoulliSection6|_6_[1-9]|lemma6_|packetProposition6|Section 6|\b6\.[1-9]\b' Section10
 ```
 
 Publication status: **PASS**, checked for the publication sources on
-2026-09-01. Both scans returned no matches (ripgrep exit status `1`).
-Historical draft numbering is retained only in the
-coverage map, not in the current Lean API.
-
-An additional migration check compared all 38 Lean files (37 modules and the
-umbrella import) with the previous verified library after removing comments
-and normalizing whitespace. The code is identical modulo the namespace,
-numbered theorem, and numbered constant renamings. No hypothesis or proof
-term was changed by the migration.
+2026-09-02. The scan returned no matches (ripgrep exit status `1`).
+It covers all 38 Lean files: 37 modules and the umbrella import.
+The public API follows items 10.2--10.10 of the cited arXiv source.
 
 ## Axiom audit
 

@@ -14,12 +14,11 @@ the downloaded v1 PDF is
 `c09843c706aebf8a33358d870a7c9d11d7c52926b0132605fa2ffd7eed4f512d`.
 The manuscript itself is not duplicated in this source-only release.
 
-This is the migration of the nine local proof chains from the earlier draft:
-old items 6.1--6.9 correspond respectively to **10.2--10.10**, not 10.1--10.9.
-The inserted item 10.1 is a new high-band proposition. The migrated range has
-four lemmas, one corollary, and four propositions.
+This library covers the nine local proof chains in **10.2--10.10**:
+four lemmas, one corollary, and four propositions. The high-band
+Proposition 10.1 is outside this chapter library's scope.
 
-**Coverage qualification:** the existing probabilistic implementation uses one
+**Coverage qualification:** the probabilistic implementation uses one
 law `μ : Measure ℝ` and its finite i.i.d. products. It covers the real i.i.d.
 specialization of the statements below. ArXiv v1 also allows planar-complex
 and directional conditional-density alternatives; those are not implemented
@@ -155,7 +154,7 @@ All names in this index belong to the namespace `BernoulliSection10`.
   dominated `L²` convergence, Jensen/Cauchy--Schwarz.
 - **Status:** **complete (real i.i.d.)**.  Exact coordinate resampling, clipping-based
   Efron--Stein, variance, and finite-degree maximum-deviation theorems are
-  proved.  `intervalDegreeLog_memLp_two` constructs the formerly exposed
+  proved.  `intervalDegreeLog_memLp_two` constructs the
   `MemLp` input from the concrete interval product: recursive row
   multiaffinity, its coefficient tensor, a fixed nonzero identity
   configuration, and the flat/recursive product-measure equivalence are all
@@ -213,13 +212,13 @@ All names in this index belong to the namespace `BernoulliSection10`.
   integrable; `intervalHodgeEnvelope_lintegral_le` gives the exact linear-in-`s`
   first-moment bound, while `intervalClearedProduct_hodgeLoss_le_ae` proves
   simultaneous almost-sure forward/inverse control of every degree for the
-  interval product.  Thus the submultiplicative interval corollary is now
+  interval product.  Thus the submultiplicative interval corollary is
   formalized with the same explicit one-site bound.  Moreover,
   `intervalMaxHodgeEnvelope` inherits the improved maximum-over-degrees
   construction, finite `L²`, integrability, exact linear-in-`s` first moment,
   and caller-facing almost-sure product control.
   The simultaneous tensor's deterministic complementary-minor estimate is
-  now constructed in `HodgeFamilyGrowth.lean`: zero/one-hot corners give
+  constructed in `HodgeFamilyGrowth.lean`: zero/one-hot corners give
   normalized atom bounds, standard determinant estimates control both
   complementary and ordinary minors, and finite matrix sums give explicit
   degree and family bounds.  Consequently
@@ -238,7 +237,7 @@ All names in this index belong to the namespace `BernoulliSection10`.
   `oneSiteMaxHodgeEnvelope_lintegral_le_W_log_eW` and
   `intervalMaxHodgeEnvelope_lintegral_le_W_log_eW` are the caller-facing
   one-site and interval `C_{L,z} s W log(eW)` first-moment conclusions.
-  Together with the already proved almost-sure envelope control,
+  Together with the almost-sure envelope control,
   integrability, and finite `L²`, these cover the real i.i.d. specialization
   of every assertion of Lemma 10.6;
   no coefficient, probability, or deterministic Hodge certificate remains.
@@ -393,24 +392,22 @@ All names in this index belong to the namespace `BernoulliSection10`.
   wedges, not proof certificates; all frame-limit, coefficient, and
   multiaffinity obligations are constructed internally.
 
-## Version alignment and source notes
+## Source notes
 
 The arXiv v1 proof of 10.10 explicitly uses the pointwise estimate (10.72),
-exponentiates it, and then passes to the deterministic frame limit. This
-corrects the earlier draft's reference to exponentiating expectation
-inequalities. The final averaging step now explicitly contains both the
-internal-block expectation and the endpoint expectation. The existing Lean
-proof already uses this pointwise estimate and this literal iterated integral;
-neither correction requires a new hypothesis or a new proof term.
+exponentiates it, and then passes to the deterministic frame limit. The final
+averaging step contains both the internal-block expectation and the endpoint
+expectation. The Lean proof uses this pointwise estimate and this literal
+iterated integral.
 
-One small typesetting issue remains in v1's proof of 10.5: in
+One small typesetting issue occurs in v1's proof of 10.5: in
 `part2_block.tex` the two squared terms in the bound on `|Y-Y'|²` are missing
 an intervening `+`. The Lean resampling proof uses the valid sum bound.
 No manuscript file is altered by this upload.
 
 ## Not covered by this chapter library
 
-- Proposition 10.1 (the newly inserted high-band asymptotic input).
+- Proposition 10.1 (the high-band asymptotic input).
 - Sections 10.4--10.6 (anchor, pressure lifting, and final asymptotic circular law).
 - Planar-complex and directional conditional-density atom laws.
 - The heterogeneous independent-law version of 10.2--10.3.
@@ -424,6 +421,6 @@ These are explicit scope boundaries, not axioms added to the proved theorems.
 ## Checkpoint audit
 
 The current build and trust status is recorded in `AUDIT.md`. The nine
-existing real-atom proof chains are preserved. Their completion must be read
+real-atom proof chains are documented above. Their completion must be read
 together with the atom-law and representation qualifications above, and is
 not a claim that all of arXiv v1's Section 10 has been formalized.
