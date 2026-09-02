@@ -1,0 +1,45 @@
+import BernoulliSection10.BoundedDensity
+import BernoulliSection10.AffineLog
+import BernoulliSection10.MultiAffine
+import BernoulliSection10.MultiAffineSecondMoment
+import BernoulliSection10.EfronStein
+import BernoulliSection10.PhysicalRows
+import BernoulliSection10.PhysicalModel
+import BernoulliSection10.PhysicalAffinity
+import BernoulliSection10.HodgeIntegrability
+import BernoulliSection10.EndpointDeterminant
+import BernoulliSection10.EndpointExteriorGrowth
+import BernoulliSection10.EndpointConditioningGrowth
+import BernoulliSection10.EndpointConditioningScale
+import BernoulliSection10.HodgeEnvelope
+import BernoulliSection10.HodgeFamily
+import BernoulliSection10.TensorCornerBound
+import BernoulliSection10.HodgeFamilyGrowth
+import BernoulliSection10.ProductMarginal
+import BernoulliSection10.IntervalHodge
+import BernoulliSection10.RowConcentration
+import BernoulliSection10.IntegratedHodge
+import BernoulliSection10.PacketBoundary
+import BernoulliSection10.PacketComparisonGrowth
+import BernoulliSection10.PacketMultiaffine
+import BernoulliSection10.PacketProbability
+import BernoulliSection10.PacketFrame
+import BernoulliSection10.PacketFrameProbability
+import BernoulliSection10.MultiAffineGrowth
+import BernoulliSection10.RademacherTensor
+import BernoulliSection10.SquarefreeRademacher
+import BernoulliSection10.PacketTensorScaling
+import BernoulliSection10.PacketTensorReverse
+import BernoulliSection10.PacketReset
+import BernoulliSection10.SeamComparison
+import BernoulliSection10.SeamProbability
+
+/-!
+# Local bounded-density estimates from arXiv:2609.01295v1, Section 10
+
+This is the chapter-library root for the real i.i.d. atom specialization of
+items 10.2--10.10, including the nine-block seam expectation and fixed-degree
+packet reset. The new Proposition 10.1, the later asymptotic arguments, and
+the complex/directional-density extensions are outside this library's scope.
+The deterministic linear algebra is imported from the Section9 library.
+-/

@@ -1,6 +1,6 @@
 name = "RandomBandCircularLaw"
 version = "0.1.0"
-defaultTargets = ["CircularLawSection4", "BernoulliLinearAlgebra", "BernoulliSection9"]
+defaultTargets = ["CircularLawSection4", "BernoulliLinearAlgebra", "BernoulliSection9", "BernoulliSection10"]
 
 [[lean_lib]]
 name = "CircularLawSection4"
@@ -13,6 +13,10 @@ srcDir = "Section9"
 [[lean_lib]]
 name = "BernoulliSection9"
 srcDir = "Section9"
+
+[[lean_lib]]
+name = "BernoulliSection10"
+srcDir = "Section10"
 
 [[require]]
 name = "mathlib"
