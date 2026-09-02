@@ -39,3 +39,5 @@ import CircularLawSection6.HermitianSpectralCoupling
 import CircularLawSection6.PositiveSingularBasis
 import CircularLawSection6.SingularSpectralCoupling
 import CircularLawSection6.LogCutoffComparison
+import CircularLawSection6.MatrixCutoffComparison
+import CircularLawSection6.CutoffMeasurability
