@@ -8,6 +8,26 @@ uncovered atom-law extensions are listed in
 
 ## Verified completion — 2026-09-02
 
+### Integration into `main`
+
+The completed chapter and its required vendored dependencies are now
+integrated into `main`. The integration fast-forwards the previously
+verified completion history; no Lean source, dependency pin, build
+configuration, verification script, or other chapter source was changed
+relative to completion snapshot
+`f3b485775ad2eed0ba3eefe1daa1fc85180dcbb1`. The follow-up integration commit
+only updates this audit record and the root README's branch instructions.
+
+That exact completion snapshot also passed a
+[second clean full-repository run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33624155590)
+on 2026-09-02, from 11:21:23 to 11:54:38 UTC. Its full downloaded log was
+independently checked for all 373 library targets, the final default
+`lake build`, the 381-file placeholder scan, and all 857 fresh axiom reports.
+This is verification evidence for the unchanged proof source, not a claim
+that a later automatic `main`-branch run has already completed.
+
+### Original proof-source verification
+
 The [clean GitHub Actions run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33620303116)
 passed for source commit **`1cb4a34cd6867cda79b26a9c8e4bded4cdabb515`**.
 Its Ubuntu 24.04 job ran from 10:36:11 to 11:11:24 UTC, **35 minutes 13 seconds**.

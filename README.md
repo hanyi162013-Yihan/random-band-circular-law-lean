@@ -132,7 +132,7 @@ The toolchain is pinned to `leanprover/lean4:v4.33.0`; mathlib is pinned by the
 manifest to `db584cd6d46c92f209a44c0f1c829460d327499d` (tag `v4.33.0`).
 
 ```sh
-git clone --branch section10-asymptotic-completion https://github.com/hanyi162013-Yihan/random-band-circular-law-lean.git
+git clone --branch main https://github.com/hanyi162013-Yihan/random-band-circular-law-lean.git
 cd random-band-circular-law-lean
 # On a new machine, this downloads the mathlib compiled cache (potentially large).
 # Skip it if the matching dependencies and compiled cache are already available.
@@ -148,10 +148,11 @@ lake build BernoulliSection9
 lake build BernoulliSection10
 ```
 
-The completion is published on `section10-asymptotic-completion`; the clone
-command selects that branch explicitly rather than the earlier `main`
-snapshot. For an immutable verification snapshot, check out the full source
-commit recorded in [Section10/AUDIT.md](Section10/AUDIT.md).
+The completed Section 10 proof and its required dependencies are integrated
+into `main`. The original `section10-asymptotic-completion` branch remains
+available as the reviewed completion snapshot. For an immutable verification
+snapshot, check out the full source commit recorded in
+[Section10/AUDIT.md](Section10/AUDIT.md).
 
 Only source and documentation are committed. Lean, mathlib, `.lake/`, compiled
 objects, scratch files, and local filesystem paths are not part of the release.
