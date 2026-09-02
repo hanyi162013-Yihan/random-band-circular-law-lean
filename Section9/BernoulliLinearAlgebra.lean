@@ -1,0 +1,47 @@
+import BernoulliLinearAlgebra.AllMinors
+import BernoulliLinearAlgebra.CoefficientTranslation
+import BernoulliLinearAlgebra.MaskCoefficient
+import BernoulliLinearAlgebra.BlockFloquet
+import BernoulliLinearAlgebra.CyclicFloquetConcrete
+import BernoulliLinearAlgebra.ConcreteClearedTransfer
+import BernoulliLinearAlgebra.ConcreteBoundaryExterior
+import BernoulliLinearAlgebra.TransferCoordinate
+import BernoulliLinearAlgebra.VolumeComparison
+import BernoulliLinearAlgebra.HodgeJacobi
+import BernoulliLinearAlgebra.BoundaryGram
+import BernoulliLinearAlgebra.BoundaryVolume
+import BernoulliLinearAlgebra.TerminalCoefficient
+import BernoulliLinearAlgebra.ThreeBlockMaskExpansion
+import BernoulliLinearAlgebra.ThreeBlockMaskMinor
+import BernoulliLinearAlgebra.ThreeBlockMaskComparison
+import BernoulliLinearAlgebra.ThreeBlockMatchingSurjective
+import BernoulliLinearAlgebra.ThreeBlockInvalidZero
+import BernoulliLinearAlgebra.ThreeBlockZeroComparison
+import BernoulliLinearAlgebra.ThreeBlockShiftTranslation
+import BernoulliLinearAlgebra.DenseExtension
+import BernoulliLinearAlgebra.ChartPerturbation
+import BernoulliLinearAlgebra.GramPositivity
+import BernoulliLinearAlgebra.DoubleEliminationConcrete
+import BernoulliLinearAlgebra.JacobiConcrete
+import BernoulliLinearAlgebra.ConcreteConditioning
+import BernoulliLinearAlgebra.ConcreteBoundaryComparison
+import BernoulliLinearAlgebra.PolynomialCoefficientContinuity
+import BernoulliLinearAlgebra.ExteriorVolumeComparison
+import BernoulliLinearAlgebra.ExteriorOperatorVolume
+import BernoulliLinearAlgebra.GramVolumeReindex
+import BernoulliLinearAlgebra.ThreeBlockTerminal
+import BernoulliLinearAlgebra.ConcreteBoundaryGlobal
+import BernoulliLinearAlgebra.GlobalBoundarySquarefree
+import BernoulliLinearAlgebra.ConcreteBoundaryChart
+import BernoulliLinearAlgebra.ConcreteRowScaling
+import BernoulliLinearAlgebra.ConcreteBoundaryFinal
+
+/-!
+# Deterministic linear algebra for `arXiv:2609.01295v1`
+
+This is the root import for the algebraic proof chains in Sections 9.1.3
+and 9.3--9.5, and the exterior-operator comparison of Lemma 7.8.
+The finite-constant, raw unit-entry-weight comparisons are not a claim
+of the full weighted-profile or uniform asymptotic estimates in
+Lemmas 7.5 and 7.7. See Section9/FORMALIZATION_MAP.md.
+-/

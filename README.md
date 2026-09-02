@@ -4,9 +4,12 @@ Lean 4 formalization accompanying Yi Han's paper
 [*The circular law for non-Hermitian random band matrices: optimal bandwidth,
 periodic profile and discrete law*](https://arxiv.org/abs/2609.01295).
 
-This is a paper-wide repository. Its first source release contains **Section 4,
-“Exterior transfer and local density tools”**. Sections 5–6 and their interfaces
-are planned additions; they are not included or claimed as proved in this release.
+This is a paper-wide repository. It contains **Section 4,
+“Exterior transfer and local density tools”**, and a separate **Section 9
+deterministic linear-algebra library**. References in the Section 9 library use
+[arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
+Sections 5–6 and the remaining probabilistic Section 9 arguments are not
+included or claimed as proved in this release.
 
 ## Scope and status
 
@@ -19,6 +22,17 @@ operator-affine logarithmic estimates, and pressure concentration.
 See the [coverage and assumption map](Section4/FORMALIZATION_MAP.md) for exact
 Lean entry points, retained hypotheses, intermediate interfaces, and manuscript
 corrections. The [detailed Section 4 overview](Section4/README.md) is in Chinese.
+
+The Section 9 library covers the algebraic proof chains in §9.1.3 and
+§9.3–9.5: the raw unit-entry-weight finite-constant core of Lemma 7.5,
+the Block Floquet identity of Lemma 7.6, Proposition 9.3, Corollary 9.4,
+Jacobi/Hodge identities, and the deterministic boundary comparison underlying
+Lemma 7.7. It also proves the exterior-operator comparison in Lemma 7.8.
+It does not claim the full weighted-profile or uniform asymptotic estimates of
+Lemmas 7.5 and 7.7. See the [Section 9 overview](Section9/README.md),
+[coverage map](Section9/FORMALIZATION_MAP.md), and
+[paper reference map](Section9/PAPER_REFERENCES.md).
+The Section 9 library introduces no Cook, Nguyen, or RRQR axiom.
 
 This release does **not** assert a full formalization of the paper.
 Coverage is stated at the level of the named proof chains; exact formulations,
@@ -48,11 +62,18 @@ Section4/
   *AxiomAudit.lean              # six audit entry points
   README.md
   FORMALIZATION_MAP.md
+Section9/
+  BernoulliLinearAlgebra.lean   # public umbrella import
+  BernoulliLinearAlgebra/       # deterministic proof modules; imports preserved
+  AxiomAudit.lean
+  README.md
+  FORMALIZATION_MAP.md
+  PAPER_REFERENCES.md
 ```
 
-Later chapters can be added as libraries with their own source directories in
-the same Lake project. They can import Section 4 directly and use the same
-dependency cache; there is no need for a separate mathlib checkout per chapter.
+Both libraries use the same Lake project and dependency cache. Later chapters
+can be added with their own source directories and can import either library;
+there is no need for a separate mathlib checkout per chapter.
 
 ## Build
 
@@ -67,6 +88,9 @@ cd random-band-circular-law-lean
 # Skip it if the matching dependencies and compiled cache are already available.
 lake exe cache get
 lake build
+
+# Optional: build only the deterministic Section 9 library.
+lake build BernoulliLinearAlgebra
 ```
 
 Only source and documentation are committed. Lean, mathlib, `.lake/`, compiled
@@ -86,6 +110,7 @@ lake env lean Section4/CompanionAxiomAudit.lean
 lake env lean Section4/FlatAxiomAudit.lean
 lake env lean Section4/FourGapsAxiomAudit.lean
 lake env lean Section4/Section4CompleteAxiomAudit.lean
+lake env lean Section9/AxiomAudit.lean
 ```
 
 These audits supplement kernel checking; they are not a proof that an informal
