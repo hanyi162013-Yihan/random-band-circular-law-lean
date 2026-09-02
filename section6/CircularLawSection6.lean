@@ -15,3 +15,8 @@ import CircularLawSection6.ProfileQuadrature
 import CircularLawSection6.ProfileMassLimits
 import CircularLawSection6.SparseProfileGeometry
 import CircularLawSection6.ProfileComparability
+import CircularLawSection6.LimitingProfileMass
+import CircularLawSection6.InvariantPhaseAverage
+import CircularLawSection6.GaussianTailJensen
+import CircularLawSection6.ReusedLogDetIntegrability
+import CircularLawSection6.GaussianTailJensenAE

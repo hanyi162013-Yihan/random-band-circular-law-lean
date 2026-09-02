@@ -110,3 +110,23 @@ example (p : NoncompactProfile) :
       ∀ (N : ℕ) [NeZero N] (W : ℝ), (N : ℝ) ≤ W →
         ∀ s : ZMod N, c / (N : ℝ) ≤ p.weight N W s ∧ p.weight N W s ≤ C / (N : ℝ) := by
   simpa only [one_mul] using p.dense_weights_comparable (κ := 1) zero_lt_one
+
+-- The literal tail integral includes all mass when the limiting core radius is zero.
+example (p : NoncompactProfile) : p.limitingTailMass 0 = 1 := by
+  rw [p.limitingTailMass_eq_one_sub le_rfl, NoncompactProfile.limitingCoreMass]
+  simp
+
+-- The expected Jensen bound has no remaining small-ball or log-integrability inputs.
+example (p : NoncompactProfile) (N H : ℕ) [NeZero N] (W : ℝ) :
+    ∀ᵐ z ∂(volume : Measure ℂ),
+      (∫ ω, p.rawCoreLogDet N H W z ω ∂gaussianProfileLaw N) / (N : ℝ) ≤
+        (∫ ω, p.rawProfileLogDet N W z ω ∂gaussianProfileLaw N) / (N : ℝ) :=
+  p.gaussian_expected_tail_jensen_ae N H W
+
+-- The local L² estimate yields sample integrability from energy, without Gaussianity.
+example {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) [IsFiniteMeasure μ]
+    (N : ℕ) [NeZero N] (A : Ω → Matrix (ZMod N) (ZMod N) ℂ)
+    (hA : ∀ i j, Measurable (fun ω => A ω i j))
+    (hE : Integrable (fun ω => cyclicEnergy N (A ω)) μ) :
+    ∀ᵐ z ∂(volume : Measure ℂ), Integrable (fun ω => Real.log ‖(A ω - z • 1).det‖) μ :=
+  ae_cyclic_rawLogDet_integrable μ N A hA hE

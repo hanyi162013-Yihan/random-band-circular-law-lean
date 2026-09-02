@@ -17,7 +17,9 @@ theorem half_dimension_ratio_tendsto (N : ℕ → ℕ) (hN : Tendsto N atTop atT
     (tendsto_natCast_atTop_atTop.comp hN)
   have heq (n : ℕ) : ⌊(1 / 2 : ℝ) * (N n : ℝ)⌋₊ = N n / 2 := by
     rw [one_div, inv_mul_eq_div, Nat.floor_div_ofNat, Nat.floor_natCast]
-  simpa only [Function.comp_apply, heq] using h
+  change Tendsto (fun n => (⌊(1 / 2 : ℝ) * (N n : ℝ)⌋₊ : ℝ) / (N n : ℝ))
+    atTop (𝓝 (1 / 2 : ℝ)) at h
+  simpa only [heq] using h
 
 theorem dimension_over_bandwidth_tendsto (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
@@ -27,7 +29,8 @@ theorem dimension_over_bandwidth_tendsto (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     div_pos (hW n) (by exact_mod_cast NeZero.pos (N n))
   have h := tendsto_inv_nhdsGT_zero.comp
     (tendsto_nhdsWithin_iff.2 ⟨hsparse, Filter.Eventually.of_forall hpos⟩)
-  simpa only [Function.comp_apply, inv_div] using h
+  change Tendsto (fun n => (W n / (N n : ℝ))⁻¹) atTop atTop at h
+  simpa only [inv_div] using h
 
 theorem sparse_centered_window_exhausts (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     (hN : Tendsto N atTop atTop) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
@@ -42,7 +45,9 @@ theorem sparse_centered_window_exhausts (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     have hN0 : (N n : ℝ) ≠ 0 := by exact_mod_cast NeZero.ne (N n)
     field_simp [hN0]
   constructor
-  · simpa only [Function.comp_apply, neg_div] using tendsto_neg_atTop_atBot.comp hhalf
+  · have h := tendsto_neg_atTop_atBot.comp hhalf
+    change Tendsto (fun n => -(((N n / 2 : ℕ) : ℝ) / W n)) atTop atBot at h
+    simpa only [neg_div] using h
   · apply tendsto_atTop_mono _ hhalf
     intro n
     apply div_le_div_of_nonneg_right _ (hW n).le
@@ -101,7 +106,9 @@ theorem NoncompactProfile.coreMass_tendsto_sparse (p : NoncompactProfile)
   have heq (n : ℕ) : (p.rawCoreMass (N n) ⌊R * W n⌋₊ (W n) / W n) /
       (p.normalizer (N n) (W n) / W n) = p.coreMass (N n) ⌊R * W n⌋₊ (W n) := by
     rw [div_div_div_cancel_right₀ (hW n).ne', p.coreMass_eq_ratio]
-  simpa only [Pi.div_apply, heq, div_one] using h
+  change Tendsto (fun n => (p.rawCoreMass (N n) ⌊R * W n⌋₊ (W n) / W n) /
+    (p.normalizer (N n) (W n) / W n)) atTop (𝓝 ((∫ x in -R..R, p.f x) / 1)) at h
+  simpa only [heq, div_one] using h
 
 theorem NoncompactProfile.tailMass_tendsto_sparse (p : NoncompactProfile)
     (N : ℕ → ℕ) [∀ n, NeZero (N n)] (hN : Tendsto N atTop atTop)

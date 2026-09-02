@@ -10,8 +10,10 @@ No second mathlib checkout or large local download is needed.
 The fourteen-module checkpoint at commit `0dce34d` passed the dedicated
 [GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33667008094):
 the publication-layout build, transitive axiom audit, and all 20 regression
-examples. Three subsequent modules (`ProfileMassLimits`, `SparseProfileGeometry`,
-`ProfileComparability`) are a new development batch, not covered by that run.
+examples. Eight subsequent modules are a new development batch, not covered
+by that run: profile mass limits, sparse geometry, weight comparability,
+limiting mass identities, invariant angular averaging, and the tail Jensen
+connection reusing Section 5 / replacement's nonvanishing and local L² estimates.
 
 - `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
   truncation radius second), with eventual radius hypotheses and the
@@ -40,10 +42,12 @@ the full noncompact Gaussian-profile circular-law theorem.
 
 ## Remaining mathematical boundaries
 
-BV Riemann-sum limits and dense/core weight comparability are being checked in
-the next batch. Compact-core cutoff periodicization and singular-value
-comparison, Gaussian affine-log/cofactor
-concentration, rotation-invariant expectation/Fubini transport, finite-matrix
+BV Riemann-sum limits, dense/core weight comparability, and the a.e.-parameter
+expected tail Jensen inequality are being checked in the next batch.
+The latter reuses existing results to discharge raw-log integrability and
+nonvanishing; no stronger every-parameter claim is needed there.
+Compact-core cutoff periodicization and singular-value comparison,
+Gaussian affine-log/cofactor concentration, finite-matrix
 Mirsky estimate, hard-edge input, and final sparse/dense replacement assembly
 still need their full source-to-model connections. The existing conditional
 helpers under `CircularLawSections56.Section6` are reused but are not counted

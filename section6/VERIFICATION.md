@@ -22,9 +22,13 @@ normalization and energy identities, product independence, tail rotations,
 centered mesh identification, and actual BV quadrature estimates. It does not
 yet prove the compact-core analytic inputs or the noncompact circular law.
 
-The next three modules (`ProfileMassLimits`, `SparseProfileGeometry`, and
-`ProfileComparability`) and their added regressions are pending a separate
+The next eight modules and their added regressions are pending a separate
 integrated check. They are not covered by the successful run above.
+These extend the mass-limit/comparability work with literal limiting mass
+identities and the expected Gaussian tail Jensen inequality. The latter
+reuses Section 5 / replacement's a.e.-parameter nonvanishing and local L²
+estimates instead of postulating logarithmic integrability. The generic
+`InvariantPhaseAverage` module has independently passed a strict local check.
 
 No large local dependency download was performed; the cloud job uses its own
 runner and cache. Local checks reused existing pinned dependencies.
