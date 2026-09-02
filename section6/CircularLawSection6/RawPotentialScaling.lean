@@ -40,17 +40,18 @@ theorem matrix_log_norm_det_eq_sum_log_singularValues
 theorem matrixRawPotential_le_cutoff
     (A : Matrix ι ι ℂ) (hA : A.det ≠ 0) (a : ℝ) :
     matrixRawPotential A ≤ matrixCutoffPotential A a := by
-  unfold matrixRawPotential matrixCutoffPotential operatorCutoffPotential
-  rw [matrix_log_norm_det_eq_sum_log_singularValues A hA]
-  simp only [Fin.sum_univ_eq_sum_range, finrank_euclideanSpace]
-  apply div_le_div_of_nonneg_right _ (Nat.cast_nonneg _)
-  apply Finset.sum_le_sum
-  intro i hi
-  apply Real.log_le_log
-  · exact A.toEuclideanLin.injective_iff_forall_lt_finrank_singularValues_pos.mp
-      (toEuclideanLin_injective_of_det_ne_zero A hA) i
-      (by simpa only [finrank_euclideanSpace] using Finset.mem_range.mp hi)
-  · exact le_max_left _ _
+  have hsum : (∑ i : Fin (Fintype.card ι), Real.log (A.toEuclideanLin.singularValues i)) ≤
+      ∑ i : Fin (Fintype.card ι), Real.log (max (A.toEuclideanLin.singularValues i) a) := by
+    apply Finset.sum_le_sum
+    intro i _
+    apply Real.log_le_log
+    · exact A.toEuclideanLin.injective_iff_forall_lt_finrank_singularValues_pos.mp
+        (toEuclideanLin_injective_of_det_ne_zero A hA) i
+        (by simpa only [finrank_euclideanSpace] using i.isLt)
+    · exact le_max_left _ _
+  have h := div_le_div_of_nonneg_right hsum (Nat.cast_nonneg (α := ℝ) (Fintype.card ι))
+  simpa only [matrixRawPotential, matrix_log_norm_det_eq_sum_log_singularValues A hA,
+    matrixCutoffPotential, operatorCutoffPotential, finrank_euclideanSpace] using h
 
 theorem matrixRawPotential_smul [Nonempty ι]
     (A : Matrix ι ι ℂ) (hA : A.det ≠ 0) {r : ℝ} (hr : 0 < r) :

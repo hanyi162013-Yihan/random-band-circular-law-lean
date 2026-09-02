@@ -38,6 +38,7 @@ theorem integrable_hilbertSchmidtSq_sub {Ω : Type*} [MeasurableSpace Ω]
     (hEA : Integrable (fun ω => hilbertSchmidtSq (A ω)) μ)
     (hEB : Integrable (fun ω => hilbertSchmidtSq (B ω)) μ) :
     Integrable (fun ω => hilbertSchmidtSq (A ω - B ω)) μ := by
+  classical
   apply ((hEA.const_mul 2).add (hEB.const_mul 2)).mono'
   · exact (continuous_hilbertSchmidtSq.measurable.comp (hA.sub hB)).aestronglyMeasurable
   · filter_upwards with ω
@@ -58,7 +59,7 @@ theorem integrable_matrixCutoffPotential [Nonempty ι]
       matrixCutoffPotential (1 : Matrix ι ι ℂ) a) μ := by
     apply (integrable_norm_iff
       ((aestronglyMeasurable_matrixCutoffPotential μ A hA hdet ha).sub aestronglyMeasurable_const)).mp
-    simpa only [Real.norm_eq_abs] using hi
+    simpa only [Real.norm_eq_abs, Pi.sub_apply] using hi
   apply (hsub.add (integrable_const (matrixCutoffPotential (1 : Matrix ι ι ℂ) a))).congr
   filter_upwards with ω
   exact sub_add_cancel _ _
