@@ -398,11 +398,15 @@ example : ZMod.finEquiv 5 (cyclicFinSlot 1 (0 : Fin 5) (0 : Fin 3)) =
   finEquiv_cyclicFinSlot 1 0 0
 
 -- The flattened sample used for the original full route has the exact IID law.
+section
+local instance : NeZero (∑ _ : Fin 2, (5 : ℕ)) := ⟨by norm_num [Fin.sum_univ_two]⟩
+
 example (ν : Measure ℂ) [IsProbabilityMeasure ν] :
     MeasurePreserving (fullBlockPaperSample (fun _ : Fin 2 => 5) 1 1 (by decide))
       (Measure.pi (fun _ : ((b : Fin 2) × Fin 5) × Fin 3 => ν))
       (CircularLawSection4.paperIndicatorSampleMeasure 10 1 ν) :=
   fullBlockPaperSample_measurePreserving (fun _ : Fin 2 => 5) 1 1 (by decide) ν
+end
 
 -- The cutoff of two nonsingular scalar blocks is their arithmetic mean.
 example (A : Fin 2 → Matrix (Fin 1) (Fin 1) ℂ) (hA : ∀ b, (A b).det ≠ 0) :
@@ -418,3 +422,17 @@ example : ∀ᵐ z ∂(volume : Measure ℂ), ∀ t : ℝ, 0 < t →
   routedBand_shifted_cutoff_integrable_ae (cyclicFinSlot 0)
     (cyclicFinSlot_injective (by decide)) (fun _ => 1) circularComplexGaussian
     circularComplexGaussian_sq_integrable
+
+-- The actual Gaussian periodicized expectation is the dimension-weighted block expectation.
+example {q : ℕ} (len : Fin q → ℕ) [∀ b, NeZero (len b)]
+    {H : ℕ} (hfit : ∀ b, 2 * H + 1 ≤ len b) (a : Fin (2 * H + 1) → ℂ) :
+    ∀ᵐ z ∂(volume : Measure ℂ),
+      (∫ ω, matrixCutoffPotential (routedBandMatrix (periodicBlockRoute len H) a ω - z • 1) 1
+        ∂Measure.pi (fun _ : ((b : Fin q) × Fin (len b)) × Fin (2 * H + 1) => circularComplexGaussian)) =
+        (∑ b, (len b : ℝ) * ∫ η, matrixCutoffPotential
+          (routedBandMatrix (cyclicFinSlot H) a η - z • (1 : Matrix (Fin (len b)) (Fin (len b)) ℂ)) 1
+            ∂Measure.pi (fun _ : Fin (len b) × Fin (2 * H + 1) => circularComplexGaussian)) /
+          (∑ b, len b : ℕ) := by
+  filter_upwards [periodicBlockMatrix_expected_cutoff_average_ae len hfit a circularComplexGaussian
+    circularComplexGaussian_sq_integrable] with z hz
+  exact (hz 1 zero_lt_one).2
