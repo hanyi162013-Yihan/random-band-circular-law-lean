@@ -178,6 +178,8 @@ theorem complete_cell_pressure_sandwich
       nsmul_eq_mul]
   rw [he]
   unfold completeCellCoreFluctuation
-  exact le_finitePressureMax _ r
+  exact le_finitePressureMax (fun q : Fin (2 * W + 1) =>
+    |∑ k : Fin K, (clippedCoreLog A W s z q (completeCellCore W s (x k)) -
+      clippedCorePressure μ A W s z q)|) r
 
 end BernoulliSection8
