@@ -7,6 +7,27 @@ open CircularLawSection6 CircularLawSections56.Section6
 
 attribute [local instance] CircularLawSection4.iidMeasure_isProbability
 
+-- The uniform Gaussian theorem now includes dimension one, without a filler.
+example (z : ℂ) : MemLp (cyclicRawLogDet 1 (fun _ => 1) 1 z) 2
+    (cyclicAtomLaw 1 circularComplexGaussian) :=
+  (gaussian_cyclic_memLp_and_variance_all 1 (fun _ => 1) (c := 1)
+    zero_lt_one zero_lt_one z (by norm_num)).1
+
+-- A three-dimensional unit core is the actual physical Section 5 matrix.
+example (p : NoncompactProfile) (W : ℝ) (z : ℂ) (ω : ZMod 3 × ZMod 3 → ℂ) :
+    p.unitCoreLogPotential 3 1 W z ω =
+      physicalLogPotential (literalIndicatorMatrix 2 1 (1 : Fin 2)
+        (fun s => (Real.sqrt (p.coreBandWeight 3 1 (1 : Fin 2) W s) : ℂ))
+        (coreBandSample 3 1 (1 : Fin 2) ω)) z :=
+  p.unitCoreLogPotential_eq_literal 1 1 (by decide) (1 : Fin 2) (by decide) W z ω
+
+-- Eigenvector overlap costs agree with actual operator energy already in dimension one.
+example (A B : Module.End ℂ ℂ) (hA : A.IsSymmetric) (hB : B.IsSymmetric) :
+    (∑ i, ∑ j, orthonormalCoupling (hA.eigenvectorBasis rfl) (hB.eigenvectorBasis rfl) i j *
+      (hA.eigenvalues rfl i - hB.eigenvalues rfl j) ^ 2) =
+      TaoVuReplacement.operatorHilbertSchmidtSq (A - B) :=
+  hermitian_eigenvector_coupling_cost A B hA hB
+
 -- The diagonal comparison does not require a positive bandwidth input.
 example (p : NoncompactProfile) (N : ℕ) [NeZero N] :
     p.diagonalComparisonConstant / (N : ℝ) ≤ p.weight N 0 0 :=

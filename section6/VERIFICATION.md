@@ -1,5 +1,31 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified thirty-three-module checkpoint
+
+Commit: `62b56b1a99377faf9e2a671c7c87b05d0f3a780a`.
+[Dedicated GitHub run 33678501518](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33678501518),
+job `100409067426`: **success** on 2026-09-02.
+
+- All 33 modules and the umbrella compiled: 4067 jobs including dependencies.
+- The transitive audit passed: 433 declarations, 367 theorem declarations
+  including generated declarations; only `propext`, `Classical.choice`, and
+  `Quot.sound` are permitted.
+- All 40 strict regression examples passed, as did the source scan and
+  verification-log retention. Section 6 warnings are errors.
+- Dependency caches were saved successfully on GitHub. No large local
+  dependency download was performed.
+
+This extends the earlier checkpoint with exact Section 5 core identification,
+Gaussian density/atom-log control, actual determinant cofactor fibers,
+automatic global L², the uniform N log²(eN) variance estimate, cyclic-to-row
+law transport, and normalized L¹/probability concentration for the full,
+truncated, and normalized-core profile models. The dimension-at-least-two
+restriction on this finite uniform estimate is harmless for these limits.
+
+The one-dimensional extension, compact-core raw-mean bridge, and subsequent
+spectral coupling work are not included in this checkpoint. In particular,
+this is not a proof of the complete Section 6 circular-law theorem.
+
 ## Verified twenty-two-module checkpoint
 
 Commit: `38f265785c8639566a5ab48e6c2079265012650a`.
@@ -24,8 +50,8 @@ log-integrability and nonvanishing premises are proved from the previously
 available Section 5 / replacement estimates. The spectral parameter is
 planar-a.e., not every `z`, which is sufficient for the final replacement step.
 
-The next model-identification and row-concentration batch is not covered by
-this run. In particular, this checkpoint is not the full Section 6 circular law.
+The model-identification and row-concentration batch was not covered by this
+historical run; it is included in the thirty-three-module checkpoint above.
 
 ## Verified fourteen-module checkpoint
 
