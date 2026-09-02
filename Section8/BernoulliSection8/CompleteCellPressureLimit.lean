@@ -16,7 +16,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option maxHeartbeats 1200000
 
-def completeCellPressureError (I : NguyenBottomSingularInput)
+def completeCellPressureError (I : NguyenBottomSingularInput.{0, 0})
     (W K : ℕ) (z : ℂ) (x : Fin K → IntervalRows W (3 + coreSites W)) : ℝ :=
   (intervalMaxDegreeLog W (K * (3 + coreSites W)) z
       (flattenCompleteCells W (3 + coreSites W) K x) -
@@ -25,7 +25,7 @@ def completeCellPressureError (I : NguyenBottomSingularInput)
       ((K : ℝ) * cellLength W)
 
 theorem completeCellPressureError_tendsto
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W K m : ℕ → ℕ)
     (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop)
     (hK : ∀ᶠ n in atTop, coreSites (W n) ≤ K n)
@@ -133,7 +133,7 @@ theorem completeCellPressureError_tendsto
 /-- The same observable on the literal finite interval law, obtained by
 the proved inverse coordinate permutation. -/
 theorem intervalCompleteCellPressureError_tendsto
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W K m : ℕ → ℕ)
     (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop)
     (hK : ∀ᶠ n in atTop, coreSites (W n) ≤ K n)
@@ -152,7 +152,7 @@ theorem intervalCompleteCellPressureError_tendsto
 
 /-- The complete-cell pressure compared on any ambient physical interval,
 normalized by the ambient scalar dimension. -/
-def embeddedCompleteCellPressureError (I : NguyenBottomSingularInput)
+def embeddedCompleteCellPressureError (I : NguyenBottomSingularInput.{0, 0})
     (W K m : ℕ) (z : ℂ) (e : Fin (K * (3 + coreSites W)) ↪ Fin m)
     (x : IntervalRows W m) : ℝ :=
   (intervalMaxDegreeLog W (K * (3 + coreSites W)) z (intervalRestriction e x) -
@@ -161,7 +161,7 @@ def embeddedCompleteCellPressureError (I : NguyenBottomSingularInput)
       ((m : ℝ) * W)
 
 theorem embeddedCompleteCellPressureError_tendsto
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W K m : ℕ → ℕ)
     (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop)
     (hK : ∀ᶠ n in atTop, coreSites (W n) ≤ K n)

@@ -55,7 +55,14 @@ jobs:
       - name: Build Section 8 and its required dependencies
         id: build
         # Collect independent failures; check the normal target only if all modules pass.
-        run: python3 scripts/build_serial.py --target BernoulliSection8 --keep-going
+        env:
+          RESTORED_PROJECT_CACHE: ${{ steps.project-cache.outputs.cache-matched-key }}
+        run: |
+          if [ -n "$RESTORED_PROJECT_CACHE" ]; then
+            python3 scripts/build_serial.py --target BernoulliSection8 --keep-going --start-at BernoulliSection8.RademacherInterface
+          else
+            python3 scripts/build_serial.py --target BernoulliSection8 --keep-going
+          fi
       - name: Save completed Section 8 dependency modules
         # Fork PRs can read base caches, but this draft does not save their builds.
         # No continue-on-error is applied to the build or the axiom audit.

@@ -84,11 +84,11 @@ theorem oneSiteMaxHodgeEnvelope_le_of_bounded_atoms
 
 /-- All constants are fixed by the named Nguyen input and the spectral
 parameter; none depends on the ring length. -/
-def rademacherTransferLogConstant (I : NguyenBottomSingularInput) (z : ℂ) : ℝ :=
+def rademacherTransferLogConstant (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ) : ℝ :=
   2 * (oneSiteTensorLogConstant z +
     max 0 (nguyenInterfaceDetLoss I (nguyenInterfaceCutoffRho I)))
 
-theorem rademacherTransferLogConstant_nonneg (I : NguyenBottomSingularInput) (z : ℂ) :
+theorem rademacherTransferLogConstant_nonneg (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ) :
     0 ≤ rademacherTransferLogConstant I z := by
   exact mul_nonneg (by norm_num)
     (add_nonneg (oneSiteTensorLogConstant_nonneg z) (le_max_left _ _))
@@ -96,7 +96,7 @@ theorem rademacherTransferLogConstant_nonneg (I : NguyenBottomSingularInput) (z 
 /-- Summing site envelopes gives the source's bound with scalar interval
 length L=sW. -/
 theorem rademacherIntervalMaxHodgeEnvelope_le_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W s)
     (hx : x ∉ rademacherInterfaceBadEvent I W s)
@@ -135,7 +135,7 @@ theorem rademacherIntervalMaxHodgeEnvelope_le_of_good
 /-- Deterministic Hodge bound for every nonempty chronological product,
 including its inverse, on the actual good event. -/
 theorem rademacherInterval_hodgeLoss_le_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W) (hs : 0 < s)
     (z : ℂ) (x : IntervalRows W s)
     (hx : x ∉ rademacherInterfaceBadEvent I W s)
@@ -153,7 +153,7 @@ open scoped Matrix.Norms.L2Operator in
 convention, for the actual
 operator norm used by pressure. -/
 theorem rademacherInterval_abs_logNorm_le_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W) (hs : 0 < s)
     (z : ℂ) (x : IntervalRows W s)
     (hx : x ∉ rademacherInterfaceBadEvent I W s)
@@ -178,7 +178,7 @@ open scoped Matrix.Norms.L2Operator in
 /-- Atom boundedness is discharged from the Rademacher law in this
 probabilistic caller, leaving only the explicitly constructed good event. -/
 theorem rademacherInterval_abs_logNorm_le_ae_on_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W) (hs : 0 < s)
     (z : ℂ) :
     ∀ᵐ x ∂intervalRowsLaw W s rademacherLaw,
@@ -195,7 +195,7 @@ open scoped Matrix.Norms.L2Operator in
 /-- Every exterior degree is nonzero on the concrete interface good event.
 The degree-zero and top-degree cases are included. -/
 theorem rademacherInterval_norm_pos_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W s)
     (hx : x ∈ rademacherInterfaceGoodEvent I W s) (r : Fin (2 * W + 1)) :
@@ -216,7 +216,7 @@ theorem rademacherInterval_norm_pos_of_good
 All boundedness and determinant premises come from the measurable physical
 good event. -/
 theorem rademacherPacket_hodgeLoss_le_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W 3)
     (hx : x ∈ rademacherInterfaceGoodEvent I W 3) (r : Fin (2 * W + 1)) :
@@ -234,7 +234,7 @@ open scoped Matrix.Norms.L2Operator in
 /-- The ordinary operator logarithm bound includes an empty interval,
 whose product is exactly the identity. -/
 theorem rademacherInterval_abs_logNorm_le_on_measurable_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W s)
     (hx : x ∈ rademacherInterfaceGoodEvent I W s) (r : Fin (2 * W + 1)) :
@@ -259,7 +259,7 @@ open scoped Matrix.Norms.L2Operator in
 /-- The support-restricted good event discharges atom boundedness pointwise,
 so its actual transfer logarithm agrees with the bounded observable. -/
 theorem rademacherInterval_clippedLog_eq_log_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W s)
     (hx : x ∈ rademacherInterfaceGoodEvent I W s) (r : Fin (2 * W + 1)) :

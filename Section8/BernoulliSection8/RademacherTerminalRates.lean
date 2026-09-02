@@ -99,7 +99,7 @@ private theorem comparisonPolynomialBase_le
   have hW1 : (1 : ℝ) ≤ W := by linarith
   unfold terminalComparisonPolynomialBase
   apply max_le (one_le_pow₀ hW1)
-  simp only [card_threeBlockIndex, Fintype.card_fin, Nat.cast_add,
+  simp only [BernoulliSection10.card_threeBlockIndex, Fintype.card_fin, Nat.cast_add,
     Nat.cast_mul, Nat.cast_ofNat, Nat.cast_one]
   calc
     ((3 * (W : ℝ)) * (3 * W) + 1) * (1 + ‖z‖) ≤
@@ -119,7 +119,7 @@ private theorem reversePolynomialBase_le
     (by norm_num : (0 : ℝ) ≤ 1).trans (packetCoordinateMaxThreshold_one_le _ _)
   unfold terminalReversePolynomialBase
   apply max_le (one_le_pow₀ hW1)
-  simp only [card_threeBlockIndex, Fintype.card_fin, Nat.cast_add,
+  simp only [BernoulliSection10.card_threeBlockIndex, Fintype.card_fin, Nat.cast_add,
     Nat.cast_mul, Nat.cast_ofNat, Nat.cast_one]
   calc
     ((3 * (W : ℝ)) * (3 * W) + 1) * (1 + ‖z‖) *
@@ -205,7 +205,8 @@ theorem rademacherBoundaryBaseLoss_le
     (reversePolynomialBase_le W hW _ hshift)
   rw [Real.log_pow] at hrp
   have hv := terminalUniformValueLoss_le cook W hW
-  simp only [card_threeBlockIndex, Fintype.card_fin, Nat.cast_mul, Nat.cast_ofNat] at hc hr
+  simp only [BernoulliSection10.card_threeBlockIndex, Fintype.card_fin,
+    Nat.cast_mul, Nat.cast_ofNat] at hc hr
   have hcl : Real.log (threeBlockConcreteComparisonConstant (W := Fin W) (packetRowScale W * z)) ≤
       12 * W * Real.log (W : ℝ) := by
     calc

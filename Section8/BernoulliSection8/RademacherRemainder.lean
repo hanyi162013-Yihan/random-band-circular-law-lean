@@ -25,7 +25,7 @@ theorem intervalClearedProduct_empty (W : ℕ) (z : ℂ) (x : IntervalRows W 0)
   simp [intervalClearedProduct, reverseMatrixProduct]
 
 theorem rademacher_remainder_log_change_le
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W p q : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W (p + q))
     (hx : x ∈ rademacherInterfaceGoodEvent I W (p + q)) (r : Fin (2 * W + 1)) :
@@ -61,7 +61,7 @@ theorem rademacher_remainder_log_change_le
     rwa [one_add_posLog_nat_eq_log_e_mul W (interfaceCanonicalLargeWConditions I hW).1] at hh
 
 theorem rademacher_remainder_maxPressure_change_le
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W p q : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W (p + q))
     (hx : x ∈ rademacherInterfaceGoodEvent I W (p + q)) :

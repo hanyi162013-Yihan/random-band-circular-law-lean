@@ -17,7 +17,7 @@ namespace BernoulliSection8
 
 open BernoulliSection9 BernoulliSection10 BernoulliLinearAlgebra
 
-def rademacherEndpointGoodEvent (I : NguyenBottomSingularInput) (W : ℕ) :
+def rademacherEndpointGoodEvent (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) :
     Set (EndpointBlockPair W) :=
   {ep | ‖normalizedBlockMatrix W ep.1‖ ≤ 40 * Real.sqrt 2 ∧
     ‖normalizedBlockMatrix W ep.2‖ ≤ 40 * Real.sqrt 2 ∧
@@ -25,7 +25,7 @@ def rademacherEndpointGoodEvent (I : NguyenBottomSingularInput) (W : ℕ) :
     interfaceDeterminantLowerBound I W ≤ ‖(normalizedBlockMatrix W ep.2).det‖}
 
 theorem measurableSet_rademacherEndpointGoodEvent
-    (I : NguyenBottomSingularInput) (W : ℕ) :
+    (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) :
     MeasurableSet (rademacherEndpointGoodEvent I W) := by
   have hL : Continuous (fun ep : EndpointBlockPair W => normalizedBlockMatrix W ep.1) := by
     unfold normalizedBlockMatrix
@@ -39,14 +39,14 @@ theorem measurableSet_rademacherEndpointGoodEvent
         (measurableSet_le measurable_const hR.matrix_det.norm.measurable)))
 
 theorem rademacherEndpointGoodEvent_spec
-    (I : NguyenBottomSingularInput) (W : ℕ) (ep : EndpointBlockPair W)
+    (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (ep : EndpointBlockPair W)
     (hep : ep ∈ rademacherEndpointGoodEvent I W) :
     PaperEndpointGood (normalizedBlockMatrix W ep.1) (normalizedBlockMatrix W ep.2)
       (40 * Real.sqrt 2) (interfaceDeterminantLowerBound I W) :=
   ⟨hep.1, hep.2.1, interfaceDeterminantLowerBound_pos I W, hep.2.2.1, hep.2.2.2⟩
 
 theorem rademacherEndpointGoodEvent_of_packet_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (p : EndpointBlockPair W × PacketAtomRows W)
     (hp : packetPhysicalRows W p ∈ rademacherInterfaceGoodEvent I W 3) :
@@ -60,7 +60,7 @@ theorem rademacherEndpointGoodEvent_of_packet_good
 /-- The factor nine comes from the three-block union at three sites.
 Only the two endpoint blocks enter the event itself. -/
 theorem rademacherEndpointGoodEvent_compl_probability_le
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W) :
     (endpointBlockPairLaw W rademacherLaw).real (rademacherEndpointGoodEvent I W)ᶜ ≤
       9 * Real.exp (-(interfaceCombinedRate I / 2) * (W : ℝ)) := by

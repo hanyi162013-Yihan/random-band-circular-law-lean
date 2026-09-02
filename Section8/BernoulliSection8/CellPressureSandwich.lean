@@ -38,7 +38,7 @@ theorem intervalRestriction_flatten_cell (W c K : ℕ) (k : Fin K)
   simp only [intervalRestriction, Function.comp_apply, intervalRowEmbedding_rowIndex]
   exact flattenCompleteCells_row W c K x k j a
 
-theorem completeCell_good_of_flatten_good (I : NguyenBottomSingularInput)
+theorem completeCell_good_of_flatten_good (I : NguyenBottomSingularInput.{0, 0})
     (W c K : ℕ) (x : Fin K → IntervalRows W c)
     (hx : flattenCompleteCells W c K x ∈ rademacherInterfaceGoodEvent I W (K * c))
     (k : Fin K) : x k ∈ rademacherInterfaceGoodEvent I W c := by
@@ -47,12 +47,12 @@ theorem completeCell_good_of_flatten_good (I : NguyenBottomSingularInput)
     (flattenCompleteCells W c K x) ∈ rademacherInterfaceGoodEvent I W c at h
   rwa [intervalRestriction_flatten_cell] at h
 
-def cellTransferBudget (I : NguyenBottomSingularInput) (W s : ℕ) (z : ℂ) : ℝ :=
+def cellTransferBudget (I : NguyenBottomSingularInput.{0, 0}) (W s : ℕ) (z : ℂ) : ℝ :=
   rademacherTransferLogConstant I z * ((s * W : ℕ) : ℝ) *
     (1 + Real.posLog (W : ℝ))
 
 theorem interval_hodgeLoss_le_cellTransferBudget
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W) (hs : 0 < s)
     (z : ℂ) (x : IntervalRows W s) (hx : x ∈ rademacherInterfaceGoodEvent I W s)
     (r : Fin (2 * W + 1)) :
@@ -62,7 +62,7 @@ theorem interval_hodgeLoss_le_cellTransferBudget
   rcases hx.1 i a with hh | hh <;> rw [hh] <;> norm_num
 
 theorem interval_product_det_isUnit_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W s) (hx : x ∈ rademacherInterfaceGoodEvent I W s)
     (r : Fin (2 * W + 1)) : IsUnit (intervalClearedProduct W s z x r).det := by
@@ -70,7 +70,7 @@ theorem interval_product_det_isUnit_of_good
   exact intervalClearedProduct_det_isUnit W s z x (fun j => (hd j).1) (fun j => (hd j).2) r
 
 theorem clippedCoreLog_eq_log_on_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W s) (hx : x ∈ rademacherInterfaceGoodEvent I W s)
     (A : ℝ≥0) (hA : cellTransferBudget I W s z ≤ A) (r : Fin (2 * W + 1)) :
@@ -87,7 +87,7 @@ def optimizingCellResetLoss (μ : Measure ℝ) (A : ℝ≥0) (W s K : ℕ) (z : 
 good event. The two numerical premises merely choose clipping and reset
 caps above the proved local Hodge budgets. -/
 theorem complete_cell_pressure_sandwich
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (μ : Measure ℝ) (W s K : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (hs : 0 < s) (z : ℂ) (x : Fin K → IntervalRows W (3 + s))
     (hx : flattenCompleteCells W (3 + s) K x ∈ rademacherInterfaceGoodEvent I W (K * (3 + s)))

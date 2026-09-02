@@ -36,7 +36,7 @@ theorem packetRowScale_norm_bounds (W : ℕ) (hW : 0 < W) :
 
 open scoped Matrix.Norms.L2Operator in
 theorem rademacherScaledEndpointGood
-    (I : NguyenBottomSingularInput) (W : ℕ) (hW : 0 < W)
+    (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (hW : 0 < W)
     (CL BR : Matrix (Fin W) (Fin W) ℂ)
     (hgood : PaperEndpointGood CL BR (40 * Real.sqrt 2)
       (interfaceDeterminantLowerBound I W)) :
@@ -56,11 +56,11 @@ theorem rademacherScaledEndpointGood
     exact hgood.delta_le_norm_det_BR.trans
       (by nlinarith [mul_le_mul_of_nonneg_right hscale (norm_nonneg BR.det)])
 
-def rademacherEndpointLogConstant (I : NguyenBottomSingularInput) : ℝ :=
+def rademacherEndpointLogConstant (I : NguyenBottomSingularInput.{0, 0}) : ℝ :=
   Real.log 7 + 1 + (2 * Real.log (24 * (40 * Real.sqrt 2)) + 6) +
     2 * max 0 (nguyenInterfaceDetLoss I (nguyenInterfaceCutoffRho I))
 
-theorem rademacherEndpointLogConstant_nonneg (I : NguyenBottomSingularInput) :
+theorem rademacherEndpointLogConstant_nonneg (I : NguyenBottomSingularInput.{0, 0}) :
     0 ≤ rademacherEndpointLogConstant I := by
   have hlog : 0 ≤ Real.log (24 * (40 * Real.sqrt 2)) :=
     Real.log_nonneg (by nlinarith [rademacherOpNormBound_one_le])
@@ -68,7 +68,7 @@ theorem rademacherEndpointLogConstant_nonneg (I : NguyenBottomSingularInput) :
   positivity
 
 theorem log_scaled_endpointExteriorConstant_le
-    (I : NguyenBottomSingularInput) (W : ℕ) (hW : 0 < W)
+    (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (hW : 0 < W)
     (CL BR : Matrix (Fin W) (Fin W) ℂ)
     (hgood : PaperEndpointGood CL BR (40 * Real.sqrt 2)
       (interfaceDeterminantLowerBound I W)) :
@@ -139,11 +139,11 @@ theorem log_scaled_endpointExteriorConstant_le
   dsimp only [rademacherEndpointLogConstant, F, B, D] at *
   nlinarith
 
-def rademacherBoundaryLogConstant (I : NguyenBottomSingularInput) (z : ℂ) : ℝ :=
+def rademacherBoundaryLogConstant (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ) : ℝ :=
   3 * (Real.log 3 + 1) + packetZeroLogConstant +
     3 * (Real.log (1 + 3 * ‖z‖) + 1) + rademacherEndpointLogConstant I
 
-theorem rademacherBoundaryLogConstant_nonneg (I : NguyenBottomSingularInput) (z : ℂ) :
+theorem rademacherBoundaryLogConstant_nonneg (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ) :
     0 ≤ rademacherBoundaryLogConstant I z := by
   have hz : 0 ≤ Real.log (1 + 3 * ‖z‖) :=
     Real.log_nonneg (le_add_of_nonneg_right (by positivity))
@@ -169,7 +169,7 @@ theorem neg_log_rademacherBoundaryInverseGamma_eq
   push_cast <;> ring
 
 theorem neg_log_rademacherBoundaryInverseGamma_le
-    (I : NguyenBottomSingularInput) (W : ℕ) (hW : 0 < W) (z : ℂ)
+    (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (hW : 0 < W) (z : ℂ)
     (CL BR : Matrix (Fin W) (Fin W) ℂ)
     (hgood : PaperEndpointGood CL BR (40 * Real.sqrt 2)
       (interfaceDeterminantLowerBound I W)) :
@@ -202,7 +202,7 @@ theorem neg_log_rademacherBoundaryInverseGamma_le
   nlinarith
 
 theorem neg_log_rademacherBoundaryInverseGamma_le_on_endpoint_good
-    (I : NguyenBottomSingularInput) (W : ℕ) (hW : 0 < W) (z : ℂ)
+    (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (hW : 0 < W) (z : ℂ)
     (ep : EndpointBlockPair W) (hep : ep ∈ rademacherEndpointGoodEvent I W) :
     -Real.log (rademacherBoundaryInverseGamma W z
       (normalizedBlockMatrix W ep.1) (normalizedBlockMatrix W ep.2)) ≤
@@ -214,7 +214,7 @@ theorem neg_log_rademacherBoundaryInverseGamma_le_on_endpoint_good
 The raw comparison is transported through the same exact common scale
 as the terminal polynomial; its logarithm has nonpositive sign. -/
 theorem rademacherPacketBoundaryCoefficient_log_gramVolume_le
-    (I : NguyenBottomSingularInput) (W : ℕ) (hW : 0 < W) (z : ℂ)
+    (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (hW : 0 < W) (z : ℂ)
     (CL BR : Matrix (Fin W) (Fin W) ℂ)
     (hgood : PaperEndpointGood CL BR (40 * Real.sqrt 2)
       (interfaceDeterminantLowerBound I W))
@@ -265,7 +265,7 @@ theorem rademacherPacketBoundaryCoefficient_log_gramVolume_le
     _ ≤ _ := neg_log_rademacherBoundaryInverseGamma_le I W hW z CL BR hgood
 
 theorem rademacherPacketBoundaryCoefficient_log_gramVolume_le_on_endpoint_good
-    (I : NguyenBottomSingularInput) (W : ℕ) (hW : 0 < W) (z : ℂ)
+    (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (hW : 0 < W) (z : ℂ)
     (ep : EndpointBlockPair W) (hep : ep ∈ rademacherEndpointGoodEvent I W)
     (Theta : Matrix (Fin W ⊕ Fin W) (Fin W ⊕ Fin W) ℂ) (hTheta : IsUnit Theta.det) :
     |Real.log (rademacherPacketBoundaryCoefficient W z

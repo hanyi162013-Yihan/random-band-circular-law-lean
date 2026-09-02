@@ -20,7 +20,7 @@ namespace BernoulliSection8
 open BernoulliSection9 BernoulliSection10 BernoulliSection10.ProbabilityLimits
 
 theorem rademacher_prefix_maxPressure_change_le
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s p : ℕ) (hp : p ≤ s) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (z : ℂ) (x : IntervalRows W s)
     (hx : x ∈ rademacherInterfaceGoodEvent I W s) :
@@ -63,7 +63,7 @@ def rademacherRemainderDifference (W s : ℕ) (z : ℂ)
     (((s + 3) * W : ℕ) : ℝ)
 
 theorem rademacherRemainderDifference_abs_le_on_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W) (z : ℂ)
     (x : IntervalRows W (s + 3))
     (hx : x ∈ rademacherInterfaceGoodEvent I W (s + 3)) :
@@ -103,7 +103,7 @@ theorem rademacherRemainderDifference_abs_le_on_good
 /-- In the long branch, the incomplete-cell contribution vanishes in
 probability under the actual global interface estimate and bandwidth law. -/
 theorem rademacherRemainderDifference_tendsto
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ → ℕ) (hW : Tendsto W atTop atTop)
     (hlong : ∀ᶠ n in atTop, anchorSize (W n) ≤ (s n + 3) * W n)
     (hlog : Tendsto (fun n => Real.log (((s n + 3) * W n : ℕ) : ℝ) / (W n : ℝ))

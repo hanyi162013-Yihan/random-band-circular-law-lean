@@ -25,14 +25,22 @@ namespace BernoulliSection8
 
 open BernoulliSection9 BernoulliSection10 BernoulliLinearAlgebra
 
+local instance rademacherInterfaceSumOrder (W : ℕ) : LinearOrder (Fin W ⊕ Fin W) :=
+  LinearOrder.lift' (fun x : Fin W ⊕ Fin W => (toLex x : Fin W ⊕ₗ Fin W))
+    (fun _ _ h => toLex.injective h)
+
+@[simp] theorem rademacherIntervalSquare_rawMatrix_apply (W s : ℕ)
+    (j : Fin s) (b : Fin 3) (x : IntervalRows W s) (a c : Fin W) :
+    (rademacherIntervalSquare W s j b).rawMatrix x a c =
+      (x (intervalRowIndex j a) (physicalAtomIndex b c) : ℂ) := rfl
+
 theorem normalized_rademacherIntervalSquare_B (W s : ℕ)
     (j : Fin s) (x : IntervalRows W s) (z : ℂ) :
     normalizedInterfaceMatrix (rademacherIntervalSquare W s j 0) x =
       (intervalSiteBlocks z x j).B := by
   ext a c
-  simp [normalizedInterfaceMatrix, rademacherIntervalSquare,
-    IidSubgaussianFamily.squareRestriction, IidSubgaussianSquare.rawMatrix,
-    rademacherIntervalFamily, intervalSquareEntryEmbedding, intervalSiteBlocks,
+  simp only [normalizedInterfaceMatrix, Matrix.smul_apply, smul_eq_mul,
+    rademacherIntervalSquare_rawMatrix_apply, intervalSiteBlocks,
     intervalPhysicalRow, physicalRowGroupOfAtoms, normalizedPhysicalAtom,
     blockNormalization, Complex.ofReal_mul]
 
@@ -41,36 +49,34 @@ theorem normalized_rademacherIntervalSquare_A (W s : ℕ)
     normalizedInterfaceMatrix (rademacherIntervalSquare W s j 1) x =
       (intervalSiteBlocks 0 x j).D := by
   ext a c
-  simp [normalizedInterfaceMatrix, rademacherIntervalSquare,
-    IidSubgaussianFamily.squareRestriction, IidSubgaussianSquare.rawMatrix,
-    rademacherIntervalFamily, intervalSquareEntryEmbedding, intervalSiteBlocks,
+  simp only [normalizedInterfaceMatrix, Matrix.smul_apply, smul_eq_mul,
+    rademacherIntervalSquare_rawMatrix_apply, intervalSiteBlocks,
     intervalPhysicalRow, physicalRowGroupOfAtoms, normalizedPhysicalAtom,
-    blockNormalization, Complex.ofReal_mul]
+    blockNormalization, Complex.ofReal_mul, ite_self, sub_zero]
 
 theorem normalized_rademacherIntervalSquare_C (W s : ℕ)
     (j : Fin s) (x : IntervalRows W s) (z : ℂ) :
     normalizedInterfaceMatrix (rademacherIntervalSquare W s j 2) x =
       (intervalSiteBlocks z x j).C := by
   ext a c
-  simp [normalizedInterfaceMatrix, rademacherIntervalSquare,
-    IidSubgaussianFamily.squareRestriction, IidSubgaussianSquare.rawMatrix,
-    rademacherIntervalFamily, intervalSquareEntryEmbedding, intervalSiteBlocks,
+  simp only [normalizedInterfaceMatrix, Matrix.smul_apply, smul_eq_mul,
+    rademacherIntervalSquare_rawMatrix_apply, intervalSiteBlocks,
     intervalPhysicalRow, physicalRowGroupOfAtoms, normalizedPhysicalAtom,
     blockNormalization, Complex.ofReal_mul]
 
 /-- The site event controls B,A,C simultaneously. Including a determinant
 condition for A is harmless and keeps one literal event family. -/
-def rademacherSiteBadEvent (I : NguyenBottomSingularInput)
+def rademacherSiteBadEvent (I : NguyenBottomSingularInput.{0, 0})
     (W s : ℕ) (j : Fin s) : Set (IntervalRows W s) :=
   ⋃ b : Fin 3, interfaceCombinedBadEvent I (rademacherIntervalSquare W s j b)
 
 /-- The exceptional set for all block sites in the actual interval/ring. -/
-def rademacherInterfaceBadEvent (I : NguyenBottomSingularInput) (W s : ℕ) :
+def rademacherInterfaceBadEvent (I : NguyenBottomSingularInput.{0, 0}) (W s : ℕ) :
     Set (IntervalRows W s) :=
   ⋃ j : Fin s, rademacherSiteBadEvent I W s j
 
 theorem rademacherSiteBadEvent_probability_le
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (j : Fin s) (hW : interfaceCanonicalLargeWThreshold I ≤ W) :
     (intervalRowsLaw W s rademacherLaw).real (rademacherSiteBadEvent I W s j) ≤
       3 * Real.exp (-(interfaceCombinedRate I / 2) * (W : ℝ)) := by
@@ -82,7 +88,7 @@ theorem rademacherSiteBadEvent_probability_le
     (by simpa using hI) hw.1 hw.2.1 hw.2.2
 
 theorem rademacherInterfaceBadEvent_probability_le
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W) :
     (intervalRowsLaw W s rademacherLaw).real (rademacherInterfaceBadEvent I W s) ≤
       3 * (s : ℝ) * Real.exp (-(interfaceCombinedRate I / 2) * (W : ℝ)) := by
@@ -95,7 +101,7 @@ theorem rademacherInterfaceBadEvent_probability_le
 /-- Every actual normalized block has its quantitative interface estimates
 outside the explicitly defined finite exceptional event. -/
 theorem rademacherInterface_controls
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (x : IntervalRows W s) (hx : x ∉ rademacherInterfaceBadEvent I W s)
     (j : Fin s) (b : Fin 3) :
@@ -113,12 +119,12 @@ theorem rademacherInterface_controls
   have h := (interfaceCanonicalDetUpperLowerInverseControl
     (intervalRowsLaw W s rademacherLaw) I (rademacherIntervalSquare W s j b)
       (by simpa using hI) hw.1 hw.2.1 hw.2.2).2 x hxb
-  simpa only [← normalizedInterfaceMatrix, rademacherIntervalSquare_opNormConstant] using h
+  simpa only [normalizedInterfaceMatrix, rademacherIntervalSquare_opNormConstant] using h
 
 /-- Invertibility for B and C is a consequence on the good event, not an
 almost-sure assertion for the finite Rademacher law. -/
 theorem rademacherInterface_dets_isUnit_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (x : IntervalRows W s) (hx : x ∉ rademacherInterfaceBadEvent I W s)
     (z : ℂ) (j : Fin s) :
@@ -134,7 +140,7 @@ theorem rademacherInterface_dets_isUnit_of_good
 /-- The actual all-interface exceptional probability vanishes under the
 Section 8 bandwidth hypothesis. -/
 theorem rademacherInterfaceBadEvent_probability_tendsto_zero
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ → ℕ) (hW : Tendsto W atTop atTop)
     (hlog : Tendsto (fun n => Real.log ((s n * W n : ℕ) : ℝ) / (W n : ℝ))
       atTop (𝓝 0)) :
@@ -151,7 +157,7 @@ theorem rademacherInterfaceBadEvent_probability_tendsto_zero
 /-- The source's original `W / log N → ∞` form for rings with at least
 four sites. -/
 theorem rademacherInterfaceBadEvent_probability_tendsto_zero_of_bandwidth
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ → ℕ) (hW : Tendsto W atTop atTop)
     (hs : ∀ᶠ n in atTop, 4 ≤ s n)
     (hband : Tendsto (fun n => (W n : ℝ) /
@@ -165,7 +171,7 @@ theorem rademacherInterfaceBadEvent_probability_tendsto_zero_of_bandwidth
 
 /-- The physical one-site norm part of (L1), with a fixed explicit constant. -/
 theorem rademacherSite_norm_sum_le_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (x : IntervalRows W s) (hx : x ∉ rademacherInterfaceBadEvent I W s)
     (j : Fin s) :
@@ -182,7 +188,7 @@ theorem rademacherSite_norm_sum_le_of_good
 /-- The actual shifted middle block gains exactly the deterministic
 operator-norm cost of the scalar spectral parameter. -/
 theorem rademacherSite_shifted_norm_sum_le_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (x : IntervalRows W s) (hx : x ∉ rademacherInterfaceBadEvent I W s)
     (j : Fin s) (z : ℂ) :
@@ -192,9 +198,11 @@ theorem rademacherSite_shifted_norm_sum_le_of_good
   letI : NeZero W := ⟨ne_of_gt hWpos⟩
   have hD : (intervalSiteBlocks z x j).D = (intervalSiteBlocks 0 x j).D - z • 1 := by
     ext a c
-    by_cases hac : a = c <;>
-      simp [intervalSiteBlocks, intervalPhysicalRow, physicalRowGroupOfAtoms,
-        Matrix.one_apply, hac]
+    change normalizedPhysicalAtom (x (intervalRowIndex j a)) 1 c -
+        (if a = c then z else 0) =
+      (normalizedPhysicalAtom (x (intervalRowIndex j a)) 1 c -
+        (if a = c then (0 : ℂ) else 0)) - z * (if a = c then 1 else 0)
+    by_cases hac : a = c <;> simp [hac]
   have hnorm : ‖(intervalSiteBlocks z x j).D‖ ≤ ‖(intervalSiteBlocks 0 x j).D‖ + ‖z‖ := by
     rw [hD]
     simpa only [norm_smul, norm_one, mul_one] using
@@ -208,7 +216,7 @@ theorem rademacherSite_shifted_norm_sum_le_of_good
 /-- Endpoint data for any selected packet's physical outer interfaces are
 constructed on the same global event. -/
 theorem rademacherEndpointGood_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (x : IntervalRows W s) (hx : x ∉ rademacherInterfaceBadEvent I W s)
     (jL jR : Fin s) (z : ℂ) :
@@ -225,7 +233,7 @@ theorem rademacherEndpointGood_of_good
 high-probability event; unlike the density API this does not claim the
 event has full measure at any finite size. -/
 theorem rademacherIntervalTransfer_representation_of_good
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W)
     (x : IntervalRows W s) (hx : x ∉ rademacherInterfaceBadEvent I W s)
     (z : ℂ) :
@@ -240,30 +248,30 @@ theorem rademacherIntervalTransfer_representation_of_good
     intervalClearedProduct_eq_clearing_smul_compound W s z x (fun j => (hdet j).1)⟩
 
 /-- A literal measurable good event on this interval's own finite support. -/
-def rademacherInterfaceGoodEvent (I : NguyenBottomSingularInput) (W s : ℕ) :
+def rademacherInterfaceGoodEvent (I : NguyenBottomSingularInput.{0, 0}) (W s : ℕ) :
     Set (IntervalRows W s) :=
   rademacherGoodEvent W s (rademacherInterfaceBadEvent I W s)
 
 theorem measurableSet_rademacherInterfaceGoodEvent
-    (I : NguyenBottomSingularInput) (W s : ℕ) :
+    (I : NguyenBottomSingularInput.{0, 0}) (W s : ℕ) :
     MeasurableSet (rademacherInterfaceGoodEvent I W s) :=
   measurableSet_rademacherGoodEvent W s _
 
 theorem rademacherInterfaceGoodEvent_spec
-    (I : NguyenBottomSingularInput) (W s : ℕ)
+    (I : NguyenBottomSingularInput.{0, 0}) (W s : ℕ)
     {x : IntervalRows W s} (hx : x ∈ rademacherInterfaceGoodEvent I W s) :
     (∀ i a, x i a = 1 ∨ x i a = -1) ∧
       x ∉ rademacherInterfaceBadEvent I W s :=
   hx
 
 theorem rademacherInterfaceGoodEvent_compl_probability_eq
-    (I : NguyenBottomSingularInput) (W s : ℕ) :
+    (I : NguyenBottomSingularInput.{0, 0}) (W s : ℕ) :
     (intervalRowsLaw W s rademacherLaw).real (rademacherInterfaceGoodEvent I W s)ᶜ =
       (intervalRowsLaw W s rademacherLaw).real (rademacherInterfaceBadEvent I W s) :=
   measureReal_rademacherGoodEvent_compl W s _
 
 theorem rademacherInterfaceGoodEvent_compl_probability_le
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ) (hW : interfaceCanonicalLargeWThreshold I ≤ W) :
     (intervalRowsLaw W s rademacherLaw).real (rademacherInterfaceGoodEvent I W s)ᶜ ≤
       3 * (s : ℝ) * Real.exp (-(interfaceCombinedRate I / 2) * (W : ℝ)) := by
@@ -271,7 +279,7 @@ theorem rademacherInterfaceGoodEvent_compl_probability_le
   exact rademacherInterfaceBadEvent_probability_le I hI W s hW
 
 theorem rademacherInterfaceGoodEvent_compl_probability_tendsto_zero
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ → ℕ) (hW : Tendsto W atTop atTop)
     (hlog : Tendsto (fun n => Real.log ((s n * W n : ℕ) : ℝ) / (W n : ℝ))
       atTop (𝓝 0)) :
@@ -281,7 +289,7 @@ theorem rademacherInterfaceGoodEvent_compl_probability_tendsto_zero
   exact rademacherInterfaceBadEvent_probability_tendsto_zero I hI W s hW hlog
 
 theorem rademacherInterfaceGoodEvent_compl_probability_tendsto_zero_of_bandwidth
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     (W s : ℕ → ℕ) (hW : Tendsto W atTop atTop)
     (hs : ∀ᶠ n in atTop, 4 ≤ s n)
     (hband : Tendsto (fun n => (W n : ℝ) /
@@ -293,19 +301,19 @@ theorem rademacherInterfaceGoodEvent_compl_probability_tendsto_zero_of_bandwidth
 
 /-- A cell/subinterval event is the pullback of the good event built from
 that subinterval's own coordinates. This retains its local measurability. -/
-def rademacherSubintervalGoodEvent (I : NguyenBottomSingularInput)
+def rademacherSubintervalGoodEvent (I : NguyenBottomSingularInput.{0, 0})
     {W s t : ℕ} (e : Fin t ↪ Fin s) : Set (IntervalRows W s) :=
   intervalRestriction e ⁻¹' rademacherInterfaceGoodEvent I W t
 
 theorem measurableSet_rademacherSubintervalGoodEvent
-    (I : NguyenBottomSingularInput) {W s t : ℕ} (e : Fin t ↪ Fin s) :
+    (I : NguyenBottomSingularInput.{0, 0}) {W s t : ℕ} (e : Fin t ↪ Fin s) :
     MeasurableSet (rademacherSubintervalGoodEvent (W := W) I e) := by
   apply (measurableSet_rademacherInterfaceGoodEvent I W t).preimage
   unfold intervalRestriction
   fun_prop
 
 theorem rademacherSubintervalGoodEvent_compl_probability_le
-    (I : NguyenBottomSingularInput) (hI : 1 ≤ I.subgaussianBound)
+    (I : NguyenBottomSingularInput.{0, 0}) (hI : 1 ≤ I.subgaussianBound)
     {W s t : ℕ} (e : Fin t ↪ Fin s)
     (hW : interfaceCanonicalLargeWThreshold I ≤ W) :
     (intervalRowsLaw W s rademacherLaw).real
@@ -332,12 +340,11 @@ theorem rademacherIntervalSquare_rawMatrix_restriction
     (rademacherIntervalSquare W t j b).rawMatrix (intervalRestriction e x) =
       (rademacherIntervalSquare W s (e j) b).rawMatrix x := by
   ext a c
-  simp [IidSubgaussianSquare.rawMatrix, rademacherIntervalSquare,
-    IidSubgaussianFamily.squareRestriction, rademacherIntervalFamily,
-    intervalSquareEntryEmbedding, intervalRestriction]
+  simp only [rademacherIntervalSquare_rawMatrix_apply, intervalRestriction,
+    Function.comp_apply, intervalRowEmbedding_rowIndex]
 
 theorem rademacherCombinedBadEvent_restriction_iff
-    (I : NguyenBottomSingularInput) {W s t : ℕ}
+    (I : NguyenBottomSingularInput.{0, 0}) {W s t : ℕ}
     (e : Fin t ↪ Fin s) (j : Fin t) (b : Fin 3) (x : IntervalRows W s) :
     intervalRestriction e x ∈ interfaceCombinedBadEvent I (rademacherIntervalSquare W t j b) ↔
       x ∈ interfaceCombinedBadEvent I (rademacherIntervalSquare W s (e j) b) := by
@@ -349,7 +356,7 @@ theorem rademacherCombinedBadEvent_restriction_iff
 /-- One all-site event certifies every selected interval simultaneously;
 no union over the collection of intervals is needed. -/
 theorem rademacherInterfaceGoodEvent_subset_subinterval
-    (I : NguyenBottomSingularInput) {W s t : ℕ} (e : Fin t ↪ Fin s) :
+    (I : NguyenBottomSingularInput.{0, 0}) {W s t : ℕ} (e : Fin t ↪ Fin s) :
     rademacherInterfaceGoodEvent I W s ⊆ rademacherSubintervalGoodEvent (W := W) I e := by
   intro x hx
   refine ⟨?_, ?_⟩

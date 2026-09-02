@@ -29,7 +29,7 @@ set_option maxHeartbeats 1200000
 /-- The concrete long-interval comparison, before deterministic anchor
 calibration. Every probabilistic comparison is proved on physical rows. -/
 theorem rademacher_long_log_potential_comparison
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W s : ℕ → ℕ)
     (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop)
     (hlong : ∀ᶠ n in atTop, anchorSize (W n) ≤ (s n + 3) * W n)
@@ -63,7 +63,7 @@ theorem targetCells_anchorSites (W : ℕ) : targetCells (anchorSites W) W = anch
   unfold targetCells anchorSites
   rw [Nat.add_sub_cancel_right, Nat.mul_div_cancel _ (cellSites_pos W)]
 
-theorem anchorPressureCenter_eq_target (I : NguyenBottomSingularInput) (W : ℕ) (z : ℂ) :
+theorem anchorPressureCenter_eq_target (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (z : ℂ) :
     anchorPressureCenter rademacherLaw (rademacherCellClipConstant I z) W z =
       targetPressureCenter rademacherLaw (rademacherCellClipConstant I z) W (anchorSites W) z := by
   simp only [anchorPressureCenter, targetPressureCenter, targetCells_anchorSites,
@@ -71,7 +71,7 @@ theorem anchorPressureCenter_eq_target (I : NguyenBottomSingularInput) (W : ℕ)
 
 /-- The anchor comparison has no seam or pressure premise. -/
 theorem rademacher_anchor_pressure_comparison
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W : ℕ → ℕ)
     (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop) (z : ℂ) :
     TendstoInProbabilityTri (fun n => intervalRowsLaw (W n) (anchorSites (W n)) rademacherLaw)
@@ -87,7 +87,7 @@ theorem rademacher_anchor_pressure_comparison
 /-- The pressure limit obtained from the actual many-cell anchor and
 Proposition 3.8. No pressure convergence certificate is an input. -/
 theorem rademacher_normalizedCorePressure_tendsto
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound)
     (hSource : Section3SubgaussianHighBandInput rademacherLaw 1)
     (W : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop) (z : ℂ) :
@@ -98,7 +98,7 @@ theorem rademacher_normalizedCorePressure_tendsto
       (rademacher_anchor_pressure_comparison cook I hI W hW hWtop z)
 
 theorem rademacher_long_rows_log_potential
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound)
     (hSource : Section3SubgaussianHighBandInput rademacherLaw 1)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop)
@@ -136,7 +136,7 @@ def longBranchLogPotential (W s : ℕ) (z : ℂ) (x : IntervalRows W (s + 3)) : 
   else circularLogPotential z
 
 theorem rademacher_long_branch_log_potential
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound)
     (hSource : Section3SubgaussianHighBandInput rademacherLaw 1)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop)
@@ -164,7 +164,11 @@ theorem rademacher_long_branch_log_potential
   have h := rademacher_long_rows_log_potential cook I hI hSource W
     (fun n => longOrAnchorCoreSites (W n) (s n)) hW hWtop hlong hlog' z
   intro ε hε
-  apply squeeze_zero (fun _ => measureReal_nonneg) _ (h ε hε)
+  refine squeeze_zero (t₀ := (atTop : Filter ℕ))
+    (f := fun n : ℕ => (intervalRowsLaw (W n) (s n + 3) rademacherLaw).real
+      {x : IntervalRows (W n) (s n + 3) |
+        ε ≤ |longBranchLogPotential (W n) (s n) z x - circularLogPotential z|})
+    (fun n : ℕ => measureReal_nonneg) ?_ (h ε hε)
   intro n
   by_cases hn : anchorSize (W n) ≤ (s n + 3) * W n
   · simp only [longBranchLogPotential, longOrAnchorCoreSites, if_pos hn]
@@ -179,7 +183,7 @@ theorem rademacher_long_branch_log_potential
 /-- Actual finite-row Bernoulli logarithmic potential, including arbitrary
 alternation of the high-band and long branches. -/
 theorem rademacher_rows_log_potential
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound)
     (hSource : Section3SubgaussianHighBandInput rademacherLaw 1)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hs : ∀ n, 0 < s n)
@@ -206,7 +210,7 @@ theorem rademacher_rows_log_potential
 
 /-- Caller-facing convergence on the actual IID Rademacher sequence. -/
 theorem rademacher_log_potential
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound)
     (hSource : Section3SubgaussianHighBandInput rademacherLaw 1)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hs : ∀ n, 0 < s n)

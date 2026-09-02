@@ -26,7 +26,7 @@ open BernoulliSection9 BernoulliSection10
 open BernoulliSection10.DiskReference BernoulliSection10.Replacement ShortRingAnchor TaoVuReplacement
 
 theorem section8_bernoulli_log_potential
-    (cook : CookDeformedSquareInput.{0, 0}) (nguyen : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (nguyen : NguyenBottomSingularInput.{0, 0})
     (hNguyen : 1 ≤ nguyen.subgaussianBound)
     (section3 : Section3SubgaussianHighBandInput rademacherLaw 1)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hs : ∀ n, 0 < s n)
@@ -45,7 +45,7 @@ theorem section8_bernoulli_log_potential
 /-- Weak convergence in probability of the empirical eigenvalue measure
 of the actual cyclic band matrix with symmetric Bernoulli entries to the uniform disk. -/
 theorem section8_bernoulli_circular_law
-    (cook : CookDeformedSquareInput.{0, 0}) (nguyen : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (nguyen : NguyenBottomSingularInput.{0, 0})
     (hNguyen : 1 ≤ nguyen.subgaussianBound)
     (section3 : Section3SubgaussianHighBandInput rademacherLaw 1)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hs : ∀ n, 0 < s n)

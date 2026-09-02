@@ -88,7 +88,10 @@ theorem rademacher_anchor_log_potential
   have h := rademacher_high_band_rows_log_potential hSource W
     (fun n => anchorCells (W n) * cellSites (W n)) hW hs hWtop
     (1 / 20) (by norm_num) (by norm_num) hb z
-  simpa only [anchorLogPotential, anchorSize, anchorSites, Nat.mul_comm] using h
+  apply h.congr
+  · intro n x
+    simp only [anchorLogPotential, anchorSize, anchorSites, Nat.mul_comm]
+  · rfl
 
 /-- Source lengths for the direct branch, with anchors at the other
 indices so no eventual branch choice is needed. -/
@@ -135,7 +138,11 @@ theorem rademacher_direct_branch_log_potential
     (1 / 20) (by norm_num) (by norm_num)
     (eventually_directOrAnchor_highBand W s hWtop) z
   intro ε hε
-  apply squeeze_zero (fun _ => measureReal_nonneg) _ (h ε hε)
+  refine squeeze_zero (t₀ := (atTop : Filter ℕ))
+    (f := fun n : ℕ => (intervalRowsLaw (W n) (s n + 3) rademacherLaw).real
+      {x : IntervalRows (W n) (s n + 3) |
+        ε ≤ |directBranchLogPotential (W n) (s n) z x - circularLogPotential z|})
+    (fun n : ℕ => measureReal_nonneg) ?_ (h ε hε)
   intro n
   by_cases hn : (s n + 3) * W n < anchorSize (W n)
   · simp only [directBranchLogPotential, directOrAnchorCoreSites, if_pos hn]

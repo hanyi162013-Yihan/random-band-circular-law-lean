@@ -25,7 +25,7 @@ set_option maxHeartbeats 1000000
 set_option backward.isDefEq.respectTransparency false
 
 theorem physicalCappedResetLoss_reset_integral_le
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W p q : ℕ) (z : ℂ)
     (hW : rademacherBoundaryWidthThreshold cook z ≤ W)
     (hWI : interfaceCanonicalLargeWThreshold I ≤ W)
@@ -109,7 +109,7 @@ theorem product_good_compl_probability_le
 fibers. The coefficient estimate will be instantiated with the proved
 endpoint constant; no measurable frame selection occurs in this theorem. -/
 theorem resetLossFlat_integral_le
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W p q : ℕ) (z : ℂ)
     (hW : rademacherBoundaryWidthThreshold cook z ≤ W)
     (hWI : interfaceCanonicalLargeWThreshold I ≤ W)

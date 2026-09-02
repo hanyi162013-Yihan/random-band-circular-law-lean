@@ -48,7 +48,7 @@ theorem tendsto_widthLogScale_div_dimension_of_anchor
     unfold densityTargetErrorScale
     linarith
 
-theorem rademacherSeamCost_le (I : NguyenBottomSingularInput)
+theorem rademacherSeamCost_le (I : NguyenBottomSingularInput.{0, 0})
     (W : ℕ) (hW : 0 < W) (z : ℂ) :
     rademacherSeamCost I W z ≤
       (rademacherBoundaryLogConstant I z + Real.log 2) * W * densityLogScale W := by
@@ -76,7 +76,7 @@ theorem tendsto_rademacherBoundaryBaseLoss_div_dimension
   simpa only [mul_div_assoc, mul_assoc] using hb
 
 theorem tendsto_rademacherSeamCost_div_dimension
-    (I : NguyenBottomSingularInput) (W N : ℕ → ℕ) (z : ℂ)
+    (I : NguyenBottomSingularInput.{0, 0}) (W N : ℕ → ℕ) (z : ℂ)
     (hW : Tendsto W atTop atTop)
     (hlong : ∀ᶠ n in atTop, anchorSize (W n) ≤ N n) :
     Tendsto (fun n => rademacherSeamCost I (W n) z / N n) atTop (𝓝 0) := by
@@ -95,7 +95,7 @@ theorem tendsto_rademacherSeamCost_div_dimension
 /-- The exact exceptional event, including every zero Fock value, has
 vanishing probability at every positive macroscopic cap. -/
 theorem rademacherSeamBadEvent_probability_tendsto_zero
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W s : ℕ → ℕ) (z : ℂ)
     (hW : Tendsto W atTop atTop)
     (hlog : Tendsto (fun n => Real.log (((s n + 3) * W n : ℕ) : ℝ) / (W n : ℝ))
@@ -145,7 +145,7 @@ theorem rademacherSeamBadEvent_probability_tendsto_zero
 /-- The actual determinant trace is nonzero with probability tending to
 one. Finite-size almost-sure invertibility is never asserted. -/
 theorem rademacherCyclicFock_zero_probability_tendsto_zero
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W s : ℕ → ℕ) (z : ℂ)
     (hW : Tendsto W atTop atTop)
     (hlog : Tendsto (fun n => Real.log (((s n + 3) * W n : ℕ) : ℝ) / (W n : ℝ))
@@ -162,7 +162,7 @@ theorem rademacherCyclicFock_zero_probability_tendsto_zero
 
 /-- Vanishing normalized seam on the literal finite physical row spaces. -/
 theorem rademacher_cyclicSeamDifference_tendstoInProbabilityTri
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W s : ℕ → ℕ) (z : ℂ)
     (hW : Tendsto W atTop atTop)
     (hlog : Tendsto (fun n => Real.log (((s n + 3) * W n : ℕ) : ℝ) / (W n : ℝ))
@@ -198,7 +198,7 @@ theorem rademacher_cyclicSeamDifference_tendstoInProbabilityTri
 /-- The same statement on the fixed, actual infinite IID Bernoulli
 sample space used by the final circular-law reduction. -/
 theorem rademacher_cyclicSeamDifference_tendstoInMeasure
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W s : ℕ → ℕ) (z : ℂ)
     (hW : Tendsto W atTop atTop)
     (hlog : Tendsto (fun n => Real.log (((s n + 3) * W n : ℕ) : ℝ) / (W n : ℝ))
@@ -220,7 +220,7 @@ theorem rademacher_cyclicSeamDifference_tendstoInMeasure
 
 /-- Final-assembly argument order for the actual triangular ring law. -/
 theorem rademacherCyclicSeamDifference_tendsto
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W s : ℕ → ℕ)
     (hWtop : Tendsto W atTop atTop)
     (hlong : ∀ᶠ n in atTop, anchorSize (W n) ≤ (s n + 3) * W n)

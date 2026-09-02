@@ -16,24 +16,24 @@ open BernoulliSection9 BernoulliSection10 BernoulliSection10.ProbabilityLimits
 set_option backward.isDefEq.respectTransparency false
 set_option maxHeartbeats 1000000
 
-def rademacherCellClipConstant (I : NguyenBottomSingularInput) (z : ℂ) : ℝ≥0 :=
+def rademacherCellClipConstant (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ) : ℝ≥0 :=
   ⟨2 * (rademacherTransferLogConstant I z + 1), by
     have h := rademacherTransferLogConstant_nonneg I z
     positivity⟩
 
-theorem rademacherCellClipConstant_pos (I : NguyenBottomSingularInput) (z : ℂ) :
+theorem rademacherCellClipConstant_pos (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ) :
     0 < rademacherCellClipConstant I z := by
   change 0 < (2 * (rademacherTransferLogConstant I z + 1) : ℝ)
   have h := rademacherTransferLogConstant_nonneg I z
   positivity
 
-def rademacherResetCapConstant (I : NguyenBottomSingularInput) (z : ℂ) : ℝ :=
+def rademacherResetCapConstant (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ) : ℝ :=
   3 * (rademacherTransferLogConstant I z + 1)
 
-def rademacherResetCap (I : NguyenBottomSingularInput) (W : ℕ) (z : ℂ) : ℝ :=
+def rademacherResetCap (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (z : ℂ) : ℝ :=
   rademacherResetCapConstant I z * cellLength W * densityLogScale W
 
-theorem rademacherResetCap_pos (I : NguyenBottomSingularInput) (W : ℕ)
+theorem rademacherResetCap_pos (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ)
     (hW : 0 < W) (z : ℂ) : 0 < rademacherResetCap I W z := by
   have h1 := rademacherTransferLogConstant_nonneg I z
   have h2 : (0 : ℝ) < cellLength W := by exact_mod_cast cellLength_pos hW
@@ -44,7 +44,7 @@ theorem rademacherResetCap_pos (I : NguyenBottomSingularInput) (W : ℕ)
   unfold rademacherResetCap rademacherResetCapConstant
   positivity
 
-theorem rademacherCellClipBound_ge_budget (I : NguyenBottomSingularInput)
+theorem rademacherCellClipBound_ge_budget (I : NguyenBottomSingularInput.{0, 0})
     (W : ℕ) (hW : 0 < W) (z : ℂ) (hlog : 1 ≤ Real.log W) :
     cellTransferBudget I W (coreSites W) z ≤ cellClipBound (rademacherCellClipConstant I z) W := by
   have ht := rademacherTransferLogConstant_nonneg I z
@@ -61,7 +61,7 @@ theorem rademacherCellClipBound_ge_budget (I : NguyenBottomSingularInput)
       linarith
     _ ≤ _ := by nlinarith [mul_nonneg (Nat.cast_nonneg (cellLength W)) (Real.log_natCast_nonneg W)]
 
-theorem rademacherResetCap_ge_budget (I : NguyenBottomSingularInput)
+theorem rademacherResetCap_ge_budget (I : NguyenBottomSingularInput.{0, 0})
     (W : ℕ) (hW : 0 < W) (z : ℂ) :
     2 * cellTransferBudget I W (coreSites W) z + cellTransferBudget I W 3 z ≤
       rademacherResetCap I W z := by
@@ -100,14 +100,14 @@ theorem integrable_cellIntervalResetLoss (W s K : ℕ) (j : Fin K)
     cappedSpliceLoss_nonneg hT _ _ _)]
   exact cappedSpliceLoss_le_cap _ _ _ _
 
-def rademacherResetMeanError (cook : CookDeformedSquareInput) (I : NguyenBottomSingularInput)
+def rademacherResetMeanError (cook : CookDeformedSquareInput) (I : NguyenBottomSingularInput.{0, 0})
     (z : ℂ) (m W : ℕ) : ℝ :=
   averagedResetError (rademacherBoundaryLogConstant I z + rademacherTerminalLossConstant cook)
     (rademacherResetCapConstant I z) (interfaceCombinedRate I / 2)
     (rademacherBoundaryBadProbability cook) m W
 
 theorem cellIntervalResetLoss_integral_le_meanError
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W K m : ℕ) (j : Fin K) (z : ℂ)
     (hW : rademacherBoundaryWidthThreshold cook z ≤ W)
     (hWI : interfaceCanonicalLargeWThreshold I ≤ W)
@@ -145,7 +145,7 @@ theorem cellIntervalResetLoss_integral_le_meanError
   nlinarith
 
 theorem tendsto_rademacherResetMeanError
-    (cook : CookDeformedSquareInput) (I : NguyenBottomSingularInput) (z : ℂ)
+    (cook : CookDeformedSquareInput) (I : NguyenBottomSingularInput.{0, 0}) (z : ℂ)
     (m W : ℕ → ℕ) (hW : Tendsto W atTop atTop)
     (hlog : Tendsto (fun n => Real.log ((m n * W n : ℕ) : ℝ) / (W n : ℝ)) atTop (𝓝 0)) :
     Tendsto (fun n => rademacherResetMeanError cook I z (m n) (W n)) atTop (𝓝 0) :=
@@ -155,7 +155,7 @@ theorem tendsto_rademacherResetMeanError
 /-- Sum first and apply Markov once. No union bound over Cook failures is
 present, including when the number of cells grows faster than any power. -/
 theorem normalizedCellResetLoss_tendsto
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W K m : ℕ → ℕ)
     (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop)
     (hK : ∀ᶠ n in atTop, 0 < K n)

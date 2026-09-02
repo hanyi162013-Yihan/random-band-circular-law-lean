@@ -245,7 +245,7 @@ theorem integral_cellIntervalResetLoss_eq
     (measurable_intervalResetLoss W s (j.val * (3 + s)) z r T)
 
 theorem cellIntervalResetLoss_integral_le
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W s K : ℕ) (j : Fin K) (z : ℂ)
     (hW : rademacherBoundaryWidthThreshold cook z ≤ W)
     (hWI : interfaceCanonicalLargeWThreshold I ≤ W)

@@ -63,7 +63,7 @@ theorem intervalResetLoss_resetSandwichRowsFlat (W p q : ℕ) (z : ℂ)
 /-- The coefficient-norm estimate is discharged here by the explicit
 Nguyen endpoint constant. Only Cook and Nguyen remain as input objects. -/
 theorem intervalResetLoss_integral_le
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W p q : ℕ) (z : ℂ)
     (hW : rademacherBoundaryWidthThreshold cook z ≤ W)
     (hWI : interfaceCanonicalLargeWThreshold I ≤ W)

@@ -7,6 +7,10 @@ build every project module and check Lake's default targets as before.
 With --keep-going, collect failures from independent branches and skip
 modules that depend on a failed module. Any failure suppresses the final
 Lake target check and returns a nonzero status.
+With --start-at MODULE, still compute the full selected dependency closure,
+but omit earlier per-module commands. Every remaining command and the final
+target check uses normal Lake dependency validation; omitted modules are
+never treated as successfully verified by this script.
 
 Requires Python 3.11+. Fetch the pinned dependency cache before running this
 script: project modules are serialized, but Lake manages external dependencies.
@@ -162,6 +166,8 @@ def main() -> int:
                         help="build this module root and its dependencies (repeatable)")
     parser.add_argument("--keep-going", action="store_true",
                         help="continue independent branches after a failed module")
+    parser.add_argument("--start-at", metavar="MODULE",
+                        help="start per-module commands here; normal Lake dependency and final checks remain")
     args = parser.parse_args()
     root = args.root.resolve()
     targets = list(dict.fromkeys(args.target))
@@ -174,12 +180,21 @@ def main() -> int:
         if targets:
             dependencies = dependency_closure(dependencies, targets)
         order = dependency_order(dependencies)
+        start_index = 0
+        if args.start_at is not None:
+            if args.start_at not in dependencies:
+                raise ValueError(f"start module is not in the selected dependency closure: {args.start_at!r}")
+            start_index = order.index(args.start_at)
+        commands = order[start_index:]
         if args.dry_run:
-            print("\n".join(order))
+            print("\n".join(commands))
             return 0
+        if start_index:
+            print(f"Starting at {args.start_at}; omitting {start_index} earlier per-module commands. "
+                  "Lake still validates dependencies and final targets.", flush=True)
         failed = set()
         skipped = set()
-        for index, name in enumerate(order, 1):
+        for index, name in enumerate(commands, start_index + 1):
             blockers = dependencies[name] & (failed | skipped)
             if blockers:
                 skipped.add(name)

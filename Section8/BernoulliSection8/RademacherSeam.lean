@@ -29,10 +29,10 @@ local instance rademacherSeamSumOrder (W : ℕ) : LinearOrder (Fin W ⊕ Fin W) 
 set_option maxHeartbeats 1200000
 set_option backward.isDefEq.respectTransparency false
 
-def rademacherSeamCost (I : NguyenBottomSingularInput) (W : ℕ) (z : ℂ) : ℝ :=
+def rademacherSeamCost (I : NguyenBottomSingularInput.{0, 0}) (W : ℕ) (z : ℂ) : ℝ :=
   rademacherBoundaryLogConstant I z * W * densityLogScale W + (W : ℝ) * Real.log 2
 
-theorem rademacherSeamCost_nonneg (I : NguyenBottomSingularInput)
+theorem rademacherSeamCost_nonneg (I : NguyenBottomSingularInput.{0, 0})
     (W : ℕ) (hW : 0 < W) (z : ℂ) : 0 ≤ rademacherSeamCost I W z := by
   unfold rademacherSeamCost
   exact add_nonneg (mul_nonneg (mul_nonneg (rademacherBoundaryLogConstant_nonneg I z)
@@ -40,7 +40,7 @@ theorem rademacherSeamCost_nonneg (I : NguyenBottomSingularInput)
     (mul_nonneg (Nat.cast_nonneg W) (Real.log_nonneg (by norm_num)))
 
 theorem rademacherSeam_fresh_probability_le
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (W : ℕ) (z : ℂ) (hW : rademacherBoundaryWidthThreshold cook z ≤ W)
     (ep : EndpointBlockPair W) (hep : ep ∈ rademacherEndpointGoodEvent I W)
     (a : ℂ) (ha : a ≠ 0) (R : Matrix (Fin W ⊕ Fin W) (Fin W ⊕ Fin W) ℂ)
@@ -71,7 +71,7 @@ theorem rademacherSeam_fresh_probability_le
   simpa only [outsideExteriorPressure, packetBoundaryEval_eq_physical] using h
 
 theorem rademacherSeam_packet_probability_le
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W : ℕ) (z : ℂ)
     (hW : rademacherBoundaryWidthThreshold cook z ≤ W)
     (hWI : interfaceCanonicalLargeWThreshold I ≤ W)
@@ -111,18 +111,18 @@ theorem continuous_cyclicFockValue (W s : ℕ) (z : ℂ) :
     polynomialClearedSignedCompoundTrace, compound_one, Matrix.mul_one] using
       continuous_physicalBoundaryExpression W (s + 3) z 1
 
-def cyclicSeamBadEvent (I : NguyenBottomSingularInput) (W s : ℕ) (z : ℂ) (t : ℝ) :
+def cyclicSeamBadEvent (I : NguyenBottomSingularInput.{0, 0}) (W s : ℕ) (z : ℂ) (t : ℝ) :
     Set (IntervalRows W (s + 3)) :=
   {x | cyclicFockValue W s z x = 0 ∨
     t + rademacherSeamCost I W z ≤ |cyclicSeamDifference W s z x|}
 
-theorem measurableSet_cyclicSeamBadEvent (I : NguyenBottomSingularInput)
+theorem measurableSet_cyclicSeamBadEvent (I : NguyenBottomSingularInput.{0, 0})
     (W s : ℕ) (z : ℂ) (t : ℝ) : MeasurableSet (cyclicSeamBadEvent I W s z t) :=
   ((continuous_cyclicFockValue W s z).measurable (measurableSet_singleton 0)).union
     (measurableSet_le measurable_const (measurable_cyclicSeamDifference W s z).norm)
 
 theorem cyclicSeamBadEvent_probability_le
-    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput)
+    (cook : CookDeformedSquareInput.{0, 0}) (I : NguyenBottomSingularInput.{0, 0})
     (hI : 1 ≤ I.subgaussianBound) (W s : ℕ) (z : ℂ)
     (hW : rademacherBoundaryWidthThreshold cook z ≤ W)
     (hWI : interfaceCanonicalLargeWThreshold I ≤ W) {t : ℝ} (ht : 0 < t) :

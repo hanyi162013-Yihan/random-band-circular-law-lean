@@ -60,7 +60,13 @@ theorem packetFramePolynomial_eval_rowScaling
     apply hphysical.congr'
     apply Filter.Eventually.of_forall
     intro q
-    rw [hboundary]
+    change packetFrameComplexNormalization r q *
+        MvPolynomial.eval (fun e => sigma⁻¹ * x e)
+          (packetBoundaryPolynomial z CL BR (packetFrameTheta U V s q)) =
+      a * (packetFrameComplexNormalization r q * MvPolynomial.eval x
+        (packetBoundaryPolynomial (sigma * z) (sigma • CL) (sigma • BR)
+          (packetFrameTheta U V s q)))
+    rw [hboundary q]
     ring
   have he := tendsto_nhds_unique hphysical' hraw
   have hsign : (-1 : ℂ) ^ r ≠ 0 := pow_ne_zero _ (by norm_num)
@@ -237,6 +243,8 @@ theorem rademacherPacketFrame_capped_and_zero
           (packetAtomAssignment W x)))
       (rademacherBoundaryBaseLoss cook W z + rademacherBoundaryBadProbability cook W * T)
       (fun q => (hterminal q).capped T hT)
+    change ∫ x, cappedLogLoss T c ((-1 : ℂ) ^ r * value x)
+      ∂packetAtomRowsLaw W rademacherLaw ≤ _ at hlimit
     simpa only [hcapSign] using hlimit
   refine ⟨hcapped, ?_⟩
   apply zeroProbability_of_all_capped_bounds
