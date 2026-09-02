@@ -1,5 +1,6 @@
 import CircularLawSection6.MatrixCutoffComparison
-import Mathlib.MeasureTheory.Constructions.BorelSpace.Basic
+import Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
+import Mathlib.Topology.Algebra.Group.Matrix
 import Mathlib.Tactic.FunProp
 
 /-! # Measurability of the actual cutoff on the nonsingular event
@@ -43,7 +44,8 @@ theorem continuousOn_matrixCutoffPotential {a : ℝ} (ha : 0 < a) :
         (continuous_subtype_val.sub continuous_const))).div_const _
     simpa [hilbertSchmidtSq] using hc.tendsto A
   apply squeeze_zero (fun _ => norm_nonneg _) (fun B => ?_) hb
-  simpa only [Real.norm_eq_abs] using matrixCutoffPotential_difference_le B.val A.val B.property A.property ha
+  simpa only [Real.norm_eq_abs, Set.domRestrict_apply] using
+    matrixCutoffPotential_difference_le B.val A.val B.property A.property ha
 
 def goodMatrixCutoffPotential (a : ℝ) (A : Matrix ι ι ℂ) : ℝ :=
   if A.det ≠ 0 then matrixCutoffPotential A a else 0
