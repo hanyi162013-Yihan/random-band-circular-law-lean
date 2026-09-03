@@ -32,6 +32,7 @@ jobs:
       LEAN_NUM_THREADS: "2"
       SECTION5_INTERFACE_ONLY: ${{ contains(github.event.head_commit.message, '[section5-interface]') }}
       DENSE_INTERFACE_ONLY: ${{ contains(github.event.head_commit.message, '[section6-dense]') }}
+      BBV_INTERFACE_ONLY: ${{ contains(github.event.head_commit.message, '[section6-bbv]') }}
     steps:
       - name: Check out source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -45,6 +46,7 @@ jobs:
           --path-prefix section3/ShortRingAnchor/AtomAssumption21.lean
           --path-prefix section3/ShortRingAnchor/BC12/GinibreSmallBall.lean
           --path-prefix section3/ShortRingAnchor/BC12/GinibreNegativeMoments.lean
+          --path-prefix section3/Vendor/Arxiv2410/V3/FreeDysonUniqueness.lean
       - name: Restore project build caches
         id: project_cache
         uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -80,6 +82,9 @@ jobs:
           elif [[ "$DENSE_INTERFACE_ONLY" == "true" ]]; then
             lake --no-cache build CircularLawSection6.GinibreFiniteFormulaSources 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true DenseGinibreAudit.lean 2>&1 | tee verification-ci/axioms.log
+          elif [[ "$BBV_INTERFACE_ONLY" == "true" ]]; then
+            lake --no-cache build CircularLawSection6.GinibreDysonImaginary CircularLawSection6.UnequalGinibreCutoff 2>&1 | tee verification-ci/build.log
+            lake --no-cache env lean -DwarningAsError=true BBVGinibreAudit.lean 2>&1 | tee verification-ci/axioms.log
           else
             lake --no-cache build CircularLawSection6 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true AxiomAudit.lean 2>&1 | tee verification-ci/axioms.log
