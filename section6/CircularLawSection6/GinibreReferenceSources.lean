@@ -110,7 +110,7 @@ theorem ginibre_raw_of_bc12
     simpa only [Real.norm_eq_abs] using (hraw.sub_const (circularRadialPotential ‖z‖)).norm
   have he := (GinibreReferenceSources.cyclicSamples_measurePreserving (N n)).measureReal_preimage
     (measurableSet_le (measurable_const (a := ε)) hm).nullMeasurableSet
-  simpa only [Set.preimage_setOf_eq, GinibreReferenceSources.cyclicSamples_raw,
+  simpa only [Set.preimage_ofPred_eq, GinibreReferenceSources.cyclicSamples_raw,
     circularRadialPotential, circularLogPotential] using he
 
 /-- Actual Ginibre ESD convergence on the Section 6 product sample space.

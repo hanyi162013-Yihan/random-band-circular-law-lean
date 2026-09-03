@@ -64,7 +64,7 @@ theorem profile_raw_limit
   have he := (cyclicSamples_measurePreserving (M n)).measureReal_preimage
     (measurableSet_le (measurable_const (a := ε))
       ((hraw.sub_const (circularRadialPotential ‖z‖)).abs)).nullMeasurableSet
-  simpa only [Set.preimage_setOf_eq, profile_cyclicSamples_raw,
+  simpa only [Set.preimage_ofPred_eq, profile_cyclicSamples_raw,
     circularRadialPotential, circularLogPotential, gaussianProfileLaw] using he
 
 end DenseProfile

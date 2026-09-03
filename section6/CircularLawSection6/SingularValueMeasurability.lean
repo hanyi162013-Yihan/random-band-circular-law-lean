@@ -2,6 +2,7 @@ import CircularLawSection6.NegativeMomentCutoff
 import CircularLawSection6.SingularValueReindexing
 import Vendor.SLT.MatrixInfra.CourantFischer
 import Mathlib.MeasureTheory.Function.SpecialFunctions.Basic
+import Mathlib.Analysis.CStarAlgebra.Matrix
 
 /-! # Ordered singular values and negative moments are measurable
 
@@ -63,21 +64,18 @@ theorem singularValue_lipschitz {n : ℕ} (hn : finrank ℂ E = n) (i : Fin n) :
   rw [norm_sub_rev S T] at hST
   constructor <;> linarith
 
+set_option backward.isDefEq.respectTransparency false in
 theorem continuous_matrix_singularValue
     {ι : Type*} [Fintype ι] [DecidableEq ι] (i : Fin (Fintype.card ι)) :
     Continuous (fun A : Matrix ι ι ℂ => A.toEuclideanLin.singularValues i) := by
-  let L : Matrix ι ι ℂ →ₗ[ℂ]
-      (EuclideanSpace ℂ ι →L[ℂ] EuclideanSpace ℂ ι) :=
-    (LinearMap.toContinuousLinearMap :
-      (EuclideanSpace ℂ ι →ₗ[ℂ] EuclideanSpace ℂ ι) ≃ₗ[ℂ]
-        (EuclideanSpace ℂ ι →L[ℂ] EuclideanSpace ℂ ι)).toLinearMap.comp
-      (Matrix.toEuclideanLin : Matrix ι ι ℂ ≃ₗ[ℂ]
-        (EuclideanSpace ℂ ι →ₗ[ℂ] EuclideanSpace ℂ ι)).toLinearMap
+  have hCLM : Continuous (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℂ)) :=
+    (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℂ)).toLinearEquiv.toLinearMap.continuous_of_finiteDimensional
   have hLip : LipschitzWith 1 (fun T : EuclideanSpace ℂ ι →L[ℂ] EuclideanSpace ℂ ι =>
       T.toLinearMap.singularValues i) :=
     singularValue_lipschitz (E := EuclideanSpace ℂ ι) (F := EuclideanSpace ℂ ι)
       (finrank_euclideanSpace (𝕜 := ℂ) (ι := ι)) i
-  exact hLip.continuous.comp L.continuous_of_finiteDimensional
+  simpa only [Function.comp_def, Matrix.coe_toEuclideanCLM_eq_toEuclideanLin] using
+    hLip.continuous.comp hCLM
 
 theorem measurable_matrixNegativeMoment
     {ι : Type*} [Fintype ι] [DecidableEq ι] (p : ℝ) :

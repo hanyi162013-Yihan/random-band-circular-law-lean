@@ -50,7 +50,7 @@ theorem negative_on_sequence_to_tri
       {ω | C < |matrixNegativeMoment (ginibreMatrix (N n) ω - z • 1) p|} < ENNReal.ofReal δ := by
     rw [← (cyclicSamples_measurePreserving (N n)).measure_preimage
       (measurableSet_lt (measurable_const (a := C)) hm).nullMeasurableSet]
-    simpa only [Set.preimage_setOf_eq, cyclicSamples_negative, Real.norm_eq_abs,
+    simpa only [Set.preimage_ofPred_eq, cyclicSamples_negative, Real.norm_eq_abs,
       shiftedSingularValueProcess] using hn
   simpa only [measureReal_def, ENNReal.toReal_ofReal hδ.le] using
     (ENNReal.toReal_lt_toReal (measure_ne_top _ _) ENNReal.ofReal_ne_top).2 hprob
