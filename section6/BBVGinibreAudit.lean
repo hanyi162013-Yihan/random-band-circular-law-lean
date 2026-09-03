@@ -1,8 +1,8 @@
-import CircularLawSection6.GinibreDysonEndpoints
-import CircularLawSection6.BBVCoreSources
-import CircularLawSection6.RegularizedCutoffComparison
-import CircularLawSection6.TightVarianceMoments
-import CircularLawSection6.TriangularTightness
+import CircularLawSection6.GinibreDysonDerivative
+import CircularLawSection6.BBVProfileEndpoint
+import CircularLawSection6.GinibreLogMomentBounds
+import CircularLawSection6.RegularizedMeanRemoval
+import CircularLawSection6.GinibrePointwiseNonzero
 import Lean.Util.CollectAxioms
 
 /-! Narrow transitive audit for the independent BBV-to-Ginibre bridges.
@@ -56,6 +56,23 @@ run_cmd do
     `CircularLawSection6.matrixRegularizedPotential_le_cutoff,
     `CircularLawSection6.matrixRegularized_raw_error_le_negativeMoment,
     `CircularLawSection6.matrixRaw_probability_of_regularized_limits,
+    `CircularLawSection6.abs_matrixRawPotential_le_energy_negativeMoment,
+    `CircularLawSection6.matrixRawPotential_boundedInProbabilityTri_of_energy_negativeMoment,
+    `CircularLawSection6.ginibre_shifted_det_ne_zero_ae,
+    `CircularLawSection6.ginibre_raw_centered_tendsto,
+    `CircularLawSection6.ginibre_raw_tight_of_bbv_ae,
+    `CircularLawSection6.ginibre_raw_uniform_secondMoment_of_bbv_ae,
+    `CircularLawSection6.ginibreLowerCutoff_L1_of_bbv_ae,
+    `CircularLawSection6.ginibre_iterated_lowerCutoff_L1_of_bbv_ae,
+    `CircularLawSection6.tendsto_of_iterated_approximations,
+    `CircularLawSection6.expected_regularized_raw_error_le_cutoff,
+    `CircularLawSection6.matrixRaw_mean_of_regularized_mean_limits,
+    `CircularLawSection6.leastSingularValue_lt_of_shifted_det_eq_zero,
+    `CircularLawSection6.ginibreOnSequence_shifted_det_ne_zero,
+    `CircularLawSection6.ginibre_shifted_det_ne_zero,
+    `CircularLawSection6.NoncompactProfile.profile_probability_along_sparse_subsequence_of_bbv_sources,
+    `CircularLawSection6.NoncompactProfile.profile_spectral_limit_along_sparse_subsequence_of_bbv_sources,
+    `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_core_sources,
     `Arxiv2410V3.normSq_mul_add_nonneg_le,
     `Arxiv2410V3.scalarDyson_strict_contraction,
     `Arxiv2410V3.scalarDysonEquation_unique,
@@ -83,3 +100,8 @@ run_cmd do
 #check CircularLawSection6.CoreRadiusBounds.canonical_core_cutoff_comparison_of_bbv
 #check CircularLawSection6.NoncompactProfile.GaussianProfileBBVCoreSources
 #check CircularLawSection6.matrixRaw_probability_of_regularized_limits
+#check CircularLawSection6.GinibreDyson.hasDerivAt_dysonPotential
+#check CircularLawSection6.ginibre_raw_uniform_secondMoment_of_bbv_ae
+#check CircularLawSection6.ginibre_iterated_lowerCutoff_L1_of_bbv_ae
+#check CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_core_sources
+#check CircularLawSection6.ginibre_shifted_det_ne_zero

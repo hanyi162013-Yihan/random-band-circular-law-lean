@@ -62,7 +62,8 @@ theorem unequal_matrix_grid_cdf_bound
       (empiricalCdf_fin_dimension (by simp)
         (fun i => (Y ω - z • 1).toEuclideanLin.singularValues i ^ 2) t)
   rw [hid]
-  convert h using 1 <;> ring
+  convert h using 1
+  ring
 
 /-- A fixed finite grid costs only a finite sum of pointwise failure
 probabilities. Its size is independent of both matrix dimensions. -/
@@ -84,9 +85,11 @@ theorem compact_grid_compl_tendsto_zero
   let badB (n : ℕ) (i : I) := {ω | K ^ (-d) < ‖g n ω (u i) - reference (u i)‖}
   have hsum : Tendsto (fun n => ∑ i : I, (μ n (badA n i) + μ n (badB n i)))
       atTop (𝓝 0) := by
-    have h := tendsto_finsetSum (Finset.univ : Finset I) (fun i _ =>
-      (hf (u i) _ (Real.rpow_pos_of_pos hK _)).add
-        (hg (u i) _ (Real.rpow_pos_of_pos hK _)))
+    have h : Tendsto (fun n => ∑ i : I, (μ n (badA n i) + μ n (badB n i)))
+        atTop (𝓝 (∑ _i : I, ((0 : ℝ≥0∞) + 0))) :=
+      tendsto_finsetSum (Finset.univ : Finset I) (fun i _ =>
+        (hf (u i) (K ^ (-d)) (Real.rpow_pos_of_pos hK (-d))).add
+          (hg (u i) (K ^ (-d)) (Real.rpow_pos_of_pos hK (-d))))
     simpa only [add_zero, Finset.sum_const_zero] using h
   apply tendsto_of_tendsto_of_tendsto_of_le_of_le
     tendsto_const_nhds hsum (fun _ => zero_le) (fun n => ?_)
@@ -153,6 +156,12 @@ theorem unequal_matrix_cdf_of_common_stieltjes
   change ε ≤ |matrixSquaredSingularCdfDistanceOn (X n ω - z • 1) (Y n ω - z • 1) R - 0| at hω
   have hb := unequal_matrix_grid_cdf_bound (X n) (Y n) z hkR hR hd0.le hd1
     (localBulkHeight_lower hkR) (by dsimp [v] at hroot ⊢; linarith) hg
+  let : Nonempty (Fin (Module.finrank ℂ (EuclideanSpace ℂ (Fin (M n))))) := by
+    simpa only [finrank_euclideanSpace, Fintype.card_fin] using
+      (inferInstance : Nonempty (Fin (M n)))
+  let : Nonempty (Fin (Module.finrank ℂ (EuclideanSpace ℂ (Fin (N n))))) := by
+    simpa only [finrank_euclideanSpace, Fintype.card_fin] using
+      (inferInstance : Nonempty (Fin (N n)))
   have hnonneg : 0 ≤ matrixSquaredSingularCdfDistanceOn
       (X n ω - z • 1) (Y n ω - z • 1) R :=
     empiricalCdfDistanceOn_nonneg (sq_nonneg R) _ _
@@ -181,8 +190,8 @@ theorem unequal_ginibre_cdf_of_bbv
       (fun n ω => matrixSquaredSingularCdfDistanceOn
         (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence (M n) ω - z • 1)
         (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence (N n) ω - z • 1) R) 0 := by
-  letI (n : ℕ) : NeZero (M n) := ⟨(hMpos n).ne'⟩
-  letI (n : ℕ) : NeZero (N n) := ⟨(hNpos n).ne'⟩
+  let (n : ℕ) : NeZero (M n) := ⟨(hMpos n).ne'⟩
+  let (n : ℕ) : NeZero (N n) := ⟨(hNpos n).ne'⟩
   have hpoint (D : ℕ → ℕ) (hDpos : ∀ n, 0 < D n) (hD : Tendsto D atTop atTop)
       (η : ℂ) (hη : 0 < η.im) (ε : ℝ) (hε : 0 < ε) :
       Tendsto (fun n =>
@@ -190,15 +199,13 @@ theorem unequal_ginibre_cdf_of_bbv
           {ω | ε < ‖stieltjesTrace
             (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence (D n) ω)
             z η - freeDysonStieltjes z η‖}) atTop (𝓝 0) := by
-    apply ENNReal.tendsto_toReal_zero_iff.mp
-    have h := GinibreBBV.ginibre_stieltjes_error_tri_of_bbv hBBV D hDpos hD z η hη ε hε
-    apply squeeze_zero (fun _ => ENNReal.toReal_nonneg) (fun n => ?_) h
-    apply measureReal_mono ?_ (measure_ne_top _ _)
+    have h := (convergesInProbability_iff_norm.1
+      (GinibreBBV.ginibre_stieltjes_inMeasure_of_bbv hBBV D hDpos hD z η hη)) ε hε
+    apply tendsto_of_tendsto_of_tendsto_of_le_of_le
+      tendsto_const_nhds h (fun _ => zero_le) (fun n => ?_)
+    apply measure_mono
     intro ω hω
-    change ε ≤ |‖stieltjesTrace
-      (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence (D n) ω)
-      z η - freeDysonStieltjes z η‖ - 0|
-    simpa only [sub_zero, abs_of_nonneg (norm_nonneg _)] using hω.le
+    exact hω.le
   exact unequal_matrix_cdf_of_common_stieltjes _ M N _ _ z hR
     (hpoint M hMpos hM) (hpoint N hNpos hN)
 

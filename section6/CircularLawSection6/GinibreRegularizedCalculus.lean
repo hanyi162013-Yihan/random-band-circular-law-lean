@@ -91,7 +91,8 @@ theorem regularizedSquaredLog_highHeight (x : ℝ) {t : ℝ} (ht : 0 < t) :
         mul_le_mul_of_nonneg_left (Real.log_le_sub_one_of_pos (div_pos hpos ht2))
           (by norm_num)
       _ = max x 0 / (2 * t ^ 2) := by
-        field_simp [ht.ne'] <;> ring
+        field_simp [ht.ne']
+        ring
 
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
@@ -212,8 +213,10 @@ theorem matrixRegularizedPotential_highHeight [Nonempty ι]
         apply div_le_div_of_nonneg_right _ (Nat.cast_nonneg _)
         apply Finset.sum_le_sum
         intro i _
-        simpa only [max_eq_left (sq_nonneg _)] using
-          (regularizedSquaredLog_highHeight (A.toEuclideanLin.singularValues i ^ 2) ht).2
+        have h := (regularizedSquaredLog_highHeight
+          (A.toEuclideanLin.singularValues i ^ 2) ht).2
+        rw [max_eq_left (sq_nonneg (A.toEuclideanLin.singularValues i))] at h
+        exact h
       _ = hilbertSchmidtSq A / (2 * (Fintype.card ι : ℝ) * t ^ 2) := by
         rw [← Finset.sum_div, sum_sq_singularValues_eq_hilbertSchmidtSq]
         simp only [finrank_euclideanSpace]
@@ -246,9 +249,9 @@ theorem integrable_matrixRegularizedPotential [Nonempty ι]
       congr 1
       ring
     _ ≤ |matrixRegularizedPotential (A ω) t - Real.log t| + |Real.log t| :=
-      abs_add _ _
+      abs_add_le _ _
     _ ≤ hilbertSchmidtSq (A ω) / (2 * (Fintype.card ι : ℝ) * t ^ 2) + |Real.log t| :=
-      add_le_add_right (abs_matrixRegularizedPotential_sub_log_le (A ω) ht) _
+      add_le_add (abs_matrixRegularizedPotential_sub_log_le (A ω) ht) le_rfl
     _ = _ := add_comm _ _
 
 end CircularLawSection6

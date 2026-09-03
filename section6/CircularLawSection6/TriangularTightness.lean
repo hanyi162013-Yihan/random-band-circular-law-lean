@@ -26,7 +26,12 @@ theorem boundedInProbabilityTri_of_integral_abs_bound
     (μ := μ n) (f := fun ω => |X n ω|)
     (ae_of_all _ fun ω => abs_nonneg _) (hint n) K
   have hmono : (μ n).real {ω | K < |X n ω|} ≤
-      (μ n).real {ω | K ≤ |X n ω|} := measureReal_mono (fun _ h => h.le)
+      (μ n).real {ω | K ≤ |X n ω|} := by
+    refine measureReal_mono ?_ (measure_ne_top _ _)
+    intro ω h
+    change K < |X n ω| at h
+    change K ≤ |X n ω|
+    exact h.le
   have hprod : K * (μ n).real {ω | K < |X n ω|} ≤ C :=
     (mul_le_mul_of_nonneg_left hmono hK.le).trans (hm.trans (hC n))
   have hden : K * δ = max C 0 + 1 := div_mul_cancel₀ _ hδ.ne'
@@ -64,8 +69,9 @@ theorem BoundedInProbabilityTri.add
       {ω | C < |X n ω|} ∪ {ω | D < |Y n ω|} := by
     intro ω hω
     by_contra hnot
-    have hx := le_of_not_gt (fun h => hnot (Or.inl h))
-    have hy := le_of_not_gt (fun h => hnot (Or.inr h))
+    change ¬ (C < |X n ω| ∨ D < |Y n ω|) at hnot
+    have hx : |X n ω| ≤ C := le_of_not_gt (fun h => hnot (Or.inl h))
+    have hy : |Y n ω| ≤ D := le_of_not_gt (fun h => hnot (Or.inr h))
     have h := abs_add_le (X n ω) (Y n ω)
     change C + D < |X n ω + Y n ω| at hω
     linarith
@@ -84,7 +90,7 @@ theorem BoundedInProbabilityTri.const_mul
   refine ⟨(|a| + 1) * C, mul_pos (by positivity) hC, ?_⟩
   filter_upwards [htail] with n hn
   refine lt_of_le_of_lt ?_ hn
-  apply measureReal_mono
+  refine measureReal_mono ?_ (measure_ne_top _ _)
   intro ω hω
   change C < |X n ω|
   by_contra hnot

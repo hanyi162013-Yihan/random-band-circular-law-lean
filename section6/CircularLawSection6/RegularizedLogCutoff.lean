@@ -42,6 +42,7 @@ theorem regularized_log_le_cutoff {s a t : ℝ}
   rw [Real.log_div (by positivity) (sq_pos_of_pos hu).ne', Real.log_pow] at hratioLog
   have hratioId : (u ^ 2 + t ^ 2) / u ^ 2 - 1 = t ^ 2 / u ^ 2 := by
     field_simp [hu.ne']
+    ring
   rw [hratioId] at hratioLog
   have hdiv : t ^ 2 / u ^ 2 ≤ t ^ 2 / a ^ 2 :=
     div_le_div_of_nonneg_left (sq_nonneg t) (sq_pos_of_pos ha) hau

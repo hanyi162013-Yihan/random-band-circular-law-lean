@@ -34,6 +34,7 @@ theorem eventually_abs_center_le_of_tight_and_close
       {ω | 1 ≤ |(X n ω - c n) - 0|} := by
     intro ω _
     by_contra hbad
+    change ¬ (D < |X n ω| ∨ 1 ≤ |(X n ω - c n) - 0|) at hbad
     have hx : |X n ω| ≤ D := le_of_not_gt (fun h => hbad (Or.inl h))
     have he : |X n ω - c n| < 1 := by
       apply lt_of_not_ge
