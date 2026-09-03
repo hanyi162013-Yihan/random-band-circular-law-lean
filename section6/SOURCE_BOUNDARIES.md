@@ -3,14 +3,15 @@
 The current branch includes a user-approved correction to Section 3's
 bounded-density record: its bound is explicitly below ENNReal top, not an
 auto-implicit variable. Concrete Gaussian instantiation compiled in cloud;
-the full 136-module integration and audits remain pending. The historical
+the full 136-module integration, audits and 126 regressions have passed. The historical
 122-module checkpoint below predates this correction;
 see `../section3/INTEGRATION_CORRECTIONS.md`.
 
 The new target declaration is
 `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_sources`
-in `CircularLawSection6/PublishedSourceGaussianProfile.lean`; its combined
-verification is still pending. The older
+in `CircularLawSection6/PublishedSourceGaussianProfile.lean`; its targeted
+verification passed in run 33719510129 at commit `3ccc69511387b2e923c38f2184b140d3536a1c09`.
+The older
 `gaussian_profile_circular_law_of_published_section3` belongs to the 122-module
 checkpoint, which passed strict compilation, the transitive
 axiom audits and all 119 regressions in GitHub run 33714847892. See
@@ -95,8 +96,9 @@ sampling adapters are not a claim that every possible caller's finite inputs
 have been automatically instantiated.
 
 The proof uses an inverse-moment/uniform-L2 alternative to the manuscript's
-separate linear limiting-singular-density hard-edge estimate. That stronger
-standalone estimate is not claimed as proved by this route. Accordingly,
+separate linear limiting-singular-density hard-edge estimate. The separate
+hard-edge modules now also prove the actual limiting-law estimate from the
+explicit BBV and Ginibre weak-law sources. Accordingly,
 completion of the circular-law chain conditional on the stated sources is
 not identical to a line-by-line formalization of every intermediate claim.
 
@@ -106,6 +108,7 @@ version for nonnegative laws. The exact logarithmic layer-cake identity,
 integrability and linear cutoff error are now proved from this CDF bound.
 The actual limiting-law bound and logarithmic-potential identification
 subsequently compiled in run 33718531306 via `GinibreLimitingHardEdge.lean`
-and `GinibreLimitingLogPotential.lean`. That later run failed in other new
-adapters and is not a green combined checkpoint. These results are not
+and `GinibreLimitingLogPotential.lean`. The later 136-module run 33719510129
+checks those results together with all model/endpoint adapters, both audits
+and the regression suite. These results are not
 inferred merely from the generic adapter or from the axiom audit.

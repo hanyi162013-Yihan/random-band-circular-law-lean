@@ -6,6 +6,7 @@ This is a lexical safeguard, not a substitute for checking compiled axioms.
 """
 
 import re
+import argparse
 import os
 import subprocess
 import sys
@@ -50,6 +51,10 @@ def code_only(source: str) -> str:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--path-prefix", action="append", default=[],
+                        help="Scan only matching repository-relative path prefixes (repeatable).")
+    args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
     # Include newly written source before it is staged; a tracked-only scan
     # can otherwise silently omit the very proofs being checked locally.
@@ -71,6 +76,8 @@ def main() -> int:
     failed = False
     count = 0
     for relative in sorted(set(filter(None, paths))):
+        if args.path_prefix and not any(relative.startswith(prefix) for prefix in args.path_prefix):
+            continue
         count += 1
         code = code_only((root / relative).read_text())
         for match in re.finditer(r"\b(sorry|admit|axiom)\b", code):
@@ -78,10 +85,11 @@ def main() -> int:
             print(f"{relative}:{line}: forbidden token {match.group()}")
             failed = True
     if not count:
-        print("No workspace Lean files found", file=sys.stderr)
+        print("No Lean files found in the requested scope", file=sys.stderr)
         return 1
     if not failed:
-        print(f"Source-token scan passed: {count} workspace Lean files ({mode})")
+        scope = "selected" if args.path_prefix else "workspace"
+        print(f"Source-token scan passed: {count} {scope} Lean files ({mode})")
     return int(failed)
 
 

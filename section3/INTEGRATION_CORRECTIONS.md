@@ -39,5 +39,7 @@ examples check the constructor and its precise finiteness field. The
 corrected imported dependency, concrete constructor, and existing Section 5/6
 entry points compiled in run `33717315989`; that run failed later in an
 unrelated new Section 6 reindexing proof. The complete build, audit and new
-regressions still require a green run. The earlier 122-module green run
+regressions passed in run `33719510129`, commit
+`3ccc69511387b2e923c38f2184b140d3536a1c09` (136 modules, 126 regressions).
+The earlier 122-module green run
 predates this correction.

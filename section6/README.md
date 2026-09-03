@@ -6,7 +6,7 @@ dependencies. No second mathlib checkout or large local download is needed.
 
 ## Main endpoint and verification status
 
-The current 136-module integration is pending a fully green cloud run.
+The current 136-module integration passed the targeted cloud check.
 A concrete Gaussian density constructor exposed an auto-implicit `top` in
 the imported Section 3 density record. The user-approved shared correction is documented in
 [Section 3 integration corrections](../section3/INTEGRATION_CORRECTIONS.md).
@@ -17,8 +17,12 @@ The new source-facing target is
 `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_sources`
 in [PublishedSourceGaussianProfile.lean](CircularLawSection6/PublishedSourceGaussianProfile.lean).
 It derives local finite-CDF comparison internally from the checked Section 3
-estimates on the actual Gaussian models. This newest endpoint is not covered
-by the historical checkpoint below. The prior
+estimates on the actual Gaussian models. This endpoint passed
+[run 33719510129](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719510129)
+at commit `3ccc69511387b2e923c38f2184b140d3536a1c09`: all 136 modules,
+126 regressions and both transitive audits passed. The audit covered 1305
+Section 6 declarations/1103 theorems and 126 new Section 3 integration declarations.
+The prior
 `gaussian_profile_circular_law_of_published_section3` remains available.
 For a strictly positive continuous integrable BV profile of integral one
 and positive bandwidths tending to infinity, it gives the circular law in
@@ -34,7 +38,7 @@ See [VERIFICATION.md](VERIFICATION.md) for the exact scope.
 
 This theorem is conditional on explicitly stated mathematical sources.
 [SOURCE_BOUNDARIES.md](SOURCE_BOUNDARIES.md) lists their exact content:
-finite Section 4 estimates and published Section 3 model/literature data for the internally called Section 5 theorem, local Section 3 singular-value comparison,
+finite Section 4 estimates and published Section 3 model/literature data for the internally called Section 5 theorem, BBV estimates for the actual local comparison models,
 classical Ginibre inputs, and Han's Gaussian dense-bandwidth theorem.
 No full-profile convergence or full-matrix cutoff comparison is assumed.
 The axiom audit checks for forbidden axioms; it does not discharge hypotheses.
@@ -61,7 +65,8 @@ The axiom audit checks for forbidden axioms; it does not discharge hypotheses.
 The 122-module checkpoint also verifies the direct published Section 3 calls,
 sample-law and finite matrix adapters, and exact logarithmic layer-cake identity
 with integrability and cutoff convergence derived from a linear CDF bound.
-Subsequent limiting-law/model instantiations require their own verification.
+The 136-module run additionally verifies the actual limiting-law and model
+adapters, including the concrete Gaussian density record with the shared fix.
 
 ## Boundaries not concealed by the endpoint
 
@@ -75,11 +80,11 @@ The broad older interfaces remain available for other source models.
 The circular-law chain uses an inverse-moment/uniform-L2 route. The separate
 hard-edge modules prove that a bounded Poisson transform implies a linear CDF
 bound, then derive the exact logarithmic layer-cake identity, logarithmic
-integrability and cutoff limit. Identification of that transform bound for the
-actual limiting law is subsequent work, not covered by the 122-module run.
-The actual Ginibre hard-edge and limiting-logarithm identification modules
-subsequently compiled in run 33718531306; later model/scaling adapters caused
-that run to fail, so its complete build and audits did not pass.
+integrability and cutoff limit. The 136-module run also verifies that bound
+for the actual limiting Ginibre law, its logarithmic-potential identification
+from the classical sources, and the variance-scaled uniform cutoff estimate.
+Finite short-ring/calibration anchor data at the Section 5 interface remain
+explicit; not every concrete caller's source record is automatically constructed.
 Thus the conditional main endpoint is not a claim that
 every intermediate statement of Section 6 has been formalized line by line.
 

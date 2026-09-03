@@ -1,6 +1,24 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
-## Current 136-module integration: complete cloud check pending
+## Verified 136-module integration with the shared density correction
+
+Commit: `3ccc69511387b2e923c38f2184b140d3536a1c09`.
+[Targeted run 33719510129](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719510129),
+job `100535572202`: success on 2026-09-03 UTC.
+Exact tree: `365303dd85e171ba0cea47a6a48a4e6ed5195e8a`.
+
+All 136 modules, 126 strict regression examples and both transitive audits
+passed. There were 4430 dependency-inclusive build jobs. The Section 6 audit
+checked 1305 declarations/1103 theorems, and the new Section 3-to-5 adapter
+audit checked 126 declarations. Only the three standard foundations are allowed.
+The root full-library workflow and independent Section 5 suite were not run.
+
+The new `gaussian_profile_circular_law_of_published_sources` endpoint derives
+the actual local CDF comparison internally. Exact Gaussian density, model and
+sample laws, core weights and polynomial scales, limiting Ginibre hard edge,
+logarithmic-potential identification and variance-scaled estimates are checked.
+Finite Section 5 anchor-source records and the named literature hypotheses
+remain explicit; this is not a claim of fully automatic concrete instantiation.
 
 Concrete Gaussian instantiation exposed an incorrectly auto-implicit `top`
 in Section 3's bounded-density record. The field is now the intended
@@ -17,7 +35,8 @@ In run 33718531306, `GinibreLimitingHardEdge` compiled in 6.7 seconds and
 `GinibreLimitingLogPotential` in 2.8 seconds. They derive the actual limiting
 linear CDF bound and logarithmic-potential identity from the explicit BBV,
 bounded-test Ginibre and BC12 sources. Later joint-model/scaling adapters
-failed, so the full build, transitive audit and 126 regressions remain pending.
+failed in that historical run; the failures were corrected before the green
+136-module run above, including the concrete density regression's noncomputable modifier.
 No local Lean compilation or large download is used.
 
 ## Verified 122-module published Section 3 integration

@@ -6,7 +6,12 @@ Section 3's auto-implicit `top` density-bound field to explicit ENNReal top,
 with the user's approval. See `../section3/INTEGRATION_CORRECTIONS.md`.
 The previous green conditional proof did not test whether this density
 premise was inhabitable; the new actual Gaussian constructor does. Fresh
-cloud verification of the corrected dependency is pending.
+cloud verification of the corrected dependency passed in the targeted
+[Section 6 run 33719510129](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719510129).
+This checks the new source-facing calls and their actual dependencies, not a
+fresh independent full Section 5 suite. Finite short-ring/calibration model
+and sampling data remain explicit inputs; their complete automatic
+instantiation at the concrete final entrance is not yet claimed.
 
 The Section 6 development branch reuses the exact `section3/` source tree
 from main commit `42c26b672faec82a8ea7999a9cd0778c31618495`.
