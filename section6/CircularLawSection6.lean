@@ -100,3 +100,5 @@ import CircularLawSection6.CanonicalSourceComparison
 import CircularLawSection6.SparseProfileSourceEndpoint
 import CircularLawSection6.ProbabilityFinitePrefix
 import CircularLawSection6.SparseSpectralEndpoint
+import CircularLawSection6.CyclicMatrixReplacement
+import CircularLawSection6.SubsequenceFillers
