@@ -53,7 +53,7 @@ theorem normalizedGaussianPair_map {N : ℕ} (hN : 0 < N) :
   change gaussianAtom p * (r : ℂ) =
     Complex.measurableEquivRealProd.symm (r * p.1, r * p.2)
   simp only [gaussianAtom, Complex.equivRealProdCLM_symm_apply,
-    Complex.measurableEquivRealProd_symm_apply, Complex.ofReal_mul]
+    Complex.measurableEquivRealProd_symm_apply, Complex.mk_eq_add_mul_I, Complex.ofReal_mul]
   ring
 
 /-- Section 8's finite Gaussian array has independent entries of the exact planar law. -/
