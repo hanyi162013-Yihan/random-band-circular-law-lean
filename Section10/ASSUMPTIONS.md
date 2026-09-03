@@ -1,5 +1,23 @@
 # Section 10: mathematical inputs and trust boundary
 
+## Source-connected extension (awaiting cloud verification)
+
+The new `BernoulliSection10Source.planar_density_circular_law` and
+`BernoulliSection10Source.real_density_circular_law` instantiate the actual
+Section 3 proofs. They expose `BBVComparisonInput`, `BC12GinibreInput`, and
+real-only `RealFiniteGeometricBrascampLieb`, alongside the original density,
+moment and bandwidth assumptions. BBV includes the source's canonical
+Gaussian/free-transform comparison; BC12 is restricted to literal circular
+Ginibre. No `Section3Inputs`, high-band, model, LSV or counting certificate
+is a public argument. This is a statement of the written interfaces, not
+yet a successful compilation claim. See `BernoulliSection10Source/AxiomAudit.lean`.
+
+The remainder of this document records the previously verified real
+conditional endpoint and must not be read as saying that Section 3's BBV,
+BC12 or geometric Brascamp--Lieb inputs have themselves been eliminated.
+
+## Previously verified conditional real endpoint
+
 The final entry point is
 `BernoulliSection10.density_circular_law` in
 `BernoulliSection10/DensityCircularLaw.lean`. Its verification status is

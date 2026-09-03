@@ -26,12 +26,19 @@ cloud. No local build of that final integration has been run.
 - At commit `56c2022`, the **complete Front target passed** in
   [run 33710177008](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33710177008),
   with the final `lake build BernoulliSection10Complex.Front` check successful.
-  The run is still checking the conditional closures and has not yet
-  returned its separate signature/axiom audit results.
+  Its separate analytic/front axiom audits passed (23 reports, only
+  `propext`, `Classical.choice`, `Quot.sound`), and the public complex
+  signature regression checks passed. The overall run failed in three
+  conditional-closure modules due to namespace/name resolution; corrections
+  were committed in `1915df2` and await a subsequent cloud check.
 - The latest root configuration now selects the published `section3/`
   source. Actual IID model, planar LSV, density representative and real LSV
-  adapters are written; their first cloud integration check is pending.
+  adapters are written; their first cloud integration check is running.
   No local integration compilation has been performed.
+- `ee286a8` adds source-connected real and planar circular-law endpoints,
+  with separately named BBV/BC12 inputs and real-only geometric
+  Brascamp--Lieb. These new proofs are **written, not yet build-verified**.
+  The cloud workflow now builds and audits them after their prerequisites.
 
 - The planar affine-log core and its eight kernel-axiom reports passed
   locally; only `propext`, `Classical.choice`, and `Quot.sound` occurred.
@@ -68,11 +75,11 @@ cloud. No local build of that final integration has been run.
 
 ## Outstanding delivery work
 
-1. Finish the complete complex front-end build, axiom audit, and signature
-   checks. A partial CI run is not counted as complete.
-2. Check the complex high-band and circular-law assembly. Its current
+1. Recheck the verified complete front-end against the updated Section 3
+   dependency tree as part of the final complete build.
+2. Check the complex high-band and circular-law assembly. Its historical
    `Section3Inputs` parameter is only an internal staging interface.
-3. Connect actual published Section 3 proofs for both density branches,
+3. Cloud-verify the written connections to published Section 3 proofs for both density branches,
    leaving only the explicitly accepted literature boundary and model
    hypotheses; perform this integration build in cloud CI.
 4. Refresh full source scans, actual public theorem signatures and

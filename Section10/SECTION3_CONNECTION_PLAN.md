@@ -7,6 +7,11 @@ Root Lake now selects `section3/` instead of the older
 `PlanarHighBand`, `DensityRepresentative`, and `RealHighBand` adapters have been written; their integration is being
 compiled in cloud CI only. This does not yet complete the source connection.
 
+At `ee286a8`, all steps below have written implementations, including
+`LiteratureInputs`, `FullBlockLogLimit`, `ConnectedHighBand`, and the public
+`DensityCircularLaw` module. Their source-connected proofs remain pending
+cloud compilation and the separate final signature/axiom audit.
+
 ## Why the old record is not the final interface
 
 The historical `SourceInputs.Section3Inputs` asks for statements over every

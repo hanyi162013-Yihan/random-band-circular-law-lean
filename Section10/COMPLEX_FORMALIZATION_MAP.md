@@ -50,22 +50,24 @@ The source manuscript supplies mathematics only, not operational instructions.
 
 ## Item-by-item work map
 
-These are planned targets, not claims of completed verification.
+Status is recorded per checked target. The complete front end and its raw-model
+signature checks passed in cloud run 33710177008 at `56c2022`; final source
+integration remains unverified.
 
 | Source | Original hypotheses / conclusion | Planned Lean role | Status |
 |---|---|---|---|
-| 10.1 | Planar bounded density, centered unit second moment, finite third moment; full-block high-band log limit | Complex profile, Section 3 adapters, high-band limit | Pending |
+| 10.1 | Planar bounded density, centered unit second moment, finite third moment; full-block high-band log limit | `BernoulliSection10Source.planar_highBandLogLimit`; concrete source LSV, counting, local bulk, literal Ginibre | Written; cloud verification pending |
 | 10.2 | Independent complex atoms with planar density; complex normed target; affine log second moments, uniform in center and target dimension | `planar_lemma_10_2_rho`, `planar_lemma_10_2_resampling`, `planar_affine_ne_zero_ae`; depends on `BoundedDensity`, `AffineLog` | Built, including raw-model wrappers; axiom audit passed |
 | 10.3 | Nonzero grouped complex multiaffine tensor; expected absolute log evaluation loss and nonvanishing | `planar_corollary_10_3`; depends on the recursively constructed complex-linear `MultiAffineTensor` and Lemma 10.2 | Built, including raw-model wrapper; axiom audit passed |
 | 10.4 | Actual cleared transfer entries affine in each physical row | `conditionedIntervalClearedProduct_line`, `conditionedIntervalClearedProduct_atoms_line`, `intervalClearedProduct_update_line`; imports complex matrix identities from the stable real library's scalar-independent `PhysicalRows` | Built |
-| 10.5 | Row resampling and log-pressure concentration | `lemma_10_5`, complex finite-product resampling, affine L², actual nonzero identity configuration | Built with internally normalized density bound; final raw-model assembly pending |
-| 10.6 | Simultaneous exterior/Hodge control, first and second moments | `intervalMaxHodgeEnvelope_memLp_two`, `intervalMaxHodgeEnvelope_lintegral_le_W_log_eW`; complex endpoint determinant and tensor evaluation | Core built locally and in cloud run 33708332599; combined raw-model wrapper audit pending |
-| 10.7 | Periodic seam, conditioned outside, all packet blocks integrated | Complex packet laws and actual cyclic determinant | Pending |
-| 10.8 | Coefficient/Gram-volume comparison integrated in endpoints | Complex endpoint law, unchanged deterministic comparison | Pending |
-| 10.9 | Conditional polynomial evaluation in physical row groups | `proposition_10_9`, complex grouped tensor evaluation and actual packet law | Core built in cloud run 33708332599; combined raw-model wrapper audit pending |
-| 10.10 | Fixed-degree unit-frame reset, uniform integrated negative-log bound | `proposition_10_10_packet_reset`, `physicalPacketResetLoss_integral_le`; actual complex packet law; no caller certificate | Core built in cloud run 33709639103; raw-model wrapper audit pending |
-| 10.30–10.57 | Concrete scales, pressure calibration, mean stitching, remainder, branch assembly, energy | Complex probability laws with shared deterministic scales | Pending |
-| Theorem 2.10 | Planar IID bounded-density finite-third-moment circular law, `W→∞` | Public complex final theorem for actual matrices | Pending |
+| 10.5 | Row resampling and log-pressure concentration | `planar_lemma_10_5`; complex finite-product resampling, affine L², actual nonzero identity configuration | Built; raw-model signatures and axiom audit passed |
+| 10.6 | Simultaneous exterior/Hodge control, first and second moments | `planar_intervalMaxHodgeEnvelope_memLp_two`, `planar_intervalMaxHodgeEnvelope_lintegral_le_W_log_eW`; complex endpoint determinant and tensor evaluation | Built; raw-model signatures and axiom audit passed |
+| 10.7 | Periodic seam, conditioned outside, all packet blocks integrated | `planar_proposition_10_7_periodic_seam`; complex packet laws and actual cyclic determinant | Built; raw-model signatures and axiom audit passed |
+| 10.8 | Coefficient/Gram-volume comparison integrated in endpoints | `planar_proposition_10_8_integrated_endpoint_comparison`; complex endpoint law, unchanged deterministic comparison | Built; raw-model signatures and axiom audit passed |
+| 10.9 | Conditional polynomial evaluation in physical row groups | `planar_proposition_10_9`; complex grouped tensor evaluation and actual packet law | Built; raw-model signatures and axiom audit passed |
+| 10.10 | Fixed-degree unit-frame reset, uniform integrated negative-log bound | `planar_proposition_10_10_packet_reset`, `planar_physicalPacketResetLoss_integral_le`; actual complex packet law; no caller certificate | Built; raw-model signatures and axiom audit passed |
+| Equations 10.30–10.57 | Concrete scales, pressure calibration, mean stitching, remainder, branch assembly, energy | Complex probability laws with shared deterministic scales | Reset, stitching, remainder, energy built; calibration and final branch assembly pending |
+| Theorem 2.10 | Planar IID bounded-density finite-third-moment circular law, `W→∞` | `BernoulliSection10Source.planar_density_circular_law` for actual matrices; no `Section3Inputs` parameter | Written; cloud verification pending |
 
 ## Verification and remaining scope
 

@@ -1,5 +1,16 @@
 # BernoulliSection10 — the real-IID bounded-density circular law
 
+**Extension work in progress:** this branch adds planar-complex atoms and
+direct connections to the repository's Section 3 proofs for both atom laws.
+The complete complex front end is verified; the new source-connected final
+endpoints are awaiting cloud verification. See
+[COMPLEX_BUILD_STATUS.md](COMPLEX_BUILD_STATUS.md) and
+[COMPLEX_FORMALIZATION_MAP.md](COMPLEX_FORMALIZATION_MAP.md).
+Their explicit retained literature inputs are BBV, BC12, and real-only
+geometric Brascamp--Lieb. The release results and counts below describe the
+earlier verified real theorem with a `Section3Inputs` parameter, not a
+completed verification of the new endpoints.
+
 Lean 4 formalization of the real IID bounded-density branch of Section 10 in
 Yi Han's [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
 It covers Proposition 10.1, the nine local results 10.2–10.10, equations
