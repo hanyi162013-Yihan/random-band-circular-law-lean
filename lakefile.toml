@@ -38,6 +38,7 @@ srcDir = "section3"
 name = "Vendor"
 srcDir = "section3"
 
+
 [[lean_lib]]
 name = "BernoulliSection10Source"
 srcDir = "Section10"

@@ -1,5 +1,5 @@
-name: General subgaussian Section 8
-# Prefer matching extension artifacts, with the verified baseline as a fallback.
+name: Section 8 with proved Section 3 anchor
+# Every build is restricted to the two Section 8 targets and their actual imports.
 "on":
   pull_request:
   workflow_dispatch:
@@ -30,32 +30,49 @@ jobs:
       - name: Check selected import scope and placeholders
         run: |
           python3 scripts/check_axioms.py --self-test
-          python3 scripts/build_subgaussian.py --target SubgaussianSection8 --dry-run
+          python3 scripts/build_subgaussian.py --target SubgaussianSection8 --target BernoulliSection8 --dry-run
           python3 scripts/check_placeholders.py --path SubgaussianSection8
+          python3 scripts/check_placeholders.py --path Section8
       - uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         id: cache
         with:
           path: |
             .lake/build
-          key: subgaussian-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          key: section8-section3-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          # Lake validates source/dependency traces after restoring older library registrations.
           restore-keys: |
+            section8-section3-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+            section8-section3-v1-${{ runner.os }}-${{ runner.arch }}-
             subgaussian-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
-      - name: Restore verified baseline on extension cache miss
+      - name: Restore proved Section 3 artifacts on integration cache miss
         if: ${{ steps.cache.outputs.cache-matched-key == '' }}
         uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
-        id: baseline_cache
+        id: section3_cache
         with:
-          path: .lake/build
-          key: lean-section8-v1-ubuntu24-Linux-X64-0026f85b3cb0162890f706e8ff3b62ab296e1ba0eaa74f972b8781159c008d4d-24a1e37550a7e471bec4bb668ce4bde92fae3cbb-33677989986-1
+          path: section3/.lake/build
+          key: section3-integration-seed-${{ github.run_id }}
+          restore-keys: |
+            section3-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('section3/lean-toolchain', 'section3/lake-manifest.json', 'section3/lakefile.toml') }}-
+      - name: Reuse available Section 3 build products
+        if: ${{ steps.section3_cache.outputs.cache-matched-key != '' }}
+        run: |
+          mkdir -p .lake/build
+          cp -an section3/.lake/build/. .lake/build/
       - name: Scoped serial build
         id: build
         env:
-          RESTORED_CACHE: ${{ steps.cache.outputs.cache-matched-key || steps.baseline_cache.outputs.cache-matched-key }}
+          RESTORED_BUILD: ${{ steps.cache.outputs.cache-matched-key }}
         run: |
-          if [ -n "$RESTORED_CACHE" ]; then
-            python3 scripts/build_subgaussian.py --target SubgaussianSection8 --start-at SubgaussianSection8.Atom
+          if [ -n "$RESTORED_BUILD" ]; then
+            python3 scripts/build_subgaussian.py --target SubgaussianSection8 --target BernoulliSection8 \
+              --module BernoulliSection8.Section3Gaussian \
+              --module BernoulliSection8.Section3Model \
+              --module BernoulliSection8.Section3Integration \
+              --module SubgaussianSection8.Section3Integration \
+              --module SubgaussianSection8.Results \
+              --module BernoulliSection8.Section8Results
           else
-            python3 scripts/build_subgaussian.py --target SubgaussianSection8
+            python3 scripts/build_subgaussian.py --target SubgaussianSection8 --target BernoulliSection8
           fi
       - name: Save completed build artifacts
         if: ${{ always() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure') && steps.cache.outputs.cache-primary-key != '' }}
@@ -64,8 +81,9 @@ jobs:
           path: |
             .lake/build
           key: ${{ steps.cache.outputs.cache-primary-key }}
-      - name: Audit this extension
+      - name: Audit Section 8 and its concrete Section 3 adapter
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: |
-          python3 scripts/check_axioms.py --audit-file SubgaussianSection8/AxiomAudit.lean
+          python3 scripts/check_axioms.py --audit-file SubgaussianSection8/AxiomAudit.lean --audit-file Section8/AxiomAudit.lean --audit-file Section8/Section3IntegrationAudit.lean
           lake env lean SubgaussianSection8/PublicSignatureAudit.lean
+          lake env lean Section8/PublicSignatureAudit.lean
