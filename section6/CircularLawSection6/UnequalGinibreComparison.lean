@@ -205,6 +205,12 @@ theorem unequal_ginibre_cdf_of_bbv
       tendsto_const_nhds h (fun _ => zero_le) (fun n => ?_)
     apply measure_mono
     intro ω hω
+    change ε < ‖stieltjesTrace
+      (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence (D n) ω)
+      z η - freeDysonStieltjes z η‖ at hω
+    change ε ≤ ‖stieltjesTrace
+      (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence (D n) ω)
+      z η - freeDysonStieltjes z η‖
     exact hω.le
   exact unequal_matrix_cdf_of_common_stieltjes _ M N _ _ z hR
     (hpoint M hMpos hM) (hpoint N hNpos hN)

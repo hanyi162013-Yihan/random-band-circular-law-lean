@@ -136,11 +136,12 @@ theorem profileF_endpointA (z : ℂ) :
 theorem tendsto_dysonPotential_nhdsGT_zero (z : ℂ) :
     Tendsto (dysonPotential z) (𝓝[>] (0 : ℝ))
       (𝓝 (ShortRingAnchor.circularLogPotential z)) := by
+  unfold dysonPotential
   have hden : (endpointA z) ^ 2 + ‖z‖ ^ 2 ≠ 0 :=
     (lt_of_lt_of_le zero_lt_one (endpointA_den_ge_one z)).ne'
   have hF := (hasDerivAt_profileF hden).continuousAt.tendsto.comp
     (tendsto_dysonA_nhdsGT_zero z)
-  simpa only [Function.comp_def, dysonPotential, profileF_endpointA] using hF
+  simpa only [Function.comp_def, profileF_endpointA] using hF
 
 theorem profileV_dysonA (z : ℂ) {t : ℝ} (ht : 0 < t) :
     profileV ‖z‖ (dysonA z t) = dysonV z t := (dysonV_eq_div z ht).symm

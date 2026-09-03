@@ -107,6 +107,7 @@ theorem continuousOn_dysonV (z : ℂ) : ContinuousOn (dysonV z) (Ioi 0) :=
 /-- The deterministic logarithmic primitive has the required physical derivative. -/
 theorem hasDerivAt_dysonPotential (z : ℂ) {t : ℝ} (ht : 0 < t) :
     HasDerivAt (dysonPotential z) (dysonV z t) t := by
+  unfold dysonPotential
   have hden := dysonA_sq_add_norm_sq_gt_one z ht
   have hslope := profileTSlope_pos hden
   have hF := hasDerivAt_profileF (zero_lt_one.trans hden).ne'

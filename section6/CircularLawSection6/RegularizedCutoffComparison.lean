@@ -99,7 +99,8 @@ theorem matrixRaw_probability_of_regularized_limits
     hneg (ShortRingAnchor.rpow_div_tendsto_zero ha0 hp) hscale hc hreg
   intro k n
   filter_upwards [hdet n] with ω hω
-  have hcoef : 0 ≤ a k ^ p / p := by positivity
+  have hcoef : 0 ≤ a k ^ p / p :=
+    div_nonneg (Real.rpow_nonneg (ha k).le p) hp.le
   have hb : 0 ≤ t k ^ 2 / (2 * a k ^ 2) := by positivity
   rw [abs_of_nonneg hcoef, abs_of_nonneg hb, abs_sub_comm]
   exact (matrixRegularized_raw_error_le_negativeMoment (A n ω) hω (ha k) (ht k) hp).trans

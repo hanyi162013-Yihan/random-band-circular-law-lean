@@ -1,12 +1,8 @@
-import CircularLawSection6.GinibreDysonDerivative
-import CircularLawSection6.BBVProfileEndpoint
-import CircularLawSection6.GinibreLogMomentBounds
-import CircularLawSection6.RegularizedMeanRemoval
-import CircularLawSection6.GinibrePointwiseNonzero
+import CircularLawSection6.BBVOnlyProfileEndpoint
 import Lean.Util.CollectAxioms
 
-/-! Narrow transitive audit for the independent BBV-to-Ginibre bridges.
-This batch does not yet assert a raw logarithmic-potential limit. -/
+/-! Transitive audit for the BBV-to-Ginibre raw-potential proof and the
+actual profile endpoint with no separate Ginibre reference hypothesis. -/
 set_option autoImplicit false
 set_option maxHeartbeats 0
 open Lean Elab Command
@@ -73,6 +69,28 @@ run_cmd do
     `CircularLawSection6.NoncompactProfile.profile_probability_along_sparse_subsequence_of_bbv_sources,
     `CircularLawSection6.NoncompactProfile.profile_spectral_limit_along_sparse_subsequence_of_bbv_sources,
     `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_core_sources,
+    `CircularLawSection6.measurable_matrixSquaredPoissonAverage_uncurry,
+    `CircularLawSection6.matrixSquaredPoissonAverage_abs_le,
+    `CircularLawSection6.measurable_integral_matrixSquaredPoissonAverage,
+    `CircularLawSection6.norm_integral_matrixSquaredPoissonAverage_le,
+    `CircularLawSection6.hasDerivAt_integral_matrixRegularizedPotential,
+    `CircularLawSection6.intervalIntegrable_integral_matrixSquaredPoissonAverage,
+    `CircularLawSection6.integral_expectedPoisson_eq_regularized_difference,
+    `CircularLawSection6.abs_integral_matrixRegularizedPotential_sub_log_le,
+    `CircularLawSection6.tendsto_of_height_differences_and_largeHeight,
+    `CircularLawSection6.GinibreReferenceSources.ginibreOnSequence_measurable,
+    `CircularLawSection6.GinibreReferenceSources.cyclicSamples_shifted_energy,
+    `CircularLawSection6.GinibreReferenceSources.ginibreOnSequence_shifted_expected_energy,
+    `CircularLawSection6.GinibreReferenceSources.cyclicSamples_regularized,
+    `CircularLawSection6.GinibreReferenceSources.ginibre_regularizedMean_eq_cyclic,
+    `CircularLawSection6.ginibre_raw_tight_of_bbv,
+    `CircularLawSection6.ginibre_raw_uniform_secondMoment_of_bbv,
+    `CircularLawSection6.ginibre_iterated_lowerCutoff_L1_of_bbv,
+    `CircularLawSection6.ginibre_raw_mean_of_bbv,
+    `CircularLawSection6.ginibre_raw_probability_of_bbv,
+    `CircularLawSection6.ginibreLogPotential_of_bbv,
+    `CircularLawSection6.NoncompactProfile.GaussianProfileBBVSources,
+    `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources,
     `Arxiv2410V3.normSq_mul_add_nonneg_le,
     `Arxiv2410V3.scalarDyson_strict_contraction,
     `Arxiv2410V3.scalarDysonEquation_unique,
@@ -105,3 +123,8 @@ run_cmd do
 #check CircularLawSection6.ginibre_iterated_lowerCutoff_L1_of_bbv_ae
 #check CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_core_sources
 #check CircularLawSection6.ginibre_shifted_det_ne_zero
+#check CircularLawSection6.GinibreBBV.ginibre_cyclic_regularizedMean_tendsto_of_bbv
+#check CircularLawSection6.ginibre_iterated_lowerCutoff_L1_of_bbv
+#check CircularLawSection6.ginibreLogPotential_of_bbv
+#check CircularLawSection6.NoncompactProfile.GaussianProfileBBVSources
+#check CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources

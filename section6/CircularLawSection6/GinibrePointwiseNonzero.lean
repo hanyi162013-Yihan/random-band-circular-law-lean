@@ -49,7 +49,7 @@ theorem ginibreOnSequence_shifted_det_ne_zero (N : ℕ) (hN : 0 < N) (z : ℂ) :
     simpa only [mul_zero, ENNReal.ofReal_zero] using
       ENNReal.tendsto_ofReal (hr.const_mul (4 * (N : ℝ) ^ 3))
   have hzero : gaussianSequenceLaw bad = 0 :=
-    le_antisymm (ge_of_tendsto hlim (Eventually.of_forall hbound)) (zero_le _)
+    le_antisymm (ge_of_tendsto hlim (Eventually.of_forall hbound)) zero_le
   simpa only [ae_iff, not_not] using hzero
 
 /-- Every fixed shifted finite cyclic Ginibre matrix is nonsingular almost
@@ -59,7 +59,8 @@ theorem ginibre_shifted_det_ne_zero (N : ℕ) [NeZero N] (z : ℂ) :
       (ginibreMatrix N ω - z • 1).det ≠ 0 := by
   classical
   have hmeas : Measurable (fun ω => (ginibreMatrix N ω - z • 1).det) := by
-    have hA := (ginibreMatrix_measurable N).sub measurable_const
+    have hA : Measurable (fun ω => ginibreMatrix N ω - z • 1) :=
+      (ginibreMatrix_measurable N).sub measurable_const
     simp only [Matrix.det_apply]
     fun_prop
   have heq (ω : ℕ → ℂ) : (ginibreOnSequence N ω - z • 1).det =
