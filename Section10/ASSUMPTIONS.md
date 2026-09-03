@@ -41,9 +41,10 @@ no real/imaginary independence, circular symmetry or vanishing complex
 second moment is required. The finite-row probability instances and all
 auxiliary model certificates are constructed internally.
 
-The remainder of this document records the previously verified real
-conditional endpoint and must not be read as saying that Section 3's BBV,
-BC12 or geometric Brascamp--Lieb inputs have themselves been eliminated.
+The remainder records older conditional endpoints and their historical
+certificates, not the current migration certificate. In the current source
+route above, BBV and real geometric Brascamp--Lieb remain explicit; the
+former BC12 estimates are constructed internally.
 
 ## Previously verified conditional real endpoint
 
