@@ -16,6 +16,10 @@ namespace BernoulliSection8.Section3Bridge
 open BernoulliSection10 BernoulliSection10.SourceInputs
 open BernoulliSection10.ProbabilityLimits ShortRingAnchor Arxiv2410V3
 
+-- Compare the named BBV predicates before expanding their Gaussian integrals.
+-- This setting is local to this file and does not change any logical input.
+attribute [local irreducible] CanonicalBBVAt
+
 def momentBudget (A : Proposition38.Atom) (C : ℝ) : ℝ :=
   max C (sourceV3MomentBudget A.law circularGaussianPairLaw
     (fun x : ℝ => (x : ℂ)) gaussianAtom)
@@ -38,6 +42,32 @@ structure UpstreamInputs (A : Proposition38.Atom) where
   projection : ∀ N : ℕ, 0 < N → BC12.GinibreProjectionIntegralFormula N
   correlation : ∀ N : ℕ, 0 < N → BC12.GinibreCorrelationFormulas (inputLaw A.law)
     (fun sample => BC12.matrixEigenvalues (circularGinibreMatrix N sample))
+
+/-- Match the ring comparison to the exact argument of Proposition 3.8. -/
+theorem UpstreamInputs.ringComparison (A : Proposition38.Atom) (known : UpstreamInputs A)
+    (W s : ℕ) (hW : 0 < W) (z eta : ℂ) (heta : 0 < eta.im) :
+    CanonicalBBVAt (Proposition38.fullBlockV3Model hW (ringArray A ((s + 3) * W)))
+      z eta (3 * (W : ℝ))
+      (max known.comparisonConstant (sourceV3MomentBudget A.law circularGaussianPairLaw
+        (fun x : ℝ => (x : ℂ)) gaussianAtom)) := by
+  simpa only [momentBudget] using known.bbvRing W s hW z eta heta
+
+/-- Unfold the dense model and moment budget once, outside the asymptotic assembly. -/
+theorem UpstreamInputs.ginibreComparison (A : Proposition38.Atom) (known : UpstreamInputs A)
+    (N : ℕ) (hN : 0 < N) (z eta : ℂ) (heta : 0 < eta.im) :
+    CanonicalBBVAt
+      (denseV3Model hN (denseAtom N) gaussianAtom gaussianAtom_moments (denseAtom_copies A N))
+      z eta (N : ℝ)
+      (max known.comparisonConstant (sourceV3MomentBudget A.law circularGaussianPairLaw
+        (fun x : ℝ => (x : ℂ)) gaussianAtom)) := by
+  simpa only [denseModel, momentBudget] using known.bbvGinibre N hN z eta heta
+
+/-- Equality of the whole reference process, usable under singular-value predicates. -/
+theorem normalizedDense_process_eq (N : ℕ → ℕ) :
+    normalizedDenseMatrixProcess (fun n => denseAtom (N n)) =
+      (fun n => circularGinibreMatrix (N n)) := by
+  funext n sample
+  exact normalizedDense_eq_circularGinibre N n sample
 
 theorem input_log_convergence_iff_sequence (A : Proposition38.Atom)
     (W s : ℕ → ℕ) (z : ℂ) :
@@ -66,7 +96,6 @@ theorem input_log_convergence_iff_sequence (A : Proposition38.Atom)
   simpa only [TendstoInProbabilityTri, tendstoInMeasure_iff_measureReal_norm,
     Real.norm_eq_abs, hid] using ht.symm
 
-set_option maxHeartbeats 800000 in
 /-- The actual Section 3 theorem constructs the old internal interface.
 Its proof calls `ShortRingAnchor.Proposition38.proposition38` directly. -/
 theorem highBandInput (A : Proposition38.Atom) (known : UpstreamInputs A) :
@@ -84,13 +113,11 @@ theorem highBandInput (A : Proposition38.Atom) (known : UpstreamInputs A) :
     (fun k => denseAtom ((s k + 3) * W k)) gaussianAtom gaussianAtom_moments
     (fun k => denseAtom_copies A ((s k + 3) * W k)) z omega known.comparisonConstant p
     ⟨homega, homegaLt⟩ hN hWtop hband (known.proposition32 z) known.cook112
-    (fun k eta heta => by
-      simpa only [momentBudget] using known.bbvRing (W k) (s k) (hW k) z eta heta)
-    (fun k eta heta => by
-      simpa only [denseModel, momentBudget] using
-        known.bbvGinibre ((s k + 3) * W k) (hNpos k) z eta heta)
+    (fun k eta heta => UpstreamInputs.ringComparison A known (W k) (s k) (hW k) z eta heta)
+    (fun k eta heta => UpstreamInputs.ginibreComparison A known
+      ((s k + 3) * W k) (hNpos k) z eta heta)
     hp
-    (by simpa only [normalizedDense_eq_circularGinibre] using hnegative)
+    (by simpa only [normalizedDense_process_eq] using hnegative)
     (fun k => known.projection _ (hNpos k))
     (fun k => by simpa only [normalizedDense_eq_circularGinibre] using
       known.correlation _ (hNpos k))
