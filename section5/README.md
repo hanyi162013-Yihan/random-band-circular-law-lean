@@ -1,5 +1,18 @@
 # Section 5: calibration, pressure lifting and circular-law conclusions
 
+## New concrete Section 3 integration — verified 2026-09-03
+
+The actual fixed-atom short/calibration matrices, sample maps and both real/complex
+Section 5 endpoints now call the checked Section 3 theorem internally. Their
+[cloud build and transitive audit passed](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131).
+Import `CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint`.
+See [CONCRETE_SECTION3_INTERFACE.md](CONCRETE_SECTION3_INTERFACE.md) for the exact
+uniformly positive indicator-profile scope and retained Section 4/literature
+inputs. The broader taper/varying-atom interfaces below keep their documented
+source boundary; they are not claimed to be automatically instantiated here.
+
+## Original Section 5 package
+
 This directory contains the checked Section 5 formalization for the combined
 circular-law manuscript. The agreed Section 3 results, finite Section 4
 estimates, and explicit model assumptions remain ordinary theorem hypotheses.

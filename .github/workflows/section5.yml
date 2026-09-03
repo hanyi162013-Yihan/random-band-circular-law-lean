@@ -6,6 +6,7 @@ on:
       - "section5/**"
       - "Section4/**"
       - "vendor/**"
+      - "section3/**"
       - "lakefile.toml"
       - "lake-manifest.json"
       - "lean-toolchain"
@@ -15,6 +16,7 @@ on:
       - "section5/**"
       - "Section4/**"
       - "vendor/**"
+      - "section3/**"
       - "lakefile.toml"
       - "lake-manifest.json"
       - "lean-toolchain"
@@ -72,7 +74,7 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p verification-ci
-          lake --no-cache build CircularLawSections56 2>&1 | tee verification-ci/build.log
+          lake --no-cache build CircularLawSections56 CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint 2>&1 | tee verification-ci/build.log
       - name: Save successful build before audits
         if: steps.project-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -87,6 +89,7 @@ jobs:
         run: |
           set -o pipefail
           bash verify_section5.sh audit "$PWD/verification-ci" 2>&1 | tee verification-ci/audit-result.log
+          lake --no-cache env lean -DwarningAsError=true PublishedSection3ConcreteAudit.lean 2>&1 | tee verification-ci/concrete-audit.log
       - name: Retain verification logs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

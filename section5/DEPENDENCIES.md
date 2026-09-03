@@ -4,6 +4,19 @@ This is a source-only subproject of
 [random-band-circular-law-lean](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean).
 Its `lakefile.toml` uses only repository-relative paths.
 
+## Current Section 3 integration (2026-09-03)
+
+The active `ShortRingAnchor` and `Vendor` libraries come from the checked
+`../section3/` package, including the shared corrected bounded-density field.
+For this publication, all 316 imported non-Section-5 repository modules were
+checked byte-for-byte against main `3c2005e1ce2987e9fc211d10c156d70240b5b93e`.
+No Section 3, Section 4, replacement, or parent library-registration change is
+needed. The old vendor snapshot and five historical support copies remain for
+provenance, but no longer own the active modules. See
+[SECTION3_INTEGRATION.md](SECTION3_INTEGRATION.md) and
+[CONCRETE_SECTION3_INTERFACE.md](CONCRETE_SECTION3_INTERFACE.md).
+The original release's dependency alignment below is retained as history.
+
 ## Checked versions
 
 - Lean: `leanprover/lean4:v4.33.0`.
@@ -14,7 +27,7 @@ Its `lakefile.toml` uses only repository-relative paths.
   [tao-vu-replacement-principle-lean](https://github.com/hanyi162013-Yihan/tao-vu-replacement-principle-lean),
   commit `2f96f5460eea0965956f69d787ebc722f1392078`.
 
-The parent package supplies `CircularLawSection4` from `../Section4`,
+The original parent package supplied `CircularLawSection4` from `../Section4`,
 `TaoVuReplacement` from `../vendor/tao-vu-replacement`, and the existing
 `ShortRingAnchor` support modules from `../vendor/short-ring-analysis`.
 The child shares `../.lake/packages`; no second mathlib checkout is required.
@@ -52,8 +65,10 @@ No additional mathematical assumptions are hidden by this packaging.
 
 ## Verification
 
-All mathematical Lean source text is unchanged from the fully checked local
-Section 5 project. The local verification included integrated compilation,
+The original mathematical source remains unchanged from the checked local
+Section 5 project. The new concrete Section 3 adapter is separately covered by
+successful cloud run 33725000131 and its 93-declaration transitive audit.
+The historical local verification included integrated compilation,
 strict extension-module checks, both axiom audits, 15 boundary regressions, and
 118-module kernel replay. The additional repository-relative local build was
 interrupted at the user's request on 2026-09-02, with no error reported before

@@ -63,3 +63,8 @@ TaperCutoffDominance
 TaperSection3Estimates
 LiteralSourceMoments
 TaperShortRingSource
+PublishedSection3Source
+PublishedSection3Transport
+PublishedSection3Endpoint
+PublishedSection3Model
+PublishedSection3Sampling
