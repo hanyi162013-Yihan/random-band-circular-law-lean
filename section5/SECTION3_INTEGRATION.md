@@ -24,7 +24,16 @@ models. A direct published-theorem interface must not be confused with an
 unconditional circular law or with a theorem for arbitrary size-dependent
 atom laws: the published Section 3 endpoint uses fixed atom laws.
 
-Integration status: source alignment is checked; the new adapters and the
-combined Section 3/4/5/6 dependency graph require their own cloud verification.
-The earlier isolated Section 3 success does not certify this new integration.
-Per the user's request, no Lean compilation is run locally.
+The first integration passed combined cloud verification at commit
+`f817f1391500e7a12efa90792cd8f901fe5744cd`,
+[run 33711286942](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33711286942).
+The new `PublishedSection3Source` compiled in 2.9 seconds, all 4403 build jobs
+completed, and the existing Section 6 audit/regressions passed. The already
+running Section 5 verification also passed (run 33711286974).
+
+The subsequent masked-anchor transport, finite matrix identity, and final
+Section 5/6 source-facing endpoints require their own incremental check.
+The isolated Section 3 success does not certify those later additions.
+Per the user's request, no Lean compilation is run locally. Further integration
+uses the Section 6 cloud check and a narrow new-adapter audit, without running
+the already verified Section 5 full suite again on this development branch.

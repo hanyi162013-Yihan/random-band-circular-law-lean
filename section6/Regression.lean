@@ -670,3 +670,22 @@ example (p : NoncompactProfile) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
         (cyclicPhysicalMatrix n (p.matrix (n + 1) (W n) (ω n).1)) f)
       atTop (fun _ => ∫ z, f z ∂CircularLawSections56.Section5.circularMeasure) :=
   p.gaussian_profile_circular_law_of_section34 W hW hWlim hsource hHan f hf hc
+
+-- Section 3 and Section 5 now run inside the new source-facing endpoint.
+example {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} {νA νG : Measure ℂ}
+    [IsProbabilityMeasure μ] [IsProbabilityMeasure νA] [IsProbabilityMeasure νG]
+    (p : NoncompactProfile) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
+    (hWlim : Tendsto W atTop atTop)
+    (hsource : NoncompactProfile.GaussianProfilePublishedSection3Inputs μ νA νG p W)
+    (hHan : HanGaussianDenseInput) (f : ℂ → ℝ) (hf : Continuous f) (hc : HasCompactSupport f) :
+    TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
+      (fun n ω => TaoVuReplacement.realEsdTest
+        (cyclicPhysicalMatrix n (p.matrix (n + 1) (W n) (ω n).1)) f)
+      atTop (fun _ => ∫ z, f z ∂CircularLawSections56.Section5.circularMeasure) :=
+  p.gaussian_profile_circular_law_of_published_section3 W hW hWlim hsource hHan f hf hc
+
+-- The actual signed column placement agrees, not merely its cardinality.
+example (i : Fin 4) (s : Fin 3) :
+    ZMod.finEquiv 4 (ShortRingAnchor.cyclicColumn (by norm_num : 2 * 1 + 1 ≤ 4) i s) =
+      ZMod.finEquiv 4 i - (1 : ZMod 4) + (s.val : ZMod 4) :=
+  section3_cyclicColumn_finEquiv (by norm_num) i s

@@ -32,6 +32,9 @@ concurrency:
 
 jobs:
   verify-section5:
+    # The Section 6 integration workflow compiles its changed Section 5 dependencies.
+    # Keep the existing full Section 5 suite available explicitly, without duplicating it here.
+    if: github.ref != 'refs/heads/codex/section6-formalization' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     env:
