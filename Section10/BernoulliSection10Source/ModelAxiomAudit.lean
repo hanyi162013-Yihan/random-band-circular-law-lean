@@ -1,5 +1,6 @@
 import BernoulliSection10Source.PlanarHighBand
 import BernoulliSection10Source.RealHighBand
+import BernoulliSection10Source.GaussianReferenceModel
 
 #print axioms BernoulliSection10Source.copies_of_product_sampling
 #print axioms BernoulliSection10Source.physical_source_bandwidth
@@ -12,3 +13,5 @@ import BernoulliSection10Source.RealHighBand
 
 #check @BernoulliSection10Source.physical_planar_minimum_input
 #check @BernoulliSection10Source.physical_real_minimum_input
+#print axioms BernoulliSection10Source.actualGinibre_nonsingular
+#print axioms BernoulliSection10Source.actualGinibre_row_moments

@@ -68,7 +68,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python3 scripts/build_serial.py --target BernoulliSection10Source.PlanarHighBand --target BernoulliSection10Source.RealHighBand --keep-going 2>&1 | tee verification-section10/source-connection-build.log
+          python3 scripts/build_serial.py --target BernoulliSection10Source.PlanarHighBand --target BernoulliSection10Source.RealHighBand --target BernoulliSection10Source.GaussianReferenceModel --keep-going 2>&1 | tee verification-section10/source-connection-build.log
       - name: Build conditional high-band closure for both density branches
         id: assembly
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}

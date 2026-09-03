@@ -18,7 +18,7 @@ noncomputable section
 
 namespace BernoulliSection10Complex.SourceInputs
 
-open BernoulliSection10.SourceInputs
+open BernoulliSection10 BernoulliSection10.SourceInputs
 
 open ShortRingAnchor ReferenceTruncation
 

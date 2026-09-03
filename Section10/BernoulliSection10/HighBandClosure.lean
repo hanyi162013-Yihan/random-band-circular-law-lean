@@ -149,7 +149,7 @@ theorem density_profile_log_limit_of_highBand
   have hlong := density_long_profile_log_limit_of_highBand hμ hHighBand W
     (fun n => densityLongAuxSites (W n) (s n)) hW hWtop
     (Eventually.of_forall fun n => densityLongAuxSites_long (W n) (s n) (hW n)) z
-  rw [convergesInProbability_iff_norm] at hshort hlong ⊢
+  rw [ShortRingAnchor.convergesInProbability_iff_norm] at hshort hlong ⊢
   intro ε hε
   apply tendsto_of_tendsto_of_tendsto_of_le_of_le tendsto_const_nhds
     (by simpa only [add_zero] using (hshort ε hε).add (hlong ε hε))
@@ -246,4 +246,3 @@ theorem density_circular_law_of_highBand
   simpa only [← densityCyclicMatrix_physicalRowsFromInput, physicalRowsFromInput, inputLaw] using h
 
 end BernoulliSection10
-
