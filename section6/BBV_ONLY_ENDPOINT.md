@@ -1,6 +1,16 @@
 # Verified BBV-only Ginibre and concrete profile endpoint
 
-The complete new chain passed
+**Current migration pending:** both `GaussianProfileBBVSources` and
+`GaussianProfileBBVCoreSources` now have exactly the two fields below.
+The core route uses the shared proved Section 5 Gaussian reference; the
+independent BBV-only derivation remains available. The finite-formula and
+log-potential records also have proved constructors with no premise.
+The legacy concrete/reduced routes still expose the separate classical
+squared-singular-law input, but no longer expose BC12, raw-log, negative
+moment or spectral-limit fields. See
+[the cross-chapter status](../GAUSSIAN_INPUT_MIGRATION.md).
+
+The earlier independent BBV-only chain passed
 [run 33740349647](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33740349647)
 at `9d98ca87d112a240fc5b596d1a27801450b15cbe` on
 `codex/section6-formalization`, tree `9007110012caebaf30a10e2d1a3cc30efb44fe9b`.
@@ -63,8 +73,9 @@ tending independently to infinity, without a relative-growth restriction.
 `MovingGinibreCore` subtracts the ambient Ginibre mean inside each block;
 the exact dimension weights sum to one. `BBVCoreSources` constructs actual
 local models from BBV. `BBVProfileEndpoint` joins the sparse and root-Section-3
-dense branches. The final two-field endpoint supplies its Ginibre log input
-using the new theorem above. No global high-bandwidth theorem is applied to
+dense branches. The original two-field endpoint supplied its Ginibre log input
+using the theorem above; the migrated core interface constructs this input
+from Section 5's proved reference instead. No global high-bandwidth theorem is applied to
 the entire sparse core.
 
 This proves the circular-law chain without constructing a separate limiting
@@ -73,7 +84,7 @@ available with their classical-source hypotheses; those are not hidden
 inputs of this new endpoint. This is not a line-by-line proof of every
 intermediate manuscript statement using its original route.
 
-## Verification scope
+## Historical verification scope
 
 - Strict final-target/import build: 4467 dependency-inclusive jobs, mostly cached.
 - `BBVGinibreAudit.lean`: 203 declarations checked transitively, allowing only

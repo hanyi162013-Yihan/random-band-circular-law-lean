@@ -5,7 +5,12 @@ Yi Han's [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1):
 Proposition 10.1, local results 10.2–10.10, equations 10.30–10.57, and their
 assembly into the circular-law conclusion of Theorem 2.10.
 
-**Verified:** [cloud run 33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)
+**Current migration pending:** the concrete endpoints now construct their
+Gaussian reference estimates instead of accepting `BC12GinibreInput`.
+See [the cross-chapter migration status](../GAUSSIAN_INPUT_MIGRATION.md).
+The new signatures still require their own successful cloud check.
+
+**Historical conditional verification:** [cloud run 33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)
 passed at `362c47f`: all three Section 10 targets and their actual dependencies,
 207 chapter files without placeholders, 492 exact axiom reports, and the
 final printed signatures. Verification took 4 minutes 13 seconds using
@@ -37,7 +42,7 @@ to be the required product laws. No auxiliary random model is an input.
   bounded Lebesgue density, and finite third absolute moment.
 - Positive integer bandwidths `W n` tending to infinity. The number of
   block sites may vary without a further growth condition.
-- The explicitly accepted BBV and BC12 literature inputs; in the real
+- The explicitly accepted BBV comparison input; in the real
   branch only, the geometric Brascamp–Lieb inequality as well.
 
 Complex density is a condition on the joint planar law. Neither independent
@@ -49,8 +54,10 @@ The actual Section 3 model, LSV application, counting/bulk estimates,
 Gaussian reference and high-band limit are connected internally. The final
 statements retain no `Section3Inputs`, high-band, reset, seam, remainder,
 pressure or reference-limit certificate. Tao–Vu replacement is imported as
-proved source. BBV/BC12 and the real Brascamp–Lieb input are not claimed as
-proved internally; see [ASSUMPTIONS.md](ASSUMPTIONS.md).
+proved source. The actual normalized Ginibre law, full-log limit and
+negative-moment bound are constructed in `VerifiedGinibreSources` using
+the proved Gaussian formulas and BBV. BBV and the real Brascamp–Lieb input
+are not claimed as proved internally; see [ASSUMPTIONS.md](ASSUMPTIONS.md).
 
 ## Mathematical organization and maps
 

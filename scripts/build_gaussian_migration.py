@@ -23,9 +23,17 @@ TARGETS = {
 AUDITS = {
     "root": ["SubgaussianSection8/AxiomAudit.lean", "Section8/AxiomAudit.lean",
              "Section8/Section3IntegrationAudit.lean",
+             "Section10/BernoulliSection10/AxiomAudit.lean",
+             "Section10/BernoulliSection10/AsymptoticAxiomAudit.lean",
+             "Section10/BernoulliSection10/CompletionAxiomAudit.lean",
+             "Section10/BernoulliSection10Complex/AnalyticAxiomAudit.lean",
+             "Section10/BernoulliSection10Complex/FrontAxiomAudit.lean",
+             "Section10/BernoulliSection10Complex/GaussianReferenceAxiomAudit.lean",
+             "Section10/BernoulliSection10Complex/ClosureAxiomAudit.lean",
+             "Section10/BernoulliSection10Source/ModelAxiomAudit.lean",
              "Section10/BernoulliSection10Source/AxiomAudit.lean",
              "Section9/AxiomAudit.lean", "Section9/SmallBallAxiomAudit.lean"],
-    "section5": ["GaussianMigrationAudit.lean"],
+    "section5": ["AxiomAudit.lean", "GaussianMigrationAudit.lean"],
     "section6": ["GaussianMigrationAudit.lean"],
 }
 

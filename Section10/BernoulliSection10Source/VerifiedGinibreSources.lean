@@ -41,7 +41,7 @@ theorem sequencePairs_measurePreserving (N : ℕ) :
       (fun ω : GaussianSequence => fun ij : Fin N × Fin N => ω (squareAtomIndex ij.1 ij.2))
       gaussianSequenceLaw (Measure.pi fun _ : Fin N × Fin N => circularGaussianPairLaw) := by
   refine ⟨by fun_prop, ?_⟩
-  simpa only [Measure.infinitePi_eq_pi] using
+  simpa only [gaussianSequenceLaw, Measure.infinitePi_eq_pi] using
     (Measure.map_infinitePi_infinitePi_of_inj
       (P := fun _ : ℕ => circularGaussianPairLaw) (squareAtomIndex_injective N))
 

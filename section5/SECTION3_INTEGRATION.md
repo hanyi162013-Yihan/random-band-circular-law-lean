@@ -1,6 +1,17 @@
 # Direct integration of the checked Section 3 package
 
-## Current concrete interface — verified 2026-09-03
+## Current Gaussian-source migration — awaiting cloud verification
+
+The current concrete endpoints no longer take `BC12GinibreInput`.
+`CircularLawSections56.Section5.VerifiedGinibreSources` identifies the actual
+reference with Section 3's Gaussian law and constructs its log limit and
+negative-moment tightness (the latter from BBV). The additional taper adapter
+constructs nonsingularity, negative moments, log limits and row moments;
+its remaining analytic fields concern only the taper matrix.
+See [the cross-chapter status](../GAUSSIAN_INPUT_MIGRATION.md).
+These changes are not certified by the historical runs below.
+
+## Historical concrete interface — verified 2026-09-03
 
 The actual fixed-law short-ring/calibration construction and both real/complex
 Section 5 endpoints passed [run 33725000131](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131)

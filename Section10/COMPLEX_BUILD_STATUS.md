@@ -1,4 +1,8 @@
-# Complex Section 10: verified
+# Complex Section 10: historical verification and current migration
+
+The BC12-free Gaussian-source migration is undergoing a separate cloud check.
+The record below certifies the older conditional signatures, not that migration.
+See [the current cross-chapter status](../GAUSSIAN_INPUT_MIGRATION.md).
 
 Both real and planar-complex source-connected endpoints passed
 [cloud run 33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)

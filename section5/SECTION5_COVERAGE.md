@@ -1,6 +1,10 @@
 # Section 5：形式化覆盖与输入边界
 
-状态：总入口（4079 个构建任务）、65 个新增模块的严格重查、公理审计、15 个边界测试及全部 118 个 Section 5 模块的内核重放均已通过。
+本轮高斯输入迁移：固定原子 indicator 终点已改为内部构造 Ginibre 参考结论，
+不再接收 BC12 参数；新增 taper 适配只保留目标 taper 的 LSV、计数、局部比较三项。
+这批修改正在云端验证，见 [全篇迁移状态](../GAUSSIAN_INPUT_MIGRATION.md)。
+
+历史版本状态：总入口（4079 个构建任务）、65 个新增模块的严格重查、公理审计、15 个边界测试及全部 118 个 Section 5 模块的内核重放均已通过。
 
 本文对应本地 combined manuscript 的 Section 5。Section 6 的 Gaussian-profile
 论证不在本轮范围。Section 3、Section 4 的结果按用户要求作为预先输入。
@@ -68,13 +72,17 @@ IID 数组上。其 `complexify` 定理证明输入搬运；最终结论又回�
 `0 < δ < γ < 1/8`。Section 5 使用所需的一、二阶可积性及二阶矩界；中心化、单位二阶矩
 和三阶矩条件中属于 Section 3 锚点的内容没有被声称在这里重新证明。
 
-对 taper，新增 `TaperShortRingSource` 从 Section 3 的原始估计构造实际 taper 短环
+对 taper，原 `TaperShortRingSource` 从 Section 3 的原始估计构造实际 taper 短环
 结论，而不是把 taper 的极限本身作为该层的假设。具体的
 `Section3TaperAnalyticInputs` 包含 Theorem 3.1 最小奇异值、Proposition 3.4 所有截断
 尺度的计数、Lemma 3.5 局部比较，以及 Section 3 原来使用的 dense/BC12 比较结果。
 源原子的中心化和行二阶矩由 `LiteralSourceMoments` 自动生成；最大方差、内带、指数
 余量、可选参数和实际 cutoff 均在本项目证明。主终点仍用短环锚点包装接收这些结果，
-新适配说明该包装如何从允许的原始 Section 3 结果得到。这组新适配已编译通过。
+该适配说明此包装如何从允许的原始 Section 3 结果得到。此历史适配已编译通过。
+本轮的 `TaperVerifiedGinibre` 进一步从实际 Ginibre 分布与 BBV 构造上述四项高斯
+结论；新入口 `tapered_short_ring_of_section3_estimates_withoutBC12` 的记录
+`Section3TaperNonGaussianInputs` 只有目标矩阵的三项估计。尚未声称已证明这些 taper
+估计，也没有把趋于零的权重下界改成统一正常数。该新适配仍待云端验证。
 
 ## 原文逐项对应
 
@@ -116,8 +124,9 @@ IID 数组上。其 `complexify` 定理证明输入搬运；最终结论又回�
 内部比较模型是 IID 均匀圆盘点组成的对角矩阵。其特征值、能量、对数势和谱积分极限
 均已在本项目证明，并复用本地 Section 3 的圆盘势积分公式。这提供所需 replacement
 参照，不需要把 Ginibre 的极限额外塞入最终 Section 5 定理。
-另须区分：taper 短环适配重用的是 Section 3 原有的 dense/BC12 比较输入；这不是给
-Section 5 replacement 额外指定一个未证明的比较模型。
+另须区分：历史 taper 短环适配接收 Section 3 原有的 dense/BC12 比较输入；本轮新
+适配将高斯侧改为内部构造。两者都不是给 Section 5 replacement 额外指定未证明的
+比较模型；后者仍使用上面已经构造的均匀圆盘对角矩阵。
 
 `AxiomAudit.lean` 保留逐个关键入口的依赖输出；`FullSection5AxiomAudit.lean` 自动遍历
 整个公开 Section 5 命名空间，检查定义和定理的传递公理依赖，只允许 `propext`、
