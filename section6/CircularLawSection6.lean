@@ -75,3 +75,6 @@ import CircularLawSection6.PhysicalCutoffTransport
 import CircularLawSection6.GinibreReference
 import CircularLawSection6.NegativeMomentCutoff
 import CircularLawSection6.GinibreLowerCutoff
+import CircularLawSection6.IteratedLowerCutoff
+import CircularLawSection6.GinibreIteratedCutoff
+import CircularLawSection6.ReferenceCutoffSqueeze

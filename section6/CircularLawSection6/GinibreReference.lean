@@ -37,7 +37,7 @@ theorem ginibreEntryAtoms_measurePreserving (N : ℕ) [NeZero N] :
   dsimp only at h₁ h₂
   apply Prod.ext h₁
   rw [h₁] at h₂
-  exact sub_right_cancel h₂
+  exact sub_left_inj.mp h₂
 
 theorem ginibreMatrix_entry (N : ℕ) (ω : ZMod N × ZMod N → ℂ) (i j : ZMod N) :
     ginibreMatrix N ω i j = (Real.sqrt (1 / (N : ℝ)) : ℂ) * ginibreEntryAtoms N ω (i, j) := rfl
