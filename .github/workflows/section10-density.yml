@@ -62,13 +62,13 @@ jobs:
           set -o pipefail
           mkdir -p verification-section10
           python3 scripts/build_serial.py --target BernoulliSection10Complex.Front --keep-going 2>&1 | tee verification-section10/front-build.log
-      - name: Build concrete Section 3 model and planar LSV connection
+      - name: Build concrete Section 3 models and both LSV connections
         id: source
         if: ${{ !cancelled() }}
         shell: bash
         run: |
           set -o pipefail
-          python3 scripts/build_serial.py --target BernoulliSection10Source.PlanarHighBand --keep-going 2>&1 | tee verification-section10/source-connection-build.log
+          python3 scripts/build_serial.py --target BernoulliSection10Source.PlanarHighBand --target BernoulliSection10Source.RealHighBand --keep-going 2>&1 | tee verification-section10/source-connection-build.log
       - name: Build conditional high-band closure for both density branches
         id: assembly
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}

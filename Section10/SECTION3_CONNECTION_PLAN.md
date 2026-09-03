@@ -4,7 +4,7 @@ This file records implementation work still pending, not completed results.
 The latest published source is `section3/` at main commit `42c26b6`.
 Root Lake now selects `section3/` instead of the older
 `vendor/short-ring-analysis/`. The concrete `IIDModels` and
-`PlanarHighBand` adapters have been written; their integration is being
+`PlanarHighBand`, `DensityRepresentative`, and `RealHighBand` adapters have been written; their integration is being
 compiled in cloud CI only. This does not yet complete the source connection.
 
 ## Why the old record is not the final interface

@@ -1,8 +1,14 @@
 import BernoulliSection10Source.PlanarHighBand
+import BernoulliSection10Source.RealHighBand
 
 #print axioms BernoulliSection10Source.copies_of_product_sampling
 #print axioms BernoulliSection10Source.physical_source_bandwidth
 #print axioms BernoulliSection10Source.physicalPlanarBandModel_identDistrib
 #print axioms BernoulliSection10Source.physical_planar_minimum_input
+#print axioms BernoulliSection10Source.boundedDensityOfMeasureLe
+#print axioms BernoulliSection10Source.exists_real_density_representative
+#print axioms BernoulliSection10Source.physicalRealBandModel_identDistrib
+#print axioms BernoulliSection10Source.physical_real_minimum_input
 
 #check @BernoulliSection10Source.physical_planar_minimum_input
+#check @BernoulliSection10Source.physical_real_minimum_input

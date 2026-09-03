@@ -23,6 +23,16 @@ cloud. No local build of that final integration has been run.
 
 ## Recorded checks
 
+- At commit `56c2022`, the **complete Front target passed** in
+  [run 33710177008](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33710177008),
+  with the final `lake build BernoulliSection10Complex.Front` check successful.
+  The run is still checking the conditional closures and has not yet
+  returned its separate signature/axiom audit results.
+- The latest root configuration now selects the published `section3/`
+  source. Actual IID model, planar LSV, density representative and real LSV
+  adapters are written; their first cloud integration check is pending.
+  No local integration compilation has been performed.
+
 - The planar affine-log core and its eight kernel-axiom reports passed
   locally; only `propext`, `Classical.choice`, and `Quot.sound` occurred.
 - The first cloud front-end build ran at commit
