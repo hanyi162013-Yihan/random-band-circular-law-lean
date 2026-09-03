@@ -22,7 +22,12 @@ TARGETS = {
     "section6": ["CircularLawSection6", "CircularLawSection6.GinibreFiniteFormulaSources"],
 }
 AUDITS = {
-    "root": ["Section4/AxiomAudit.lean", "Section4/CompanionAxiomAudit.lean",
+    "root": ["scripts/GaussianSourceSignatureAudit.lean",
+             "section3/ShortRingAnchor/Audit.lean",
+             "section3/ShortRingAnchor/HighBandIntegrationAudit.lean",
+             "section3/ShortRingAnchor/Proposition38/Audit.lean",
+             "section3/ShortRingAnchor/BC12/VerifiedAudit.lean",
+             "Section4/AxiomAudit.lean", "Section4/CompanionAxiomAudit.lean",
              "Section4/FourGapsAxiomAudit.lean", "Section4/FlatAxiomAudit.lean",
              "Section4/Section4CompleteAxiomAudit.lean", "Section4/AssumptionFreeAxiomAudit.lean",
              "SubgaussianSection8/AxiomAudit.lean", "Section8/AxiomAudit.lean",

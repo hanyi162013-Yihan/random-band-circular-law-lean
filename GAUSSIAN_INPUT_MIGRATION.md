@@ -103,10 +103,13 @@ changes still require cloud validation.
 - Each project ends with ordinary `lake --no-cache build` of its public targets.
 - Separate compiled axiom/signature audits require the usual
   `propext`, `Classical.choice`, `Quot.sound` allowlist with exact report counts.
-- The final expanded audit covers 975 root, 240 Section 5 and 20 Section 6
+- The final expanded audit covers 1379 root, 240 Section 5 and 20 Section 6
   reports. Optional kernel replay checks the 22 changed proof modules with
   one worker and exact module coverage. This uses Lean's own kernel, not an
   external independent verifier, and does not replay all of mathlib.
+- The upstream signature audit prints the genuine Gaussian model definitions
+  and the density/correlation/log-limit signatures; Schur change of variables
+  and finite correlations must not reappear as external hypotheses.
 - No new proof-checking limit overrides, custom axioms, `sorry`, `admit`,
   `unsafe`, or `native_decide` are permitted in the new source constructors.
 - Cloud reports must be associated with their exact commit before marking a
