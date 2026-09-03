@@ -2,9 +2,10 @@
 
 The target declaration is
 `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law`
-in `CircularLawSection6/GaussianProfileTheorem.lean`. Its source has been
-submitted for strict compilation; see `VERIFICATION.md` for the most recent
-fully successful checkpoint rather than treating submission as verification.
+in `CircularLawSection6/GaussianProfileTheorem.lean`. The complete 110-module
+checkpoint, including this theorem, passed strict compilation, the transitive
+axiom audit and all 107 regressions in GitHub run 33708812493. See
+`VERIFICATION.md` for the exact commit and scope.
 
 ## What the endpoint says
 

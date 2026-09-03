@@ -1,5 +1,35 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified 110-module conditional circular-law checkpoint
+
+Commit: `b4106b56f5a5a79086194e5bb5181e514ebc9644`.
+[Dedicated GitHub run 33708812493](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33708812493),
+job `100503706438`: **success** on 2026-09-03 UTC.
+Exact source tree: `33c88726977ef960f2c7ba3b532b097e26a4f001`.
+
+- All 110 modules plus umbrella compiled: 4160 dependency-inclusive jobs.
+- The transitive audit passed: 999 declarations, 873 theorem declarations;
+  only `propext`, `Classical.choice`, and `Quot.sound` are permitted.
+- All 107 strict regressions, the 643-file source-token scan, cache saving
+  and verification-log retention passed.
+- `SubsequenceSourceEndpoint` compiled in 3.1 seconds and the final
+  `GaussianProfileTheorem` in 1.8 seconds.
+
+The actual noncompact Gaussian-profile circular law is now proved conditional
+on the explicit source bundle, without assuming a limit of bandwidth/dimension.
+The proof constructs the compact comparison, finite-prefix transport, iterated
+cutoff squeeze, sparse probability limit, actual model replacement, dense
+threshold, and sparse/dense subsequence closure. Numerical bad-event dimension
+equalities avoid expensive transport of whole dependent sample spaces.
+
+This does not discharge the ordinary source hypotheses: Section 5's literal
+core result, local Section 3 CDF/Ginibre singular-law inputs, classical Ginibre
+raw/negative-moment/spectral limits, and Han's dense theorem. These are listed
+in [SOURCE_BOUNDARIES.md](SOURCE_BOUNDARIES.md). The generic Stieltjes-to-linear
+hard-edge adapter is also checked, but the limiting-law transform identification
+and logarithmic layer-cake identity are not claimed. Subsequent direct Section 5
+source-instantiation work is outside this historical checkpoint.
+
 ## Verified eighty-module checkpoint
 
 Commit: `bbb5d66a6b81121240e6b7d3bfa87588bf5af168`.

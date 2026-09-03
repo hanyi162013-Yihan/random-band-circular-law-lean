@@ -638,3 +638,15 @@ example (p : NoncompactProfile) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
 example (σ : Measure ℝ) [IsProbabilityMeasure σ] {t C : ℝ} (ht : 0 < t)
     (hbound : (∫ s, singularPoissonKernel t s ∂σ) ≤ C) :
     σ.real (Set.Icc 0 t) ≤ 2 * C * t := hardEdge_mass_le_of_poisson_bound σ ht hbound
+
+-- The global Section 5 band fits the physical dimension, even for a large input bandwidth.
+example : clampedCoreHalfWidth 1 100 10 = 5 := by
+  norm_num [clampedCoreHalfWidth]
+
+-- A genuinely positive center exists at the small-index filler.
+example : clampedCoreHalfWidth 1 0 0 = 1 := by
+  norm_num [clampedCoreHalfWidth]
+
+example (W : ℕ → ℝ) (hW : Tendsto W atTop atTop) :
+    Tendsto (fun n => clampedCoreHalfWidth 1 (W n) n) atTop atTop :=
+  clampedCoreHalfWidth_atTop W hW (by norm_num)

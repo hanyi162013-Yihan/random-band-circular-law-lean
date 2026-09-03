@@ -14,11 +14,11 @@ and positive bandwidths tending to infinity, it gives the circular law in
 probability for the actual normalized Gaussian cyclic matrix. It does not
 assume that the bandwidth/dimension ratio has a limit.
 
-The complete 110-module source and 107 strict regression examples have been
-submitted for cloud verification. Submission is not verification: the
-latest fully successful historical checkpoint remains 80 modules and 93
-regressions until a newer success is recorded in
-[VERIFICATION.md](VERIFICATION.md).
+The complete 110-module checkpoint and 107 strict regression examples passed
+[cloud verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33708812493)
+at commit `b4106b56f5a5a79086194e5bb5181e514ebc9644`.
+The transitive axiom audit checked 999 declarations, including 873 theorem
+declarations. See [VERIFICATION.md](VERIFICATION.md) for the exact scope.
 
 This theorem is conditional on explicitly stated mathematical sources.
 [SOURCE_BOUNDARIES.md](SOURCE_BOUNDARIES.md) lists their exact content:
@@ -46,9 +46,8 @@ The axiom audit checks for forbidden axioms; it does not discharge hypotheses.
   exactly one, dimension-preserving subsequence fillers, the dense-source
   threshold, and sparse/dense recombination.
 
-These describe the mathematical content of the submitted source; the
-verification ledger distinguishes complete green checkpoints from individual
-modules compiled during development.
+These are included in the verified 110-module checkpoint. Subsequent work
+must receive its own verification and is not covered by that historical run.
 
 ## Boundaries not concealed by the endpoint
 
