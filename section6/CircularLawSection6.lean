@@ -111,3 +111,4 @@ import CircularLawSection6.StieltjesHardEdge
 import CircularLawSection6.ClampedCoreGeometry
 import CircularLawSection6.GaussianAtomTransfer
 import CircularLawSection6.ClampedCoreProfile
+import CircularLawSection6.ClampedSection5Source

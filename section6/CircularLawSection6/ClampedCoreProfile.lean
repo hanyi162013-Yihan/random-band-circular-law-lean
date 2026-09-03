@@ -38,7 +38,10 @@ variable {p : NoncompactProfile} {R : ℝ}
 def uniformWeights (B : CoreRadiusBounds p R) (d : ℕ) :
     PaperIndicatorWeights d (B.lower / B.upper) (B.upper / B.lower) where
   q := fun _ => 1 / (d + 1 : ℝ)
-  normalized := by simp
+  normalized := by
+    simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul,
+      Nat.cast_add, Nat.cast_one, one_div]
+    exact mul_inv_cancel₀ (by positivity)
   lower _ := div_le_div_of_nonneg_right
     ((div_le_one B.upper_pos).2 B.lower_le_upper) (by positivity)
   upper _ := div_le_div_of_nonneg_right
@@ -79,7 +82,8 @@ theorem clampedWeights_q (B : CoreRadiusBounds p R) (W : ℝ) (n : ℕ)
     (B.clampedWeights W n).q s =
       p.coreBandWeight (n + 1) (canonicalCoreBand (clampedCoreHalfWidth R W n))
         (canonicalCoreCenter _ (clampedCoreHalfWidth_pos R W n)) W s := by
-  simp only [clampedWeights, dif_pos ⟨hn, hW, hf⟩, coreWeights,
+  have h : 2 ≤ n ∧ 0 < W ∧ 0 < ⌊R * W⌋₊ := ⟨hn, hW, hf⟩
+  simp only [clampedWeights, dif_pos h, coreWeights,
     NoncompactProfile.corePaperWeights]
 
 end CoreRadiusBounds
