@@ -1,6 +1,7 @@
 # Build and axiom audits
 
-The Proposition 3.8 extension **passed locally on 2026-09-03 at 03:44 UTC**:
+The Proposition 3.8 extension **passed locally at 03:44 UTC and on GitHub
+at 04:11 UTC on 2026-09-03**:
 250 Lean files, the ordinary build, and 351 exact axiom reports covering
 340 distinct declarations. Its audit includes the final conditional
 `ShortRingAnchor.Proposition38.proposition38`; see
@@ -8,6 +9,12 @@ The Proposition 3.8 extension **passed locally on 2026-09-03 at 03:44 UTC**:
 [Proposition 3.8 report](PROPOSITION38.md). Only `propext`,
 `Classical.choice`, and `Quot.sound` occur. Explicit literature hypotheses
 remain theorem arguments.
+
+The cloud-verified proof-source commit is
+`af0e8e80eee5db88f811b972ea79c359b89a8cea`.
+[Successful run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33712613763),
+[durable CI summary](audit/github-verification-2026-09-03-proposition38.json),
+[complete job log](audit/github-verification-2026-09-03-proposition38.log).
 
 The preceding Proposition 3.6 integration **passed on GitHub on 2026-09-03 UTC**:
 all 230 Lean files in the selected closure, normal `lake build`, and

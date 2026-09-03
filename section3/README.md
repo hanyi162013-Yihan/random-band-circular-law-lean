@@ -354,11 +354,17 @@ applications.  It is no longer an external geometric-measure input.
 
 ## Build and audit
 
-The complete Proposition 3.8 extension passed locally on **2026-09-03 UTC**:
+The complete Proposition 3.8 extension passed **both locally and on GitHub
+on 2026-09-03 UTC**:
 **250 Lean files**, the normal build, and **351 exact axiom reports covering
 340 distinct declarations**, including `ShortRingAnchor.Proposition38.proposition38`.
 See [the full verification summary](audit/verification/summary.json) and
 [Proposition 3.8](PROPOSITION38.md) for the precise conditional boundary.
+The cloud-verified proof-source commit is
+`af0e8e80eee5db88f811b972ea79c359b89a8cea`:
+[successful run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33712613763),
+[durable cloud record](audit/github-verification-2026-09-03-proposition38.json).
+This run took about 24 minutes 38 seconds with a section3 build-cache miss.
 
 The preceding Proposition 3.6 integration passed on GitHub on **2026-09-03 UTC**:
 **230 Lean files**, the normal `lake build`, and **271 exact axiom reports

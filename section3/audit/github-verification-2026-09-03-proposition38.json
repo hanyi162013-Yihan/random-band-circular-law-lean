@@ -1,0 +1,34 @@
+{
+  "sourceCommit": "af0e8e80eee5db88f811b972ea79c359b89a8cea",
+  "runId": 33712613763,
+  "jobId": 100515110429,
+  "status": "success",
+  "runURL": "https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33712613763",
+  "runStartedUTC": "2026-09-03T03:46:56Z",
+  "runUpdatedUTC": "2026-09-03T04:11:34Z",
+  "kernelAuditCompletedUTC": "2026-09-03T04:11:30.0261597Z",
+  "elapsedUntilAuditSeconds": 1474,
+  "sourceFiles": 250,
+  "serialTargetsPassed": 250,
+  "normalLakeBuild": "passed",
+  "auditReports": 351,
+  "distinctAuditedDeclarations": 340,
+  "audits": {
+    "ShortRingAnchor/Audit.lean": 207,
+    "ShortRingAnchor/HighBandIntegrationAudit.lean": 64,
+    "ShortRingAnchor/Proposition38/Audit.lean": 80
+  },
+  "endpoint": "ShortRingAnchor.Proposition38.proposition38",
+  "allowedAxioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "section3BuildCache": "miss; a new cache was saved after the successful serial build",
+  "artifact": {
+    "id": 9877897870,
+    "sha256": "a879d579bb081fd7a7d3c41cb2ac047f3981064428caabc4a688282792429ee3",
+    "url": "https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33712613763/artifacts/9877897870"
+  },
+  "note": "Summary checked against the successful GitHub job log. Exact per-declaration kernel reports and the generated summary.json are in the run artifact. The endpoint is required by the fail-closed audit at the verified source commit. This verifies the conditional Lean statements; Proposition 3.2, Cook 1.12 and the pre-existing BBV/BC12 literature inputs remain explicit theorem arguments."
+}

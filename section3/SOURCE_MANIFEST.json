@@ -13,8 +13,8 @@
     },
     {
       "path": "BUILD_AUDIT.md",
-      "bytes": 8833,
-      "sha256": "ab099f3f709f68cd1e4dceb81f1ca11ca4ebc566db285846ddfbcdb137c8aa8f"
+      "bytes": 9213,
+      "sha256": "4a9e86493874ee8d719f4642cdf16b52273241bb5f49270abc32274bdb937915"
     },
     {
       "path": "CONCRETE_MODELS_AUDIT.md",
@@ -28,8 +28,8 @@
     },
     {
       "path": "PROPOSITION38.md",
-      "bytes": 8391,
-      "sha256": "60d1b431e26fdef703293f82fde1bd8fa1c997fc0b4777d4e8de7a265a528252"
+      "bytes": 9465,
+      "sha256": "8e18d85eb7a0f24e6c691e3d628b3a8048f18866cc27969da9243f4beec3a5b2"
     },
     {
       "path": "RADIUS_SHORTCUT.md",
@@ -38,8 +38,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 27994,
-      "sha256": "59d3772a3df1ea7c292d54df5321f978cc5879ed6d53f5501b1d4781d7ccb4b6"
+      "bytes": 28367,
+      "sha256": "a1fc0e89299515b22be249a0ab0d2ccb85a95e6047843250e8e5022884c199e1"
     },
     {
       "path": "ShortRingAnchor.lean",
@@ -1332,6 +1332,16 @@
       "sha256": "c9477fc4048847171803fe4aacdd5a8d79d686c62bd989c7487ce4df4c1dbf5e"
     },
     {
+      "path": "audit/github-verification-2026-09-03-proposition38.json",
+      "bytes": 1619,
+      "sha256": "3139f19c59e0e170fcd913861b13808d7ff9f5e867394b979e2d92b855369ea4"
+    },
+    {
+      "path": "audit/github-verification-2026-09-03-proposition38.log",
+      "bytes": 73712,
+      "sha256": "f7cfe4c5620fd4d51d03cd45990df3a76a6b068cb7533c00688aa91d726512e3"
+    },
+    {
       "path": "audit/github-verification-2026-09-03.json",
       "bytes": 1280,
       "sha256": "54ab56982c0339bc60cb336da069e3515a1d33e049330513c5c8e6bc71c188b0"
@@ -1408,8 +1418,8 @@
     },
     {
       "path": "scripts/export-source.mjs",
-      "bytes": 4175,
-      "sha256": "92ce9715f0ac36e20febc376a624a6bfc40e58790fb9ecd5977b3ecdb989f179"
+      "bytes": 4194,
+      "sha256": "ab50db74c7c7643dc12e9cebd2dddea133fa48817a1a712e2e142f567898963d"
     },
     {
       "path": "scripts/serial-upstream-build.mjs",

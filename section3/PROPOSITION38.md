@@ -128,8 +128,19 @@ The complete local verification passed on **2026-09-03 at 03:44 UTC**:
 250 Lean source files, the ordinary build, and 351 exact axiom reports
 covering 340 distinct declarations. The Proposition 3.8 audit contributes
 80 reports, including the final endpoint. No non-foundational axiom or
-forbidden source construct was found. GitHub verification is a separate
-run and is not implied by this local record.
+forbidden source construct was found.
+
+The independent **GitHub verification also passed**, at proof-source
+commit `af0e8e80eee5db88f811b972ea79c359b89a8cea`, on 2026-09-03 at
+04:11 UTC, with the same 250-file / 351-report / 340-declaration totals.
+See the [successful run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33712613763),
+[durable CI summary](audit/github-verification-2026-09-03-proposition38.json),
+and [complete job log](audit/github-verification-2026-09-03-proposition38.log).
+The run took about 24 minutes 38 seconds; its section3 build-cache lookup
+missed, and a fresh cache was saved after the serial build. The accompanying
+record publication changes documentation, retained logs, and the packaging
+helper only: the verified Lean sources, pinned dependency configuration,
+and verification workflow are unchanged.
 
 Run using the already installed Lean 4.33.0 / pinned mathlib dependencies:
 
@@ -149,6 +160,12 @@ The complete verification records are
 A current certificate must explicitly contain
 `ShortRingAnchor.Proposition38.proposition38`.
 Historical section3 or earlier component-only logs do not certify it.
+
+The new local record directory contains `summary.json`,
+`source-hygiene.json`, `lake-build.log`, `Audit.log`,
+`HighBandIntegrationAudit.log`, and `Proposition38Audit.log`. The two
+dated `github-verification-2026-09-03-proposition38` files above retain
+the separate cloud run without overwriting the Proposition 3.6 record.
 
 The optional `--proposition38-only` mode still runs the ordinary project
 build, but audits only the new endpoint/components and writes to
