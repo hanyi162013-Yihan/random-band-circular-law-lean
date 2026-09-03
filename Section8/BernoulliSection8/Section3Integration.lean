@@ -1,12 +1,12 @@
-import BernoulliSection8.Section3Model
+import BernoulliSection8.Section3GaussianLaw
 import BernoulliSection8.Section3HighBand
-import ShortRingAnchor.Proposition38.Assembly
+import ShortRingAnchor.Proposition38.VerifiedGinibre
 
 /-!
 Section 8 now obtains its high-band anchor from the proved Section 3.8
-assembly. This file retains exactly its named literature boundary on the
-explicit ring and circular Gaussian arrays. No high-band log-potential or
-circle-law conclusion, or internally proved norm/counting certificate, is a field.
+BC12-free endpoint. This file retains only Proposition 3.2, Cook 1.12 and
+the two BBV comparisons on the explicit arrays. The Ginibre law, negative
+moments and finite formulas are proved, not fields of the public interface.
 -/
 
 open MeasureTheory ProbabilityTheory Filter
@@ -32,12 +32,6 @@ structure UpstreamInputs (A : Proposition38.Atom) where
       z eta (3 * (W : ℝ)) (momentBudget A comparisonConstant)
   bbvGinibre : ∀ (N : ℕ) (hN : 0 < N) (z eta : ℂ), 0 < eta.im →
     CanonicalBBVAt (denseModel A N hN) z eta (N : ℝ) (momentBudget A comparisonConstant)
-  negativeMoment : ∀ (N : ℕ → ℕ), (∀ k, 0 < N k) → Tendsto N atTop atTop →
-    ∀ z : ℂ, ∃ p : ℝ, 0 < p ∧ BC12GinibreNegativeMomentTightness (inputLaw A.law) p
-      (shiftedSingularValueProcess (fun k => circularGinibreMatrix (N k)) z)
-  projection : ∀ N : ℕ, 0 < N → BC12.GinibreProjectionIntegralFormula N
-  correlation : ∀ N : ℕ, 0 < N → BC12.GinibreCorrelationFormulas (inputLaw A.law)
-    (fun sample => BC12.matrixEigenvalues (circularGinibreMatrix N sample))
 
 /-- Match the ring comparison to the exact argument of Proposition 3.8. -/
 theorem UpstreamInputs.ringComparison (A : Proposition38.Atom) (known : UpstreamInputs A)
@@ -93,7 +87,8 @@ theorem input_log_convergence_iff_sequence (A : Proposition38.Atom)
     Real.norm_eq_abs, hid] using ht.symm
 
 /-- The actual Section 3 theorem constructs the old internal interface.
-Its proof calls `ShortRingAnchor.Proposition38.proposition38` directly. -/
+Its proof calls `ShortRingAnchor.Proposition38.proposition38_withoutBC12` directly;
+the Gaussian reference law is constructed, not supplied by the caller. -/
 theorem highBandInput (A : Proposition38.Atom) (known : UpstreamInputs A) :
     Section3SubgaussianHighBandInput A.law A.parameter := by
   refine ⟨?_⟩
@@ -102,21 +97,16 @@ theorem highBandInput (A : Proposition38.Atom) (known : UpstreamInputs A) :
   have hN : Tendsto (fun k => (s k + 3) * W k) atTop atTop := by
     apply tendsto_atTop_mono (fun k => ?_) hWtop
     nlinarith [Nat.zero_le (s k), Nat.zero_le (W k)]
-  obtain ⟨p, hp, hnegative⟩ := known.negativeMoment _ hNpos hN z
-  have h := Proposition38.proposition38
+  have h := Proposition38.proposition38_withoutBC12
     (μ := inputLaw A.law) (νG := circularGaussianPairLaw) (W := W) (s := s) A hW hs
     (fun k => ringArray A ((s k + 3) * W k))
     (fun k => denseAtom ((s k + 3) * W k)) gaussianAtom gaussianAtom_moments
-    (fun k => denseAtom_copies A ((s k + 3) * W k)) z omega known.comparisonConstant p
+    (fun k => denseAtom_copies A ((s k + 3) * W k))
+    (fun k => normalizedDense_hasGinibreLaw A _ k (hNpos k)) z omega known.comparisonConstant
     ⟨homega, homegaLt⟩ hN hWtop hband (known.proposition32 z) known.cook112
     (fun k eta heta => UpstreamInputs.ringComparison A known (W k) (s k) (hW k) z eta heta)
     (fun k eta heta => UpstreamInputs.ginibreComparison A known
       ((s k + 3) * W k) (hNpos k) z eta heta)
-    hp
-    (by simpa only [normalizedDense_process_eq] using hnegative)
-    (fun k => known.projection _ (hNpos k))
-    (fun k => by simpa only [normalizedDense_eq_circularGinibre] using
-      known.correlation _ (hNpos k))
   apply (input_log_convergence_iff_sequence A W s z).1
   simpa only [Proposition38.Conclusion, ConvergesInProbability,
     fullBlockMatrix_eq_physical, ← densityCyclicMatrix_physicalRowsFromInput,

@@ -5,6 +5,7 @@ import argparse, re, subprocess, sys, tomllib
 root=Path(__file__).resolve().parents[1]
 config=tomllib.loads((root/'lakefile.toml').read_text())
 roots={lib['name']:root/lib.get('srcDir','') for lib in config['lean_lib']}
+roots['Ginibre']=root/'.lake/packages/GinibreCorrelationIdentities'
 p=argparse.ArgumentParser()
 p.add_argument('--target', action='append', default=[])
 p.add_argument('--start-at')
