@@ -41,16 +41,14 @@ theorem GaussianProfileConcreteSources.ginibreRaw {p : NoncompactProfile} {W : �
     TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
       (fun n ω => matrixRawPotential (ginibreMatrix (n + 1) ω - z • 1))
       (circularRadialPotential ‖z‖) :=
-  ae_of_all _ fun z => ginibre_raw_verified
-    (fun n => n + 1) (tendsto_add_atTop_nat 1) z
+  ginibre_raw_verified_ae
 
 /-- The Gaussian negative moment is derived from BBV and Gaussian small-ball. -/
 theorem GaussianProfileConcreteSources.ginibreNegative
     {p : NoncompactProfile} {W : ℕ → ℝ} (h : GaussianProfileConcreteSources p W) :
     ∀ᵐ z ∂(volume : Measure ℂ), ∃ q : ℝ, 0 < q ∧
       BC12GinibreNegativeMomentTightnessTri (fun n => n + 1) z q :=
-  ae_of_all _ fun z => ⟨1 / 128, by norm_num,
-    ginibre_negative_of_bbv h.bbv (fun n => n + 1) (tendsto_add_atTop_nat 1) z⟩
+  ginibre_negative_of_bbv_ae h.bbv
 
 /-- The actual Ginibre circular law follows from the proved raw-log limit. -/
 theorem GaussianProfileConcreteSources.ginibreSpectral
