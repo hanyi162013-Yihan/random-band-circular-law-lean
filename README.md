@@ -4,314 +4,267 @@ Lean 4 formalization accompanying Yi Han's paper
 [*The circular law for non-Hermitian random band matrices: optimal bandwidth,
 periodic profile and discrete law*](https://arxiv.org/abs/2609.01295).
 
-This is a paper-wide repository. It contains **Section 4,
-“Exterior transfer and local density tools”**, **Section 5**, **Section 6 for
-Gaussian noncompact profiles**, **Section 8 for
-real IID subgaussian atoms**, **Section 9 libraries for deterministic linear
-algebra and local small-ball arguments**, and **the Section 10 bounded-density
-circular-law proofs for real and planar-complex IID atoms**.
-References in the Section 9 and 10 libraries use
-[arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
-Section 3 contains [Proposition 3.6](section3/README.md) and the real-subgaussian
-[Proposition 3.8](section3/PROPOSITION38.md), with actual Hermitization counting
-and the copied high-band Theorem 3.1.
-Its [integration and verification record](section3/HIGH_BAND_INTEGRATION.md)
-states the exact BBV/BC12 and real-branch geometric Brascamp–Lieb boundary.
-Section 5 has its own [subproject and verification record](section5/README.md).
-Section 6 now includes the [verified concrete Gaussian profile endpoint](section6/BBV_ONLY_ENDPOINT.md):
-actual Ginibre logarithmic and spectral limits are derived from BBV, and
-the final circular-law theorem retains only BBV and the pre-given finite
-Section 4 pressure estimates, alongside the stated profile/bandwidth assumptions.
-Its proof chain passed [cloud verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33740349647),
-including 203 audited declarations and seven regressions. See the
-[main integration record](section6/MAIN_INTEGRATION.md) for exact source identity
-and scope; this is not a line-by-line reproof of every intermediate manuscript claim.
+This repository contains checked proof chains for the paper's high-band
+estimates, transfer and small-ball tools, and several circular-law conclusions.
+The guide below follows the paper's section order and describes the public
+interfaces on `main`. It does **not** claim a complete formalization of every
+statement in the paper. Exact hypotheses, quantitative variants and coverage
+are recorded in the linked theorem maps and Lean declarations. Several endpoints
+remain conditional on the [explicit mathematical inputs listed below](#inputs-still-assumed-at-public-interfaces).
 
-## Scope and status
+## Results in paper order
 
-Section 8 proves the logarithmic-potential limit and circular law for every
-fixed real IID law with mean zero, second moment one, and a finite subgaussian
-MGF parameter, under `W → ∞` and `W/log N → ∞`, where `N=(s+3)W`.
-Cook and Nguyen remain explicit external inputs. The Section 3.8 anchor is
-obtained from its concrete Lean proof, retaining that proof's named upstream
-Proposition 3.2, Cook 1.12, BBV and BC12/finite Ginibre formula assumptions.
-See the [Section 3 integration record](Section8/SECTION3_INTEGRATION.md) for
-the exact interface and current cloud-verification status.
-The general theorem is
-`SubgaussianSection8.section8_subgaussian_circular_law`; its proof requires no
-bounded-support, symmetry, or density hypothesis. The Rademacher proof remains
-available in `Section8/BernoulliSection8`. See the
-[general Section 8 overview](SubgaussianSection8/README.md),
-[proof and verification map](SubgaussianSection8/STATUS.md), and
-[Rademacher overview](Section8/README.md).
+### Section 3 — High-band estimates and logarithmic-potential anchors
 
-The Section 4 library contains 104 modules, with proof chains corresponding to
-the nine named results in Section 4: row-linearity, the periodic
-determinant identity, singleton-domain words, isolated full monomials,
-multiaffine small-ball bounds, fresh closure, projective observability,
-operator-affine logarithmic estimates, and pressure concentration.
+[`section3/`](section3/README.md) contains the concrete density endpoints for
+Proposition 3.6 and the real-subgaussian full-block endpoint for Proposition 3.8.
+The density proof connects the proved Theorem 3.1 to the actual cyclic matrix;
+Hermitization counting and local bulk comparison are constructed from the
+stated BBV input. Callers do not supply a least-singular-value or counting
+conclusion in place of these proofs.
 
-See the [coverage and assumption map](Section4/FORMALIZATION_MAP.md) for exact
-Lean entry points, retained hypotheses, intermediate interfaces, and manuscript
-corrections. The [detailed Section 4 overview](Section4/README.md) is in Chinese.
+- Proposition 3.6: real or planar-complex bounded-density atoms with the stated
+  moment assumptions; high-band regime `W ≥ M^(8/9 + ω)`, `0 < ω < 1/9`.
+- Proposition 3.8: fixed real centered, variance-one subgaussian atoms,
+  including discrete laws, for the three-neighbor full-block ring.
+- Both give the normalized shifted log-determinant limit for every fixed
+  complex shift, subject to their explicit inputs below.
 
-The Section 9 library covers the algebraic proof chains in §9.1.3 and
-§9.3–9.5: the raw unit-entry-weight finite-constant core of Lemma 7.5,
-the Block Floquet identity of Lemma 7.6, Proposition 9.3, Corollary 9.4,
-Jacobi/Hodge identities, and the deterministic boundary comparison underlying
-Lemma 7.7. It also proves the exterior-operator comparison in Lemma 7.8.
-It does not claim the full weighted-profile or uniform asymptotic estimates of
-Lemmas 7.5 and 7.7. See the [Section 9 overview](Section9/README.md),
-[coverage map](Section9/FORMALIZATION_MAP.md), and
-[paper reference map](Section9/PAPER_REFERENCES.md).
-The Section 9 library introduces no Cook, Nguyen, or RRQR axiom.
+See the [density endpoint map](section3/HIGH_BAND_INTEGRATION.md) and
+[Proposition 3.8 statement and assumptions](section3/PROPOSITION38.md).
+These are not proofs of every Section 3 result: in particular, Proposition 3.2
+remains an input to the subgaussian endpoint.
 
-The `BernoulliSection9` library contains 75 modules for interface control,
-the terminal packet, and the arbitrary-frame deduction in §§9.1–9.2.
-Cook and Nguyen estimates are explicit inputs with fixed subgaussian ranges;
-Cook also fixes the profile bounds. The public signatures use those ranges
-directly. RRQR and the two-square/CUR constructions are proved internally.
-The RRQR exponent is 16 (Lemma 9.1 states 4), and small-ball losses and failure
-bounds are supplied as explicit finite expressions. See the
-[small-ball overview](Section9/SMALL_BALL_README.md),
-[formula map](Section9/SMALL_BALL_FORMALIZATION_MAP.md), and
-[verification audit](Section9/SMALL_BALL_AUDIT.md). The integrated build and
-public-theorem axiom audits passed on 2026-09-02; this verifies the documented
-formal scope, not a complete translation of every paper statement.
+### Section 4 — Exterior transfer and local density tools
 
-Section 10 covers the real and planar-complex IID bounded-density,
-finite-third-moment branches of Proposition 10.1 through Proposition 10.10,
-equations 10.30–10.57, and the circular-law conclusion of Theorem 2.10.
-Use `BernoulliSection10Source.real_density_circular_law` or
-`BernoulliSection10Source.planar_density_circular_law`.
+[`Section4/`](Section4/README.md) supplies checked proof chains for all nine
+named results: row-linearity, the periodic determinant identity,
+singleton-domain words, isolated full monomials, multiaffine small-ball bounds,
+fresh closure, projective observability, operator-affine logarithmic estimates,
+and pressure concentration.
 
-Both endpoints connect the actual Section 3 proofs internally. Only BBV,
-BC12, and (for real atoms only) geometric Brascamp–Lieb remain as explicit
-literature inputs, alongside the original model assumptions. No caller
-Section 3, high-band, LSV, counting or model certificate remains. Tao–Vu is
-a proved source dependency. The shared density-definition correction
-`5c7be7b` is included; it repairs a Lean-only implicit-variable error.
+The paper-specific determinant identity and the real, planar and directional
+density constructions are proved from their stated model hypotheses.
+The final pressure specializations derive the required integrability internally.
+See the [declaration-level coverage and assumption map](Section4/FORMALIZATION_MAP.md).
 
-[Scoped cloud verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)
-passed at `362c47f`: all three Section 10 targets with their actual imports,
-207 chapter source files, 492 exact axiom reports and the final printed
-signatures. This is not a new whole-repository verification claim.
-Directional conditional-density and heterogeneous-law extensions of
-10.2–10.3 are not claimed. See the
-[Section 10 overview](Section10/README.md),
-[exact source and scope map](Section10/FORMALIZATION_MAP.md), and
-[source-connection build and axiom audit](Section10/SOURCE_CONNECTION_AUDIT.md).
-The [explicit assumption list](Section10/ASSUMPTIONS.md) and
-[proof provenance](Section10/PROVENANCE.md) document the final trust boundary.
+### Section 5 — Calibration, pressure lifting and spectral limits
 
-This release does **not** assert a full formalization of the paper.
-Coverage is stated at the level of the named proof chains; exact formulations,
-constants, and hypotheses are documented in the Lean statements and coverage map.
+[`section5/`](section5/README.md) proves the calibration and pressure-lifting
+chain, logarithmic-potential limits, energy tightness, and empirical spectral
+convergence against bounded continuous real tests.
 
-Formal theorem statements are authoritative. Probability-law assumptions
-(including normalization, independence, density or directional conditional
-density, second moments, positive weights, and required nondegeneracy) remain
-explicit theorem parameters. General conditional APIs are provided alongside
-the final paper-specific theorems; the presence of an interface theorem alone
-does not establish an unconditional result.
+For fixed centered, unit-second-moment real or planar-complex atom laws with
+bounded density and finite third absolute moment, and centered indicator-band
+profiles with fixed positive lower and upper bounds, the
+public endpoints construct the sampled matrices and invoke Section 3 internally.
+Import `CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint` and
+use `indicator_real_full_of_published_literature` or
+`indicator_complex_full_of_published_literature` in the namespace
+`CircularLawSections56.Section5.PublishedSection3Concrete`.
 
-No `sorry`, `admit`, or custom axioms occur in the released Lean sources.
-The audit files print the dependencies of selected public theorems. Standard
-Lean foundational axioms such as `propext`, `Classical.choice`, and `Quot.sound`
-are not manuscript assumptions.
+These endpoints retain two quantitative Section 4 pressure inputs as well as
+the named literature inputs; these pressure hypotheses have not been eliminated
+merely because Section 4 source is present in this repository.
+Broader taper and varying-atom results are available with their documented
+Section 3/4 interfaces. The concrete fixed-law integration does not automatically
+cover taper profiles whose lower bounds vanish. See the
+[concrete interface](section5/CONCRETE_SECTION3_INTERFACE.md) and
+[full Section 5 coverage](section5/SECTION5_COVERAGE.md).
 
-## Repository layout
+### Section 6 — Gaussian noncompact profiles
 
-```text
-lakefile.toml                   # one Lake project and one mathlib dependency
-lake-manifest.json              # exact dependency revisions
-lean-toolchain                 # Lean 4.33.0
-Section4/
-  CircularLawSection4.lean      # public umbrella import
-  CircularLawSection4/          # 104 proof modules; existing imports preserved
-  *AxiomAudit.lean              # six audit entry points
-  README.md
-  FORMALIZATION_MAP.md
-section3/                      # proved Section 3.6/3.8; also independently buildable
-section5/                      # Section 5 subproject; see its own README
-section6/                      # verified Gaussian profile endpoint; depends on Section 5
-Section8/
-  BernoulliSection8.lean      # Rademacher specialization
-  BernoulliSection8/          # proof modules and shared Section 8 lemmas
-  README.md
-SubgaussianSection8.lean       # general real-IID subgaussian public import
-SubgaussianSection8/
-  Results.lean               # final log-potential and circular-law theorems
-  README.md
-  STATUS.md
-Section9/
-  BernoulliLinearAlgebra.lean   # public umbrella import
-  BernoulliLinearAlgebra/       # deterministic proof modules; imports preserved
-  BernoulliSection9.lean        # small-ball public umbrella import
-  BernoulliSection9/            # 75 interface/terminal/frame proof modules
-  AxiomAudit.lean
-  SmallBallAxiomAudit.lean
-  README.md
-  FORMALIZATION_MAP.md
-  PAPER_REFERENCES.md
-  SMALL_BALL_*.md
-Section10/
-  BernoulliSection10.lean      # arXiv v1 numbering; public umbrella import
-  BernoulliSection10/          # 107 mathematical modules and three audits
-  BernoulliSection10Complex/   # actual planar-complex density proof
-  BernoulliSection10Source/    # concrete Section 3 connections and final endpoints
-  README.md
-  FORMALIZATION_MAP.md
-  AUDIT.md
-  ASSUMPTIONS.md
-  PROVENANCE.md
-  SOURCE_CONNECTION_AUDIT.md
-  verification/               # durable scoped audit records and signatures
-vendor/
-  tao-vu-replacement/          # 13 proved modules, pinned provenance/license
-  short-ring-analysis/        # earlier source snapshot, retained for provenance
-```
+[`section6/`](section6/BBV_ONLY_ENDPOINT.md) proves the circular-law endpoint
+for the actual normalized Gaussian cyclic matrices with a strictly positive,
+continuous, integrable profile of bounded variation and integral one.
+The bandwidth is positive and tends to infinity; its ratio to the dimension
+need not converge. The public statement uses every continuous compactly
+supported real test function on the complex plane.
 
-The root libraries use the same Lake project and dependency cache. Section 5
-is a subproject that depends on this root project and shares its mathlib
-package directory; see [its build instructions](section5/README.md).
-Section 6 is a further subproject using that same shared dependency directory;
-see [its verified endpoint and build instructions](section6/MAIN_INTEGRATION.md).
-The root project imports `ShortRingAnchor` and `Vendor` from `section3/`.
-Section 3 also retains its standalone package and CI. Its Proposition 3.8
-verification passed for 250 Lean files and 351 exact axiom reports; see
-[the verified Section 3 run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33712613763).
-The [Section 8 adapter](Section8/SECTION3_INTEGRATION.md) has a separate cloud
-gate. Section 3's documented literature assumptions remain explicit.
+Import `CircularLawSection6.BBVOnlyProfileEndpoint`. The endpoint is
+`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources`.
+Its source record contains only BBV and the two finite Section 4 pressure
+estimates for each compact core. Ginibre negative-moment tightness,
+logarithmic-potential and spectral limits are derived internally from BBV;
+there is no independent BC12, Ginibre correlation-formula or Han premise.
+See the [exact input boundary and proof route](section6/BBV_ONLY_ENDPOINT.md).
+
+### Section 7 — Local estimates used by the block argument
+
+There is no separate `Section7/` package. The formalized local estimates are
+organized with their proofs in Section 9 and their applications in Section 8.
+They include interface control, terminal and arbitrary-frame small-ball
+constructions, Floquet identities, boundary comparison and exterior-operator
+comparison. Coverage and quantitative qualifications are given in the
+[deterministic reference map](Section9/PAPER_REFERENCES.md) and
+[small-ball reference map](Section9/SMALL_BALL_REFERENCE_MAP.md);
+this is not a separate claim that all of Section 7 is complete.
+
+### Section 8 — Real subgaussian and Bernoulli block rings
+
+[`SubgaussianSection8/`](SubgaussianSection8/README.md) proves the logarithmic
+potential and circular law for every fixed real IID law with mean zero,
+second moment one, and a finite subgaussian MGF parameter. The conditions are
+`W → ∞` and `W / log N → ∞`, with `N = (s + 3)W` and positive widths and
+core-site counts. No density, symmetry or bounded-support assumption is imposed.
+
+The public results are `SubgaussianSection8.section8_subgaussian_log_potential`
+and `SubgaussianSection8.section8_subgaussian_circular_law`.
+The [Rademacher specialization](Section8/README.md) is available in
+`BernoulliSection8`.
+
+Both construct their high-band anchor by calling the concrete Proposition 3.8
+proof. Cook and Nguyen inputs remain, together with Proposition 3.8's upstream
+assumptions. No separate pressure, reset or high-band convergence certificate
+is requested by the final endpoints. See the
+[Section 3 connection and exact public inputs](Section8/SECTION3_INTEGRATION.md)
+and [general proof map](SubgaussianSection8/STATUS.md).
+
+### Section 9 — Deterministic algebra and local small-ball proofs
+
+[`BernoulliLinearAlgebra`](Section9/README.md) proves the terminal polynomial
+constructions, Block Floquet identity, Proposition 9.3, Corollary 9.4,
+Jacobi/Hodge identities, deterministic boundary comparison, and the exterior
+operator comparison used in Lemma 7.8. These results do not assume Cook,
+Nguyen or an RRQR theorem.
+
+[`BernoulliSection9`](Section9/SMALL_BALL_README.md) provides the terminal,
+conditional and arbitrary-frame small-ball deductions, together with interface
+probability control. Cook and Nguyen estimates are explicit inputs with fixed
+subgaussian ranges; Cook also fixes the profile range. RRQR selection and
+CUR/Schur constructions are proved internally.
+
+The scope is quantitative and specific: the terminal packet uses unit-entry
+weights; general entrywise-weighted coefficient comparisons and all printed
+uniform `exp(C W log W)` bounds are not claimed. The proved RRQR exponent is
+16 rather than the paper's 4, and the small-ball statements expose finite
+loss/failure expressions. See the [algebra map](Section9/FORMALIZATION_MAP.md)
+and [small-ball map](Section9/SMALL_BALL_FORMALIZATION_MAP.md).
+
+### Section 10 — Real and complex bounded-density block rings
+
+[`Section10/`](Section10/README.md) covers the real and planar-complex IID
+bounded-density, finite-third-moment branches of results 10.1–10.10 and the
+circular-law conclusion of Theorem 2.10. The matrix is the actual normalized
+three-neighbor full-block ring, with `N = (s + 3)W` and positive `W → ∞`.
+Both atom laws are centered and have unit second moment.
+
+Use `import BernoulliSection10Source`. The final results are
+`real_density_circular_law`, `planar_density_circular_law`,
+`real_density_ring_log_limit` and `planar_density_ring_log_limit`, all in
+`BernoulliSection10Source`. The circular laws use every bounded continuous
+real test function. Complex density means the joint planar density; independent
+real/imaginary parts and circular symmetry are not assumed.
+
+Actual matrix laws, Section 3 applications, counting, Gaussian reference,
+pressure and replacement steps are connected internally. BBV and BC12 remain
+explicit inputs, with geometric Brascamp–Lieb additionally required for real
+atoms. Directional conditional-density, heterogeneous-law and general
+finite-`(2+α)`-moment extensions are not included in these endpoints.
+See the [real map](Section10/FORMALIZATION_MAP.md),
+[complex map](Section10/COMPLEX_FORMALIZATION_MAP.md), and
+[source-connection audit](Section10/SOURCE_CONNECTION_AUDIT.md).
+
+## Inputs still assumed at public interfaces
+
+The following are mathematical hypotheses, not custom Lean axioms.
+Ordinary model conditions—independence, normalization, moments, density,
+profile bounds and bandwidth growth—remain explicit as well, but are not
+external theorem inputs.
+
+| Undischarged input | Where it is required |
+| --- | --- |
+| BBV canonical Gaussian/free comparison | Section 3 anchors and the public Section 5, 6, 8 and 10 endpoints. |
+| BC12 shifted-Ginibre negative-moment tightness and full normalized log-determinant limit | Proposition 3.6 density endpoints and the concrete Section 5 and Section 10 endpoints. |
+| BC12 negative-moment tightness, plus finite Ginibre correlation/projection formulas | Proposition 3.8 and Section 8. The full Ginibre log limit is derived from those formulas, not separately assumed there. |
+| Real geometric Brascamp–Lieb inequality | Real-density branches of Proposition 3.6, Section 5 and Section 10; not the planar or discrete-subgaussian branches. |
+| Cook (2018), Theorem 1.12, with its norm guard | Proposition 3.8 and, through that anchor, Section 8. |
+| Cook deformed-square least-singular-value estimates, including conditional versions | Section 9 terminal/frame small-ball results and Section 8. |
+| Nguyen bottom-singular-value fixed-index and overcrowding estimates | Section 9 interface control and Section 8. |
+| Paper Proposition 3.2, full-block least-singular-value estimate | Proposition 3.8 and, through it, Section 8. This is a retained result of this paper, not an external-paper citation. |
+| Two finite quantitative Section 4 pressure estimates, for calibration and the final ring | Concrete Section 5 endpoints; Section 6 requires them for each compact core. These remain endpoint hypotheses, not yet supplied by a closed Section 4-to-caller adapter. |
+
+The table concerns the concrete endpoints described above; more general
+conditional APIs may expose additional intermediate inputs, as recorded in
+their chapter maps. A result proved elsewhere in the repository does not
+automatically remove a parameter from an endpoint: Section 6's BBV-only Ginibre
+route does not, by itself, remove the BC12/formula parameters still present
+in Sections 3, 5, 8 and 10.
+
+Tao–Vu replacement is a [proved source dependency](vendor/tao-vu-replacement/),
+not a remaining literature hypothesis. The standard Lean foundations
+`propext`, `Classical.choice` and `Quot.sound` are separate from all the
+mathematical inputs above. An axiom audit checks logical dependencies;
+it does not prove a theorem's explicit hypotheses or certify that its statement
+matches every detail of the manuscript.
 
 ## Build
 
-All commands below run from the repository root, with Lean managed by `elan`.
-The toolchain is pinned to `leanprover/lean4:v4.33.0`; mathlib is pinned by the
-manifest to `db584cd6d46c92f209a44c0f1c829460d327499d` (tag `v4.33.0`).
+Lean is pinned to `leanprover/lean4:v4.33.0`, with mathlib fixed by the committed
+manifests. Use `elan` and keep those manifests unchanged for reproduction.
 
 ```sh
 git clone --branch main https://github.com/hanyi162013-Yihan/random-band-circular-law-lean.git
 cd random-band-circular-law-lean
-# On a new machine, this downloads the mathlib compiled cache (potentially large).
-# Skip it if the matching dependencies and compiled cache are already available.
 lake exe cache get
-# Build only Section 8 and its actual imports.
-lake build SubgaussianSection8
-
-# Optional: build the Rademacher specialization.
-lake build BernoulliSection8
-
-# Optional: build only the deterministic Section 9 library.
-lake build BernoulliLinearAlgebra
-# Optional: build the local small-ball proof chains and their dependencies.
-lake build BernoulliSection9
-
-# Optional: build the real/planar Section 10 proofs and their actual imports.
-lake build BernoulliSection10 BernoulliSection10Complex BernoulliSection10Source
 ```
 
-The completed Section 10 proof and its required dependencies are integrated
-into `main`. The original `section10-asymptotic-completion` branch remains
-available as the reviewed completion snapshot. For an immutable verification
-snapshot, check out the full source commit recorded in
-[Section10/SOURCE_CONNECTION_AUDIT.md](Section10/SOURCE_CONNECTION_AUDIT.md).
+The cache command is only needed when matching compiled dependencies are
+unavailable; it can download a large amount of data. Reading the source does
+not require Lean or a cache download. Do not run `lake update` for routine
+verification.
 
-Only source and documentation are committed. Lean, mathlib, `.lake/`, compiled
-objects, scratch files, and local filesystem paths are not part of the release.
-The cache download is not needed merely to read or download the source.
-Do not run `lake update` for routine checking: the committed manifest records
-the dependency versions used for this release.
+Choose the relevant target below, from the indicated directory. Each build
+checks that target and its actual imports; a whole-repository build is not
+required for a chapter change.
 
-For a memory-constrained machine, serialize the Section 8 import closure:
+| Area | Working directory | Build command |
+| --- | --- | --- |
+| Section 3 | repository root | `lake build ShortRingAnchor` |
+| Section 4 | repository root | `lake build CircularLawSection4` |
+| Section 5 concrete endpoints | `section5/` | `lake build CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint` |
+| Section 6 BBV-only endpoint | `section6/` | `lake build CircularLawSection6.BBVOnlyProfileEndpoint` |
+| Section 8, general and Rademacher | repository root | `lake build SubgaussianSection8 BernoulliSection8` |
+| Section 9, algebra and small ball | repository root | `lake build BernoulliLinearAlgebra BernoulliSection9` |
+| Section 10, real and complex endpoints | repository root | `lake build BernoulliSection10Source` |
 
-```sh
-python3 scripts/check_axioms.py --self-test
-python3 scripts/check_placeholders.py --path SubgaussianSection8
-python3 scripts/build_subgaussian.py --target SubgaussianSection8
-python3 scripts/check_axioms.py --audit-file SubgaussianSection8/AxiomAudit.lean
-lake env lean SubgaussianSection8/PublicSignatureAudit.lean
-```
+The root Lake project loads Section 3 from `section3/` and the other root
+libraries from their chapter directories. Section 5 depends on the root
+project; Section 6 depends on Section 5. These two subprojects share the root
+`.lake/packages` directory. Their explicit endpoint targets above are important:
+building an umbrella alone need not include every separately published module.
 
-Python 3.11 or newer is required. This serial builder checks only the selected
-import closure, then runs the normal `lake build SubgaussianSection8` target.
-The closure contains zero Section 4 modules. Existing `.lake` artifacts are
-reused by Lake. The source scan also supports archives without Git metadata.
+## Verification and scope
 
-### Automated verification
+Published verification records include target/import builds, placeholder
+scans, kernel axiom audits and, where provided, public-signature checks and
+regression proofs. Released proofs contain no `sorry`, `admit` or custom
+mathematical axioms. Audits allow only the three standard Lean foundations
+listed above; the explicit mathematical hypotheses remain visible.
 
-The [Section 3 / Section 8 integration run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33720016599/job/100537065421)
-passed at proof-source commit `b6c379836fcc6cf166881768d1a0ad6782c5c552`:
-both normal Section 8 targets, 420 selected project modules with no Section 4
-imports, 94 Section 8 source files without placeholders, 56 strict axiom
-reports, and both compiled public-signature audits. The new bridge keeps
-the default proof-checking limits. See the [integration record](Section8/SECTION3_INTEGRATION.md)
-for the concrete Section 3 call and remaining upstream assumptions.
+For precise checked source revisions and reproducible audit commands, see:
 
-Section 10 verification is limited to its three explicit library targets
-and their real import dependencies. Its workflow retains the chapter source
-scan, density-construction regression, final parameter checks, and all 492
-chapter axiom reports. It does not automatically rebuild unrelated chapters
-or invoke a whole-root audit. The verified integration run is
-[33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307).
+- Section 3: [density integration](section3/HIGH_BAND_INTEGRATION.md) and
+  [Proposition 3.8](section3/PROPOSITION38.md).
+- Section 4: [coverage and audit commands](Section4/FORMALIZATION_MAP.md).
+- Section 5: [concrete integration](section5/CONCRETE_SECTION3_INTERFACE.md).
+- Section 6: [endpoint verification and main integration](section6/MAIN_INTEGRATION.md).
+- Section 8: [Section 3 integration verification](Section8/SECTION3_INTEGRATION.md).
+- Section 9: [deterministic map](Section9/FORMALIZATION_MAP.md) and
+  [small-ball audit](Section9/SMALL_BALL_AUDIT.md).
+- Section 10: [source, signatures and axiom audit](Section10/SOURCE_CONNECTION_AUDIT.md).
 
-The [general Section 8 verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33688229894/job/100440674643)
-verified the earlier baseline at proof-source commit `d29fd6f0cefcaa4ec3afe09f14c54df3e16842d4`:
-32 new modules, the normal `lake build SubgaussianSection8`, 34 extension
-files without placeholders, 13 strict axiom reports, and compiled public
-signatures. All reported axioms were `propext`, `Classical.choice`, or
-`Quot.sound`. The [Rademacher baseline run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33677989986/job/100407373237)
-also passed independently. These checks cover the documented Section 8
-scope; they do not claim completion of the entire paper.
+A successful scoped run certifies its recorded source and checked statements,
+not all chapters at every later `main` commit. Historical logs and development
+details remain in the chapter documentation rather than serving as a global
+completion claim.
 
-The `Section 8 with proved Section 3 anchor` workflow runs for pull requests or
-manual dispatch. It restores compiled artifacts and builds both Section 8
-targets and their required imports. Section 5 retains its independent workflow. Routine
-Section 8 verification does not require a complete repository build.
+## Citation and licensing
 
-The [complete Section 10 verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33620303116)
-passed for source commit `1cb4a34cd6867cda79b26a9c8e4bded4cdabb515` on
-2026-09-02: **373** library modules, the complete default `lake build`,
-**381** Lean files in the placeholder scan, and **857** axiom reports across
-**11** audit files. The clean job took **35 minutes 13 seconds**, including
-toolchain/cache setup and audits. See [Section10/AUDIT.md](Section10/AUDIT.md)
-for exact scope, the final printed signature, and the earlier baseline record.
+Please cite the [paper](https://arxiv.org/abs/2609.01295) for its mathematical
+results and record the repository commit when citing a formalization snapshot.
 
-The Section 10 run above is a historical full-build record, not a requirement
-to repeat all chapters for Section 8 changes. A successful job verifies its
-checked source, not arbitrary later edits or completeness of the paper
-translation. Axiom reports must match their audit declarations and use only
-the three standard Lean foundations listed above.
-
-## Audit
-
-After building:
-
-```sh
-lake env lean Section4/AxiomAudit.lean
-lake env lean Section4/AssumptionFreeAxiomAudit.lean
-lake env lean Section4/CompanionAxiomAudit.lean
-lake env lean Section4/FlatAxiomAudit.lean
-lake env lean Section4/FourGapsAxiomAudit.lean
-lake env lean Section4/Section4CompleteAxiomAudit.lean
-lake env lean Section9/AxiomAudit.lean
-lake env lean Section9/SmallBallAxiomAudit.lean
-lake env lean Section10/BernoulliSection10/AxiomAudit.lean
-lake env lean Section10/BernoulliSection10/AsymptoticAxiomAudit.lean
-lake env lean Section10/BernoulliSection10/CompletionAxiomAudit.lean
-```
-
-These audits supplement kernel checking; they are not a proof that an informal
-paper statement has been translated faithfully. Review the theorem statements
-and the coverage map when citing a particular result.
-
-## Paper and licensing
-
-Please cite the [paper](https://arxiv.org/abs/2609.01295) when referring to its
-mathematical results, and include this repository's commit when referring to a
-specific formalization snapshot.
-
-No repository license has been selected for this initial publication.
-Lean and mathlib retain their own licenses and are not vendored here.
-The proved Tao–Vu source dependency preserves its upstream Apache-2.0 license
-under `vendor/tao-vu-replacement/`.
+No repository-wide license has been selected. Lean and mathlib retain their
+own licenses. Copied proof dependencies retain the license/provenance notices
+in their source directories, including the Apache-2.0 notice for
+`vendor/tao-vu-replacement/`.
