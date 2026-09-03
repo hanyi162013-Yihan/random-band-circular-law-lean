@@ -13,6 +13,7 @@ specified product laws, not random-matrix estimates.
 open MeasureTheory ProbabilityTheory
 open scoped BigOperators ENNReal
 noncomputable section
+set_option autoImplicit false
 namespace BernoulliSection10Source
 open BernoulliSection10 BernoulliSection10.SourceInputs ShortRingAnchor Arxiv2410V3
 

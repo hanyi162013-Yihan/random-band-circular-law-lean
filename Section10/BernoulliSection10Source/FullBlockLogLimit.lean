@@ -16,6 +16,7 @@ are constructed here from the accepted BBV and BC12 hypotheses.
 open MeasureTheory Filter
 open scoped Topology ENNReal
 noncomputable section
+set_option autoImplicit false
 namespace BernoulliSection10Source
 open BernoulliSection10 BernoulliSection10.SourceInputs ShortRingAnchor Arxiv2410V3
 

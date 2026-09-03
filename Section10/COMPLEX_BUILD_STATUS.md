@@ -35,6 +35,13 @@ cloud. No local build of that final integration has been run.
   source. Actual IID model, planar LSV, density representative and real LSV
   adapters are written; their first cloud integration check is running.
   No local integration compilation has been performed.
+- In [run 33713026658](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33713026658)
+  at `0e8a721`, the front-end passed again with the published `section3/`
+  dependency, and `BernoulliSection10.HighBandClosure` compiled. The new
+  Gaussian moment helper and density representative reported elaboration
+  errors; the complex circular-law assembly reported ambiguous real/complex
+  names. Fixes are on the working branch, pending cloud verification.
+  This does not yet verify either source-connected final endpoint.
 - `ee286a8` adds source-connected real and planar circular-law endpoints,
   with separately named BBV/BC12 inputs and real-only geometric
   Brascamp--Lieb. These new proofs are **written, not yet build-verified**.

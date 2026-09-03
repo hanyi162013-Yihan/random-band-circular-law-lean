@@ -8,6 +8,7 @@ import ShortRingAnchor.DensityNonsingularity
 open MeasureTheory ProbabilityTheory
 open scoped ENNReal BigOperators
 noncomputable section
+set_option autoImplicit false
 namespace BernoulliSection10Source
 open BernoulliSection10.SourceInputs ShortRingAnchor Arxiv2410V3
 

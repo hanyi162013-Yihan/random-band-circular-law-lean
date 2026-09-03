@@ -6,6 +6,7 @@ import Mathlib.MeasureTheory.Measure.Decomposition.RadonNikodym
 open MeasureTheory Set
 open scoped ENNReal
 noncomputable section
+set_option autoImplicit false
 namespace BernoulliSection10Source
 open ShortRingAnchor
 

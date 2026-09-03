@@ -19,6 +19,7 @@ All three retained external results were explicitly accepted by the user.
 open MeasureTheory Filter
 open scoped Topology ENNReal
 noncomputable section
+set_option autoImplicit false
 namespace BernoulliSection10Source
 open BernoulliSection10.SourceInputs ShortRingAnchor Arxiv2410V3
 

@@ -11,6 +11,7 @@ BBV and BC12, and, for real atoms only, geometric Brascamp--Lieb.
 open MeasureTheory Filter
 open scoped Topology
 noncomputable section
+set_option autoImplicit false
 namespace BernoulliSection10Source
 open BernoulliSection10 Replacement DiskReference TaoVuReplacement
 open LivshytsProjectionFormalization

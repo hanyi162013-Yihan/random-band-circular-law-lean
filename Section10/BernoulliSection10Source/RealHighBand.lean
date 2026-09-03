@@ -14,6 +14,7 @@ The density representative and all matrix-law certificates are constructed.
 open MeasureTheory ProbabilityTheory Filter
 open scoped BigOperators ENNReal Topology
 noncomputable section
+set_option autoImplicit false
 namespace BernoulliSection10Source
 open BernoulliSection10 BernoulliSection10.SourceInputs
 open ShortRingAnchor Arxiv2410V3 HighBandLSV LivshytsProjectionFormalization

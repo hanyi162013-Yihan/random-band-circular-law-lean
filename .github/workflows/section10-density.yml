@@ -76,7 +76,13 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python3 scripts/build_serial.py --target BernoulliSection10Source.PlanarHighBand --target BernoulliSection10Source.RealHighBand --target BernoulliSection10Source.FullBlockLogLimit --keep-going 2>&1 | tee verification-section10/source-connection-build.log
+          resume=()
+          if [ -n '${{ steps.cache.outputs.cache-matched-key }}' ]; then
+            # Omit repeated per-module invocations, not dependency checks:
+            # every remaining build and the final targets use ordinary Lake validation.
+            resume=(--start-at BernoulliSection10.GaussianReferenceFacts)
+          fi
+          python3 scripts/build_serial.py --target BernoulliSection10Source.PlanarHighBand --target BernoulliSection10Source.RealHighBand --target BernoulliSection10Source.FullBlockLogLimit --keep-going "${resume[@]}" 2>&1 | tee verification-section10/source-connection-build.log
       - name: Build conditional high-band closure for both density branches
         id: assembly
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
@@ -87,7 +93,11 @@ jobs:
             if lake --no-build build BernoulliSection10.HighBandClosure BernoulliSection10Complex.HighBandClosure; then
               lake build BernoulliSection10.HighBandClosure BernoulliSection10Complex.HighBandClosure
             else
-              python3 scripts/build_serial.py --target BernoulliSection10.HighBandClosure --target BernoulliSection10Complex.HighBandClosure --keep-going
+              resume=()
+              if [ -n '${{ steps.cache.outputs.cache-matched-key }}' ]; then
+                resume=(--start-at BernoulliSection10Complex.DensityCircularLaw)
+              fi
+              python3 scripts/build_serial.py --target BernoulliSection10.HighBandClosure --target BernoulliSection10Complex.HighBandClosure --keep-going "${resume[@]}"
             fi
           } 2>&1 | tee verification-section10/conditional-closure-build.log
       - name: Build source-connected caller-facing theorems

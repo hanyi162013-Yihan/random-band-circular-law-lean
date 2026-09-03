@@ -9,6 +9,7 @@ import BernoulliSection10Complex.HighBandClosure
 open MeasureTheory Filter
 open scoped Topology
 noncomputable section
+set_option autoImplicit false
 namespace BernoulliSection10Source
 open BernoulliSection10 ShortRingAnchor
 open LivshytsProjectionFormalization
