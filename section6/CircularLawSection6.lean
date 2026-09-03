@@ -112,3 +112,5 @@ import CircularLawSection6.ClampedCoreGeometry
 import CircularLawSection6.GaussianAtomTransfer
 import CircularLawSection6.ClampedCoreProfile
 import CircularLawSection6.ClampedSection5Source
+import CircularLawSection6.ClampedCoreSubsequence
+import CircularLawSection6.Section34GaussianProfileTheorem

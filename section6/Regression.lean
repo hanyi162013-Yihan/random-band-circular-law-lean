@@ -660,3 +660,13 @@ example (p : NoncompactProfile) (R : ℝ) (B : CoreRadiusBounds p R) (W : ℝ) :
     (B.clampedWeights W 0).q 0 = 1 / 3 := by
   norm_num [CoreRadiusBounds.clampedWeights, CoreRadiusBounds.uniformWeights,
     clampedCoreHalfWidth, canonicalCoreBand]
+
+-- The endpoint takes finite Section 3/4 sources, not a core probability limit.
+example (p : NoncompactProfile) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
+    (hWlim : Tendsto W atTop atTop) (hsource : p.GaussianProfileSection34Inputs W)
+    (hHan : HanGaussianDenseInput) (f : ℂ → ℝ) (hf : Continuous f) (hc : HasCompactSupport f) :
+    TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
+      (fun n ω => TaoVuReplacement.realEsdTest
+        (cyclicPhysicalMatrix n (p.matrix (n + 1) (W n) (ω n).1)) f)
+      atTop (fun _ => ∫ z, f z ∂CircularLawSections56.Section5.circularMeasure) :=
+  p.gaussian_profile_circular_law_of_section34 W hW hWlim hsource hHan f hf hc

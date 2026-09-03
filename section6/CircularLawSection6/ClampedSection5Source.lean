@@ -2,6 +2,7 @@ import CircularLawSection6.ClampedCoreProfile
 import CircularLawSection6.GaussianAtomTransfer
 import CircularLawSections56.Section5.CanonicalSection5Endpoint
 import CircularLawSections56.Section5.QuantitativeSection4Inputs
+import CircularLawSections56.Section6.Potentials
 
 /-! # Direct application of the existing Section 5 theorem
 
@@ -17,6 +18,7 @@ open CircularLawSection4
 open CircularLawSections56.Section5 CircularLawSections56.Section6
 
 noncomputable section
+set_option autoImplicit false
 set_option maxHeartbeats 800000
 set_option backward.isDefEq.respectTransparency false
 
