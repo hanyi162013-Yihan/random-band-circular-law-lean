@@ -34,8 +34,8 @@ theorem ginibreEntryAtoms_measurePreserving (N : ℕ) [NeZero N] :
   intro x y h
   have h₁ := congrArg Prod.fst h
   have h₂ := congrArg Prod.snd h
-  apply Prod.ext h₁
   dsimp only at h₁ h₂
+  apply Prod.ext h₁
   rw [h₁] at h₂
   exact sub_right_cancel h₂
 

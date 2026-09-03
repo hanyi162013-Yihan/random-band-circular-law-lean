@@ -546,3 +546,15 @@ example : MeasurePreserving (ginibreEntryAtoms 3) (cyclicAtomLaw 3 circularCompl
 -- The reference raw log potential is L2 even for every fixed shift in dimension one.
 example (z : ℂ) : MemLp (fun ω => matrixRawPotential (ginibreMatrix 1 ω - z • 1)) 2
     (cyclicAtomLaw 1 circularComplexGaussian) := ginibre_raw_memLp 1 z
+
+-- The actual lower error, not a surrogate singular observable, obeys the negative-moment bound.
+example (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A.det ≠ 0) {a : ℝ} (ha : 0 < a) :
+    |matrixCutoffPotential A a - matrixRawPotential A| ≤ (a ^ (1 : ℝ) / 1) * matrixNegativeMoment A 1 :=
+  matrixLowerCutoff_le_negativeMoment A hA ha zero_lt_one
+
+-- A zero triangular observable is tight on every finite Gaussian sample space.
+example (N : ℕ → ℕ) [∀ n, NeZero (N n)] :
+    BoundedInProbabilityTri (fun n => cyclicAtomLaw (N n) circularComplexGaussian) (fun _ _ => 0) := by
+  intro δ hδ
+  refine ⟨1, zero_lt_one, Eventually.of_forall fun n => ?_⟩
+  simpa using hδ

@@ -73,3 +73,5 @@ import CircularLawSection6.LowerCutoffSecondMoment
 import CircularLawSection6.CutoffReindexing
 import CircularLawSection6.PhysicalCutoffTransport
 import CircularLawSection6.GinibreReference
+import CircularLawSection6.NegativeMomentCutoff
+import CircularLawSection6.GinibreLowerCutoff
