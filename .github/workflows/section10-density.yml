@@ -70,6 +70,12 @@ jobs:
               python3 scripts/build_serial.py --target BernoulliSection10Complex.Front --keep-going
             fi
           } 2>&1 | tee verification-section10/front-build.log
+      - name: Inspect the upstream density record's actual quantifiers
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean Section10/BernoulliSection10Source/DensitySchemaAudit.lean 2>&1 | tee verification-section10/density-schema.log
       - name: Build concrete Section 3 models and both LSV connections
         id: source
         if: ${{ !cancelled() }}
