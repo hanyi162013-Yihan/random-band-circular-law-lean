@@ -66,6 +66,7 @@ theorem input_log_convergence_iff_sequence (A : Proposition38.Atom)
   simpa only [TendstoInProbabilityTri, tendstoInMeasure_iff_measureReal_norm,
     Real.norm_eq_abs, hid] using ht.symm
 
+set_option maxHeartbeats 800000 in
 /-- The actual Section 3 theorem constructs the old internal interface.
 Its proof calls `ShortRingAnchor.Proposition38.proposition38` directly. -/
 theorem highBandInput (A : Proposition38.Atom) (known : UpstreamInputs A) :
