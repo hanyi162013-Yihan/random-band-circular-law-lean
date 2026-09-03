@@ -221,8 +221,16 @@ reused by Lake. The source scan also supports archives without Git metadata.
 
 ### Automated verification
 
+The [Section 3 / Section 8 integration run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33720016599/job/100537065421)
+passed at proof-source commit `b6c379836fcc6cf166881768d1a0ad6782c5c552`:
+both normal Section 8 targets, 420 selected project modules with no Section 4
+imports, 94 Section 8 source files without placeholders, 56 strict axiom
+reports, and both compiled public-signature audits. The new bridge keeps
+the default proof-checking limits. See the [integration record](Section8/SECTION3_INTEGRATION.md)
+for the concrete Section 3 call and remaining upstream assumptions.
+
 The [general Section 8 verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33688229894/job/100440674643)
-passed at proof-source commit `d29fd6f0cefcaa4ec3afe09f14c54df3e16842d4`:
+verified the earlier baseline at proof-source commit `d29fd6f0cefcaa4ec3afe09f14c54df3e16842d4`:
 32 new modules, the normal `lake build SubgaussianSection8`, 34 extension
 files without placeholders, 13 strict axiom reports, and compiled public
 signatures. All reported axioms were `propext`, `Classical.choice`, or

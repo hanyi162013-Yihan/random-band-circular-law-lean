@@ -6,7 +6,7 @@ The extension belongs to the root Lake project of `random-band-circular-law-lean
 
 ## Current integration
 
-The public final theorems now take `Section3UpstreamInputs`, and `section3_input` constructs the former high-band interface using `ShortRingAnchor.Proposition38.proposition38`. The concrete Gaussian reference moments, IID coordinates and matrix/probability transports are proved in the new bridge modules. [Integration proof map and cloud gate](../Section8/SECTION3_INTEGRATION.md). The current integration is not certified by the earlier baseline run.
+The public final theorems now take `Section3UpstreamInputs`, and `section3_input` constructs the former high-band interface using `ShortRingAnchor.Proposition38.proposition38`. The concrete Gaussian reference moments, IID coordinates and matrix/probability transports are proved in the new bridge modules. The integration passed at `b6c379836fcc6cf166881768d1a0ad6782c5c552`: both Section 8 targets, 56 strict axiom reports, both public-signature audits, and 94 source files without placeholders. The bridge keeps the default proof-checking limits. [Verified integration proof map and cloud run](../Section8/SECTION3_INTEGRATION.md).
 
 ## Scope
 

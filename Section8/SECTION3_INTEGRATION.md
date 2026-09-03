@@ -4,10 +4,11 @@ The public Bernoulli and general real-subgaussian Section 8 theorems now
 construct their high-band anchor by calling
 `ShortRingAnchor.Proposition38.proposition38` in
 [`section3/ShortRingAnchor/Proposition38/Assembly.lean`](../section3/ShortRingAnchor/Proposition38/Assembly.lean).
-The new adapter is undergoing cloud verification in
-[PR #2](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/pull/2),
-[run 33715622981](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33715622981).
-The older Section 8 and Section 3 certificates do not by themselves certify it.
+**Verified:** proof-source commit `b6c379836fcc6cf166881768d1a0ad6782c5c552`
+passed [cloud run 33720016599](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33720016599/job/100537065421)
+on 2026-09-03. [PR #2](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/pull/2)
+integrates it into the root project. The [audit excerpt](SECTION3_CLOUD_AUDIT.txt)
+records the normal target builds and all 56 strict axiom reports.
 
 ## Exact public boundary
 
@@ -39,7 +40,7 @@ callers to supply the high-band log-potential conclusion.
 | --- | --- |
 | `BernoulliSection8/Section3Gaussian.lean` | Prove the Gaussian pair's mean, second moment and finite third moment. |
 | `BernoulliSection8/Section3Model.lean` | Construct IID arrays; identify cyclic successors, coefficients, ring matrices and the actual Gaussian reference. |
-| `BernoulliSection8/Section3Integration.lean` | Invoke Proposition 3.8 and transfer its probability limit to the original real IID sequence. |
+| `BernoulliSection8/Section3Integration.lean` | Specialize BBV through separate model-conversion lemmas, invoke Proposition 3.8, and transfer its probability limit to the original real IID sequence. |
 | `../SubgaussianSection8/Section3Integration.lean` | Instantiate the adapter at the general Section 8 atom. |
 
 Both ring constructions use the existing `squareIIDFromSequence` coordinates,
@@ -63,3 +64,13 @@ The gate includes the existing 13-report general and 28-report Bernoulli audits,
 a new 15-report integration audit, and both public-signature audits. The new
 audit includes Proposition 3.8 and the four final Section 8 endpoints. Only
 `propext`, `Classical.choice`, and `Quot.sound` are allowed.
+
+All gates passed, including scans of 59 Bernoulli and 35 general Section 8
+Lean files and both compiled public-signature audits. The final run restored
+the integration cache and completed the normal
+`lake build SubgaussianSection8 BernoulliSection8` target.
+
+The adapter uses the default heartbeat and recursion-depth limits, with no
+reducibility override. The model conversions are separate proved lemmas;
+the final bridge module compiled in 2.9 seconds. Documentation-only commits
+after the proof-source commit do not alter its Lean sources or build configuration.

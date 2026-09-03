@@ -1,0 +1,112 @@
+Section 3 / Section 8 cloud verification
+Proof-source commit: b6c379836fcc6cf166881768d1a0ad6782c5c552
+Run: https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33720016599/job/100537065421
+Date: 2026-09-03
+Result: success
+Lean: v4.33.0; new bridge uses default checking limits
+Scope: 420 project modules; Section4 modules: 0
+Both public-signature audit commands completed successfully.
+
+Build/source-scan excerpt:
+Final scoped target: lake build SubgaussianSection8 BernoulliSection8
+Source-token scan passed: 35 SubgaussianSection8 Lean files (tracked and new)
+Source-token scan passed: 59 Section8 Lean files (tracked and new)
+✔ [4132/4132] Built BernoulliSection8.Section3Integration (2.9s)
+✔ [4135/4135] Built SubgaussianSection8.Section3Integration (2.3s)
+✔ [4276/4276] Built SubgaussianSection8.Results (2.3s)
+✔ [4264/4264] Built BernoulliSection8.Section8Results (2.4s)
+Build completed successfully (4301 jobs).
+
+Complete strict axiom reports (timestamps removed):
+[axiom-audit] SubgaussianSection8/AxiomAudit.lean: 13 reports expected
+'SubgaussianSection8.Atom.integrable_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.intervalMeanAtomSquare_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.ring_energy_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.subgaussianInterfaceGoodEvent_compl_probability_tendsto_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'SubgaussianSection8.subgaussianInterfaceGoodEvent_subset_subinterval' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'SubgaussianSection8.subgaussianInterval_clippedLog_eq_log_of_good' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'SubgaussianSection8.circular_law_of_log_potential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.high_band_circular_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.subgaussianBoundarySmallBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.normalizedCellResetLoss_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.subgaussian_normalizedCorePressure_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'SubgaussianSection8.section8_subgaussian_log_potential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.section8_subgaussian_circular_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+[axiom-audit] PASS SubgaussianSection8/AxiomAudit.lean: 13 reports
+[axiom-audit] Section8/AxiomAudit.lean: 28 reports expected
+'BernoulliSection8.section8_bernoulli_log_potential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.section8_bernoulli_circular_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacher_rows_log_potential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacher_long_log_potential_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacher_normalizedCorePressure_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacher_anchor_pressure_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.completeCellPressureError_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.complete_cell_pressure_sandwich' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.completeCellCoreFluctuation_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.normalizedCellResetLoss_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.cellIntervalResetLoss_integral_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.intervalResetLoss_integral_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.physicalCappedResetLoss_fresh_integral_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacherBoundarySmallBall' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.cyclicSeamBadEvent_probability_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacherCyclicSeamDifference_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacherCyclicFock_zero_probability_tendsto_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection8.rademacherRemainderDifference_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacherInterfaceGoodEvent_compl_probability_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection8.rademacherInterval_hodgeLoss_le_of_good' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacherPacketBoundaryCoefficient_log_gramVolume_le_on_endpoint_good' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection8.tendsto_rademacherBoundaryBadProbability_mul_logScale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection8.tendsto_averagedResetError' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.terminal_logDeviation_probability_le_parseval' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection8.resetPrefixProduct_log_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.resetPrefixProduct_log_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacher_circular_law_of_log_potential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacher_anchor_log_potential' depends on axioms: [propext, Classical.choice, Quot.sound]
+[axiom-audit] PASS Section8/AxiomAudit.lean: 28 reports
+[axiom-audit] Section8/Section3IntegrationAudit.lean: 15 reports expected
+'BernoulliSection8.Section3Bridge.gaussianAtom_moments' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.Section3Bridge.cyclicSiteSucc_eq_finRotate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection8.Section3Bridge.coefficient_eq_physicalProfile' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection8.Section3Bridge.fullBlockMatrix_eq_physical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection8.Section3Bridge.denseAtom_copies' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.Section3Bridge.normalizedDense_eq_circularGinibre' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection8.Section3Bridge.input_log_convergence_iff_sequence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.proposition38' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.Section3Bridge.highBandInput' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.rademacher_section3_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.section3_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.section8_bernoulli_log_potential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection8.section8_bernoulli_circular_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.section8_subgaussian_log_potential' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianSection8.section8_subgaussian_circular_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+[axiom-audit] PASS Section8/Section3IntegrationAudit.lean: 15 reports
+[axiom-audit] PASS: 3 files, 56 reports; allowed axioms: Classical.choice, Quot.sound, propext
+

@@ -8,7 +8,7 @@ This library belongs to the root Lake project of `random-band-circular-law-lean`
 
 ## Verification
 
-The current Section 3 integration is undergoing a separate cloud gate, recorded in the link above. The following is the verified baseline before that integration.
+The Section 3 integration passed its [separate cloud gate](../Section8/SECTION3_INTEGRATION.md) at `b6c379836fcc6cf166881768d1a0ad6782c5c552`: both Section 8 targets, 56 combined axiom reports, and both compiled public signatures. The new bridge uses default proof-checking limits. The following records the earlier baseline.
 
 Proof-source commit: `d29fd6f0cefcaa4ec3afe09f14c54df3e16842d4`.
 

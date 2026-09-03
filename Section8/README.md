@@ -2,9 +2,11 @@
 
 This directory formalizes the Rademacher specialization of Section 8 of the fixed arXiv v1 source, with independent entries taking values ±1 with equal probabilities. The actual matrix is `BernoulliSection8.rademacherMatrix W s`: its block count is `m = s + 3`, its scalar dimension is `(s + 3) * W`, and the factor `1 / sqrt (3W)` is part of the matrix definition. The source range `m ≥ 4` is expressed by `0 < s`.
 
+**Current integration verified:** the public endpoints now call the proved Section 3.8 assembly. Both Section 8 targets and all 56 combined axiom reports passed at `b6c379836fcc6cf166881768d1a0ad6782c5c552`, with default proof-checking limits. See [the cloud record](SECTION3_INTEGRATION.md).
+
 **Verified baseline:** source commit `15433d8765efd6c9767967140bb6969b6e31f643` passed the normal `lake build BernoulliSection8` target, all 28 strict axiom reports, the public signature check, and the 55-file Section 8 placeholder scan in [GitHub Actions run 33676900277](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33676900277). The dependency closure contains 271 project modules, including 53 Section 8 modules and no Section 4 modules. The only logical axioms reported are `propext`, `Classical.choice`, and `Quot.sound`.
 
-The public results are `section8_bernoulli_log_potential` and `section8_bernoulli_circular_law` in `BernoulliSection8/Section8Results.lean`. Their current public signatures take Cook, Nguyen, `RademacherSection3UpstreamInputs`, positivity of the dimensions, and the source bandwidth conditions. The Section 3.8 conclusion is constructed by its concrete proof; see [the integration record](SECTION3_INTEGRATION.md) for the new cloud-verification gate. The circular-law theorem applies to every bounded continuous real test function. There is no caller-supplied pressure, reset, seam, energy, or log-potential certificate in its statement.
+The public results are `section8_bernoulli_log_potential` and `section8_bernoulli_circular_law` in `BernoulliSection8/Section8Results.lean`. Their compiled public signatures take Cook, Nguyen, `RademacherSection3UpstreamInputs`, positivity of the dimensions, and the source bandwidth conditions. The Section 3.8 conclusion is constructed by its concrete proof. The circular-law theorem applies to every bounded continuous real test function. There is no caller-supplied pressure, reset, seam, energy, or log-potential certificate in its statement.
 
 The permitted analytic inputs are:
 
