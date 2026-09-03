@@ -47,8 +47,9 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
         (circularRadialPotential ‖z‖) := by
   have hφ' : Tendsto (fun n => φ (n + 1)) atTop atTop :=
     hφ.tendsto_atTop.comp (tendsto_add_atTop_nat 1)
-  have hN : (fun n => subsequenceCoreSize φ n + 2) = (fun n => φ (n + 1) + 1) :=
-    funext (subsequenceCoreSize_dimension φ hφ)
+  have hN : (fun n => (⟨subsequenceCoreSize φ n + 2, by omega⟩ : ℕ+)) =
+      (fun n => (⟨φ (n + 1) + 1, by omega⟩ : ℕ+)) :=
+    funext fun n => Subtype.ext (subsequenceCoreSize_dimension φ hφ n)
   have hdim : Tendsto (fun n => subsequenceCoreSize φ n + 2) atTop atTop := by
     apply ((tendsto_add_atTop_nat 1).comp hφ').congr'
     exact Eventually.of_forall fun n => (subsequenceCoreSize_dimension φ hφ n).symm
@@ -67,7 +68,7 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
     have h : TendstoInProbabilityTri (fun n => cyclicAtomLaw (φ (n + 1) + 1) circularComplexGaussian)
         (fun n ω => matrixRawPotential (ginibreMatrix (φ (n + 1) + 1) ω - z • 1))
         (circularRadialPotential ‖z‖) := fun ε hε => (hz ε hε).comp hφ'
-    exact (congrArg (fun N : ℕ → ℕ =>
+    exact (congrArg (fun N : ℕ → ℕ+ =>
       TendstoInProbabilityTri (fun n => cyclicAtomLaw (N n) circularComplexGaussian)
         (fun n ω => matrixRawPotential (ginibreMatrix (N n) ω - z • 1))
         (circularRadialPotential ‖z‖)) hN).mpr h
@@ -80,7 +81,8 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
       intro δ hδ
       obtain ⟨C, hC, hbound⟩ := hneg δ hδ
       exact ⟨C, hC, hφ'.eventually hbound⟩
-    exact (congrArg (fun N : ℕ → ℕ => BC12GinibreNegativeMomentTightnessTri N z q) hN).mpr h
+    exact (congrArg (fun N : ℕ → ℕ+ =>
+      BC12GinibreNegativeMomentTightnessTri (fun n => (N n : ℕ)) z q) hN).mpr h
   have hp := p.sparse_profile_probability_of_section3_section5 (subsequenceCoreSize φ) hdim
     (fun n => W (φ (n + 1))) (fun n => hW (φ (n + 1))) (hWlim.comp hφ') hs
     (hsource.coreSection5 φ hφ) (hsource.coreSection3 φ hφ) hg hn
@@ -88,7 +90,7 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
   apply (tendstoInProbabilityTri_shift_iff (fun n => gaussianProfileLaw (φ n + 1))
     (fun n ω => matrixRawPotential (p.matrix (φ n + 1) (W (φ n)) ω - z • 1))
     (circularRadialPotential ‖z‖) 1).mp
-  exact (congrArg (fun N : ℕ → ℕ =>
+  exact (congrArg (fun N : ℕ → ℕ+ =>
     TendstoInProbabilityTri (fun n => gaussianProfileLaw (N n))
       (fun n ω => matrixRawPotential (p.matrix (N n) (W (φ (n + 1))) ω - z • 1))
       (circularRadialPotential ‖z‖)) hN).mp hz
