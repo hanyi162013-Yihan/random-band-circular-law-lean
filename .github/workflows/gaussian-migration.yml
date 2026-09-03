@@ -42,7 +42,8 @@ jobs:
           python3 scripts/check_axioms.py --self-test
           python3 -m unittest discover -s scripts -p 'test_build*.py'
           python3 scripts/check_gaussian_migration.py
-          python3 scripts/section6_public_audit.py --check
+          python3 scripts/public_theorem_audit.py --project section5 --check
+          python3 scripts/public_theorem_audit.py --project section6 --check
           python3 scripts/check_placeholders.py --path Section10/BernoulliSection10Source
           python3 scripts/check_placeholders.py --path section5/CircularLawSections56
           python3 scripts/check_placeholders.py --path section6/CircularLawSection6

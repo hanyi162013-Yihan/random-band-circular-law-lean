@@ -112,15 +112,18 @@ changes still require cloud validation.
 - Each project ends with ordinary `lake --no-cache build` of its public targets.
 - Separate compiled axiom/signature audits require the usual
   `propext`, `Classical.choice`, `Quot.sound` allowlist with exact report counts.
-- The final expanded audit covers 1379 root, 240 Section 5 and 839 Section 6
+- The final expanded audit covers 1379 root, 1101 Section 5 and 839 Section 6
   reports. Optional kernel replay checks the 28 changed proof modules with
   one worker and exact module coverage. This uses Lean's own kernel, not an
   external independent verifier, and does not replay all of mathlib.
 - Section 6's 839 reports comprise 31 migration checks and every one of its
   808 named public source theorems. The checked-in explicit audit is kept in
-  sync by `section6_public_audit.py`; every name is checked by Lean, with no
+  sync by `public_theorem_audit.py`; every name is checked by Lean, with no
   heartbeat override. Private auxiliaries are covered transitively, not
   counted as additional public theorems.
+- The Section 5 project also checks all 861 of its public source theorems
+  (including its Section 6 bridge library), in addition to the 240 selected
+  and migration reports. This explicit audit likewise uses default limits.
 - The upstream signature audit prints the genuine Gaussian model definitions
   and the density/correlation/log-limit signatures; Schur change of variables
   and finite correlations must not reappear as external hypotheses.

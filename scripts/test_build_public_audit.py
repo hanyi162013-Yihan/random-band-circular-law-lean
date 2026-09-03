@@ -1,7 +1,7 @@
 """Source coverage tests; the generated Lean commands require cloud checking."""
 import unittest
 
-from section6_public_audit import public_theorems
+from public_theorem_audit import public_theorems
 
 
 class PublicAuditCoverageTests(unittest.TestCase):
