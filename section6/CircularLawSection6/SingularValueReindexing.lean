@@ -10,6 +10,7 @@ This argument also covers zero singular values and arbitrary spectral tests.
 -/
 
 noncomputable section
+set_option backward.isDefEq.respectTransparency false
 open scoped BigOperators
 
 namespace CircularLawSection6
@@ -55,11 +56,15 @@ theorem matrixSquaredSingularAverage_reindex (e : ι ≃ κ) (A : Matrix ι ι �
     matrixSquaredSingularAverage (A.submatrix e.symm e.symm) φ =
       matrixSquaredSingularAverage A φ := by
   unfold matrixSquaredSingularAverage
-  simp only [Fin.sum_univ_eq_sum_range, finrank_euclideanSpace]
-  rw [Fintype.card_congr e]
-  congr 1
-  apply Finset.sum_congr rfl
-  intro i hi
+  have hdim : Module.finrank ℂ (EuclideanSpace ℂ κ) =
+      Module.finrank ℂ (EuclideanSpace ℂ ι) := by
+    simp only [finrank_euclideanSpace]
+    exact (Fintype.card_congr e).symm
+  refine congrArg₂ (fun x y : ℝ => x / y) ?_ (by exact_mod_cast hdim)
+  apply Fintype.sum_equiv (finCongr hdim)
+  intro i
+  change φ ((A.submatrix e.symm e.symm).toEuclideanLin.singularValues i ^ 2) =
+    φ (A.toEuclideanLin.singularValues i ^ 2)
   rw [matrix_singularValues_reindex]
 
 theorem matrixSquaredSingularAverage_shifted_reindex (e : ι ≃ κ)

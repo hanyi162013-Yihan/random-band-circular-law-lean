@@ -10,6 +10,7 @@ its logarithmic normalization are explicit, not source assumptions.
 
 open MeasureTheory Set Filter Topology
 noncomputable section
+set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
 
@@ -69,8 +70,9 @@ theorem scaledSingularLaw_logCutoff (σ : Measure ℝ) [IsProbabilityMeasure σ]
     (hcut : Integrable (fun s => Real.log (max s (a / r))) σ) :
     (∫ s, Real.log (max s a) ∂scaledSingularLaw r σ) =
       Real.log r + ∫ s, Real.log (max s (a / r)) ∂σ := by
-  rw [scaledSingularLaw, integral_map (by fun_prop)
-    (Real.measurable_log.comp (measurable_id.max measurable_const)).aestronglyMeasurable]
+  have hm : Measurable (fun s : ℝ => Real.log (max s a)) :=
+    Real.measurable_log.comp (measurable_id.max measurable_const)
+  rw [scaledSingularLaw, integral_map (by fun_prop) hm.aestronglyMeasurable]
   simp_rw [log_max_positive_scale hr ha]
   rw [integral_add (integrable_const _) hcut, integral_const]
   simp

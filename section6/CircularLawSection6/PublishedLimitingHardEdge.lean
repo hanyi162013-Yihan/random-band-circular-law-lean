@@ -15,6 +15,7 @@ open MeasureTheory Filter Topology Set Arxiv2410V3
 open CircularLawSections56.Section5
 open scoped BigOperators
 noncomputable section
+set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
 
@@ -47,7 +48,7 @@ theorem empirical_symmetric_stieltjes_im {N : ℕ} [NeZero N]
     Sum.elim_inl, Sum.elim_inr, sub_zero, poissonKernel, singularPoissonKernel,
     neg_sq, Fintype.card_sum, Fintype.card_fin, Nat.cast_add]
   have hN : (N : ℝ) ≠ 0 := by exact_mod_cast NeZero.ne N
-  field_simp <;> ring
+  field_simp
 
 theorem matrix_stieltjes_im_eq_squaredPoissonAverage {N : ℕ} [NeZero N]
     (X : Matrix (Fin N) (Fin N) ℂ) (z : ℂ) {t : ℝ} (ht : 0 < t) :
@@ -56,8 +57,13 @@ theorem matrix_stieltjes_im_eq_squaredPoissonAverage {N : ℕ} [NeZero N]
   rw [ShortRingAnchor.matrix_stieltjesTrace_eq_symmetric_singularValues X z
     (by simpa [spectralParameter] using ht),
     empirical_symmetric_stieltjes_im]
-  simp only [matrixSquaredSingularAverage, finrank_euclideanSpace, Fintype.card_fin,
-    squaredPoissonTest_sq, ShortRingAnchor.shiftedSingularValueFamily,
+  unfold matrixSquaredSingularAverage
+  have hdim : Module.finrank ℂ (EuclideanSpace ℂ (Fin N)) = N := by simp
+  symm
+  refine congrArg₂ (fun x y : ℝ => x / y) ?_ (by exact_mod_cast hdim)
+  apply Fintype.sum_equiv (finCongr hdim)
+  intro i
+  simp only [squaredPoissonTest_sq, ShortRingAnchor.shiftedSingularValueFamily,
     ShortRingAnchor.shiftedSingularValue, ShortRingAnchor.matrixSingularValue]
 
 theorem mean_poisson_tendsto_of_squaredTests
@@ -118,6 +124,9 @@ theorem published_dense_limiting_poisson_identity
         ∫ ω, (stieltjesTrace ((model n).matrix ω) z (spectralParameter 0 t)).im ∂μ n := by
     simpa only [RCLike.im_eq_complex_im] using
       (integral_im ((model n).stieltjesTrace_integrable z heta)).symm
+  change Tendsto (fun n => (∫ ω, stieltjesTrace ((model n).matrix ω) z
+    (spectralParameter 0 t) ∂μ n).im) atTop
+    (𝓝 (freeDysonStieltjes z (spectralParameter 0 t)).im) at him
   simp_rw [heq] at him
   exact tendsto_nhds_unique
     (mean_poisson_tendsto_of_squaredTests μ N (fun n => (model n).matrix)
