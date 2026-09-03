@@ -35,11 +35,16 @@ theorem profile_cyclicSamples_raw (p : NoncompactProfile) (N : ℕ) [NeZero N]
   have hm : (p.matrix N W (cyclicSamples N ω) - z • 1).submatrix
       (ZMod.finEquiv N) (ZMod.finEquiv N) = actualMatrix N (p.weight N W) ω - z • 1 := by
     change (p.matrix N W (cyclicSamples N ω)).submatrix (ZMod.finEquiv N)
-      (ZMod.finEquiv N) - (z • 1).submatrix (ZMod.finEquiv N) (ZMod.finEquiv N) = _
+      (ZMod.finEquiv N) - (z • (1 : Matrix (ZMod N) (ZMod N) ℂ)).submatrix
+        (ZMod.finEquiv N) (ZMod.finEquiv N) = _
     rw [← actualMatrix_eq_profile p N W ω, hscalar]
+  have hdet : (actualMatrix N (p.weight N W) ω - z • 1).det =
+      (p.matrix N W (cyclicSamples N ω) - z • 1).det :=
+    (congrArg Matrix.det hm.symm).trans
+      (Matrix.det_submatrix_equiv_self (ZMod.finEquiv N).toEquiv
+        (p.matrix N W (cyclicSamples N ω) - z • 1))
   unfold matrixRawPotential normalizedShiftLogDet
-  rw [← hm, Matrix.det_submatrix_equiv_self (ZMod.finEquiv N).toEquiv]
-  simp only [ZMod.card]
+  rw [hdet, ZMod.card]
 
 theorem profile_raw_limit
     (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
