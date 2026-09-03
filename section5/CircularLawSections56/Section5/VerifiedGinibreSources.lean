@@ -125,6 +125,8 @@ theorem ginibre_negative_on_sequence_of_bbv
     (fun n => denseVarianceProfile_isBandwidth (hNpos n)) z
     (C := D) ((le_max_left _ _).trans (le_max_right _ _))
   · intro n
+    change (∫ x : ℂ, ‖id x‖ ^ 3 ∂circularComplexGaussian) +
+      BVH.complexGaussianThirdMomentConstant ≤ D
     exact (le_max_right _ _).trans (le_max_right _ _)
   · intro n v hv
     have hη : 0 < (spectralParameter 0 v).im := by simpa [spectralParameter] using hv

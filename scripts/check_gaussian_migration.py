@@ -31,11 +31,34 @@ for path in [
     if re.search(r"\(\w+\s*:\s*BC12GinibreInput\)", source):
         raise SystemExit(f"External Gaussian source reintroduced in {path}")
 
-for filename, structure in [("BBVCoreSources", "GaussianProfileBBVCoreSources"),
-                            ("BBVOnlyProfileEndpoint", "GaussianProfileBBVSources")]:
+for filename, structure, fields in [
+    ("BBVCoreSources", "GaussianProfileBBVCoreSources", ["bbv", "coreSection4"]),
+    ("BBVOnlyProfileEndpoint", "GaussianProfileBBVSources", ["bbv", "coreSection4"]),
+    ("PublishedConcreteGaussianProfile", "GaussianProfileConcreteSources",
+     ["bbv", "ginibreSquared", "coreSection4"]),
+    ("GinibreReducedSources", "GaussianProfileReducedSources",
+     ["bbv", "ginibreSquared", "coreSection4"]),
+]:
     source = code_only((root / f"section6/CircularLawSection6/{filename}.lean").read_text())
     match = re.search(rf"^structure {structure} .*? where\n(.*?)(?=^\S)", source, re.M | re.S)
-    if not match or re.findall(r"^  (\w+)\s*:", match[1], re.M) != ["bbv", "coreSection4"]:
+    if not match or re.findall(r"^  (\w+)\s*:", match[1], re.M) != fields:
         raise SystemExit(f"Unexpected fields in {structure}")
+
+taper = code_only((root / "section5/CircularLawSections56/Section5/TaperVerifiedGinibre.lean").read_text())
+if re.search(r"\b(sorry|admit|unsafe|axiom|native_decide|set_option)\b", taper):
+    raise SystemExit("Forbidden checking escape/option in the taper Gaussian adapter")
+match = re.search(r"^structure Section3TaperNonGaussianInputs.*? where\n(.*?)(?=^\S)",
+                  taper, re.M | re.S)
+if not match or re.findall(r"^  (\w+)\s*:", match[1], re.M) != [
+        "minimum_singular", "counting", "local_comparison"]:
+    raise SystemExit("Unexpected Gaussian analytic premise in the new taper interface")
+
+normalization = code_only((root / "section3/ShortRingAnchor/BC12/GaussianPairNormalization.lean").read_text())
+if re.search(r"\b(sorry|admit|unsafe|axiom|native_decide|set_option)\b", normalization):
+    raise SystemExit("Forbidden checking escape/option in shared Gaussian normalization")
+for path in ["Section8/BernoulliSection8/Section3GaussianLaw.lean",
+             "Section10/BernoulliSection10Source/VerifiedGinibreSources.lean"]:
+    if "BC12.normalizedGaussianPair_map hN" not in code_only((root / path).read_text()):
+        raise SystemExit(f"Shared Gaussian normalization missing from {path}")
 
 print("Gaussian source migration: constructed reference sources and reduced public boundaries pass.")

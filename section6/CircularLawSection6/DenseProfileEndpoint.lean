@@ -6,8 +6,8 @@ import CircularLawSection6.GinibreReducedSources
 The dense subsequence uses the checked general Section 3 estimates for the
 actual full variance profile. The sparse subsequence retains the existing
 Section 4/5 core argument. No assertion of Han's more general theorem is
-made or needed. The logarithmic and squared-singular Ginibre literature
-sources remain explicit in `GaussianProfileReducedSources`.
+made or needed. Only the historical squared-singular Ginibre source remains
+in `GaussianProfileReducedSources`; its logarithmic reference is proved.
 -/
 
 open MeasureTheory Filter Topology ShortRingAnchor TaoVuReplacement

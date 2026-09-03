@@ -11,6 +11,9 @@ at `8d9dbc26f820f7056b37108c980501cecb951203`: ordinary target builds,
 61 exact axiom reports and both compiled public-signature audits.
 The broader migration at `94d3efa` is checked separately in
 [run 33812184651](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33812184651).
+The later compatibility/taper migration and extraction of
+`BC12.normalizedGaussianPair_map` into the shared Section 3 layer are pending.
+The shared lemma removes duplicated normalization proofs from Sections 8 and 10.
 
 ## Scope and proof boundary
 
@@ -54,24 +57,30 @@ Generic lemmas such as `bc12_on_sampleLaw`, `ginibre_raw_of_bc12`, or a cutoff
 lemma conditional on bounded negative moments remain valid reusable lemmas.
 
 Section 6 also retains historical conditional routes with
-`ClassicalGinibreSquaredTestInput`, `GinibreLogPotentialInput`, and
-`HanGaussianDenseInput`. They are **not** the reduced public route and are
-not claimed to be assumption-free. The full limiting squared-singular law
+`ClassicalGinibreSquaredTestInput` and `HanGaussianDenseInput`.
+They are **not** the preferred BBV-only public route and are not claimed
+to be assumption-free. The full limiting squared-singular law
 has not been proved by this migration; the concrete BBV-core route avoids
 needing it. `verifiedGinibreFiniteFormulaInput` instead constructs the exact
 finite correlation/projection record with no premise.
+`verifiedGinibreLogPotentialInput` likewise constructs the log-limit record.
+Even the historical concrete/reduced bundles no longer ask callers for
+BC12, raw-log, negative-moment, spectral or full-log fields; their former
+accessors are proved methods where needed for compatibility.
 
 The regression guard checks the selected public signatures and record fields;
 it does not establish that every historical conditional theorem in the
 repository has been deleted or generalized. The cloud audit must inspect the
 compiled declarations as well as their transitive kernel axioms.
 
-The generic Section 5 taper interfaces also retain explicit negative-moment
-and full-log premises for arbitrary comparison processes. They are not the
-fixed-law indicator endpoints migrated here. Discharging those premises
-requires a concrete Gaussian-law identification and the compatible exponent
-`p = 1/128`; it does not follow for an arbitrary process or a taper with a
-vanishing lower profile bound. No full taper-source migration is claimed.
+The generic Section 5 taper lemmas with arbitrary comparison processes remain
+available. The new `TaperVerifiedGinibre` adapter instead constructs their
+Gaussian nonsingularity, negative moment, full-log limit and row moments from
+an actual Ginibre model law and BBV, fixing the compatible exponent to
+`p = 1/128`. Its reduced record has only the taper's LSV, count and local
+comparison fields. This is a Gaussian-source migration, not a proof of those
+three taper estimates or a uniform-positive-profile theorem for taper weights.
+These additional compatibility/taper changes still require cloud validation.
 
 ## Verification plan
 

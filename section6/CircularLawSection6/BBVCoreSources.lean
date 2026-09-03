@@ -6,8 +6,8 @@ import CircularLawSection6.GinibreReducedSources
 
 The local finite Gaussian models, their exact bandwidths and the finite
 CDF comparison are constructed before calling the moving-reference core
-theorem. No bounded-test Ginibre singular law is retained. The separate
-raw logarithmic reference source remains explicit in the reduced bundle.
+theorem. No bounded-test Ginibre singular law or raw logarithmic reference
+source is retained in the BBV-core bundle.
 -/
 
 open MeasureTheory Filter Topology ShortRingAnchor Arxiv2410V3

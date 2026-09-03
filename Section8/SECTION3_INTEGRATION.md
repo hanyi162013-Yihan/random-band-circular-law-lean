@@ -17,6 +17,8 @@ The report artifact SHA-256 is
 `9e989af6583e77f3cb4d17b39f9f16aff5cd117c63be470abd0aae96f8956d5c`.
 This is a Section 8 certificate, not a certificate for the subsequent
 Section 5/6/10 migration.
+The later extraction of Gaussian normalization into a shared Section 3 lemma
+is awaiting its own cloud check and increases the audit count to 62.
 
 **Historical conditional integration:** proof-source commit `b6c379836fcc6cf166881768d1a0ad6782c5c552`
 passed [cloud run 33720016599](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33720016599/job/100537065421)
@@ -75,9 +77,9 @@ and the two complete Section 8 targets normally.
 No local Lean compilation or whole-repository build is used.
 
 The gate includes the existing 13-report general and 28-report Bernoulli audits,
-a 20-report integration audit, and both public-signature audits. The new
+a 21-report integration audit, and both public-signature audits. The new
 audit includes the BC12-free Proposition 3.8, the Gaussian-law constructors,
-and the four final Section 8 endpoints. A source regression check requires
+the shared normalization lemma, and the four final Section 8 endpoints. A source regression check requires
 exactly the five upstream fields (one comparison constant and four theorem
 premises), and rejects returning the former BC12 fields. Only
 `propext`, `Classical.choice`, and `Quot.sound` are allowed.

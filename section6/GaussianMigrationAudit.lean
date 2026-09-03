@@ -2,6 +2,12 @@ import CircularLawSection6.BBVOnlyProfileEndpoint
 import CircularLawSection6.GinibreFiniteFormulaSources
 
 #print axioms CircularLawSection6.verifiedGinibreFiniteFormulaInput
+#print axioms CircularLawSection6.verifiedGinibreLogPotentialInput
+#print axioms CircularLawSection6.NoncompactProfile.GaussianProfileConcreteSources.bc12
+#print axioms CircularLawSection6.NoncompactProfile.GaussianProfileConcreteSources.ginibreRaw
+#print axioms CircularLawSection6.NoncompactProfile.GaussianProfileConcreteSources.ginibreNegative
+#print axioms CircularLawSection6.NoncompactProfile.GaussianProfileConcreteSources.ginibreSpectral
+#print axioms CircularLawSection6.NoncompactProfile.GaussianProfileReducedSources.toConcrete
 #print axioms CircularLawSection6.CoreRadiusBounds.ConcreteSection4Input.toSection34
 #print axioms CircularLawSection6.CoreRadiusBounds.ConcreteSection4Input.logPotential
 #print axioms CircularLawSection6.DenseProfile.actualMatrix_conclusion
@@ -18,5 +24,7 @@ example : CircularLawSection6.GinibreFiniteFormulaInput :=
 
 #print CircularLawSection6.NoncompactProfile.GaussianProfileBBVCoreSources
 #print CircularLawSection6.NoncompactProfile.GaussianProfileBBVSources
+#print CircularLawSection6.NoncompactProfile.GaussianProfileConcreteSources
+#print CircularLawSection6.NoncompactProfile.GaussianProfileReducedSources
 #check @CircularLawSection6.DenseProfile.profile_conclusion
 #check @CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources

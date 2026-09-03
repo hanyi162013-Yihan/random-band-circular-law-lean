@@ -1,4 +1,5 @@
 import CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint
+import CircularLawSections56.Section5.TaperVerifiedGinibre
 
 -- Exact reports are checked against the standard three-axiom allowlist in CI.
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.complexGaussian_pi_toLp
@@ -11,6 +12,8 @@ import CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.ginibre_negative_on_sequence_of_bbv
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.ginibre_logPotential_on_sequence
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.provedGinibreInput
+#print axioms CircularLawSections56.Section5.Section3TaperNonGaussianInputs.toAnalytic
+#print axioms CircularLawSections56.Section5.tapered_short_ring_of_section3_estimates_withoutBC12
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.concreteModel_sources
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.literal_anchors
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.indicator_complex_full_of_published_literature
@@ -23,3 +26,5 @@ example (h : CircularLawSections56.Section5.PublishedSection3Concrete.BBVCompari
 
 #check @CircularLawSections56.Section5.PublishedSection3Concrete.indicator_complex_full_of_published_literature
 #check @CircularLawSections56.Section5.PublishedSection3Concrete.indicator_real_full_of_published_literature
+#print CircularLawSections56.Section5.Section3TaperNonGaussianInputs
+#check @CircularLawSections56.Section5.tapered_short_ring_of_section3_estimates_withoutBC12

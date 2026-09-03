@@ -8,6 +8,7 @@ import SubgaussianSection8
 #print axioms BernoulliSection8.Section3Bridge.denseAtom_copies
 #print axioms BernoulliSection8.Section3Bridge.normalizedDense_eq_circularGinibre
 #print axioms BernoulliSection8.Section3Bridge.normalizedGaussianPair_map
+#print axioms ShortRingAnchor.BC12.normalizedGaussianPair_map
 #print axioms BernoulliSection8.Section3Bridge.circularGinibre_hasEntryLaw
 #print axioms BernoulliSection8.Section3Bridge.gaussianMatrixEntriesEquiv
 #print axioms BernoulliSection8.Section3Bridge.circularGinibre_hasLaw
