@@ -27,6 +27,7 @@ theorem gaussian_expected_unitCore_upper_ae (p : NoncompactProfile)
     p.gaussian_unitCore_cutoff_scaling_ae N H W (Real.sqrt (p.coreMass N H W)) 1] with z hz hs
   intro a ha
   obtain ⟨hi, hj, hb⟩ := hs a ha
+  simp only [Complex.ofReal_one] at hj hb
   have hcmp : (∫ ω, matrixCutoffPotential (p.coreMatrix N H W ω - z • 1) a ∂gaussianProfileLaw N) -
       (∫ ω, matrixCutoffPotential (p.unitCoreMatrix N H W ω - z • 1) a ∂gaussianProfileLaw N) ≤
         |Real.sqrt (p.coreMass N H W) - 1| / a := by
@@ -35,7 +36,7 @@ theorem gaussian_expected_unitCore_upper_ae (p : NoncompactProfile)
       matrixCutoffPotential ((1 : ℂ) • p.unitCoreMatrix N H W ω - z • 1) a ∂gaussianProfileLaw N)).trans
         (abs_integral_le_integral_abs.trans hb)
     rw [integral_sub hi hj] at h
-    simpa only [← p.coreMatrix_eq_scale_unitCoreMatrix, Complex.ofReal_one, one_smul] using h
+    simpa only [← p.coreMatrix_eq_scale_unitCoreMatrix, one_smul] using h
   refine ⟨(hz a ha).2.1, ?_⟩
   have hu := (hz a ha).2.2
   rw [add_div]

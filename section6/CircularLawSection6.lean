@@ -82,3 +82,6 @@ import CircularLawSection6.CoupledCdfComparison
 import CircularLawSection6.UnitCoreUpperSandwich
 import CircularLawSection6.FourthRootNormalizationError
 import CircularLawSection6.NoncompactReferenceMean
+import CircularLawSection6.RoutedGinibreComparison
+import CircularLawSection6.UniformCyclicSourceBridge
+import CircularLawSection6.CompactSourceAssembly
