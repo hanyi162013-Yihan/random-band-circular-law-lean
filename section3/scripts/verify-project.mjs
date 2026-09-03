@@ -80,6 +80,7 @@ for (const file of audits) {
     for (const name of ['ShortRingAnchor.Proposition38.proposition38_withoutBC12',
       'ShortRingAnchor.proposition36_cyclicShortRing_withoutBC12',
       'ShortRingAnchor.BC12.normalizedGinibreLaw_flatten',
+      'ShortRingAnchor.BC12.canonical_normalizedGinibre_correlations',
       'ShortRingAnchor.BC12.verifiedGinibreCorrelations']) {
       if (!expected.includes(name)) throw new Error(`Missing BC12-elimination audit target: ${name}`);
     }
@@ -98,7 +99,7 @@ const summary = {
   allowedAxioms: [...allowed], audits: results,
   scope: proposition38Only
     ? 'Normal project build and kernel audit of the complete conditional Proposition 3.8 endpoint and its new components. Explicit literature hypotheses remain theorem arguments. Historical Proposition 3.6 audits are not rerun in this mode.'
-    : 'Kernel verification of the stated conditional theorems, including the complete Proposition 3.8 endpoint. Explicit mathematical hypotheses are not discharged by an axiom audit.'
+    : 'Normal Section 3 build and kernel verification of the BC12-free Proposition 3.6 and 3.8 endpoints, all new Gaussian bridges, and retained conditional assemblies. The Gaussian law is specified; non-BC12 literature hypotheses remain explicit and are not discharged by an axiom audit.'
 };
 fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2) + '\n');
 console.log(`PASS: normal lake build; ${summary.reportCount} reports, ${summary.uniqueDeclarations} distinct declarations; ${hygiene.files} source files.`);

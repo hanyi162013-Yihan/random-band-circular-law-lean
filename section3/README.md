@@ -29,7 +29,7 @@ and every fixed `z : ℂ`,
 in probability.  There is no restriction such as `|z| <= 2.5` in this
 formalization: `z` is arbitrary and fixed, and constants may depend on `z`.
 
-The real subgaussian full-block **Proposition 3.8** is formalized by
+The original conditional real subgaussian full-block **Proposition 3.8** endpoint is
 `ShortRingAnchor.Proposition38.proposition38`. It permits discrete atoms
 and every fixed complex shift. Its new literature inputs are explicitly
 Proposition 3.2 and Cook 1.12; the existing BBV/BC12 boundary remains visible.
@@ -38,7 +38,7 @@ counting, CDF comparison, upper moments, and logarithmic assembly are proved
 internally. See [PROPOSITION38.md](PROPOSITION38.md) for the complete input
 boundary, file list, and current build/audit records.
 
-## Main checked theorems
+## Earlier conditional endpoints (kept for compatibility)
 
 Both density endpoints have passed the complete build and kernel audit.
 They remain conditional on BBV and the two named BC12 inputs. The real-density

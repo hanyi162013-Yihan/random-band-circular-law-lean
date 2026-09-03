@@ -13,7 +13,7 @@ The checked `main.tex` SHA-256 is
 `eb737f3e1541e7949cf71354fa7cd18a49f2d779d2c71108dda262339e8d98fe`.
 The manuscript is read-only and is not copied into this project.
 
-The source-facing endpoint is
+The original source-facing conditional endpoint is
 `ShortRingAnchor.Proposition38.proposition38` in
 [`Assembly.lean`](ShortRingAnchor/Proposition38/Assembly.lean).
 Successful build/audit records, not the presence of theorem source text,
@@ -43,7 +43,7 @@ The dense reference is the same explicit normalized independent-atom
 array used by section3. Its moment data and finite Ginibre formulas remain
 visible, rather than asserting that an arbitrary reference is Ginibre.
 
-## Exact external boundary
+## Original conditional boundary (before the BC12-free wrapper)
 
 The two **newly authorized** literature inputs are centralized in
 [`ExternalInputs.lean`](ShortRingAnchor/Proposition38/ExternalInputs.lean):
