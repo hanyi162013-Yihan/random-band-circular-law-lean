@@ -27,14 +27,15 @@ theorem hardEdge_nonpositive_null (σ : Measure ℝ) [IsFiniteMeasure σ]
     have ht : (0 : ℝ) < 1 / (n + 1 : ℝ) := by positivity
     exact (measureReal_mono (Iic_subset_Iic.mpr ht.le)).trans
       (hCDF _ ht hn.le))
-  exact measureReal_eq_zero_iff.mp (le_antisymm hzero measureReal_nonneg)
+  exact (measureReal_eq_zero_iff (by finiteness)).mp
+    (le_antisymm hzero measureReal_nonneg)
 
 theorem hardEdge_positive_ae (σ : Measure ℝ) [IsFiniteMeasure σ]
     {a C : ℝ} (ha : 0 < a)
     (hCDF : ∀ t, 0 < t → t ≤ a → σ.real (Iic t) ≤ C * t) :
     ∀ᵐ s ∂σ, 0 < s := by
   rw [ae_iff]
-  simpa only [not_lt] using hardEdge_nonpositive_null σ ha hCDF
+  simpa only [not_lt, Iic_def] using hardEdge_nonpositive_null σ ha hCDF
 
 def lowerLogKernel (s t : ℝ) : ℝ := (Ici s).indicator (fun t => t⁻¹) t
 
@@ -74,12 +75,13 @@ theorem lowerLogKernel_integrable_prod (σ : Measure ℝ) [IsFiniteMeasure σ]
     {a C : ℝ} (hC : 0 ≤ C)
     (hCDF : ∀ t, 0 < t → t ≤ a → σ.real (Iic t) ≤ C * t) :
     Integrable (Function.uncurry lowerLogKernel) (σ.prod (volume.restrict (Ioc 0 a))) := by
-  haveI : IsFiniteMeasure (volume.restrict (Ioc 0 a)) := ⟨by simp⟩
+  have : IsFiniteMeasure (volume.restrict (Ioc 0 a)) := ⟨by simp⟩
   apply (integrable_prod_iff' lowerLogKernel_measurable.stronglyMeasurable.aestronglyMeasurable).2
   refine ⟨ae_of_all _ (lowerLogKernel_integrable_left σ), ?_⟩
   apply (integrable_const |C|).mono'
   · exact lowerLogKernel_measurable.stronglyMeasurable.norm.integral_prod_left.aestronglyMeasurable
   · filter_upwards [ae_restrict_mem measurableSet_Ioc] with t ht
+    change ‖∫ s, ‖lowerLogKernel s t‖ ∂σ‖ ≤ |C|
     rw [integral_norm_lowerLogKernel_left σ ht.1, Real.norm_eq_abs,
       abs_of_nonneg (div_nonneg measureReal_nonneg ht.1.le), abs_of_nonneg hC]
     exact (div_le_iff₀ ht.1).2 (hCDF t ht.1 ht.2)

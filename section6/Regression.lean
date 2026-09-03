@@ -697,3 +697,10 @@ example (σ : Measure ℝ) [IsProbabilityMeasure σ] {t C : ℝ}
 example (σ : Measure ℝ) [IsProbabilityMeasure σ] {a C : ℝ} (ha : 0 < a)
     (h : ∀ t, 0 < t → t ≤ a → σ.real (Set.Iic t) ≤ C * t) :
     ∀ᵐ s ∂σ, 0 < s := hardEdge_positive_ae σ ha h
+
+-- The exact layer-cake identity derives its own integrability hypotheses.
+example (σ : Measure ℝ) [IsProbabilityMeasure σ] {a C : ℝ} (ha : 0 < a) (hC : 0 ≤ C)
+    (h : ∀ t, 0 < t → t ≤ a → σ.real (Set.Iic t) ≤ C * t) :
+    (∫ s, Real.log (max s a) - Real.log s ∂σ) =
+      ∫ t in Set.Ioc 0 a, σ.real (Set.Iic t) / t :=
+  integral_lowerLogError_eq_cdf σ ha hC h
