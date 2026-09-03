@@ -537,7 +537,8 @@ example (e : Fin 2 ≃ Fin 2) (A : Matrix (Fin 2) (Fin 2) ℂ) (z : ℂ)
 
 -- The reference is the actual normalized Gaussian matrix, including dimension one.
 example : (∫ ω, TaoVuReplacement.hilbertSchmidtSq (ginibreMatrix 1 ω)
-    ∂cyclicAtomLaw 1 circularComplexGaussian) = 1 := (ginibre_expected_energy 1).2
+    ∂cyclicAtomLaw 1 circularComplexGaussian) = 1 := by
+  simpa only [Nat.cast_one] using (ginibre_expected_energy 1).2
 
 -- The entry/displacement permutation preserves the full IID Gaussian law.
 example : MeasurePreserving (ginibreEntryAtoms 3) (cyclicAtomLaw 3 circularComplexGaussian)
@@ -557,4 +558,5 @@ example (N : ℕ → ℕ) [∀ n, NeZero (N n)] :
     BoundedInProbabilityTri (fun n => cyclicAtomLaw (N n) circularComplexGaussian) (fun _ _ => 0) := by
   intro δ hδ
   refine ⟨1, zero_lt_one, Eventually.of_forall fun n => ?_⟩
-  simpa using hδ
+  simpa only [abs_zero, not_lt_of_ge (zero_le_one : (0 : ℝ) ≤ 1),
+    Set.ofPred_false, measureReal_empty] using hδ
