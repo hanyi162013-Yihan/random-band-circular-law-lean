@@ -36,7 +36,10 @@ theorem eventually_abs_center_le_of_tight_and_close
     by_contra hbad
     have hx : |X n ω| ≤ D := le_of_not_gt (fun h => hbad (Or.inl h))
     have he : |X n ω - c n| < 1 := by
-      simpa only [sub_zero] using lt_of_not_ge (fun h => hbad (Or.inr h))
+      apply lt_of_not_ge
+      intro h
+      apply hbad
+      exact Or.inr (by simpa only [sub_zero] using h)
     have htri : |c n| ≤ |X n ω| + |X n ω - c n| := by
       have h := abs_sub_le (c n) (X n ω) 0
       simpa only [sub_zero, abs_sub_comm, add_comm] using h
@@ -71,6 +74,7 @@ theorem exists_uniform_secondMoment_of_tight_and_centered
     have hv : variance (X n) (μ n) ≤ max V 0 :=
       (hV ⟨n, rfl⟩).trans (le_max_left _ _)
     rw [variance_eq_sub (hX n)] at hv
+    simp only [Pi.pow_apply] at hv
     linarith
   · have hmem : n ∈ Finset.range K := Finset.mem_range.2 (lt_of_not_ge hn)
     have hsingle : |E n| ≤ P :=

@@ -36,7 +36,7 @@ theorem regularized_log_le_cutoff {s a t : ℝ}
     (sq_le_sq₀ ha.le hu.le).2 (le_max_right _ _)
   have hpos : 0 < s ^ 2 + t ^ 2 :=
     add_pos_of_nonneg_of_pos (sq_nonneg _) (sq_pos_of_pos ht)
-  have hlog := Real.log_le_log hpos (add_le_add_right hsu (t ^ 2))
+  have hlog := Real.log_le_log hpos (add_le_add hsu (le_refl (t ^ 2)))
   have hratio : 0 < (u ^ 2 + t ^ 2) / u ^ 2 := by positivity
   have hratioLog := Real.log_le_sub_one_of_pos hratio
   rw [Real.log_div (by positivity) (sq_pos_of_pos hu).ne', Real.log_pow] at hratioLog

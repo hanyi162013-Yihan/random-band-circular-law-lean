@@ -35,14 +35,15 @@ theorem tendstoInProbabilityTri_of_tight_approximations
   have hrate : Tendsto
       (fun k => |a k| * C + |b k| + |c k - target|) atTop (𝓝 0) := by
     simpa only [abs_zero, zero_mul, zero_add, sub_self] using
-      ((ha.abs.mul_const C).add hb.abs).add (hc.sub tendsto_const_nhds).abs
+      ((ha.abs.mul_const C).add hb.abs).add
+        (hc.sub (tendsto_const_nhds : Tendsto (fun _ : ℕ => target) atTop (𝓝 target))).abs
   obtain ⟨k, hk⟩ := (hrate.eventually (gt_mem_nhds (half_pos hε))).exists
   have hprob := (hX k (ε / 2) (half_pos hε)).eventually
     (gt_mem_nhds (half_pos hδ))
   filter_upwards [htail, hprob] with n hn hnprob
   rw [Real.dist_eq, sub_zero, abs_of_nonneg measureReal_nonneg]
-  have hsubset : {ω | ε ≤ |Y n ω - target|} ≤ᵐ[μ n]
-      {ω | C < |Z n ω|} ∪ {ω | ε / 2 ≤ |X k n ω - c k|} := by
+  have hsubset : ∀ᵐ ω ∂μ n, ω ∈ {ω | ε ≤ |Y n ω - target|} →
+      ω ∈ ({ω | C < |Z n ω|} ∪ {ω | ε / 2 ≤ |X k n ω - c k|} : Set (Ω n)) := by
     filter_upwards [herror k n] with ω hω
     intro hy
     by_contra hnot
@@ -50,8 +51,8 @@ theorem tendstoInProbabilityTri_of_tight_approximations
     have hx : |X k n ω - c k| < ε / 2 :=
       lt_of_not_ge (fun hx => hnot (Or.inr hx))
     have hsmall : |Y n ω - X k n ω| ≤ |a k| * C + |b k| :=
-      hω.trans (add_le_add_right
-        (mul_le_mul_of_nonneg_left hz (abs_nonneg (a k))) _)
+      hω.trans (add_le_add
+        (mul_le_mul_of_nonneg_left hz (abs_nonneg (a k))) le_rfl)
     have htri := abs_sub_le (Y n ω) (X k n ω) target
     have htri2 := abs_sub_le (X k n ω) (c k) target
     change ε ≤ |Y n ω - target| at hy

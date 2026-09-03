@@ -1,8 +1,8 @@
-import CircularLawSection6.GinibreDysonImaginary
-import CircularLawSection6.MovingGinibreCore
-import CircularLawSection6.TightApproximation
-import CircularLawSection6.RegularizedLogCutoff
+import CircularLawSection6.GinibreDysonEndpoints
+import CircularLawSection6.BBVCoreSources
+import CircularLawSection6.RegularizedCutoffComparison
 import CircularLawSection6.TightVarianceMoments
+import CircularLawSection6.TriangularTightness
 import Lean.Util.CollectAxioms
 
 /-! Narrow transitive audit for the independent BBV-to-Ginibre bridges.
@@ -33,6 +33,29 @@ run_cmd do
     `CircularLawSection6.regularized_log_le_cutoff,
     `CircularLawSection6.eventually_abs_center_le_of_tight_and_close,
     `CircularLawSection6.exists_uniform_secondMoment_of_tight_and_centered,
+    `CircularLawSection6.CoreRadiusBounds.localCdf_of_bbv,
+    `CircularLawSection6.CoreRadiusBounds.canonical_core_cutoff_comparison_of_bbv,
+    `CircularLawSection6.NoncompactProfile.GaussianProfileBBVCoreSources,
+    `CircularLawSection6.NoncompactProfile.sparse_profile_probability_of_bbv_section5,
+    `CircularLawSection6.BoundedInProbabilityTri,
+    `CircularLawSection6.boundedInProbabilityTri_of_integral_abs_bound,
+    `CircularLawSection6.regularizedSquaredLog,
+    `CircularLawSection6.matrixRegularizedPotential,
+    `CircularLawSection6.hasDerivAt_regularizedSquaredLog,
+    `CircularLawSection6.hasDerivAt_matrixRegularizedPotential,
+    `CircularLawSection6.hasDerivAt_shifted_matrixRegularizedPotential,
+    `CircularLawSection6.hasDerivAt_shifted_matrixRegularizedPotential_I_mul,
+    `CircularLawSection6.continuous_matrixRegularizedPotential,
+    `CircularLawSection6.measurable_matrixRegularizedPotential,
+    `CircularLawSection6.integrable_matrixRegularizedPotential,
+    `CircularLawSection6.sum_sq_singularValues_eq_hilbertSchmidtSq,
+    `CircularLawSection6.matrixRegularizedPotential_highHeight,
+    `CircularLawSection6.abs_matrixRegularizedPotential_sub_log_le,
+    `CircularLawSection6.matrixRegularizedPotential_eq_sum_card,
+    `CircularLawSection6.matrixRawPotential_le_regularized,
+    `CircularLawSection6.matrixRegularizedPotential_le_cutoff,
+    `CircularLawSection6.matrixRegularized_raw_error_le_negativeMoment,
+    `CircularLawSection6.matrixRaw_probability_of_regularized_limits,
     `Arxiv2410V3.normSq_mul_add_nonneg_le,
     `Arxiv2410V3.scalarDyson_strict_contraction,
     `Arxiv2410V3.scalarDysonEquation_unique,
@@ -55,3 +78,8 @@ run_cmd do
 #check CircularLawSection6.unequal_ginibre_cutoff_of_bbv_ae
 #check CircularLawSection6.NoncompactProfile.canonical_core_cutoff_comparison_of_local_cdf
 #check CircularLawSection6.tendstoInProbabilityTri_of_tight_approximations
+#check CircularLawSection6.GinibreDyson.tendsto_dysonPotential_nhdsGT_zero
+#check CircularLawSection6.GinibreDyson.tendsto_dysonPotential_sub_log_atTop
+#check CircularLawSection6.CoreRadiusBounds.canonical_core_cutoff_comparison_of_bbv
+#check CircularLawSection6.NoncompactProfile.GaussianProfileBBVCoreSources
+#check CircularLawSection6.matrixRaw_probability_of_regularized_limits

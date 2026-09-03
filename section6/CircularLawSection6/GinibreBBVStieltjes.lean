@@ -71,8 +71,7 @@ theorem ginibre_stieltjes_inMeasure_of_bbv
     have hreal : Tendsto (fun n => (N n : ℝ) ^ (-(10 : ℝ))) atTop (𝓝 0) :=
       (tendsto_rpow_neg_atTop (by norm_num)).comp
         (tendsto_natCast_atTop_atTop.comp hN)
-    simpa only [Function.comp_apply, ENNReal.ofReal_zero] using
-      ENNReal.continuous_ofReal.continuousAt.tendsto.comp hreal
+    simpa only [ENNReal.ofReal_zero] using ENNReal.tendsto_ofReal hreal
   have hbad : Tendsto (fun n => gaussianSequenceLaw (good n)ᶜ) atTop (𝓝 0) := by
     apply tendsto_of_tendsto_of_tendsto_of_le_of_le' tendsto_const_nhds hbadRate
       (Eventually.of_forall fun _ => zero_le)
