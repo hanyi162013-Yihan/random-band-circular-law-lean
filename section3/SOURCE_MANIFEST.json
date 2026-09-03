@@ -58,8 +58,8 @@
     },
     {
       "path": "ShortRingAnchor/AtomAssumption21.lean",
-      "bytes": 7629,
-      "sha256": "38526c0a75b6f13c2e62d6cc918baa840da1eebbece4c06379cb683682f7d4f8"
+      "bytes": 7643,
+      "sha256": "f96c9a78fb9c59b098e3207da87c6a7e0abbecb46cf934a5d652478163dfe7d5"
     },
     {
       "path": "ShortRingAnchor/AtomDensityTransport.lean",
