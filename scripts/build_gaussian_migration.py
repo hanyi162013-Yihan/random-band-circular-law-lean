@@ -15,13 +15,17 @@ from check_axioms import run_audits
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGETS = {
-    "root": ["SubgaussianSection8", "BernoulliSection8", "BernoulliSection10",
+    "root": ["ShortRingAnchor", "CircularLawSection4", "BernoulliLinearAlgebra",
+             "BernoulliSection9", "SubgaussianSection8", "BernoulliSection8", "BernoulliSection10",
              "BernoulliSection10Complex", "BernoulliSection10Source"],
     "section5": ["CircularLawSections56"],
     "section6": ["CircularLawSection6", "CircularLawSection6.GinibreFiniteFormulaSources"],
 }
 AUDITS = {
-    "root": ["SubgaussianSection8/AxiomAudit.lean", "Section8/AxiomAudit.lean",
+    "root": ["Section4/AxiomAudit.lean", "Section4/CompanionAxiomAudit.lean",
+             "Section4/FourGapsAxiomAudit.lean", "Section4/FlatAxiomAudit.lean",
+             "Section4/Section4CompleteAxiomAudit.lean", "Section4/AssumptionFreeAxiomAudit.lean",
+             "SubgaussianSection8/AxiomAudit.lean", "Section8/AxiomAudit.lean",
              "Section8/Section3IntegrationAudit.lean",
              "Section10/BernoulliSection10/AxiomAudit.lean",
              "Section10/BernoulliSection10/AsymptoticAxiomAudit.lean",
