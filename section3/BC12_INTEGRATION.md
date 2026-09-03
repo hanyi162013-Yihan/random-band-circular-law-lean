@@ -9,6 +9,11 @@ Neither theorem takes a BC12 negative-moment conclusion, a Ginibre
 log-determinant convergence conclusion, or a projection/correlation formula
 as an argument. The earlier conditional assembly lemmas remain available
 unchanged for API compatibility.
+Their historical source comments describe the boundary of that generic
+conditional layer; the new bridge modules discharge it. The old foundational
+Lean files are deliberately kept byte-for-byte unchanged, with the updated
+project-level status documented here rather than invalidating their imports
+for documentation-only edits.
 
 ## Pinned proof dependency
 

@@ -11,11 +11,11 @@ determinant convergence used in Proposition 3.6.  No circular law,
 logarithmic uniform integrability, variance estimate, disk-potential
 formula, or nonsingularity conclusion is an assumption of this theorem.
 
-This file is the generic conditional analytic layer. The formulas are now
-constructed from Gaussian entries in `GaussianMatrixLawBridge.lean`, using
-the pinned Ginibre proof dependency; that file exposes the version with
-no formula hypotheses. See `KnownFormulas.lean` for the interface types and
-`IsEigenvalueEnumeration` for the algebraic meaning of the enumeration.
+The finite formulas themselves are **not** proved here.  In particular we
+do not claim to have constructed the Ginibre ensemble from Gaussian entries
+and derived its eigenvalue Jacobian.  See `KnownFormulas.lean` for the exact
+external boundary, and `IsEigenvalueEnumeration` for the purely algebraic
+identification of the supplied eigenvalues with the matrix.
 -/
 
 open Filter MeasureTheory

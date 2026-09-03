@@ -33,7 +33,7 @@ theorem sum_test_eq_of_enumerations {n : ℕ} {A : Matrix (Fin n) (Fin n) ℂ}
   have hr := (roots_eq_multiset_of_enumeration he).symm.trans
     (roots_eq_multiset_of_enumeration hd)
   have hs := congrArg (fun s : Multiset ℂ => (s.map f).sum) hr
-  simpa only [Multiset.map_map] using hs
+  simpa only [Multiset.map_map, Function.comp_def, Finset.sum_eq_multiset_sum] using hs
 
 /-- Correlation identities transfer across a.e. equal symmetric statistics;
 the eigenvalue orderings themselves need not be measurable or equal. -/
