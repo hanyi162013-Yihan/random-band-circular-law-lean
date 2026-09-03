@@ -12,6 +12,9 @@ import BernoulliSection10Source.DensityCircularLaw
 set_option pp.fullNames true
 #print BernoulliSection10Source.BBVComparisonInput
 #print BernoulliSection10Source.BC12GinibreInput
+#print LivshytsProjectionFormalization.RealFiniteGeometricBrascampLieb
+#print BernoulliSection10Complex.IsPlanarDensityAtom
+#print BernoulliSection10.IsBoundedDensityAtom
 #check @BernoulliSection10Source.planar_density_circular_law
 #check @BernoulliSection10Source.real_density_circular_law
 #check @BernoulliSection10Source.planar_density_ring_log_limit

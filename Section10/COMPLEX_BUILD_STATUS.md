@@ -42,6 +42,11 @@ cloud. No local build of that final integration has been run.
   errors; the complex circular-law assembly reported ambiguous real/complex
   names. Fixes are on the working branch, pending cloud verification.
   This does not yet verify either source-connected final endpoint.
+- At `b505051`, the cloud run
+  [33714301600](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33714301600)
+  compiled `GaussianReferenceFacts` in 1.8 seconds. Explicit real-to-complex
+  intermediate types removed the previous elaboration timeout. This verifies
+  the Gaussian moments and density domination, not yet the full source model.
 - `ee286a8` adds source-connected real and planar circular-law endpoints,
   with separately named BBV/BC12 inputs and real-only geometric
   Brascamp--Lieb. These new proofs are **written, not yet build-verified**.

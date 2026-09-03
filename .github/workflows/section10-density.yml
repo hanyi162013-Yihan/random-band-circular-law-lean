@@ -80,7 +80,7 @@ jobs:
           if [ -n '${{ steps.cache.outputs.cache-matched-key }}' ]; then
             # Omit repeated per-module invocations, not dependency checks:
             # every remaining build and the final targets use ordinary Lake validation.
-            resume=(--start-at BernoulliSection10.GaussianReferenceFacts)
+            resume=(--start-at BernoulliSection10Source.IIDModels)
           fi
           python3 scripts/build_serial.py --target BernoulliSection10Source.PlanarHighBand --target BernoulliSection10Source.RealHighBand --target BernoulliSection10Source.FullBlockLogLimit --keep-going "${resume[@]}" 2>&1 | tee verification-section10/source-connection-build.log
       - name: Build conditional high-band closure for both density branches
@@ -106,7 +106,9 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python3 scripts/build_serial.py --target BernoulliSection10Source.DensityCircularLaw --keep-going 2>&1 | tee verification-section10/connected-build.log
+          # Both prerequisite branches were checked in the preceding steps.
+          # Normal Lake validation still covers their full dependency graph.
+          lake build BernoulliSection10Source.DensityCircularLaw 2>&1 | tee verification-section10/connected-build.log
       - name: Complete repository build and default lake build
         id: full
         if: ${{ !cancelled() && steps.connected.outcome == 'success' }}
