@@ -1,5 +1,38 @@
 # Section 6 source boundaries
 
+The new Han-free, reduced-Ginibre source assembly is documented in
+[DENSE_GINIBRE_ADAPTERS.md](DENSE_GINIBRE_ADAPTERS.md). Its combined cloud
+verification and 145-declaration transitive audit passed run 33731702204
+at `ccdfb4c52fffd96f6facd4042529c6eb796ae590`.
+
+The current `GaussianProfileReducedSources` has four explicit fields:
+
+- `bbv`: the uniform published BBV comparison input.
+- `ginibreLog`: the logarithmic-potential limit for the actual Gaussian
+  array, optionally constructed by the checked finite-formula adapter from
+  exact projection/correlation formulas for that actual matrix law.
+- `ginibreSquared`: the classical bounded squared-singular-value test
+  limit, with the stated support and second-moment properties.
+- `coreSection4`: the two finite Section 4 pressure estimates for each
+  compact core.
+
+The Gaussian negative moment at order `1/128` is now derived from BBV and
+the proved Gaussian small-ball estimate. Raw and spectral transports are
+derived internally from the retained logarithmic source. The actual dense
+profile branch calls root Section 3 instead of `HanGaussianDenseInput`.
+The BBV-only logarithmic route and the unequal-dimension comparison that
+could remove `ginibreSquared` are identified next steps, not yet theorems.
+
+## Historical published-source interface
+
+The table below describes the older published-source endpoint, not the
+reduced source bundle above.
+
+The subsequent concrete interface passed run33725000131 at
+`c992bff30e9af6ddabcba04f113447cd48c27f20` and constructs the actual core
+Section 3 model/sampling data internally. Thus the finite-input limitations
+of the older interfaces below are not limitations of that newer caller.
+
 The current branch includes a user-approved correction to Section 3's
 bounded-density record: its bound is explicitly below ENNReal top, not an
 auto-implicit variable. Concrete Gaussian instantiation compiled in cloud;

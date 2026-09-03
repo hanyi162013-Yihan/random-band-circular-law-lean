@@ -1,4 +1,50 @@
-# Section 6 continuation checkpoint — 2026-09-02
+# Section 6 continuation checkpoints — 2026-09-03
+
+## Verified Han-free dense and actual Ginibre adapters
+
+Commit: `ccdfb4c52fffd96f6facd4042529c6eb796ae590`.
+[Run 33731702204](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33731702204),
+job `100572881243`: success. Tree `833b43a71040e1661dcdafea37446ad9f5e24b1a`.
+
+The narrow target `CircularLawSection6.GinibreFiniteFormulaSources` and its
+transitive imports compiled successfully (4448 dependency-inclusive jobs,
+mostly restored/replayed). The final `DenseProfileEndpoint` compiled in
+2.8 seconds and `GinibreFiniteFormulaSources` in 2.3 seconds. The source-token
+scan passed for 170 selected Lean files. `DenseGinibreAudit.lean` passed
+for 145 declarations, allowing only `propext`, `Classical.choice`, and
+`Quot.sound` transitively.
+
+The checked chain constructs the actual dense profile V3/planar models,
+its Section 3 least-value/counting/bulk/Proposition 3.6 inputs, and the
+Han-free sparse/dense endpoint. It also identifies the actual scalar
+Gaussian array with the imported Gaussian small-ball law, derives the
+negative moment at `p=1/128` from BBV, and transports raw/negative/spectral
+sources to the original Section 6 probability spaces. The finite-formula
+adapter calls the existing root Section 3 logarithmic-limit theorem.
+
+The new endpoint still has explicit BBV, actual Ginibre logarithmic and
+squared-test sources, and finite Section 4 pressure hypotheses. Exact
+Gaussian eigenvalue correlation formulas are not independently proved by
+the finite-formula adapter. The identified BBV-only alternative remains
+future work. See [DENSE_GINIBRE_ADAPTERS.md](DENSE_GINIBRE_ADAPTERS.md).
+
+Only the development branch was updated. The root full-library workflow,
+old independent Section 5 suite, and historical Section 6 full regression
+suite were not rerun. No local Lean build or large local download was used.
+
+## Verified concrete Section 3 interfaces — 2026-09-03
+
+Commit: `c992bff30e9af6ddabcba04f113447cd48c27f20`.
+[Run 33725000131](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131),
+job `100551912095`: success. Tree `1007e290b1dcb2d5cb054882bef2b40de5e19622`.
+The targeted concrete Section 5 and Section 6 proof roots compiled, with
+93 and 35 declarations respectively passing their transitive axiom audits.
+The old full Section 5 suite and root full-library build were intentionally
+not rerun. Core finite sampling, normalized matrices, ring and calibration
+models are constructed by the concrete sources.
+
+The newer Han-free/Ginibre-reuse modules passed their own targeted cloud
+verification described above; that is separate from this older checkpoint.
 
 ## Verified 136-module integration with the shared density correction
 

@@ -6,14 +6,36 @@ dependencies. No second mathlib checkout or large local download is needed.
 
 ## Main endpoint and verification status
 
-The current 136-module integration passed the targeted cloud check.
+The concrete Section 3 → Section 5 → Section 6 interfaces passed
+[run 33725000131](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131)
+at `c992bff30e9af6ddabcba04f113447cd48c27f20`, including the 93-declaration
+Section 5 and 35-declaration Section 6 transitive audits. The literal core
+anchor models and samples are constructed at this newer endpoint, not
+requested as extra convergence certificates. The Section 5 portion was
+published separately to main at `6887a8c7591ec15c37513f6c0944605c3680d5ef`.
+
+New explicit-import adapters assemble
+`gaussian_profile_circular_law_without_Han` in `DenseProfileEndpoint.lean`
+and reuse the actual Gaussian negative-moment and finite-formula log-limit
+proofs from root `section3/`. Their combined cloud compilation and
+145-declaration transitive axiom audit passed
+[run 33731702204](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33731702204)
+at `ccdfb4c52fffd96f6facd4042529c6eb796ae590`. The current reduced inputs
+are BBV, the actual Ginibre logarithmic limit, the bounded squared-singular
+test limit, and two finite Section 4 pressure estimates. Han and separate
+Ginibre negative-moment/raw/spectral duplicate inputs are no longer needed
+at this endpoint. A BBV-only derivation of the logarithmic center is not
+yet claimed.
+See [Dense/Ginibre adapter scope](DENSE_GINIBRE_ADAPTERS.md).
+
+The earlier 136-module integration passed the targeted cloud check.
 A concrete Gaussian density constructor exposed an auto-implicit `top` in
 the imported Section 3 density record. The user-approved shared correction is documented in
 [Section 3 integration corrections](../section3/INTEGRATION_CORRECTIONS.md).
 The 122-module checkpoint below predates that correction and verifies
 conditional proofs, not satisfiability of the former density premise.
 
-The new source-facing target is
+The earlier published-source target is
 `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_sources`
 in [PublishedSourceGaussianProfile.lean](CircularLawSection6/PublishedSourceGaussianProfile.lean).
 It derives local finite-CDF comparison internally from the checked Section 3
@@ -36,7 +58,7 @@ The transitive audit checked 1167 Section 6 declarations, including 987 theorems
 and separately checked 126 newly added Section 3-to-5 adapter declarations.
 See [VERIFICATION.md](VERIFICATION.md) for the exact scope.
 
-This theorem is conditional on explicitly stated mathematical sources.
+This earlier theorem is conditional on explicitly stated mathematical sources.
 [SOURCE_BOUNDARIES.md](SOURCE_BOUNDARIES.md) lists their exact content:
 finite Section 4 estimates and published Section 3 model/literature data for the internally called Section 5 theorem, BBV estimates for the actual local comparison models,
 classical Ginibre inputs, and Han's Gaussian dense-bandwidth theorem.
@@ -70,7 +92,9 @@ adapters, including the concrete Gaussian density record with the shared fix.
 
 ## Boundaries not concealed by the endpoint
 
-The cited Han, BC12 and classical Ginibre results are not reproved here.
+The historical endpoints do not reprove the cited Han, BC12 and classical
+Ginibre results. The newer Han-free endpoint and its remaining inputs are
+described above and in `DENSE_GINIBRE_ADAPTERS.md`.
 Section 5 and the newly verified Section 3 density endpoints are called inside
 the proof. The new source-facing endpoint takes finite model/sampling identities
 and the published BBV/BC12 literature premises, not the short-ring probability
@@ -83,8 +107,8 @@ bound, then derive the exact logarithmic layer-cake identity, logarithmic
 integrability and cutoff limit. The 136-module run also verifies that bound
 for the actual limiting Ginibre law, its logarithmic-potential identification
 from the classical sources, and the variance-scaled uniform cutoff estimate.
-Finite short-ring/calibration anchor data at the Section 5 interface remain
-explicit; not every concrete caller's source record is automatically constructed.
+The older general interfaces retain finite short-ring/calibration data.
+The newer concrete interface constructs those data for this Gaussian core.
 Thus the conditional main endpoint is not a claim that
 every intermediate statement of Section 6 has been formalized line by line.
 
