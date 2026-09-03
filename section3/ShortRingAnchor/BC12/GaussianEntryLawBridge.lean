@@ -102,8 +102,8 @@ theorem scaled_stdGaussian_complex_eq_entryLaw {a r : ℝ}
   have hv : 0 < v := sq_pos_of_pos hr
   have hreal : (gaussianReal 0 1).map (fun x => r * x) = gaussianReal 0 v := by
     have he : NNReal.mk (r ^ 2) (sq_nonneg r) * (1 : ℝ≥0) = v := by
-      apply Subtype.ext
-      simp [NNReal.mk, v]
+      rw [mul_one]
+      rfl
     have hh := (gaussianReal_const_mul (HasLaw.id (μ := gaussianReal 0 1)) r).map_eq
     rw [he, mul_zero] at hh
     simpa only [id_eq] using hh

@@ -85,6 +85,8 @@ downloads and the full project build take place on the remote runner.
 
 The proof changes are confined to `section3/` and its workflow. The root
 dependency files also register the same pin because the root project
-compiles Section 3 source directly. This does not move,
+compiles Section 3 source directly. The Section 5 and 6 lockfiles inherit
+that same pin: without those entries Lake rejects their root dependency
+as absent from the manifest. No downstream proof source is changed. This does not move,
 rewrite, or replace the vendored trees in later chapters. Existing downstream
 conditional interfaces are preserved.

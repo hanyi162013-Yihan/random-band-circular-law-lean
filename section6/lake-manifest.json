@@ -3,6 +3,18 @@
   "packagesDir": "../.lake/packages",
   "packages": [
     {
+      "url": "https://github.com/hanyi162013-Yihan/ginibre-correlation-identities-lean.git",
+      "type": "git",
+      "subDir": null,
+      "scope": "",
+      "rev": "403bab996ebc6b8331531bdf12b7a8c84bf61a4d",
+      "name": "GinibreCorrelationIdentities",
+      "manifestFile": "lake-manifest.json",
+      "inputRev": "403bab996ebc6b8331531bdf12b7a8c84bf61a4d",
+      "inherited": true,
+      "configFile": "lakefile.toml"
+    },
+    {
       "type": "path",
       "scope": "",
       "name": "CircularLawSections56",
