@@ -49,6 +49,7 @@ theorem planar_density_ring_log_limit
     {μ : Measure ℂ} {L : ℝ} (hμ : BernoulliSection10Complex.IsPlanarDensityAtom μ L)
     (h3 : Integrable (fun x : ℂ => ‖x‖ ^ 3) μ)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop) (z : ℂ) :
+    letI := hμ.toIsProbabilityMeasure
     ProbabilityLimits.TendstoInProbabilityTri
       (fun n => BernoulliSection10Complex.intervalRowsLaw (W n) (s n + 3) μ)
       (fun n x => BernoulliSection10Complex.densityCyclicLogDet (W n) (s n) z x /
@@ -62,6 +63,7 @@ theorem real_density_ring_log_limit
     {μ : Measure ℝ} {L : ℝ} (hμ : BernoulliSection10.IsBoundedDensityAtom μ L)
     (h3 : Integrable (fun x : ℝ => |x| ^ 3) μ)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop) (z : ℂ) :
+    letI := hμ.toIsProbabilityMeasure
     ProbabilityLimits.TendstoInProbabilityTri (fun n => intervalRowsLaw (W n) (s n + 3) μ)
       (fun n x => densityCyclicLogDet (W n) (s n) z x /
         (((s n + 3) * W n : ℕ) : ℝ)) (ShortRingAnchor.circularLogPotential z) :=

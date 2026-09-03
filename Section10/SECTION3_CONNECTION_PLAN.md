@@ -1,7 +1,10 @@
 # Direct Section 3 connection: exact proof route
 
 This file records implementation work still pending, not completed results.
-The latest published source is `section3/` at main commit `42c26b6`.
+The selected Section 3 baseline is `section3/` at commit `42c26b6`, with
+the density-field correction documented in `DENSITY_SCHEMA_CORRECTION.md`.
+The user explicitly excluded the later, unrelated Proposition 3.8 additions
+from this verification task; they are not imported into this work branch.
 Root Lake now selects `section3/` instead of the older
 `vendor/short-ring-analysis/`. The concrete `IIDModels` and
 `PlanarHighBand`, `DensityRepresentative`, and `RealHighBand` adapters have been written; their integration is being
