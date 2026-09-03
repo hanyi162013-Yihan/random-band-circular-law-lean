@@ -33,7 +33,7 @@ theorem varianceScaledSingularLaw_uniformHardEdge (σ : Measure ℝ)
     (hCDF : ∀ t, 0 < t → σ.real (Iic t) ≤ 2 * t)
     {v : ℝ} (hv : (1 / 4 : ℝ) ≤ v) :
     ∀ t, 0 < t → (varianceScaledSingularLaw v σ).real (Iic t) ≤ 4 * t := by
-  simpa only [show (2 : ℝ) / (1 / 2) = 4 by norm_num] using
+  simpa only [varianceScaledSingularLaw, show (2 : ℝ) / (1 / 2) = 4 by norm_num] using
     scaledSingularLaw_uniformHardEdge σ (by norm_num : (0 : ℝ) < 1 / 2)
       (sqrt_ge_half_of_variance_ge_quarter hv) (by norm_num : (0 : ℝ) ≤ 2) hCDF
 
@@ -45,7 +45,7 @@ theorem varianceScaledSingularLaw_uniformLogCutoff (σ : Measure ℝ)
       (∫ s, Real.log s ∂varianceScaledSingularLaw v σ) ∧
     (∫ s, Real.log (max s a) ∂varianceScaledSingularLaw v σ) -
       (∫ s, Real.log s ∂varianceScaledSingularLaw v σ) ≤ 4 * a := by
-  simpa only [show (2 : ℝ) / (1 / 2) = 4 by norm_num] using
+  simpa only [varianceScaledSingularLaw, show (2 : ℝ) / (1 / 2) = 4 by norm_num] using
     scaledSingularLaw_logCutoff_error σ hsecond (by norm_num : (0 : ℝ) < 1 / 2)
       (sqrt_ge_half_of_variance_ge_quarter hv) (by norm_num : (0 : ℝ) ≤ 2) hCDF ha
 

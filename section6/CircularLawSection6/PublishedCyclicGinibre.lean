@@ -1,5 +1,7 @@
 import CircularLawSection6.PublishedLocalBulkTri
-import CircularLawSection6.GinibreLimitingHardEdge
+import CircularLawSection6.PublishedGaussianModel
+import CircularLawSection6.SingularValueReindexing
+import CircularLawSection6.UniformCyclicSourceBridge
 import CircularLawSection6.RoutedBandIdentification
 import CircularLawSections56.Section5.PublishedSection3Model
 
@@ -29,9 +31,9 @@ theorem matrixSquaredSingularCdf_eq_average {ι : Type*} [Fintype ι] [Decidable
   simp only [empiricalCdf, matrixSquaredSingularAverage, Finset.sum_boole, Fintype.card_fin]
 
 theorem matrixSquaredSingularCdfDistanceOn_shifted_reindex_right
-    {ι κ λ : Type*} [Fintype ι] [DecidableEq ι]
-    [Fintype κ] [DecidableEq κ] [Fintype λ] [DecidableEq λ]
-    (A : Matrix ι ι ℂ) (B : Matrix κ κ ℂ) (e : κ ≃ λ) (z : ℂ) (R : ℝ) :
+    {ι κ η : Type*} [Fintype ι] [DecidableEq ι]
+    [Fintype κ] [DecidableEq κ] [Fintype η] [DecidableEq η]
+    (A : Matrix ι ι ℂ) (B : Matrix κ κ ℂ) (e : κ ≃ η) (z : ℂ) (R : ℝ) :
     matrixSquaredSingularCdfDistanceOn A (B.submatrix e.symm e.symm - z • 1) R =
       matrixSquaredSingularCdfDistanceOn A (B - z • 1) R := by
   unfold matrixSquaredSingularCdfDistanceOn empiricalCdfDistanceOn
@@ -40,7 +42,7 @@ theorem matrixSquaredSingularCdfDistanceOn_shifted_reindex_right
 abbrev cyclicGinibreJointSample (M H : ℕ) :=
   (Fin M × Fin (2 * H + 1) → ℂ) × (ZMod M × ZMod M → ℂ)
 
-def cyclicGinibreJointLaw (M H : ℕ) : Measure (cyclicGinibreJointSample M H) :=
+def cyclicGinibreJointLaw (M H : ℕ) [NeZero M] : Measure (cyclicGinibreJointSample M H) :=
   (Measure.pi (fun _ : Fin M × Fin (2 * H + 1) => circularComplexGaussian)).prod
     (cyclicAtomLaw M circularComplexGaussian)
 
