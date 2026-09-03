@@ -25,7 +25,7 @@ theorem normalizedGaussianPair_map {N : ℕ} (hN : 0 < N) :
     circularGaussianPairLaw.map (fun p => gaussianAtom p / (Real.sqrt (N : ℝ) : ℂ)) =
       Ginibre.gaussianEntryLaw N := by
   let r : ℝ := (Real.sqrt (N : ℝ))⁻¹
-  let v : ℝ≥0 := ⟨r ^ 2 / 2, div_nonneg (sq_nonneg r) (by norm_num)⟩
+  let v : ℝ≥0 := NNReal.mk (r ^ 2 / 2) (div_nonneg (sq_nonneg r) (by norm_num))
   have hr : 0 < r := by dsimp [r]; positivity
   have hv : 0 < v := by
     change (0 : ℝ) < r ^ 2 / 2
@@ -36,8 +36,8 @@ theorem normalizedGaussianPair_map {N : ℕ} (hN : 0 < N) :
     rw [inv_pow, Real.sq_sqrt (Nat.cast_nonneg _)]
     ring
   have hreal : (gaussianReal 0 (1 / 2)).map (fun x => r * x) = gaussianReal 0 v := by
-    have hvar : (⟨r ^ 2, sq_nonneg r⟩ : ℝ≥0) * (1 / 2) = v := by
-      apply NNReal.ext
+    have hvar : NNReal.mk (r ^ 2) (sq_nonneg r) * (1 / 2) = v := by
+      apply NNReal.coe_injective
       change r ^ 2 * (1 / 2 : ℝ) = r ^ 2 / 2
       ring
     have h := (gaussianReal_const_mul (HasLaw.id (μ := gaussianReal 0 (1 / 2))) r).map_eq
@@ -50,9 +50,11 @@ theorem normalizedGaussianPair_map {N : ℕ} (hN : 0 < N) :
   change gaussianAtom p / (Real.sqrt (N : ℝ) : ℂ) =
     Complex.measurableEquivRealProd.symm (r * p.1, r * p.2)
   rw [div_eq_mul_inv, ← Complex.ofReal_inv]
-  apply Complex.ext <;>
-    simp [gaussianAtom, r,
-      Complex.measurableEquivRealProd_symm_apply, mul_comm]
+  change gaussianAtom p * (r : ℂ) =
+    Complex.measurableEquivRealProd.symm (r * p.1, r * p.2)
+  simp only [gaussianAtom, Complex.equivRealProdCLM_symm_apply,
+    Complex.measurableEquivRealProd_symm_apply, Complex.ofReal_mul]
+  ring
 
 /-- Section 8's finite Gaussian array has independent entries of the exact planar law. -/
 theorem circularGinibre_hasEntryLaw (A : Proposition38.Atom) {N : ℕ} (hN : 0 < N) :
