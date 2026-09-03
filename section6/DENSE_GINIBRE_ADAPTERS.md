@@ -1,5 +1,17 @@
 # Dense profile and Ginibre source reuse
 
+The later BBV-only route is now complete and verified in
+[run 33740349647](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33740349647),
+including the final concrete endpoint, 203-declaration transitive audit and
+seven new regressions. It removes both `ginibreLog` and `ginibreSquared`;
+only BBV and the pre-given Section 4 pressure estimates remain. See
+[BBV_ONLY_ENDPOINT.md](BBV_ONLY_ENDPOINT.md).
+
+The remainder records the earlier checkpoint and the route identified at
+that time. Its future-work statements are historical, not current status.
+
+## Earlier source-reuse checkpoint
+
 Status: combined cloud verification and transitive axiom audit passed in
 [run 33731702204](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33731702204)
 at commit `ccdfb4c52fffd96f6facd4042529c6eb796ae590`.

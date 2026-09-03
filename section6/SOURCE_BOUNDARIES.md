@@ -1,32 +1,36 @@
 # Section 6 source boundaries
 
-The new Han-free, reduced-Ginibre source assembly is documented in
-[DENSE_GINIBRE_ADAPTERS.md](DENSE_GINIBRE_ADAPTERS.md). Its combined cloud
-verification and 145-declaration transitive audit passed run 33731702204
-at `ccdfb4c52fffd96f6facd4042529c6eb796ae590`.
+The current BBV-only Ginibre and concrete profile endpoint is documented in
+[BBV_ONLY_ENDPOINT.md](BBV_ONLY_ENDPOINT.md). Its complete import chain,
+203-declaration transitive audit and seven regression examples passed
+[run 33740349647](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33740349647)
+at `9d98ca87d112a240fc5b596d1a27801450b15cbe`.
 
-The current `GaussianProfileReducedSources` has four explicit fields:
+The current `GaussianProfileBBVSources` has exactly two explicit fields:
 
 - `bbv`: the uniform published BBV comparison input.
-- `ginibreLog`: the logarithmic-potential limit for the actual Gaussian
-  array, optionally constructed by the checked finite-formula adapter from
-  exact projection/correlation formulas for that actual matrix law.
-- `ginibreSquared`: the classical bounded squared-singular-value test
-  limit, with the stated support and second-moment properties.
 - `coreSection4`: the two finite Section 4 pressure estimates for each
   compact core.
 
-The Gaussian negative moment at order `1/128` is now derived from BBV and
-the proved Gaussian small-ball estimate. Raw and spectral transports are
-derived internally from the retained logarithmic source. The actual dense
-profile branch calls root Section 3 instead of `HanGaussianDenseInput`.
-The BBV-only logarithmic route and the unequal-dimension comparison that
-could remove `ginibreSquared` are identified next steps, not yet theorems.
+The actual Gaussian logarithmic-potential limit, spectral circular law and
+negative-moment tightness at order `1/128` are now derived from BBV and the
+proved Gaussian estimates. The logarithmic limit holds for every fixed
+complex shift. Unequal-dimension comparison and the moving Ginibre reference
+remove the separate limiting squared-singular-test source. The actual dense
+profile branch calls repository-root Section 3 instead of
+`HanGaussianDenseInput`; Section 5 imports that same root `section3/`.
+
+The BBV literature result and finite Section 4 pressure estimates remain
+explicit hypotheses, not newly proved results. A transitive axiom audit
+does not discharge them. The older four-field
+`GaussianProfileReducedSources` and finite-formula interfaces remain as
+compatibility endpoints, but are not extra inputs of the new two-field
+endpoint.
 
 ## Historical published-source interface
 
 The table below describes the older published-source endpoint, not the
-reduced source bundle above.
+current two-field source bundle above.
 
 The subsequent concrete interface passed run33725000131 at
 `c992bff30e9af6ddabcba04f113447cd48c27f20` and constructs the actual core
@@ -118,9 +122,12 @@ is used.
 
 ## What is not claimed
 
-This package does not reprove the cited Han, BC12 or classical Ginibre source
-theorems. Section 3 has not been silently formalized by naming an input.
-The Section 5 endpoint is called internally, with all core geometry and
+The historical interfaces described above retain their named literature hypotheses.
+The current two-field endpoint instead derives the needed actual Ginibre
+logarithmic and spectral results from BBV and avoids the Han input. This is
+not a proof of the general Han theorem or of the BBV literature result.
+Section 3 has not been silently formalized by naming an input.
+In those historical interfaces, the Section 5 endpoint is called internally, with all core geometry and
 Gaussian atom transfer proved. The new published Section 3/density entry point
 also passed combined cloud verification. Finite model/sampling identities,
 fixed atom laws and the published BBV/BC12 sources remain explicit; the real

@@ -1,5 +1,41 @@
 # Section 6 continuation checkpoints — 2026-09-03
 
+## Verified BBV-only Ginibre and concrete profile endpoint
+
+Commit: `9d98ca87d112a240fc5b596d1a27801450b15cbe`.
+[Run 33740349647](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33740349647),
+job `100600557183`: success. Tree `9007110012caebaf30a10e2d1a3cc30efb44fe9b`.
+
+The strict target `CircularLawSection6.BBVOnlyProfileEndpoint` and its complete
+transitive imports passed (4467 dependency-inclusive jobs, mostly cached).
+`BBVGinibreAudit.lean` passed for 203 declarations, allowing only
+`propext`, `Classical.choice`, and `Quot.sound` transitively.
+All seven `BBVOnlyRegression.lean` examples and the selected source-token
+scan of 196 Lean files passed.
+
+The actual Ginibre regularized-mean proof compiled in 4.0 seconds, the raw
+logarithmic-potential source in 2.9 seconds and its spectral/BC12 consequences
+in 2.4 seconds in the preceding checkpoint. The final outer concrete-profile
+endpoint compiled in 2.9 seconds in this successful run. The earlier interval
+DCT timeout was resolved by typed local functions and directed identities;
+the successful proof did not require another heartbeat-budget increase.
+
+`NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources` assembles
+the actual Gaussian model with no assumption that bandwidth/dimension has
+a limit. Its source bundle retains only BBV and the two pre-given finite
+Section 4 pressure estimates for each compact core. Actual Ginibre raw-log,
+spectral and inverse-moment sources are derived internally. The independent
+Ginibre squared-singular-law and Han hypotheses are no longer inputs.
+See [BBV_ONLY_ENDPOINT.md](BBV_ONLY_ENDPOINT.md) for the exact statement,
+proof route and remaining literature boundary.
+
+This verifies the new circular-law proof chain, not a claim to have reproved
+BBV or every intermediate manuscript statement by its original route.
+Only the development branch was updated. No local Lean build or large
+download, root full-library build, old independent Section 5 suite, or
+historical Section 6 full regression rerun was used. Documentation-only
+follow-ups preserve the verified proof files.
+
 ## Verified Han-free dense and actual Ginibre adapters
 
 Commit: `ccdfb4c52fffd96f6facd4042529c6eb796ae590`.
@@ -22,11 +58,12 @@ negative moment at `p=1/128` from BBV, and transports raw/negative/spectral
 sources to the original Section 6 probability spaces. The finite-formula
 adapter calls the existing root Section 3 logarithmic-limit theorem.
 
-The new endpoint still has explicit BBV, actual Ginibre logarithmic and
+At that earlier checkpoint the endpoint still had explicit BBV, actual Ginibre logarithmic and
 squared-test sources, and finite Section 4 pressure hypotheses. Exact
 Gaussian eigenvalue correlation formulas are not independently proved by
-the finite-formula adapter. The identified BBV-only alternative remains
-future work. See [DENSE_GINIBRE_ADAPTERS.md](DENSE_GINIBRE_ADAPTERS.md).
+the finite-formula adapter. The BBV-only alternative has since passed the
+new checkpoint above and does not use those correlation formulas.
+See [DENSE_GINIBRE_ADAPTERS.md](DENSE_GINIBRE_ADAPTERS.md).
 
 Only the development branch was updated. The root full-library workflow,
 old independent Section 5 suite, and historical Section 6 full regression

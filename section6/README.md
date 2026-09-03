@@ -6,6 +6,18 @@ dependencies. No second mathlib checkout or large local download is needed.
 
 ## Main endpoint and verification status
 
+The new endpoint `NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources`
+passed [run 33740349647](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33740349647)
+at `9d98ca87d112a240fc5b596d1a27801450b15cbe`: complete target/import build,
+203-declaration transitive axiom audit, seven new regressions and a 196-file
+source scan. Its only source fields are uniform BBV and the two finite
+Section 4 pressure estimates for each core. Actual Ginibre negative-moment tightness,
+raw-log and spectral limits are proved from BBV; unequal-dimension comparison
+removes the separate squared-singular-test source. No Han input remains.
+See [the exact result and boundary](BBV_ONLY_ENDPOINT.md).
+
+The following paragraphs record earlier verified checkpoints.
+
 The concrete Section 3 → Section 5 → Section 6 interfaces passed
 [run 33725000131](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131)
 at `c992bff30e9af6ddabcba04f113447cd48c27f20`, including the 93-declaration
@@ -20,12 +32,12 @@ and reuse the actual Gaussian negative-moment and finite-formula log-limit
 proofs from root `section3/`. Their combined cloud compilation and
 145-declaration transitive axiom audit passed
 [run 33731702204](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33731702204)
-at `ccdfb4c52fffd96f6facd4042529c6eb796ae590`. The current reduced inputs
+at `ccdfb4c52fffd96f6facd4042529c6eb796ae590`. That earlier bundle's inputs
 are BBV, the actual Ginibre logarithmic limit, the bounded squared-singular
 test limit, and two finite Section 4 pressure estimates. Han and separate
 Ginibre negative-moment/raw/spectral duplicate inputs are no longer needed
-at this endpoint. A BBV-only derivation of the logarithmic center is not
-yet claimed.
+at that endpoint. The BBV-only derivation and stronger final endpoint have
+now passed the newer checkpoint above.
 See [Dense/Ginibre adapter scope](DENSE_GINIBRE_ADAPTERS.md).
 
 The earlier 136-module integration passed the targeted cloud check.
