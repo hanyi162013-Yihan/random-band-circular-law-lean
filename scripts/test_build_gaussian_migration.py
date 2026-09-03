@@ -75,6 +75,16 @@ class BatchProtocolTests(unittest.TestCase):
                                            {"OurAuditOnly": Path("source.lean")}),
                          {"OurAuditOnly"})
 
+    def test_regression_invocations_fail_closed(self):
+        with patch.object(driver.subprocess, "run") as run, \
+             contextlib.redirect_stdout(io.StringIO()):
+            driver.run_regressions(Path("project"), ["Signatures.lean"])
+        run.assert_called_once_with(["lake", "env", "lean", "Signatures.lean"],
+                                    cwd=Path("project"), check=True)
+        with patch.object(driver.subprocess, "run", side_effect=subprocess.CalledProcessError(1, [])), \
+             contextlib.redirect_stdout(io.StringIO()), self.assertRaises(subprocess.CalledProcessError):
+            driver.run_regressions(Path("project"), ["Signatures.lean"])
+
 
 if __name__ == "__main__":
     unittest.main()

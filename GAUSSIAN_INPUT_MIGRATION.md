@@ -20,6 +20,8 @@ import in the audit configuration. That is **not** a successful whole-run
 certificate. The missing audit-only imports are now included in the build
 closure. The full chapter check at `d603e53` is running in
 [run 33816611348](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33816611348).
+Its root job has now passed all nine public targets and 975 axiom reports,
+including Sections 4 and 9; Section 5/6 are still being checked.
 The shared lemma removes duplicated normalization proofs from Sections 8 and 10.
 
 ## Scope and proof boundary
@@ -117,6 +119,9 @@ changes still require cloud validation.
 - The upstream signature audit prints the genuine Gaussian model definitions
   and the density/correlation/log-limit signatures; Schur change of variables
   and finite correlations must not reappear as external hypotheses.
+- The expanded audit also compiles the existing Section 6 regression
+  examples and BBV-only regression, both Section 8 public signature audits,
+  and the Section 10 density schema regression; errors in any file fail CI.
 - No new proof-checking limit overrides, custom axioms, `sorry`, `admit`,
   `unsafe`, or `native_decide` are permitted in the new source constructors.
 - Cloud reports must be associated with their exact commit before marking a

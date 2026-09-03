@@ -45,6 +45,20 @@ AUDITS = {
     "section5": ["AxiomAudit.lean", "GaussianMigrationAudit.lean"],
     "section6": ["GaussianMigrationAudit.lean"],
 }
+REGRESSIONS = {
+    "root": ["Section8/PublicSignatureAudit.lean", "SubgaussianSection8/PublicSignatureAudit.lean",
+             "Section10/BernoulliSection10Source/DensitySchemaAudit.lean"],
+    "section5": [],
+    "section6": ["Regression.lean", "BBVOnlyRegression.lean"],
+}
+
+
+def run_regressions(project: Path, files: list[str]) -> None:
+    """Compile the existing examples and signature/schema inspections too."""
+    for filename in files:
+        print(f"[regression] lake env lean {filename}", flush=True)
+        subprocess.run(["lake", "env", "lean", filename], cwd=project, check=True)
+        print(f"[regression] PASS {filename}", flush=True)
 
 
 def sources(ginibre_root: Path) -> dict[str, Path]:
@@ -79,13 +93,15 @@ def main() -> int:
         if args.dry_run:
             raise ValueError("Use --dry-run for builds, not audits")
         run_audits(project, [Path(p) for p in AUDITS[args.project]])
+        run_regressions(project, REGRESSIONS[args.project])
         return 0
     modules = sources(args.ginibre_root.resolve())
     dependencies = {name: header_imports(path.read_text()) & modules.keys()
                     for name, path in modules.items()}
     # Reject cycles in the entire source graph, including legacy adapters.
     dependency_order(dependencies)
-    roots = TARGETS[args.project] + sorted(audit_roots(project, AUDITS[args.project], modules))
+    roots = TARGETS[args.project] + sorted(audit_roots(
+        project, AUDITS[args.project] + REGRESSIONS[args.project], modules))
     selected = dependency_closure(dependencies, roots)
     order = dependency_order(selected)
     if args.dry_run:
