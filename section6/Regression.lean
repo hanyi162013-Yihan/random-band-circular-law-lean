@@ -485,3 +485,7 @@ example (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A.det ≠ 0) :
     |matrixCutoffPotential A 1 - matrixClippedPotential A 1 2| ≤ hilbertSchmidtSq A / (2 * 2) := by
   simpa using matrixCutoff_clipped_error_le A hA zero_lt_one (by norm_num : (1 : ℝ) ≤ 2)
     (by norm_num)
+
+-- The squared-singular observable is the exact bounded test used in the matrix theorem.
+example (A : Matrix (Fin 2) (Fin 2) ℂ) :
+    matrixSquaredSingularAverage A (ShortRingAnchor.clippedLog 1 2) = matrixClippedPotential A 1 2 := rfl

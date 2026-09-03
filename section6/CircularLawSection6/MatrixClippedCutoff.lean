@@ -68,7 +68,7 @@ theorem matrixClippedPotential_abs_le (A : Matrix ι ι ℂ)
     simp only [finrank_euclideanSpace]
     exact Nat.cast_ne_zero.mpr Fintype.card_ne_zero
   unfold matrixClippedPotential
-  rw [abs_div, abs_of_nonneg (Nat.cast_nonneg _)]
+  rw [abs_div, abs_of_nonneg (Nat.cast_nonneg (Module.finrank ℂ (EuclideanSpace ℂ ι)))]
   calc
     _ ≤ (∑ i : Fin (Module.finrank ℂ (EuclideanSpace ℂ ι)),
         |clippedLog a R (A.toEuclideanLin.singularValues i ^ 2)|) / _ :=
@@ -84,7 +84,8 @@ theorem matrixCutoff_clipped_error_le (A : Matrix ι ι ℂ) (hA : A.det ≠ 0)
     |matrixCutoffPotential A a - matrixClippedPotential A a R| ≤
       hilbertSchmidtSq A / ((Fintype.card ι : ℝ) * R) := by
   unfold matrixCutoffPotential operatorCutoffPotential matrixClippedPotential
-  rw [← sub_div, ← Finset.sum_sub_distrib, abs_div, abs_of_nonneg (Nat.cast_nonneg _)]
+  rw [← sub_div, ← Finset.sum_sub_distrib, abs_div,
+    abs_of_nonneg (Nat.cast_nonneg (Module.finrank ℂ (EuclideanSpace ℂ ι)))]
   calc
     _ ≤ (∑ i : Fin (Module.finrank ℂ (EuclideanSpace ℂ ι)),
         |Real.log (max (A.toEuclideanLin.singularValues i) a) -
