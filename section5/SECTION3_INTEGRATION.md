@@ -31,9 +31,14 @@ The new `PublishedSection3Source` compiled in 2.9 seconds, all 4403 build jobs
 completed, and the existing Section 6 audit/regressions passed. The already
 running Section 5 verification also passed (run 33711286974).
 
-The subsequent masked-anchor transport, finite matrix identity, and final
-Section 5/6 source-facing endpoints require their own incremental check.
-The isolated Section 3 success does not certify those later additions.
+The subsequent masked-anchor transport, finite matrix/normalization identities,
+iid sampling adapter, and final Section 5/6 source-facing endpoints passed
+[combined run 33714847892](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33714847892)
+at commit `5301196f97a7de515d3602df4dc6a20924296f95`.
+All 122 Section 6 modules and 119 regressions passed. The narrow integration
+audit checked 126 new adapter declarations and their transitive foundations.
+This verifies the actual published theorem calls, not merely the imports.
+Finite source model/sampling identities and literature premises remain visible.
 Per the user's request, no Lean compilation is run locally. Further integration
 uses the Section 6 cloud check and a narrow new-adapter audit, without running
 the already verified Section 5 full suite again on this development branch.

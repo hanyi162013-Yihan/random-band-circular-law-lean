@@ -7,22 +7,23 @@ dependencies. No second mathlib checkout or large local download is needed.
 ## Main endpoint and verification status
 
 The target declaration is
-`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_section34`
-in [Section34GaussianProfileTheorem.lean](CircularLawSection6/Section34GaussianProfileTheorem.lean).
+`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_section3`
+in [PublishedSection3GaussianProfile.lean](CircularLawSection6/PublishedSection3GaussianProfile.lean).
 For a strictly positive continuous integrable BV profile of integral one
 and positive bandwidths tending to infinity, it gives the circular law in
 probability for the actual normalized Gaussian cyclic matrix. It does not
 assume that the bandwidth/dimension ratio has a limit.
 
-The complete 116-module checkpoint and 113 strict regression examples passed
-[cloud verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33710633794)
-at commit `d37151b820b450007747b679390135ce205ed0b0`.
-The transitive axiom audit checked 1103 declarations, including 938 theorem
-declarations. See [VERIFICATION.md](VERIFICATION.md) for the exact scope.
+The complete 122-module checkpoint and 119 strict regression examples passed
+[cloud verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33714847892)
+at commit `5301196f97a7de515d3602df4dc6a20924296f95`.
+The transitive audit checked 1167 Section 6 declarations, including 987 theorems,
+and separately checked 126 newly added Section 3-to-5 adapter declarations.
+See [VERIFICATION.md](VERIFICATION.md) for the exact scope.
 
 This theorem is conditional on explicitly stated mathematical sources.
 [SOURCE_BOUNDARIES.md](SOURCE_BOUNDARIES.md) lists their exact content:
-finite Section 3/4 inputs to the internally called Section 5 theorem, local Section 3 singular-value comparison,
+finite Section 4 estimates and published Section 3 model/literature data for the internally called Section 5 theorem, local Section 3 singular-value comparison,
 classical Ginibre inputs, and Han's Gaussian dense-bandwidth theorem.
 No full-profile convergence or full-matrix cutoff comparison is assumed.
 The axiom audit checks for forbidden axioms; it does not discharge hypotheses.
@@ -46,21 +47,26 @@ The axiom audit checks for forbidden axioms; it does not discharge hypotheses.
   exactly one, dimension-preserving subsequence fillers, the dense-source
   threshold, and sparse/dense recombination.
 
-These and the direct Section 5 call are included in the verified 116-module checkpoint. Subsequent work
-must receive its own verification and is not covered by that historical run.
+The 122-module checkpoint also verifies the direct published Section 3 calls,
+sample-law and finite matrix adapters, and exact logarithmic layer-cake identity
+with integrability and cutoff convergence derived from a linear CDF bound.
+Subsequent limiting-law/model instantiations require their own verification.
 
 ## Boundaries not concealed by the endpoint
 
 The cited Han, BC12 and classical Ginibre results are not reproved here.
-Section 5 is now called inside the proof, from finite Section 4 estimates and
-Section 3 anchors. Integrating the newly verified Section 3 density endpoints
-is subsequent work; merely importing those files does not discharge an anchor.
+Section 5 and the newly verified Section 3 density endpoints are called inside
+the proof. The new source-facing endpoint takes finite model/sampling identities
+and the published BBV/BC12 literature premises, not the short-ring probability
+limit again. Real-density sources additionally retain geometric Brascamp--Lieb.
+The broad older interfaces remain available for other source models.
 
 The circular-law chain uses an inverse-moment/uniform-L2 route. The separate
-`StieltjesHardEdge` module proves that a bounded Poisson transform implies
-a linear hard-edge mass bound. It does not yet identify that transform bound
-for the actual limiting singular law or prove the manuscript's logarithmic
-layer-cake identity. Thus the conditional main endpoint is not a claim that
+hard-edge modules prove that a bounded Poisson transform implies a linear CDF
+bound, then derive the exact logarithmic layer-cake identity, logarithmic
+integrability and cutoff limit. Identification of that transform bound for the
+actual limiting law is subsequent work, not covered by the 122-module run.
+Thus the conditional main endpoint is not a claim that
 every intermediate statement of Section 6 has been formalized line by line.
 
 ## Reproduce verification

@@ -1,10 +1,10 @@
 # Section 6 source boundaries
 
 The target declaration is
-`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_section34`
-in `CircularLawSection6/Section34GaussianProfileTheorem.lean`. The complete 116-module
+`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_section3`
+in `CircularLawSection6/PublishedSection3GaussianProfile.lean`. The complete 122-module
 checkpoint, including this theorem, passed strict compilation, the transitive
-axiom audit and all 113 regressions in GitHub run 33710633794. See
+axiom audits and all 119 regressions in GitHub run 33714847892. See
 `VERIFICATION.md` for the exact commit and scope.
 
 ## What the endpoint says
@@ -29,7 +29,7 @@ The axiom audit cannot and does not discharge these hypotheses.
 
 | Input | Exact mathematical content | Location |
 | --- | --- | --- |
-| `coreSection34` | Two finite quantitative Section 4 pressure estimates and Section 3 short/calibration anchors; the Section 5 core limit is derived internally | `ClampedSection5Source.lean` |
+| `coreSection34` | Two finite quantitative Section 4 pressure estimates and finite published Section 3 model/sampling/literature data; both Section 3 anchors and the Section 5 core limit are derived internally | `PublishedSection3CoreEndpoint.lean` |
 | `coreSection3` | Local finite squared-singular CDF comparison with finite Ginibre, plus the Ginibre bounded-test singular-law limit with nonnegative support and finite second moment | `CanonicalSourceComparison.lean` |
 | `ginibreRaw` | Classical normalized Ginibre raw log-potential convergence in probability for planar-a.e. shift | `SubsequenceSourceEndpoint.lean` |
 | `ginibreNegative` | Tightness in probability of one positive-order inverse singular-value moment of shifted Ginibre | `GinibreLowerCutoff.lean` |
@@ -78,9 +78,12 @@ is used.
 This package does not reprove the cited Han, BC12 or classical Ginibre source
 theorems. Section 3 has not been silently formalized by naming an input.
 The Section 5 endpoint is called internally, with all core geometry and
-Gaussian atom transfer proved. Its finite Section 3/4 inputs remain explicit.
-Integration of the newly checked Section 3/density theorem is subsequent work
-and must pass a separate combined cloud verification.
+Gaussian atom transfer proved. The new published Section 3/density entry point
+also passed combined cloud verification. Finite model/sampling identities,
+fixed atom laws and the published BBV/BC12 sources remain explicit; the real
+density branch additionally retains geometric Brascamp--Lieb. The model and
+sampling adapters are not a claim that every possible caller's finite inputs
+have been automatically instantiated.
 
 The proof uses an inverse-moment/uniform-L2 alternative to the manuscript's
 separate linear limiting-singular-density hard-edge estimate. That stronger
@@ -90,6 +93,7 @@ not identical to a line-by-line formalization of every intermediate claim.
 
 `StieltjesHardEdge.lean` separately proves the generic implication
 `integral t/(s^2+t^2) <= C` implies `sigma([0,t]) <= 2*C*t`, and its CDF
-version for nonnegative laws. The actual limiting-law transform bound and
-the logarithmic layer-cake identity are still separate boundaries, not
-consequences claimed from that generic adapter alone.
+version for nonnegative laws. The exact logarithmic layer-cake identity,
+integrability and linear cutoff error are now proved from this CDF bound.
+Identification of the bound for the actual limiting law is subsequent work,
+not covered by the 122-module checkpoint or inferred from the generic adapter.

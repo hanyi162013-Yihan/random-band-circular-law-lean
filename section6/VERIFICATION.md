@@ -1,5 +1,33 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified 122-module published Section 3 integration
+
+Commit: `5301196f97a7de515d3602df4dc6a20924296f95`.
+[GitHub run 33714847892](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33714847892),
+job `100521740539`: success on 2026-09-03 UTC.
+Exact tree: `61b42c046bf5f74971e075168df1c95bed162200`.
+
+All 122 modules, 119 strict regression examples, both transitive axiom audits
+and the 890-file source-token scan passed. The build completed 4415 jobs.
+The Section 6 audit checked 1167 declarations/987 theorems. The separate,
+narrow new-adapter audit checked 126 Section 3 integration declarations.
+Only `propext`, `Classical.choice` and `Quot.sound` are permitted transitively.
+The already verified Section 5 full suite was not rerun.
+
+The new endpoint `gaussian_profile_circular_law_of_published_section3` calls
+the actual published Section 3 density theorems through Section 5. Its finite
+model, fixed-atom, sampling and literature hypotheses remain explicit.
+Finite coordinate, matrix, normalization and iid sampling adapters passed.
+No short-ring convergence conclusion is inserted as an independent premise
+at this new entry point. The local Section 3 CDF/weak-law and classical
+Ginibre/Han fields elsewhere in the Section 6 source bundle remain visible.
+
+The exact lower-logarithmic layer-cake identity, its Fubini justification,
+absence of nonpositive mass, linear cutoff error, and logarithmic integrability
+and cutoff convergence from a second moment are verified conditional on a
+linear CDF bound. Subsequent work deriving that bound for the actual limiting
+Ginibre law is outside this checkpoint.
+
 ## Verified 116-module direct Section 5 checkpoint
 
 Commit: `d37151b820b450007747b679390135ce205ed0b0`.

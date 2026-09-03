@@ -710,3 +710,21 @@ example (σ : Measure ℝ) [IsProbabilityMeasure σ] {a C : ℝ} (ha : 0 < a) (h
     (h : ∀ t, 0 < t → t ≤ a → σ.real (Set.Iic t) ≤ C * t)
     (hsecond : Integrable (fun s : ℝ => s ^ 2) σ) : Integrable Real.log σ :=
   integrable_log_of_hardEdge_secondMoment σ ha hC h hsecond
+
+-- The published atom record uses the exact existing Gaussian law.
+example : ShortRingAnchor.AtomMomentAssumption21 circularComplexGaussian id :=
+  circularComplexGaussian_publishedMoments
+
+-- Ordered singular values survive coordinate permutations, including zeros.
+example {ι κ : Type*} [Fintype ι] [DecidableEq ι] [Fintype κ] [DecidableEq κ]
+    (e : ι ≃ κ) (A : Matrix ι ι ℂ) (i : ℕ) :
+    (A.submatrix e.symm e.symm).toEuclideanLin.singularValues i =
+      A.toEuclideanLin.singularValues i := matrix_singularValues_reindex e A i
+
+-- No limiting-law density or transform bound is an input to this conclusion.
+example (M : ℕ → ℕ+) (hM : Tendsto (fun n => (M n : ℕ)) atTop atTop) (z : ℂ)
+    (σ : Measure ℝ) [IsProbabilityMeasure σ] (hpos : ∀ᵐ s ∂σ, 0 ≤ s)
+    (hweak : GinibreSquaredTestInput M z σ) {comparisonConstant : ℝ}
+    (hBBV : GinibreBBVInput M z comparisonConstant)
+    {t : ℝ} (ht : 0 < t) : σ.real (Set.Iic t) ≤ 2 * t :=
+  ginibre_limiting_linearHardEdge M hM z σ hpos hweak hBBV t ht
