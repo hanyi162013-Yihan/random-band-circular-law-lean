@@ -1,4 +1,4 @@
-import CircularLawSections56.Section5.PublishedSection3ConcreteRings
+import CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint
 import Lean.Util.CollectAxioms
 
 /-! Narrow audit: new concrete Section 3-to-5 interface and its actual proof dependencies. -/
@@ -36,3 +36,7 @@ example (L K : ℕ) (h : L ≤ K) (ω : Sample) :
   samples_prefix L K h ω
 
 #check ringPotential_limit
+#check calibrationRaw_prefix_normalization
+#check literal_anchors
+#check indicator_complex_full_of_published_literature
+#check indicator_real_full_of_published_literature

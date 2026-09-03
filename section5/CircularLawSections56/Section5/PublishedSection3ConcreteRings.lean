@@ -78,11 +78,11 @@ theorem concreteModel_sources
       (D.weights n).bandwidthParameter_pos hη (le_max_left _ _)
   · intro n u
     have hη : 0 < (spectralParameter u
-        (localBulkHeight (v3BandwidthExponent ω₀ / 2) (k n + 1))).im := by
-      simp only [spectralParameter, Complex.add_im, Complex.ofReal_im, Complex.mul_im,
-        Complex.I_re, Complex.I_im, Complex.ofReal_re, mul_zero, mul_one, zero_add, add_zero]
-      unfold localBulkHeight
-      positivity
+        (localBulkHeight (v3BandwidthExponent ω₀ / 2) ((k n + 1 : ℕ) : ℝ))).im := by
+      have hv : 0 < localBulkHeight (v3BandwidthExponent ω₀ / 2) ((k n + 1 : ℕ) : ℝ) := by
+        unfold localBulkHeight
+        positivity
+      simpa [spectralParameter] using hv
     exact canonicalBBVAt_mono
       (hC Sample ℂ (sampleLaw ν) circularComplexGaussian (k n + 1) (Nat.succ_pos _)
         _ _ (denseVarianceProfile_isBandwidth (Nat.succ_pos _)) z _ hη)
@@ -147,6 +147,9 @@ theorem ringPotential_limit
   intro ε hε
   apply (hlim ε hε).congr'
   filter_upwards [eventually_ge_atTop K] with n hn
-  simp only [r, max_eq_left hn]
+  let probability : ℕ → ℝ := fun j => (sampleLaw ν).real
+    {ω | ε ≤ |ringPotential (k j) (d j) (center j) (profile j).b z ω - circularLogPotential z|}
+  change probability (r n) = probability n
+  exact congrArg probability (max_eq_left hn)
 
 end CircularLawSections56.Section5.PublishedSection3Concrete

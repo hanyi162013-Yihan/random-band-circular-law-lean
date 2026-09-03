@@ -71,8 +71,9 @@ jobs:
           set -o pipefail
           mkdir -p verification-ci
           if [[ "$SECTION5_INTERFACE_ONLY" == "true" ]]; then
-            lake --no-cache build CircularLawSections56.Section5.PublishedSection3ConcreteRings 2>&1 | tee verification-ci/build.log
+            lake --no-cache build CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint CircularLawSection6.PublishedConcreteGaussianProfile 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true ../section5/PublishedSection3ConcreteAudit.lean 2>&1 | tee verification-ci/axioms.log
+            lake --no-cache env lean -DwarningAsError=true PublishedConcreteAudit.lean 2>&1 | tee verification-ci/concrete-section6.log
           else
             lake --no-cache build CircularLawSection6 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true AxiomAudit.lean 2>&1 | tee verification-ci/axioms.log
