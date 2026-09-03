@@ -13,6 +13,7 @@ open Filter MeasureTheory Topology
 open scoped ENNReal
 noncomputable section
 set_option autoImplicit false
+set_option warningAsError true
 set_option maxHeartbeats 1800000
 
 namespace CircularLawSections56.Section5
@@ -74,7 +75,7 @@ theorem literal_canonical_profile_endpoint_of_published_section3
         atTop (fun _ => ∫ w, g w ∂circularMeasure)) := by
   apply literal_canonical_profile_endpoint_of_section34 d W center profile A J K C4 ν
     δ γ hc₀ hA hJ hK hδ hδγ hγ hW hfit hDim hcenter hProfile hAtom hCalibration hFinal
-  letI : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
+  let : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
     fun n => iidMeasure_isProbability (ν n) _
   filter_upwards [h3] with z hz
   exact PublishedSection3AnchorsTri.toAnchors hz

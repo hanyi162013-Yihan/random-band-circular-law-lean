@@ -13,6 +13,7 @@ open CircularLawSection4 CircularLawSection4.PaperIndicatorWeights
 open scoped BigOperators
 noncomputable section
 set_option autoImplicit false
+set_option warningAsError true
 set_option maxHeartbeats 800000
 
 namespace CircularLawSections56.Section5

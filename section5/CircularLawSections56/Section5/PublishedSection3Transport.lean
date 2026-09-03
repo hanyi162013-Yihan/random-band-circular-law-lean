@@ -11,6 +11,7 @@ initial indices can be ignored. No convergence conclusion is a field below.
 open MeasureTheory Filter Topology ShortRingAnchor
 noncomputable section
 set_option autoImplicit false
+set_option warningAsError true
 set_option maxHeartbeats 800000
 
 namespace CircularLawSections56.Section5
@@ -48,7 +49,7 @@ theorem PublishedSection3Anchor.limit
     {X : ∀ n, Ξ n → ℝ} {z : ℂ}
     (h : PublishedSection3Anchor μ νA νG ν X z) :
     TendstoInProbabilityTri ν X (circularLogPotential z) := by
-  letI := h.dimension_nonempty
+  let := h.dimension_nonempty
   have hlimit : TendstoInProbabilityTri (fun _ => μ)
       (fun n ω => normalizedShiftLogDet (h.model.matrix n ω) z) (circularLogPotential z) := by
     cases h.density with

@@ -11,6 +11,7 @@ open MeasureTheory ProbabilityTheory ShortRingAnchor
 open CircularLawSection4 CircularLawSection4.PaperIndicatorWeights
 noncomputable section
 set_option autoImplicit false
+set_option warningAsError true
 set_option maxHeartbeats 800000
 
 namespace CircularLawSections56.Section5
@@ -40,8 +41,13 @@ theorem paperSection3Coordinate_injective (k d W : ℕ) (hwidth : d + 2 = 2 * W 
   intro x y h
   have he := congrArg (paperIndicatorIndexEquiv (k + 1) d) h
   simp only [paperSection3Coordinate, paperIndicatorIndexEquiv_flatIndex] at he
-  exact Prod.ext ((ZMod.finEquiv (k + 1)).injective (congrArg Prod.fst he))
-    ((finCongr hwidth).symm.injective (congrArg Prod.snd he))
+  have hi : ZMod.finEquiv (k + 1) x.1 = ZMod.finEquiv (k + 1) y.1 :=
+    congrArg (fun p : ZMod (k + 1) × Fin (d + 2) => p.1) he
+  have hs : (finCongr hwidth).symm x.2 = (finCongr hwidth).symm y.2 :=
+    congrArg (fun p : ZMod (k + 1) × Fin (d + 2) => p.2) he
+  apply Prod.ext
+  · exact (ZMod.finEquiv (k + 1)).injective hi
+  · exact (finCongr hwidth).symm.injective hs
 
 theorem paperSection3Atoms_measurePreserving (k d W : ℕ) (hwidth : d + 2 = 2 * W + 1)
     (ν : Measure ℂ) [IsProbabilityMeasure ν] :
@@ -80,7 +86,7 @@ def publishedSection3ModelOfSamples
     PublishedSection3Model μ νA νG (fun n => k n + 1) W c₀ C₀ where
   weights n := paperSection3Weights (profile n) (hwidth n) hc₀
   fit := hfit
-  dimension_pos n := Nat.succ_pos _
+  dimension_pos _ := Nat.succ_pos _
   ringEntry n ω := paperSection3Atoms (k n) (d n) (W n) (hwidth n) (samples n ω)
   denseAtom n ω i j := denseSamples n ω (i, j)
   momentsA := hMomA

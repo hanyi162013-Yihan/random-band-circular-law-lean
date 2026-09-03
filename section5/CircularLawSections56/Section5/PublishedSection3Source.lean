@@ -14,6 +14,7 @@ open MeasureTheory ProbabilityTheory Filter Topology
 open ShortRingAnchor Arxiv2410V3
 noncomputable section
 set_option autoImplicit false
+set_option warningAsError true
 set_option maxHeartbeats 800000
 
 namespace CircularLawSections56.Section5

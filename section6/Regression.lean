@@ -693,3 +693,7 @@ example (i : Fin 4) (s : Fin 3) :
 example (σ : Measure ℝ) [IsProbabilityMeasure σ] {t C : ℝ}
     (ht : 0 < t) (h : ‖singularStieltjesTransform σ t‖ ≤ C) :
     σ.real (Set.Icc 0 t) ≤ 2 * C * t := hardEdge_mass_le_of_stieltjes_norm σ ht h
+
+example (σ : Measure ℝ) [IsProbabilityMeasure σ] {a C : ℝ} (ha : 0 < a)
+    (h : ∀ t, 0 < t → t ≤ a → σ.real (Set.Iic t) ≤ C * t) :
+    ∀ᵐ s ∂σ, 0 < s := hardEdge_positive_ae σ ha h

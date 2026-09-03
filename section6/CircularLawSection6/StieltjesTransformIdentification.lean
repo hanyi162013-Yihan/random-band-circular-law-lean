@@ -53,8 +53,11 @@ theorem singularStieltjesTransform_im (σ : Measure ℝ) [IsFiniteMeasure σ]
     {t : ℝ} (ht : 0 < t) :
     (singularStieltjesTransform σ t).im = ∫ s, singularPoissonKernel t s ∂σ := by
   unfold singularStieltjesTransform
-  rw [← integral_im (singularStieltjesKernel_integrable σ ht)]
-  exact integral_congr_ae (ae_of_all σ (singularStieltjesKernel_im t))
+  have hi : (∫ s, (singularStieltjesKernel t s).im ∂σ) =
+      (∫ s, singularStieltjesKernel t s ∂σ).im := by
+    simpa only [RCLike.im_eq_complex_im] using
+      integral_im (singularStieltjesKernel_integrable σ ht)
+  exact hi.symm.trans (integral_congr_ae (ae_of_all σ (singularStieltjesKernel_im t)))
 
 theorem hardEdge_mass_le_of_stieltjes_norm (σ : Measure ℝ) [IsFiniteMeasure σ]
     {t C : ℝ} (ht : 0 < t) (hbound : ‖singularStieltjesTransform σ t‖ ≤ C) :
