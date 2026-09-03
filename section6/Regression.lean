@@ -492,7 +492,7 @@ example (A : Matrix (Fin 2) (Fin 2) ℂ) :
 
 -- A two-dimensional matrix upper error is normalized by both dimension and cutoff.
 example (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A.det ≠ 0) :
-    |matrixCutoffPotential A 1 - matrixClippedPotential A 1 2| ≤ hilbertSchmidtSq A / (2 * 2) := by
+    |matrixCutoffPotential A 1 - matrixClippedPotential A 1 2| ≤ TaoVuReplacement.hilbertSchmidtSq A / (2 * 2) := by
   simpa using matrixCutoff_clipped_error_le A hA zero_lt_one (by norm_num : (1 : ℝ) ≤ 2)
     (by norm_num)
 
@@ -501,8 +501,8 @@ example (A : Matrix (Fin 2) (Fin 2) ℂ) :
     matrixSquaredSingularAverage A (ShortRingAnchor.clippedLog 1 2) = matrixClippedPotential A 1 2 := rfl
 
 -- The actual normalized diagonal Gaussian route has total mean energy equal to its dimension.
-example : (∫ ω, hilbertSchmidtSq (routedBandMatrix (cyclicFinSlot (N := 3) 0) (fun _ => 1) ω)
+example : (∫ ω, TaoVuReplacement.hilbertSchmidtSq (routedBandMatrix (cyclicFinSlot (N := 3) 0) (fun _ => 1) ω)
     ∂Measure.pi (fun _ : Fin 3 × Fin 1 => circularComplexGaussian)) = 3 := by
-  simpa using (routedBand_expected_energy (cyclicFinSlot 0)
+  simpa using (routedBand_expected_energy (cyclicFinSlot (N := 3) 0)
     (cyclicFinSlot_injective (by decide)) (fun _ => 1) (by simp) circularComplexGaussian
     circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment).2
