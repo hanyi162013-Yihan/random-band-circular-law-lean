@@ -43,7 +43,7 @@ AUDITS = {
              "Section10/BernoulliSection10Source/AxiomAudit.lean",
              "Section9/AxiomAudit.lean", "Section9/SmallBallAxiomAudit.lean"],
     "section5": ["AxiomAudit.lean", "GaussianMigrationAudit.lean"],
-    "section6": ["GaussianMigrationAudit.lean"],
+    "section6": ["GaussianMigrationAudit.lean", "PublicTheoremAxiomAudit.lean"],
 }
 REGRESSIONS = {
     "root": ["Section8/PublicSignatureAudit.lean", "SubgaussianSection8/PublicSignatureAudit.lean",
