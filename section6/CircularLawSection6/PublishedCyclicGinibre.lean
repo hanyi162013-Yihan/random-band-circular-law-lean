@@ -119,6 +119,6 @@ theorem cyclicGinibreCdfInput_of_published_models
   filter_upwards with ω
   rw [publishedJointCyclicModel_matrix, publishedJointDenseModel_matrix]
   exact matrixSquaredSingularCdfDistanceOn_shifted_reindex_right _ _
-    (ZMod.finEquiv (M n)).symm z R
+    (ZMod.finEquiv (M n)).toEquiv.symm z R
 
 end CircularLawSection6

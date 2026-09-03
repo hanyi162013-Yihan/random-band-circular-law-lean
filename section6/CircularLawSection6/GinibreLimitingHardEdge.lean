@@ -36,7 +36,7 @@ theorem GinibreSquaredTestInput.toPublished (M : ℕ → ℕ+) (z : ℂ) (σ : M
       matrixSquaredSingularAverage ((publishedGinibreModel (M n)).matrix ω - z • 1) φ =
         matrixSquaredSingularAverage (ginibreMatrix (M n) ω - z • 1) φ := by
     rw [publishedGinibreModel_matrix]
-    exact matrixSquaredSingularAverage_shifted_reindex (ZMod.finEquiv (M n)).symm
+    exact matrixSquaredSingularAverage_shifted_reindex (ZMod.finEquiv (M n)).toEquiv.symm
       (ginibreMatrix (M n) ω) z φ
   exact tendstoInProbabilityTri_congr_ae
     (fun n => cyclicAtomLaw (M n) circularComplexGaussian)

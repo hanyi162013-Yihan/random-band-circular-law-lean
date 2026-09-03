@@ -24,8 +24,20 @@ With the user's approval, this branch corrects the field to
 structure. No mathematical bound or literature premise is added. Main is
 not modified by this integration branch.
 
+The unique shared source is commit
+`5c7be7bf2bd843ccdbfb45fdc0144e3dc7163278` on
+`codex/shared-density-definition-fix`, based directly on `42c26b6`.
+It changes only this definition file; Section 6 and Section 10 reuse it.
+The file is byte-identical to this branch's already-corrected version:
+7643 bytes, SHA256
+`f96c9a78fb9c59b098e3207da87c6a7e0abbecb46cf934a5d652478163dfe7d5`.
+No second edit to the field is necessary when incorporating that commit.
+
 `section6/CircularLawSection6/PublishedGaussianDensity.lean` constructs the
 record for the actual circular Gaussian law, with bound 2. Two regression
 examples check the constructor and its precise finiteness field. The
-corrected imported dependency and its Section 5/6 consumers must be checked
-again in cloud CI; the earlier 122-module green run predates this correction.
+corrected imported dependency, concrete constructor, and existing Section 5/6
+entry points compiled in run `33717315989`; that run failed later in an
+unrelated new Section 6 reindexing proof. The complete build, audit and new
+regressions still require a green run. The earlier 122-module green run
+predates this correction.
