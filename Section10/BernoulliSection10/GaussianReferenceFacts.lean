@@ -44,8 +44,13 @@ theorem circularGaussian_snd_memLp (p : ℝ≥0∞) (hp : p ≠ ∞) :
 
 theorem circularGaussianAtom_memLp (p : ℝ≥0∞) (hp : p ≠ ∞) :
     MemLp circularGaussianAtom p circularGaussianPairLaw := by
-  exact (circularGaussian_fst_memLp p hp).ofReal.add
-    ((circularGaussian_snd_memLp p hp).ofReal.const_mul Complex.I)
+  have hf : MemLp (fun x : ℝ × ℝ => (x.1 : ℂ)) p circularGaussianPairLaw :=
+    (circularGaussian_fst_memLp p hp).ofReal
+  have hg : MemLp (fun x : ℝ × ℝ => (x.2 : ℂ)) p circularGaussianPairLaw :=
+    (circularGaussian_snd_memLp p hp).ofReal
+  have hsum : MemLp (fun x : ℝ × ℝ => (x.1 : ℂ) + Complex.I * (x.2 : ℂ))
+      p circularGaussianPairLaw := hf.add (hg.const_mul Complex.I)
+  exact hsum
 
 theorem circularGaussianAtom_integrable :
     Integrable circularGaussianAtom circularGaussianPairLaw :=
@@ -91,13 +96,17 @@ theorem circularGaussianAtom_second_moment :
     rw [Complex.sq_norm]
     simp [Complex.normSq_apply, circularGaussianAtom, pow_two]
   have hfst : (∫ x : ℝ × ℝ, x.1 ^ 2 ∂circularGaussianPairLaw) = 1 / 2 := by
-    simpa [circularGaussianPairLaw, gaussianHalf_second_moment] using
-      (integral_fun_fst (μ := gaussianReal 0 (1 / 2)) (ν := gaussianReal 0 (1 / 2))
-        (fun x : ℝ => x ^ 2))
+    calc
+      _ = (gaussianReal 0 (1 / 2)).real Set.univ •
+          (∫ x : ℝ, x ^ 2 ∂gaussianReal 0 (1 / 2)) :=
+        integral_fun_fst (fun x : ℝ => x ^ 2)
+      _ = 1 / 2 := by rw [gaussianHalf_second_moment]; simp
   have hsnd : (∫ x : ℝ × ℝ, x.2 ^ 2 ∂circularGaussianPairLaw) = 1 / 2 := by
-    simpa [circularGaussianPairLaw, gaussianHalf_second_moment] using
-      (integral_fun_snd (μ := gaussianReal 0 (1 / 2)) (ν := gaussianReal 0 (1 / 2))
-        (fun x : ℝ => x ^ 2))
+    calc
+      _ = (gaussianReal 0 (1 / 2)).real Set.univ •
+          (∫ x : ℝ, x ^ 2 ∂gaussianReal 0 (1 / 2)) :=
+        integral_fun_snd (fun x : ℝ => x ^ 2)
+      _ = 1 / 2 := by rw [gaussianHalf_second_moment]; simp
   simp_rw [he]
   rw [integral_add hf hg]
   rw [hfst, hsnd]

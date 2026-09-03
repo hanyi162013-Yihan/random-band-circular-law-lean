@@ -86,16 +86,22 @@ theorem bc12_on_sampleLaw
         (fun n ω => normalizedShiftLogDet (actualGinibre (N n) ω) z)
         (circularLogPotential z) := by
   obtain ⟨p, hp, hneg, hlog⟩ := hBC12 N hN hNtop z
-  have heq (n : ℕ) (ω : SampleSpace E) :
-      actualGinibre (N n) ω = ginibreOnSequence (N n) ω.2 := rfl
   refine ⟨p, hp, ?_, ?_⟩
   · intro δ hδ
     obtain ⟨C, hC, htail⟩ := hneg δ hδ
     refine ⟨C, hC, ?_⟩
     filter_upwards [htail] with n hn
-    simpa only [shiftedSingularValueProcess, heq, sampleLaw_snd_event] using hn
+    have hevent : (sampleLaw μ) {ω | C < ‖normalizedNegativeMoment p
+        (shiftedSingularValueProcess (fun n => actualGinibre (E := E) (N n)) z n ω)‖} =
+        gaussianSequenceLaw {ω | C < ‖normalizedNegativeMoment p
+          (shiftedSingularValueProcess (fun n => ginibreOnSequence (N n)) z n ω)‖} :=
+      sampleLaw_snd_event μ {ω | C < ‖normalizedNegativeMoment p
+        (shiftedSingularValueProcess (fun n => ginibreOnSequence (N n)) z n ω)‖}
+    exact hevent.trans_lt hn
   · rw [convergesInProbability_iff_norm] at hlog ⊢
     intro ε hε
-    simpa only [heq, sampleLaw_snd_event] using hlog ε hε
+    exact (hlog ε hε).congr fun n =>
+      (sampleLaw_snd_event μ {ω | ε ≤
+        ‖normalizedShiftLogDet (ginibreOnSequence (N n) ω) z - circularLogPotential z‖}).symm
 
 end BernoulliSection10Source

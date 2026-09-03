@@ -63,7 +63,13 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p verification-section10
-          python3 scripts/build_serial.py --target BernoulliSection10Complex.Front --keep-going 2>&1 | tee verification-section10/front-build.log
+          {
+            if lake --no-build build BernoulliSection10Complex.Front; then
+              lake build BernoulliSection10Complex.Front
+            else
+              python3 scripts/build_serial.py --target BernoulliSection10Complex.Front --keep-going
+            fi
+          } 2>&1 | tee verification-section10/front-build.log
       - name: Build concrete Section 3 models and both LSV connections
         id: source
         if: ${{ !cancelled() }}
@@ -77,7 +83,13 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python3 scripts/build_serial.py --target BernoulliSection10.HighBandClosure --target BernoulliSection10Complex.HighBandClosure --keep-going 2>&1 | tee verification-section10/conditional-closure-build.log
+          {
+            if lake --no-build build BernoulliSection10.HighBandClosure BernoulliSection10Complex.HighBandClosure; then
+              lake build BernoulliSection10.HighBandClosure BernoulliSection10Complex.HighBandClosure
+            else
+              python3 scripts/build_serial.py --target BernoulliSection10.HighBandClosure --target BernoulliSection10Complex.HighBandClosure --keep-going
+            fi
+          } 2>&1 | tee verification-section10/conditional-closure-build.log
       - name: Build source-connected caller-facing theorems
         id: connected
         if: ${{ !cancelled() && steps.source.outcome == 'success' && steps.assembly.outcome == 'success' }}
@@ -130,6 +142,7 @@ jobs:
         run: |
           set -o pipefail
           python3 scripts/check_axioms.py 2>&1 | tee verification-section10/full-axioms.log
+          python3 scripts/check_axioms.py --audit-file section3/ShortRingAnchor/Audit.lean --audit-file section3/ShortRingAnchor/HighBandIntegrationAudit.lean 2>&1 | tee verification-section10/section3-upstream-axioms.log
       - name: Preserve build and audit logs
         if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
