@@ -77,13 +77,17 @@ theorem highBandInput (A : Proposition38.Atom) (known : UpstreamInputs A) :
     apply tendsto_atTop_mono (fun k => ?_) hWtop
     nlinarith [Nat.zero_le (s k), Nat.zero_le (W k)]
   obtain ⟨p, hp, hnegative⟩ := known.negativeMoment _ hNpos hN z
-  have h := Proposition38.proposition38 A hW hs
+  have h := Proposition38.proposition38
+    (μ := inputLaw A.law) (νG := circularGaussianPairLaw) (W := W) (s := s) A hW hs
     (fun k => ringArray A ((s k + 3) * W k))
     (fun k => denseAtom ((s k + 3) * W k)) gaussianAtom gaussianAtom_moments
     (fun k => denseAtom_copies A ((s k + 3) * W k)) z omega known.comparisonConstant p
     ⟨homega, homegaLt⟩ hN hWtop hband (known.proposition32 z) known.cook112
-    (fun k eta heta => known.bbvRing (W k) (s k) (hW k) z eta heta)
-    (fun k eta heta => known.bbvGinibre ((s k + 3) * W k) (hNpos k) z eta heta)
+    (fun k eta heta => by
+      simpa only [momentBudget] using known.bbvRing (W k) (s k) (hW k) z eta heta)
+    (fun k eta heta => by
+      simpa only [denseModel, momentBudget] using
+        known.bbvGinibre ((s k + 3) * W k) (hNpos k) z eta heta)
     hp
     (by simpa only [normalizedDense_eq_circularGinibre] using hnegative)
     (fun k => known.projection _ (hNpos k))
@@ -98,7 +102,7 @@ end BernoulliSection8.Section3Bridge
 
 namespace BernoulliSection8
 
-def IsRealSubgaussianAtom.toSection3Atom {μ : Measure ℝ} {c : ℝ≥0}
+def IsRealSubgaussianAtom.toSection3Atom {μ : Measure ℝ} {c : NNReal}
     (h : IsRealSubgaussianAtom μ c) : ShortRingAnchor.Proposition38.Atom where
   law := μ
   parameter := c
