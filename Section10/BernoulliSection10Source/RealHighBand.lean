@@ -28,8 +28,8 @@ theorem realAtomMoments {μ : Measure ℝ} {L : ℝ}
     AtomMomentAssumption21 μ Complex.ofReal := by
   refine ⟨Complex.measurable_ofReal.stronglyMeasurable, ?_, ?_, ?_⟩
   · calc
-      (∫ x : ℝ, (x : ℂ) ∂μ) = ((∫ x : ℝ, x ∂μ) : ℂ) :=
-        integral_complex_ofReal (f := fun x : ℝ => x)
+      (∫ x : ℝ, (x : ℂ) ∂μ) = Complex.ofReal (∫ x : ℝ, x ∂μ) :=
+        integral_complex_ofReal (μ := μ) (f := fun x : ℝ => x)
       _ = 0 := by rw [hμ.centered, Complex.ofReal_zero]
   · simpa only [Complex.norm_real, Real.norm_eq_abs, sq_abs] using hμ.variance_one
   · simpa only [Complex.norm_real, Real.norm_eq_abs] using h3

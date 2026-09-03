@@ -58,3 +58,10 @@ build, and all final audits before publication to main. No local compilation
 of this integration has been run. Previously verified direct planar-LSV
 estimates use measure domination rather than this record; they will still be
 rebuilt because their imports are affected.
+
+In [run 33716279954](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33716279954)
+at `09add1a`, the schema target was built before the independent fresh print.
+The ordinary finite-bound construction regression passed, and the printed
+field uses actual infinity with no extra `{top}` quantifier. The shared
+`FullBlockLogLimit` source theorem also compiled. The complete real/complex
+endpoints and final whole-repository audit are still pending.
