@@ -75,7 +75,7 @@ theorem normalizedGinibreLaw_eq_map_iidColumns (N : ℕ) :
   change ((Real.sqrt (N : ℝ))⁻¹ : ℂ) *
       ((((Real.sqrt 2)⁻¹ : ℝ) : ℂ) * C j i) =
     ((Real.sqrt 2)⁻¹ • C j i) / (Real.sqrt (N : ℝ) : ℂ)
-  simp only [Algebra.smul_def, Complex.ofReal_inv, div_eq_mul_inv]
+  simp only [Complex.real_smul, Complex.ofReal_inv, div_eq_mul_inv]
   ring
 
 def sequenceColumns (N : ℕ) (ω : ℕ → ℂ) : Fin N → Fin N → ℂ :=
