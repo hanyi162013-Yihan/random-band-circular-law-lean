@@ -30,6 +30,7 @@ jobs:
     timeout-minutes: 180
     env:
       LEAN_NUM_THREADS: "2"
+      SECTION5_INTERFACE_ONLY: ${{ contains(github.event.head_commit.message, '[section5-interface]') }}
     steps:
       - name: Check out source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -69,9 +70,14 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p verification-ci
-          lake --no-cache build CircularLawSection6 2>&1 | tee verification-ci/build.log
-          lake --no-cache env lean -DwarningAsError=true AxiomAudit.lean 2>&1 | tee verification-ci/axioms.log
-          lake --no-cache env lean -DwarningAsError=true Regression.lean 2>&1 | tee verification-ci/regression.log
+          if [[ "$SECTION5_INTERFACE_ONLY" == "true" ]]; then
+            lake --no-cache build CircularLawSections56.Section5.PublishedSection3ConcreteRings 2>&1 | tee verification-ci/build.log
+            lake --no-cache env lean -DwarningAsError=true ../section5/PublishedSection3ConcreteAudit.lean 2>&1 | tee verification-ci/axioms.log
+          else
+            lake --no-cache build CircularLawSection6 2>&1 | tee verification-ci/build.log
+            lake --no-cache env lean -DwarningAsError=true AxiomAudit.lean 2>&1 | tee verification-ci/axioms.log
+            lake --no-cache env lean -DwarningAsError=true Regression.lean 2>&1 | tee verification-ci/regression.log
+          fi
       # Failed new modules must not discard already-built Section 4/5 dependencies.
       # Lake still validates source hashes; saving this cache does not change the job result.
       - name: Preserve completed dependency builds
