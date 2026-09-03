@@ -1,4 +1,5 @@
 import CircularLawSection6.CompactSourceAssembly
+import CircularLawSection6.GaussianProfile
 
 /-! # The sampled unit core inherits the compact source cutoff limit
 

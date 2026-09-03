@@ -575,3 +575,13 @@ example (p : NoncompactProfile) (R : ℕ) : 0 < p.referenceCoreCutoff R ∧ p.re
 example (p : NoncompactProfile) (W : ℝ) :
     0 < p.coreBandWeight 3 1 ⟨1, by decide⟩ W ⟨0, by decide⟩ :=
   p.coreBandWeight_pos 3 1 _ W _
+
+-- The replacement matrix has the same actual raw log determinant, even on singular samples.
+example (A : Matrix (ZMod 2) (ZMod 2) ℂ) (z : ℂ) :
+    CircularLawSections56.Section6.physicalLogPotential (cyclicPhysicalMatrix 1 A) z =
+      matrixRawPotential (A - z • 1) := cyclicPhysicalMatrix_logPotential 1 A z
+
+-- Physical reindexing does not change the normalized energy.
+example (A : Matrix (ZMod 2) (ZMod 2) ℂ) :
+    CircularLawSections56.Section6.physicalEnergy (cyclicPhysicalMatrix 1 A) = cyclicEnergy 2 A :=
+  cyclicPhysicalMatrix_energy 1 A
