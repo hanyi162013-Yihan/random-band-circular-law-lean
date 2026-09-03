@@ -17,8 +17,10 @@ open MeasureTheory ProbabilityTheory Filter Set Arxiv2410V3
 open scoped Topology
 namespace ShortRingAnchor
 
-local instance (n : ℕ) : MeasurableSpace (Matrix (Fin n) (Fin n) ℂ) := borel _
-local instance (n : ℕ) : BorelSpace (Matrix (Fin n) (Fin n) ℂ) := ⟨rfl⟩
+local instance proposition36VerifiedMatrixMeasurableSpace (n : ℕ) :
+    MeasurableSpace (Matrix (Fin n) (Fin n) ℂ) := borel _
+local instance proposition36VerifiedMatrixBorelSpace (n : ℕ) :
+    BorelSpace (Matrix (Fin n) (Fin n) ℂ) := ⟨rfl⟩
 
 /-- **Proposition 3.6 / (3.8), with no BC12 theorem or formula premise.**
 The retained dense BBV comparison is available at all positive heights:

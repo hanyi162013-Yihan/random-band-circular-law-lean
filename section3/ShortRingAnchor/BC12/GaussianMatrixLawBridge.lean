@@ -15,8 +15,10 @@ open MeasureTheory ProbabilityTheory Filter Set
 open scoped BigOperators Topology
 namespace ShortRingAnchor.BC12
 
-local instance (n : ℕ) : MeasurableSpace (Matrix (Fin n) (Fin n) ℂ) := borel _
-local instance (n : ℕ) : BorelSpace (Matrix (Fin n) (Fin n) ℂ) := ⟨rfl⟩
+local instance gaussianBridgeMatrixMeasurableSpace (n : ℕ) :
+    MeasurableSpace (Matrix (Fin n) (Fin n) ℂ) := borel _
+local instance gaussianBridgeMatrixBorelSpace (n : ℕ) :
+    BorelSpace (Matrix (Fin n) (Fin n) ℂ) := ⟨rfl⟩
 
 /-- BC12 model coordinates: reading matrix entries is Borel measurable. -/
 theorem measurable_matrixEntries (n : ℕ) :

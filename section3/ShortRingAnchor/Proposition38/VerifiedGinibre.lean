@@ -17,8 +17,10 @@ open MeasureTheory ProbabilityTheory Filter Arxiv2410V3
 open scoped Topology
 namespace ShortRingAnchor.Proposition38
 
-local instance (n : ℕ) : MeasurableSpace (Matrix (Fin n) (Fin n) ℂ) := borel _
-local instance (n : ℕ) : BorelSpace (Matrix (Fin n) (Fin n) ℂ) := ⟨rfl⟩
+local instance proposition38VerifiedMatrixMeasurableSpace (n : ℕ) :
+    MeasurableSpace (Matrix (Fin n) (Fin n) ℂ) := borel _
+local instance proposition38VerifiedMatrixBorelSpace (n : ℕ) :
+    BorelSpace (Matrix (Fin n) (Fin n) ℂ) := ⟨rfl⟩
 
 /-- **Proposition 3.8 / (3.19), with every BC12 input discharged.**
 The negative-moment exponent is constructed as `1/128`; the exact kernel
