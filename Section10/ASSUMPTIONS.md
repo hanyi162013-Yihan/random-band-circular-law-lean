@@ -13,8 +13,10 @@ The current branch removes `BC12GinibreInput` from all four
 `BernoulliSection10Source` endpoints. `VerifiedGinibreSources` constructs
 the exact Gaussian matrix law, negative-moment bound and full-log limit.
 BBV and real-only geometric Brascamp–Lieb remain explicit.
-**These changes await cloud validation.** The runs described below certify
-the earlier signatures, not the new migration.
+The Section 10 builds, all 502 chapter reports and new signatures passed
+at `c4e8078` in run `33815655602`. A subsequent missing Section 9 audit
+import made that root job fail overall; the expanded whole-chapter check
+is separate. The historical runs below certify earlier signatures.
 See [the migration audit](../GAUSSIAN_INPUT_MIGRATION.md).
 
 ## Previously verified source-connected real and planar extension

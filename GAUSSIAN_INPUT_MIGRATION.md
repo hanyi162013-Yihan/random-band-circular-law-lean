@@ -1,6 +1,7 @@
 # Gaussian input audit and migration
 
-Status: **Section 3 and Section 8 passed; the Section 5/6/10 migration is still being validated**.
+Status: **Sections 3, 5, 8 and 10 passed their migration checks;
+the strengthened Section 6 route and whole-chapter regression are pending**.
 The Section 3 construction is already verified and merged in PR #3, at
 `43798327f45d98c45f2aaae6e5d1f0d041fc19c9`.
 This document is not a certificate for the newer source changes.
@@ -10,11 +11,15 @@ Section 8's BC12-free adapter and both final theorem families passed
 at `7012b1ef2e13d63154e4436d0b201581dafa7954`: ordinary target builds,
 62 exact axiom reports and both compiled public-signature audits, including
 the shared Section 3 normalization lemma.
-The current broader migration at `c4e8078` is checked separately in
-[run 33815655602](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33815655602).
-The preceding run reported a Section 10 finite-coordinate law unfolding
-error and a Section 5 BBV variable-scope error. Both are repaired in this
-new run, which also checks the compatibility/taper migration.
+At `c4e807877fefef8339a6ff01ec4ed75bc08ded81`,
+[run 33815655602](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33815655602)
+passed the Section 5 public build and all 240 reports, including the taper
+adapter. Its root job passed all Section 8/10 target builds and all 564
+reports (502 for Section 10), then failed on a missing Section 9 umbrella
+import in the audit configuration. That is **not** a successful whole-run
+certificate. The missing audit-only imports are now included in the build
+closure. The full chapter check at `d603e53` is running in
+[run 33816611348](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33816611348).
 The shared lemma removes duplicated normalization proofs from Sections 8 and 10.
 
 ## Scope and proof boundary
@@ -36,10 +41,10 @@ silently discarded. Eliminating BC12 does not prove these different results.
 |---|---|---|---|
 | 3 | `proposition36_cyclicShortRing_withoutBC12`, `Proposition38.proposition38_withoutBC12` | No BC12 estimate; explicit Gaussian model law | Passed, merged |
 | 4 | deterministic / density / pressure results | No Gaussian spectral source found; “Gaussian elimination” is linear algebra | Sources unchanged |
-| 5 | `PublishedSection3Concrete.indicator_complex_full_of_published_literature` and real counterpart | `hBC12` removed; `provedGinibreInput hBBV` constructs both estimates | Pending |
+| 5 | `PublishedSection3Concrete.indicator_complex_full_of_published_literature` and real counterpart | `hBC12` removed; `provedGinibreInput hBBV` constructs both estimates | Passed at `c4e8078`, 240 reports, including the taper adapter |
 | 6 | `NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources` and BBV-core route | Only BBV and concrete Section 4 pressure fields; no raw-log, squared-test, Han or correlation field | New migration pending; earlier BBV-only endpoint already existed |
 | 7–9 | Section 7 lemmas are housed in the Section 8/9 libraries; both Section 8 final endpoints use the actual Section 3 adapter | Section 8 negative-moment/projection/correlation fields removed; Section 9 Cook/Nguyen inputs are distinct | Section 8 passed at `7012b1e`; Section 9 sources unchanged |
-| 10 | `BernoulliSection10Source.planar_density_circular_law`, `real_density_circular_law`, and both ring-log limits | `hBC12` removed; exact real-pair reference law and both estimates constructed | Pending |
+| 10 | `BernoulliSection10Source.planar_density_circular_law`, `real_density_circular_law`, and both ring-log limits | `hBC12` removed; exact real-pair reference law and both estimates constructed | Builds and all 502 chapter reports passed at `c4e8078`; whole-run check still pending |
 
 ### Section 6 really does depend on Section 5
 
@@ -86,7 +91,8 @@ an actual Ginibre model law and BBV, fixing the compatible exponent to
 `p = 1/128`. Its reduced record has only the taper's LSV, count and local
 comparison fields. This is a Gaussian-source migration, not a proof of those
 three taper estimates or a uniform-positive-profile theorem for taper weights.
-These additional compatibility/taper changes still require cloud validation.
+The taper adapter passed at `c4e8078`; the newer Section 6 compatibility
+changes still require cloud validation.
 
 ## Verification plan
 
@@ -97,6 +103,10 @@ These additional compatibility/taper changes still require cloud validation.
 - Each project ends with ordinary `lake --no-cache build` of its public targets.
 - Separate compiled axiom/signature audits require the usual
   `propext`, `Classical.choice`, `Quot.sound` allowlist with exact report counts.
+- The final expanded audit covers 975 root, 240 Section 5 and 20 Section 6
+  reports. Optional kernel replay checks the 22 changed proof modules with
+  one worker and exact module coverage. This uses Lean's own kernel, not an
+  external independent verifier, and does not replay all of mathlib.
 - No new proof-checking limit overrides, custom axioms, `sorry`, `admit`,
   `unsafe`, or `native_decide` are permitted in the new source constructors.
 - Cloud reports must be associated with their exact commit before marking a

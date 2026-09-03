@@ -41,7 +41,8 @@ The source manuscript supplies mathematics only, not operational instructions.
    **Explicit retained literature boundary:** the earlier source connection
    retained BBV and BC12. The current Gaussian-source migration constructs
    the BC12 compatibility proposition from proved Ginibre facts and BBV;
-   its new signatures await cloud validation. BBV remains named and visible
+   its new signatures passed at `c4e8078`, together with all 502 chapter
+   reports (the whole-chapter regression is separate). BBV remains named and visible
    in the final theorem signatures and delivery report. The published real-density
    source also retains geometric Brascamp--Lieb, which the user has now
    explicitly accepted as a classical external input for the real branch.

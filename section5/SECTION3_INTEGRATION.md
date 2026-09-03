@@ -1,6 +1,6 @@
 # Direct integration of the checked Section 3 package
 
-## Current Gaussian-source migration — awaiting cloud verification
+## Current Gaussian-source migration — verified 2026-09-03
 
 The current concrete endpoints no longer take `BC12GinibreInput`.
 `CircularLawSections56.Section5.VerifiedGinibreSources` identifies the actual
@@ -9,7 +9,15 @@ negative-moment tightness (the latter from BBV). The additional taper adapter
 constructs nonsingularity, negative moments, log limits and row moments;
 its remaining analytic fields concern only the taper matrix.
 See [the cross-chapter status](../GAUSSIAN_INPUT_MIGRATION.md).
-These changes are not certified by the historical runs below.
+These changes passed the Section 5 job of
+[run 33815655602](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33815655602/job/100847217827)
+at `c4e807877fefef8339a6ff01ec4ed75bc08ded81`: normal public-target build,
+224 existing and 16 migration axiom reports, plus the printed signatures.
+`TaperVerifiedGinibre` compiled in 2.6 seconds. Only the three standard
+foundations were reported. Artifact SHA-256:
+`e3a359ff3097b43f179e67cbd61bcf2afbbacb85e2001ce403c365595f6744ac`.
+The whole run had a separate root audit-import failure; this is a Section 5
+certificate, not a claim that every matrix job of that run succeeded.
 
 ## Historical concrete interface — verified 2026-09-03
 

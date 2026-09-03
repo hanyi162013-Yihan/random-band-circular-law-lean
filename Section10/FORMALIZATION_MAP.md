@@ -7,7 +7,8 @@ Section 3 connections internally. Their original BBV/BC12 interface and
 real-only geometric Brascamp–Lieb input passed scoped cloud run
 `33719162307` at `362c47f`. The current branch also constructs the BC12
 compatibility proposition internally, leaving BBV and real-only geometric
-Brascamp–Lieb; this signature change awaits separate cloud validation. See
+Brascamp–Lieb; these signatures and the 502 chapter reports passed at
+`c4e8078`, while the whole-chapter regression is pending. See
 [SOURCE_CONNECTION_AUDIT.md](SOURCE_CONNECTION_AUDIT.md) for both final
 signatures and [COMPLEX_FORMALIZATION_MAP.md](COMPLEX_FORMALIZATION_MAP.md)
 for the planar counterpart of every item. Historical 857-report/full-root

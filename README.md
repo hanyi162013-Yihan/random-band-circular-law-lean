@@ -16,9 +16,9 @@ remain conditional on the [explicit mathematical inputs listed below](#inputs-st
 **Branch migration notice:** the new removal of external Gaussian inputs from
 Sections 5, 6, 8 and 10 is tracked in
 [GAUSSIAN_INPUT_MIGRATION.md](GAUSSIAN_INPUT_MIGRATION.md).
-Section 3 is merged and Section 8 has passed; the Section 5/6/10 checks are still pending. The section guide and historical
-verification records below must not be taken as certification of these
-unverified signature changes.
+Section 3 is merged, and the Section 5, 8 and 10 migration checks have passed.
+The strengthened Section 6 route and final whole-chapter regression are
+still pending; the historical records below do not certify those new changes.
 
 ## Results in paper order
 

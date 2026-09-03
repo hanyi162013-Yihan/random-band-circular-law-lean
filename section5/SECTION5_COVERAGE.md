@@ -2,7 +2,8 @@
 
 本轮高斯输入迁移：固定原子 indicator 终点已改为内部构造 Ginibre 参考结论，
 不再接收 BC12 参数；新增 taper 适配只保留目标 taper 的 LSV、计数、局部比较三项。
-这批修改正在云端验证，见 [全篇迁移状态](../GAUSSIAN_INPUT_MIGRATION.md)。
+这批修改已在 `c4e8078` 的 Section 5 云端任务通过构建与 240 项公理审计，
+见 [本章验证记录](SECTION3_INTEGRATION.md) 及 [全篇迁移状态](../GAUSSIAN_INPUT_MIGRATION.md)。
 
 历史版本状态：总入口（4079 个构建任务）、65 个新增模块的严格重查、公理审计、15 个边界测试及全部 118 个 Section 5 模块的内核重放均已通过。
 
@@ -82,7 +83,7 @@ IID 数组上。其 `complexify` 定理证明输入搬运；最终结论又回�
 本轮的 `TaperVerifiedGinibre` 进一步从实际 Ginibre 分布与 BBV 构造上述四项高斯
 结论；新入口 `tapered_short_ring_of_section3_estimates_withoutBC12` 的记录
 `Section3TaperNonGaussianInputs` 只有目标矩阵的三项估计。尚未声称已证明这些 taper
-估计，也没有把趋于零的权重下界改成统一正常数。该新适配仍待云端验证。
+估计，也没有把趋于零的权重下界改成统一正常数。该新适配已通过本轮云端验证。
 
 ## 原文逐项对应
 

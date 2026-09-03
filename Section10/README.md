@@ -5,10 +5,13 @@ Yi Han's [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1):
 Proposition 10.1, local results 10.2–10.10, equations 10.30–10.57, and their
 assembly into the circular-law conclusion of Theorem 2.10.
 
-**Current migration pending:** the concrete endpoints now construct their
+**Gaussian-source migration checked:** the concrete endpoints now construct their
 Gaussian reference estimates instead of accepting `BC12GinibreInput`.
 See [the cross-chapter migration status](../GAUSSIAN_INPUT_MIGRATION.md).
-The new signatures still require their own successful cloud check.
+At `c4e8078`, all three Section 10 targets and all 502 chapter axiom reports,
+including the new public signatures, passed. The same root job later failed
+on a missing Section 9 audit import; its overall result is not reported as
+green. The expanded whole-chapter run remains pending.
 
 **Historical conditional verification:** [cloud run 33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)
 passed at `362c47f`: all three Section 10 targets and their actual dependencies,

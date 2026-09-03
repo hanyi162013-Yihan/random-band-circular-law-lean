@@ -2,7 +2,13 @@
 
 ## Current migration status
 
-The BC12-free signature migration is pending cloud validation.
+The BC12-free signatures, all three Section 10 targets and all 502 exact
+Section 10 axiom reports passed at
+`c4e807877fefef8339a6ff01ec4ed75bc08ded81`, in
+[run 33815655602](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33815655602/job/100847217601).
+That root job subsequently failed on a missing Section 9 audit-only import;
+this is a Section 10 checkpoint, not an overall green run. The import issue
+is fixed and the expanded whole-chapter check is pending.
 `VerifiedGinibreSources` supplies the old BC12 compatibility proposition
 internally from BBV. The certificates and tables below describe the
 **historical pre-migration commit** and are not certificates for current

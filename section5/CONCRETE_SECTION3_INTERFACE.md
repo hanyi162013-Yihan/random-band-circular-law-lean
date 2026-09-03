@@ -1,9 +1,10 @@
 # Concrete Section 3 → Section 5 interface
 
 **Migration status:** the current branch removes the external BC12 parameter
-using `VerifiedGinibreSources.provedGinibreInput` (in the enclosing
-`PublishedSection3Concrete` namespace). These signature changes await cloud
-validation; the successful runs below certify the earlier source version.
+using `provedGinibreInput` in the `PublishedSection3Concrete` namespace,
+defined in `VerifiedGinibreSources.lean`. These signature changes passed
+at `c4e8078`, with all 240 Section 5 reports and the normal target build;
+see [the current certificate](SECTION3_INTEGRATION.md).
 See [the whole-paper migration audit](../GAUSSIAN_INPUT_MIGRATION.md).
 
 The new entry points construct the actual short-ring and calibration matrices
