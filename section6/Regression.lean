@@ -729,7 +729,7 @@ example : ShortRingAnchor.AtomMomentAssumption21 circularComplexGaussian id :=
   circularComplexGaussian_publishedMoments
 
 -- A concrete density constructor guards against vacuous source assumptions.
-example : ShortRingAnchor.HasBoundedDensityWithRespectTo
+noncomputable example : ShortRingAnchor.HasBoundedDensityWithRespectTo
     (Measure.map id circularComplexGaussian) (volume : Measure ℂ) :=
   circularComplexGaussian_publishedDensity
 
