@@ -109,7 +109,7 @@ theorem ginibre_raw_of_bc12
         (measurable_pi_apply j).comp ((measurable_pi_apply i).comp hA))).div_const _
     simpa only [Real.norm_eq_abs] using (hraw.sub_const (circularRadialPotential ‖z‖)).norm
   have he := (GinibreReferenceSources.cyclicSamples_measurePreserving (N n)).measureReal_preimage
-    (measurableSet_le measurable_const hm).nullMeasurableSet
+    (measurableSet_le (measurable_const (a := ε)) hm).nullMeasurableSet
   simpa only [Set.preimage_setOf_eq, GinibreReferenceSources.cyclicSamples_raw,
     circularRadialPotential, circularLogPotential] using he
 

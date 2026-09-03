@@ -78,7 +78,7 @@ jobs:
             lake --no-cache env lean -DwarningAsError=true ../section5/PublishedSection3ConcreteAudit.lean 2>&1 | tee verification-ci/axioms.log
             lake --no-cache env lean -DwarningAsError=true PublishedConcreteAudit.lean 2>&1 | tee verification-ci/concrete-section6.log
           elif [[ "$DENSE_INTERFACE_ONLY" == "true" ]]; then
-            lake --no-cache build CircularLawSection6.DenseProfileEndpoint 2>&1 | tee verification-ci/build.log
+            lake --no-cache build CircularLawSection6.GinibreFiniteFormulaSources 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true DenseGinibreAudit.lean 2>&1 | tee verification-ci/axioms.log
           else
             lake --no-cache build CircularLawSection6 2>&1 | tee verification-ci/build.log

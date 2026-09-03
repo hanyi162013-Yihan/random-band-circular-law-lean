@@ -66,6 +66,7 @@ theorem negativeMomentTightness_of_ginibreLaw_and_count
     (K := 1 + C / 127 + C)
   apply Eventually.of_forall
   intro k sample hs
+  change ‖normalizedNegativeMoment (1 / 128) (shiftedSingularValueFamily (G k sample) z)‖ ≤ _
   rw [Real.norm_eq_abs, abs_of_nonneg (normalizedNegativeMoment_nonneg
     (fun i => shiftedSingularValueFamily_nonneg (G k sample) z i))]
   apply normalizedNegativeMoment_one_div_128_le _

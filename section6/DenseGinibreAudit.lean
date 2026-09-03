@@ -1,4 +1,4 @@
-import CircularLawSection6.DenseProfileEndpoint
+import CircularLawSection6.GinibreFiniteFormulaSources
 import Lean.Util.CollectAxioms
 
 /-! Audit the new dense-model and actual Ginibre source adapters, with their
@@ -22,6 +22,8 @@ run_cmd do
     `CircularLawSection6.NoncompactProfile.dense_profile_spectral_limit_of_section3,
     `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_without_Han,
     `CircularLawSection6.bc12_of_bbv_and_logPotential,
+    `CircularLawSection6.ginibreLogPotential_of_finiteFormulas,
+    `CircularLawSection6.bc12_of_bbv_and_finiteFormulas,
     `ShortRingAnchor.BC12.normalizedGinibre_lower_bad_tendsto_zero,
     `ShortRingAnchor.BC12.negativeMomentTightness_of_ginibreLaw_and_v3,
     `ShortRingAnchor.BC12.negativeMomentTightness_normalizedDenseMatrixProcess,
@@ -46,3 +48,4 @@ run_cmd do
 #check CircularLawSection6.NoncompactProfile.GaussianProfileReducedSources.toConcrete
 #check CircularLawSection6.DenseProfile.actualMatrix_conclusion
 #check CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_without_Han
+#check CircularLawSection6.ginibreLogPotential_of_finiteFormulas

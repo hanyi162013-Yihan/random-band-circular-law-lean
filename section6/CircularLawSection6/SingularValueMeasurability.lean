@@ -16,6 +16,7 @@ open scoped BigOperators
 noncomputable section
 set_option autoImplicit false
 set_option warningAsError true
+set_option maxHeartbeats 800000
 
 namespace CircularLawSection6
 
@@ -42,20 +43,20 @@ theorem singularValue_le_add_opNorm (T S : E →L[ℂ] F)
     calc
       ‖T x‖ = ‖S x + (T - S) x‖ := by simp
       _ ≤ ‖S x‖ + ‖(T - S) x‖ := norm_add_le _ _
-      _ ≤ _ := add_le_add_left ((T - S).le_opNorm x) _
+      _ ≤ _ := add_le_add le_rfl ((T - S).le_opNorm x)
   have hquot : LinearMap.singularQuotient T.toLinearMap x ≤
       LinearMap.singularQuotient S.toLinearMap x + ‖T - S‖ := by
     unfold LinearMap.singularQuotient
     apply (div_le_iff₀ (norm_pos_iff.mpr hx0)).2
     rw [add_mul, div_mul_cancel₀ _ (norm_ne_zero_iff.mpr hx0)]
     exact hnorm
-  exact hleft.trans (hquot.trans (add_le_add_right hright _))
+  exact hleft.trans (hquot.trans (add_le_add hright le_rfl))
 
 theorem singularValue_lipschitz {n : ℕ} (hn : finrank ℂ E = n) (i : Fin n) :
     LipschitzWith 1 (fun T : E →L[ℂ] F => T.toLinearMap.singularValues i) := by
   apply LipschitzWith.of_dist_le_mul
   intro T S
-  simp only [NNReal.coe_one, one_mul, Real.dist_eq, dist_eq_norm]
+  simp only [NNReal.coe_one, one_mul, dist_eq_norm]
   apply abs_sub_le_iff.2
   have hTS := singularValue_le_add_opNorm T S hn i
   have hST := singularValue_le_add_opNorm S T hn i
@@ -67,9 +68,16 @@ theorem continuous_matrix_singularValue
     Continuous (fun A : Matrix ι ι ℂ => A.toEuclideanLin.singularValues i) := by
   let L : Matrix ι ι ℂ →ₗ[ℂ]
       (EuclideanSpace ℂ ι →L[ℂ] EuclideanSpace ℂ ι) :=
-    LinearMap.toContinuousLinearMap.toLinearMap.comp Matrix.toEuclideanLin.toLinearMap
-  exact (singularValue_lipschitz
-    (finrank_euclideanSpace (𝕜 := ℂ) (ι := ι)) i).continuous.comp L.continuous_of_finiteDimensional
+    (LinearMap.toContinuousLinearMap :
+      (EuclideanSpace ℂ ι →ₗ[ℂ] EuclideanSpace ℂ ι) ≃ₗ[ℂ]
+        (EuclideanSpace ℂ ι →L[ℂ] EuclideanSpace ℂ ι)).toLinearMap.comp
+      (Matrix.toEuclideanLin : Matrix ι ι ℂ ≃ₗ[ℂ]
+        (EuclideanSpace ℂ ι →ₗ[ℂ] EuclideanSpace ℂ ι)).toLinearMap
+  have hLip : LipschitzWith 1 (fun T : EuclideanSpace ℂ ι →L[ℂ] EuclideanSpace ℂ ι =>
+      T.toLinearMap.singularValues i) :=
+    singularValue_lipschitz (E := EuclideanSpace ℂ ι) (F := EuclideanSpace ℂ ι)
+      (finrank_euclideanSpace (𝕜 := ℂ) (ι := ι)) i
+  exact hLip.continuous.comp L.continuous_of_finiteDimensional
 
 theorem measurable_matrixNegativeMoment
     {ι : Type*} [Fintype ι] [DecidableEq ι] (p : ℝ) :

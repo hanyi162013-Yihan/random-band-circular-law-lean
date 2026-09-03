@@ -62,8 +62,8 @@ theorem profile_raw_limit
     (measurable_log_norm_matrix_det _ (fun i j =>
       (measurable_pi_apply j).comp ((measurable_pi_apply i).comp hA))).div_const _
   have he := (cyclicSamples_measurePreserving (M n)).measureReal_preimage
-    (measurableSet_le measurable_const
-      ((hraw.sub measurable_const).abs)).nullMeasurableSet
+    (measurableSet_le (measurable_const (a := ε))
+      ((hraw.sub_const (circularRadialPotential ‖z‖)).abs)).nullMeasurableSet
   simpa only [Set.preimage_setOf_eq, profile_cyclicSamples_raw,
     circularRadialPotential, circularLogPotential, gaussianProfileLaw] using he
 

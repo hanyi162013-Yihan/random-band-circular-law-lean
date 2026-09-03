@@ -1,4 +1,5 @@
 import CircularLawSection6.DenseProfilePublishedModel
+import CircularLawSection6.ProfileMatrices
 import ShortRingAnchor.HighBandLSVProbability
 
 /-! # The proved Section 3 least-value bound for actual dense profile matrices
