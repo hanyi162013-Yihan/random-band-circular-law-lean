@@ -1,0 +1,17 @@
+/- Source snapshot: upstream-sources/livshyts-projection-formalization/LivshytsProjectionFormalization.lean
+   Local adaptation: import paths prefixed with Vendor; compatibility edits are documented separately. -/
+import Vendor.LivshytsProjectionFormalization.ProbabilityCore
+import Vendor.LivshytsProjectionFormalization.ProjectionSmallBall
+import Vendor.LivshytsProjectionFormalization.Section5TargetFormalization
+import Vendor.LivshytsProjectionFormalization.GeometricBrascampLieb
+import Vendor.LivshytsProjectionFormalization.KernelCoordinateFrame
+import Vendor.LivshytsProjectionFormalization.ConcreteFiberBL
+import Vendor.LivshytsProjectionFormalization.DensityScaling
+import Vendor.LivshytsProjectionFormalization.EntropyJacobian
+import Vendor.LivshytsProjectionFormalization.ConcreteProjectionDensity
+import Vendor.LivshytsProjectionFormalization.RealComplexCorrespondence
+import Vendor.LivshytsProjectionFormalization.FiniteProductDensity
+import Vendor.LivshytsProjectionFormalization.RandomVectorProjection
+
+import Vendor.LivshytsProjectionFormalization.ProjectionWithoutCoarea
+

@@ -1,0 +1,396 @@
+ℹ [3192/3392] Replayed ShortRingAnchor.BC12.NegativeMomentCounting
+info: ShortRingAnchor/BC12/NegativeMomentCounting.lean:125:8: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+⚠ [3202/3392] Replayed ShortRingAnchor.PoissonSmoothingKernel
+warning: ShortRingAnchor/PoissonSmoothingKernel.lean:126:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3207/3392] Replayed ShortRingAnchor.HermitizationResolventBlocks
+warning: ShortRingAnchor/HermitizationResolventBlocks.lean:54:29: This simp argument is unused:
+  Matrix.one_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Matrix.toBlocks₂₁]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3219/3392] Replayed ShortRingAnchor.MatrixLocalBulk
+warning: ShortRingAnchor/MatrixLocalBulk.lean:74:20: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3375/3392] Replayed Vendor.Arxiv2410.V3.BVH.EntryResolvent
+warning: Vendor/Arxiv2410/V3/BVH/EntryResolvent.lean:176:67: This simp argument is unused:
+  hstar
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [entryHermitianSummand, singleEntryMatrix, Matrix.single]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/Arxiv2410/V3/BVH/EntryResolvent.lean:279:6: This simp argument is unused:
+  smul_smul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.mul_add, Matrix.add_mul, Matrix.mul_smul, Matrix.smul_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3376/3392] Replayed Vendor.Arxiv2410.V3.BVH.ProductLindeberg
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:120:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:129:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:108:0: automatically included section variable(s) unused in theorem `Arxiv2410V3.BVH.norm_integral_pi_sub_integral_pi_update_le`:
+  [CompleteSpace E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:248:8: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3385/3423] Replayed Vendor.Arxiv2410.V3.BVH.ModelMoments
+warning: Vendor/Arxiv2410/V3/BVH/ModelMoments.lean:112:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Vendor/Arxiv2410/V3/BVH/ModelMoments.lean:157:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3387/3423] Replayed Vendor.Arxiv2410.V3.BVH.GaussianConstruction
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:244:5: Variable name `model` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _model
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:250:5: Variable name `model` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _model
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:260:7: Variable name `h` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:302:6: This simp argument is unused:
+  Matrix.diagonal_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [canonicalCircularizedMatrix, canonicalDiagonalDifference, hij]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3391/3423] Replayed Vendor.Arxiv2410.V3.BVH.TraceUniversality
+warning: Vendor/Arxiv2410/V3/BVH/TraceUniversality.lean:129:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Arxiv2410/V3/BVH/TraceUniversality.lean:132:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3419/3423] Replayed ShortRingAnchor.V3MatrixLocalBulk
+warning: ShortRingAnchor/V3MatrixLocalBulk.lean:52:32: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+ℹ [3423/3423] Built ShortRingAnchor.Audit (67s)
+info: ShortRingAnchor/Audit.lean:13:0: 'ShortRingAnchor.proposition36_of_source_scales' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:14:0: 'ShortRingAnchor.proposition36_cyclicShortRing_of_source_scales' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:15:0: 'ShortRingAnchor.proposition36_matrix_form_highProbability' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:16:0: 'ShortRingAnchor.proposition36_matrix_form_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:17:0: 'ShortRingAnchor.empiricalLog_convergesInProbability_of_truncations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:18:0: 'ShortRingAnchor.abs_empiricalClippedLog_sub_le_cdfDistanceOn_zero_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:19:0: 'ShortRingAnchor.normalizedSmallLogMass_convergesInProbability_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:20:0: 'ShortRingAnchor.ginibreSmallLogMass_convergesInProbability_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:21:0: 'ShortRingAnchor.upperRawLogTail_le_log_div_sq_mul_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:22:0: 'ShortRingAnchor.sum_sq_matrixSingularValue_eq_sum_norm_sq_entries' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:23:0: 'ShortRingAnchor.upperSecondMomentInputs_of_centered_matrix_entries' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:24:0: 'ShortRingAnchor.centeredMatrixRowSecondMomentInputs_cyclicShortRing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:25:0: 'ShortRingAnchor.normalizedDenseMatrixProcess_centeredRowSecondMomentInputs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:26:0: 'ShortRingAnchor.AtomMomentAssumption21.integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:27:0: 'ShortRingAnchor.AtomMomentAssumption21.normSqIntegrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:28:0: 'ShortRingAnchor.RingEntryMomentCopies21.centeredMatrixRowSecondMomentInputs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:29:0: 'ShortRingAnchor.DenseAtomMomentCopies21.centeredMatrixRowSecondMomentInputs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:30:0: 'ShortRingAnchor.theorem31LeastSingularValueInput_of_minimum' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:31:0: 'ShortRingAnchor.Theorem31MinimumSingularValueInput.det_ne_zero_on_good' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:32:0: 'ShortRingAnchor.Theorem31MinimumSingularValueInput.singular_probability_tendsto_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:33:0: 'ShortRingAnchor.UpperCorrectionsUniformlyNegligible.congr_on_good' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:34:0: 'ShortRingAnchor.shiftedNonsingularInProbability_of_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:35:0: 'ShortRingAnchor.Proposition34AllCutoffsInput.specialize_eventually' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:36:0: 'ShortRingAnchor.smallSingularValue_card_le_smallHermitizationEigenvalue_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:37:0: 'ShortRingAnchor.proposition34AllCutoffsInput_of_hermitization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:38:0: 'ShortRingAnchor.sourceHardEdgeError_tendsto_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:39:0: 'ShortRingAnchor.sourceBulkCutoffBookkeeping_tendsto_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:40:0: 'ShortRingAnchor.manuscriptHardEdgeCutoff_le_sourceCutoff_eventually' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:41:0: 'ShortRingAnchor.norm_det_eq_prod_matrixSingularValue' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:42:0: 'ShortRingAnchor.shiftedDetPolynomial_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:43:0: 'ShortRingAnchor.shifted_det_ne_zero_ae_of_law_absolutelyContinuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:44:0: 'ShortRingAnchor.cyclicShortRingShiftedDetPolynomial_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:45:0: 'ShortRingAnchor.cyclicShortRing_shifted_det_ne_zero_ae' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:46:0: 'ShortRingAnchor.mvPolynomial_eval_ne_zero_ae_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:47:0: 'ShortRingAnchor.mvPolynomial_zeroSet_volume' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:48:0: 'ShortRingAnchor.hasNullMvPolynomialZeroSets_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:49:0: 'ShortRingAnchor.hasNullMvPolynomialZeroSets_volume' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:50:0: 'ShortRingAnchor.HasBoundedDensityWithRespectTo.absolutelyContinuous' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:51:0: 'ShortRingAnchor.AtomDensityAlternative21.nullSingletonClass' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:52:0: 'ShortRingAnchor.finite_product_absolutelyContinuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:53:0: 'ShortRingAnchor.independent_jointLaw_absolutelyContinuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:54:0: 'ShortRingAnchor.independent_complex_jointLaw_of_boundedDensity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:55:0: 'ShortRingAnchor.independent_real_jointLaw_of_boundedDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:56:0: 'ShortRingAnchor.shifted_det_ne_zero_ae_of_law_absolutelyContinuous_volume' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:57:0: 'ShortRingAnchor.mvPolynomial_ne_zero_ae_of_independent_nonatomic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:58:0: 'ShortRingAnchor.mvPolynomial_ne_zero_ae_of_independent_density' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:59:0: 'ShortRingAnchor.shifted_det_ne_zero_ae_of_independent_density' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:60:0: 'ShortRingAnchor.cyclicShortRing_shifted_det_ne_zero_ae_of_independent_density' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:61:0: 'ShortRingAnchor.det_div_sub_smul_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:62:0: 'ShortRingAnchor.normalizedDense_shifted_det_ne_zero_ae_of_independent_density' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:63:0: 'ShortRingAnchor.normalizedDense_shiftedNonsingularInProbability_of_independent_density' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:67:0: 'ShortRingAnchor.BC12.ginibreOnePointDensity_le_inv_pi' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:68:0: 'ShortRingAnchor.BC12.ginibreOnePointDensity_le_gaussian' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:69:0: 'ShortRingAnchor.BC12.ginibreOnePointDensity_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:70:0: 'ShortRingAnchor.BC12.norm_ne_one_ae_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:71:0: 'ShortRingAnchor.BC12.integral_mul_ginibreOnePointDensity_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:72:0: 'ShortRingAnchor.BC12.centered_convergesInProbability_of_square_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:73:0: 'ShortRingAnchor.BC12.convergesInProbability_of_mean_and_square_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:74:0: 'ShortRingAnchor.BC12.negativeMomentTightness_of_uniform_integral_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:75:0: 'ShortRingAnchor.BC12.ginibre_variance_le_of_formulas' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:76:0: 'ShortRingAnchor.BC12.ginibre_statistic_convergesInProbability_of_formulas' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:77:0: 'ShortRingAnchor.BC12.integrable_log_sq_mul_ginibreEnvelope' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:78:0: 'ShortRingAnchor.BC12.integrable_abs_log_mul_ginibreEnvelope' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:79:0: 'ShortRingAnchor.BC12.integral_eq_radial_circleAverage' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:80:0: 'ShortRingAnchor.BC12.integral_mul_log_from_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:81:0: 'ShortRingAnchor.BC12.integral_log_mul_circularDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:82:0: 'ShortRingAnchor.BC12.exists_eigenvalueEnumeration' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:83:0: 'ShortRingAnchor.BC12.matrixEigenvalues_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:84:0: 'ShortRingAnchor.BC12.eigenvalues_ne_fixed_ae_of_firstMoment' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:85:0: 'ShortRingAnchor.BC12.normalizedShiftLogDet_eq_eigenvalueStatistic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:86:0: 'ShortRingAnchor.BC12.ginibre_log_statistic_convergesInProbability_of_formulas' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:87:0: 'ShortRingAnchor.BC12.ginibre_logdet_convergesInProbability_of_formulas' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:88:0: 'ShortRingAnchor.BC12.ginibre_matrix_logdet_convergesInProbability_of_formulas' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:92:0: 'ShortRingAnchor.BC12.continuousOn_rpow_positive_interval' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:93:0: 'ShortRingAnchor.BC12.integral_lower_indicator_eq_clamp' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:94:0: 'ShortRingAnchor.BC12.integral_negative_power_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:95:0: 'ShortRingAnchor.BC12.clamped_negativePower_layerCake' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:96:0: 'ShortRingAnchor.BC12.sum_lower_indicators' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:97:0: 'ShortRingAnchor.BC12.empirical_clamped_negativePower_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:98:0: 'ShortRingAnchor.BC12.negativePower_le_clamped_add_low' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:99:0: 'ShortRingAnchor.BC12.normalizedNegativeMoment_le_of_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:100:0: 'ShortRingAnchor.BC12.boundedInProbability_of_bound_on_good' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:101:0: 'ShortRingAnchor.BC12.negativeMomentTightness_of_count_and_lower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:102:0: 'ShortRingAnchor.BC12.polynomial_negativeMoment_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:103:0: 'ShortRingAnchor.BC12.normalizedNegativeMoment_one_div_128_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:104:0: 'ShortRingAnchor.horizontalGrid_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:105:0: 'ShortRingAnchor.horizontalGridSize_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:106:0: 'ShortRingAnchor.horizontalGrid_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:107:0: 'ShortRingAnchor.measure_horizontal_comparison_bad_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:108:0: 'ShortRingAnchor.eventually_formula311Error_le_explicit_allEta' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:109:0: 'ShortRingAnchor.eventually_formula311Error_le_explicit_nat_allEta' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:110:0: 'ShortRingAnchor.horizontalGridSize_polynomial_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:111:0: 'ShortRingAnchor.horizontalPolynomial_interpolation_error_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:112:0: 'ShortRingAnchor.inverse_height_sq_le_dimension' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:113:0: 'ShortRingAnchor.horizontalGrid_comparison_polynomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:114:0: 'ShortRingAnchor.horizontalPolynomial_failure_budget' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:115:0: 'ShortRingAnchor.measure_horizontal_comparison_bad_polynomial_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:116:0: 'ShortRingAnchor.probability_tendsto_zero_of_truncated_and_tight' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:117:0: 'ShortRingAnchor.probability_tendsto_zero_of_truncated_and_mean_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:120:0: 'ShortRingAnchor.arctan_le_self_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:121:0: 'ShortRingAnchor.arctan_upper_tail_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:122:0: 'ShortRingAnchor.arctan_lower_tail_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:123:0: 'ShortRingAnchor.poissonWindow_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:124:0: 'ShortRingAnchor.poissonWindow_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:125:0: 'ShortRingAnchor.one_le_poissonWindow_enlarged_add_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:126:0: 'ShortRingAnchor.closedIntervalIndicator_le_poissonWindow_enlarged_add_tail' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:127:0: 'ShortRingAnchor.poissonWindow_le_closedIntervalIndicator_enlarged_add_tail' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:128:0: 'ShortRingAnchor.continuous_poissonKernel_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:129:0: 'ShortRingAnchor.hasDerivAt_arctan_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:130:0: 'ShortRingAnchor.poissonWindow_eq_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:131:0: 'ShortRingAnchor.smoothing_empiricalAverage_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:132:0: 'ShortRingAnchor.smoothing_empiricalAverage_add_const' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:133:0: 'ShortRingAnchor.empiricalIntervalMass_le_smoothed_enlarged' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:134:0: 'ShortRingAnchor.empiricalSmoothedMass_le_interval_enlarged' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:135:0: 'ShortRingAnchor.continuous_empiricalStieltjes_im' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:136:0: 'ShortRingAnchor.empiricalSmoothedMass_eq_integral_im' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:137:0: 'ShortRingAnchor.empiricalSmoothedMass_le_length_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:138:0: 'ShortRingAnchor.empiricalSmoothedMass_le_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:139:0: 'ShortRingAnchor.empiricalIntervalMass_enlarged_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:140:0: 'ShortRingAnchor.empiricalIntervalMass_le_length_from_stieltjes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:141:0: 'ShortRingAnchor.empiricalIntervalMass_le_of_local_stieltjes' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:142:0: 'ShortRingAnchor.abs_empiricalIntervalMass_sub_le_of_local_stieltjes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:143:0: 'ShortRingAnchor.compact_interval_comparison_of_stieltjes' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:144:0: 'ShortRingAnchor.closedIntervalIndicator_sqrt_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:145:0: 'ShortRingAnchor.empiricalIntervalMass_symmetrized_sqrt' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:146:0: 'ShortRingAnchor.squaredCdfDistanceOn_le_of_stieltjes' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:147:0: 'ShortRingAnchor.empiricalIntervalMass_zero_eq_cdf' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:148:0: 'ShortRingAnchor.isBigOInProbability_of_bound_on_good' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:149:0: 'ShortRingAnchor.lemma35LocalBulkComparisonInput_of_stieltjes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:152:0: 'ShortRingAnchor.hermitization_shift_eq_fromBlocks' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:153:0: 'ShortRingAnchor.trace_eq_diagonalBlock_traces' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:154:0: 'ShortRingAnchor.hermitization_inverse_block_equations' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:155:0: 'ShortRingAnchor.hermitization_inverse_diagonal_traces_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:156:0: 'ShortRingAnchor.hermitization_inverse_lowerBlock_gram' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:157:0: 'ShortRingAnchor.real_sub_upperHalfPlane_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:158:0: 'ShortRingAnchor.real_sq_sub_upperHalfPlane_sq_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:159:0: 'ShortRingAnchor.symmetric_resolvent_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:160:0: 'ShortRingAnchor.gram_shift_apply_rightSingularVector' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:161:0: 'ShortRingAnchor.gram_solution_apply_rightSingularVector' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:162:0: 'ShortRingAnchor.trace_gram_solution_eq_singular_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:163:0: 'ShortRingAnchor.normalizedTrace_hermitization_inverse_eq_singularStieltjes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:164:0: 'ShortRingAnchor.matrix_stieltjesTrace_eq_symmetric_singularValues' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:165:0: 'ShortRingAnchor.matrix_squaredCdfDistanceOn_le_of_stieltjes' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:166:0: 'ShortRingAnchor.v3_formula311_canonical_on_good' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:167:0: 'ShortRingAnchor.v3_concentration_bad_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:168:0: 'ShortRingAnchor.v3_pointwise_comparison_bad_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:169:0: 'ShortRingAnchor.localBulkRateExponent_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:170:0: 'ShortRingAnchor.localBulkHeight_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:171:0: 'ShortRingAnchor.localBulkHeight_scale' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:172:0: 'ShortRingAnchor.sqrt_localBulkHeight_le_rate' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:173:0: 'ShortRingAnchor.eventually_formula311Error_localBulkHeight' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:174:0: 'ShortRingAnchor.localBulk_rate_tendsto_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:175:0: 'ShortRingAnchor.measure_compactStieltjesGridGood_compl_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:176:0: 'ShortRingAnchor.compactStieltjesGridGood_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:177:0: 'ShortRingAnchor.compactStieltjesGridGood_reference_im_le_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:178:0: 'ShortRingAnchor.matrix_stieltjesTrace_horizontal_lipschitz' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:179:0: 'ShortRingAnchor.matrixLocalBulkGood_cdf_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:180:0: 'ShortRingAnchor.matrixLocalBulkGood_bad_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:181:0: 'ShortRingAnchor.matrixLocalBulk_failure_budget_tendsto_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:182:0: 'ShortRingAnchor.lemma35LocalBulkComparisonInput_of_v3_models' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:183:0: 'Arxiv2410V3.probabilityAtLeast_stieltjesTrace_complexConcentrationGood_v3_thirtytwo' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ShortRingAnchor/Audit.lean:184:0: 'Arxiv2410V3.BVH.bvh_remark613_specialized_v3' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ShortRingAnchor/Audit.lean:185:0: 'Arxiv2410V3.BVH.canonicalGaussianCompanion' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (3423 jobs).

@@ -1,0 +1,102 @@
+import ShortRingAnchor.Proposition36Planar
+import ShortRingAnchor.Proposition36PublishedTheorem31
+import Vendor.PaperModelTheorem
+import Vendor.ModelLawTransport
+
+/-! # Kernel axiom audit of the counting and copied Theorem 3.1 integration
+
+Only successful builds of this file count as audit results. Failed elaboration
+logs may contain Lean's error-recovery `sorryAx`; they are not certificates.
+The accepted axiom set is contained in `propext`, `Classical.choice`, `Quot.sound`.
+-/
+
+-- VerticalStieltjesCounting.lean
+#print axioms ShortRingAnchor.verticalGridHeight
+#print axioms ShortRingAnchor.verticalGrid_cover
+#print axioms ShortRingAnchor.verticalStieltjesGridGood
+#print axioms ShortRingAnchor.verticalStieltjesGridGood_norm_le_three
+#print axioms ShortRingAnchor.smallHermitizationEigenvalueIndices_eq_v3
+#print axioms ShortRingAnchor.verticalStieltjesGridGood_count
+#print axioms ShortRingAnchor.verticalStieltjesGridGood_bad_le
+
+-- HermitizationCountingFromV3.lean
+#print axioms ShortRingAnchor.hardEdgeCutoff_eighth_power
+#print axioms ShortRingAnchor.hardEdgeCutoff_lower
+#print axioms ShortRingAnchor.eventually_formula311Error_hardEdge
+#print axioms ShortRingAnchor.hermitizationAllCutoffsCountingInput_of_v3_model
+#print axioms ShortRingAnchor.hermitizationAllCutoffsCountingInput_cyclic
+
+-- Proposition36Counting.lean
+#print axioms ShortRingAnchor.proposition36_cyclicShortRing_of_atom_copies_bbv_and_lsv
+
+-- CyclicHighBandProfile.lean
+#print axioms ShortRingAnchor.exists_cyclicColumn_of_cyclicDist_le
+#print axioms ShortRingAnchor.cyclicVarianceCoefficient_local_floor
+#print axioms ShortRingAnchor.cyclicVarianceCoefficient_upper
+#print axioms ShortRingAnchor.HasBoundedDensityWithRespectTo.exists_pos_measure_le
+
+-- UniformSequenceSelection.lean
+#print axioms ShortRingAnchor.eventually_uniform_of_eventually_every_sequence
+
+-- HighBandUniformNumerics.lean
+#print axioms ShortRingAnchor.HighBandNumericalCertificates
+#print axioms ShortRingAnchor.eventually_highBandNumerics_uniform_width
+#print axioms ShortRingAnchor.eventually_highBandNumerics_along_dimensions
+
+-- CyclicPlanarHighBandModel.lean
+#print axioms ShortRingAnchor.cyclicPlanarBandModel
+#print axioms ShortRingAnchor.identDistrib_matrix_of_independent_entries
+#print axioms ShortRingAnchor.planarBandModel_entries_independent
+#print axioms ShortRingAnchor.planarBandModel_entry_law
+#print axioms ShortRingAnchor.cyclicPlanarBandModel_matrix_identDistrib
+
+-- HighBandLSVBridge.lean
+#print axioms ShortRingAnchor.ginibreLeastSingularValue_eq_last
+#print axioms ShortRingAnchor.highBand_threshold_eq_source_exp
+#print axioms ShortRingAnchor.isOpen_leastSingularValue_lt
+#print axioms ShortRingAnchor.measurableSet_highBand_strict_bad
+#print axioms ShortRingAnchor.highBand_strict_bad_le_of_identDistrib
+#print axioms ShortRingAnchor.empiricalSecondMoment_zero_eq_hilbertSchmidt_sq
+
+-- HighBandLSVProbability.lean
+#print axioms ShortRingAnchor.planar_lsv_of_highBandNumericalCertificates
+#print axioms ShortRingAnchor.eventually_planar_lsv_along_dimensions
+#print axioms ShortRingAnchor.hsCutoff_of_empiricalSecondMoment_le
+#print axioms ShortRingAnchor.highBandLSV_failure_tendsto_zero
+#print axioms ShortRingAnchor.theorem31MinimumInput_of_truncated_estimate
+
+-- Theorem31CyclicPlanar.lean
+#print axioms ShortRingAnchor.theorem31MinimumSingularValueInput_cyclic_planar
+
+-- BoundedDensityRepresentative.lean
+#print axioms ShortRingAnchor.HasBoundedDensityWithRespectTo.exists_measurable_bounded_density
+
+-- CyclicRealHighBandModel.lean
+#print axioms ShortRingAnchor.cyclicRealBandModel
+#print axioms ShortRingAnchor.realBandModel_entries_independent
+#print axioms ShortRingAnchor.identDistrib_realPart_embedding
+#print axioms ShortRingAnchor.realBandModel_entry_law
+#print axioms ShortRingAnchor.cyclicRealBandModel_matrix_identDistrib
+
+-- HighBandRealLSVProbability.lean
+#print axioms ShortRingAnchor.real_lsv_of_highBandNumericalCertificates
+#print axioms ShortRingAnchor.eventually_real_lsv_along_dimensions
+
+-- Theorem31CyclicReal.lean
+#print axioms ShortRingAnchor.theorem31MinimumSingularValueInput_cyclic_real
+#print axioms ShortRingAnchor.theorem31MinimumSingularValueInput_cyclic_of_densityAlternative
+
+-- Proposition36Planar.lean
+#print axioms ShortRingAnchor.proposition36_cyclicShortRing_planar_from_published_theorem31
+
+-- Proposition36PublishedTheorem31.lean
+#print axioms ShortRingAnchor.proposition36_cyclicShortRing_from_published_theorem31
+#print axioms HighBandLSV.planar_model_lsv_of_numerics
+#print axioms HighBandLSV.real_model_lsv_of_numerics
+#print axioms HighBandLSV.eventually_planar_band_lsv
+#print axioms HighBandLSV.eventually_real_band_lsv
+#print axioms HighBandLSV.PaperModelTheorem.planar_main_statement
+#print axioms HighBandLSV.PaperModelTheorem.real_main_statement
+#print axioms HighBandLSV.ModelLawTransport.planar_matrix_law
+#print axioms HighBandLSV.ModelLawTransport.real_matrix_law
+
