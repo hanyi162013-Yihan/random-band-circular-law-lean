@@ -1,145 +1,70 @@
-# Section 6: Gaussian noncompact profiles (work in progress)
+# Section 6: Gaussian noncompact profiles
 
-This is a separate continuation of Section 5 on the
-`codex/section6-formalization` branch. It imports the checked `section5/`
-package and shares the parent's pinned Lean 4.33.0/mathlib dependencies.
-No second mathlib checkout or large local download is needed.
+This continuation lives on `codex/section6-formalization`, imports the
+verified `section5/` package, and shares the pinned Lean 4.33.0/mathlib
+dependencies. No second mathlib checkout or large local download is needed.
 
-## New proof layer
+## Main endpoint and verification status
 
-The eighty-module checkpoint at commit `bbb5d66` passed the dedicated
-[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33701538973):
-the publication-layout build, transitive axiom audit (859 declarations,
-758 theorem declarations), and all 93 regression examples.
+The target declaration is
+`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law`
+in [GaussianProfileTheorem.lean](CircularLawSection6/GaussianProfileTheorem.lean).
+For a strictly positive continuous integrable BV profile of integral one
+and positive bandwidths tending to infinity, it gives the circular law in
+probability for the actual normalized Gaussian cyclic matrix. It does not
+assume that the bandwidth/dimension ratio has a limit.
 
-This now includes the concrete normalized circular Ginibre model, its IID
-entry-law identification, energy and logarithmic L2/variance estimates,
-actual lower-cutoff correction bounds from negative moments, and the
-size-before-cutoff expectation control. The two BC12 probability statements
-remain explicit source inputs. This supplies an alternative final-squeeze
-route; it is not a proof of the manuscript's stronger linear limiting-law
-hard-edge density statement.
+The complete 110-module source and 107 strict regression examples have been
+submitted for cloud verification. Submission is not verification: the
+latest fully successful historical checkpoint remains 80 modules and 93
+regressions until a newer success is recorded in
+[VERIFICATION.md](VERIFICATION.md).
 
-The newest verified layer derives actual expected cutoff comparison from
-finite-matrix squared-singular CDF comparison in probability and normalized
-second-moment bounds. It also proves compact-test expectation convergence,
-upper logarithmic tail control, routed Gaussian energy bounds and the
-all-admissible-block-length cutoff limit transfer. The source CDF comparison
-and reference-model logarithmic limit still require concrete instantiation;
-these conclusions have not been assumed as expectation bounds.
+This theorem is conditional on explicitly stated mathematical sources.
+[SOURCE_BOUNDARIES.md](SOURCE_BOUNDARIES.md) lists their exact content:
+Section 5's literal core endpoint, local Section 3 singular-value comparison,
+classical Ginibre inputs, and Han's Gaussian dense-bandwidth theorem.
+No full-profile convergence or full-matrix cutoff comparison is assumed.
+The axiom audit checks for forbidden axioms; it does not discharge hypotheses.
 
-This includes the actual Gaussian density and atom-log control, core model
-identification, all-positive-dimension determinant concentration, and the
-Section 5 probability-to-core-mean bridge. It also proves the singular-value
-Lipschitz comparison using canonical singular bases and their overlap
-energies, the exact logarithmic cutoff constant, the literal matrix energy
-identification, and cutoff measurability on the nonsingular event. No Mirsky
-inequality or measurable singular-frame choice is supplied as a premise.
+## What the continuation proves
 
-Seven further verified modules derive expected
-cutoff stability and integrability, the literal Gaussian tail error, the
-determinant/singular-log and scaling identities, and the actual expected
-core/full sandwich, varying-scale cutoff stability, and actual radial mean
-monotonicity and normalization. They are included in the 50-module checkpoint.
+- The actual Gaussian atom and matrix laws, core/tail decomposition,
+  normalization, mesh and mass limits, and variance comparability.
+- Gaussian determinant nonvanishing, logarithmic integrability and
+  concentration, with all positive dimensions and the original sample laws.
+- Jensen lower comparison, singular-value cutoff stability, exact energy
+  identities, and upper/core/full expectation bounds.
+- Concrete balanced periodicization, exact single-block equality in the
+  short-dimension branch, weighted spectral averaging, and the boundary error.
+- Local finite-CDF comparison to cutoff expectation convergence, uniformity
+  over admissible block lengths, and the full normalized-core comparison.
+- Finite-prefix transport of the literal Section 5 core result, inverse-moment
+  lower-cutoff control, the iterated L1 estimate, and full-profile mean and
+  probability convergence in the sparse regime.
+- Actual profile/Ginibre replacement with both normalized mean energies
+  exactly one, dimension-preserving subsequence fillers, the dense-source
+  threshold, and sparse/dense recombination.
 
-Four further verified modules connect the
-canonical floor-radius band geometry, positive fixed-scale Section 5 mean
-transport, the actual raw core mass limit, and varying cutoff normalization.
-They also construct a common-atom routing coupling and prove its expected
-boundary-row energy bound. These are included in the 54-module checkpoint.
+These describe the mathematical content of the submitted source; the
+verification ledger distinguishes complete green checkpoints from individual
+modules compiled during development.
 
-Three further verified modules (57 total, 64 regression examples) construct the
-actual contiguous-block routes, balanced block lengths and boundary count,
-transport parameter nonvanishing to general finite indices, and derive
-the actual block marginal law and expected HS/cutoff periodicization error.
-These additions passed the complete cloud verification. Six further verified
-modules add exact positive cutoff scaling, uniform block-length averaging,
-and the full-route identification with the actual Section 4/5 finite-band
-matrix and IID law. Constructed block singular bases prove the exact
-dimension-weighted spectral cutoff identity; the actual periodicized
-matrix has that block decomposition, with integrability and expected block
-averaging derived on its IID law. The positive-scale periodicization error
-is exactly bounded by `r * sqrt(8H/m0) / a`. These are included in the
-63-module checkpoint. The genuine compact singular-law limit is still
-required; the averaging theorem does not prove its convergence premise.
+## Boundaries not concealed by the endpoint
 
-- `IteratedSqueeze`: the genuine two-limit argument (matrix size first,
-  truncation radius second), with eventual radius hypotheses and the
-  fourth-root tail cutoff. No uniform-in-radius convergence is assumed.
-- `PotentialContinuity`: continuity of the explicit circular potential and
-  its variance-scaled version, including convergence as core mass tends to one.
-- `PolynomialJensen`: actual circle-integral Jensen lower bounds and radial
-  monotonicity from mathlib's analytic Jensen theorem. Roots on the circle
-  and zero constant terms in the monotonicity theorem are supported.
-- `DeterminantJensen`: the actual polynomial `det(w B + A)`, its evaluation
-  identity, circle integrability, and normalized Jensen lower bound.
-- `VaryingNormalization`: varying-radius convergence from fixed radii in
-  a dense set, and the countable a.e. version with one common full-measure set.
-- `SampledProfile`, `CenteredMesh`: the actual centered cyclic sampling,
-  normalized variance weights, exact core cardinality and integer-sum identities.
-- `CyclicMatrix`, `ProfileMatrices`: concrete core/tail matrices, exact energy
-  identities, variance normalization and product-law expected energies.
-- `ComplexGaussian`, `CyclicIndependence`, `GaussianProfile`: the actual normalized
-  circular complex Gaussian, atomlessness, independent core/tail matrices,
-  and law-preserving tail rotations.
-- `BVQuadrature`, `ProfileQuadrature`: uniform mesh error bounded by total
-  variation times mesh size, specialized to the literal full and core sums.
-- `ProfileMassLimits`, `SparseProfileGeometry`, `LimitingProfileMass`: actual
-  normalized core/tail limits, sparse unwrapping, positive finite-radius
-  tails, monotonicity and radius exhaustion.
-- `ProfileComparability`: uniform dense and fixed-core variance bounds.
-- `InvariantPhaseAverage`, `GaussianTailJensen`, `ReusedLogDetIntegrability`,
-  `GaussianTailJensenAE`: invariant Fubini averaging, replacement local L²
-  estimates transported to random samples, and the actual expected Jensen
-  inequality on a common full-measure set for all sizes and integer radii.
-- `GaussianDensityBounds`, `CoreBandIdentification`: actual bounded-density
-  atom input, exact finite-band weights, IID marginal law, and matrix identity.
-- `AffineLogFromDiagonal`, `RowResamplingClosure`, `DeterminantRowFibers`,
-  `RowLogUniformBound`: diagonal-only row bounds, the zero-cofactor branch,
-  automatic global L² and variance, and the reused Section 5 logarithmic constant.
-- `CyclicRowTransport`, `NormalizedConcentration`, `GaussianCyclicConcentration`,
-  `ProfileDiagonalBound`, `ProfileConcentration`: original cyclic-law
-  concentration, the proved logarithmic rate limit, a bandwidth-uniform
-  diagonal lower bound, and full/core/normalized-core model instantiations.
-- `GaussianAllDimensions`, `TriangularLawTransport`, `CompactCoreRawBridge`:
-  the dimension-one case, measure-preserving probability transport, and the
-  literal Section 5 probability-to-core-mean implication with concentration proved.
-- `WeightedSpectralCoupling`, `HermitianSpectralCoupling`, `PositiveSingularBasis`,
-  `SingularSpectralCoupling`: actual orthonormal frames and overlap-energy
-  comparisons, including the singular-value Lipschitz sum bound.
-- `LogCutoffComparison`, `MatrixCutoffComparison`, `CutoffMeasurability`:
-  the exact cutoff constant and normalization, shifted/scaled matrix bounds,
-  and a measurable representative agreeing off the singular event.
+The cited Han, BC12 and classical Ginibre results are not reproved here.
+Section 3 is not silently implemented by declaring its input. The Section 5
+endpoint remains an explicit manuscript-boundary input, rather than a final
+parameter-free call to a bundled Section 3/4/5 instance.
 
-These are proved lemmas, not new axioms. This directory does **not** yet assert
-the full noncompact Gaussian-profile circular-law theorem.
+The circular-law chain uses an inverse-moment/uniform-L2 route. The separate
+`StieltjesHardEdge` module proves that a bounded Poisson transform implies
+a linear hard-edge mass bound. It does not yet identify that transform bound
+for the actual limiting singular law or prove the manuscript's logarithmic
+layer-cake identity. Thus the conditional main endpoint is not a claim that
+every intermediate statement of Section 6 has been formalized line by line.
 
-## Remaining mathematical boundaries
-
-BV Riemann-sum limits, dense/core weight comparability, and the a.e.-parameter
-expected tail Jensen inequality are checked. No stronger every-parameter
-claim is needed for that Jensen connection.
-Gaussian affine-log/cofactor concentration, the literal Section 5 probability
-to core-mean implication, and finite-matrix singular-value comparison are
-checked. Canonical radius/scale transport and eventual geometry are now
-checked too, while the final Section 3/4-to-core instantiation and finite-prefix
-assembly still need completion. The constructed periodicization energy,
-scaled cutoff error, and actual spectral/expected block averaging are checked.
-The cited direct comparison and compact fixed-cutoff limit,
-hard-edge control, and final sparse/dense replacement assembly still need
-their full source-to-model connections. The existing conditional
-helpers under `CircularLawSections56.Section6` are reused but are not counted
-as proofs of these remaining boundaries. In particular, Section 5 supplies
-the indicator-model results, not the noncompact-profile conclusion itself.
-
-## Verification
-
-[VERIFICATION.md](VERIFICATION.md) records the exact verified commit and scope:
-80 modules, 859 audited declarations (758 theorem declarations, including
-generated declarations), and 93 regression examples. This is not a proof of
-the entire manuscript section.
-
-For an integrated build in this repository layout:
+## Reproduce verification
 
 ```sh
 cd section6
@@ -148,7 +73,8 @@ lake --no-cache env lean -DwarningAsError=true AxiomAudit.lean
 lake --no-cache env lean -DwarningAsError=true Regression.lean
 ```
 
-Local development checks only the new modules against installed caches;
-publication-layout integration is kept distinct from those targeted checks.
-`AxiomAudit.lean` rejects every transitive axiom except `propext`,
-`Classical.choice`, and `Quot.sound`. It does not discharge ordinary hypotheses.
+`AxiomAudit.lean` checks every declaration in the new Section 6 namespace
+and permits only `propext`, `Classical.choice`, and `Quot.sound` transitively.
+Section 6 compiler warnings are errors. GitHub retains build, audit and
+regression logs, and saves completed dependency builds even after a failed
+new-module check.

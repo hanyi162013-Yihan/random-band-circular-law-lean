@@ -85,3 +85,9 @@ separate linear limiting-singular-density hard-edge estimate. That stronger
 standalone estimate is not claimed as proved by this route. Accordingly,
 completion of the circular-law chain conditional on the stated sources is
 not identical to a line-by-line formalization of every intermediate claim.
+
+`StieltjesHardEdge.lean` separately proves the generic implication
+`integral t/(s^2+t^2) <= C` implies `sigma([0,t]) <= 2*C*t`, and its CDF
+version for nonnegative laws. The actual limiting-law transform bound and
+the logarithmic layer-cake identity are still separate boundaries, not
+consequences claimed from that generic adapter alone.
