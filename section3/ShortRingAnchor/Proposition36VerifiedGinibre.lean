@@ -1,6 +1,6 @@
-import ShortRingAnchor.Proposition36PublishedTheorem31
 import ShortRingAnchor.BC12.GaussianMatrixLawBridge
 import ShortRingAnchor.BC12.GinibreNegativeMoments
+import ShortRingAnchor.Proposition36PublishedTheorem31
 
 /-!
 # Proposition 3.6 without BC12 hypotheses

@@ -1,6 +1,6 @@
-import ShortRingAnchor.Proposition38.Assembly
 import ShortRingAnchor.BC12.GaussianMatrixLawBridge
 import ShortRingAnchor.BC12.GinibreNegativeMoments
+import ShortRingAnchor.Proposition38.Assembly
 
 /-!
 # Proposition 3.8 without BC12 hypotheses

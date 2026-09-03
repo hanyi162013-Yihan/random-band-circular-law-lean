@@ -1,5 +1,7 @@
 import ShortRingAnchor.BC12.VerifiedKernel
 import Ginibre.AllDimensionsStatistics
+import ShortRingAnchor.BC12.GaussianMatrixLawBridge
+import ShortRingAnchor.BC12.GinibreNegativeMoments
 import ShortRingAnchor.Proposition36VerifiedGinibre
 import ShortRingAnchor.Proposition38.VerifiedGinibre
 
@@ -27,11 +29,13 @@ import ShortRingAnchor.Proposition38.VerifiedGinibre
 #print axioms ShortRingAnchor.BC12.scaled_stdGaussian_complex_eq_entryLaw
 #print axioms ShortRingAnchor.BC12.stdGaussian_complexColumn_eq_pi
 #print axioms ShortRingAnchor.BC12.normalizedGinibre_real_scale
+#print axioms ShortRingAnchor.BC12.measurable_matrixEntries
 #print axioms ShortRingAnchor.BC12.normalizedGinibre_column_map
 #print axioms ShortRingAnchor.BC12.pi_columns_flatten_map
 #print axioms ShortRingAnchor.BC12.normalizedGinibreLaw_flatten
 #print axioms ShortRingAnchor.BC12.normalizedGinibre_hasEntryLaw
 #print axioms ShortRingAnchor.BC12.normalizedGinibre_correlations
+#print axioms ShortRingAnchor.BC12.canonical_normalizedGinibre_correlations
 #print axioms ShortRingAnchor.BC12.ginibre_logdet_convergesInProbability_of_ginibreLaw
 #print axioms ShortRingAnchor.BC12.continuous_normalizedGinibreMatrix
 #print axioms ShortRingAnchor.BC12.normalizedGinibreLaw_isProbabilityMeasure
