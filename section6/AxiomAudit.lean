@@ -49,7 +49,7 @@ run_cmd do
     `CircularLawSections56.Section5.paperSection3Atoms_measurePreserving,
     `CircularLawSections56.Section5.paperSection3Atoms_copies,
     `CircularLawSections56.Section5.publishedSection3ModelOfSamples]
-  let mut checked := 0
+  let mut checked : Nat := 0
   for (name, _) in env.constants do
     if prefixes.any (fun pfx => pfx.isPrefixOf name) then
       checked := checked + 1
