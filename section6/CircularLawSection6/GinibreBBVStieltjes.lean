@@ -71,7 +71,7 @@ theorem ginibre_stieltjes_inMeasure_of_bbv
     have hreal : Tendsto (fun n => (N n : ℝ) ^ (-(10 : ℝ))) atTop (𝓝 0) :=
       (tendsto_rpow_neg_atTop (by norm_num)).comp
         (tendsto_natCast_atTop_atTop.comp hN)
-    simpa only [ENNReal.ofReal_zero] using
+    simpa only [Function.comp_apply, ENNReal.ofReal_zero] using
       ENNReal.continuous_ofReal.continuousAt.tendsto.comp hreal
   have hbad : Tendsto (fun n => gaussianSequenceLaw (good n)ᶜ) atTop (𝓝 0) := by
     apply tendsto_of_tendsto_of_tendsto_of_le_of_le' tendsto_const_nhds hbadRate
@@ -118,6 +118,7 @@ theorem ginibre_stieltjes_error_tri_of_bbv
     rw [convergesInProbability_iff_norm]
     intro ε hε
     simpa only [sub_zero, Real.norm_eq_abs, abs_norm] using h ε hε
-  exact (tendstoInMeasure_iff_tri gaussianSequenceLaw _ 0).1 hnorm
+  exact (CircularLawSections56.Section6.tendstoInMeasure_iff_tri
+    gaussianSequenceLaw _ 0).1 hnorm
 
 end CircularLawSection6.GinibreBBV

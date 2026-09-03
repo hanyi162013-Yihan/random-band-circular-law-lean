@@ -1,5 +1,8 @@
 import CircularLawSection6.GinibreDysonImaginary
-import CircularLawSection6.UnequalGinibreCutoff
+import CircularLawSection6.MovingGinibreCore
+import CircularLawSection6.TightApproximation
+import CircularLawSection6.RegularizedLogCutoff
+import CircularLawSection6.TightVarianceMoments
 import Lean.Util.CollectAxioms
 
 /-! Narrow transitive audit for the independent BBV-to-Ginibre bridges.
@@ -20,6 +23,16 @@ run_cmd do
     `CircularLawSection6.unequal_ginibre_cdf_of_bbv,
     `CircularLawSection6.cyclicSamples_unequal_cdf,
     `CircularLawSection6.unequal_ginibre_cutoff_of_bbv_ae,
+    `CircularLawSection6.cyclicBlock_moving_ginibre_of_cdf_ae,
+    `CircularLawSection6.periodicBlock_moving_cutoff_of_all_lengths,
+    `CircularLawSection6.one_or_fullBlock_moving_cutoff_of_all_lengths,
+    `CircularLawSection6.NoncompactProfile.unitCore_cutoff_comparison_of_local_cdf_ae,
+    `CircularLawSection6.NoncompactProfile.canonical_core_cutoff_comparison_of_local_cdf,
+    `CircularLawSection6.tendstoInProbabilityTri_of_tight_approximations,
+    `CircularLawSection6.regularized_log_ge_log,
+    `CircularLawSection6.regularized_log_le_cutoff,
+    `CircularLawSection6.eventually_abs_center_le_of_tight_and_close,
+    `CircularLawSection6.exists_uniform_secondMoment_of_tight_and_centered,
     `Arxiv2410V3.normSq_mul_add_nonneg_le,
     `Arxiv2410V3.scalarDyson_strict_contraction,
     `Arxiv2410V3.scalarDysonEquation_unique,
@@ -40,3 +53,5 @@ run_cmd do
 #check CircularLawSection6.GinibreDyson.deriv_profileF_eq_profileV_mul_deriv_profileT
 #check CircularLawSection6.unequal_ginibre_cdf_of_bbv
 #check CircularLawSection6.unequal_ginibre_cutoff_of_bbv_ae
+#check CircularLawSection6.NoncompactProfile.canonical_core_cutoff_comparison_of_local_cdf
+#check CircularLawSection6.tendstoInProbabilityTri_of_tight_approximations

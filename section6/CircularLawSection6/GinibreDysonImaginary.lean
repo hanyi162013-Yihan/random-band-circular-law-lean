@@ -39,9 +39,10 @@ private theorem scalarDysonEquation_reflect {z m : ℂ} {t : ℝ}
     simp only [map_add, neg_add, heta]
   unfold ScalarDysonEquation at h ⊢
   rw [hsum]
-  simpa only [map_add, map_neg, map_mul, map_inv₀, Complex.conj_ofReal,
-    inv_neg, neg_neg, mul_neg, neg_add] using
-    congrArg (fun q : ℂ => -conj q) h
+  have hc := congrArg (fun q : ℂ => -conj q) h
+  simp only [map_add, map_neg, map_mul, map_inv₀, Complex.conj_ofReal] at hc
+  simp only [map_add, map_mul, Complex.conj_ofReal, inv_neg, neg_neg]
+  linear_combination hc
 
 /-- Symmetry and the proved uniqueness theorem force a purely imaginary value. -/
 theorem freeDysonStieltjes_re_eq_zero (z : ℂ) {t : ℝ} (ht : 0 < t) :
@@ -91,7 +92,7 @@ theorem scalarDyson_imaginary_div {z : ℂ} {t v : ℝ}
   have him0 : -(v / v ^ 2) = -(t + v) - ‖z‖ ^ 2 * (t + v) / (t + v) ^ 2 := by
     simpa using him
   have him1 : -(1 / v) = -(t + v) - ‖z‖ ^ 2 / (t + v) := by
-    convert him0 using 1 <;> field_simp [hv.ne', ha.ne'] <;> ring
+    convert him0 using 1 <;> field_simp [hv.ne', ha.ne']
   apply (eq_div_iff hden.ne').2
   field_simp [hv.ne', ha.ne'] at him1
   nlinarith only [him1]
