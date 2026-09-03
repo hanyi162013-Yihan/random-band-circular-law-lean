@@ -30,7 +30,6 @@ theorem GaussianProfileBBVSources.toCoreSources
     (p : NoncompactProfile) (W : ℕ → ℝ) (h : GaussianProfileBBVSources p W) :
     GaussianProfileBBVCoreSources p W where
   bbv := h.bbv
-  ginibreLog := ginibreLogPotential_of_bbv h.bbv
   coreSection4 := h.coreSection4
 
 /-- The actual Gaussian profile ESD converges against every continuous

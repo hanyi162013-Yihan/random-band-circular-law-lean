@@ -1,6 +1,14 @@
 # Section 10: real and planar source-connection audit
 
-## Current verification boundary
+## Current migration status
+
+The BC12-free signature migration is pending cloud validation.
+`VerifiedGinibreSources` supplies the old BC12 compatibility proposition
+internally from BBV. The certificates and tables below describe the
+**historical pre-migration commit** and are not certificates for current
+source changes. See [the migration audit](../GAUSSIAN_INPUT_MIGRATION.md).
+
+## Historical verification boundary
 
 **PASS.** Proof-source commit: `362c47fe69c5330b18e1818497dcbbe4433df1be`.
 [Cloud run 33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)

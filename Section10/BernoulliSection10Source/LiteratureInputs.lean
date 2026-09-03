@@ -5,15 +5,17 @@ import ShortRingAnchor.GinibreLowerEdge
 /-!
 # Explicit, accepted literature boundary
 
-These are named hypotheses, not axioms or proved literature theorems.
+These are named propositions, not axioms.
 `BBVComparisonInput` is precisely the Gaussian-to-free comparison used by
 the repository's Section 3 proofs (including its canonical free transform).
 `BC12GinibreInput` concerns only the literal normalized circular Ginibre
-ensemble. Neither hypothesis contains a Section 10 conclusion, a non-Gaussian
+ensemble; its constructor in `VerifiedGinibreSources` now proves it from BBV.
+Neither proposition contains a Section 10 conclusion, a non-Gaussian
 LSV estimate, a counting certificate, or an arbitrary comparison ensemble.
 
 The real endpoint additionally displays `RealFiniteGeometricBrascampLieb`.
-All three retained external results were explicitly accepted by the user.
+The concrete public endpoints retain BBV and the real-only geometric input,
+not an externally supplied BC12 estimate.
 -/
 
 open MeasureTheory Filter

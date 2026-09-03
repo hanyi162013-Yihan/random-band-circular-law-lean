@@ -1,5 +1,11 @@
 # Concrete Section 3 → Section 5 interface
 
+**Migration status:** the current branch removes the external BC12 parameter
+using `VerifiedGinibreSources.provedGinibreInput` (in the enclosing
+`PublishedSection3Concrete` namespace). These signature changes await cloud
+validation; the successful runs below certify the earlier source version.
+See [the whole-paper migration audit](../GAUSSIAN_INPUT_MIGRATION.md).
+
 The new entry points construct the actual short-ring and calibration matrices
 and invoke the checked Section 3 theorem internally. The caller no longer
 supplies a Section 3 anchor limit, finite sampling certificate, matrix identity,
@@ -18,10 +24,11 @@ The scope is a fixed atom law satisfying the original moment and bounded-density
 assumptions, centered indicator-band geometry, fixed positive lower/upper profile
 bounds, bandwidth tending to infinity, and eventual dimension/bandwidth fit.
 Real atoms are returned on their original real IID space. The source hypotheses
-are universal BBV for the canonical Gaussian companions, BC12 for the actual
-normalized circular Ginibre ensemble, and the two quantitative Section 4
+are universal BBV for the canonical Gaussian companions and the two quantitative Section 4
 pressure estimates. The real branch also retains geometric Brascamp–Lieb.
-These are ordinary theorem hypotheses, not new axioms.
+These are ordinary theorem hypotheses, not new axioms. The actual normalized
+Ginibre law, negative-moment tightness and full-log limit are constructed
+internally, rather than requested as a BC12 parameter.
 
 The old taper and varying-atom interfaces remain available. This new fixed-law,
 uniformly positive profile wrapper does **not** claim automatic Section 3
@@ -51,13 +58,16 @@ matrix conclusion.
 
 `CircularLawSection6.CoreRadiusBounds.ConcreteSection4Input.toSection34`
 constructs these anchors for the actual clamped Gaussian core. Its input record
-contains only the two Section 4 pressure estimates.
+contains only the two Section 4 pressure estimates. The preferred
+`NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources` route
+uses only BBV and this pressure record; the BBV-core caller is also migrated.
+The following older conditional route remains for compatibility:
 `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_concrete_sources`
 also constructs the local Section 3 input from universal BBV and the classical
 actual-Ginibre bounded-test limit. It retains the named Ginibre and Han sources;
 there is no finite anchor or local-CDF certificate in the new caller record.
 
-## Verification
+## Historical verification before the BC12 migration
 
 The complete targeted proof build passed in
 [run 33724679472](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33724679472)

@@ -18,7 +18,7 @@ set_option maxHeartbeats 2000000
 set_option backward.isDefEq.respectTransparency false
 
 theorem planar_highBandLogLimit
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     {μ : Measure ℂ} {L : ℝ} (hμ : BernoulliSection10Complex.IsPlanarDensityAtom μ L)
     (h3 : Integrable (fun x : ℂ => ‖x‖ ^ 3) μ) :
     BernoulliSection10Complex.HighBandLogLimit μ := by
@@ -41,11 +41,11 @@ theorem planar_highBandLogLimit
   have hmom := BernoulliSection10Complex.SourceInputs.profileMatrix_row_moments
     hμ.normalized (fun n => physicalProfile (W n) (s n))
     (fun n => SourceInputs.physicalProfile_doublyStochastic (W n) (s n) (hW n))
-  exact fullBlock_log_limit_from_source hBBV hBC12 μ id (planarAtomMoments hμ h3)
+  exact fullBlock_log_limit_from_source hBBV μ id (planarAtomMoments hμ h3)
     W s hW hWtop hp hβ1 hhigh z hmom hmin
 
 theorem real_highBandLogLimit
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (hGBL : RealFiniteGeometricBrascampLieb)
     {μ : Measure ℝ} {L : ℝ} (hμ : BernoulliSection10.IsBoundedDensityAtom μ L)
     (h3 : Integrable (fun x : ℝ => |x| ^ 3) μ) :
@@ -73,7 +73,7 @@ theorem real_highBandLogLimit
       SourceInputs.profileMatrix (physicalProfile (W n) (s n)) := by
     funext sample i j
     exact (Complex.ofReal_mul _ _).symm
-  have h := fullBlock_log_limit_from_source hBBV hBC12 μ Complex.ofReal (realAtomMoments hμ h3)
+  have h := fullBlock_log_limit_from_source hBBV μ Complex.ofReal (realAtomMoments hμ h3)
     W s hW hWtop hp hβ1 hhigh z
     (by simpa only [heq, sampleLaw, SourceInputs.inputLaw] using hmom)
     (by simpa only [heq, sampleLaw, SourceInputs.inputLaw] using hmin)

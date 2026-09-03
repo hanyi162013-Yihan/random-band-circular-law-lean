@@ -1,3 +1,4 @@
+import CircularLawSection6.BBVOnlyProfileEndpoint
 import CircularLawSection6.IteratedSqueeze
 import CircularLawSection6.PotentialContinuity
 import CircularLawSection6.PolynomialJensen

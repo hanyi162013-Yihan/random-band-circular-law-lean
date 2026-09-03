@@ -12,6 +12,13 @@ statement in the paper. Exact hypotheses, quantitative variants and coverage
 are recorded in the linked theorem maps and Lean declarations. Several endpoints
 remain conditional on the [explicit mathematical inputs listed below](#inputs-still-assumed-at-public-interfaces).
 
+**Branch migration notice:** the new removal of external Gaussian inputs from
+Sections 5, 6, 8 and 10 is tracked in
+[GAUSSIAN_INPUT_MIGRATION.md](GAUSSIAN_INPUT_MIGRATION.md).
+Its cloud checks are still pending. The section guide and historical
+verification records below must not be taken as certification of these
+unverified signature changes.
+
 ## Results in paper order
 
 ### Section 3 — High-band estimates and logarithmic-potential anchors

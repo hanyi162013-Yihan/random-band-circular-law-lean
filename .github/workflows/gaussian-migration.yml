@@ -1,0 +1,101 @@
+name: Gaussian source migration verification
+on:
+  workflow_call:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        project: [root, section5, section6]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      LEAN_NUM_THREADS: "2"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and restore Mathlib
+        uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: true
+          use-github-cache: false
+      - name: Source and dependency regressions
+        run: |
+          python3 scripts/check_axioms.py --self-test
+          python3 -m unittest discover -s scripts -p 'test_build*.py'
+          python3 scripts/check_gaussian_migration.py
+          python3 scripts/check_placeholders.py --path Section10/BernoulliSection10Source
+          python3 scripts/check_placeholders.py --path section5/CircularLawSections56
+          python3 scripts/check_placeholders.py --path section6/CircularLawSection6
+          python3 scripts/build_gaussian_migration.py --project '${{ matrix.project }}' --dry-run
+          (cd section5 && sha256sum -c SOURCE_SHA256SUMS)
+      - uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        id: cache
+        with:
+          path: |
+            .lake/build
+            .lake/packages/GinibreCorrelationIdentities/.lake/build
+            section5/.lake/build
+            section6/.lake/build
+          key: gaussian-migration-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'section5/lake-manifest.json', 'section6/lake-manifest.json') }}-${{ github.sha }}-${{ matrix.project }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            gaussian-migration-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'section5/lake-manifest.json', 'section6/lake-manifest.json') }}-
+      - name: Seed main Section 5 artifacts
+        if: ${{ steps.cache.outputs.cache-matched-key == '' }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            .lake/build
+            section5/.lake/build
+          key: gaussian-main-seed-${{ github.run_id }}-${{ matrix.project }}
+          restore-keys: |
+            section5-${{ runner.os }}-${{ runner.arch }}-
+      - name: Seed the latest Section 8 and proved Ginibre artifacts
+        if: ${{ steps.cache.outputs.cache-matched-key == '' }}
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            .lake/build
+            .lake/packages/GinibreCorrelationIdentities/.lake/build
+          key: gaussian-section8-seed-${{ github.run_id }}-${{ matrix.project }}
+          restore-keys: |
+            section8-bc12-v1-${{ runner.os }}-${{ runner.arch }}-
+      - name: Serial public-target build
+        id: build
+        run: |
+          set -o pipefail
+          mkdir -p outputs/gaussian-migration/${{ matrix.project }}
+          python3 scripts/build_gaussian_migration.py --project '${{ matrix.project }}' 2>&1 | tee outputs/gaussian-migration/${{ matrix.project }}/build.log
+      - name: Preserve validated dependency progress
+        if: ${{ always() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure') && steps.cache.outputs.cache-primary-key != '' }}
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
+        with:
+          path: |
+            .lake/build
+            .lake/packages/GinibreCorrelationIdentities/.lake/build
+            section5/.lake/build
+            section6/.lake/build
+          key: ${{ steps.cache.outputs.cache-primary-key }}
+      - name: Exact axiom and public-signature audit
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        run: |
+          set -o pipefail
+          python3 scripts/build_gaussian_migration.py --project '${{ matrix.project }}' --audit 2>&1 | tee outputs/gaussian-migration/${{ matrix.project }}/audit.log
+          git rev-parse HEAD | tee outputs/gaussian-migration/${{ matrix.project }}/verified-commit.txt
+      - name: Preserve reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: gaussian-migration-${{ matrix.project }}-${{ github.sha }}
+          path: outputs/gaussian-migration/${{ matrix.project }}/
+          if-no-files-found: ignore
+          retention-days: 30

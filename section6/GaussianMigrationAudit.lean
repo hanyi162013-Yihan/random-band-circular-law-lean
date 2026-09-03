@@ -1,0 +1,22 @@
+import CircularLawSection6.BBVOnlyProfileEndpoint
+import CircularLawSection6.GinibreFiniteFormulaSources
+
+#print axioms CircularLawSection6.verifiedGinibreFiniteFormulaInput
+#print axioms CircularLawSection6.CoreRadiusBounds.ConcreteSection4Input.toSection34
+#print axioms CircularLawSection6.CoreRadiusBounds.ConcreteSection4Input.logPotential
+#print axioms CircularLawSection6.DenseProfile.actualMatrix_conclusion
+#print axioms CircularLawSection6.DenseProfile.profile_conclusion
+#print axioms CircularLawSection6.DenseProfile.profile_raw_limit
+#print axioms CircularLawSection6.NoncompactProfile.dense_profile_spectral_limit_of_section3
+#print axioms CircularLawSection6.NoncompactProfile.sparse_profile_probability_of_bbv_section5
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_core_sources
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources
+
+-- Regression: no projection/correlation or log-potential premise is needed.
+example : CircularLawSection6.GinibreFiniteFormulaInput :=
+  CircularLawSection6.verifiedGinibreFiniteFormulaInput
+
+#print CircularLawSection6.NoncompactProfile.GaussianProfileBBVCoreSources
+#print CircularLawSection6.NoncompactProfile.GaussianProfileBBVSources
+#check @CircularLawSection6.DenseProfile.profile_conclusion
+#check @CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources

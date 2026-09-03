@@ -13,7 +13,7 @@ sources remain explicit in `GaussianProfileReducedSources`.
 open MeasureTheory Filter Topology ShortRingAnchor TaoVuReplacement
 open CircularLawSections56.Section5 CircularLawSections56.Section6
 open CircularLawSections56.Section5.PublishedSection3Concrete
-  (BBVComparisonInput BC12GinibreInput Sample)
+  (BBVComparisonInput provedGinibreInput Sample)
 noncomputable section
 set_option autoImplicit false
 set_option warningAsError true
@@ -47,7 +47,7 @@ theorem profile_cyclicSamples_raw (p : NoncompactProfile) (N : ℕ) [NeZero N]
   rw [hdet, ZMod.card]
 
 theorem profile_raw_limit
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (p : NoncompactProfile) (M : ℕ → ℕ) [∀ n, NeZero (M n)]
     (W : ℕ → ℝ) (hM : Tendsto M atTop atTop) {δ : ℝ} (hδ : 0 < δ)
     (hdense : ∀ n, δ * (M n : ℝ) ≤ W n) (z : ℂ) :
@@ -55,7 +55,7 @@ theorem profile_raw_limit
       (fun n ω => matrixRawPotential (p.matrix (M n) (W n) ω - z • 1))
       (circularRadialPotential ‖z‖) := by
   have h := (tendstoInMeasure_iff_tri law _ _).1
-    (profile_conclusion hBBV hBC12 p M W hM hδ hdense z)
+    (profile_conclusion hBBV p M W hM hδ hdense z)
   intro ε hε
   apply (h ε hε).congr'
   apply Eventually.of_forall
@@ -78,7 +78,7 @@ namespace NoncompactProfile
 theorem dense_profile_spectral_limit_of_section3 (p : NoncompactProfile)
     (W : ℕ → ℝ) (φ : ℕ → ℕ) (hφ : StrictMono φ)
     (hdense : ∃ c : ℝ, 0 < c ∧ ∀ n, c ≤ W (φ n) / (φ n + 1 : ℕ))
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput) :
+    (hBBV : BBVComparisonInput) :
     ∀ f : ℂ → ℝ, Continuous f → HasCompactSupport f →
       TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
         (fun n ω => realEsdTest (cyclicPhysicalMatrix (φ n)
@@ -91,19 +91,19 @@ theorem dense_profile_spectral_limit_of_section3 (p : NoncompactProfile)
       TendstoInProbabilityTri (fun n => gaussianProfileLaw (φ n + 1))
         (fun n ω => matrixRawPotential (p.matrix (φ n + 1) (W (φ n)) ω - z • 1))
         (circularRadialPotential ‖z‖) :=
-    ae_of_all _ fun z => DenseProfile.profile_raw_limit hBBV hBC12 p
+    ae_of_all _ fun z => DenseProfile.profile_raw_limit hBBV p
       (fun n => φ n + 1) (fun n => W (φ n)) hM hc
       (fun n => (le_div_iff₀ (by positivity)).mp (hratio n)) z
   have hrep := p.profile_ginibre_replacement_along_subsequence W φ hφ
     (fun z => circularRadialPotential ‖z‖) hprofile
-    (ae_of_all _ fun z => ginibre_raw_of_bc12 hBC12 (fun n => n + 1)
+    (ae_of_all _ fun z => ginibre_raw_of_bc12 (provedGinibreInput hBBV) (fun n => n + 1)
       (tendsto_add_atTop_nat 1) z)
   intro f hf hcpt
   have hdiff := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ 0).1
     (hrep f hf hcpt)
   have hgin := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _
     (∫ z, f z ∂circularMeasure)).1
-    ((ginibre_spectral_of_bc12 hBC12 f hf hcpt).comp hφ.tendsto_atTop)
+    ((ginibre_spectral_of_bc12 (provedGinibreInput hBBV) f hf hcpt).comp hφ.tendsto_atTop)
   apply (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ _).2
   simpa only [esdDifference, Function.comp_apply, sub_add_cancel, zero_add] using
     hdiff.add (fun _ => Measure.infinitePi profileGinibrePairLaw) hgin
@@ -128,7 +128,7 @@ theorem gaussian_profile_circular_law_without_Han (p : NoncompactProfile)
       φ hφ hsparse f hf hc
   · intro φ hφ hdense
     exact p.dense_profile_spectral_limit_of_section3 W φ hφ hdense
-      hsource.bbv hconcrete.bc12 f hf hc
+      hsource.bbv f hf hc
 
 end NoncompactProfile
 end CircularLawSection6

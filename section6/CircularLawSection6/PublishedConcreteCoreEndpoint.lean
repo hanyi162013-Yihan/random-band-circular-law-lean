@@ -53,7 +53,7 @@ structure ConcreteSection4Input (B : CoreRadiusBounds p R) (W : ℕ → ℝ) : P
 
 theorem ConcreteSection4Input.toSection34 (B : CoreRadiusBounds p R)
     (W : ℕ → ℝ) (hR : 0 < R) (hWlim : Tendsto W atTop atTop)
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (h : B.ConcreteSection4Input W) : B.Section34Input W where
   calibration := h.calibration
   finalPressure := h.finalPressure
@@ -70,7 +70,7 @@ theorem ConcreteSection4Input.toSection34 (B : CoreRadiusBounds p R)
       Or.inl ⟨circularComplexGaussian_publishedDensity⟩
     apply Filter.Eventually.of_forall
     intro z
-    exact literal_anchors hBBV hBC12 circularComplexGaussian
+    exact literal_anchors hBBV circularComplexGaussian
       circularComplexGaussian_publishedMoments hDensity
       (clampedCoreBand R W) (fun n => clampedCoreHalfWidth R (W n) n)
       (clampedCoreCenter R W) (fun n => B.clampedWeights (W n) n)
@@ -83,13 +83,13 @@ theorem ConcreteSection4Input.toSection34 (B : CoreRadiusBounds p R)
 
 theorem ConcreteSection4Input.logPotential (B : CoreRadiusBounds p R)
     (W : ℕ → ℝ) (hR : 0 < R) (hWlim : Tendsto W atTop atTop)
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (h : B.ConcreteSection4Input W) :
     ∀ᵐ z ∂(volume : Measure ℂ), TendstoInProbabilityTri (clampedCoreSampleLaw R W)
       (fun n ω => physicalLogPotential (literalIndicatorMatrix n (clampedCoreBand R W n)
         (clampedCoreCenter R W n) (B.clampedWeights (W n) n).b ω) z)
       (circularRadialPotential ‖z‖) :=
   Section34Input.logPotential B W hR hWlim
-    (ConcreteSection4Input.toSection34 B W hR hWlim hBBV hBC12 h)
+    (ConcreteSection4Input.toSection34 B W hR hWlim hBBV h)
 
 end CircularLawSection6.CoreRadiusBounds

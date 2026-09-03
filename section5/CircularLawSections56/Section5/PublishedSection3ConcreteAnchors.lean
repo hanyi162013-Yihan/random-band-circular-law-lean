@@ -19,7 +19,7 @@ namespace CircularLawSections56.Section5.PublishedSection3Concrete
 open Section6
 
 theorem masked_ringPotential_limit
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (ν : Measure ℂ) [IsProbabilityMeasure ν] (hMom : AtomMomentAssumption21 ν id)
     (hDensity : DensityInput ν)
     (k d W : ℕ → ℕ) (center : ∀ n, Fin (d n + 1)) {c₀ C₀ : ℝ}
@@ -58,7 +58,7 @@ theorem masked_ringPotential_limit
     filter_upwards [hvalid'] with n hn
     omega
   have hω := section3Margin_spec γ (hδ.trans hδγ) hγ
-  have hlim := ringPotential_limit hBBV hBC12 ν hMom hDensity k' d W center profile hc₀
+  have hlim := ringPotential_limit hBBV ν hMom hDensity k' d W center profile hc₀
     hwidth hcenter hM hW (section3Margin γ) ⟨hω.1, hω.2.1⟩ hvalid' z
   have hconst : TendstoInProbabilityTri (fun _ => sampleLaw ν)
       (fun _ _ => circularLogPotential z) (circularLogPotential z) :=
@@ -87,7 +87,7 @@ theorem calibrationRaw_prefix_normalization
     rfl
 
 theorem short_anchor_on_common_space
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (ν : Measure ℂ) [IsProbabilityMeasure ν] (hMom : AtomMomentAssumption21 ν id)
     (hDensity : DensityInput ν)
     (d W : ℕ → ℕ) (center : ∀ n, Fin (d n + 1)) {c₀ C₀ : ℝ}
@@ -104,7 +104,7 @@ theorem short_anchor_on_common_space
     filter_upwards [hfit, hW.eventually_ge_atTop 1] with n hn hw ha
     exact ⟨by rw [← hwidth n]; exact hn,
       natural_short_branch_high_band W γ (hδ.trans hδγ) hγ n (by omega) ha⟩
-  have hlim := masked_ringPotential_limit hBBV hBC12 ν hMom hDensity id d W center
+  have hlim := masked_ringPotential_limit hBBV ν hMom hDensity id d W center
     profile hc₀ hwidth hcenter (paperNaturalShortBranch W γ) δ γ hδ hδγ hγ hW hv z
   intro ε hε
   apply (hlim ε hε).congr'
@@ -113,7 +113,7 @@ theorem short_anchor_on_common_space
     id_eq]
 
 theorem calibration_anchor_on_common_space
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (ν : Measure ℂ) [IsProbabilityMeasure ν] (hMom : AtomMomentAssumption21 ν id)
     (hDensity : DensityInput ν)
     (d W : ℕ → ℕ) (center : ∀ n, Fin (d n + 1)) {c₀ C₀ : ℝ}
@@ -151,7 +151,7 @@ theorem calibration_anchor_on_common_space
     · have her : ((m n - 1 : ℕ) : ℝ) + 1 = (m n : ℝ) := by exact_mod_cast he
       rw [her]
       exact hband (m n) hm.2.2.2
-  have hlim := masked_ringPotential_limit hBBV hBC12 ν hMom hDensity (fun n => m n - 1)
+  have hlim := masked_ringPotential_limit hBBV ν hMom hDensity (fun n => m n - 1)
     d W center profile hc₀ hwidth hcenter active δ γ hδ hδγ hγ hW hv z
   apply hlim.congr _ rfl
   intro n ω
@@ -170,7 +170,7 @@ theorem calibration_anchor_on_common_space
 /-- Both original finite-iid anchors are consequences, not assumptions.
 All finite sample maps, matrix identities, active fillers and cutoffs are internal. -/
 theorem literal_anchors
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (ν : Measure ℂ) [IsProbabilityMeasure ν] (hMom : AtomMomentAssumption21 ν id)
     (hDensity : DensityInput ν)
     (d W : ℕ → ℕ) (center : ∀ n, Fin (d n + 1)) {c₀ C₀ : ℝ}
@@ -195,9 +195,9 @@ theorem literal_anchors
   · exact measurable_literalActiveNormalizedObservable _ _ _ _
       (fun n => measurable_literalModelCalibrationRaw n (d n) (paperBandCellLength W δ n)
         (center n) (profile n).b z)
-  · exact ⟨short_anchor_on_common_space hBBV hBC12 ν hMom hDensity d W center profile hc₀
+  · exact ⟨short_anchor_on_common_space hBBV ν hMom hDensity d W center profile hc₀
       hwidth hcenter δ γ hδ hδγ hγ hW hfit z,
-      calibration_anchor_on_common_space hBBV hBC12 ν hMom hDensity d W center profile hc₀
+      calibration_anchor_on_common_space hBBV ν hMom hDensity d W center profile hc₀
         hwidth hcenter δ γ hδ hδγ hγ hW z⟩
 
 end CircularLawSections56.Section5.PublishedSection3Concrete

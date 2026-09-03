@@ -22,6 +22,11 @@ on:
       - "lean-toolchain"
       - ".github/workflows/section5.yml"
   workflow_dispatch:
+    inputs:
+      gaussian_migration:
+        description: Verify the root and both child projects after Gaussian source migration
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -31,7 +36,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  gaussian-migration:
+    if: ${{ inputs.gaussian_migration == true }}
+    uses: ./.github/workflows/gaussian-migration.yml
   verify-section5:
+    if: ${{ inputs.gaussian_migration != true }}
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     env:

@@ -44,7 +44,7 @@ theorem GaussianProfileConcreteSources.toSection34 (p : NoncompactProfile)
     intro R
     exact CoreRadiusBounds.ConcreteSection4Input.toSection34
       (p.coreRadiusBounds (by positivity : (0 : ℝ) ≤ (R : ℝ) + 1))
-      W (by positivity) hWlim h.bbv h.bc12 (h.coreSection4 R)
+      W (by positivity) hWlim h.bbv (h.coreSection4 R)
   coreSection3 := by
     intro φ hφ R
     exact CoreRadiusBounds.canonicalCoreSection3Input_of_concrete_literature

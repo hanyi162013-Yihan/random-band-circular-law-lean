@@ -1,6 +1,6 @@
 import CircularLawSection6.DenseProfileLSV
 import CircularLawSection6.DenseProfileScales
-import CircularLawSections56.Section5.PublishedSection3Literature
+import CircularLawSections56.Section5.VerifiedGinibreSources
 import ShortRingAnchor.HermitizationCountingFromV3
 import ShortRingAnchor.Lemma35FromV3
 import ShortRingAnchor.DensityNonsingularity
@@ -10,14 +10,14 @@ import ShortRingAnchor.Proposition36
 
 The target is the full profile matrix, not a short-ring surrogate. Its
 least-value estimate, all-cutoff count, bulk comparison, exact moments and
-Ginibre nonsingularity are constructed. Only uniform BBV and the classical
-BC12 statements for actual Ginibre remain external sources.
+Ginibre nonsingularity are constructed. The Gaussian reference is discharged
+by the proved Section 5 source; only uniform BBV remains external here.
 -/
 
 open MeasureTheory ProbabilityTheory Filter Topology ShortRingAnchor Arxiv2410V3
 open CircularLawSections56.Section5
 open CircularLawSections56.Section5.PublishedSection3Concrete
-  (Sample BBVComparisonInput BC12GinibreInput canonicalBBVAt_mono bc12_on_sampleLaw
+  (Sample BBVComparisonInput provedGinibreInput canonicalBBVAt_mono bc12_on_sampleLaw
     denseSamples denseSamples_measurePreserving actualGinibre)
 open scoped BigOperators
 noncomputable section
@@ -59,7 +59,7 @@ theorem reference_nonsingular (M : ℕ → ℕ) [∀ n, NeZero (M n)] (z : ℂ) 
       ((referenceCopies (M n)).law (i, j)) circularComplexGaussian_publishedDensityAlternative) z
 
 theorem actualMatrix_conclusion
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (M : ℕ → ℕ) [∀ n, NeZero (M n)]
     (q : ∀ n, ZMod (M n) → ℝ) (hq : ∀ n s, 0 < q n s)
     (hsum : ∀ n, ∑ s, q n s = 1) {c C : ℝ} (hc : 0 < c) (hC : 0 < C)
@@ -112,7 +112,7 @@ theorem actualMatrix_conclusion
   have hLSVAll := theorem31LeastSingularValueInput_of_minimum hMpos
     (fun n => actualMatrix (M n) (q n)) z (sourceHardEdgeScale M M denseKappa) goodLSV hLSV
   obtain ⟨p, hp, hBC12Negative, hBC12Full⟩ :=
-    bc12_on_sampleLaw hBC12 circularComplexGaussian M hMpos hM z
+    bc12_on_sampleLaw (provedGinibreInput hBBV) circularComplexGaussian M hMpos hM z
   have hscaleA := eventually_bandwidth_ge_half_power M B hM hC hBlower
   have hscaleG : ∀ᶠ n in atTop, (M n : ℝ) ^ (1 / 2 : ℝ) ≤ (M n : ℝ) :=
     eventually_bandwidth_ge_half_power M (fun n => (M n : ℝ)) hM zero_lt_one
@@ -157,13 +157,13 @@ theorem actualMatrix_conclusion
       (actualMatrix_rowMoments M q hq hsum) (reference_rowMoments M))
 
 theorem profile_conclusion
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (p : NoncompactProfile) (M : ℕ → ℕ) [∀ n, NeZero (M n)]
     (W : ℕ → ℝ) (hM : Tendsto M atTop atTop) {δ : ℝ} (hδ : 0 < δ)
     (hdense : ∀ n, δ * (M n : ℝ) ≤ W n) (z : ℂ) :
     Proposition36SequenceConclusion law M (fun n => actualMatrix (M n) (p.weight (M n) (W n))) z := by
   obtain ⟨c, C, hc, hC, hb⟩ := p.dense_weights_comparable hδ
-  exact actualMatrix_conclusion hBBV hBC12 M (fun n => p.weight (M n) (W n))
+  exact actualMatrix_conclusion hBBV M (fun n => p.weight (M n) (W n))
     (fun n s => p.weight_pos _ _ s) (fun n => p.sum_weight _ _) hc hC
     (fun n s => (hb (M n) (W n) (hdense n) s).1)
     (fun n s => (hb (M n) (W n) (hdense n) s).2) hM z
