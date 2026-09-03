@@ -587,6 +587,8 @@ example (A : Matrix (ZMod 2) (ZMod 2) ℂ) :
   cyclicPhysicalMatrix_energy 1 A
 
 -- One block is already periodic: there is no boundary cost, even for large widths.
+private instance : NeZero (∑ _ : Fin 1, (3 : ℕ)) := ⟨by decide⟩
+
 example : fullBlockRoute (fun _ : Fin 1 => 3) 10 = periodicBlockRoute (fun _ : Fin 1 => 3) 10 :=
   oneBlock_routes_eq (fun _ => 3) 10
 
@@ -602,9 +604,9 @@ example (H : ℕ) : (H : ℝ) / quadraticBlockScale H ≤ 1 / ((H : ℝ) + 1) :=
   quadraticBlockScale_ratio_le H
 
 -- Varying-dimension probability limits survive removing a finite prefix.
-example : TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 2) circularComplexGaussian)
+example : CircularLawSections56.Section5.TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 2) circularComplexGaussian)
     (fun _ _ => (0 : ℝ)) 0 ↔
-    TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
+    CircularLawSections56.Section5.TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
       (fun _ _ => (0 : ℝ)) 0 := by
   simpa only [Nat.add_assoc] using tendstoInProbabilityTri_shift_iff
     (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian) (fun _ _ => (0 : ℝ)) 0 1
