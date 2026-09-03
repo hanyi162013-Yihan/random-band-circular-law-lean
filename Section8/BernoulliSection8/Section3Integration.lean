@@ -16,10 +16,6 @@ namespace BernoulliSection8.Section3Bridge
 open BernoulliSection10 BernoulliSection10.SourceInputs
 open BernoulliSection10.ProbabilityLimits ShortRingAnchor Arxiv2410V3
 
--- Compare the named BBV predicates before expanding their Gaussian integrals.
--- This setting is local to this file and does not change any logical input.
-attribute [local irreducible] CanonicalBBVAt
-
 def momentBudget (A : Proposition38.Atom) (C : ℝ) : ℝ :=
   max C (sourceV3MomentBudget A.law circularGaussianPairLaw
     (fun x : ℝ => (x : ℂ)) gaussianAtom)
