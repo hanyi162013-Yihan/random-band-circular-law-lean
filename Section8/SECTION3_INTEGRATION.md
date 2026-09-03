@@ -7,8 +7,16 @@ construct their high-band anchor by calling
 The former negative-moment, projection and correlation fields are removed
 from the public upstream structure. No Gaussian-law field replaces them:
 the law of the existing explicit reference array is proved internally.
-The BC12-free migration requires its own successful cloud build and audits;
-the historical certificate below does not certify the new sources.
+**BC12-free migration: PASS.** Proof-source commit
+`8d9dbc26f820f7056b37108c980501cecb951203` passed
+[cloud run 33812017163](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33812017163)
+on 2026-09-03 at 22:16:54 UTC. Both normal Section 8 targets, all 61 exact
+axiom reports and both compiled public-signature audits passed.
+The scoped build took 36 seconds and the audit step 13 seconds after setup.
+The report artifact SHA-256 is
+`9e989af6583e77f3cb4d17b39f9f16aff5cd117c63be470abd0aae96f8956d5c`.
+This is a Section 8 certificate, not a certificate for the subsequent
+Section 5/6/10 migration.
 
 **Historical conditional integration:** proof-source commit `b6c379836fcc6cf166881768d1a0ad6782c5c552`
 passed [cloud run 33720016599](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33720016599/job/100537065421)

@@ -1,9 +1,16 @@
 # Gaussian input audit and migration
 
-Status: **migration in progress; new Section 5/6/8/10 signatures still require cloud validation**.
+Status: **Section 3 and Section 8 passed; the Section 5/6/10 migration is still being validated**.
 The Section 3 construction is already verified and merged in PR #3, at
 `43798327f45d98c45f2aaae6e5d1f0d041fc19c9`.
 This document is not a certificate for the newer source changes.
+
+Section 8's BC12-free adapter and both final theorem families passed
+[run 33812017163](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33812017163)
+at `8d9dbc26f820f7056b37108c980501cecb951203`: ordinary target builds,
+61 exact axiom reports and both compiled public-signature audits.
+The broader migration at `94d3efa` is checked separately in
+[run 33812184651](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33812184651).
 
 ## Scope and proof boundary
 
@@ -26,7 +33,7 @@ silently discarded. Eliminating BC12 does not prove these different results.
 | 4 | deterministic / density / pressure results | No Gaussian spectral source found; “Gaussian elimination” is linear algebra | Sources unchanged |
 | 5 | `PublishedSection3Concrete.indicator_complex_full_of_published_literature` and real counterpart | `hBC12` removed; `provedGinibreInput hBBV` constructs both estimates | Pending |
 | 6 | `NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources` and BBV-core route | Only BBV and concrete Section 4 pressure fields; no raw-log, squared-test, Han or correlation field | New migration pending; earlier BBV-only endpoint already existed |
-| 7–9 | Section 7 lemmas are housed in the Section 8/9 libraries; both Section 8 final endpoints use the actual Section 3 adapter | Section 8 negative-moment/projection/correlation fields removed; Section 9 Cook/Nguyen inputs are distinct | Section 8 cloud build pending; Section 9 sources unchanged |
+| 7–9 | Section 7 lemmas are housed in the Section 8/9 libraries; both Section 8 final endpoints use the actual Section 3 adapter | Section 8 negative-moment/projection/correlation fields removed; Section 9 Cook/Nguyen inputs are distinct | Section 8 passed at `8d9dbc2`; Section 9 sources unchanged |
 | 10 | `BernoulliSection10Source.planar_density_circular_law`, `real_density_circular_law`, and both ring-log limits | `hBC12` removed; exact real-pair reference law and both estimates constructed | Pending |
 
 ### Section 6 really does depend on Section 5

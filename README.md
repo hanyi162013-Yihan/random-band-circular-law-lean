@@ -15,7 +15,7 @@ remain conditional on the [explicit mathematical inputs listed below](#inputs-st
 **Branch migration notice:** the new removal of external Gaussian inputs from
 Sections 5, 6, 8 and 10 is tracked in
 [GAUSSIAN_INPUT_MIGRATION.md](GAUSSIAN_INPUT_MIGRATION.md).
-Its cloud checks are still pending. The section guide and historical
+Section 8 has passed; the Section 5/6/10 checks are still pending. The section guide and historical
 verification records below must not be taken as certification of these
 unverified signature changes.
 
