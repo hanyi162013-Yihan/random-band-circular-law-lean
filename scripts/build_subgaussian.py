@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Build the extension serially, retaining independent progress after errors."""
 from pathlib import Path
-import argparse, re, subprocess, sys
+import argparse, re, subprocess, sys, tomllib
 root=Path(__file__).resolve().parents[1]
+config=tomllib.loads((root/'lakefile.toml').read_text())
+roots={lib['name']:root/lib.get('srcDir','') for lib in config['lean_lib']}
 p=argparse.ArgumentParser()
 p.add_argument('--target', action='append', default=[])
 p.add_argument('--start-at')
@@ -18,7 +20,7 @@ start=modules.index(a.start_at) if a.start_at else 0
 selected=[m for m in modules[start:] if not a.start_at or m.startswith('SubgaussianSection8')]
 failed=set();blocked=set()
 for i,mod in enumerate(selected,1):
-    source=root/(mod.replace('.','/')+'.lean')
+    source=roots[mod.split('.')[0]]/(mod.replace('.','/')+'.lean')
     deps=set(re.findall(r'^import\s+([\w.]+)',source.read_text(),re.M)) if source.is_file() else set()
     if deps & (failed|blocked):
         blocked.add(mod);print(f'[{i}/{len(selected)}] Deferred {mod}: failed dependency',flush=True);continue

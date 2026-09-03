@@ -2,7 +2,9 @@ import BernoulliSection8
 
 set_option pp.universes true
 set_option pp.explicit false
-#print BernoulliSection8.Section3SubgaussianHighBandInput
+#print BernoulliSection8.RademacherSection3UpstreamInputs
+#print BernoulliSection8.Section3Bridge.UpstreamInputs
+#print BernoulliSection8.rademacher_section3_input
 #print BernoulliSection9.NguyenBottomSingularInput
 #print BernoulliSection9.CookDeformedSquareInput
 #print BernoulliSection8.rademacherMatrix

@@ -1,5 +1,6 @@
 import BernoulliSection8.RademacherLogPotential
 import BernoulliSection8.RademacherCircularReduction
+import BernoulliSection8.Section3Integration
 
 /-!
 # Section 8: caller-facing Bernoulli results
@@ -11,7 +12,8 @@ symmetric sign, with the physical factor `1/sqrt(3W)` built into
 `W → infinity` and `W/log N → infinity`.
 
 The only unproved analytic inputs accepted by these statements are the
-explicit Nguyen, Cook, and Section 3 objects. Pressure, reset, terminal,
+explicit Nguyen, Cook, and the named literature inputs retained by Section 3.
+Proposition 3.8 is obtained from its concrete implementation. Pressure, reset, terminal,
 measurability, energy, and circular-law reduction data are all constructed.
 -/
 
@@ -28,7 +30,7 @@ open BernoulliSection10.DiskReference BernoulliSection10.Replacement ShortRingAn
 theorem section8_bernoulli_log_potential
     (cook : CookDeformedSquareInput.{0, 0}) (nguyen : NguyenBottomSingularInput.{0, 0})
     (hNguyen : 1 ≤ nguyen.subgaussianBound)
-    (section3 : Section3SubgaussianHighBandInput rademacherLaw 1)
+    (section3 : RademacherSection3UpstreamInputs)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hs : ∀ n, 0 < s n)
     (hWtop : Tendsto W atTop atTop)
     (hband : Tendsto
@@ -40,14 +42,15 @@ theorem section8_bernoulli_log_potential
   have hlog : Tendsto (fun n => Real.log (((s n + 3) * W n : ℕ) : ℝ) / (W n : ℝ))
       atTop (𝓝 0) := by
     simpa only [Function.comp_def, inv_div] using tendsto_inv_atTop_zero.comp hband
-  exact rademacher_log_potential cook nguyen hNguyen section3 W s hW hs hWtop hlog z
+  exact rademacher_log_potential cook nguyen hNguyen
+    (rademacher_section3_input section3) W s hW hs hWtop hlog z
 
 /-- Weak convergence in probability of the empirical eigenvalue measure
 of the actual cyclic band matrix with symmetric Bernoulli entries to the uniform disk. -/
 theorem section8_bernoulli_circular_law
     (cook : CookDeformedSquareInput.{0, 0}) (nguyen : NguyenBottomSingularInput.{0, 0})
     (hNguyen : 1 ≤ nguyen.subgaussianBound)
-    (section3 : Section3SubgaussianHighBandInput rademacherLaw 1)
+    (section3 : RademacherSection3UpstreamInputs)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hs : ∀ n, 0 < s n)
     (hWtop : Tendsto W atTop atTop)
     (hband : Tendsto

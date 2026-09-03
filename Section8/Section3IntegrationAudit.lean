@@ -1,0 +1,18 @@
+import BernoulliSection8
+import SubgaussianSection8
+
+#print axioms BernoulliSection8.Section3Bridge.gaussianAtom_moments
+#print axioms BernoulliSection8.Section3Bridge.cyclicSiteSucc_eq_finRotate
+#print axioms BernoulliSection8.Section3Bridge.coefficient_eq_physicalProfile
+#print axioms BernoulliSection8.Section3Bridge.fullBlockMatrix_eq_physical
+#print axioms BernoulliSection8.Section3Bridge.denseAtom_copies
+#print axioms BernoulliSection8.Section3Bridge.normalizedDense_eq_circularGinibre
+#print axioms BernoulliSection8.Section3Bridge.input_log_convergence_iff_sequence
+#print axioms ShortRingAnchor.Proposition38.proposition38
+#print axioms BernoulliSection8.Section3Bridge.highBandInput
+#print axioms BernoulliSection8.rademacher_section3_input
+#print axioms SubgaussianSection8.section3_input
+#print axioms BernoulliSection8.section8_bernoulli_log_potential
+#print axioms BernoulliSection8.section8_bernoulli_circular_law
+#print axioms SubgaussianSection8.section8_subgaussian_log_potential
+#print axioms SubgaussianSection8.section8_subgaussian_circular_law
