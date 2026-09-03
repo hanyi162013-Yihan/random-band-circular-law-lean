@@ -16,6 +16,7 @@ open CircularLawSection4 CircularLawSection4.PaperIndicatorWeights
 open scoped ENNReal
 noncomputable section
 set_option autoImplicit false
+set_option warningAsError true
 set_option maxHeartbeats 1800000
 
 namespace CircularLawSections56.Section5.PublishedSection3Concrete
@@ -66,8 +67,10 @@ theorem real_density_input
     DensityInput (realComplexAtomLaw (volume.withDensity f)) := by
   have hsource : AtomDensityAlternative21 (volume.withDensity f) Complex.ofReal := by
     refine .real (Eventually.of_forall fun _ => rfl) ?_
-    simpa only [Complex.ofReal_re, Measure.map_id] using
-      boundedDensityOfMeasureLe (withDensity_le_of_bound volume f L hf)
+    change HasBoundedDensityWithRespectTo
+      (Measure.map (id : ℝ → ℝ) (volume.withDensity f)) volume
+    rw [Measure.map_id]
+    exact boundedDensityOfMeasureLe (withDensity_le_of_bound volume f L hf)
   have hcopy : IdentDistrib (id : ℂ → ℂ) Complex.ofReal
       (realComplexAtomLaw (volume.withDensity f)) (volume.withDensity f) := by
     refine ⟨measurable_id.aemeasurable, Complex.continuous_ofReal.measurable.aemeasurable, ?_⟩
