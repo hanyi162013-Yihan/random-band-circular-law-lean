@@ -84,6 +84,7 @@ theorem calibrationRaw_prefix_normalization
     have hvalid : 0 < m + 1 ∧ m + 1 ≤ n + 1 := ⟨hm, hmN⟩
     simp only [literalModelCalibrationRaw, dif_pos hvalid, samples,
       Nat.cast_add, Nat.cast_one]
+    rfl
 
 theorem short_anchor_on_common_space
     (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
@@ -159,7 +160,7 @@ theorem calibration_anchor_on_common_space
       (if active n then literalModelCalibrationRaw n (d n) (m n) (center n) (profile n).b z
         (samples ((n + 1) * (d n + 2)) ω) / (m n : ℝ) else circularLogPotential z)
   cases ha : active n with
-  | false => simp only [ha, Bool.false_eq_true, ↓reduceIte]
+  | false => simp only [Bool.false_eq_true, ↓reduceIte]
   | true =>
     have hm := hg n ha
     simpa only [ha, ↓reduceIte] using
