@@ -53,7 +53,7 @@ theorem normalizedGaussianPair_map {N : ℕ} (hN : 0 < N) :
 theorem circularGinibre_hasEntryLaw (A : Proposition38.Atom) {N : ℕ} (hN : 0 < N) :
     HasLaw (fun sample (ij : Fin N × Fin N) => circularGinibreMatrix N sample ij.1 ij.2)
       (Ginibre.gaussianMatrixLaw N N) (inputLaw A.law) := by
-  letI := Ginibre.gaussianEntryLaw_isProbability (by exact_mod_cast hN : (0 : ℝ) < N)
+  let := Ginibre.gaussianEntryLaw_isProbability (by exact_mod_cast hN : (0 : ℝ) < N)
   let pairs : InputSpace → Fin N × Fin N → ℝ × ℝ :=
     fun sample ij => sample.2 (squareAtomIndex ij.1 ij.2)
   have hp : MeasurePreserving pairs (inputLaw A.law)
@@ -71,8 +71,8 @@ theorem circularGinibre_hasEntryLaw (A : Proposition38.Atom) {N : ℕ} (hN : 0 <
   have he : (fun sample (ij : Fin N × Fin N) => circularGinibreMatrix N sample ij.1 ij.2) =
       (fun x ij => f (x ij)) ∘ pairs := by
     funext sample ij
-    simp [circularGinibreMatrix, f, pairs, gaussianAtom, Function.comp_def,
-      Complex.equivRealProdCLM_symm_apply]
+    simp [circularGinibreMatrix, f, pairs, gaussianAtom,
+      Complex.equivRealProdCLM_symm_apply, mul_comm]
   rw [he]
   exact ⟨(hi.comp hp).measurable.aemeasurable, (hi.comp hp).map_eq⟩
 
@@ -84,8 +84,9 @@ def gaussianMatrixEntriesEquiv (N : ℕ) :
   left_inv _ := rfl
   right_inv _ := rfl
   measurable_toFun := BC12.measurable_matrixEntries N
-  measurable_invFun := (continuous_pi fun i =>
-    continuous_pi fun j => continuous_apply (i, j)).measurable
+  measurable_invFun := by
+    apply Continuous.measurable
+    exact continuous_pi fun i => continuous_pi fun j => continuous_apply (i, j)
 
 /-- The actual Section 8 comparison matrix has the Section 3 Gaussian-column law. -/
 theorem circularGinibre_hasLaw (A : Proposition38.Atom) {N : ℕ} (hN : 0 < N) :
