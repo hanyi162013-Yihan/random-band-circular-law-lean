@@ -90,3 +90,6 @@ import CircularLawSection6.ProfileCompactSourceBridge
 import CircularLawSection6.ProfileProbability
 import CircularLawSection6.ProfileReplacement
 import CircularLawSection6.OneBlockPeriodicization
+import CircularLawSection6.FlexiblePeriodicization
+import CircularLawSection6.FlexiblePeriodicCutoffLimit
+import CircularLawSection6.IntervalCyclicSourceBridge

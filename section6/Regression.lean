@@ -589,3 +589,8 @@ example (A : Matrix (ZMod 2) (ZMod 2) ℂ) :
 -- One block is already periodic: there is no boundary cost, even for large widths.
 example : fullBlockRoute (fun _ : Fin 1 => 3) 10 = periodicBlockRoute (fun _ : Fin 1 => 3) 10 :=
   oneBlock_routes_eq (fun _ => 3) 10
+
+-- A short matrix is a single block; the allowed source window includes its full dimension.
+example : ∃ (q : ℕ) (len : Fin q → ℕ), 0 < q ∧ (∑ j, len j) = 5 ∧
+    (∀ j, 3 ≤ len j ∧ len j ≤ 200) ∧ (q = 1 ∨ ∀ j, 100 ≤ len j) := by
+  exact exists_one_or_periodic_block_lengths (H := 1) (m₀ := 100) (by decide) (by decide)

@@ -94,6 +94,7 @@ theorem profile_ginibre_replacement_of_log_limits (p : NoncompactProfile) (W : â
     exact (measurePreserving_fst.integrable_comp_of_integrable (hEX k).1).add
       (measurePreserving_snd.integrable_comp_of_integrable (hEY k).1)
   Â· intro k
+    unfold profileGinibrePairLaw
     rw [integral_add (measurePreserving_fst.integrable_comp_of_integrable (hEX k).1)
       (measurePreserving_snd.integrable_comp_of_integrable (hEY k).1),
       integral_comp_of_measurePreserving_aes measurePreserving_fst _ (hEX k).1.aestronglyMeasurable,
