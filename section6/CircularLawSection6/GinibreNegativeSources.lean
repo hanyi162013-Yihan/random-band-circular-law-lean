@@ -32,8 +32,11 @@ theorem cyclicSamples_negative (N : ℕ) [NeZero N] (ω : ℕ → ℂ) (z : ℂ)
     ((ginibreMatrix N (cyclicSamples N ω) - z • 1).submatrix
       (ZMod.finEquiv N) (ZMod.finEquiv N)) p = _
   rw [hm]
-  simp only [matrixNegativeMoment, Fintype.card_fin, shiftedSingularValueFamily,
-    shiftedSingularValue, matrixSingularValue]
+  unfold matrixNegativeMoment normalizedNegativeMoment empiricalAverage
+  refine congrArg₂ (fun x y : ℝ => x / y) ?_ (by simp only [Fintype.card_fin])
+  apply Fintype.sum_equiv (finCongr (Fintype.card_fin N))
+  intro i
+  rfl
 
 theorem negative_on_sequence_to_tri
     (N : ℕ → ℕ) [∀ n, NeZero (N n)] (z : ℂ) (p : ℝ)
