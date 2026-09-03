@@ -111,7 +111,10 @@ theorem expected_matrixLowerCutoff_secondMoment [Nonempty ι]
   have hint : Integrable (fun ω => (matrixCutoffPotential (A ω) a - matrixRawPotential (A ω)) ^ 2) μ := by
     apply hmajor.mono' (hm.pow 2)
     filter_upwards [hpoint] with ω hω
-    simpa only [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg _), Pi.pow_apply, Pi.sub_apply] using hω
+    change ‖(matrixCutoffPotential (A ω) a - matrixRawPotential (A ω)) ^ 2‖ ≤
+      2 * (hilbertSchmidtSq (A ω) / (Fintype.card ι : ℝ)) + 2 * matrixRawPotential (A ω) ^ 2
+    rw [Real.norm_eq_abs, abs_of_nonneg (sq_nonneg (matrixCutoffPotential (A ω) a - matrixRawPotential (A ω)))]
+    exact hω
   refine ⟨(memLp_two_iff_integrable_sq hm).mpr hint, ?_⟩
   calc
     _ ≤ ∫ ω, 2 * (hilbertSchmidtSq (A ω) / (Fintype.card ι : ℝ)) + 2 * matrixRawPotential (A ω) ^ 2 ∂μ :=

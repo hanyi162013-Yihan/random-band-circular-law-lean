@@ -534,3 +534,15 @@ example (e : Fin 2 ≃ Fin 2) (A : Matrix (Fin 2) (Fin 2) ℂ) (z : ℂ)
     matrixCutoffPotential (A.submatrix e.symm e.symm - z • 1) 1 =
       matrixCutoffPotential (A - z • 1) 1 :=
   matrixCutoffPotential_shifted_reindex e A z hA zero_lt_one
+
+-- The reference is the actual normalized Gaussian matrix, including dimension one.
+example : (∫ ω, TaoVuReplacement.hilbertSchmidtSq (ginibreMatrix 1 ω)
+    ∂cyclicAtomLaw 1 circularComplexGaussian) = 1 := (ginibre_expected_energy 1).2
+
+-- The entry/displacement permutation preserves the full IID Gaussian law.
+example : MeasurePreserving (ginibreEntryAtoms 3) (cyclicAtomLaw 3 circularComplexGaussian)
+    (cyclicAtomLaw 3 circularComplexGaussian) := ginibreEntryAtoms_measurePreserving 3
+
+-- The reference raw log potential is L2 even for every fixed shift in dimension one.
+example (z : ℂ) : MemLp (fun ω => matrixRawPotential (ginibreMatrix 1 ω - z • 1)) 2
+    (cyclicAtomLaw 1 circularComplexGaussian) := ginibre_raw_memLp 1 z

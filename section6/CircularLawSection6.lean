@@ -71,3 +71,5 @@ import CircularLawSection6.FiniteCdfCutoffComparison
 import CircularLawSection6.SquareBoundedProbability
 import CircularLawSection6.LowerCutoffSecondMoment
 import CircularLawSection6.CutoffReindexing
+import CircularLawSection6.PhysicalCutoffTransport
+import CircularLawSection6.GinibreReference

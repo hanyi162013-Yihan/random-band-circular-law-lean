@@ -69,7 +69,9 @@ theorem matrixCutoffPotential_shifted_reindex (e : ι ≃ κ) (A : Matrix ι ι 
     matrixCutoffPotential (A.submatrix e.symm e.symm - z • 1) a =
       matrixCutoffPotential (A - z • 1) a := by
   have hm : (A - z • 1).submatrix e.symm e.symm = A.submatrix e.symm e.symm - z • 1 := by
-    rw [Matrix.submatrix_sub, Matrix.submatrix_smul, Matrix.submatrix_one_equiv]
+    ext i j
+    simp only [Matrix.submatrix_apply, Matrix.sub_apply, Matrix.smul_apply,
+      Matrix.one_apply, e.symm.injective.eq_iff]
   rw [← hm]
   exact matrixCutoffPotential_reindex e (A - z • 1) hA ha
 
