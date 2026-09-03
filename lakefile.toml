@@ -19,6 +19,10 @@ name = "BernoulliSection10"
 srcDir = "Section10"
 
 [[lean_lib]]
+name = "BernoulliSection10Complex"
+srcDir = "Section10"
+
+[[lean_lib]]
 name = "BernoulliSection8"
 srcDir = "Section8"
 
