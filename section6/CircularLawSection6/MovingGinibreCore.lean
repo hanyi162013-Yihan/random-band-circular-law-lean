@@ -19,6 +19,9 @@ set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
 
+attribute [local instance 2000] CircularLawSection6.complexMatrixMeasurableSpace
+  CircularLawSection6.complexMatrixBorelSpace
+
 theorem cyclicBlock_moving_ginibre_of_cdf_ae
     (hBBV : BBVComparisonInput) (N : ℕ → ℕ+) (hN : Tendsto (fun n => (N n : ℕ)) atTop atTop)
     (H lo hi : ℕ → ℕ) (hlo : ∀ n, 0 < lo n) (hloLim : Tendsto lo atTop atTop)
@@ -65,6 +68,7 @@ theorem cyclicBlock_moving_ginibre_of_cdf_ae
   have hM : Tendsto (fun n => (M n : ℕ)) atTop atTop :=
     tendsto_atTop_mono (fun n => (hm n).1) hloLim
   have hlim := hcmp.add (hzG M N hM hN a ha)
+  dsimp only [ν] at hlim
   simp only [sub_add_sub_cancel, add_zero] at hlim
   apply hlim.congr'
   apply Eventually.of_forall
@@ -176,6 +180,7 @@ theorem one_or_fullBlock_moving_cutoff_of_all_lengths
     apply tendsto_zero_iff_norm_tendsto_zero.mpr
     exact squeeze_zero (fun _ => norm_nonneg _) (fun n => by simpa only [Real.norm_eq_abs] using hbound n) hrate
   have hlim := hdiff.add (hp g hchoice)
+  dsimp only [A, B, μ] at hlim
   simpa only [sub_add_sub_cancel, add_zero] using hlim
 
 namespace NoncompactProfile
@@ -227,11 +232,12 @@ theorem unitCore_cutoff_comparison_of_local_cdf_ae (p : NoncompactProfile)
     (len n) (d n) (H n) (hwidth n) (hglobal n) (center n) (hcenter n) (W n) circularComplexGaussian)
   filter_upwards [hlocal, hfull, htransport] with z hl hf heq
   intro hsource
-  have hlim := hf _ (hl hsource a ha)
+  let g (n : ℕ) : ℝ := ∫ ω, matrixCutoffPotential
+    (ginibreMatrix (∑ j, len n j) ω - z • 1) a
+      ∂cyclicAtomLaw (∑ j, len n j) circularComplexGaussian
+  have hlim := hf g (hl hsource a ha)
   apply hlim.congr'
-  exact Eventually.of_forall fun n => congrArg
-    (fun x => x - ∫ ω, matrixCutoffPotential (ginibreMatrix (∑ j, len n j) ω - z • 1) a
-      ∂cyclicAtomLaw (∑ j, len n j) circularComplexGaussian) (heq n a ha).symm
+  exact Eventually.of_forall fun n => congrArg (fun x : ℝ => x - g n) (heq n a ha).symm
 
 /-- Restore the initial non-fitting prefix after applying the moving
 reference comparison to the canonical quadratic block partition. -/

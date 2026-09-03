@@ -31,6 +31,12 @@ set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
 
+-- Use the same entrywise measurable structure as the generic matrix
+-- calculus.  The imported finite-Ginibre Borel instance is mathematically
+-- equal but not definitionally equal to this product structure.
+attribute [local instance 2000] CircularLawSection6.complexMatrixMeasurableSpace
+  CircularLawSection6.complexMatrixBorelSpace
+
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
 /-- Joint measurability in height and the actual random matrix entries.
@@ -58,7 +64,9 @@ theorem matrixSquaredPoissonAverage_abs_le [Nonempty ι]
     simp only [finrank_euclideanSpace]
     exact Nat.cast_ne_zero.mpr Fintype.card_ne_zero
   unfold matrixSquaredSingularAverage
-  rw [abs_div, abs_of_nonneg (Nat.cast_nonneg _)]
+  rw [abs_div, abs_of_nonneg
+    (Nat.cast_nonneg (finrank ℂ (EuclideanSpace ℂ ι)) :
+      (0 : ℝ) ≤ (finrank ℂ (EuclideanSpace ℂ ι) : ℝ))]
   calc
     _ ≤ (∑ i : Fin (finrank ℂ (EuclideanSpace ℂ ι)),
         |squaredPoissonTest t (A.toEuclideanLin.singularValues i ^ 2)|) /
@@ -100,7 +108,7 @@ theorem hasDerivAt_integral_matrixRegularizedPotential [Nonempty ι]
     {t : ℝ} (ht : 0 < t) :
     HasDerivAt (fun u => ∫ ω, matrixRegularizedPotential (A ω) u ∂μ)
       (∫ ω, matrixSquaredSingularAverage (A ω) (squaredPoissonTest t) ∂μ) t := by
-  have hs : Ioi (t / 2) ∈ 𝓝 t := isOpen_Ioi.mem_nhds (by dsimp; linarith)
+  have hs : Ioi (t / 2) ∈ 𝓝 t := isOpen_Ioi.mem_nhds (by linarith)
   have hmeas : ∀ᶠ u in 𝓝 t,
       AEStronglyMeasurable (fun ω => matrixRegularizedPotential (A ω) u) μ := by
     filter_upwards [hs] with u hu
@@ -117,7 +125,6 @@ theorem hasDerivAt_integral_matrixRegularizedPotential [Nonempty ι]
     have hu0 : 0 < u := lt_trans (half_pos ht) hu
     have hratio : 1 / u ≤ 2 / t := by
       apply (div_le_div_iff₀ hu0 ht).2
-      dsimp at hu
       linarith
     have habs : ‖matrixSquaredSingularAverage (A ω) (squaredPoissonTest u)‖ ≤ 1 / u := by
       simpa only [Real.norm_eq_abs] using matrixSquaredPoissonAverage_abs_le (A ω) hu0
@@ -306,8 +313,9 @@ theorem ginibre_meanSquaredPoisson_tendsto_of_bbv
         ∫ ω, matrixSquaredSingularAverage (ginibreOnSequence (N n) ω - z • 1)
           (squaredPoissonTest t) ∂gaussianSequenceLaw := by
     have hi := integrable_stieltjesTrace (mu := gaussianSequenceLaw)
-      (fun i j => (measurable_pi_apply j).comp
-        ((measurable_pi_apply i).comp (ginibreOnSequence_measurable (N n)))) z heta
+      (X := ginibreOnSequence (N n))
+      (fun i j => show Measurable (fun ω => ginibreOnSequence (N n) ω i j) from
+        (measurable_pi_apply _).div_const _) z heta
     calc
       _ = ∫ ω, (stieltjesTrace (ginibreOnSequence (N n) ω) z
           (Complex.I * (t : ℂ))).im ∂gaussianSequenceLaw := by
