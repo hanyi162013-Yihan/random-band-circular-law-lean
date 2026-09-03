@@ -1,6 +1,7 @@
 import CircularLawSection6.PublishedCyclicGinibre
 import CircularLawSection6.ClampedCoreProfile
 import CircularLawSection6.QuadraticBlockScale
+import CircularLawSection6.ProfileCompactSourceBridge
 
 /-! # The actual core weights and automatic polynomial local scales
 
@@ -33,7 +34,7 @@ theorem quadraticBlockScale_quarter_power_eventually
     (Nat.cast_nonneg _) (by norm_num : (0 : ℝ) < 4)).1
   rw [← Real.rpow_mul (Nat.cast_nonneg _)]
   norm_num only [show (1 / 4 : ℝ) * 4 = 1 by norm_num, Real.rpow_one,
-    Real.rpow_natCast]
+    Real.rpow_ofNat]
   exact hm4
 
 theorem cyclic_bandwidth_eighth_power_eventually

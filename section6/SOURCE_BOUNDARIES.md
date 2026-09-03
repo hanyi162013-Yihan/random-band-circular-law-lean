@@ -2,14 +2,17 @@
 
 The current branch includes a user-approved correction to Section 3's
 bounded-density record: its bound is explicitly below ENNReal top, not an
-auto-implicit variable. Concrete Gaussian instantiation and revalidation are
-pending. The historical 122-module checkpoint below predates this correction;
+auto-implicit variable. Concrete Gaussian instantiation compiled in cloud;
+the full 136-module integration and audits remain pending. The historical
+122-module checkpoint below predates this correction;
 see `../section3/INTEGRATION_CORRECTIONS.md`.
 
-The target declaration is
-`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_section3`
-in `CircularLawSection6/PublishedSection3GaussianProfile.lean`. The complete 122-module
-checkpoint, including this theorem, passed strict compilation, the transitive
+The new target declaration is
+`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_sources`
+in `CircularLawSection6/PublishedSourceGaussianProfile.lean`; its combined
+verification is still pending. The older
+`gaussian_profile_circular_law_of_published_section3` belongs to the 122-module
+checkpoint, which passed strict compilation, the transitive
 axiom audits and all 119 regressions in GitHub run 33714847892. See
 `VERIFICATION.md` for the exact commit and scope.
 
@@ -36,7 +39,7 @@ The axiom audit cannot and does not discharge these hypotheses.
 | Input | Exact mathematical content | Location |
 | --- | --- | --- |
 | `coreSection34` | Two finite quantitative Section 4 pressure estimates and finite published Section 3 model/sampling/literature data; both Section 3 anchors and the Section 5 core limit are derived internally | `PublishedSection3CoreEndpoint.lean` |
-| `coreSection3` | Local finite squared-singular CDF comparison with finite Ginibre, plus the Ginibre bounded-test singular-law limit with nonnegative support and finite second moment | `CanonicalSourceComparison.lean` |
+| `coreLocal` | BBV comparison for two explicitly constructed finite Gaussian models, plus the common Ginibre bounded-test singular-law limit with nonnegative support and finite second moment; local CDF convergence is derived internally | `PublishedCoreLocalInput.lean` |
 | `ginibreRaw` | Classical normalized Ginibre raw log-potential convergence in probability for planar-a.e. shift | `SubsequenceSourceEndpoint.lean` |
 | `ginibreNegative` | Tightness in probability of one positive-order inverse singular-value moment of shifted Ginibre | `GinibreLowerCutoff.lean` |
 | `ginibreSpectral` | Classical circular law for the actual normalized Ginibre reference | `SubsequenceSourceEndpoint.lean` |
@@ -101,5 +104,8 @@ not identical to a line-by-line formalization of every intermediate claim.
 `integral t/(s^2+t^2) <= C` implies `sigma([0,t]) <= 2*C*t`, and its CDF
 version for nonnegative laws. The exact logarithmic layer-cake identity,
 integrability and linear cutoff error are now proved from this CDF bound.
-Identification of the bound for the actual limiting law is subsequent work,
-not covered by the 122-module checkpoint or inferred from the generic adapter.
+The actual limiting-law bound and logarithmic-potential identification
+subsequently compiled in run 33718531306 via `GinibreLimitingHardEdge.lean`
+and `GinibreLimitingLogPotential.lean`. That later run failed in other new
+adapters and is not a green combined checkpoint. These results are not
+inferred merely from the generic adapter or from the axiom audit.

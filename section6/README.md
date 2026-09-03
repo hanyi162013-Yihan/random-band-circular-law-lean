@@ -6,16 +6,20 @@ dependencies. No second mathlib checkout or large local download is needed.
 
 ## Main endpoint and verification status
 
-The newest integration is pending fresh cloud verification. A concrete
-Gaussian density constructor exposed an auto-implicit `top` in the imported
-Section 3 density record. The user-approved correction is documented in
+The current 136-module integration is pending a fully green cloud run.
+A concrete Gaussian density constructor exposed an auto-implicit `top` in
+the imported Section 3 density record. The user-approved shared correction is documented in
 [Section 3 integration corrections](../section3/INTEGRATION_CORRECTIONS.md).
 The 122-module checkpoint below predates that correction and verifies
 conditional proofs, not satisfiability of the former density premise.
 
-The target declaration is
-`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_section3`
-in [PublishedSection3GaussianProfile.lean](CircularLawSection6/PublishedSection3GaussianProfile.lean).
+The new source-facing target is
+`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_sources`
+in [PublishedSourceGaussianProfile.lean](CircularLawSection6/PublishedSourceGaussianProfile.lean).
+It derives local finite-CDF comparison internally from the checked Section 3
+estimates on the actual Gaussian models. This newest endpoint is not covered
+by the historical checkpoint below. The prior
+`gaussian_profile_circular_law_of_published_section3` remains available.
 For a strictly positive continuous integrable BV profile of integral one
 and positive bandwidths tending to infinity, it gives the circular law in
 probability for the actual normalized Gaussian cyclic matrix. It does not
@@ -73,6 +77,9 @@ hard-edge modules prove that a bounded Poisson transform implies a linear CDF
 bound, then derive the exact logarithmic layer-cake identity, logarithmic
 integrability and cutoff limit. Identification of that transform bound for the
 actual limiting law is subsequent work, not covered by the 122-module run.
+The actual Ginibre hard-edge and limiting-logarithm identification modules
+subsequently compiled in run 33718531306; later model/scaling adapters caused
+that run to fail, so its complete build and audits did not pass.
 Thus the conditional main endpoint is not a claim that
 every intermediate statement of Section 6 has been formalized line by line.
 

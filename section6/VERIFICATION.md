@@ -1,14 +1,24 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
-## New density-instantiation correction: cloud check pending
+## Current 136-module integration: complete cloud check pending
 
 Concrete Gaussian instantiation exposed an incorrectly auto-implicit `top`
 in Section 3's bounded-density record. The field is now the intended
 `bound < (⊤ : ENNReal)`, with auto-implicit variables disabled locally.
 See `../section3/INTEGRATION_CORRECTIONS.md`. The prior 122-module success
 checked conditional theorems with that old premise; it did not prove the
-premise could be instantiated. The new concrete constructor and two regression
-tests must pass with the corrected dependency before this revision is green.
+premise could be instantiated. The actual Gaussian constructor and corrected
+Section 3 dependency compiled in run 33717315989. The shared minimal fix is
+`5c7be7bf2bd843ccdbfb45fdc0144e3dc7163278`, now an ancestor of both development
+branches; Section 6's merge is `68ba63d60a070b08df071e8f3d0fe3edc608746f`.
+Its density source is byte-identical to the already-corrected file.
+
+In run 33718531306, `GinibreLimitingHardEdge` compiled in 6.7 seconds and
+`GinibreLimitingLogPotential` in 2.8 seconds. They derive the actual limiting
+linear CDF bound and logarithmic-potential identity from the explicit BBV,
+bounded-test Ginibre and BC12 sources. Later joint-model/scaling adapters
+failed, so the full build, transitive audit and 126 regressions remain pending.
+No local Lean compilation or large download is used.
 
 ## Verified 122-module published Section 3 integration
 
