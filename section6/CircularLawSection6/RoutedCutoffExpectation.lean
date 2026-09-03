@@ -48,7 +48,13 @@ theorem expected_shifted_scaled_energy_le
     (hA.const_smul c) measurable_const hscale (integrable_const _)
   have hI : hilbertSchmidtSq (z • (1 : Matrix ι ι ℂ)) = ‖z‖ ^ 2 * (Fintype.card ι : ℝ) := by
     rw [hilbertSchmidtSq_smul]
-    simp [hilbertSchmidtSq, Matrix.one_apply]
+    congr 1
+    have hentry (i j : ι) : ‖(if i = j then (1 : ℂ) else 0)‖ ^ 2 =
+        if i = j then (1 : ℝ) else 0 := by
+      split_ifs <;> norm_num
+    unfold hilbertSchmidtSq
+    simp_rw [Matrix.one_apply, hentry]
+    simp
   refine ⟨hint, (div_le_iff₀ (Nat.cast_pos.mpr (Fintype.card_pos (α := ι)))).mpr ?_⟩
   calc
     _ ≤ ∫ ω, 2 * hilbertSchmidtSq (c • A ω) + 2 * hilbertSchmidtSq (z • (1 : Matrix ι ι ℂ)) ∂μ :=

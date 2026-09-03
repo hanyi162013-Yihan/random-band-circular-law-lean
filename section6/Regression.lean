@@ -375,6 +375,12 @@ example {q : ℕ} (len : Fin q → ℕ) [∀ j, NeZero (len j)] [NeZero (∑ j, 
 example (ν : Measure ℂ) (z : ℂ) : cyclicBlockExpectedCutoff 0 0 (fun _ => 1) ν z 1 = 0 := by
   simp [cyclicBlockExpectedCutoff]
 
+-- The exact finite squared-singular CDF controls the bounded matrix test.
+example (A : Matrix (Fin 1) (Fin 1) ℂ) (B : Matrix (Fin 2) (Fin 2) ℂ) :
+    |matrixClippedPotential A 1 2 - matrixClippedPotential B 1 2| ≤
+      matrixSquaredSingularCdfDistanceOn A B 2 * (Real.log 2 - Real.log 1) :=
+  matrixClipped_difference_le_cdf A B zero_lt_one (by norm_num)
+
 -- Exact cutoff scaling includes a threshold change, not just an additive logarithm.
 example (A : Matrix (Fin 1) (Fin 1) ℂ) (hA : A.det ≠ 0) :
     matrixCutoffPotential ((2 : ℂ) • A) 1 =

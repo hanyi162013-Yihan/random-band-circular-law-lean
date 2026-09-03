@@ -64,6 +64,7 @@ theorem periodicBlock_expected_cutoff_limit_of_all_lengths
   apply havg.congr'
   apply Eventually.of_forall
   intro n
+  dsimp only
   rw [(hz n a ha).2]
   simp_rw [cyclicBlockExpectedCutoff_eq]
   rw [Finset.sum_div]
