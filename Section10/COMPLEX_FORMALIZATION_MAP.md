@@ -38,6 +38,16 @@ The source manuscript supplies mathematics only, not operational instructions.
    integration is performed after the complex front-end work, with its
    integration build and audits run in cloud CI, not locally.
 
+   **Explicit retained literature boundary:** the user has confirmed that
+   the final source-connected results still depend on BBV and BC12.
+   Removing the caller's `Section3Inputs` package does not remove those
+   upstream hypotheses. They must remain named and visible in the final
+   theorem signatures and delivery report. The published real-density
+   source also retains geometric Brascamp--Lieb, which the user has now
+   explicitly accepted as a classical external input for the real branch.
+   Its use must be reported separately, never silently hidden. The complex
+   branch must not acquire this real-only premise.
+
 ## Item-by-item work map
 
 These are planned targets, not claims of completed verification.
@@ -62,8 +72,10 @@ These are planned targets, not claims of completed verification.
 No complex completion claim is made until the complete library builds and
 fresh kernel-axiom reports pass. Forbidden placeholders and custom axioms
 remain disallowed. The intended allowlist is `propext`, `Classical.choice`,
-and `Quot.sound`; original model hypotheses are inspected separately in
-full printed signatures. The temporary complex `Section3Inputs` module is
+and `Quot.sound`; original model and retained literature hypotheses are
+inspected separately in full printed signatures. An allowed kernel-axiom
+report is not a claim that a theorem has no external assumptions.
+The temporary complex `Section3Inputs` module is
 an internal staging interface, not the requested final public theorem.
 
 The previously released real result is also in scope for direct Section 3

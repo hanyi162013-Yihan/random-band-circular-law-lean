@@ -144,12 +144,11 @@ theorem endpointForwardFamilyFlat_update_line
       (endpointAmbientRow W a ((1 - t) • u + t • v))) s c = _
   rw [hinterp]
   by_cases ha : a ∈ s
-  · simpa [E, a, ru, rv, Complex.real_smul] using
+  · simpa [E, a, ru, rv] using
       (minor_updateRow_interpolate_of_mem q.1 E a ru rv (t : ℂ) s c ha)
   · rw [minor_updateRow_eq_of_not_mem q.1 E a _ s c ha,
       minor_updateRow_eq_of_not_mem q.1 E a ru s c ha,
       minor_updateRow_eq_of_not_mem q.1 E a rv s c ha]
-    simp only [Complex.real_smul]
     ring
 
 def endpointForwardFamilyRecursive (W : ℕ) :

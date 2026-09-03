@@ -251,4 +251,3 @@ theorem proposition_10_10_packet_reset
       rw [add_mul]
 
 end BernoulliSection10Complex
-

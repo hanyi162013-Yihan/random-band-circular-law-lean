@@ -145,4 +145,3 @@ theorem densityCorePressure_mean_stitching
     intervalPressure_complete_cells hμ W (densityCoreSites W) K hW z r
 
 end BernoulliSection10Complex
-

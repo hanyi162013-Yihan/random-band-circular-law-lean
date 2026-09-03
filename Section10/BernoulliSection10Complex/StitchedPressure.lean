@@ -91,4 +91,3 @@ theorem stitchedPressure_markov
       (div_le_div_of_nonneg_right (stitchedPressure_L1_bound hμ W K hW z) hε.le)
 
 end BernoulliSection10Complex
-

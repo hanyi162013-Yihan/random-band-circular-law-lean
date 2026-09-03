@@ -132,4 +132,3 @@ theorem densityCyclicLogDet_integrable
   exact hd.add hp
 
 end BernoulliSection10Complex
-

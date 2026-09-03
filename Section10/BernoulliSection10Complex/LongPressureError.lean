@@ -144,4 +144,3 @@ theorem tendsto_cyclicStitchedPressureError_div
     exact cyclicStitchedPressureError_div_le L (W n) (K n) (q n) (N n) hn z hqn hsn
 
 end BernoulliSection10Complex
-

@@ -66,4 +66,3 @@ theorem stitchedPressure_with_remainder_L1_bound
     (stitchedPressure_L1_bound hμ W K hW z))
 
 end BernoulliSection10Complex
-

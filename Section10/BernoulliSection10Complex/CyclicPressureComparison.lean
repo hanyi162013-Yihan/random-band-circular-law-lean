@@ -62,4 +62,3 @@ theorem cyclicPressure_normalized_L1_bound
   exact div_le_div_of_nonneg_right (cyclicPressure_L1_bound hμ W s hW z) (Nat.cast_nonneg _)
 
 end BernoulliSection10Complex
-

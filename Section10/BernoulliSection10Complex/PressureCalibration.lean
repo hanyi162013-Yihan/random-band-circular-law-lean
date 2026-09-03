@@ -61,4 +61,3 @@ theorem densityCorePressureDensity_tendsto_of_anchor
   · exact (tendsto_cyclicAnchorPressureError L z).comp hWtop
 
 end BernoulliSection10Complex
-

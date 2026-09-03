@@ -88,4 +88,3 @@ theorem resetSandwichLog_joint_integrable
     using h
 
 end BernoulliSection10Complex
-

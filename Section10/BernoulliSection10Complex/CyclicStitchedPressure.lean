@@ -68,4 +68,3 @@ theorem cyclicStitchedPressure_normalized_L1_bound
     (Nat.cast_nonneg _)
 
 end BernoulliSection10Complex
-

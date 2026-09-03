@@ -68,6 +68,7 @@ jobs:
         run: |
           set -o pipefail
           python3 scripts/check_axioms.py --audit-file Section10/BernoulliSection10Complex/AnalyticAxiomAudit.lean --audit-file Section10/BernoulliSection10Complex/FrontAxiomAudit.lean 2>&1 | tee verification-section10/front-axioms.log
+          lake env lean Section10/BernoulliSection10Complex/FrontSignatureAudit.lean 2>&1 | tee verification-section10/front-signatures.log
       - name: Preserve build and audit logs
         if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

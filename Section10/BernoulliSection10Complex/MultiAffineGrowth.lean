@@ -150,7 +150,7 @@ theorem norm_multiAffineEval_finRows_le
           _ = (1 + (p : ℝ) * R) * ‖c‖ := by
             simp [Finset.card_univ]
             ring
-      have htail : ∀ (i : Fin n) (j : Fin p), |Fin.tail x i j| ≤ R := by
+      have htail : ∀ (i : Fin n) (j : Fin p), ‖Fin.tail x i j‖ ≤ R := by
         intro i j
         exact hx i.succ j
       have hind := ih cnext (Fin.tail x) htail

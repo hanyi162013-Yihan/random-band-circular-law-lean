@@ -147,4 +147,3 @@ theorem intervalMaxDegreeLog_sub_maxPressure_integral_le
         nsmul_eq_mul, intervalPressureConcentrationCost, mul_assoc] using h
 
 end BernoulliSection10Complex
-

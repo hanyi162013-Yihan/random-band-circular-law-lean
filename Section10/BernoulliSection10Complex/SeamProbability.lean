@@ -327,4 +327,3 @@ theorem proposition_10_7_periodic_seam
       ring
 
 end BernoulliSection10Complex
-

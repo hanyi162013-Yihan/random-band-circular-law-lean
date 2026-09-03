@@ -160,4 +160,3 @@ theorem physicalPacketResetLoss_integral_le
     ENNReal.toReal_ofReal hn, physicalPacketResetConstant, mul_assoc] using h
 
 end BernoulliSection10Complex
-

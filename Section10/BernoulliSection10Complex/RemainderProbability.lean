@@ -219,4 +219,3 @@ theorem densityRemainder_normalized_tendsto
       (Eventually.of_forall fun n => (densityRemainderSites_lt (m n) (W n)).le) z hε)
 
 end BernoulliSection10Complex
-

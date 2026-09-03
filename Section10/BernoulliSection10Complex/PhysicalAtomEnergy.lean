@@ -116,4 +116,3 @@ theorem intervalMeanAtomSquare_tendsto_in_probability
   exact h
 
 end BernoulliSection10Complex
-

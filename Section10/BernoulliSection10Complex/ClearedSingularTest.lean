@@ -71,4 +71,3 @@ theorem interval_product_scalar_test_ae
       hx.2.1 hy.2.1 (intervalClearingFactor W p z x) (intervalClearingFactor W q z y) r.1 hr
 
 end BernoulliSection10Complex
-

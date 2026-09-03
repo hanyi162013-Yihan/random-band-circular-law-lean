@@ -72,4 +72,3 @@ theorem intervalMaxDegreeLog_eq_outsidePressure_ae
   ring
 
 end BernoulliSection10Complex
-

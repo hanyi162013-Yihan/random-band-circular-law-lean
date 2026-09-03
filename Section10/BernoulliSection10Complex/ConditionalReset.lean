@@ -132,4 +132,3 @@ theorem resetSandwichDegreeLog_integral_bounds_ae
     linarith only [hle, hcost]
 
 end BernoulliSection10Complex
-

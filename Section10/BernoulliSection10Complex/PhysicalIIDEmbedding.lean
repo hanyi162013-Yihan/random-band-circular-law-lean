@@ -97,4 +97,3 @@ theorem physicalRowsFromSequence_measurePreserving
     (squareIIDFromSequence_measurePreserving μ ((s + 3) * W))
 
 end BernoulliSection10Complex
-

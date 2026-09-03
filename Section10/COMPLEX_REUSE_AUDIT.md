@@ -3,6 +3,17 @@
 Baseline repository commit: `42c26b6` (Lean 4.33.0).
 The stable real Section 10 files are not edited.
 
+The requested final integration also applies to the real-density endpoint.
+It is deferred until the complex front-end is verified; the source-connected
+integration is to be compiled and audited in cloud CI only.
+
+The user explicitly confirmed that BBV and BC12 remain dependencies of the
+final result. This is a conditional literature-based formalization, not a
+from-first-principles proof of those upstream results. The final source
+connection must expose this boundary in theorem signatures and reports.
+The user also explicitly accepted the geometric Brascamp--Lieb inequality
+as a classical external input for the real-density branch only.
+
 ## Imported proved facts
 
 | Source | Reused result | Mathematical role |
@@ -33,6 +44,12 @@ the final spectral replacement library are likewise independent of atom type.
   in the independent `section3/` project. Their signatures still state the
   appropriate BBV/BC12 inputs. Integration must respect the separate Lake
   project and the overlapping `ShortRingAnchor` namespaces.
+  This was rechecked against GitHub main at `42c26b6`:
+  `proposition36_cyclicShortRing_planar_from_published_theorem31` explicitly
+  takes `bbvA`, `bbvG`, `hBC12Negative`, and `hBC12Full`.
+  The real endpoint additionally retains `RealFiniteGeometricBrascampLieb`.
+  These are genuine upstream theorem hypotheses, not failures of the kernel
+  axiom audit and not automatically discharged by importing the file.
 - The high-band LSV project (`2026-09-01/high-band-lsv-2609-01295`)
   contains planar tensorization, small-ball, and model theorems. These are
   also present in the Section 3 vendor graph.

@@ -33,13 +33,16 @@ theorem densityCyclicMatrix_from_square (W s : ℕ)
   obtain ⟨h1, h2, h3⟩ := cyclic_three_positions_distinct s i
   by_cases hd : j = i
   · subst j
-    simp [h1.symm, h2.symm, physicalSiteAdjacent, physicalNeighborSite]
+    simp [h1.symm, h2.symm, physicalSiteAdjacent, physicalNeighborSite,
+      blockNormalization, BernoulliSection10.blockNormalization]
   · by_cases hb : j = cyclicSiteSucc i
     · subst j
-      simp [h1, h3, physicalSiteAdjacent, physicalNeighborSite]
+      simp [h1, h3, physicalSiteAdjacent, physicalNeighborSite,
+        blockNormalization, BernoulliSection10.blockNormalization]
     · by_cases hc : j = (cyclicSiteSucc (m := s + 2)).symm i
       · subst j
-        simp [h2, h3.symm, physicalSiteAdjacent, physicalNeighborSite]
+        simp [h2, h3.symm, physicalSiteAdjacent, physicalNeighborSite,
+          blockNormalization, BernoulliSection10.blockNormalization]
       · simp [hd, hb, hc, physicalSiteAdjacent, physicalNeighborSite]
 
 theorem densityCyclicMatrix_from_sequence (W s : ℕ) (ω : ℕ → ℂ)
@@ -53,7 +56,9 @@ theorem normalizedPhysicalAtom_norm_sq {W : ℕ} (x : PhysicalRowAtoms W)
     ‖normalizedPhysicalAtom x b c‖ ^ 2 =
       (3 * (W : ℝ))⁻¹ * ‖x (physicalAtomIndex b c)‖ ^ 2 := by
   simp only [normalizedPhysicalAtom, norm_mul, Complex.norm_real, Real.norm_eq_abs,
-    mul_pow, sq_abs, blockNormalization_sq]
+    mul_pow, sq_abs]
+  change BernoulliSection10.blockNormalization W ^ 2 * ‖x (physicalAtomIndex b c)‖ ^ 2 = _
+  rw [BernoulliSection10.blockNormalization_sq]
 
 theorem densityCyclicMatrix_squared_entry_sum (W s : ℕ)
     (x : IntervalRows W (s + 3)) :
@@ -91,4 +96,3 @@ theorem densityCyclicMatrix_normalized_energy (W s : ℕ) (hW : 0 < W)
   field_simp
 
 end BernoulliSection10Complex
-

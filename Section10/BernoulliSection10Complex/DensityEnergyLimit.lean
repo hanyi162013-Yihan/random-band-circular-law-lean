@@ -78,4 +78,3 @@ theorem density_ring_energy_limit
     W s hW hWtop
 
 end BernoulliSection10Complex
-

@@ -123,4 +123,3 @@ theorem physicalSeamLoss_integral_le
     ENNReal.toReal_ofReal hn, physicalSeamConstant, mul_assoc] using h
 
 end BernoulliSection10Complex
-

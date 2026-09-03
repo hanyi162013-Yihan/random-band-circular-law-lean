@@ -67,4 +67,3 @@ theorem abs_intervalPressure_le
     (abs_intervalDegreeLog_integral_le hμ W s hW z r)
 
 end BernoulliSection10Complex
-

@@ -81,4 +81,3 @@ theorem intervalPressureConcentrationCost_le
     _ = _ := by unfold densityConcentrationConstant; ring
 
 end BernoulliSection10Complex
-

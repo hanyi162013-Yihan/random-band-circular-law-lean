@@ -91,4 +91,3 @@ theorem fixed_interval_sandwich_log_integrable
   · linarith only [h1.2, h2.2, le_abs_self (Real.log ‖B‖)]
 
 end BernoulliSection10Complex
-
