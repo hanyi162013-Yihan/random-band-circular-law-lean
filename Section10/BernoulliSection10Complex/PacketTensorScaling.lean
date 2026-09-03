@@ -1,5 +1,6 @@
 import BernoulliSection10.SquarefreeRademacher
 import BernoulliSection10Complex.MultiAffineGrowth
+import BernoulliSection10Complex.PacketFrameProbability
 import BernoulliSection10Complex.EndpointDeterminant
 import BernoulliSection10Complex.PacketComparisonGrowth
 

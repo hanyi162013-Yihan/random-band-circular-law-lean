@@ -59,10 +59,10 @@ These are planned targets, not claims of completed verification.
 | 10.3 | Nonzero grouped complex multiaffine tensor; expected absolute log evaluation loss and nonvanishing | `planar_corollary_10_3`; depends on the recursively constructed complex-linear `MultiAffineTensor` and Lemma 10.2 | Built, including raw-model wrapper; axiom audit passed |
 | 10.4 | Actual cleared transfer entries affine in each physical row | `conditionedIntervalClearedProduct_line`, `conditionedIntervalClearedProduct_atoms_line`, `intervalClearedProduct_update_line`; imports complex matrix identities from the stable real library's scalar-independent `PhysicalRows` | Built |
 | 10.5 | Row resampling and log-pressure concentration | `lemma_10_5`, complex finite-product resampling, affine L², actual nonzero identity configuration | Built with internally normalized density bound; final raw-model assembly pending |
-| 10.6 | Simultaneous exterior/Hodge control, first and second moments | Complex endpoint determinant and tensor evaluation | Pending |
+| 10.6 | Simultaneous exterior/Hodge control, first and second moments | `intervalMaxHodgeEnvelope_memLp_two`, `intervalMaxHodgeEnvelope_lintegral_le_W_log_eW`; complex endpoint determinant and tensor evaluation | Core built locally and in cloud run 33708332599; combined raw-model wrapper audit pending |
 | 10.7 | Periodic seam, conditioned outside, all packet blocks integrated | Complex packet laws and actual cyclic determinant | Pending |
 | 10.8 | Coefficient/Gram-volume comparison integrated in endpoints | Complex endpoint law, unchanged deterministic comparison | Pending |
-| 10.9 | Conditional polynomial evaluation in physical row groups | Complex grouped tensor evaluation | Pending |
+| 10.9 | Conditional polynomial evaluation in physical row groups | `proposition_10_9`, complex grouped tensor evaluation and actual packet law | Core built in cloud run 33708332599; combined raw-model wrapper audit pending |
 | 10.10 | Fixed-degree unit-frame reset, uniform integrated negative-log bound | Actual complex packet reset; no caller certificate | Pending |
 | 10.30–10.57 | Concrete scales, pressure calibration, mean stitching, remainder, branch assembly, energy | Complex probability laws with shared deterministic scales | Pending |
 | Theorem 2.10 | Planar IID bounded-density finite-third-moment circular law, `W→∞` | Public complex final theorem for actual matrices | Pending |
