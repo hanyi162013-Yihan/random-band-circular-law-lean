@@ -2,6 +2,9 @@ import ShortRingAnchor.Proposition36Planar
 import ShortRingAnchor.Proposition36PublishedTheorem31
 import Vendor.PaperModelTheorem
 import Vendor.ModelLawTransport
+import Vendor
+import Vendor.Arxiv2410.V3.Proposition34Canonical
+import Vendor.GinibreLSV.GinibreSmoothed
 
 /-! # Kernel axiom audit of the counting and copied Theorem 3.1 integration
 
@@ -100,3 +103,10 @@ The accepted axiom set is contained in `propext`, `Classical.choice`, `Quot.soun
 #print axioms HighBandLSV.ModelLawTransport.planar_matrix_law
 #print axioms HighBandLSV.ModelLawTransport.real_matrix_law
 
+-- Also check the retained source endpoints used by the remaining BC12 route.
+#print axioms Arxiv2410V3.proposition34_formula39_complete_canonical
+#print axioms Arxiv2410V3.proposition34_uniform_complete_canonical
+#print axioms Arxiv2410V3.corollary35_complete_canonical
+#print axioms GinibreLSV.shiftedScaledGinibre_leastSingularValue_smallBall
+#print axioms GinibreLSV.normalizedShiftedGinibre_leastSingularValue_lt_le
+#print axioms GinibreLSV.prod_normalizedShiftedGinibre_leastSingularValue_lt_le_of_measurable

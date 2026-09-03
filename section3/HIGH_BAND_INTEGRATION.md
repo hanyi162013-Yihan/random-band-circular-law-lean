@@ -8,6 +8,17 @@ law adapter, numerical reindexing, and HS cutoff removal. The real-density
 endpoint is still being checked. Full-build and final axiom-audit results
 will be recorded here only after those commands succeed.
 
+The independent package is published under the paper-wide repository's
+`section3/` directory. The first complete remote verification is
+[GitHub Actions run 33701162416](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33701162416),
+at source commit `3a16167bb50baa1446d037734617716f6a13c674`.
+That run checked 221 of its 227 selected modules, then stopped at a `simp`
+compatibility error in `Theorem31CyclicReal.lean`. The normalization identity
+now uses explicit `withDensity_apply` and `restrict_univ` rewrites. The first
+run is not a successful full-build certificate; its compiled artifacts are
+saved for the corrected run. The dedicated workflow
+does not build other chapters. Existing project directories are untouched.
+
 ## Mathematical reconstruction
 
 The counting proof uses the exact cutoff
@@ -114,13 +125,14 @@ All paths in this table are under `ShortRingAnchor/`.
 | `Theorem31CyclicReal.lean` | Actual cyclic least-value conclusion, real/alternative branches |
 | `Proposition36Planar.lean` | Planar Proposition 3.6 with counting and Theorem 3.1 connected |
 | `Proposition36PublishedTheorem31.lean` | Real/complex-alternative Proposition 3.6 endpoint |
-| `HighBandIntegrationAudit.lean` | Audit all new declarations and eight upstream endpoints |
+| `HighBandIntegrationAudit.lean` | Audit all new declarations and fourteen retained upstream endpoints |
 
 Three additional copied files are `Vendor/ModelLawTransport.lean`,
 `Vendor/ModelStatements.lean`, and `Vendor/PaperModelTheorem.lean`.
 Their provenance and all compatibility edits are listed in [UPSTREAM.md](UPSTREAM.md).
-The new helpers are `scripts/serial-upstream-build.mjs` and
-`scripts/audit-lean-sources.mjs`. The latter scans all project/vendored Lean
+The new helpers are `scripts/serial-upstream-build.mjs`,
+`scripts/verify-project.mjs`, `scripts/export-source.mjs`, and
+`scripts/audit-lean-sources.mjs`. The source scanner checks all project/vendored Lean
 sources outside hidden dependency directories, excluding comments and strings;
 it is a hygiene check, not a substitute for kernel verification.
 
@@ -128,3 +140,55 @@ No manuscript or original proof project is changed. No Lake directory is
 copied or removed; all dependencies are built from existing local sources.
 Failed development logs are retained for diagnostics, not counted as
 verification certificates.
+
+## New theorem inventory
+
+All names below are in `ShortRingAnchor`. The first group has no external
+literature-conclusion premise; it can still take explicit deterministic
+bounds or probability/model hypotheses. The second group retains the named
+literature boundary. Build status is the one stated at the top, not inferred
+from membership in this list.
+
+Internal deterministic and probabilistic deductions:
+
+- `verticalGrid_cover`, `verticalStieltjesGridGood_norm_le_three`,
+  `smallHermitizationEigenvalueIndices_eq_v3`, `verticalStieltjesGridGood_count`,
+  `verticalStieltjesGridGood_bad_le`;
+- `hardEdgeCutoff_eighth_power`, `hardEdgeCutoff_lower`,
+  `eventually_formula311Error_hardEdge`;
+- `exists_cyclicColumn_of_cyclicDist_le`, `cyclicVarianceCoefficient_local_floor`,
+  `cyclicVarianceCoefficient_upper`,
+  `HasBoundedDensityWithRespectTo.exists_pos_measure_le`;
+- `eventually_uniform_of_eventually_every_sequence`,
+  `eventually_highBandNumerics_uniform_width`, `eventually_highBandNumerics_along_dimensions`;
+- `identDistrib_matrix_of_independent_entries`, `planarBandModel_entries_independent`,
+  `planarBandModel_entry_law`, `cyclicPlanarBandModel_matrix_identDistrib`;
+- `ginibreLeastSingularValue_eq_last`, `highBand_threshold_eq_source_exp`,
+  `isOpen_leastSingularValue_lt`, `measurableSet_highBand_strict_bad`,
+  `highBand_strict_bad_le_of_identDistrib`,
+  `empiricalSecondMoment_zero_eq_hilbertSchmidt_sq`;
+- `planar_lsv_of_highBandNumericalCertificates`, `eventually_planar_lsv_along_dimensions`,
+  `hsCutoff_of_empiricalSecondMoment_le`, `highBandLSV_failure_tendsto_zero`,
+  `theorem31MinimumInput_of_truncated_estimate`,
+  `theorem31MinimumSingularValueInput_cyclic_planar`;
+- `HasBoundedDensityWithRespectTo.exists_measurable_bounded_density`,
+  `realBandModel_entries_independent`, `identDistrib_realPart_embedding`,
+  `realBandModel_entry_law`, `cyclicRealBandModel_matrix_identDistrib`.
+
+Conditional deductions:
+
+- BBV: `hermitizationAllCutoffsCountingInput_of_v3_model`,
+  `hermitizationAllCutoffsCountingInput_cyclic`.
+- Real geometric BL: `real_lsv_of_highBandNumericalCertificates`,
+  `eventually_real_lsv_along_dimensions`,
+  `theorem31MinimumSingularValueInput_cyclic_real`,
+  `theorem31MinimumSingularValueInput_cyclic_of_densityAlternative`.
+- BBV + BC12: `proposition36_cyclicShortRing_planar_from_published_theorem31`.
+- BBV + BC12 + real geometric BL:
+  `proposition36_cyclicShortRing_from_published_theorem31`.
+- Intermediate version also accepting `hLSV`:
+  `proposition36_cyclicShortRing_of_atom_copies_bbv_and_lsv`.
+
+The audited auxiliary definitions are `verticalGridHeight`,
+`verticalStieltjesGridGood`, `HighBandNumericalCertificates`,
+`cyclicPlanarBandModel`, and `cyclicRealBandModel`.

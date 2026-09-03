@@ -32,8 +32,10 @@ const manifest = entries.map(e => ({ path: e.path.slice(9), bytes: Buffer.byteLe
   sha256: crypto.createHash('sha256').update(e.content).digest('hex') }));
 entries.push({ path: 'section3/SOURCE_MANIFEST.json', mode: '100644', type: 'blob',
   content: JSON.stringify({ scope: 'Published source snapshot; hashes are not proof certificates.', files: manifest }, null, 2) + '\n' });
+const localWorkflow = path.join(root, 'ci/section3.yml');
+const workflow = fs.existsSync(localWorkflow) ? localWorkflow : path.join(root, '../.github/workflows/section3.yml');
 entries.push({ path: '.github/workflows/section3.yml', mode: '100644', type: 'blob',
-  content: fs.readFileSync(path.join(root, 'ci/section3.yml'), 'utf8') });
+  content: fs.readFileSync(workflow, 'utf8') });
 const args = process.argv.slice(2);
 if (args[0] === '--manifest') {
   console.log(JSON.stringify(entries.map(({ path, content }) => ({ path, bytes: Buffer.byteLength(content) }))));

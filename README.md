@@ -11,6 +11,10 @@ algebra and local small-ball arguments**, and **the Section 10 bounded-density
 circular-law proof for real i.i.d. atoms**.
 References in the Section 9 and 10 libraries use
 [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
+Section 3 has an independent [Proposition 3.6 subproject](section3/README.md),
+with actual Hermitization counting and the copied high-band Theorem 3.1.
+Its [integration and verification record](section3/HIGH_BAND_INTEGRATION.md)
+states the exact BBV/BC12 and real-branch geometric Brascamp–Lieb boundary.
 Section 5 has its own [subproject and verification record](section5/README.md).
 The included Section 6 helper modules do not claim completion of Section 6.
 
@@ -111,6 +115,7 @@ Section4/
   *AxiomAudit.lean              # six audit entry points
   README.md
   FORMALIZATION_MAP.md
+section3/                      # standalone Proposition 3.6; own Lake project and CI
 section5/                      # Section 5 subproject; see its own README
 Section8/
   BernoulliSection8.lean      # Rademacher specialization

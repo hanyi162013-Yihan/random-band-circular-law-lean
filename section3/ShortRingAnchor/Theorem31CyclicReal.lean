@@ -43,7 +43,8 @@ theorem theorem31MinimumSingularValueInput_cyclic_real
     Measure.isProbabilityMeasure_map (Complex.measurable_re.comp hatom.measurable).aemeasurable
   have hint : ∫⁻ x, f x = 1 := by
     calc
-      _ = (volume.withDensity f) Set.univ := by simp only [withDensity_apply, Measure.restrict_univ]
+      _ = (volume.withDensity f) Set.univ := by
+        rw [withDensity_apply _ MeasurableSet.univ, Measure.restrict_univ]
       _ = 1 := by rw [hflaw]; exact measure_univ
   have hWpos (k) : 0 < W k := by
     have hn : (0 : ℝ) < M k := by exact_mod_cast hMpos k

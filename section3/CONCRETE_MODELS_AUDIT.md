@@ -4,6 +4,9 @@ Date: 2026-09-02. This checkpoint continues the completed actual-matrix
 Stieltjes and v3 probability reconstruction. It removes the explicit
 Lemma 3.5 `hBulk` premise from a new source-facing Proposition 3.6 endpoint.
 
+This is a historical checkpoint. The later counting and Theorem 3.1
+integration is documented in [HIGH_BAND_INTEGRATION.md](HIGH_BAND_INTEGRATION.md).
+
 ## Verification
 
 Both final commands passed on 2026-09-02, after the comparison-constant

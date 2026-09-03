@@ -12,6 +12,7 @@ import ShortRingAnchor.Lemma35FromV3
 import ShortRingAnchor.Proposition36Concrete
 import ShortRingAnchor.Proposition36Counting
 import ShortRingAnchor.Proposition36Planar
+import ShortRingAnchor.Proposition36PublishedTheorem31
 
 /-!
 # The finite-moment short-ring anchor
@@ -21,6 +22,9 @@ Root module for a Lean reconstruction of Proposition 3.6 in
 
 The planar-density source-model conditional theorem is
 `ShortRingAnchor.proposition36_cyclicShortRing_planar_from_published_theorem31`.
+The real/complex-alternative endpoint is
+`ShortRingAnchor.proposition36_cyclicShortRing_from_published_theorem31`;
+it retains the copied real theorem's explicit geometric Brascamp--Lieb premise.
 It constructs both the Hermitization counting event and the least-value event:
 the former uses the actual v3 probability bound and the latter reuses the
 user's copied, proved Theorem 3.1. Its Lemma 3.5 input is derived from the

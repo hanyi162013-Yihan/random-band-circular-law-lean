@@ -13,18 +13,18 @@
     },
     {
       "path": "BUILD_AUDIT.md",
-      "bytes": 7670,
-      "sha256": "0b3585cd3d4e8f635488b91197868669983cfc585e7bd7c0229b70e4daaf494f"
+      "bytes": 7870,
+      "sha256": "db720890f1355c148eabfcdb8dedb53b5731e50d6621b4e95b3e0787b0eae497"
     },
     {
       "path": "CONCRETE_MODELS_AUDIT.md",
-      "bytes": 9511,
-      "sha256": "e988d1a5aa76c5ed15f5fa0ea79a357f3d6272c3f98a4a9f453a9fbaf81e2037"
+      "bytes": 9663,
+      "sha256": "c555406343002cb3403bb8c772bd2f7db1dde50f3f1d69a8a7d52e0441dc39eb"
     },
     {
       "path": "HIGH_BAND_INTEGRATION.md",
-      "bytes": 7088,
-      "sha256": "53720bba11a3ab8ed87775510f83876e1d701c3e9b5b5a95b1101fd39d383dbf"
+      "bytes": 10661,
+      "sha256": "e48d9b325ed9ea6c502bfa593b50f5549ae6274d478c83adbade5883fdae9ae0"
     },
     {
       "path": "RADIUS_SHORTCUT.md",
@@ -38,8 +38,8 @@
     },
     {
       "path": "ShortRingAnchor.lean",
-      "bytes": 1589,
-      "sha256": "2dc98320c74a226b048003b2d5218e9347426ec4c36216504533e26fa9bbec78"
+      "bytes": 1839,
+      "sha256": "2f7a60e1e8ef42e3104c668eb1ccf819c657bf59d96782000328df712e6d3075"
     },
     {
       "path": "ShortRingAnchor/AEInputTransfer.lean",
@@ -258,8 +258,8 @@
     },
     {
       "path": "ShortRingAnchor/HighBandIntegrationAudit.lean",
-      "bytes": 4905,
-      "sha256": "6fbb2f5c0c602c1c186e00083381fa024f57103972fbcad580c5a673ce3aa4e7"
+      "bytes": 5525,
+      "sha256": "d70fc8621fd662e4632d5dca80491b20eccf50079fa04aa0b6b9d05bf35e228a"
     },
     {
       "path": "ShortRingAnchor/HighBandLSVBridge.lean",
@@ -463,8 +463,8 @@
     },
     {
       "path": "ShortRingAnchor/Theorem31CyclicReal.lean",
-      "bytes": 5874,
-      "sha256": "194dc81878aeead8be001fd98e054ddbbf8ecce607be13f6db00a5b001115008"
+      "bytes": 5896,
+      "sha256": "834f3c18415e3cbb4cf1fbd77130d28e47d15840707671318b6e187156607cc7"
     },
     {
       "path": "ShortRingAnchor/TruncationAssembly.lean",
@@ -1258,13 +1258,13 @@
     },
     {
       "path": "scripts/export-source.mjs",
-      "bytes": 2860,
-      "sha256": "5f33e28a376041a650655841f3bf900f4f3f9af9263b62cc2c8f6b0d2f4ba8f6"
+      "bytes": 3010,
+      "sha256": "0dca97cbc86932c32f48e077ae81db46889810e5c771645f17db6f8ff28203de"
     },
     {
       "path": "scripts/serial-upstream-build.mjs",
-      "bytes": 2914,
-      "sha256": "9e60890cade06b5f3a20270a52be4f479aaee48482c5ab754201127419fd7273"
+      "bytes": 3344,
+      "sha256": "3615f7174e8c293f3cbc74915293f24e1694ee8bc23d782b3bb6bf2de4702fca"
     },
     {
       "path": "scripts/verify-project.mjs",

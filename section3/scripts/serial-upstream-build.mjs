@@ -9,29 +9,36 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const requested = process.argv.slice(2);
 if (!requested.length) throw new Error('Supply the Lean module targets to check.');
 const seen = new Set();
+const dirty = new Map();
 const pending = [];
 function visit(module) {
-  if (seen.has(module)) return;
+  if (seen.has(module)) return dirty.get(module) ?? false;
   seen.add(module);
   if (module === 'Mathlib') throw new Error('Refusing an umbrella Mathlib build.');
   let base;
-  if (module === 'ShortRingAnchor' || module.startsWith('Vendor.') || module.startsWith('ShortRingAnchor.')) base = root;
+  if (module === 'Vendor' || module === 'ShortRingAnchor' || module.startsWith('Vendor.') || module.startsWith('ShortRingAnchor.')) base = root;
   else if (module.startsWith('Mathlib.')) base = path.join(root, '.lake/packages/mathlib');
   else return; // The already installed auxiliary packages are managed by Lake.
   const rel = module.replaceAll('.', '/');
   const source = path.join(base, rel + '.lean');
   const output = path.join(base, '.lake/build/lib/lean', rel + '.olean');
+  // Checkout and cache extraction times need not agree. Leave validation of
+  // existing pinned mathlib artifacts to Lake's dependency traces; do not
+  // schedule thousands of redundant per-module prebuilds based on mtimes.
+  if (module.startsWith('Mathlib.') && fs.existsSync(output)) return false;
   const current = fs.existsSync(output) && fs.statSync(output).mtimeMs >= fs.statSync(source).mtimeMs;
-  if (module.startsWith('Mathlib.') && current) return;
   const content = fs.readFileSync(source, 'utf8');
+  let needsBuild = !current;
   for (const match of content.matchAll(/^(?:public )?import (.+)$/gm)) {
     for (const dep of match[1].split(/\s+/)) {
       if (!/^[A-Za-z_][A-Za-z0-9_.]*$/.test(dep)) break;
-      visit(dep);
+      if (visit(dep)) needsBuild = true;
     }
   }
   // Lake still checks dependency traces of all requested upstream modules.
-  if (!current || requested.includes(module)) pending.push(module);
+  if (needsBuild || requested.includes(module)) pending.push(module);
+  dirty.set(module, needsBuild);
+  return needsBuild;
 }
 requested.forEach(visit);
 const stamp = new Date().toISOString().replaceAll(':', '-');

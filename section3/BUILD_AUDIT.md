@@ -1,6 +1,10 @@
 # Build and axiom audits
 
-The latest checkpoint is [Concrete models and Proposition 3.6 integration](CONCRETE_MODELS_AUDIT.md):
+The current integration status is recorded in
+[Hermitization counting and Theorem 3.1](HIGH_BAND_INTEGRATION.md).
+The complete GitHub audit is tracked separately from the historical checks below.
+
+The preceding checkpoint is [Concrete models and Proposition 3.6 integration](CONCRETE_MODELS_AUDIT.md):
 both commands passed with **3432 jobs**, and the audit covers **196 distinct
 declarations**. It constructs the actual cyclic/dense v3 models and removes
 the source-facing `hBulk` premise. The remaining-model-adapter note in the
