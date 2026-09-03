@@ -58,8 +58,20 @@ jobs:
           cp -an section3/.lake/build/. .lake/build/
       - name: Scoped serial build
         id: build
+        env:
+          RESTORED_BUILD: ${{ steps.cache.outputs.cache-matched-key }}
         run: |
-          python3 scripts/build_subgaussian.py --target SubgaussianSection8 --target BernoulliSection8
+          if [ -n "$RESTORED_BUILD" ]; then
+            python3 scripts/build_subgaussian.py --target SubgaussianSection8 --target BernoulliSection8 \
+              --module BernoulliSection8.Section3Gaussian \
+              --module BernoulliSection8.Section3Model \
+              --module BernoulliSection8.Section3Integration \
+              --module SubgaussianSection8.Section3Integration \
+              --module SubgaussianSection8.Results \
+              --module BernoulliSection8.Section8Results
+          else
+            python3 scripts/build_subgaussian.py --target SubgaussianSection8 --target BernoulliSection8
+          fi
       - name: Save completed build artifacts
         if: ${{ always() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure') && steps.cache.outputs.cache-primary-key != '' }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25

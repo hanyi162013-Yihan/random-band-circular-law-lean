@@ -44,7 +44,7 @@ theorem coefficient_eq_physicalProfile (W s : ℕ) :
 theorem fullBlockMatrix_eq_physical (A : Proposition38.Atom) (W s : ℕ) (sample : InputSpace) :
     Proposition38.fullBlockMatrix (ringArray A ((s + 3) * W)) sample =
       densityCyclicMatrix W s (physicalRowsFromSequence W s sample.1) := by
-  ext i j
+  funext i j
   rw [densityCyclicMatrix_from_sequence]
   simp only [Proposition38.fullBlockMatrix, ringArray, squareIIDFromSequence,
     coefficient_eq_physicalProfile, Complex.ofReal_mul]
@@ -85,7 +85,8 @@ def denseModel (A : Proposition38.Atom) (N : ℕ) (hN : 0 < N) :=
 theorem normalizedDense_eq_circularGinibre (N : ℕ → ℕ) (k : ℕ) (sample : InputSpace) :
     normalizedDenseMatrixProcess (fun n => denseAtom (N n)) k sample =
       circularGinibreMatrix (N k) sample := by
-  ext i j
-  simp [normalizedDenseMatrixProcess, denseAtom, gaussianAtom, circularGinibreMatrix]
+  funext i j
+  simp [normalizedDenseMatrixProcess, denseAtom, gaussianAtom, circularGinibreMatrix,
+    Complex.equivRealProdCLM_symm_apply, mul_comm]
 
 end BernoulliSection8.Section3Bridge

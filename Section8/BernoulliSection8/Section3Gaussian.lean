@@ -25,7 +25,7 @@ theorem gaussianAtom_measurable : Measurable gaussianAtom :=
 theorem gaussian_coordinate_second_moment :
     (∫ x : ℝ, x ^ 2 ∂gaussianReal 0 (1 / 2)) = (1 / 2 : ℝ) := by
   have h := variance_fun_id_gaussianReal (μ := 0) (v := 1 / 2)
-  rw [variance_eq_integral measurable_id.aemeasurable] at h
+  rw [variance_eq_integral measurable_id'.aemeasurable] at h
   simpa using h
 
 theorem gaussianAtom_moments : AtomMomentAssumption21 circularGaussianPairLaw gaussianAtom := by
@@ -53,10 +53,14 @@ theorem gaussianAtom_moments : AtomMomentAssumption21 circularGaussianPairLaw ga
     · simpa [gaussianAtom] using
         (integral_im gaussianAtom_hasGaussianLaw.integrable).symm.trans hmeans
   · have heq (x : ℝ × ℝ) : ‖gaussianAtom x‖ ^ 2 = x.1 ^ 2 + x.2 ^ 2 := by
-      simp [Complex.sq_norm, Complex.normSq_apply, gaussianAtom, pow_two]
+      rw [Complex.sq_norm, Complex.normSq_apply]
+      simp [gaussianAtom, pow_two]
+    have hfi : Integrable (fun x : ℝ × ℝ => x.1 ^ 2) circularGaussianPairLaw :=
+      hf.integrable_comp_of_integrable hsq
+    have hsi : Integrable (fun x : ℝ × ℝ => x.2 ^ 2) circularGaussianPairLaw :=
+      hs.integrable_comp_of_integrable hsq
     simp_rw [heq]
-    rw [integral_add (hf.integrable_comp_of_integrable hsq)
-      (hs.integrable_comp_of_integrable hsq), hsqf, hsqs]
+    rw [integral_add hfi hsi, hsqf, hsqs]
     norm_num
   · exact (gaussianAtom_hasGaussianLaw.memLp (p := 3) (by norm_num)).integrable_norm_pow'
 

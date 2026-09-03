@@ -11,8 +11,9 @@ algebra and local small-ball arguments**, and **the Section 10 bounded-density
 circular-law proof for real i.i.d. atoms**.
 References in the Section 9 and 10 libraries use
 [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
-Section 3 has an independent [Proposition 3.6 subproject](section3/README.md),
-with actual Hermitization counting and the copied high-band Theorem 3.1.
+Section 3 contains [Proposition 3.6](section3/README.md) and the real-subgaussian
+[Proposition 3.8](section3/PROPOSITION38.md), with actual Hermitization counting
+and the copied high-band Theorem 3.1.
 Its [integration and verification record](section3/HIGH_BAND_INTEGRATION.md)
 states the exact BBV/BC12 and real-branch geometric Brascamp–Lieb boundary.
 Section 5 has its own [subproject and verification record](section5/README.md).
@@ -23,7 +24,11 @@ The included Section 6 helper modules do not claim completion of Section 6.
 Section 8 proves the logarithmic-potential limit and circular law for every
 fixed real IID law with mean zero, second moment one, and a finite subgaussian
 MGF parameter, under `W → ∞` and `W/log N → ∞`, where `N=(s+3)W`.
-Cook, Nguyen, and Section 3 Proposition 3.8 remain explicit external inputs.
+Cook and Nguyen remain explicit external inputs. The Section 3.8 anchor is
+obtained from its concrete Lean proof, retaining that proof's named upstream
+Proposition 3.2, Cook 1.12, BBV and BC12/finite Ginibre formula assumptions.
+See the [Section 3 integration record](Section8/SECTION3_INTEGRATION.md) for
+the exact interface and current cloud-verification status.
 The general theorem is
 `SubgaussianSection8.section8_subgaussian_circular_law`; its proof requires no
 bounded-support, symmetry, or density hypothesis. The Rademacher proof remains
@@ -115,7 +120,7 @@ Section4/
   *AxiomAudit.lean              # six audit entry points
   README.md
   FORMALIZATION_MAP.md
-section3/                      # standalone Proposition 3.6; own Lake project and CI
+section3/                      # proved Section 3.6/3.8; also independently buildable
 section5/                      # Section 5 subproject; see its own README
 Section8/
   BernoulliSection8.lean      # Rademacher specialization
@@ -147,17 +152,18 @@ Section10/
   PROVENANCE.md
 vendor/
   tao-vu-replacement/          # 13 proved modules, pinned provenance/license
-  short-ring-analysis/        # 30 proved generic modules, SHA-256 manifest
+  short-ring-analysis/        # earlier source snapshot, retained for provenance
 ```
 
 The root libraries use the same Lake project and dependency cache. Section 5
 is a subproject that depends on this root project and shares its mathlib
 package directory; see [its build instructions](section5/README.md).
-Section 3 is a separate, pinned Lake package: build it from `section3/`.
-Its dedicated verification passed for all 230 Lean files, normal `lake build`,
-and 271 axiom reports covering 260 declarations; see
-[the verified Section 3 run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33702782802).
-The documented BBV/BC12 and real-branch geometric BL hypotheses remain explicit.
+The root project imports `ShortRingAnchor` and `Vendor` from `section3/`.
+Section 3 also retains its standalone package and CI. Its Proposition 3.8
+verification passed for 250 Lean files and 351 exact axiom reports; see
+[the verified Section 3 run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33712613763).
+The [Section 8 adapter](Section8/SECTION3_INTEGRATION.md) has a separate cloud
+gate. Section 3's documented literature assumptions remain explicit.
 
 ## Build
 
@@ -224,9 +230,9 @@ signatures. All reported axioms were `propext`, `Classical.choice`, or
 also passed independently. These checks cover the documented Section 8
 scope; they do not claim completion of the entire paper.
 
-The `General subgaussian Section 8` workflow runs for pull requests or manual
-dispatch. It restores compiled artifacts and builds only Section 8 and its
-required imports. Section 5 retains its independent workflow. Routine
+The `Section 8 with proved Section 3 anchor` workflow runs for pull requests or
+manual dispatch. It restores compiled artifacts and builds both Section 8
+targets and their required imports. Section 5 retains its independent workflow. Routine
 Section 8 verification does not require a complete repository build.
 
 The [complete Section 10 verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33620303116)

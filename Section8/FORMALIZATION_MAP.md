@@ -1,5 +1,9 @@
 # Section 8 formalization map
 
+## Current Section 3 connection
+
+The public endpoints now construct Proposition 3.8 through the concrete `section3/` implementation; only its named upstream literature inputs remain. See [the integration map and current cloud status](SECTION3_INTEGRATION.md). The original Section 3 interface entries below describe the preserved internal pressure-proof API, and the earlier verification counts describe the baseline snapshot.
+
 This is the implementation companion to `SOURCE_MAP.md`, whose fixed v1
 source hashes, printed labels, line numbers, and assumptions apply here.
 It maps all four numbered results and all 69 displayed equations to
