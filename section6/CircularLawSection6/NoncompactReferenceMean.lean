@@ -32,8 +32,9 @@ theorem referenceCoreCutoff_le_one (p : NoncompactProfile) (R : ℕ) : p.referen
 
 theorem referenceCoreCutoff_tendsto_zero (p : NoncompactProfile) :
     Tendsto p.referenceCoreCutoff atTop (𝓝 0) := by
+  change Tendsto (fun R : ℕ => Real.sqrt (Real.sqrt (p.limitingTailMass (R + 1)))) atTop (𝓝 0)
   have ht := p.limitingTailMass_integral_tendsto_zero.comp (tendsto_add_atTop_nat 1)
-  simpa only [referenceCoreCutoff, fourthRoot, Nat.cast_add, Nat.cast_one,
+  simpa only [Nat.cast_add, Nat.cast_one,
     Real.sqrt_zero, Function.comp_apply] using ht.sqrt.sqrt
 
 theorem sparse_profile_mean_of_core_and_reference_inputs (p : NoncompactProfile)

@@ -566,3 +566,12 @@ example {v t : ℝ} (hv : 0 ≤ v) (ht : 0 < t) (hsum : v + t = 1) :
     (Real.sqrt t + |Real.sqrt v - 1|) / CircularLawSections56.Section6.fourthRoot t ≤
       2 * CircularLawSections56.Section6.fourthRoot t :=
   normalized_tail_error_le_two_fourthRoot hv ht hsum
+
+-- The actual profile cutoff remains positive and at most one at every radius.
+example (p : NoncompactProfile) (R : ℕ) : 0 < p.referenceCoreCutoff R ∧ p.referenceCoreCutoff R ≤ 1 :=
+  ⟨p.referenceCoreCutoff_pos R, p.referenceCoreCutoff_le_one R⟩
+
+-- The amplitude identification uses the actual positive sampled core weights.
+example (p : NoncompactProfile) (W : ℝ) :
+    0 < p.coreBandWeight 3 1 ⟨1, by decide⟩ W ⟨0, by decide⟩ :=
+  p.coreBandWeight_pos 3 1 _ W _

@@ -85,3 +85,6 @@ import CircularLawSection6.NoncompactReferenceMean
 import CircularLawSection6.RoutedGinibreComparison
 import CircularLawSection6.UniformCyclicSourceBridge
 import CircularLawSection6.CompactSourceAssembly
+import CircularLawSection6.FinitePrefixCoreBridge
+import CircularLawSection6.ProfileCompactSourceBridge
+import CircularLawSection6.ProfileProbability
