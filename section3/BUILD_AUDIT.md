@@ -1,6 +1,15 @@
 # Build and axiom audits
 
-The current integration **passed on GitHub on 2026-09-03 UTC**:
+The Proposition 3.8 extension **passed locally on 2026-09-03 at 03:44 UTC**:
+250 Lean files, the ordinary build, and 351 exact axiom reports covering
+340 distinct declarations. Its audit includes the final conditional
+`ShortRingAnchor.Proposition38.proposition38`; see
+[the current summary](audit/verification/summary.json) and
+[Proposition 3.8 report](PROPOSITION38.md). Only `propext`,
+`Classical.choice`, and `Quot.sound` occur. Explicit literature hypotheses
+remain theorem arguments.
+
+The preceding Proposition 3.6 integration **passed on GitHub on 2026-09-03 UTC**:
 all 230 Lean files in the selected closure, normal `lake build`, and
 271 axiom reports covering 260 distinct declarations. The verified source
 commit is `79798346f1cc9dda9cfd0c5bf2c3044aea5162a9`.

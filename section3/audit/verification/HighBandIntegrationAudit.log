@@ -1,0 +1,94 @@
+'ShortRingAnchor.verticalGridHeight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.verticalGrid_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.verticalStieltjesGridGood' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.verticalStieltjesGridGood_norm_le_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.smallHermitizationEigenvalueIndices_eq_v3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.verticalStieltjesGridGood_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.verticalStieltjesGridGood_bad_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.hardEdgeCutoff_eighth_power' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.hardEdgeCutoff_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.eventually_formula311Error_hardEdge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.hermitizationAllCutoffsCountingInput_of_v3_model' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.hermitizationAllCutoffsCountingInput_cyclic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.proposition36_cyclicShortRing_of_atom_copies_bbv_and_lsv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.exists_cyclicColumn_of_cyclicDist_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.cyclicVarianceCoefficient_local_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.cyclicVarianceCoefficient_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.HasBoundedDensityWithRespectTo.exists_pos_measure_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.eventually_uniform_of_eventually_every_sequence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.HighBandNumericalCertificates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.eventually_highBandNumerics_uniform_width' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.eventually_highBandNumerics_along_dimensions' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.cyclicPlanarBandModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.identDistrib_matrix_of_independent_entries' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.planarBandModel_entries_independent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.planarBandModel_entry_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.cyclicPlanarBandModel_matrix_identDistrib' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.ginibreLeastSingularValue_eq_last' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.highBand_threshold_eq_source_exp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.isOpen_leastSingularValue_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.measurableSet_highBand_strict_bad' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.highBand_strict_bad_le_of_identDistrib' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.empiricalSecondMoment_zero_eq_hilbertSchmidt_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.planar_lsv_of_highBandNumericalCertificates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.eventually_planar_lsv_along_dimensions' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.hsCutoff_of_empiricalSecondMoment_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.highBandLSV_failure_tendsto_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.theorem31MinimumInput_of_truncated_estimate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.theorem31MinimumSingularValueInput_cyclic_planar' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.HasBoundedDensityWithRespectTo.exists_measurable_bounded_density' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.cyclicRealBandModel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.realBandModel_entries_independent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.identDistrib_realPart_embedding' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.realBandModel_entry_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.cyclicRealBandModel_matrix_identDistrib' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.real_lsv_of_highBandNumericalCertificates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.eventually_real_lsv_along_dimensions' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.theorem31MinimumSingularValueInput_cyclic_real' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.theorem31MinimumSingularValueInput_cyclic_of_densityAlternative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.proposition36_cyclicShortRing_planar_from_published_theorem31' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.proposition36_cyclicShortRing_from_published_theorem31' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HighBandLSV.planar_model_lsv_of_numerics' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HighBandLSV.real_model_lsv_of_numerics' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HighBandLSV.eventually_planar_band_lsv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HighBandLSV.eventually_real_band_lsv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HighBandLSV.PaperModelTheorem.planar_main_statement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HighBandLSV.PaperModelTheorem.real_main_statement' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HighBandLSV.ModelLawTransport.planar_matrix_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HighBandLSV.ModelLawTransport.real_matrix_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Arxiv2410V3.proposition34_formula39_complete_canonical' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Arxiv2410V3.proposition34_uniform_complete_canonical' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Arxiv2410V3.corollary35_complete_canonical' depends on axioms: [propext, Classical.choice, Quot.sound]
+'GinibreLSV.shiftedScaledGinibre_leastSingularValue_smallBall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'GinibreLSV.normalizedShiftedGinibre_leastSingularValue_lt_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'GinibreLSV.prod_normalizedShiftedGinibre_leastSingularValue_lt_le_of_measurable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -13,6 +13,10 @@ import ShortRingAnchor.Proposition36Concrete
 import ShortRingAnchor.Proposition36Counting
 import ShortRingAnchor.Proposition36Planar
 import ShortRingAnchor.Proposition36PublishedTheorem31
+import ShortRingAnchor.Proposition38.AtomMoments
+import ShortRingAnchor.Proposition38.Scales
+import ShortRingAnchor.Proposition38.BlockNorm
+import ShortRingAnchor.Proposition38.Assembly
 
 /-!
 # The finite-moment short-ring anchor
@@ -34,4 +38,11 @@ random-matrix conclusions remain explicit hypotheses in
 `ShortRingAnchor.ExternalInputs`.  The BC12 full-logdet premise can now be
 discharged from the named finite Ginibre formulas by
 `ShortRingAnchor.BC12.ginibre_matrix_logdet_convergesInProbability_of_formulas`.
+
+The `Proposition38` subdirectory contains the subgaussian full-block
+high-band anchor, `ShortRingAnchor.Proposition38.proposition38`. Its two
+new explicit literature hypotheses are Proposition 3.2 and Cook 1.12;
+the existing BBV and BC12 boundary is documented in `PROPOSITION38.md`.
+The actual cyclic profile, Cook norm guard, spread and broad-connectivity
+conditions, the two-branch LSV floor, and the final assembly are internal.
 -/

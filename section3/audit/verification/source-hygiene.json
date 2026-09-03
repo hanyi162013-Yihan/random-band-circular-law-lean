@@ -1,0 +1,16 @@
+{
+  "files": 250,
+  "violations": [],
+  "options": [
+    "autoImplicit false",
+    "maxHeartbeats 1000000",
+    "maxHeartbeats 4000000",
+    "maxHeartbeats 800000"
+  ],
+  "excludes": [
+    ".lake and other hidden directories",
+    "comments",
+    "strings"
+  ],
+  "note": "Source scan only; use successful lake builds and kernel axiom audits as certificates."
+}

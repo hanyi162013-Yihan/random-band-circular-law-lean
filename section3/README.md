@@ -1,4 +1,4 @@
-# Proposition 3.6: finite-moment short-ring anchor
+# Section 3: finite-moment and subgaussian high-band anchors
 
 This is a standalone Lean 4 + mathlib reconstruction of Proposition 3.6 in
 *The circular law for non-Hermitian random band matrices: optimal bandwidth,
@@ -20,6 +20,15 @@ and every fixed `z : ℂ`,
 
 in probability.  There is no restriction such as `|z| <= 2.5` in this
 formalization: `z` is arbitrary and fixed, and constants may depend on `z`.
+
+The real subgaussian full-block **Proposition 3.8** is formalized by
+`ShortRingAnchor.Proposition38.proposition38`. It permits discrete atoms
+and every fixed complex shift. Its new literature inputs are explicitly
+Proposition 3.2 and Cook 1.12; the existing BBV/BC12 boundary remains visible.
+The norm event, spread, broad connectivity, two-branch least-value floor,
+counting, CDF comparison, upper moments, and logarithmic assembly are proved
+internally. See [PROPOSITION38.md](PROPOSITION38.md) for the complete input
+boundary, file list, and current build/audit records.
 
 ## Main checked theorems
 
@@ -345,7 +354,13 @@ applications.  It is no longer an external geometric-measure input.
 
 ## Build and audit
 
-The complete integration passed on GitHub on **2026-09-03 UTC**:
+The complete Proposition 3.8 extension passed locally on **2026-09-03 UTC**:
+**250 Lean files**, the normal build, and **351 exact axiom reports covering
+340 distinct declarations**, including `ShortRingAnchor.Proposition38.proposition38`.
+See [the full verification summary](audit/verification/summary.json) and
+[Proposition 3.8](PROPOSITION38.md) for the precise conditional boundary.
+
+The preceding Proposition 3.6 integration passed on GitHub on **2026-09-03 UTC**:
 **230 Lean files**, the normal `lake build`, and **271 exact axiom reports
 covering 260 distinct declarations**. All reported axioms belong to
 `propext`, `Classical.choice`, and `Quot.sound`.
@@ -371,6 +386,7 @@ The project is pinned to Lean `v4.33.0` and mathlib `v4.33.0`.
 lake build
 lake build ShortRingAnchor.Audit
 lake build ShortRingAnchor.HighBandIntegrationAudit
+lake build ShortRingAnchor.Proposition38.Audit
 ```
 
 In the paper-wide repository this independent package lives at `section3/`;
@@ -379,7 +395,7 @@ or the existing `vendor/short-ring-analysis` snapshot. For a serial, resumable
 build and a fail-closed audit (Node.js required):
 
 ```sh
-node scripts/serial-upstream-build.mjs ShortRingAnchor.Audit ShortRingAnchor.HighBandIntegrationAudit
+node scripts/serial-upstream-build.mjs ShortRingAnchor.Audit ShortRingAnchor.HighBandIntegrationAudit ShortRingAnchor.Proposition38.Audit
 node scripts/verify-project.mjs
 ```
 

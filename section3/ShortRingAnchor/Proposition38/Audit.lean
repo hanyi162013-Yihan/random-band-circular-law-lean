@@ -1,0 +1,91 @@
+import ShortRingAnchor.Proposition38.Source
+import ShortRingAnchor.Proposition38.AtomMoments
+import ShortRingAnchor.Proposition38.Scales
+import ShortRingAnchor.Proposition38.BlockNorm
+import ShortRingAnchor.Proposition38.Assembly
+
+/-! Kernel audit of Proposition 3.8 and every new proved component.
+Only a successful execution is a certificate. The final endpoint retains
+the explicit literature hypotheses documented in `Assembly.lean` and
+`ExternalInputs.lean`; an axiom audit does not discharge theorem arguments. -/
+
+#print axioms ShortRingAnchor.Proposition38.conclusion_iff
+#print axioms ShortRingAnchor.Proposition38.Atom.integrable_norm_pow
+#print axioms ShortRingAnchor.Proposition38.Atom.momentAssumption21
+#print axioms ShortRingAnchor.Proposition38.block_count_le_width
+#print axioms ShortRingAnchor.Proposition38.source_parameter_inequalities
+#print axioms ShortRingAnchor.Proposition38.counting_cutoff_le_eventually
+#print axioms ShortRingAnchor.Proposition38.eventually_log_three_width_le_power
+#print axioms ShortRingAnchor.Proposition38.jjlo_exponent_le_sourceHardEdgeScale
+#print axioms ShortRingAnchor.Proposition38.exponential_floor_le_jjlo_floor
+#print axioms ShortRingAnchor.Proposition38.exponential_floor_le_polynomial
+#print axioms ShortRingAnchor.Proposition38.siteAdjacent_symm
+#print axioms ShortRingAnchor.Proposition38.three_positions_distinct
+#print axioms ShortRingAnchor.Proposition38.coefficient_sq
+#print axioms ShortRingAnchor.Proposition38.coefficient_row
+#print axioms ShortRingAnchor.Proposition38.coefficient_symm
+#print axioms ShortRingAnchor.Proposition38.coefficient_column
+#print axioms ShortRingAnchor.Proposition38.varianceProfile_isBandwidth
+#print axioms ShortRingAnchor.Proposition38.AtomArray.complexCopies
+#print axioms ShortRingAnchor.Proposition38.fullBlockV3Model_isBandwidth
+#print axioms ShortRingAnchor.Proposition38.norm_coordinateProjection_le
+#print axioms ShortRingAnchor.Proposition38.block_mask_eq_sum
+#print axioms ShortRingAnchor.Proposition38.norm_block_mask_le
+#print axioms ShortRingAnchor.Proposition38.exists_cyclic_boundary
+#print axioms ShortRingAnchor.Proposition38.card_cyclic_expansion
+#print axioms ShortRingAnchor.Proposition38.heavy_mass_bound
+#print axioms ShortRingAnchor.Proposition38.heavy_expansion_weight
+#print axioms ShortRingAnchor.Proposition38.block_fiber_card
+#print axioms ShortRingAnchor.Proposition38.card_label_mem
+#print axioms ShortRingAnchor.Proposition38.broadlyConnected_of_cyclic_blocks
+#print axioms ShortRingAnchor.Proposition38.fullBlock_broadlyConnected
+#print axioms ShortRingAnchor.Proposition38.BroadlyConnected.mono
+#print axioms ShortRingAnchor.Proposition38.fullBlock_broadlyConnected_uniform
+#print axioms ShortRingAnchor.Proposition38.rescaled_fullBlockMatrix_eq
+#print axioms ShortRingAnchor.Proposition38.rescaled_shift_eq
+#print axioms ShortRingAnchor.Proposition38.one_le_cookNormConstant
+#print axioms ShortRingAnchor.Proposition38.fullBlock_cook_norm_tail
+#print axioms ShortRingAnchor.Proposition38.truncated_variance_eq
+#print axioms ShortRingAnchor.Proposition38.integral_bounded_truncation_tendsto
+#print axioms ShortRingAnchor.Proposition38.Atom.exists_cookSpread
+#print axioms ShortRingAnchor.Proposition38.leastSingularValue_smul
+#print axioms ShortRingAnchor.Proposition38.leastSingularValue_shift_eq
+#print axioms ShortRingAnchor.Proposition38.cook_threshold_dominates_polynomial
+#print axioms ShortRingAnchor.Proposition38.centeredRowMoments_of_v3
+#print axioms ShortRingAnchor.Proposition38.least_bad_le_guarded_add_norm
+#print axioms ShortRingAnchor.Proposition38.leastSingularValueInput_of_known
+#print axioms ShortRingAnchor.Proposition38.reference_nonsingular_of_formulas
+#print axioms ShortRingAnchor.Proposition38.proposition38
+#print axioms ShortRingAnchor.Proposition38.norm_blockInjection_apply
+#print axioms ShortRingAnchor.Proposition38.norm_blockProjection_apply_le
+#print axioms ShortRingAnchor.Proposition38.norm_blockInjection_le
+#print axioms ShortRingAnchor.Proposition38.norm_blockProjection_le
+#print axioms ShortRingAnchor.Proposition38.norm_embeddedBlock_le
+#print axioms ShortRingAnchor.Proposition38.norm_sum_embeddedBlock_le
+#print axioms ShortRingAnchor.Proposition38.rawBlockSum_norm_tail
+#print axioms ShortRingAnchor.Proposition38.shifted_rawBlockSum_norm_tail
+#print axioms ShortRingAnchor.Proposition38.cook_norm_guard_tail
+#print axioms ShortRingAnchor.Proposition38.norm_rescaled_shift_le
+#print axioms ShortRingAnchor.Proposition38.bounded_block_norm_failure_tendsto_zero
+#print axioms SubgaussianNorm.sphere_quarter_packing_bound
+#print axioms SubgaussianNorm.exists_sphere_quarter_net
+#print axioms SubgaussianNorm.subgaussianEnvelope_pos
+#print axioms ProbabilityTheory.HasSubgaussianMGF.mono_parameter
+#print axioms SubgaussianNorm.sum_coordinate_sq_eq_norm_sq
+#print axioms SubgaussianNorm.sum_bilinear_coeff_sq
+#print axioms SubgaussianNorm.hasSubgaussianMGF_realBilinear
+#print axioms SubgaussianNorm.realBilinear_abs_tail
+#print axioms SubgaussianNorm.opNorm_le_two_mul_of_quarter_net
+#print axioms SubgaussianNorm.inner_rawRealMatrix_eq_realBilinear
+#print axioms SubgaussianNorm.two_mul_eightyOne_pow_mul_exp_le
+#print axioms SubgaussianNorm.rawRealMatrix_opNorm_tail
+#print axioms SubgaussianNorm.complex_norm_sq_decompose
+#print axioms SubgaussianNorm.complexReVec_raw_action
+#print axioms SubgaussianNorm.complexImVec_raw_action
+#print axioms SubgaussianNorm.rawComplexMatrix_norm_le_rawRealMatrix
+#print axioms SubgaussianNorm.rawComplexMatrix_opNorm_tail
+#print axioms SubgaussianNorm.measurableSet_subgaussianOpNormBadEvent
+#print axioms SubgaussianNorm.subgaussianOpNormConstant_nonneg
+#print axioms SubgaussianNorm.normalizedRawComplexMatrix_opNorm_tail
+#print axioms SubgaussianNorm.norm_invSqrtThreeN_raw_le_of_opNormGood
+#print axioms SubgaussianNorm.normalizedRawComplexMatrix_opNorm_interface

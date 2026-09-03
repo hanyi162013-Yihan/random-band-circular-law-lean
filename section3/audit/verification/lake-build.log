@@ -1,0 +1,1531 @@
+ℹ [3192/3372] Replayed ShortRingAnchor.BC12.NegativeMomentCounting
+info: ShortRingAnchor/BC12/NegativeMomentCounting.lean:125:8: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+⚠ [3202/3372] Replayed ShortRingAnchor.PoissonSmoothingKernel
+warning: ShortRingAnchor/PoissonSmoothingKernel.lean:126:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3207/3372] Replayed ShortRingAnchor.HermitizationResolventBlocks
+warning: ShortRingAnchor/HermitizationResolventBlocks.lean:54:29: This simp argument is unused:
+  Matrix.one_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Matrix.toBlocks₂₁]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3219/3372] Replayed ShortRingAnchor.MatrixLocalBulk
+warning: ShortRingAnchor/MatrixLocalBulk.lean:74:20: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3381/3559] Replayed Vendor.Arxiv2410.V3.BVH.ModelMoments
+warning: Vendor/Arxiv2410/V3/BVH/ModelMoments.lean:112:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Vendor/Arxiv2410/V3/BVH/ModelMoments.lean:157:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3383/3559] Replayed Vendor.Arxiv2410.V3.BVH.GaussianConstruction
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:244:5: Variable name `model` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _model
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:250:5: Variable name `model` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _model
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:260:7: Variable name `h` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:302:6: This simp argument is unused:
+  Matrix.diagonal_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [canonicalCircularizedMatrix, canonicalDiagonalDifference, hij]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3386/3559] Replayed Vendor.Arxiv2410.V3.BVH.EntryResolvent
+warning: Vendor/Arxiv2410/V3/BVH/EntryResolvent.lean:176:67: This simp argument is unused:
+  hstar
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [entryHermitianSummand, singleEntryMatrix, Matrix.single]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/Arxiv2410/V3/BVH/EntryResolvent.lean:279:6: This simp argument is unused:
+  smul_smul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.mul_add, Matrix.add_mul, Matrix.mul_smul, Matrix.smul_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3388/3559] Replayed Vendor.Arxiv2410.V3.BVH.ProductLindeberg
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:120:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:129:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:108:0: automatically included section variable(s) unused in theorem `Arxiv2410V3.BVH.norm_integral_pi_sub_integral_pi_update_le`:
+  [CompleteSpace E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:248:8: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3390/3559] Replayed Vendor.Arxiv2410.V3.BVH.TraceUniversality
+warning: Vendor/Arxiv2410/V3/BVH/TraceUniversality.lean:129:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Arxiv2410/V3/BVH/TraceUniversality.lean:132:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3419/3559] Replayed ShortRingAnchor.V3MatrixLocalBulk
+warning: ShortRingAnchor/V3MatrixLocalBulk.lean:52:32: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3431/3559] Replayed ShortRingAnchor.VerticalStieltjesCounting
+warning: ShortRingAnchor/VerticalStieltjesCounting.lean:113:22: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ShortRingAnchor/VerticalStieltjesCounting.lean:113:64: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3440/3559] Replayed Vendor.SLT.MatrixInfra.CourantFischer
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:190:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:203:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:217:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:220:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:236:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:239:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:273:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:304:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:335:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:338:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:376:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:379:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:503:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:516:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:530:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:533:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:549:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:552:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:585:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:616:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:647:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:650:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:688:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:691:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1018:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1020:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1030:4: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1082:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1084:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1094:4: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1390:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1392:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1402:4: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1456:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1458:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SLT/MatrixInfra/CourantFischer.lean:1468:4: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3441/3559] Replayed Vendor.GinibreLSV.Deterministic
+warning: Vendor/GinibreLSV/Deterministic.lean:154:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/GinibreLSV/Deterministic.lean:195:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/GinibreLSV/Deterministic.lean:225:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/GinibreLSV/Deterministic.lean:227:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3442/3559] Replayed Vendor.Section5Formalization.Section5Formalization
+warning: Vendor/Section5Formalization/Section5Formalization.lean:52:21: Variable name `hij` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hij
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Section5Formalization/Section5Formalization.lean:52:57: Variable name `ha` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _ha
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Section5Formalization/Section5Formalization.lean:53:19: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Section5Formalization/Section5Formalization.lean:163:10: This simp argument is unused:
+  π
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [(Finset.mem_erase.mp hj).1]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/Section5Formalization/Section5Formalization.lean:210:26: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/Section5Formalization/Section5Formalization.lean:210:26: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3444/3559] Replayed Vendor.Section5Formalization.DeterministicCompletion
+warning: Vendor/Section5Formalization/DeterministicCompletion.lean:183:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Section5Formalization/DeterministicCompletion.lean:205:0: automatically included section variable(s) unused in theorem `Section5Formalization.mem_blockProductNet`:
+  [NormedAddCommGroup E]
+  [NormedSpace ℝ E]
+  [FiniteDimensional ℝ E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Vendor/Section5Formalization/DeterministicCompletion.lean:211:0: automatically included section variable(s) unused in theorem `Section5Formalization.blockProductNet_card`:
+  [NormedAddCommGroup E]
+  [NormedSpace ℝ E]
+  [FiniteDimensional ℝ E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3445/3559] Replayed Vendor.Section5Formalization.ExponentLedger
+warning: Vendor/Section5Formalization/ExponentLedger.lean:20:10: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/Section5Formalization/ExponentLedger.lean:20:10: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Vendor/Section5Formalization/ExponentLedger.lean:27:31: Variable name `hC₀` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC₀
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Section5Formalization/ExponentLedger.lean:39:10: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/Section5Formalization/ExponentLedger.lean:39:10: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3448/3559] Replayed Vendor.HighBandLSV
+warning: Vendor/HighBandLSV.lean:71:5: Variable name `hC` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/HighBandLSV.lean:81:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/HighBandLSV.lean:81:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Vendor/HighBandLSV.lean:345:70: This simp argument is unused:
+  Real.rpow_two
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hilbertSchmidt, Matrix.frobenius_norm_def, Real.sqrt_eq_rpow]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/HighBandLSV.lean:368:39: This simp argument is unused:
+  Matrix.sub_mulVec
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [shifted, Matrix.toLpLin_apply, Matrix.smul_mulVec]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/HighBandLSV.lean:368:58: This simp argument is unused:
+  Matrix.smul_mulVec
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [shifted, Matrix.toLpLin_apply, Matrix.sub_mulVec]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/HighBandLSV.lean:416:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/HighBandLSV.lean:451:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/HighBandLSV.lean:453:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/HighBandLSV.lean:463:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/HighBandLSV.lean:561:5: Variable name `hCw` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hCw
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/HighBandLSV.lean:780:30: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+info: Vendor/HighBandLSV.lean:962:0: 'HighBandLSV.high_band_lsv_from_numerics' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/HighBandLSV.lean:963:0: 'HighBandLSV.ceiling_partition_arithmetic' depends on axioms: [propext, Quot.sound]
+info: Vendor/HighBandLSV.lean:964:0: 'HighBandLSV.log_rawFixedBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/HighBandLSV.lean:965:0: 'HighBandLSV.eventually_final_log_dominance' depends on axioms: [propext, Classical.choice, Quot.sound]
+warning: Vendor/HighBandLSV.lean:1006:28: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+info: Vendor/HighBandLSV.lean:1101:0: 'HighBandLSV.eventually_actual_numerics' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/HighBandLSV.lean:1102:0: 'HighBandLSV.eventually_high_band_lsv' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3451/3559] Replayed Vendor.PlanarSmallBall
+warning: Vendor/PlanarSmallBall.lean:105:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/PlanarSmallBall.lean:107:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/PlanarSmallBall.lean:179:4: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Vendor/PlanarSmallBall.lean:182:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/PlanarSmallBall.lean:236:15: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: Vendor/PlanarSmallBall.lean:239:4: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/PlanarSmallBall.lean:252:49: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Complex.volume_closedBall, ENNReal.ofReal_mul, ENNReal.ofReal_pow, hD, hs, hpi, Real.pi_pos.le,
+    mul_comm, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/PlanarSmallBall.lean:376:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/PlanarSmallBall.lean:376:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+info: Vendor/PlanarSmallBall.lean:384:0: 'HighBandLSV.Planar.sum_has_bounded_density' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/PlanarSmallBall.lean:385:0: 'HighBandLSV.Planar.sum_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/PlanarSmallBall.lean:386:0: 'HighBandLSV.dimension_loss_normal_union' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/PlanarSmallBall.lean:387:0: 'HighBandLSV.dimension_loss_final_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3453/3559] Replayed Vendor.RandomMatrixModel
+warning: Vendor/RandomMatrixModel.lean:51:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/RandomMatrixModel.lean:72:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/RandomMatrixModel.lean:85:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/RandomMatrixModel.lean:114:22: This simp argument is unused:
+  norm_mul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [coefficients, mul_pow, Complex.norm_real, Real.norm_eq_abs]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: Vendor/RandomMatrixModel.lean:349:0: 'HighBandLSV.PlanarBandModel.selected_rows_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RandomMatrixModel.lean:350:0: 'HighBandLSV.PlanarBandModel.finite_net_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RandomMatrixModel.lean:351:0: 'HighBandLSV.ColumnExposure.expose_preserving' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RandomMatrixModel.lean:352:0: 'HighBandLSV.ColumnExposure.moving_block_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3454/3559] Replayed ShortRingAnchor.CyclicPlanarHighBandModel
+warning: ShortRingAnchor/CyclicPlanarHighBandModel.lean:116:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3455/3559] Replayed ShortRingAnchor.HighBandLSVBridge
+warning: ShortRingAnchor/HighBandLSVBridge.lean:50:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: ShortRingAnchor/HighBandLSVBridge.lean:51:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: ShortRingAnchor/HighBandLSVBridge.lean:53:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: ShortRingAnchor/HighBandLSVBridge.lean:60:8: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ShortRingAnchor/HighBandLSVBridge.lean:64:27: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+ℹ [3457/3559] Replayed Vendor.ModelNumerics
+info: Vendor/ModelNumerics.lean:105:0: 'HighBandLSV.eventually_model_numerics' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/ModelNumerics.lean:106:0: 'HighBandLSV.certificate_dimension_loss_union' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3461/3559] Replayed Vendor.Section5Formalization.VolumetricNet
+warning: Vendor/Section5Formalization/VolumetricNet.lean:81:30: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/Section5Formalization/VolumetricNet.lean:81:30: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Vendor/Section5Formalization/VolumetricNet.lean:95:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3462/3559] Replayed Vendor.PlanarNets
+warning: Vendor/PlanarNets.lean:28:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+info: Vendor/PlanarNets.lean:161:0: 'HighBandLSV.PlanarNets.exists_annular_net' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/PlanarNets.lean:162:0: 'HighBandLSV.PlanarNets.exists_level' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3465/3559] Replayed Vendor.GinibreLSV.Ginibre
+warning: Vendor/GinibreLSV/Ginibre.lean:125:15: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+⚠ [3466/3559] Replayed Vendor.NormalEvents
+warning: Vendor/NormalEvents.lean:64:25: `Set.setOf_forall` has been deprecated: Use `Set.ofPred_forall` instead
+warning: Vendor/NormalEvents.lean:175:41: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+info: Vendor/NormalEvents.lean:211:0: 'HighBandLSV.NormalEvents.measurableSet_good' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/NormalEvents.lean:212:0: 'HighBandLSV.NormalEvents.exists_unit_normal' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/NormalEvents.lean:213:0: 'HighBandLSV.NormalEvents.norm_inner_le_distance' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3467/3559] Replayed Vendor.BlockGeometry
+warning: Vendor/BlockGeometry.lean:91:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+info: Vendor/BlockGeometry.lean:190:0: 'HighBandLSV.BlockGeometry.Partition.assembled_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/BlockGeometry.lean:191:0: 'HighBandLSV.BlockGeometry.chooseRows' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/BlockGeometry.lean:192:0: 'HighBandLSV.BlockGeometry.RowSelection.product_by_blocks' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3468/3559] Replayed Vendor.NeighborPath
+info: Vendor/NeighborPath.lean:150:0: 'HighBandLSV.NeighborPath.between' depends on axioms: [propext, Quot.sound]
+info: Vendor/NeighborPath.lean:151:0: 'HighBandLSV.NeighborPath.inverse_product_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3469/3559] Replayed Vendor.RadialLedger
+warning: Vendor/RadialLedger.lean:90:35: This simp argument is unused:
+  Nat.mul_comm J r
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [div_pow, pow_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: Vendor/RadialLedger.lean:133:0: 'HighBandLSV.RadialLedger.net_row_cancellation' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RadialLedger.lean:134:0: 'HighBandLSV.RadialLedger.radial_to_endpoint_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3470/3559] Replayed Vendor.RadialNetAssembly
+warning: Vendor/RadialNetAssembly.lean:159:58: Variable name `hh` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hh
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Vendor/RadialNetAssembly.lean:180:0: 'HighBandLSV.RadialNetAssembly.chooseSystem' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RadialNetAssembly.lean:181:0: 'HighBandLSV.RadialNetAssembly.System.covers_unit_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RadialNetAssembly.lean:182:0: 'HighBandLSV.RadialNetAssembly.heavy_weight' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3471/3559] Replayed Vendor.PathGeometry
+info: Vendor/PathGeometry.lean:54:0: 'HighBandLSV.PathGeometry.target_in_band' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3472/3559] Replayed Vendor.PlanarRowBounds
+warning: Vendor/PlanarRowBounds.lean:40:10: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/PlanarRowBounds.lean:40:10: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Vendor/PlanarRowBounds.lean:75:50: Variable name `hW` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hW
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Vendor/PlanarRowBounds.lean:116:0: 'HighBandLSV.PlanarRowBounds.center_row_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3473/3559] Replayed Vendor.MatrixColumnBound
+warning: Vendor/MatrixColumnBound.lean:147:30: `Set.setOf_forall` has been deprecated: Use `Set.ofPred_forall` instead
+info: Vendor/MatrixColumnBound.lean:182:0: 'HighBandLSV.ColumnExposure.exposed_distance_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/MatrixColumnBound.lean:183:0: 'HighBandLSV.PlanarBandModel.column_distance_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3474/3559] Replayed Vendor.NormalNetEvents
+warning: Vendor/NormalNetEvents.lean:50:2: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+warning: Vendor/NormalNetEvents.lean:63:5: Variable name `hK` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hK
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Vendor/NormalNetEvents.lean:121:0: 'HighBandLSV.NormalNetEvents.normal_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/NormalNetEvents.lean:122:0: 'HighBandLSV.NormalNetEvents.fixedBad_subset_net_union' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3475/3559] Replayed Vendor.FiniteProbability
+info: Vendor/FiniteProbability.lean:54:0: 'HighBandLSV.FiniteProbability.finite_union' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/FiniteProbability.lean:55:0: 'HighBandLSV.FiniteProbability.product_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3476/3559] Replayed Vendor.MatrixGeometry
+warning: Vendor/MatrixGeometry.lean:39:40: This simp argument is unused:
+  Ne.symm h
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [NormalEvents.col, shifted, h]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: Vendor/MatrixGeometry.lean:73:0: 'HighBandLSV.MatrixGeometry.hs_cutoff_column_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/MatrixGeometry.lean:74:0: 'HighBandLSV.MatrixGeometry.inner_shifted_column' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3477/3559] Replayed Vendor.PlanarTensorization
+warning: Vendor/PlanarTensorization.lean:52:57: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+info: Vendor/PlanarTensorization.lean:129:0: 'HighBandLSV.PlanarTensorization.point_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/PlanarTensorization.lean:130:0: 'HighBandLSV.PlanarTensorization.center_union_endpoint_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3478/3559] Replayed Vendor.RadialRawBound
+info: Vendor/RadialRawBound.lean:74:0: 'HighBandLSV.RadialRawBound.actual_fixedEnvelope_le_raw' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3479/3559] Replayed Vendor.FixedNormalProbability
+info: Vendor/FixedNormalProbability.lean:123:2: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+info: Vendor/FixedNormalProbability.lean:127:0: 'HighBandLSV.FixedNormalProbability.fixed_bad_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/FixedNormalProbability.lean:128:0: 'HighBandLSV.FixedNormalProbability.bad_normal_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3480/3559] Replayed Vendor.ModelPartition
+info: Vendor/ModelPartition.lean:48:0: 'HighBandLSV.ModelPartition.local_band' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/ModelPartition.lean:49:0: 'HighBandLSV.ModelPartition.retained_rows_fit' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3481/3559] Replayed Vendor.MeshParameters
+info: Vendor/MeshParameters.lean:58:0: 'HighBandLSV.MeshParameters.actual_mesh_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3482/3559] Replayed Vendor.PlanarNormalTheorem
+info: Vendor/PlanarNormalTheorem.lean:65:0: 'HighBandLSV.planar_bad_normals_from_numerics' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3483/3559] Replayed Vendor.QuadraticLinearization
+warning: Vendor/QuadraticLinearization.lean:27:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/QuadraticLinearization.lean:27:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+info: Vendor/QuadraticLinearization.lean:46:0: 'HighBandLSV.QuadraticLinearization.planar_column_linearization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+ℹ [3484/3559] Replayed Vendor.LSVAssembly
+info: Vendor/LSVAssembly.lean:78:0: 'HighBandLSV.lsv_probability_from_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/LSVAssembly.lean:79:0: 'HighBandLSV.dimension_loss_column_union_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3485/3559] Replayed Vendor.PlanarModelTheorem
+info: Vendor/PlanarModelTheorem.lean:124:0: 'HighBandLSV.planar_model_lsv_of_numerics' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/PlanarModelTheorem.lean:125:0: 'HighBandLSV.eventually_planar_band_lsv' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3486/3559] Replayed ShortRingAnchor.HighBandLSVProbability
+warning: ShortRingAnchor/HighBandLSVProbability.lean:114:6: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3487/3559] Replayed ShortRingAnchor.Theorem31CyclicPlanar
+warning: ShortRingAnchor/Theorem31CyclicPlanar.lean:40:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3490/3559] Replayed Vendor.LivshytsProjectionFormalization.ProbabilityCore
+warning: Vendor/LivshytsProjectionFormalization/ProbabilityCore.lean:147:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3491/3559] Replayed Vendor.LivshytsProjectionFormalization.ProjectionSmallBall
+warning: Vendor/LivshytsProjectionFormalization/ProjectionSmallBall.lean:60:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/LivshytsProjectionFormalization/ProjectionSmallBall.lean:182:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/LivshytsProjectionFormalization/ProjectionSmallBall.lean:268:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3492/3559] Replayed Vendor.RealProjectionInterface
+warning: Vendor/RealProjectionInterface.lean:23:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3493/3559] Replayed Vendor.RealProjectionSmallBall
+warning: Vendor/RealProjectionSmallBall.lean:22:34: Variable name `hrho` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hrho
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/RealProjectionSmallBall.lean:168:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3494/3559] Replayed Vendor.LivshytsProjectionFormalization.Section5TargetFormalization
+warning: Vendor/LivshytsProjectionFormalization/Section5TargetFormalization.lean:68:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/LivshytsProjectionFormalization/Section5TargetFormalization.lean:83:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3496/3559] Replayed Vendor.LivshytsProjectionFormalization.KernelCoordinateFrame
+warning: Vendor/LivshytsProjectionFormalization/KernelCoordinateFrame.lean:94:4: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+warning: Vendor/LivshytsProjectionFormalization/KernelCoordinateFrame.lean:151:79: This simp argument is unused:
+  zero_pow
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [not_ne_iff.mp i.property, inner_zero_left, norm_zero]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/LivshytsProjectionFormalization/KernelCoordinateFrame.lean:214:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3499/3559] Replayed Vendor.LivshytsProjectionFormalization.EntropyJacobian
+warning: Vendor/LivshytsProjectionFormalization/EntropyJacobian.lean:18:48: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Vendor/LivshytsProjectionFormalization/EntropyJacobian.lean:30:50: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Vendor/LivshytsProjectionFormalization/EntropyJacobian.lean:33:48: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3500/3559] Replayed Vendor.LivshytsProjectionFormalization.ConcreteProjectionDensity
+warning: Vendor/LivshytsProjectionFormalization/ConcreteProjectionDensity.lean:130:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Vendor/LivshytsProjectionFormalization/ConcreteProjectionDensity.lean:427:25: This simp argument is unused:
+  Module.finrank_pi_fintype
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [CoordinateSpace]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/LivshytsProjectionFormalization/ConcreteProjectionDensity.lean:643:10: This simp argument is unused:
+  finrank_coordinateSpace
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hE]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/LivshytsProjectionFormalization/ConcreteProjectionDensity.lean:656:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/LivshytsProjectionFormalization/ConcreteProjectionDensity.lean:653:10: This simp argument is unused:
+  finrank_coordinateSpace
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hE]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/LivshytsProjectionFormalization/ConcreteProjectionDensity.lean:671:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/LivshytsProjectionFormalization/ConcreteProjectionDensity.lean:687:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3502/3559] Replayed Vendor.LivshytsProjectionFormalization.FiniteProductDensity
+warning: Vendor/LivshytsProjectionFormalization/FiniteProductDensity.lean:67:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3507/3559] Replayed Vendor.RealProjectionAdapter
+warning: Vendor/RealProjectionAdapter.lean:56:0: Definition `boundedPDFInterfaceOfLivshytsDensity` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Vendor/RealProjectionAdapter.lean:77:0: Definition `boundedPlanePDFInterfaceOfLivshytsDensity` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Vendor/RealProjectionAdapter.lean:98:0: Definition `BoundedPDFInterface.mono` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Vendor/RealProjectionAdapter.lean:109:0: Definition `BoundedPlanePDFInterface.mono` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Vendor/RealProjectionAdapter.lean:120:0: Definition `boundedPDFInterfaceOfExternal` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Vendor/RealProjectionAdapter.lean:130:0: Definition `boundedPlanePDFInterfaceOfExternal` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Vendor/RealProjectionAdapter.lean:140:0: Definition `oneTwoProjectionDensityInterfaceOfExternal` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Vendor/RealProjectionAdapter.lean:159:0: Definition `realOneProjectionBoundedPDFFromGBL` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Vendor/RealProjectionAdapter.lean:295:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Vendor/RealProjectionAdapter.lean:234:0: Definition `realTwoProjectionBoundedPDFFromGBL` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+warning: Vendor/RealProjectionAdapter.lean:255:15: This simp argument is unused:
+  inner_self_eq_norm_sq
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [v, hp]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/RealProjectionAdapter.lean:258:15: This simp argument is unused:
+  inner_self_eq_norm_sq
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [v, hr]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/RealProjectionAdapter.lean:332:0: Definition `realOneTwoProjectionDensityInterfaceFromGBL` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+info: Vendor/RealProjectionAdapter.lean:354:0: 'HighBandLSV.Real.realOneTwoProjectionDensityInterfaceFromGBL' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+⚠ [3508/3559] Replayed Vendor.RealRandomMatrixModel
+warning: Vendor/RealRandomMatrixModel.lean:91:0: Definition `projectionInterface` is a proposition; use `theorem` instead of `def`
+
+Note: This linter can be disabled with `set_option linter.defProp false`
+info: Vendor/RealRandomMatrixModel.lean:101:0: 'HighBandLSV.RealBandModel.projectedBoundedDensity' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3510/3559] Replayed Vendor.Section5Formalization.BlockEnergy
+warning: Vendor/Section5Formalization/BlockEnergy.lean:16:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Section5Formalization/BlockEnergy.lean:62:39: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+ℹ [3511/3559] Replayed Vendor.InternalNet
+info: Vendor/InternalNet.lean:49:0: 'HighBandLSV.InternalNet.exists_internal_net' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3512/3559] Replayed Vendor.RealAnisotropicGeometry
+warning: Vendor/RealAnisotropicGeometry.lean:88:23: This simp argument is unused:
+  Bool.true_eq
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [rotate, if_true, realPart_I, imagPart_I, norm_neg]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: Vendor/RealAnisotropicGeometry.lean:158:0: 'HighBandLSV.Anisotropic.gram_product_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3513/3559] Replayed Vendor.RealFormSmallBall
+warning: Vendor/RealFormSmallBall.lean:64:0: automatically included section variable(s) unused in theorem `HighBandLSV.Anisotropic.form_one_small_ball`:
+  [IsProbabilityMeasure P]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsProbabilityMeasure P] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+info: Vendor/RealFormSmallBall.lean:118:0: 'HighBandLSV.Anisotropic.form_two_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3514/3559] Replayed Vendor.RealWeightedGeometry
+warning: Vendor/RealWeightedGeometry.lean:52:33: Variable name `hq` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hq
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Vendor/RealWeightedGeometry.lean:97:0: 'HighBandLSV.Anisotropic.weighted_block_gram_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3515/3559] Replayed Vendor.RealMatrixForms
+warning: Vendor/RealMatrixForms.lean:33:16: This simp argument is unused:
+  mul_left_comm
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [form, realCoefficients, imagCoefficients, weightReal, Anisotropic.realPart, Anisotropic.imagPart,
+    coordinateRV, linearForm, PiLp.inner_apply, Complex.mul_re, Complex.mul_im, mul_comm, mul_assoc]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: Vendor/RealMatrixForms.lean:65:0: 'HighBandLSV.RealBandModel.linearForm_two_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RealMatrixForms.lean:66:0: 'HighBandLSV.RealBandModel.block_gram_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3516/3559] Replayed Vendor.RealSmallBallNumerics
+warning: Vendor/RealSmallBallNumerics.lean:21:21: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/RealSmallBallNumerics.lean:21:21: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Vendor/RealSmallBallNumerics.lean:30:59: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/RealSmallBallNumerics.lean:30:59: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Vendor/RealSmallBallNumerics.lean:53:18: Variable name `hd` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Vendor/RealSmallBallNumerics.lean:67:0: 'HighBandLSV.RealSmallBallNumerics.rank_one_to_mesh_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RealSmallBallNumerics.lean:68:0: 'HighBandLSV.RealSmallBallNumerics.one_axis_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3517/3559] Replayed Vendor.AnisotropicLabels
+warning: Vendor/AnisotropicLabels.lean:42:4: Unused tactic linter: `push_cast at this` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+info: Vendor/AnisotropicLabels.lean:151:0: 'HighBandLSV.Anisotropic.exists_block_label' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/AnisotropicLabels.lean:152:0: 'HighBandLSV.Anisotropic.heavy_block_weight' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3518/3559] Replayed Vendor.RealRowBounds
+warning: Vendor/RealRowBounds.lean:35:55: Variable name `hx` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hx
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/RealRowBounds.lean:60:38: This simp argument is unused:
+  Bool.true_eq
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [rotate, rotatedCenter, if_true, m.linearForm_smul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/RealRowBounds.lean:132:25: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+info: Vendor/RealRowBounds.lean:156:0: 'HighBandLSV.RealBandModel.anisotropic_row_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3519/3559] Replayed Vendor.AnisotropicNetGeometry
+warning: Vendor/AnisotropicNetGeometry.lean:43:37: Variable name `heps` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _heps
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Vendor/AnisotropicNetGeometry.lean:78:0: 'HighBandLSV.Anisotropic.exists_external_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3520/3559] Replayed Vendor.AnisotropicNets
+info: Vendor/AnisotropicNets.lean:81:0: 'HighBandLSV.Anisotropic.exists_internal_anisotropic_net' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3521/3559] Replayed Vendor.AnisotropicNetAssembly
+info: Vendor/AnisotropicNetAssembly.lean:97:0: 'HighBandLSV.Anisotropic.System.covers_unit_sphere' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/AnisotropicNetAssembly.lean:98:0: 'HighBandLSV.Anisotropic.System.center_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3522/3559] Replayed Vendor.ProductEvents
+warning: Vendor/ProductEvents.lean:20:15: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+info: Vendor/ProductEvents.lean:38:0: 'HighBandLSV.ProductEvents.finite_constraints' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3523/3559] Replayed Vendor.RealTensorization
+warning: Vendor/RealTensorization.lean:45:61: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: Vendor/RealTensorization.lean:47:19: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+info: Vendor/RealTensorization.lean:118:0: 'HighBandLSV.RealTensorization.center_union_probability' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3524/3559] Replayed Vendor.RealRawBound
+info: Vendor/RealRawBound.lean:50:0: 'HighBandLSV.RealRawBound.actual_fixedEnvelope_le_raw' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3525/3559] Replayed Vendor.AnisotropicMesh
+warning: Vendor/AnisotropicMesh.lean:31:46: Variable name `hwk` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hwk
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Vendor/AnisotropicMesh.lean:57:0: 'HighBandLSV.Anisotropic.actual_endpoint_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3526/3559] Replayed Vendor.RealNetCost
+warning: Vendor/RealNetCost.lean:41:5: Variable name `hN` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hN
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/RealNetCost.lean:41:18: Variable name `hW` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hW
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: Vendor/RealNetCost.lean:85:0: 'HighBandLSV.RealNetCost.weighted_cost_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RealNetCost.lean:86:0: 'HighBandLSV.RealNetCost.actual_endpoint_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3527/3559] Replayed Vendor.RealNetProbability
+info: Vendor/RealNetProbability.lean:76:0: 'HighBandLSV.RealNetProbability.label_union_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3528/3559] Replayed Vendor.RealNormalNetEvents
+info: Vendor/RealNormalNetEvents.lean:55:0: 'HighBandLSV.RealNormalNetEvents.fixedBad_subset_net_union' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3529/3559] Replayed Vendor.RealFixedNormalProbability
+info: Vendor/RealFixedNormalProbability.lean:109:0: 'HighBandLSV.RealFixedNormalProbability.actual_fixed_probability' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: Vendor/RealFixedNormalProbability.lean:110:0: 'HighBandLSV.RealFixedNormalProbability.bad_normals_union' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3530/3559] Replayed Vendor.RealNormalTheorem
+info: Vendor/RealNormalTheorem.lean:58:0: 'HighBandLSV.real_bad_normals_from_numerics' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3531/3559] Replayed Vendor.RealColumnExposure
+info: Vendor/RealColumnExposure.lean:66:0: 'HighBandLSV.RealColumnExposure.exposure_probability_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3532/3559] Replayed Vendor.RealColumnSmallBall
+info: Vendor/RealColumnSmallBall.lean:101:0: 'HighBandLSV.RealBandModel.linearForm_block_mass_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3533/3559] Replayed Vendor.RealMatrixColumnBound
+warning: Vendor/RealMatrixColumnBound.lean:26:8: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Vendor/RealMatrixColumnBound.lean:148:6: Unused tactic linter: `change
+  GinibreLSV.columnDistance (shifted (m.reconstructedMatrix j (expose j omega)) z) j ≤ s` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+info: Vendor/RealMatrixColumnBound.lean:160:0: 'HighBandLSV.RealBandModel.column_distance_small_ball' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3534/3559] Replayed Vendor.RealLSVAssembly
+info: Vendor/RealLSVAssembly.lean:42:0: 'HighBandLSV.real_lsv_from_bad_normals' depends on axioms: [propext, Classical.choice, Quot.sound]
+ℹ [3535/3559] Replayed Vendor.RealModelTheorem
+info: Vendor/RealModelTheorem.lean:121:0: 'HighBandLSV.real_model_lsv_of_numerics' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Vendor/RealModelTheorem.lean:122:0: 'HighBandLSV.eventually_real_band_lsv' depends on axioms: [propext, Classical.choice, Quot.sound]
+⚠ [3537/3559] Replayed ShortRingAnchor.Theorem31CyclicReal
+warning: ShortRingAnchor/Theorem31CyclicReal.lean:42:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3540/3559] Replayed ShortRingAnchor.Proposition38.AtomMoments
+warning: ShortRingAnchor/Proposition38/AtomMoments.lean:23:4: Unused tactic linter: `change (∫ x : ℝ, (x : ℂ) ∂A.law) = 0` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3542/3559] Replayed ShortRingAnchor.Proposition38.BlockEmbedding
+warning: ShortRingAnchor/Proposition38/BlockEmbedding.lean:43:0: automatically included section variable(s) unused in theorem `ShortRingAnchor.Proposition38.norm_blockProjection_apply_le`:
+  [DecidableEq B]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq B] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3543/3559] Replayed Vendor.SubgaussianNorm.Data
+warning: Vendor/SubgaussianNorm/Data.lean:82:18: Variable name `p` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _p
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/SubgaussianNorm/Data.lean:82:20: Variable name `q` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _q
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [3544/3559] Replayed Vendor.SubgaussianNorm.OperatorNorm
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:29:2: Try this: 
+  haveI̵
+
+The goal is a proposition, so `have` is preferred over `haveI`.
+The difference between `have` and `haveI` is that `haveI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:132:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:49:38: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:147:26: `ENat.coe_lt_top` has been deprecated: Use `ENat.natCast_lt_top` instead
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:273:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:325:10: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:337:10: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:365:13: `Matrix.toEuclideanLin_apply` has been deprecated: Use `Matrix.toLpLin_apply` instead
+
+Note: The updated constant has a different type:
+  ∀ {m : Type u_1} {n : Type u_2} {R : Type u_4} [inst : Fintype n] [inst_1 : DecidableEq n] [inst_2 : CommRing R]
+    (p q : ℝ≥0∞) (M : Matrix m n R) (v : WithLp p (n → R)), ((Matrix.toLpLin p q) M) v = WithLp.toLp q (M.mulVec v.ofLp)
+instead of
+  ∀ {𝕜 : Type u_3} [inst : RCLike 𝕜] {m : Type u_7} {n : Type u_8} [inst_1 : Fintype n] [inst_2 : DecidableEq n]
+    (M : Matrix m n 𝕜) (v : EuclideanSpace 𝕜 n), (Matrix.toEuclideanLin M) v = WithLp.toLp 2 (M.mulVec v.ofLp)
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:415:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:474:19: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:474:19: Unused tactic linter: `exact_mod_cast hNcard` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:582:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:608:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:610:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/SubgaussianNorm/OperatorNorm.lean:640:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3545/3559] Replayed ShortRingAnchor.Proposition38.BlockNorm
+warning: ShortRingAnchor/Proposition38/BlockNorm.lean:131:13: `ContinuousLinearMap.smul_apply` has been deprecated: Use `smul_apply` instead
+
+Note: The updated constant is in a different namespace. Dot notation may need to be changed (e.g., from `x.smul_apply` to `smul_apply x`).
+warning: ShortRingAnchor/Proposition38/BlockNorm.lean:125:0: automatically included section variable(s) unused in theorem `ShortRingAnchor.Proposition38.norm_rescaled_shift_le`:
+  [DecidableEq B]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [DecidableEq B] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3546/3559] Replayed ShortRingAnchor.Proposition38.Profile
+warning: ShortRingAnchor/Proposition38/Profile.lean:26:48: This simp argument is unused:
+  Equiv.symm_apply_eq
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [siteAdjacent, Equiv.eq_symm_apply]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ShortRingAnchor/Proposition38/Profile.lean:93:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3547/3559] Replayed ShortRingAnchor.Proposition38.HeavyBlocks
+warning: ShortRingAnchor/Proposition38/HeavyBlocks.lean:84:8: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: ShortRingAnchor/Proposition38/HeavyBlocks.lean:84:8: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: ShortRingAnchor/Proposition38/HeavyBlocks.lean:125:12: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: ShortRingAnchor/Proposition38/HeavyBlocks.lean:125:12: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3548/3559] Replayed ShortRingAnchor.Proposition38.BroadConnectivity
+warning: ShortRingAnchor/Proposition38/BroadConnectivity.lean:81:10: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: ShortRingAnchor/Proposition38/BroadConnectivity.lean:81:10: Unused tactic linter: `ring` does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+⚠ [3549/3559] Replayed ShortRingAnchor.Proposition38.Spread
+warning: ShortRingAnchor/Proposition38/Spread.lean:37:34: This simp argument is unused:
+  Set.indicator_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hx]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3550/3559] Replayed ShortRingAnchor.Proposition38.Model
+warning: ShortRingAnchor/Proposition38/Model.lean:44:0: automatically included section variable(s) unused in theorem `ShortRingAnchor.Proposition38.AtomArray.complexCopies`:
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+⚠ [3551/3559] Replayed ShortRingAnchor.Proposition38.MaskNorm
+warning: ShortRingAnchor/Proposition38/MaskNorm.lean:28:0: automatically included section variable(s) unused in theorem `ShortRingAnchor.Proposition38.norm_coordinateProjection_le`:
+  [Fintype B]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [Fintype B] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: ShortRingAnchor/Proposition38/MaskNorm.lean:82:8: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3552/3559] Replayed ShortRingAnchor.Proposition38.MatrixNormTail
+warning: ShortRingAnchor/Proposition38/MatrixNormTail.lean:21:0: automatically included section variable(s) unused in theorem `ShortRingAnchor.Proposition38.rescaled_fullBlockMatrix_eq`:
+  [IsProbabilityMeasure μ]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [IsProbabilityMeasure μ] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: ShortRingAnchor/Proposition38/MatrixNormTail.lean:71:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3554/3559] Replayed ShortRingAnchor.Proposition38.ExternalInputs
+warning: ShortRingAnchor/Proposition38/ExternalInputs.lean:41:17: Variable name `hW` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hW
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ShortRingAnchor/Proposition38/ExternalInputs.lean:52:17: Variable name `hn` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hn
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+⚠ [3555/3559] Replayed ShortRingAnchor.Proposition38.LeastValue
+warning: ShortRingAnchor/Proposition38/LeastValue.lean:108:81: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+⚠ [3557/3559] Replayed ShortRingAnchor.Proposition38.Assembly
+warning: ShortRingAnchor/Proposition38/Assembly.lean:84:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+✔ [3558/3559] Built ShortRingAnchor (92s)
+Build completed successfully (3559 jobs).

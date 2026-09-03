@@ -6,7 +6,10 @@ import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const audits = ['ShortRingAnchor/Audit.lean', 'ShortRingAnchor/HighBandIntegrationAudit.lean'];
+const proposition38Only = process.argv.includes('--proposition38-only');
+const audits = proposition38Only ? ['ShortRingAnchor/Proposition38/Audit.lean'] :
+  ['ShortRingAnchor/Audit.lean', 'ShortRingAnchor/HighBandIntegrationAudit.lean',
+    'ShortRingAnchor/Proposition38/Audit.lean'];
 const allowed = new Set(['propext', 'Classical.choice', 'Quot.sound']);
 function checkReports(output, expected) {
   const reports = new Map();
@@ -31,8 +34,20 @@ function selfTest() {
 }
 selfTest();
 if (process.argv.includes('--self-test')) process.exit(0);
-const outDir = path.join(root, 'audit', 'verification');
+const outDir = path.join(root, 'audit', proposition38Only ? 'proposition38-verification' : 'verification');
 fs.mkdirSync(outDir, { recursive: true });
+// A failed rerun must not leave an older "passed" summary beside fresh
+// failure logs. Only the successful final block below issues a certificate.
+fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify({
+  status: 'in_progress', timeUTC: new Date().toISOString(),
+  scope: 'No certificate has been issued for this verification run.'
+}, null, 2) + '\n');
+process.on('exit', code => {
+  if (code !== 0) fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify({
+    status: 'failed', timeUTC: new Date().toISOString(), exitCode: code,
+    scope: 'Verification failed; inspect the associated build and audit logs.'
+  }, null, 2) + '\n');
+});
 async function run(command, args, logName) {
   const log = fs.createWriteStream(path.join(outDir, logName));
   let output = '';
@@ -57,7 +72,13 @@ const results = {};
 for (const file of audits) {
   const expected = [...fs.readFileSync(path.join(root, file), 'utf8').matchAll(/^#print axioms (\S+)\s*$/gm)].map(m => m[1]);
   if (!expected.length || new Set(expected).size !== expected.length) throw new Error(`Invalid audit declaration list: ${file}`);
-  const output = await run('lake', ['env', 'lean', '-j', '1', file], path.basename(file, '.lean') + '.log');
+  if (file === 'ShortRingAnchor/Proposition38/Audit.lean' &&
+      !expected.includes('ShortRingAnchor.Proposition38.proposition38')) {
+    throw new Error('Proposition 3.8 audit must include the complete conditional endpoint.');
+  }
+  const logName = file === 'ShortRingAnchor/Proposition38/Audit.lean'
+    ? 'Proposition38Audit.log' : path.basename(file, '.lean') + '.log';
+  const output = await run('lake', ['env', 'lean', '-j', '1', file], logName);
   results[file] = checkReports(output, expected);
   console.log(`PASS ${file}: ${expected.length} exact axiom reports.`);
 }
@@ -67,7 +88,9 @@ const summary = {
   reportCount: Object.values(results).reduce((n, r) => n + Object.keys(r).length, 0),
   uniqueDeclarations: new Set(Object.values(results).flatMap(r => Object.keys(r))).size,
   allowedAxioms: [...allowed], audits: results,
-  scope: 'Kernel verification of the stated conditional theorems; explicit mathematical hypotheses are not discharged by an axiom audit.'
+  scope: proposition38Only
+    ? 'Normal project build and kernel audit of the complete conditional Proposition 3.8 endpoint and its new components. Explicit literature hypotheses remain theorem arguments. Historical Proposition 3.6 audits are not rerun in this mode.'
+    : 'Kernel verification of the stated conditional theorems, including the complete Proposition 3.8 endpoint. Explicit mathematical hypotheses are not discharged by an axiom audit.'
 };
 fs.writeFileSync(path.join(outDir, 'summary.json'), JSON.stringify(summary, null, 2) + '\n');
 console.log(`PASS: normal lake build; ${summary.reportCount} reports, ${summary.uniqueDeclarations} distinct declarations; ${hygiene.files} source files.`);

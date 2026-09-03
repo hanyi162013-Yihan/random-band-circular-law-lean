@@ -1,0 +1,1778 @@
+{
+  "status": "passed",
+  "commit": null,
+  "timeUTC": "2026-09-03T03:44:04.350Z",
+  "leanSourceFiles": 250,
+  "normalLakeBuild": "passed",
+  "reportCount": 351,
+  "uniqueDeclarations": 340,
+  "allowedAxioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "audits": {
+    "ShortRingAnchor/Audit.lean": {
+      "ShortRingAnchor.proposition36_of_source_scales": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.verticalGrid_cover": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.verticalStieltjesGridGood_norm_le_three": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.smallHermitizationEigenvalueIndices_eq_v3": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.verticalStieltjesGridGood_count": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.verticalStieltjesGridGood_bad_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hardEdgeCutoff_eighth_power": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hardEdgeCutoff_lower": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_formula311Error_hardEdge": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hermitizationAllCutoffsCountingInput_of_v3_model": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hermitizationAllCutoffsCountingInput_cyclic": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.proposition36_cyclicShortRing_of_atom_copies_bbv_and_lsv": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.proposition36_cyclicShortRing_of_source_scales": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.proposition36_matrix_form_highProbability": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.proposition36_matrix_form_ae": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalLog_convergesInProbability_of_truncations": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.abs_empiricalClippedLog_sub_le_cdfDistanceOn_zero_sq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.normalizedSmallLogMass_convergesInProbability_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.ginibreSmallLogMass_convergesInProbability_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.upperRawLogTail_le_log_div_sq_mul_sq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.sum_sq_matrixSingularValue_eq_sum_norm_sq_entries": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.upperSecondMomentInputs_of_centered_matrix_entries": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.centeredMatrixRowSecondMomentInputs_cyclicShortRing": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.normalizedDenseMatrixProcess_centeredRowSecondMomentInputs": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.AtomMomentAssumption21.integrable": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.AtomMomentAssumption21.normSqIntegrable": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.RingEntryMomentCopies21.centeredMatrixRowSecondMomentInputs": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.DenseAtomMomentCopies21.centeredMatrixRowSecondMomentInputs": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.theorem31LeastSingularValueInput_of_minimum": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Theorem31MinimumSingularValueInput.det_ne_zero_on_good": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Theorem31MinimumSingularValueInput.singular_probability_tendsto_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.UpperCorrectionsUniformlyNegligible.congr_on_good": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.shiftedNonsingularInProbability_of_ae": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition34AllCutoffsInput.specialize_eventually": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.smallSingularValue_card_le_smallHermitizationEigenvalue_card": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.proposition34AllCutoffsInput_of_hermitization": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.sourceHardEdgeError_tendsto_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.sourceBulkCutoffBookkeeping_tendsto_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.manuscriptHardEdgeCutoff_le_sourceCutoff_eventually": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.norm_det_eq_prod_matrixSingularValue": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.shiftedDetPolynomial_ne_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.shifted_det_ne_zero_ae_of_law_absolutelyContinuous": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicShortRingShiftedDetPolynomial_ne_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicShortRing_shifted_det_ne_zero_ae": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.mvPolynomial_eval_ne_zero_ae_pi": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.mvPolynomial_zeroSet_volume": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hasNullMvPolynomialZeroSets_pi": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hasNullMvPolynomialZeroSets_volume": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.HasBoundedDensityWithRespectTo.absolutelyContinuous": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.AtomDensityAlternative21.nullSingletonClass": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.finite_product_absolutelyContinuous": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.independent_jointLaw_absolutelyContinuous": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.independent_complex_jointLaw_of_boundedDensity": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.independent_real_jointLaw_of_boundedDensity": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.shifted_det_ne_zero_ae_of_law_absolutelyContinuous_volume": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.mvPolynomial_ne_zero_ae_of_independent_nonatomic": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.mvPolynomial_ne_zero_ae_of_independent_density": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.shifted_det_ne_zero_ae_of_independent_density": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicShortRing_shifted_det_ne_zero_ae_of_independent_density": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.det_div_sub_smul_ne_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.normalizedDense_shifted_det_ne_zero_ae_of_independent_density": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.normalizedDense_shiftedNonsingularInProbability_of_independent_density": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.ginibreOnePointDensity_le_inv_pi": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.ginibreOnePointDensity_le_gaussian": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.ginibreOnePointDensity_tendsto": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.norm_ne_one_ae_complex": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.integral_mul_ginibreOnePointDensity_tendsto": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.centered_convergesInProbability_of_square_bound": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.convergesInProbability_of_mean_and_square_bound": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.negativeMomentTightness_of_uniform_integral_bound": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.ginibre_variance_le_of_formulas": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.ginibre_statistic_convergesInProbability_of_formulas": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.integrable_log_sq_mul_ginibreEnvelope": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.integrable_abs_log_mul_ginibreEnvelope": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.integral_eq_radial_circleAverage": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.integral_mul_log_from_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.integral_log_mul_circularDensity": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.exists_eigenvalueEnumeration": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.matrixEigenvalues_spec": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.eigenvalues_ne_fixed_ae_of_firstMoment": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.normalizedShiftLogDet_eq_eigenvalueStatistic": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.ginibre_log_statistic_convergesInProbability_of_formulas": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.ginibre_logdet_convergesInProbability_of_formulas": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.ginibre_matrix_logdet_convergesInProbability_of_formulas": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.continuousOn_rpow_positive_interval": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.integral_lower_indicator_eq_clamp": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.integral_negative_power_kernel": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.clamped_negativePower_layerCake": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.sum_lower_indicators": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.empirical_clamped_negativePower_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.negativePower_le_clamped_add_low": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.normalizedNegativeMoment_le_of_count": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.boundedInProbability_of_bound_on_good": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.negativeMomentTightness_of_count_and_lower": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.polynomial_negativeMoment_balance": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.BC12.normalizedNegativeMoment_one_div_128_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.horizontalGrid_cover": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.horizontalGridSize_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.horizontalGrid_comparison": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.measure_horizontal_comparison_bad_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_formula311Error_le_explicit_allEta": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_formula311Error_le_explicit_nat_allEta": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.horizontalGridSize_polynomial_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.horizontalPolynomial_interpolation_error_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.inverse_height_sq_le_dimension": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.horizontalGrid_comparison_polynomial": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.horizontalPolynomial_failure_budget": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.measure_horizontal_comparison_bad_polynomial_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.probability_tendsto_zero_of_truncated_and_tight": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.probability_tendsto_zero_of_truncated_and_mean_bound": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.arctan_le_self_nonneg": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.arctan_upper_tail_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.arctan_lower_tail_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.poissonWindow_nonneg": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.poissonWindow_le_one": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.one_le_poissonWindow_enlarged_add_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.closedIntervalIndicator_le_poissonWindow_enlarged_add_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.poissonWindow_le_closedIntervalIndicator_enlarged_add_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.continuous_poissonKernel_shift": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hasDerivAt_arctan_shift": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.poissonWindow_eq_integral": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.smoothing_empiricalAverage_mono": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.smoothing_empiricalAverage_add_const": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalIntervalMass_le_smoothed_enlarged": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalSmoothedMass_le_interval_enlarged": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.continuous_empiricalStieltjes_im": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalSmoothedMass_eq_integral_im": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalSmoothedMass_le_length_mul": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalSmoothedMass_le_comparison": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalIntervalMass_enlarged_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalIntervalMass_le_length_from_stieltjes": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalIntervalMass_le_of_local_stieltjes": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.abs_empiricalIntervalMass_sub_le_of_local_stieltjes": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.compact_interval_comparison_of_stieltjes": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.closedIntervalIndicator_sqrt_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalIntervalMass_symmetrized_sqrt": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.squaredCdfDistanceOn_le_of_stieltjes": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalIntervalMass_zero_eq_cdf": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.isBigOInProbability_of_bound_on_good": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.lemma35LocalBulkComparisonInput_of_stieltjes": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hermitization_shift_eq_fromBlocks": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.trace_eq_diagonalBlock_traces": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hermitization_inverse_block_equations": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hermitization_inverse_diagonal_traces_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hermitization_inverse_lowerBlock_gram": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.real_sub_upperHalfPlane_ne_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.real_sq_sub_upperHalfPlane_sq_ne_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.symmetric_resolvent_pair": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.gram_shift_apply_rightSingularVector": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.gram_solution_apply_rightSingularVector": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.trace_gram_solution_eq_singular_sum": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.normalizedTrace_hermitization_inverse_eq_singularStieltjes": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.matrix_stieltjesTrace_eq_symmetric_singularValues": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.matrix_squaredCdfDistanceOn_le_of_stieltjes": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.v3_formula311_canonical_on_good": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.v3_concentration_bad_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.v3_pointwise_comparison_bad_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.localBulkRateExponent_pos": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.localBulkHeight_lower": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.localBulkHeight_scale": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.sqrt_localBulkHeight_le_rate": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_formula311Error_localBulkHeight": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.localBulk_rate_tendsto_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.measure_compactStieltjesGridGood_compl_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.compactStieltjesGridGood_comparison": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.compactStieltjesGridGood_reference_im_le_three": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.matrix_stieltjesTrace_horizontal_lipschitz": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.matrixLocalBulkGood_cdf_bound": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.matrixLocalBulkGood_bad_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.matrixLocalBulk_failure_budget_tendsto_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.lemma35LocalBulkComparisonInput_of_v3_models": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "Arxiv2410V3.probabilityAtLeast_stieltjesTrace_complexConcentrationGood_v3_thirtytwo": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "Arxiv2410V3.BVH.bvh_remark613_specialized_v3": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "Arxiv2410V3.BVH.canonicalGaussianCompanion": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicColumn_row_bijective": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicPlacement_sum_at": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicShortRingMatrix_at": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicShortRingMatrix_off_band": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicVarianceCoefficient": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicVarianceCoefficient_at": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicVarianceCoefficient_off_band": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicVarianceCoefficient_sq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicVarianceCoefficient_col_sq_sum": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicVarianceProfile": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicVarianceProfile_isBandwidth": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.iIndepFun_of_constant_outside": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.AtomMomentAssumption21.of_identDistrib": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.ringEntryMomentCopies21_of_independentAtomCopies": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.denseAtomMomentCopies21_of_independentAtomCopies": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.identDistrib_zero_probability": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicShortRingRandomMatrix_entries_independent": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicShortRingRandomMatrix_entry_law": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicV3Model": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.denseVarianceCoefficient_sq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.denseVarianceProfile": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.denseVarianceProfile_isBandwidth": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.denseV3Model": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_cyclic_bandwidth_ge_half_power": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.dense_bandwidth_ge_half_power": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.localBulkRateExponent_half_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.sourceV3MomentBudget": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.sourceV3MomentBudget_ge_eight": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.sourceV3MomentBudget_ge_left": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.sourceV3MomentBudget_ge_right": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.AtomDensityAlternative21.of_identDistrib": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.lemma35LocalBulkComparisonInput_cyclic_dense": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.proposition36_cyclicShortRing_of_atom_copies_and_bbv": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    "ShortRingAnchor/HighBandIntegrationAudit.lean": {
+      "ShortRingAnchor.verticalGridHeight": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.verticalGrid_cover": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.verticalStieltjesGridGood": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.verticalStieltjesGridGood_norm_le_three": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.smallHermitizationEigenvalueIndices_eq_v3": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.verticalStieltjesGridGood_count": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.verticalStieltjesGridGood_bad_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hardEdgeCutoff_eighth_power": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hardEdgeCutoff_lower": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_formula311Error_hardEdge": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hermitizationAllCutoffsCountingInput_of_v3_model": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hermitizationAllCutoffsCountingInput_cyclic": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.proposition36_cyclicShortRing_of_atom_copies_bbv_and_lsv": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.exists_cyclicColumn_of_cyclicDist_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicVarianceCoefficient_local_floor": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicVarianceCoefficient_upper": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.HasBoundedDensityWithRespectTo.exists_pos_measure_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_uniform_of_eventually_every_sequence": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.HighBandNumericalCertificates": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_highBandNumerics_uniform_width": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_highBandNumerics_along_dimensions": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicPlanarBandModel": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.identDistrib_matrix_of_independent_entries": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.planarBandModel_entries_independent": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.planarBandModel_entry_law": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicPlanarBandModel_matrix_identDistrib": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.ginibreLeastSingularValue_eq_last": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.highBand_threshold_eq_source_exp": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.isOpen_leastSingularValue_lt": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.measurableSet_highBand_strict_bad": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.highBand_strict_bad_le_of_identDistrib": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.empiricalSecondMoment_zero_eq_hilbertSchmidt_sq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.planar_lsv_of_highBandNumericalCertificates": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_planar_lsv_along_dimensions": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.hsCutoff_of_empiricalSecondMoment_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.highBandLSV_failure_tendsto_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.theorem31MinimumInput_of_truncated_estimate": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.theorem31MinimumSingularValueInput_cyclic_planar": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.HasBoundedDensityWithRespectTo.exists_measurable_bounded_density": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicRealBandModel": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.realBandModel_entries_independent": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.identDistrib_realPart_embedding": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.realBandModel_entry_law": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.cyclicRealBandModel_matrix_identDistrib": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.real_lsv_of_highBandNumericalCertificates": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.eventually_real_lsv_along_dimensions": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.theorem31MinimumSingularValueInput_cyclic_real": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.theorem31MinimumSingularValueInput_cyclic_of_densityAlternative": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.proposition36_cyclicShortRing_planar_from_published_theorem31": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.proposition36_cyclicShortRing_from_published_theorem31": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "HighBandLSV.planar_model_lsv_of_numerics": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "HighBandLSV.real_model_lsv_of_numerics": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "HighBandLSV.eventually_planar_band_lsv": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "HighBandLSV.eventually_real_band_lsv": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "HighBandLSV.PaperModelTheorem.planar_main_statement": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "HighBandLSV.PaperModelTheorem.real_main_statement": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "HighBandLSV.ModelLawTransport.planar_matrix_law": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "HighBandLSV.ModelLawTransport.real_matrix_law": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "Arxiv2410V3.proposition34_formula39_complete_canonical": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "Arxiv2410V3.proposition34_uniform_complete_canonical": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "Arxiv2410V3.corollary35_complete_canonical": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "GinibreLSV.shiftedScaledGinibre_leastSingularValue_smallBall": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "GinibreLSV.normalizedShiftedGinibre_leastSingularValue_lt_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "GinibreLSV.prod_normalizedShiftedGinibre_leastSingularValue_lt_le_of_measurable": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    "ShortRingAnchor/Proposition38/Audit.lean": {
+      "ShortRingAnchor.Proposition38.conclusion_iff": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.Atom.integrable_norm_pow": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.Atom.momentAssumption21": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.block_count_le_width": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.source_parameter_inequalities": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.counting_cutoff_le_eventually": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.eventually_log_three_width_le_power": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.jjlo_exponent_le_sourceHardEdgeScale": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.exponential_floor_le_jjlo_floor": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.exponential_floor_le_polynomial": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.siteAdjacent_symm": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.three_positions_distinct": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.coefficient_sq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.coefficient_row": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.coefficient_symm": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.coefficient_column": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.varianceProfile_isBandwidth": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.AtomArray.complexCopies": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.fullBlockV3Model_isBandwidth": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.norm_coordinateProjection_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.block_mask_eq_sum": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.norm_block_mask_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.exists_cyclic_boundary": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.card_cyclic_expansion": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.heavy_mass_bound": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.heavy_expansion_weight": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.block_fiber_card": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.card_label_mem": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.broadlyConnected_of_cyclic_blocks": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.fullBlock_broadlyConnected": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.BroadlyConnected.mono": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.fullBlock_broadlyConnected_uniform": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.rescaled_fullBlockMatrix_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.rescaled_shift_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.one_le_cookNormConstant": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.fullBlock_cook_norm_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.truncated_variance_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.integral_bounded_truncation_tendsto": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.Atom.exists_cookSpread": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.leastSingularValue_smul": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.leastSingularValue_shift_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.cook_threshold_dominates_polynomial": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.centeredRowMoments_of_v3": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.least_bad_le_guarded_add_norm": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.leastSingularValueInput_of_known": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.reference_nonsingular_of_formulas": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.proposition38": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.norm_blockInjection_apply": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.norm_blockProjection_apply_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.norm_blockInjection_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.norm_blockProjection_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.norm_embeddedBlock_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.norm_sum_embeddedBlock_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.rawBlockSum_norm_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.shifted_rawBlockSum_norm_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.cook_norm_guard_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.norm_rescaled_shift_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ShortRingAnchor.Proposition38.bounded_block_norm_failure_tendsto_zero": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.sphere_quarter_packing_bound": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.exists_sphere_quarter_net": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.subgaussianEnvelope_pos": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "ProbabilityTheory.HasSubgaussianMGF.mono_parameter": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.sum_coordinate_sq_eq_norm_sq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.sum_bilinear_coeff_sq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.hasSubgaussianMGF_realBilinear": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.realBilinear_abs_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.opNorm_le_two_mul_of_quarter_net": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.inner_rawRealMatrix_eq_realBilinear": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.two_mul_eightyOne_pow_mul_exp_le": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.rawRealMatrix_opNorm_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.complex_norm_sq_decompose": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.complexReVec_raw_action": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.complexImVec_raw_action": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.rawComplexMatrix_norm_le_rawRealMatrix": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.rawComplexMatrix_opNorm_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.measurableSet_subgaussianOpNormBadEvent": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.subgaussianOpNormConstant_nonneg": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.normalizedRawComplexMatrix_opNorm_tail": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.norm_invSqrtThreeN_raw_le_of_opNormGood": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "SubgaussianNorm.normalizedRawComplexMatrix_opNorm_interface": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  },
+  "scope": "Kernel verification of the stated conditional theorems, including the complete Proposition 3.8 endpoint. Explicit mathematical hypotheses are not discharged by an axiom audit."
+}

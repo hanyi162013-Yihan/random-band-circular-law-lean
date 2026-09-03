@@ -1,0 +1,102 @@
+'ShortRingAnchor.Proposition38.conclusion_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.Atom.integrable_norm_pow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.Atom.momentAssumption21' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.block_count_le_width' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.source_parameter_inequalities' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.counting_cutoff_le_eventually' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.eventually_log_three_width_le_power' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.jjlo_exponent_le_sourceHardEdgeScale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.exponential_floor_le_jjlo_floor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.exponential_floor_le_polynomial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.siteAdjacent_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.three_positions_distinct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.coefficient_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.coefficient_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.coefficient_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.coefficient_column' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.varianceProfile_isBandwidth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.AtomArray.complexCopies' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.fullBlockV3Model_isBandwidth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.norm_coordinateProjection_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.block_mask_eq_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.norm_block_mask_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.exists_cyclic_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.card_cyclic_expansion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.heavy_mass_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.heavy_expansion_weight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.block_fiber_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.card_label_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.broadlyConnected_of_cyclic_blocks' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.fullBlock_broadlyConnected' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.BroadlyConnected.mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.fullBlock_broadlyConnected_uniform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.rescaled_fullBlockMatrix_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.rescaled_shift_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.one_le_cookNormConstant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.fullBlock_cook_norm_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.truncated_variance_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.integral_bounded_truncation_tendsto' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.Atom.exists_cookSpread' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.leastSingularValue_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.leastSingularValue_shift_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.cook_threshold_dominates_polynomial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.centeredRowMoments_of_v3' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.least_bad_le_guarded_add_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.leastSingularValueInput_of_known' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.reference_nonsingular_of_formulas' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'ShortRingAnchor.Proposition38.proposition38' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.norm_blockInjection_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.norm_blockProjection_apply_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.norm_blockInjection_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.norm_blockProjection_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.norm_embeddedBlock_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.norm_sum_embeddedBlock_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.rawBlockSum_norm_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.shifted_rawBlockSum_norm_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.cook_norm_guard_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.norm_rescaled_shift_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortRingAnchor.Proposition38.bounded_block_norm_failure_tendsto_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'SubgaussianNorm.sphere_quarter_packing_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.exists_sphere_quarter_net' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.subgaussianEnvelope_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ProbabilityTheory.HasSubgaussianMGF.mono_parameter' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.sum_coordinate_sq_eq_norm_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.sum_bilinear_coeff_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.hasSubgaussianMGF_realBilinear' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.realBilinear_abs_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.opNorm_le_two_mul_of_quarter_net' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.inner_rawRealMatrix_eq_realBilinear' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.two_mul_eightyOne_pow_mul_exp_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.rawRealMatrix_opNorm_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.complex_norm_sq_decompose' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.complexReVec_raw_action' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.complexImVec_raw_action' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.rawComplexMatrix_norm_le_rawRealMatrix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.rawComplexMatrix_opNorm_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.measurableSet_subgaussianOpNormBadEvent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.subgaussianOpNormConstant_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.normalizedRawComplexMatrix_opNorm_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.norm_invSqrtThreeN_raw_le_of_opNormGood' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SubgaussianNorm.normalizedRawComplexMatrix_opNorm_interface' depends on axioms: [propext, Classical.choice, Quot.sound]
