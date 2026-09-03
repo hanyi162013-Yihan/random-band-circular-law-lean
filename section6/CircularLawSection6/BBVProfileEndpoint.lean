@@ -74,19 +74,17 @@ theorem profile_spectral_limit_along_sparse_subsequence_of_bbv_sources (p : Nonc
         (fun n ω => realEsdTest (cyclicPhysicalMatrix (φ n)
           (p.matrix (φ n + 1) (W (φ n)) (ω (φ n)).1)) f)
         atTop (fun _ => ∫ z, f z ∂circularMeasure) := by
-  have hBC12 := CircularLawSections56.Section5.PublishedSection3Concrete.provedGinibreInput
-    hsource.bbv
   have hrep := p.profile_ginibre_replacement_along_subsequence W φ hφ
     (fun z => circularRadialPotential ‖z‖)
     (p.profile_probability_along_sparse_subsequence_of_bbv_sources W hW hWlim hsource φ hφ hsparse)
-    (ae_of_all _ fun z => ginibre_raw_of_bc12 hBC12 (fun n => n + 1)
+    (ae_of_all _ fun z => ginibre_raw_verified (fun n => n + 1)
       (tendsto_add_atTop_nat 1) z)
   intro f hf hc
   have hdiff := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ 0).1
     (hrep f hf hc)
   have hgin := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _
     (∫ z, f z ∂circularMeasure)).1
-    ((ginibre_spectral_of_bc12 hBC12 f hf hc).comp hφ.tendsto_atTop)
+    ((ginibre_spectral_verified f hf hc).comp hφ.tendsto_atTop)
   apply (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ _).2
   simpa only [esdDifference, Function.comp_apply, sub_add_cancel, zero_add] using
     hdiff.add (fun _ => Measure.infinitePi profileGinibrePairLaw) hgin

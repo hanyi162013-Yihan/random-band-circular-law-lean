@@ -37,11 +37,11 @@ theorem GaussianProfileConcreteSources.bc12 {p : NoncompactProfile} {W : ℕ →
 
 /-- The actual Ginibre raw-log limit, not a caller-supplied source field. -/
 theorem GaussianProfileConcreteSources.ginibreRaw {p : NoncompactProfile} {W : ℕ → ℝ}
-    (h : GaussianProfileConcreteSources p W) : ∀ᵐ z ∂(volume : Measure ℂ),
+    (_h : GaussianProfileConcreteSources p W) : ∀ᵐ z ∂(volume : Measure ℂ),
     TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
       (fun n ω => matrixRawPotential (ginibreMatrix (n + 1) ω - z • 1))
       (circularRadialPotential ‖z‖) :=
-  ae_of_all _ fun z => ginibre_raw_of_bc12 h.bc12
+  ae_of_all _ fun z => ginibre_raw_verified
     (fun n => n + 1) (tendsto_add_atTop_nat 1) z
 
 /-- The Gaussian negative moment is derived from BBV and Gaussian small-ball. -/
@@ -54,12 +54,12 @@ theorem GaussianProfileConcreteSources.ginibreNegative
 
 /-- The actual Ginibre circular law follows from the proved raw-log limit. -/
 theorem GaussianProfileConcreteSources.ginibreSpectral
-    {p : NoncompactProfile} {W : ℕ → ℝ} (h : GaussianProfileConcreteSources p W) :
+    {p : NoncompactProfile} {W : ℕ → ℝ} (_h : GaussianProfileConcreteSources p W) :
     ∀ f : ℂ → ℝ, Continuous f → HasCompactSupport f →
     TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
       (fun n ω => realEsdTest (cyclicPhysicalMatrix n (ginibreMatrix (n + 1) (ω n).2)) f)
       atTop (fun _ => ∫ z, f z ∂circularMeasure) :=
-  ginibre_spectral_of_bc12 h.bc12
+  ginibre_spectral_verified
 
 theorem GaussianProfileConcreteSources.toSection34 (p : NoncompactProfile)
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n) (hWlim : Tendsto W atTop atTop)

@@ -10,11 +10,11 @@ Section 8's BC12-free adapter and both final theorem families passed
 at `7012b1ef2e13d63154e4436d0b201581dafa7954`: ordinary target builds,
 62 exact axiom reports and both compiled public-signature audits, including
 the shared Section 3 normalization lemma.
-The broader migration at `94d3efa` is checked separately in
-[run 33812184651](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33812184651).
-The root job reported a Section 10 finite-coordinate law unfolding error;
-the proof has been repaired and needs a new build. The later
-compatibility/taper migration is also pending.
+The current broader migration at `c4e8078` is checked separately in
+[run 33815655602](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33815655602).
+The preceding run reported a Section 10 finite-coordinate law unfolding
+error and a Section 5 BBV variable-scope error. Both are repaired in this
+new run, which also checks the compatibility/taper migration.
 The shared lemma removes duplicated normalization proofs from Sections 8 and 10.
 
 ## Scope and proof boundary
@@ -66,6 +66,10 @@ has not been proved by this migration; the concrete BBV-core route avoids
 needing it. `verifiedGinibreFiniteFormulaInput` instead constructs the exact
 finite correlation/projection record with no premise.
 `verifiedGinibreLogPotentialInput` likewise constructs the log-limit record.
+The later `ginibre_raw_verified` and `ginibre_spectral_verified` strengthen
+the Section 6 cyclic-reference statements further: neither requires BBV.
+Only the negative-moment constructor still uses BBV. These later
+factorizations are awaiting their own cloud check.
 Even the historical concrete/reduced bundles no longer ask callers for
 BC12, raw-log, negative-moment, spectral or full-log fields; their former
 accessors are proved methods where needed for compatibility.

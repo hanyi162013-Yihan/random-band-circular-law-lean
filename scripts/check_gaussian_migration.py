@@ -61,4 +61,15 @@ for path in ["Section8/BernoulliSection8/Section3GaussianLaw.lean",
     if "BC12.normalizedGaussianPair_map hN" not in code_only((root / path).read_text()):
         raise SystemExit(f"Shared Gaussian normalization missing from {path}")
 
+reference = code_only((root / "section6/CircularLawSection6/GinibreReferenceSources.lean").read_text())
+for declaration in ["ginibre_raw_verified", "ginibre_spectral_verified"]:
+    match = re.search(rf"^theorem {declaration}\b(.*?)(?=^theorem |^end )",
+                      reference, re.M | re.S)
+    if not match or re.search(r"\b(BBVComparisonInput|BC12GinibreInput|hBBV|hBC12)\b", match[1]):
+        raise SystemExit(f"Unnecessary external source in {declaration}")
+for filename in ["BBVCoreSources", "BBVProfileEndpoint", "DenseProfileEndpoint"]:
+    source = code_only((root / f"section6/CircularLawSection6/{filename}.lean").read_text())
+    if re.search(r"\b(ginibre_raw_of_bc12|ginibre_spectral_of_bc12)\b", source):
+        raise SystemExit(f"Preferred {filename} route reverted to a conditional Gaussian limit")
+
 print("Gaussian source migration: constructed reference sources and reduced public boundaries pass.")

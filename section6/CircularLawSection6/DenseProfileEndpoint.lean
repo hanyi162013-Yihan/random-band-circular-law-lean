@@ -13,7 +13,7 @@ in `GaussianProfileReducedSources`; its logarithmic reference is proved.
 open MeasureTheory Filter Topology ShortRingAnchor TaoVuReplacement
 open CircularLawSections56.Section5 CircularLawSections56.Section6
 open CircularLawSections56.Section5.PublishedSection3Concrete
-  (BBVComparisonInput provedGinibreInput Sample)
+  (BBVComparisonInput Sample)
 noncomputable section
 set_option autoImplicit false
 set_option warningAsError true
@@ -96,14 +96,14 @@ theorem dense_profile_spectral_limit_of_section3 (p : NoncompactProfile)
       (fun n => (le_div_iff₀ (by positivity)).mp (hratio n)) z
   have hrep := p.profile_ginibre_replacement_along_subsequence W φ hφ
     (fun z => circularRadialPotential ‖z‖) hprofile
-    (ae_of_all _ fun z => ginibre_raw_of_bc12 (provedGinibreInput hBBV) (fun n => n + 1)
+    (ae_of_all _ fun z => ginibre_raw_verified (fun n => n + 1)
       (tendsto_add_atTop_nat 1) z)
   intro f hf hcpt
   have hdiff := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ 0).1
     (hrep f hf hcpt)
   have hgin := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _
     (∫ z, f z ∂circularMeasure)).1
-    ((ginibre_spectral_of_bc12 (provedGinibreInput hBBV) f hf hcpt).comp hφ.tendsto_atTop)
+    ((ginibre_spectral_verified f hf hcpt).comp hφ.tendsto_atTop)
   apply (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ _).2
   simpa only [esdDifference, Function.comp_apply, sub_add_cancel, zero_add] using
     hdiff.add (fun _ => Measure.infinitePi profileGinibrePairLaw) hgin

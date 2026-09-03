@@ -126,8 +126,7 @@ theorem sparse_profile_probability_of_bbv_section5 (p : NoncompactProfile)
       (p.coreRadiusBounds (by positivity : (0 : ℝ) ≤ (R : ℝ) + 1))
       hBBV (fun n => size n + 2) hsize W hW hWlim hsparse (by positivity)
       (p.referenceCoreCutoff_pos R))
-    (ae_of_all _ fun z => ginibre_raw_of_bc12
-      (CircularLawSections56.Section5.PublishedSection3Concrete.provedGinibreInput hBBV)
+    (ae_of_all _ fun z => ginibre_raw_verified
       (fun n => size n + 2) hsize z)
     (ae_of_all _ fun z => ⟨1 / 128, by norm_num,
       ginibre_negative_of_bbv hBBV (fun n => size n + 2) hsize z⟩)
