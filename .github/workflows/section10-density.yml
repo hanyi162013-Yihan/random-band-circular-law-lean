@@ -9,6 +9,7 @@ name: Section 10 density verification
       - 'Section10/BernoulliSection10Source.lean'
       - 'Section10/BernoulliSection10/HighBandClosure.lean'
       - 'Section10/BernoulliSection10/GaussianReferenceFacts.lean'
+      - 'section3/**'
       - 'lakefile.toml'
       - '.github/workflows/section10-density.yml'
   workflow_dispatch:

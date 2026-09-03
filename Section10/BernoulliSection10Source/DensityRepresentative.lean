@@ -16,7 +16,7 @@ def boundedDensityOfMeasureLe
     {E : Type*} [MeasurableSpace E] {μ ν : Measure E}
     [SigmaFinite μ] [SigmaFinite ν] {L : ℝ}
     (h : μ ≤ ENNReal.ofReal L • ν) :
-    HasBoundedDensityWithRespectTo (top := ∞) μ ν := by
+    HasBoundedDensityWithRespectTo μ ν := by
   have hac : μ ≪ ν := by
     intro s hs
     apply le_antisymm ?_ zero_le

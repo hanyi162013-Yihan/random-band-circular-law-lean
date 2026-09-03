@@ -19,6 +19,8 @@ hypotheses each and directly construct the corresponding
 
 noncomputable section
 
+set_option autoImplicit false
+
 namespace ShortRingAnchor
 
 open MeasureTheory
@@ -84,7 +86,7 @@ structure HasBoundedDensityWithRespectTo
   density : E -> ENNReal
   densityAEMeasurable : AEMeasurable density lambda
   bound : ENNReal
-  bound_lt_top : bound < top
+  bound_lt_top : bound < ⊤
   density_le_bound : ∀ᵐ x ∂lambda, density x <= bound
   law_eq_withDensity : nu = lambda.withDensity density
 

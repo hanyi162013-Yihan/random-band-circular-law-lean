@@ -4,6 +4,12 @@ This is not a completion certificate. The final real/complex Section 3
 source connections are still pending. BBV, BC12, and (for the real branch
 only) geometric Brascamp--Lieb are explicitly accepted literature inputs.
 
+An upstream density-record definition error was confirmed by cloud-printed
+types in run `33715585984`: its finiteness field accidentally quantified over
+every bound instead of using infinity. The minimal correction and the new
+construction regression require a fresh dependency rebuild. See
+[DENSITY_SCHEMA_CORRECTION.md](DENSITY_SCHEMA_CORRECTION.md).
+
 ## Reproducible front-end checks
 
 Use the repository's pinned Lean 4.33.0 and mathlib revision:

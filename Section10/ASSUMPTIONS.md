@@ -1,5 +1,12 @@
 # Section 10: mathematical inputs and trust boundary
 
+The source-connection work exposed and corrected an uninhabitable upstream
+density record caused by an automatically generalized `top` identifier.
+See [DENSITY_SCHEMA_CORRECTION.md](DENSITY_SCHEMA_CORRECTION.md) for the
+cloud-printed evidence, exact impact, correction and pending revalidation.
+Older conditional axiom audits do not establish that the former density
+record could be instantiated.
+
 ## Source-connected extension (awaiting cloud verification)
 
 The new `BernoulliSection10Source.planar_density_circular_law` and
