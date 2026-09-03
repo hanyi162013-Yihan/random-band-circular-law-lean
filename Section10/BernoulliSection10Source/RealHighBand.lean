@@ -27,7 +27,10 @@ theorem realAtomMoments {μ : Measure ℝ} {L : ℝ}
     (h3 : Integrable (fun x : ℝ => |x| ^ 3) μ) :
     AtomMomentAssumption21 μ Complex.ofReal := by
   refine ⟨Complex.measurable_ofReal.stronglyMeasurable, ?_, ?_, ?_⟩
-  · simpa only [integral_complex_ofReal, hμ.centered, Complex.ofReal_zero]
+  · calc
+      (∫ x : ℝ, (x : ℂ) ∂μ) = ((∫ x : ℝ, x ∂μ) : ℂ) :=
+        integral_complex_ofReal (f := fun x : ℝ => x)
+      _ = 0 := by rw [hμ.centered, Complex.ofReal_zero]
   · simpa only [Complex.norm_real, Real.norm_eq_abs, sq_abs] using hμ.variance_one
   · simpa only [Complex.norm_real, Real.norm_eq_abs] using h3
 
@@ -73,7 +76,12 @@ theorem physicalRealBandModel_identDistrib
         i j).symm
   change IdentDistrib (actualProfileMatrix Complex.ofReal (physicalProfile W s))
     m.matrix (sampleLaw μ) m.law at hraw
-  simpa only [actualProfileMatrix, profileMatrix, Complex.ofReal_mul, sampleLaw, inputLaw] using hraw
+  have heq : actualProfileMatrix Complex.ofReal (physicalProfile W s) =
+      profileMatrix (physicalProfile W s) := by
+    funext sample i j
+    exact (Complex.ofReal_mul _ _).symm
+  rw [heq] at hraw
+  exact hraw
 
 /-- The real source LSV conclusion. Its only non-model mathematical input
 is the explicitly named geometric Brascamp--Lieb theorem. -/

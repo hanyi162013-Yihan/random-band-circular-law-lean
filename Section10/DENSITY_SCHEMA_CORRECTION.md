@@ -42,6 +42,16 @@ audits; none can be replaced by an axiom allowlist alone.
 
 ## Verification status
 
+In [run 33715880853](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33715880853)
+at `18178ad`, the corrected `AtomAssumption21`, its dependent density and law
+adapters, `DensityRepresentative`, and the literal `GaussianReferenceModel`
+compiled. The actual Gaussian density record is therefore now constructed.
+The preliminary schema-print step ran before rebuilding that dependency and
+loaded its old cached artifact; CI now explicitly builds the schema target
+before doing a fresh print. That failed preliminary print is not evidence
+about the corrected definition. The remaining source-stage failures were
+real/complex function transport and equivalent rational-exponent syntax.
+
 The correction is on the working branch and requires fresh cloud compilation
 of its affected dependencies, both Section 10 endpoints, the complete root
 build, and all final audits before publication to main. No local compilation

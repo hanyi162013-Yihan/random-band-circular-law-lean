@@ -95,8 +95,11 @@ theorem fullBlock_log_limit_from_source
     (fun n v hv => bbvA n (spectralParameter 0 v) (by simpa [spectralParameter] using hv))
   have hAll := proposition34AllCutoffsInput_of_hermitization
     (fun n => (modelA n).matrix) z _ _ goodCount hCount
-  obtain ⟨good', hCount'⟩ := hAll.specialize_eventually
-    (mesoscopicThreshold_le_sourceCutoff_eventually hN hNtop BA hp hscaleA)
+  have hcut : ∀ᶠ n in atTop, BA n ^ (-(1 / 8 : ℝ)) * (N n : ℝ) ^ τ ≤
+      sourceCutoff N 1 β τ n := by
+    simpa only [neg_div] using
+      mesoscopicThreshold_le_sourceCutoff_eventually hN hNtop BA hp hscaleA
+  obtain ⟨good', hCount'⟩ := hAll.specialize_eventually hcut
   let R := fun r : ℕ => Real.sqrt (Real.exp 1) + (r : ℝ) + 1
   have hR (r : ℕ) : Real.sqrt (Real.exp 1) < R r := by
     dsimp [R]
