@@ -20,7 +20,8 @@ theorem reindexed_gram_conjugate (e : ι ≃ κ) (A : Matrix ι ι ℂ) :
     (euclideanReindex e).toLinearEquiv.conj (A.toEuclideanLin.adjoint.comp A.toEuclideanLin) =
       (A.submatrix e.symm e.symm).toEuclideanLin.adjoint.comp
         (A.submatrix e.symm e.symm).toEuclideanLin := by
-  ext y
+  apply LinearMap.ext
+  intro y
   obtain ⟨x, rfl⟩ := (euclideanReindex e).surjective y
   change euclideanReindex e
       (A.toEuclideanLin.adjoint (A.toEuclideanLin
@@ -54,8 +55,9 @@ theorem matrixSquaredSingularAverage_reindex (e : ι ≃ κ) (A : Matrix ι ι �
     matrixSquaredSingularAverage (A.submatrix e.symm e.symm) φ =
       matrixSquaredSingularAverage A φ := by
   unfold matrixSquaredSingularAverage
-  simp only [finrank_euclideanSpace, ← Fintype.card_congr e]
   simp_rw [matrix_singularValues_reindex]
+  simp only [finrank_euclideanSpace]
+  rw [Fintype.card_congr e]
 
 theorem matrixSquaredSingularAverage_shifted_reindex (e : ι ≃ κ)
     (A : Matrix ι ι ℂ) (z : ℂ) (φ : ℝ → ℝ) :

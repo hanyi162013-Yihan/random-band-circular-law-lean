@@ -112,6 +112,7 @@ import CircularLawSection6.StieltjesTransformIdentification
 import CircularLawSection6.HardEdgeLogFubini
 import CircularLawSection6.HardEdgeLogIdentity
 import CircularLawSection6.HardEdgeLogLimit
+import CircularLawSection6.HardEdgeScaling
 import CircularLawSection6.PublishedStieltjesMean
 import CircularLawSection6.PublishedLimitingHardEdge
 import CircularLawSection6.PublishedGaussianModel
