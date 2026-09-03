@@ -16,9 +16,10 @@ remain conditional on the [explicit mathematical inputs listed below](#inputs-st
 **Branch migration notice:** the new removal of external Gaussian inputs from
 Sections 5, 6, 8 and 10 is tracked in
 [GAUSSIAN_INPUT_MIGRATION.md](GAUSSIAN_INPUT_MIGRATION.md).
-Section 3 is merged, and the Section 5, 8 and 10 migration checks have passed.
-The strengthened Section 6 route and final whole-chapter regression are
-still pending; the historical records below do not certify those new changes.
+Section 3 is merged. The base migration passed root, Section 5 and Section 6
+together, including the Section 8/10 endpoints. The later generic source-record
+cleanup, exhaustive audits and kernel replay are still being checked;
+earlier certificates do not certify these latest changes.
 
 ## Results in paper order
 

@@ -1,7 +1,7 @@
 # Gaussian input audit and migration
 
-Status: **Sections 3, 5, 8 and 10 passed their migration checks;
-the strengthened Section 6 route and whole-chapter regression are pending**.
+Status: **the base migration passed root, Section 5 and Section 6 together;
+later source-record reductions and expanded audits are pending**.
 The Section 3 construction is already verified and merged in PR #3, at
 `43798327f45d98c45f2aaae6e5d1f0d041fc19c9`.
 This document is not a certificate for the newer source changes.
@@ -18,10 +18,15 @@ adapter. Its root job passed all Section 8/10 target builds and all 564
 reports (502 for Section 10), then failed on a missing Section 9 umbrella
 import in the audit configuration. That is **not** a successful whole-run
 certificate. The missing audit-only imports are now included in the build
-closure. The full chapter check at `d603e53` is running in
+closure. The full checkpoint at `d603e53` passed in
 [run 33816611348](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33816611348).
-Its root job has now passed all nine public targets and 975 axiom reports,
-including Sections 4 and 9; Section 5/6 are still being checked.
+It passed all nine root public targets and 975 reports, all Section 5 targets
+and 240 reports, and the Section 6 umbrella/finite-formula targets and 20
+reports. This includes the no-BBV cyclic Ginibre log and spectral limits.
+The later five Section 6 source-record reductions, general Section 5 source
+record migration, exhaustive public-theorem audits and kernel replay are
+being checked at `128e6c1` in
+[run 33819737972](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33819737972).
 The shared lemma removes duplicated normalization proofs from Sections 8 and 10.
 
 ## Scope and proof boundary
@@ -44,7 +49,7 @@ silently discarded. Eliminating BC12 does not prove these different results.
 | 3 | `proposition36_cyclicShortRing_withoutBC12`, `Proposition38.proposition38_withoutBC12` | No BC12 estimate; explicit Gaussian model law | Passed, merged |
 | 4 | deterministic / density / pressure results | No Gaussian spectral source found; “Gaussian elimination” is linear algebra | Sources unchanged |
 | 5 | `PublishedSection3Concrete.indicator_complex_full_of_published_literature` and real counterpart | `hBC12` removed; `provedGinibreInput hBBV` constructs both estimates | Passed at `c4e8078`, 240 reports, including the taper adapter |
-| 6 | `NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources` and BBV-core route | Only BBV and concrete Section 4 pressure fields; no raw-log, squared-test, Han or correlation field | New migration pending; earlier BBV-only endpoint already existed |
+| 6 | `NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources` and BBV-core route | Only BBV and concrete Section 4 pressure fields; no raw-log, squared-test, Han or correlation field | Base migration passed at `d603e53`; later source-record cleanup/expanded audits pending |
 | 7–9 | Section 7 lemmas are housed in the Section 8/9 libraries; both Section 8 final endpoints use the actual Section 3 adapter | Section 8 negative-moment/projection/correlation fields removed; Section 9 Cook/Nguyen inputs are distinct | Section 8 passed at `7012b1e`; Section 9 sources unchanged |
 | 10 | `BernoulliSection10Source.planar_density_circular_law`, `real_density_circular_law`, and both ring-log limits | `hBC12` removed; exact real-pair reference law and both estimates constructed | Builds and all 502 chapter reports passed at `c4e8078`; whole-run check still pending |
 
@@ -83,8 +88,8 @@ finite correlation/projection record with no premise.
 `verifiedGinibreLogPotentialInput` likewise constructs the log-limit record.
 The later `ginibre_raw_verified` and `ginibre_spectral_verified` strengthen
 the Section 6 cyclic-reference statements further: neither requires BBV.
-Only the negative-moment constructor still uses BBV. These later
-factorizations are awaiting their own cloud check.
+Only the negative-moment constructor still uses BBV. These factorizations
+passed the complete Section 6 target build at `d603e53`.
 Even the historical concrete/reduced bundles no longer ask callers for
 BC12, raw-log, negative-moment, spectral or full-log fields; their former
 accessors are proved methods where needed for compatibility.
