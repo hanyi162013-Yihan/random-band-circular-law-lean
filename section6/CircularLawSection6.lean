@@ -109,3 +109,5 @@ import CircularLawSection6.SubsequenceSourceEndpoint
 import CircularLawSection6.GaussianProfileTheorem
 import CircularLawSection6.StieltjesHardEdge
 import CircularLawSection6.ClampedCoreGeometry
+import CircularLawSection6.GaussianAtomTransfer
+import CircularLawSection6.ClampedCoreProfile

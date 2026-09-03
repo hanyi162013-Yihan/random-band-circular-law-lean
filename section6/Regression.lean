@@ -650,3 +650,13 @@ example : clampedCoreHalfWidth 1 0 0 = 1 := by
 example (W : ℕ → ℝ) (hW : Tendsto W atTop atTop) :
     Tendsto (fun n => clampedCoreHalfWidth 1 (W n) n) atTop atTop :=
   clampedCoreHalfWidth_atTop W hW (by norm_num)
+
+-- The density representation is exactly the same Gaussian measure.
+example : volume.withDensity circularGaussianDensity = circularComplexGaussian :=
+  circularGaussianDensity_withDensity
+
+-- The small-index filler is a normalized three-offset band.
+example (p : NoncompactProfile) (R : ℝ) (B : CoreRadiusBounds p R) (W : ℝ) :
+    (B.clampedWeights W 0).q 0 = 1 / 3 := by
+  norm_num [CoreRadiusBounds.clampedWeights, CoreRadiusBounds.uniformWeights,
+    clampedCoreHalfWidth, canonicalCoreBand]
