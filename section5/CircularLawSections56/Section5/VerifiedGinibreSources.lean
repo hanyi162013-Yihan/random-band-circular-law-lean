@@ -103,6 +103,13 @@ theorem ginibreOnSequence_hasLaw (N : ℕ) :
   rw [← Measure.map_map (normalizedColumnEntries_measurable N) hT.measurable,
     hT.map_eq, ← normalizedGinibreLaw_eq_map_iidColumns]
 
+/-- Adding the independent target array preserves the actual Ginibre law. -/
+theorem actualGinibre_hasLaw (ν : Measure ℂ) [IsProbabilityMeasure ν] (N : ℕ) :
+    HasLaw (actualGinibre N) (BC12.normalizedGinibreLaw N) (sampleLaw ν) :=
+  HasLaw.fun_comp (ginibreOnSequence_hasLaw N)
+    (show HasLaw Prod.snd gaussianSequenceLaw (sampleLaw ν) from
+      ⟨measurable_snd.aemeasurable, measurePreserving_snd.map_eq⟩)
+
 def sequenceDenseModel (N : ℕ) (hN : 0 < N) :
     RandomMatrixModelV3 N (ℕ → ℂ) ℂ gaussianSequenceLaw circularComplexGaussian :=
   denseV3Model hN (fun ω i j => ω (denseCoordinate (i, j))) id gaussianMoments

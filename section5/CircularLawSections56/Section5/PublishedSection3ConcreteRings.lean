@@ -47,11 +47,8 @@ theorem concreteModel_sources
     (hband : ∀ n, (k n + 1 : ℝ) ^ v3BandwidthExponent ω₀ ≤ W n) (z : ℂ) :
     Nonempty ((concreteModel ν k d W profile hc₀ hwidth hfit hMom).Sources z) := by
   let D := concreteModel ν k d W profile hc₀ hwidth hfit hMom
-  have hGinibre := provedGinibreInput hBBV
   obtain ⟨C, _, hC⟩ := hBBV
   obtain ⟨χ, κ, τ, hparam⟩ := exists_hardEdgeAdmissible_of_omega hω.1
-  obtain ⟨p, hp, hneg, hfull⟩ :=
-    bc12_on_sampleLaw hGinibre ν (fun n => k n + 1) (fun n => Nat.succ_pos _) hM z
   refine ⟨{
     comparisonConstant := C
     omega := ω₀
@@ -59,7 +56,6 @@ theorem concreteModel_sources
     kappa := κ
     tau := τ
     K := C₀ ^ (1 / 8 : ℝ)
-    p := p
     R := fun r => (r : ℝ) + (Real.sqrt (Real.exp 1) + 1)
     omega_range := hω
     parameters := hparam
@@ -71,21 +67,13 @@ theorem concreteModel_sources
     radius_lower := fun r => by have := Nat.cast_nonneg (α := ℝ) r; linarith
     bbvA := ?_
     bbvG := ?_
-    negative_exponent_pos := hp
-    bc12_negative := hneg
-    bc12_full := hfull }⟩
+    ginibreLaw := fun n => actualGinibre_hasLaw ν (k n + 1) }⟩
   · intro n η hη
     exact canonicalBBVAt_mono
       (hC Sample ℂ (sampleLaw ν) ν (k n + 1) (Nat.succ_pos _)
         _ _ (cyclicVarianceProfile_isBandwidth (D.weights n) (D.fit n)) z η hη)
       (D.weights n).bandwidthParameter_pos hη (le_max_left _ _)
-  · intro n u
-    have hη : 0 < (spectralParameter u
-        (localBulkHeight (v3BandwidthExponent ω₀ / 2) ((k n + 1 : ℕ) : ℝ))).im := by
-      have hv : 0 < localBulkHeight (v3BandwidthExponent ω₀ / 2) ((k n + 1 : ℕ) : ℝ) := by
-        unfold localBulkHeight
-        positivity
-      simpa [spectralParameter] using hv
+  · intro n η hη
     exact canonicalBBVAt_mono
       (hC Sample ℂ (sampleLaw ν) circularComplexGaussian (k n + 1) (Nat.succ_pos _)
         _ _ (denseVarianceProfile_isBandwidth (Nat.succ_pos _)) z _ hη)

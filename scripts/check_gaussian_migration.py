@@ -58,6 +58,18 @@ consequences = code_only((root / "section6/CircularLawSection6/GinibreSourceCons
 if re.search(r"\b(sorry|admit|unsafe|axiom|native_decide|set_option)\b", consequences):
     raise SystemExit("Forbidden checking escape/option in Gaussian reference consequences")
 
+published = code_only((root / "section5/CircularLawSections56/Section5/PublishedSection3Source.lean").read_text())
+match = re.search(r"^structure Sources\b.*? where\n(.*?)(?=^\S)", published, re.M | re.S)
+if not match or re.findall(r"^  (\w+)\s*:", match[1], re.M) != [
+        "comparisonConstant", "omega", "chi", "kappa", "tau", "K", "R", "omega_range",
+        "parameters", "dimension_tendsto", "bandwidth_tendsto", "bandwidth_lower",
+        "cutoff_constant", "radius_tendsto", "radius_lower", "bbvA", "bbvG", "ginibreLaw"]:
+    raise SystemExit("Unexpected Gaussian analytic premise in the general Section 5 source record")
+if "bbvG : ∀ n eta, 0 < eta.im →" not in match[1]:
+    raise SystemExit("Dense BBV must supply both counting and local-comparison heights")
+if re.search(r"set_option\s+(maxHeartbeats|maxRecDepth)", published):
+    raise SystemExit("The migrated Section 5 source adapters must use default checking limits")
+
 taper = code_only((root / "section5/CircularLawSections56/Section5/TaperVerifiedGinibre.lean").read_text())
 if re.search(r"\b(sorry|admit|unsafe|axiom|native_decide|set_option)\b", taper):
     raise SystemExit("Forbidden checking escape/option in the taper Gaussian adapter")

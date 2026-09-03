@@ -25,6 +25,7 @@ TARGETS = {
         "BernoulliSection10Source.DensityCircularLaw",
     ],
     "section5": [
+        "CircularLawSections56.Section5.PublishedSection3Source",
         "CircularLawSections56.Section5.VerifiedGinibreSources",
         "CircularLawSections56.Section5.TaperVerifiedGinibre",
         "CircularLawSections56.Section5.PublishedSection3ConcreteRings",

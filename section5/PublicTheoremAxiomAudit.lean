@@ -676,6 +676,9 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSections56.Section5.paperSection3Atoms_copies
 
 -- Section5/PublishedSection3Source.lean
+#print axioms CircularLawSections56.Section5.PublishedSection3Model.Sources.ginibre_negative_moment
+#print axioms CircularLawSections56.Section5.PublishedSection3Model.Sources.ginibre_logPotential
+#print axioms CircularLawSections56.Section5.PublishedSection3Model.Sources.ginibre_local_comparison
 #print axioms CircularLawSections56.Section5.PublishedSection3Model.Sources.planar_conclusion
 #print axioms CircularLawSections56.Section5.PublishedSection3Model.Sources.density_conclusion
 #print axioms CircularLawSections56.Section5.PublishedSection3Model.Sources.planar_tri
@@ -989,6 +992,7 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.normalizedGinibreLaw_eq_map_iidColumns
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.sequenceColumns_measurePreserving
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence_hasLaw
+#print axioms CircularLawSections56.Section5.PublishedSection3Concrete.actualGinibre_hasLaw
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.ginibre_negative_on_sequence_of_bbv
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.ginibre_logPotential_on_sequence
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.provedGinibreInput
