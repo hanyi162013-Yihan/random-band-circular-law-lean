@@ -67,7 +67,9 @@ theorem verified_raw_firstMoment {n : ℕ} (hn : 0 < n)
   refine ⟨(verified_rawStatistic_integrable hn f hf hi').div_const _, ?_⟩
   change (∫ A, Ginibre.linearStatistic n f (rawGinibreSpectrum n A) / (n : ℝ)
     ∂Ginibre.gaussianMatrixLaw n n) = _
-  rw [integral_div, Ginibre.gaussianMatrix_integral_linearStatistic_all n f hf hi']
+  rw [integral_div]
+  simp only [rawGinibreSpectrum]
+  rw [Ginibre.gaussianMatrix_integral_linearStatistic_all n f hf hi']
   have he : (fun z => f z * Ginibre.ginibreIntensity n z) =
       fun z => (n : ℝ) * (f z * ginibreOnePointDensity n z) := by
     funext z
@@ -93,7 +95,8 @@ theorem verified_raw_secondMoment {n : ℕ} (hn : 0 < n)
   have hraw := verified_rawStatistic_memLp_two hn f hf hi'
   have hnorm : MemLp (eigenvalueStatistic (rawGinibreSpectrum n) f) 2
       (Ginibre.gaussianMatrixLaw n n) := by
-    simpa only [eigenvalueStatistic, Ginibre.linearStatistic, div_eq_mul_inv] using
+    change MemLp (fun A => (∑ i, f (rawGinibreSpectrum n A i)) / (n : ℝ)) 2 _
+    simpa only [Ginibre.linearStatistic, div_eq_mul_inv] using
       hraw.mul_const ((n : ℝ)⁻¹)
   refine ⟨(hnorm.sub (memLp_const _)).integrable_sq, ?_⟩
   rw [← variance_eq_integral hnorm.aemeasurable]

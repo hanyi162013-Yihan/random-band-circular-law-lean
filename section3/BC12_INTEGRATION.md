@@ -77,6 +77,10 @@ exact `#print axioms` reports. `BC12/VerifiedAudit.lean` includes all new
 bridge theorems and both BC12-free endpoints. The audit parser rejects any
 axiom outside `propext`, `Classical.choice`, and `Quot.sound`, and rejects
 missing reports or Lean errors.
+The source-level boundary check also rejects reintroducing the former named
+BC12 premises into either new endpoint signature. A separate configuration
+check loads the root, Section 5, and Section 6 workspaces without compiling
+their chapters, to catch missing inherited dependency entries.
 
 Only a successful workflow on the final integration commit certifies this
 integration; an earlier upstream or kernel-only run is not that certificate.

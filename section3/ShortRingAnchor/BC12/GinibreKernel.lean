@@ -10,8 +10,8 @@ import Mathlib.Tactic.Ring
 # Elementary estimates for the explicit complex Ginibre one-point function
 
 BC12, Section 3, Theorems 3.3--3.4 give the finite-dimensional correlation
-formula.  Its derivation from Gaussian matrix entries is an external formula
-in this development.  This file proves the estimates on that explicit formula;
+formula. Its derivation from Gaussian entries is now connected through
+`VerifiedMatrixStatistics.lean`. This file proves estimates on the explicit formula;
 it does not assume a circular law, logarithmic integrability, or tightness.
 
 For variance-normalized matrices the mean empirical eigenvalue density is

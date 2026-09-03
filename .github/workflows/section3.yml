@@ -38,6 +38,15 @@ jobs:
           node scripts/audit-lean-sources.mjs
           node scripts/verify-project.mjs --self-test
           node scripts/check-ginibre-pin.mjs
+          node scripts/check-bc12-boundary.mjs
+      - name: Check root and inherited workspace dependency resolution (no chapter builds)
+        run: |
+          mkdir -p ../.lake
+          test ! -e ../.lake/packages
+          ln -s ../section3/.lake/packages ../.lake/packages
+          (cd .. && lake env lean --version)
+          (cd ../section5 && lake env lean --version)
+          (cd ../section6 && lake env lean --version)
       - uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         id: cache
         with:
