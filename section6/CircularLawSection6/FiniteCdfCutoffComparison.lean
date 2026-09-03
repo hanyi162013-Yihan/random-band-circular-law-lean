@@ -31,11 +31,11 @@ theorem tendstoInProbabilityTri_of_abs_le_mul
       have h := hbound n ω
       rw [hzero, zero_mul] at h
       exact abs_eq_zero.mp (le_antisymm h (abs_nonneg _))
-    simpa only [hX, sub_zero, abs_zero, not_le.mpr hε, Set.setOf_false, measureReal_empty] using
+    simpa only [hX, sub_zero, abs_zero, not_le.mpr hε, Set.ofPred_false, measureReal_empty] using
       (tendsto_const_nhds : Tendsto (fun _ : ℕ => (0 : ℝ)) atTop (𝓝 0))
   · have hKpos := hK.lt_of_ne' hzero
     apply squeeze_zero (fun _ => measureReal_nonneg) (fun n => ?_) (hY (ε / K) (div_pos hε hKpos))
-    apply measureReal_mono
+    refine measureReal_mono ?_ (measure_ne_top _ _)
     intro ω hω
     change ε ≤ |X n ω - 0| at hω
     rw [sub_zero] at hω
