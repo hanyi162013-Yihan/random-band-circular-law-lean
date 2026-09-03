@@ -78,7 +78,7 @@ theorem dense_hardEdge_error_tendsto_zero
     Tendsto (fun n => C * sourceCutoff M K 1 denseTau n *
       sourceHardEdgeScale M M denseKappa n) atTop (𝓝 0) := by
   have hband : ∀ᶠ n in atTop, (M n : ℝ) ^ (1 : ℝ) ≤ (M n : ℝ) :=
-    Eventually.of_forall fun n => by simp only [Real.rpow_one]
+    Eventually.of_forall fun n => by rw [Real.rpow_one]
   exact sourceHardEdgeError_tendsto_zero dense_parameters hM hband hK hC
 
 theorem dense_bulk_cutoff_tendsto_zero

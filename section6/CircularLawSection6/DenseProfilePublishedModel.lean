@@ -138,7 +138,7 @@ theorem bandwidth_lower (N : ℕ) [NeZero N] (q : ZMod N → ℝ)
     (N : ℝ) = (maxWeight N q)⁻¹ * (maxWeight N q * (N : ℝ)) := by
       rw [← mul_assoc, inv_mul_cancel₀ hmpos.ne', one_mul]
     _ ≤ (maxWeight N q)⁻¹ * C :=
-      mul_le_mul_of_nonneg_left ((div_le_iff₀ hN).mp hmax) (inv_nonneg.mpr hmpos.le)
+      mul_le_mul_of_nonneg_left ((le_div_iff₀ hN).mp hmax) (inv_nonneg.mpr hmpos.le)
 
 def cyclicCoordinate (N : ℕ) [NeZero N] (is : ZMod N × ZMod N) : ℕ :=
   denseCoordinate ((ZMod.finEquiv N).symm is.1, (ZMod.finEquiv N).symm (is.1 + is.2))

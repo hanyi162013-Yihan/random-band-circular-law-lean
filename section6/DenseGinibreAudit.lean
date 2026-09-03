@@ -1,6 +1,4 @@
-import CircularLawSection6.DenseProfileLSV
-import CircularLawSection6.DenseProfileScales
-import CircularLawSection6.GinibreGaussianLaw
+import CircularLawSection6.DenseProfileEndpoint
 import Lean.Util.CollectAxioms
 
 /-! Audit the new dense-model and actual Ginibre source adapters, with their
@@ -17,8 +15,16 @@ run_cmd do
     `CircularLawSection6.GinibreReferenceSources,
     `CircularLawSection6.ginibre_raw_of_bc12,
     `CircularLawSection6.ginibre_spectral_of_bc12,
-    `ShortRingAnchor.BC12.normalizedGinibre,
-    `ShortRingAnchor.BC12.negativeMomentTightness,
+    `CircularLawSection6.ginibre_negative_of_bbv,
+    `CircularLawSection6.singularValue_lipschitz,
+    `CircularLawSection6.measurable_matrixNegativeMoment,
+    `CircularLawSection6.NoncompactProfile.GaussianProfileReducedSources,
+    `CircularLawSection6.NoncompactProfile.dense_profile_spectral_limit_of_section3,
+    `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_without_Han,
+    `CircularLawSection6.bc12_of_bbv_and_logPotential,
+    `ShortRingAnchor.BC12.normalizedGinibre_lower_bad_tendsto_zero,
+    `ShortRingAnchor.BC12.negativeMomentTightness_of_ginibreLaw_and_v3,
+    `ShortRingAnchor.BC12.negativeMomentTightness_normalizedDenseMatrixProcess,
     `ShortRingAnchor.BC12.gaussian_smallBall_normalization_le]
   let mut checked : Nat := 0
   for (name, _) in env.constants do
@@ -36,3 +42,7 @@ run_cmd do
 #check CircularLawSection6.ginibre_spectral_of_bc12
 #check CircularLawSection6.GinibreReferenceSources.ginibreOnSequence_hasLaw
 #check CircularLawSection6.GinibreReferenceSources.ginibre_negative_on_sequence_of_bbv
+#check CircularLawSection6.ginibre_negative_of_bbv
+#check CircularLawSection6.NoncompactProfile.GaussianProfileReducedSources.toConcrete
+#check CircularLawSection6.DenseProfile.actualMatrix_conclusion
+#check CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_without_Han

@@ -1,4 +1,5 @@
 import CircularLawSection6.ProfileReplacement
+import CircularLawSection6.GaussianTailJensen
 import CircularLawSections56.Section5.CircularLawFromPotential
 import CircularLawSections56.Section5.PublishedSection3Literature
 
@@ -55,21 +56,27 @@ theorem cyclicSamples_matrix (N : ℕ) [NeZero N] (ω : ℕ → ℂ) :
   simp [ginibreMatrix, weightedCyclicMatrix, cyclicSamples, cyclicCoordinate,
     CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence, div_eq_mul_inv, mul_comm]
 
+theorem cyclicSamples_shifted_matrix (N : ℕ) [NeZero N] (ω : ℕ → ℂ) (z : ℂ) :
+    (ginibreMatrix N (cyclicSamples N ω) - z • 1).submatrix
+      (ZMod.finEquiv N) (ZMod.finEquiv N) =
+        CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence N ω - z • 1 := by
+  ext i j
+  simpa only [Matrix.submatrix_apply, Matrix.sub_apply, Matrix.smul_apply,
+    Matrix.one_apply, (ZMod.finEquiv N).injective.eq_iff] using
+    congrArg (fun A : Matrix (Fin N) (Fin N) ℂ => (A - z • 1) i j)
+      (cyclicSamples_matrix N ω)
+
 theorem cyclicSamples_raw (N : ℕ) [NeZero N] (ω : ℕ → ℂ) (z : ℂ) :
     matrixRawPotential (ginibreMatrix N (cyclicSamples N ω) - z • 1) =
       normalizedShiftLogDet
         (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence N ω) z := by
-  have hm : (ginibreMatrix N (cyclicSamples N ω) - z • 1).submatrix
-      (ZMod.finEquiv N) (ZMod.finEquiv N) =
-        CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence N ω - z • 1 := by
-    rw [Matrix.submatrix_sub, cyclicSamples_matrix]
-    congr 1
-    ext i j
-    simp only [Matrix.submatrix_apply, Matrix.smul_apply, Matrix.one_apply,
-      (ZMod.finEquiv N).injective.eq_iff]
+  have hdet : (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence N ω -
+      z • 1).det = (ginibreMatrix N (cyclicSamples N ω) - z • 1).det :=
+    (congrArg Matrix.det (cyclicSamples_shifted_matrix N ω z).symm).trans
+      (Matrix.det_submatrix_equiv_self (ZMod.finEquiv N).toEquiv
+        (ginibreMatrix N (cyclicSamples N ω) - z • 1))
   unfold matrixRawPotential normalizedShiftLogDet
-  rw [← hm, Matrix.det_submatrix_equiv_self]
-  simp only [ZMod.card]
+  rw [hdet, ZMod.card]
 
 end GinibreReferenceSources
 
@@ -93,9 +100,14 @@ theorem ginibre_raw_of_bc12
   intro n
   have hm : Measurable (fun ω : ZMod (N n) × ZMod (N n) → ℂ =>
       |matrixRawPotential (ginibreMatrix (N n) ω - z • 1) - circularRadialPotential ‖z‖|) := by
-    unfold matrixRawPotential ginibreMatrix weightedCyclicMatrix
-    simp only [Matrix.det_apply]
-    fun_prop
+    have hA : Measurable (fun ω : ZMod (N n) × ZMod (N n) → ℂ =>
+        ginibreMatrix (N n) ω - z • 1) :=
+      (ginibreMatrix_measurable (N n)).sub measurable_const
+    have hraw : Measurable (fun ω : ZMod (N n) × ZMod (N n) → ℂ =>
+        matrixRawPotential (ginibreMatrix (N n) ω - z • 1)) :=
+      (measurable_log_norm_matrix_det _ (fun i j =>
+        (measurable_pi_apply j).comp ((measurable_pi_apply i).comp hA))).div_const _
+    simpa only [Real.norm_eq_abs] using (hraw.sub_const (circularRadialPotential ‖z‖)).norm
   have he := (GinibreReferenceSources.cyclicSamples_measurePreserving (N n)).measureReal_preimage
     (measurableSet_le measurable_const hm).nullMeasurableSet
   simpa only [Set.preimage_setOf_eq, GinibreReferenceSources.cyclicSamples_raw,

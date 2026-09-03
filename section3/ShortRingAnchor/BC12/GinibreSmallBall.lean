@@ -40,7 +40,7 @@ theorem continuous_normalizedGinibreMatrix (N : ℕ) :
   change Continuous (fun C : Fin N → GinibreLSV.ComplexColumn N =>
     ((Real.sqrt (N : ℝ))⁻¹ : ℂ) * ((((Real.sqrt 2)⁻¹ : ℝ) : ℂ) * C j i))
   exact continuous_const.mul (continuous_const.mul
-    ((PiLp.continuous_apply i).comp (continuous_apply j)))
+    ((PiLp.continuous_apply 2 (fun _ : Fin N => ℂ) i).comp (continuous_apply j)))
 
 /-- The concrete normalized circular Ginibre matrix distribution. -/
 def normalizedGinibreLaw (N : ℕ) : Measure (Matrix (Fin N) (Fin N) ℂ) :=
@@ -76,6 +76,7 @@ theorem gaussianPeak_one_le_one : GinibreLSV.gaussianPeak 1 ≤ 1 := by
   unfold GinibreLSV.gaussianPeak
   apply (ENNReal.ofReal_le_one).2
   have hp : 1 ≤ Real.sqrt (2 * Real.pi * (1 : NNReal)) := by
+    norm_num only [NNReal.coe_one, mul_one]
     apply (Real.le_sqrt (by norm_num) (by positivity)).2
     nlinarith [Real.one_le_pi_div_two]
   exact inv_le_one_of_one_le₀ hp
@@ -121,8 +122,8 @@ theorem normalizedGinibre_smallBall {N : ℕ} (hN : 0 < N) (z : ℂ)
       by gcongr; exact gaussianPeak_one_le_one
     _ = ENNReal.ofReal (((n + 1 : ℕ) : ℝ) *
         (2 * (((n + 1 : ℕ) : ℝ) * e / ((Real.sqrt ((n + 1 : ℕ) : ℝ))⁻¹ / Real.sqrt 2)))) := by
-      rw [one_mul, ENNReal.ofReal_mul (by positivity)]
-      norm_cast
+      rw [one_mul, ENNReal.ofReal_mul (Nat.cast_nonneg (n + 1)), ENNReal.ofReal_natCast]
+      simp only [Nat.cast_add, Nat.cast_one]
     _ ≤ _ := ENNReal.ofReal_le_ofReal (gaussian_smallBall_normalization_le hn he)
 
 /-- The lower-tail event is Borel. This discharges the measurability needed
