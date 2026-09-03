@@ -2,7 +2,9 @@
 
 This directory formalizes the Rademacher specialization of Section 8 of the fixed arXiv v1 source, with independent entries taking values ±1 with equal probabilities. The actual matrix is `BernoulliSection8.rademacherMatrix W s`: its block count is `m = s + 3`, its scalar dimension is `(s + 3) * W`, and the factor `1 / sqrt (3W)` is part of the matrix definition. The source range `m ≥ 4` is expressed by `0 < s`.
 
-**Current integration verified:** the public endpoints now call the proved Section 3.8 assembly. Both Section 8 targets and all 56 combined axiom reports passed at `b6c379836fcc6cf166881768d1a0ad6782c5c552`, with default proof-checking limits. See [the cloud record](SECTION3_INTEGRATION.md).
+**BC12-free integration:** the public endpoints now call the new Section 3.8 endpoint and construct the explicit Gaussian reference law internally. The BC12 negative-moment, projection and correlation fields are removed. See [the proof map and verification boundary](SECTION3_INTEGRATION.md); historical certificates do not certify a later source revision.
+
+**Historical conditional integration:** both Section 8 targets and all 56 combined axiom reports passed at `b6c379836fcc6cf166881768d1a0ad6782c5c552`, with default proof-checking limits.
 
 **Verified baseline:** source commit `15433d8765efd6c9767967140bb6969b6e31f643` passed the normal `lake build BernoulliSection8` target, all 28 strict axiom reports, the public signature check, and the 55-file Section 8 placeholder scan in [GitHub Actions run 33676900277](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33676900277). The dependency closure contains 271 project modules, including 53 Section 8 modules and no Section 4 modules. The only logical axioms reported are `propext`, `Classical.choice`, and `Quot.sound`.
 
@@ -12,7 +14,7 @@ The permitted analytic inputs are:
 
 - `NguyenBottomSingularInput`, at a subgaussian bound at least one;
 - `CookDeformedSquareInput`, specialized internally to the actual Rademacher family;
-- `RademacherSection3UpstreamInputs`, containing precisely the Proposition 3.2, Cook 1.12, canonical BBV and BC12/finite Ginibre formula inputs retained by the concrete Section 3.8 proof.
+- `RademacherSection3UpstreamInputs`, containing precisely Proposition 3.2, Cook 1.12 and the two canonical BBV comparisons, with a common comparison constant. No BC12 estimate, finite Ginibre formula or Gaussian-law premise is a public field.
 
 Section 4 is not an analytic input. Existing proved deterministic algebra and probability lemmas are reused from the repository; their directory names do not introduce new assumptions.
 

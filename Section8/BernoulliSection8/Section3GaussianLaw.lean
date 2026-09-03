@@ -10,6 +10,7 @@ its matrix law. No spectral, correlation, density or tail estimate is assumed.
 -/
 
 open MeasureTheory ProbabilityTheory
+open scoped NNReal
 noncomputable section
 namespace BernoulliSection8.Section3Bridge
 open BernoulliSection10 BernoulliSection10.SourceInputs ShortRingAnchor
