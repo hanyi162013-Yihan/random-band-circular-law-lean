@@ -342,26 +342,48 @@ theorem ginibre_regularizedMean_difference_tendsto_of_bbv
         ∂gaussianSequenceLaw) -
       ∫ ω, matrixRegularizedPotential (ginibreOnSequence (N n) ω - z • 1) a
         ∂gaussianSequenceLaw) atTop (𝓝 (dysonPotential z b - dysonPotential z a)) := by
+  let A : (n : ℕ) → (ℕ → ℂ) → Matrix (Fin (N n)) (Fin (N n)) ℂ :=
+    fun n ω => ginibreOnSequence (N n) ω - z • 1
+  let F : ℕ → ℝ → ℝ := fun n u =>
+    ∫ ω, matrixSquaredSingularAverage (A n ω) (squaredPoissonTest u) ∂gaussianSequenceLaw
+  let U : ℕ → ℝ → ℝ := fun n u =>
+    ∫ ω, matrixRegularizedPotential (A n ω) u ∂gaussianSequenceLaw
+  change Tendsto (fun n => U n b - U n a) atTop
+    (𝓝 (dysonPotential z b - dysonPotential z a))
+  have hA (n : ℕ) : Measurable (A n) :=
+    (ginibreOnSequence_measurable (N n)).sub measurable_const
+  have hE (n : ℕ) : Integrable (fun ω => hilbertSchmidtSq (A n ω)) gaussianSequenceLaw :=
+    (ginibreOnSequence_shifted_expected_energy (N n) z).1
   have hm : 0 < min a b := lt_min ha hb
-  have hDCT := intervalIntegral.tendsto_integral_filter_of_dominated_convergence
-    (μ := volume) (a := a) (b := b) (l := atTop)
-    (F := fun n t => ∫ ω, matrixSquaredSingularAverage
-      (ginibreOnSequence (N n) ω - z • 1) (squaredPoissonTest t) ∂gaussianSequenceLaw)
-    (f := dysonV z) (fun _ => 1 / min a b)
-    (Eventually.of_forall fun n =>
-      (measurable_integral_matrixSquaredPoissonAverage gaussianSequenceLaw
-        ((ginibreOnSequence_measurable (N n)).sub measurable_const)).aestronglyMeasurable)
-    (Eventually.of_forall fun n => ae_of_all _ fun t ht =>
-      (norm_integral_matrixSquaredPoissonAverage_le gaussianSequenceLaw
-        (fun ω => ginibreOnSequence (N n) ω - z • 1) (hm.trans ht.1)).trans
-          (one_div_le_one_div_of_le hm ht.1.le))
-    intervalIntegrable_const
-    (ae_of_all _ fun t ht => ginibre_meanSquaredPoisson_tendsto_of_bbv hBBV N hN z
-      (hm.trans ht.1))
-  have hid (n : ℕ) := integral_expectedPoisson_eq_regularized_difference gaussianSequenceLaw
-    ((ginibreOnSequence_measurable (N n)).sub measurable_const)
-    (ginibreOnSequence_shifted_expected_energy (N n) z).1 ha hb
-  simpa only [hid, integral_dysonV_eq_sub z ha hb] using hDCT
+  have hmeas (n : ℕ) : AEStronglyMeasurable (F n)
+      ((volume : Measure ℝ).restrict (uIoc a b)) :=
+    (measurable_integral_matrixSquaredPoissonAverage gaussianSequenceLaw (hA n)).aestronglyMeasurable
+  have hbound (n : ℕ) : ∀ᵐ u ∂(volume : Measure ℝ), u ∈ uIoc a b →
+      ‖F n u‖ ≤ 1 / min a b := by
+    filter_upwards [] with u
+    intro hu
+    have hu0 : 0 < u := hm.trans hu.1
+    have hnorm : ‖F n u‖ ≤ 1 / u :=
+      norm_integral_matrixSquaredPoissonAverage_le gaussianSequenceLaw (A n) hu0
+    exact hnorm.trans (one_div_le_one_div_of_le hm hu.1.le)
+  have hpoint : ∀ᵐ u ∂(volume : Measure ℝ), u ∈ uIoc a b →
+      Tendsto (fun n => F n u) atTop (𝓝 (dysonV z u)) := by
+    filter_upwards [] with u
+    intro hu
+    exact ginibre_meanSquaredPoisson_tendsto_of_bbv hBBV N hN z (hm.trans hu.1)
+  have hDCT : Tendsto (fun n => ∫ u in a..b, F n u)
+      atTop (𝓝 (∫ u in a..b, dysonV z u)) :=
+    intervalIntegral.tendsto_integral_filter_of_dominated_convergence
+      (ι := ℕ) (E := ℝ) (μ := volume) (a := a) (b := b) (l := atTop)
+      (F := F) (f := dysonV z)
+      (fun _ => 1 / min a b) (Eventually.of_forall hmeas)
+      (Eventually.of_forall hbound) intervalIntegrable_const hpoint
+  have hDyson : (∫ u in a..b, dysonV z u) = dysonPotential z b - dysonPotential z a :=
+    integral_dysonV_eq_sub z ha hb
+  rw [hDyson] at hDCT
+  have hInt (n : ℕ) : (∫ u in a..b, F n u) = U n b - U n a :=
+    integral_expectedPoisson_eq_regularized_difference gaussianSequenceLaw (hA n) (hE n) ha hb
+  exact hDCT.congr' (Eventually.of_forall hInt)
 
 /-- The actual Ginibre regularized mean at every fixed positive height,
 with its integration constant determined by the large-height energy anchor. -/
