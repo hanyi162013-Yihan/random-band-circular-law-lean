@@ -9,7 +9,7 @@ open Lean Elab Command
 run_cmd do
   let env ← getEnv
   let allowed : Array Name := #[``propext, ``Classical.choice, ``Quot.sound]
-  let mut checked := 0
+  let mut checked : Nat := 0
   for (name, _) in env.constants do
     if (`CircularLawSections56.Section5.PublishedSection3Concrete).isPrefixOf name then
       checked := checked + 1

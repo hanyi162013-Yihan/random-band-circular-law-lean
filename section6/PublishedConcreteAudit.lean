@@ -18,7 +18,7 @@ run_cmd do
     `CircularLawSection6.CoreRadiusBounds.ConcreteSection4Input,
     `CircularLawSection6.NoncompactProfile.GaussianProfileConcreteSources,
     `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_concrete_sources]
-  let mut checked := 0
+  let mut checked : Nat := 0
   for (name, _) in env.constants do
     if prefixes.any (fun p => p.isPrefixOf name) then
       checked := checked + 1
