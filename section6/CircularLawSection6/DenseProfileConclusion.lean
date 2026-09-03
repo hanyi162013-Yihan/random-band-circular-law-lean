@@ -67,6 +67,7 @@ theorem actualMatrix_conclusion
     (hupper : ∀ n s, q n s ≤ C / (M n : ℝ))
     (hM : Tendsto M atTop atTop) (z : ℂ) :
     Proposition36SequenceConclusion law M (fun n => actualMatrix (M n) (q n)) z := by
+  have hGinibre := provedGinibreInput hBBV
   obtain ⟨C₀, _hC₀, hBBV₀⟩ := hBBV
   let modelA (n : ℕ) := v3Model (M n) (q n) (hq n) (hsum n)
   let modelG (n : ℕ) := referenceModel (M n)
@@ -112,7 +113,7 @@ theorem actualMatrix_conclusion
   have hLSVAll := theorem31LeastSingularValueInput_of_minimum hMpos
     (fun n => actualMatrix (M n) (q n)) z (sourceHardEdgeScale M M denseKappa) goodLSV hLSV
   obtain ⟨p, hp, hBC12Negative, hBC12Full⟩ :=
-    bc12_on_sampleLaw (provedGinibreInput hBBV) circularComplexGaussian M hMpos hM z
+    bc12_on_sampleLaw hGinibre circularComplexGaussian M hMpos hM z
   have hscaleA := eventually_bandwidth_ge_half_power M B hM hC hBlower
   have hscaleG : ∀ᶠ n in atTop, (M n : ℝ) ^ (1 / 2 : ℝ) ≤ (M n : ℝ) :=
     eventually_bandwidth_ge_half_power M (fun n => (M n : ℝ)) hM zero_lt_one

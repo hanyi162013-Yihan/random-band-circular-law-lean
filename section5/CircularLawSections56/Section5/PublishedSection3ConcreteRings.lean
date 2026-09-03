@@ -47,10 +47,11 @@ theorem concreteModel_sources
     (hband : ∀ n, (k n + 1 : ℝ) ^ v3BandwidthExponent ω₀ ≤ W n) (z : ℂ) :
     Nonempty ((concreteModel ν k d W profile hc₀ hwidth hfit hMom).Sources z) := by
   let D := concreteModel ν k d W profile hc₀ hwidth hfit hMom
+  have hGinibre := provedGinibreInput hBBV
   obtain ⟨C, _, hC⟩ := hBBV
   obtain ⟨χ, κ, τ, hparam⟩ := exists_hardEdgeAdmissible_of_omega hω.1
   obtain ⟨p, hp, hneg, hfull⟩ :=
-    bc12_on_sampleLaw (provedGinibreInput hBBV) ν (fun n => k n + 1) (fun n => Nat.succ_pos _) hM z
+    bc12_on_sampleLaw hGinibre ν (fun n => k n + 1) (fun n => Nat.succ_pos _) hM z
   refine ⟨{
     comparisonConstant := C
     omega := ω₀

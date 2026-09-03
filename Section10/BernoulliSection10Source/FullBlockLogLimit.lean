@@ -66,6 +66,7 @@ theorem fullBlock_log_limit_from_source
     intro n
     simpa only [Real.rpow_one] using
       Real.rpow_le_rpow_of_exponent_le (by exact_mod_cast hN n) hβ1
+  have hGinibre := provedGinibreInput hBBV
   obtain ⟨C0, _hC0, hbbv⟩ := hBBV
   let mA := (∫ x, ‖atom x‖ ^ 3 ∂μ) + BVH.complexGaussianThirdMomentConstant
   let mG := (∫ x, ‖circularGaussianAtom x‖ ^ 3 ∂circularGaussianPairLaw) +
@@ -119,7 +120,7 @@ theorem fullBlock_log_limit_from_source
     (fun n u => bbvG n _ (by
       simpa [spectralParameter, localBulkHeight] using
         Real.rpow_pos_of_pos (Nat.cast_pos.mpr (hN n)) (-(localBulkEffectiveExponent β / 16))))
-  obtain ⟨p, hpp, hneg, hfull⟩ := bc12_on_sampleLaw (provedGinibreInput hBBV) μ N hN hNtop z
+  obtain ⟨p, hpp, hneg, hfull⟩ := bc12_on_sampleLaw hGinibre μ N hN hNtop z
   obtain ⟨goodLSV, hLSV⟩ := hmin
   exact proposition36_matrix_form_highProbability
     (fun n => actualProfileMatrix atom (σ n)) (fun n => actualGinibre (N n)) z
