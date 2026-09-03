@@ -108,7 +108,9 @@ theorem hasDerivAt_integral_matrixRegularizedPotential [Nonempty ι]
     {t : ℝ} (ht : 0 < t) :
     HasDerivAt (fun u => ∫ ω, matrixRegularizedPotential (A ω) u ∂μ)
       (∫ ω, matrixSquaredSingularAverage (A ω) (squaredPoissonTest t) ∂μ) t := by
-  have hs : Ioi (t / 2) ∈ 𝓝 t := isOpen_Ioi.mem_nhds (by linarith)
+  have hs : Ioi (t / 2) ∈ 𝓝 t := isOpen_Ioi.mem_nhds (by
+    change t / 2 < t
+    linarith)
   have hmeas : ∀ᶠ u in 𝓝 t,
       AEStronglyMeasurable (fun ω => matrixRegularizedPotential (A ω) u) μ := by
     filter_upwards [hs] with u hu
@@ -125,6 +127,7 @@ theorem hasDerivAt_integral_matrixRegularizedPotential [Nonempty ι]
     have hu0 : 0 < u := lt_trans (half_pos ht) hu
     have hratio : 1 / u ≤ 2 / t := by
       apply (div_le_div_iff₀ hu0 ht).2
+      change t / 2 < u at hu
       linarith
     have habs : ‖matrixSquaredSingularAverage (A ω) (squaredPoissonTest u)‖ ≤ 1 / u := by
       simpa only [Real.norm_eq_abs] using matrixSquaredPoissonAverage_abs_le (A ω) hu0
@@ -327,6 +330,7 @@ theorem ginibre_meanSquaredPoisson_tendsto_of_bbv
           matrix_stieltjes_im_eq_squaredPoissonAverage (ginibreOnSequence (N n) ω) z ht
   simpa only [heq] using him
 
+set_option maxHeartbeats 800000 in
 /-- Integration of the BBV mean Stieltjes limit between positive heights.
 The interval is bounded away from zero, so the deterministic domination
 is independent of the matrix size. -/
