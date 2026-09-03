@@ -13,6 +13,7 @@ open CircularLawSections56.Section5 CircularLawSections56.Section6
 
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
+set_option maxHeartbeats 800000
 
 namespace CircularLawSection6
 
@@ -42,21 +43,24 @@ theorem profile_ginibre_replacement_along_subsequence (p : NoncompactProfile)
     if k ∈ Set.range φ then p.matrix (k + 1) (W k) ω else ginibreMatrix (k + 1) ω
   have hA (k : ℕ) : Measurable (A k) := by
     by_cases hk : k ∈ Set.range φ
-    · simpa only [A, if_pos hk] using weightedCyclicMatrix_measurable_matrix (k + 1) (p.weight (k + 1) (W k))
+    · simpa only [A, if_pos hk, matrix] using weightedCyclicMatrix_measurable_matrix (k + 1) (p.weight (k + 1) (W k))
     · simpa only [A, if_neg hk] using ginibreMatrix_measurable (k + 1)
   have hAE (k : ℕ) : Integrable (fun ω => cyclicEnergy (k + 1) (A k ω)) (gaussianProfileLaw (k + 1)) ∧
       (∫ ω, cyclicEnergy (k + 1) (A k ω) ∂gaussianProfileLaw (k + 1)) = 1 := by
     by_cases hk : k ∈ Set.range φ
     · simpa only [A, if_pos hk] using p.gaussian_expected_energy (k + 1) (W k)
-    · simpa only [A, if_neg hk] using ginibre_expected_cyclicEnergy (k + 1)
+    · simpa only [A, if_neg hk, gaussianProfileLaw] using ginibre_expected_cyclicEnergy (k + 1)
   have hLog : ∀ᵐ z ∂(volume : Measure ℂ),
       TendstoInProbabilityTri (fun k => gaussianProfileLaw (k + 1))
         (fun k ω => matrixRawPotential (A k ω - z • 1)) (target z) := by
     filter_upwards [hProfile, hGinibre] with z hx hy
+    have hy' : TendstoInProbabilityTri (fun k => gaussianProfileLaw (k + 1))
+        (fun k ω => matrixRawPotential (ginibreMatrix (k + 1) ω - z • 1)) (target z) := by
+      simpa only [gaussianProfileLaw] using hy
     have hfill := tendstoInProbabilityTri_subsequence_filler
       (fun k => gaussianProfileLaw (k + 1))
       (fun k ω => matrixRawPotential (p.matrix (k + 1) (W k) ω - z • 1))
-      (fun k ω => matrixRawPotential (ginibreMatrix (k + 1) ω - z • 1)) φ hφ hx hy
+      (fun k ω => matrixRawPotential (ginibreMatrix (k + 1) ω - z • 1)) φ hφ hx hy'
     apply hfill.congr ?_ rfl
     intro k ω
     by_cases hk : k ∈ Set.range φ <;> simp [A, hk]

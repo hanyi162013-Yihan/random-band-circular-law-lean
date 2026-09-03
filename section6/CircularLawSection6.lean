@@ -104,3 +104,6 @@ import CircularLawSection6.CyclicMatrixReplacement
 import CircularLawSection6.SubsequenceFillers
 import CircularLawSection6.SubsequenceProfileReplacement
 import CircularLawSection6.SparseDenseSubsequences
+import CircularLawSection6.DenseGaussianSourceAdapter
+import CircularLawSection6.SubsequenceSourceEndpoint
+import CircularLawSection6.GaussianProfileTheorem
