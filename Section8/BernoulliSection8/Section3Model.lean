@@ -29,7 +29,8 @@ def ringArray (A : Proposition38.Atom) (N : ℕ) :
 
 theorem cyclicSiteSucc_eq_finRotate (s : ℕ) :
     BernoulliLinearAlgebra.cyclicSiteSucc (m := s + 2) = finRotate (s + 3) := by
-  ext i
+  apply Equiv.ext
+  intro i
   refine Fin.lastCases ?_ (fun j => ?_) i
   · simp
   · rw [BernoulliLinearAlgebra.cyclicSiteSucc_castSucc]
@@ -40,6 +41,7 @@ theorem coefficient_eq_physicalProfile (W s : ℕ) :
   funext i j
   simp only [Proposition38.coefficient, physicalProfile, Proposition38.siteAdjacent,
     physicalSiteAdjacent, cyclicSiteSucc_eq_finRotate, blockNormalization]
+  split_ifs <;> rfl
 
 theorem fullBlockMatrix_eq_physical (A : Proposition38.Atom) (W s : ℕ) (sample : InputSpace) :
     Proposition38.fullBlockMatrix (ringArray A ((s + 3) * W)) sample =
