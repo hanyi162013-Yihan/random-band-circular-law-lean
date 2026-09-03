@@ -12,24 +12,24 @@ open ShortRingAnchor
 /-- The Radon--Nikodym derivative supplies the source's density record;
 it is not an additional assumption on a dominated probability law. -/
 def boundedDensityOfMeasureLe
-    {E : Type*} [MeasurableSpace E] {μ λ : Measure E}
-    [SigmaFinite μ] [SigmaFinite λ] {L : ℝ}
-    (h : μ ≤ ENNReal.ofReal L • λ) :
-    HasBoundedDensityWithRespectTo μ λ := by
-  have hac : μ ≪ λ := by
+    {E : Type*} [MeasurableSpace E] {μ ν : Measure E}
+    [SigmaFinite μ] [SigmaFinite ν] {L : ℝ}
+    (h : μ ≤ ENNReal.ofReal L • ν) :
+    HasBoundedDensityWithRespectTo μ ν := by
+  have hac : μ ≪ ν := by
     intro s hs
     apply le_antisymm ?_ (zero_le _)
     simpa only [Measure.smul_apply, smul_eq_mul, hs, mul_zero] using h s
   refine
-    { density := μ.rnDeriv λ
-      densityAEMeasurable := (μ.measurable_rnDeriv λ).aemeasurable
+    { density := μ.rnDeriv ν
+      densityAEMeasurable := (μ.measurable_rnDeriv ν).aemeasurable
       bound := ENNReal.ofReal L
       bound_lt_top := ENNReal.ofReal_lt_top
       density_le_bound := ?_
-      law_eq_withDensity := (Measure.withDensity_rnDeriv_eq μ λ hac).symm }
-  apply ae_le_of_forall_setLIntegral_le_of_sigmaFinite (μ.measurable_rnDeriv λ)
+      law_eq_withDensity := (Measure.withDensity_rnDeriv_eq μ ν hac).symm }
+  apply ae_le_of_forall_setLIntegral_le_of_sigmaFinite (μ.measurable_rnDeriv ν)
   intro s _ _
-  have he := (Measure.setLIntegral_rnDeriv_le (μ := μ) (ν := λ) s).trans (h s)
+  have he := (Measure.setLIntegral_rnDeriv_le (μ := μ) (ν := ν) s).trans (h s)
   simpa only [lintegral_const, Measure.restrict_apply_univ, Measure.smul_apply,
     smul_eq_mul] using he
 

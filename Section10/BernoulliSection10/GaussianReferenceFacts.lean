@@ -2,6 +2,7 @@ import BernoulliSection10.Section3Inputs
 import Mathlib.MeasureTheory.Function.LpSpace.Basic
 import Mathlib.MeasureTheory.Measure.Lebesgue.Complex
 import Mathlib.MeasureTheory.Integral.Prod
+import Mathlib.Analysis.Real.Pi.Bounds
 
 /-!
 # The literal circular Gaussian atom used by both density branches
@@ -16,6 +17,9 @@ open scoped ENNReal NNReal
 noncomputable section
 
 namespace BernoulliSection10.SourceInputs
+
+set_option maxHeartbeats 1600000
+set_option backward.isDefEq.respectTransparency false
 
 def circularGaussianAtom (x : ℝ × ℝ) : ℂ :=
   (x.1 : ℂ) + Complex.I * (x.2 : ℂ)
@@ -57,9 +61,17 @@ theorem circularGaussianAtom_centered :
     memLp_one_iff_integrable.mp ((circularGaussian_fst_memLp 1 (by norm_num)).ofReal)
   have hg : Integrable (fun x : ℝ × ℝ => (x.2 : ℂ)) circularGaussianPairLaw :=
     memLp_one_iff_integrable.mp ((circularGaussian_snd_memLp 1 (by norm_num)).ofReal)
+  have hfst : (∫ x : ℝ × ℝ, x.1 ∂circularGaussianPairLaw) = 0 := by
+    simpa [circularGaussianPairLaw] using
+      (integral_fun_fst (μ := gaussianReal 0 (1 / 2)) (ν := gaussianReal 0 (1 / 2))
+        (fun x : ℝ => x))
+  have hsnd : (∫ x : ℝ × ℝ, x.2 ∂circularGaussianPairLaw) = 0 := by
+    simpa [circularGaussianPairLaw] using
+      (integral_fun_snd (μ := gaussianReal 0 (1 / 2)) (ν := gaussianReal 0 (1 / 2))
+        (fun x : ℝ => x))
   simp only [circularGaussianAtom]
   rw [integral_add hf (hg.const_mul Complex.I), integral_const_mul]
-  simp [circularGaussianPairLaw, integral_fun_fst, integral_fun_snd, integral_complex_ofReal]
+  simp only [integral_complex_ofReal, hfst, hsnd, Complex.ofReal_zero, mul_zero, add_zero]
 
 theorem gaussianHalf_second_moment :
     (∫ x : ℝ, x ^ 2 ∂gaussianReal 0 (1 / 2)) = 1 / 2 := by
@@ -76,10 +88,20 @@ theorem circularGaussianAtom_second_moment :
     simpa [Real.norm_eq_abs, sq_abs] using
       (circularGaussian_snd_memLp 2 (by norm_num)).integrable_norm_pow (by norm_num)
   have he (x : ℝ × ℝ) : ‖circularGaussianAtom x‖ ^ 2 = x.1 ^ 2 + x.2 ^ 2 := by
-    simp [Complex.sq_norm, Complex.normSq_apply, circularGaussianAtom, pow_two]
+    rw [Complex.sq_norm]
+    simp [Complex.normSq_apply, circularGaussianAtom, pow_two]
+  have hfst : (∫ x : ℝ × ℝ, x.1 ^ 2 ∂circularGaussianPairLaw) = 1 / 2 := by
+    simpa [circularGaussianPairLaw, gaussianHalf_second_moment] using
+      (integral_fun_fst (μ := gaussianReal 0 (1 / 2)) (ν := gaussianReal 0 (1 / 2))
+        (fun x : ℝ => x ^ 2))
+  have hsnd : (∫ x : ℝ × ℝ, x.2 ^ 2 ∂circularGaussianPairLaw) = 1 / 2 := by
+    simpa [circularGaussianPairLaw, gaussianHalf_second_moment] using
+      (integral_fun_snd (μ := gaussianReal 0 (1 / 2)) (ν := gaussianReal 0 (1 / 2))
+        (fun x : ℝ => x ^ 2))
   simp_rw [he]
   rw [integral_add hf hg]
-  simp [circularGaussianPairLaw, integral_fun_fst, integral_fun_snd, gaussianHalf_second_moment]
+  rw [hfst, hsnd]
+  norm_num
 
 theorem gaussianHalf_le_volume : gaussianReal 0 (1 / 2) ≤ (volume : Measure ℝ) := by
   rw [gaussianReal_of_var_ne_zero 0 (by norm_num : (1 / 2 : ℝ≥0) ≠ 0)]
@@ -104,7 +126,9 @@ theorem circularGaussianAtom_law_le_volume :
   have hp : circularGaussianPairLaw ≤ (volume : Measure (ℝ × ℝ)) := by
     exact Measure.prod_mono gaussianHalf_le_volume gaussianHalf_le_volume
   have hv : Measure.map circularGaussianAtom (volume : Measure (ℝ × ℝ)) = volume := by
-    simp_rw [circularGaussianAtom_eq_equiv]
+    rw [show circularGaussianAtom =
+      (Complex.measurableEquivRealProd.symm : (ℝ × ℝ) → ℂ) from
+        funext circularGaussianAtom_eq_equiv]
     exact Complex.volume_preserving_equiv_real_prod.symm.map_eq
   exact hv ▸ Measure.map_mono hp measurable_circularGaussianAtom
 
