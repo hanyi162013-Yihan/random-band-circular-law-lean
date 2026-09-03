@@ -51,9 +51,11 @@ theorem PublishedSection3Anchor.limit
   letI := h.dimension_nonempty
   have hlimit : TendstoInProbabilityTri (fun _ => μ)
       (fun n ω => normalizedShiftLogDet (h.model.matrix n ω) z) (circularLogPotential z) := by
-    rcases h.density with ⟨hd⟩ | ⟨hd, hGBL⟩
-    · exact PublishedSection3Model.Sources.planar_tri h.model z h.sources hd
-    · exact PublishedSection3Model.Sources.density_tri h.model z h.sources hd hGBL
+    cases h.density with
+    | inl hd =>
+      exact PublishedSection3Model.Sources.planar_tri h.model z h.sources (Classical.choice hd)
+    | inr hd =>
+      exact PublishedSection3Model.Sources.density_tri h.model z h.sources hd.1 hd.2
   have hconstant : TendstoInProbabilityTri (fun _ => μ)
       (fun _ _ => circularLogPotential z) (circularLogPotential z) :=
     tendstoInProbabilityTri_const (fun _ => μ) _ _ tendsto_const_nhds

@@ -42,7 +42,13 @@ run_cmd do
     `CircularLawSections56.Section5.paperSection3Weights,
     `CircularLawSections56.Section5.paperSection3Atoms,
     `CircularLawSections56.Section5.literalIndicatorMatrix_eq_section3,
-    `CircularLawSections56.Section5.literalPhysicalLogPotential_eq_section3]
+    `CircularLawSections56.Section5.literalPhysicalLogPotential_eq_section3,
+    `CircularLawSections56.Section5.independentAtomCopies21_of_jointLaw,
+    `CircularLawSections56.Section5.paperSection3Coordinate,
+    `CircularLawSections56.Section5.paperSection3Coordinate_injective,
+    `CircularLawSections56.Section5.paperSection3Atoms_measurePreserving,
+    `CircularLawSections56.Section5.paperSection3Atoms_copies,
+    `CircularLawSections56.Section5.publishedSection3ModelOfSamples]
   let mut checked := 0
   for (name, _) in env.constants do
     if prefixes.any (fun prefix => prefix.isPrefixOf name) then

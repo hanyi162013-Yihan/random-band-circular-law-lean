@@ -116,6 +116,7 @@ import CircularLawSections56.Section5.PublishedSection3Source
 import CircularLawSections56.Section5.PublishedSection3Transport
 import CircularLawSections56.Section5.PublishedSection3Endpoint
 import CircularLawSections56.Section5.PublishedSection3Model
+import CircularLawSections56.Section5.PublishedSection3Sampling
 
 /-!
 # Section 5: mesoscopic calibration and global pressure lifting

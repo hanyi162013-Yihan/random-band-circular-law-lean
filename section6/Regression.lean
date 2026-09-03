@@ -689,3 +689,7 @@ example (i : Fin 4) (s : Fin 3) :
     ZMod.finEquiv 4 (ShortRingAnchor.cyclicColumn (by norm_num : 2 * 1 + 1 ≤ 4) i s) =
       ZMod.finEquiv 4 i - (1 : ZMod 4) + (s.val : ZMod 4) :=
   section3_cyclicColumn_finEquiv (by norm_num) i s
+
+example (σ : Measure ℝ) [IsProbabilityMeasure σ] {t C : ℝ}
+    (ht : 0 < t) (h : ‖singularStieltjesTransform σ t‖ ≤ C) :
+    σ.real (Set.Icc 0 t) ≤ 2 * C * t := hardEdge_mass_le_of_stieltjes_norm σ ht h

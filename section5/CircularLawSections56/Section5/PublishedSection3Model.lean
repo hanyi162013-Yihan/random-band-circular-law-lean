@@ -84,10 +84,10 @@ theorem literalIndicatorMatrix_eq_section3
     constructor
     · intro hj
       rw [hj] at hcol
-      simpa only [hcenter] using hcol
+      simpa only [hcenter, finCongr_apply_coe] using hcol
     · intro hj
       apply (ZMod.finEquiv (k + 1)).injective
-      exact hcol.trans (by simpa only [hcenter] using hj.symm)
+      exact hcol.trans (by simpa only [hcenter, finCongr_apply_coe] using hj.symm)
   simp only [he, paperSection3Weights, paperSection3Atoms,
     Equiv.symm_apply_apply, PaperIndicatorWeights.b]
 
@@ -102,6 +102,6 @@ theorem literalPhysicalLogPotential_eq_section3
         (cyclicShortRingMatrix (paperSection3Weights profile hwidth hc₀) hfit
           (paperSection3Atoms k d W hwidth ω)) z := by
   rw [literalIndicatorMatrix_eq_section3 k d W hwidth center hcenter profile hc₀ hfit]
-  rfl
+  simp only [Section6.physicalLogPotential, normalizedShiftLogDet, Nat.cast_add, Nat.cast_one]
 
 end CircularLawSections56.Section5

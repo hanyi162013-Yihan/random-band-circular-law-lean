@@ -4,6 +4,16 @@ This is a source-only subproject of
 [random-band-circular-law-lean](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean).
 Its `lakefile.toml` uses only repository-relative paths.
 
+## Current Section 3 integration (2026-09-03)
+
+On `codex/section6-formalization`, the active `ShortRingAnchor` and `Vendor`
+libraries now come from the checked `../section3/` package, pinned to main
+commit `42c26b672faec82a8ea7999a9cd0778c31618495`. Its Lean sources match the
+verified Section 3 proof checkpoint exactly. The old vendor snapshot and the
+five historical support copies below remain unchanged for provenance, but
+they no longer own the active modules. See [SECTION3_INTEGRATION.md](SECTION3_INTEGRATION.md).
+The original release's dependency alignment below is retained as history.
+
 ## Checked versions
 
 - Lean: `leanprover/lean4:v4.33.0`.
@@ -14,7 +24,7 @@ Its `lakefile.toml` uses only repository-relative paths.
   [tao-vu-replacement-principle-lean](https://github.com/hanyi162013-Yihan/tao-vu-replacement-principle-lean),
   commit `2f96f5460eea0965956f69d787ebc722f1392078`.
 
-The parent package supplies `CircularLawSection4` from `../Section4`,
+The original parent package supplied `CircularLawSection4` from `../Section4`,
 `TaoVuReplacement` from `../vendor/tao-vu-replacement`, and the existing
 `ShortRingAnchor` support modules from `../vendor/short-ring-analysis`.
 The child shares `../.lake/packages`; no second mathlib checkout is required.
