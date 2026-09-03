@@ -5,6 +5,8 @@ name: Section 10 density verification
     paths:
       - 'Section10/BernoulliSection10Complex/**'
       - 'Section10/BernoulliSection10Source/**'
+      - 'Section10/BernoulliSection10Complex.lean'
+      - 'Section10/BernoulliSection10Source.lean'
       - 'Section10/BernoulliSection10/HighBandClosure.lean'
       - 'Section10/BernoulliSection10/GaussianReferenceFacts.lean'
       - 'lakefile.toml'
@@ -83,6 +85,14 @@ jobs:
         run: |
           set -o pipefail
           python3 scripts/build_serial.py --target BernoulliSection10Source.DensityCircularLaw --keep-going 2>&1 | tee verification-section10/connected-build.log
+      - name: Complete repository build and default lake build
+        id: full
+        if: ${{ !cancelled() && steps.connected.outcome == 'success' }}
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 scripts/build_serial.py --keep-going 2>&1 | tee verification-section10/full-build.log
+          python3 scripts/check_placeholders.py 2>&1 | tee verification-section10/full-source-scan.log
       - name: Save checked artifacts for resumable verification
         if: ${{ always() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure') && steps.cache.outputs.cache-primary-key != '' }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
@@ -114,6 +124,12 @@ jobs:
         run: |
           set -o pipefail
           python3 scripts/check_axioms.py --audit-file Section10/BernoulliSection10Source/AxiomAudit.lean 2>&1 | tee verification-section10/connected-axioms-signatures.log
+      - name: Full fresh repository axiom audit
+        if: ${{ !cancelled() && steps.full.outcome == 'success' }}
+        shell: bash
+        run: |
+          set -o pipefail
+          python3 scripts/check_axioms.py 2>&1 | tee verification-section10/full-axioms.log
       - name: Preserve build and audit logs
         if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

@@ -1,6 +1,6 @@
 name = "RandomBandCircularLaw"
 version = "0.1.0"
-defaultTargets = ["SubgaussianSection8"]
+defaultTargets = ["SubgaussianSection8", "BernoulliSection10", "BernoulliSection10Complex", "BernoulliSection10Source"]
 
 [[lean_lib]]
 name = "CircularLawSection4"
