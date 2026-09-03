@@ -1,5 +1,10 @@
 # BC12: exact-formula route and remaining target
 
+This document records the **historical conditional route**. The new
+entry-to-spectrum integration and BC12-free Proposition 3.6/3.8 endpoints
+are documented in [BC12_INTEGRATION.md](BC12_INTEGRATION.md). In particular,
+the finite formulas are no longer assumptions of those new endpoints.
+
 The two BC12 inputs can be developed independently of Proposition 3.6.
 The current implementation takes the user-authorized route of treating
 exact finite-dimensional Ginibre formulas as explicit hypotheses.  It does

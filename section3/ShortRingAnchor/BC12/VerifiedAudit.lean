@@ -1,5 +1,7 @@
 import ShortRingAnchor.BC12.VerifiedKernel
 import Ginibre.AllDimensionsStatistics
+import ShortRingAnchor.Proposition36VerifiedGinibre
+import ShortRingAnchor.Proposition38.VerifiedGinibre
 
 #print axioms ShortRingAnchor.BC12.ginibreOnePointDensity_eq_verified
 #print axioms ShortRingAnchor.BC12.ginibreKernel_eq_verified
@@ -7,3 +9,29 @@ import Ginibre.AllDimensionsStatistics
 #print axioms ShortRingAnchor.BC12.verifiedGinibreProjection
 #print axioms Ginibre.gaussianMatrix_integral_linearStatistic_all
 #print axioms Ginibre.gaussianEigenvalueVariance_all_energy
+#print axioms ShortRingAnchor.BC12.verified_rawStatistic_integrable
+#print axioms ShortRingAnchor.BC12.verified_rawStatistic_memLp_two
+#print axioms ShortRingAnchor.BC12.verified_raw_firstMoment
+#print axioms ShortRingAnchor.BC12.verified_raw_secondMoment
+#print axioms ShortRingAnchor.BC12.verifiedGinibreCorrelations
+#print axioms ShortRingAnchor.BC12.GinibreCorrelationFormulas.comp_hasLaw
+#print axioms ShortRingAnchor.BC12.roots_eq_multiset_of_enumeration
+#print axioms ShortRingAnchor.BC12.sum_test_eq_of_enumerations
+#print axioms ShortRingAnchor.BC12.GinibreCorrelationFormulas.congr_statistics
+#print axioms ShortRingAnchor.BC12.verifiedGinibreMatrixCorrelations
+#print axioms ShortRingAnchor.BC12.ginibre_logdet_convergesInProbability_of_entryLaw
+#print axioms ShortRingAnchor.BC12.map_withDensity_equiv_verified
+#print axioms ShortRingAnchor.BC12.gaussian_realPair_density
+#print axioms ShortRingAnchor.BC12.gaussianEntryLaw_eq_realPair
+#print axioms ShortRingAnchor.BC12.stdGaussian_complex_eq_realPair
+#print axioms ShortRingAnchor.BC12.scaled_stdGaussian_complex_eq_entryLaw
+#print axioms ShortRingAnchor.BC12.stdGaussian_complexColumn_eq_pi
+#print axioms ShortRingAnchor.BC12.normalizedGinibre_real_scale
+#print axioms ShortRingAnchor.BC12.normalizedGinibre_column_map
+#print axioms ShortRingAnchor.BC12.pi_columns_flatten_map
+#print axioms ShortRingAnchor.BC12.normalizedGinibreLaw_flatten
+#print axioms ShortRingAnchor.BC12.normalizedGinibre_hasEntryLaw
+#print axioms ShortRingAnchor.BC12.normalizedGinibre_correlations
+#print axioms ShortRingAnchor.BC12.ginibre_logdet_convergesInProbability_of_ginibreLaw
+#print axioms ShortRingAnchor.Proposition38.proposition38_withoutBC12
+#print axioms ShortRingAnchor.proposition36_cyclicShortRing_withoutBC12

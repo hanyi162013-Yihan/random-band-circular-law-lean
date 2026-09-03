@@ -1,5 +1,12 @@
 # Proposition 3.8 — subgaussian full-block high-band anchor
 
+**BC12 integration:** the new endpoint
+`ShortRingAnchor.Proposition38.proposition38_withoutBC12` in
+[`VerifiedGinibre.lean`](ShortRingAnchor/Proposition38/VerifiedGinibre.lean)
+constructs all BC12 inputs. The conditional `Assembly.lean` endpoint below
+is preserved unchanged. See [BC12_INTEGRATION.md](BC12_INTEGRATION.md) for
+the law bridge, precise retained hypotheses, and final-commit audit requirements.
+
 Target: arXiv:2609.01295v1, **Proposition 3.8 (High-band log potential for
 subgaussian full-block rings)**, equations (3.18)–(3.25), PDF pp. 16–17.
 The checked `main.tex` SHA-256 is

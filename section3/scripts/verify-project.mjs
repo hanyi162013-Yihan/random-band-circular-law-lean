@@ -76,6 +76,14 @@ for (const file of audits) {
       !expected.includes('ShortRingAnchor.Proposition38.proposition38')) {
     throw new Error('Proposition 3.8 audit must include the complete conditional endpoint.');
   }
+  if (file === 'ShortRingAnchor/BC12/VerifiedAudit.lean') {
+    for (const name of ['ShortRingAnchor.Proposition38.proposition38_withoutBC12',
+      'ShortRingAnchor.proposition36_cyclicShortRing_withoutBC12',
+      'ShortRingAnchor.BC12.normalizedGinibreLaw_flatten',
+      'ShortRingAnchor.BC12.verifiedGinibreCorrelations']) {
+      if (!expected.includes(name)) throw new Error(`Missing BC12-elimination audit target: ${name}`);
+    }
+  }
   const logName = file === 'ShortRingAnchor/Proposition38/Audit.lean'
     ? 'Proposition38Audit.log' : path.basename(file, '.lean') + '.log';
   const output = await run('lake', ['env', 'lean', '-j', '1', file], logName);

@@ -4,10 +4,12 @@ import Mathlib.MeasureTheory.Constructions.BorelSpace.Complex
 import Mathlib.MeasureTheory.Measure.Haar.OfBasis
 
 /-!
-# Explicit external finite-dimensional Ginibre formulas
+# Finite-dimensional Ginibre formula interfaces
 
-The user permits known integrable-ensemble formulas as hypotheses.  This
-file is the entire formula boundary for the eigenvalue route.  Nothing here
+The generic analytic route is expressed using these exact formula records.
+`VerifiedKernel.lean` and `GaussianMatrixLawBridge.lean` now construct them
+from proved Gaussian-entry theorems. The BC12-free proposition endpoints
+do not take these records as hypotheses. Nothing in the records
 asserts a circular law, a limit, a tail bound, or a BC12 conclusion.
 
 The formulas are the integrated one- and two-point correlation formulas
@@ -43,7 +45,7 @@ def eigenvalueStatistic {Omega : Type*} {n : ℕ}
     (eigenvalue : Omega → Fin n → ℂ) (f : ℂ → ℝ) (sample : Omega) : ℝ :=
   (∑ i, f (eigenvalue sample i)) / (n : ℝ)
 
-/-- **External exact integral formula**, not a proved theorem here.
+/-- Exact integral interface, constructed by `verifiedGinibreProjection`.
 This is the symmetric weighted form of
 `integral |K_n(w,v)|² dv = n * rho_n(w)`.
 It is a finite-dimensional projection identity, not a variance estimate. -/
@@ -55,8 +57,8 @@ structure GinibreProjectionIntegralFormula (n : ℕ) : Prop where
     (∫ wv : ℂ × ℂ, (g wv.1 + g wv.2) * ginibreKernelWeight n wv) =
       2 * (n : ℝ) * ∫ w, g w * ginibreOnePointDensity n w
 
-/-- **External exact correlation formulas**, not proved results of this
-project.  There are deliberately no asymptotic or inequality fields.
+/-- Exact correlation interface, constructed for the actual Gaussian law
+by `normalizedGinibre_correlations`. There are no asymptotic or inequality fields.
 The second formula is the standard difference-square form of the
 two-point covariance identity for a projection determinantal process. -/
 structure GinibreCorrelationFormulas
