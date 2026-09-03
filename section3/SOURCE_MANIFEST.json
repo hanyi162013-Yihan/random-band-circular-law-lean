@@ -1,5 +1,5 @@
 {
-  "scope": "Published source snapshot; hashes are not proof certificates.",
+  "scope": "Published source snapshot, including the cloud-verified Section 6 Ginibre/Dyson additions; hashes are not proof certificates. See ../section6/MAIN_INTEGRATION.md.",
   "files": [
     {
       "path": ".gitignore",
@@ -25,6 +25,11 @@
       "path": "HIGH_BAND_INTEGRATION.md",
       "bytes": 12064,
       "sha256": "1cf4ac1558110d8e9f7c55b71ffda0927d897c5c65cb2588287125756ec6a1ae"
+    },
+    {
+      "path": "INTEGRATION_CORRECTIONS.md",
+      "bytes": 2427,
+      "sha256": "b7aa3631873a84f4f8b5abe2f8cae09d0d8a0716e64a3ad57dd2442e248ee906"
     },
     {
       "path": "PROPOSITION38.md",
@@ -105,6 +110,16 @@
       "path": "ShortRingAnchor/BC12/GinibreKernel.lean",
       "bytes": 6028,
       "sha256": "155763c54245e6d57f518f4379fc42c5b6492d4c33cf767460ab0849293f5534"
+    },
+    {
+      "path": "ShortRingAnchor/BC12/GinibreNegativeMoments.lean",
+      "bytes": 7532,
+      "sha256": "7b25424ab6a897d710e1cce2df7a7b62fbe1fb69c3165a3c030854b2f536e373"
+    },
+    {
+      "path": "ShortRingAnchor/BC12/GinibreSmallBall.lean",
+      "bytes": 9569,
+      "sha256": "f6c614c9f483861030b06a4b5d279ea8521ebaf264d6a8cbfda5501ac237c23e"
     },
     {
       "path": "ShortRingAnchor/BC12/KnownFormulas.lean",
@@ -730,6 +745,11 @@
       "path": "Vendor/Arxiv2410/V3/FreeDysonExistence.lean",
       "bytes": 11206,
       "sha256": "a46252c173280ba2e919b514cab2c973d70df8c621de934151f09c96da9fba63"
+    },
+    {
+      "path": "Vendor/Arxiv2410/V3/FreeDysonUniqueness.lean",
+      "bytes": 8383,
+      "sha256": "0a6b2ca00dc76a1c574368165124278d9c67eccb29698135525ca0e35ec1cdcc"
     },
     {
       "path": "Vendor/Arxiv2410/V3/GaussianDiagonal.lean",

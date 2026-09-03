@@ -1,0 +1,12 @@
+name = "CircularLawSection6"
+version = "0.1.0"
+defaultTargets = ["CircularLawSection6"]
+packagesDir = "../.lake/packages"
+
+[[lean_lib]]
+name = "CircularLawSection6"
+moreLeanArgs = ["-DwarningAsError=true"]
+
+[[require]]
+name = "CircularLawSections56"
+path = "../section5"

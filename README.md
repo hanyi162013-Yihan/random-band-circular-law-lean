@@ -5,7 +5,8 @@ Lean 4 formalization accompanying Yi Han's paper
 periodic profile and discrete law*](https://arxiv.org/abs/2609.01295).
 
 This is a paper-wide repository. It contains **Section 4,
-“Exterior transfer and local density tools”**, **Section 5**, **Section 8 for
+“Exterior transfer and local density tools”**, **Section 5**, **Section 6 for
+Gaussian noncompact profiles**, **Section 8 for
 real IID subgaussian atoms**, **Section 9 libraries for deterministic linear
 algebra and local small-ball arguments**, and **the Section 10 bounded-density
 circular-law proofs for real and planar-complex IID atoms**.
@@ -17,7 +18,14 @@ and the copied high-band Theorem 3.1.
 Its [integration and verification record](section3/HIGH_BAND_INTEGRATION.md)
 states the exact BBV/BC12 and real-branch geometric Brascamp–Lieb boundary.
 Section 5 has its own [subproject and verification record](section5/README.md).
-The included Section 6 helper modules do not claim completion of Section 6.
+Section 6 now includes the [verified concrete Gaussian profile endpoint](section6/BBV_ONLY_ENDPOINT.md):
+actual Ginibre logarithmic and spectral limits are derived from BBV, and
+the final circular-law theorem retains only BBV and the pre-given finite
+Section 4 pressure estimates, alongside the stated profile/bandwidth assumptions.
+Its proof chain passed [cloud verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33740349647),
+including 203 audited declarations and seven regressions. See the
+[main integration record](section6/MAIN_INTEGRATION.md) for exact source identity
+and scope; this is not a line-by-line reproof of every intermediate manuscript claim.
 
 ## Scope and status
 
@@ -126,6 +134,7 @@ Section4/
   FORMALIZATION_MAP.md
 section3/                      # proved Section 3.6/3.8; also independently buildable
 section5/                      # Section 5 subproject; see its own README
+section6/                      # verified Gaussian profile endpoint; depends on Section 5
 Section8/
   BernoulliSection8.lean      # Rademacher specialization
   BernoulliSection8/          # proof modules and shared Section 8 lemmas
@@ -166,6 +175,8 @@ vendor/
 The root libraries use the same Lake project and dependency cache. Section 5
 is a subproject that depends on this root project and shares its mathlib
 package directory; see [its build instructions](section5/README.md).
+Section 6 is a further subproject using that same shared dependency directory;
+see [its verified endpoint and build instructions](section6/MAIN_INTEGRATION.md).
 The root project imports `ShortRingAnchor` and `Vendor` from `section3/`.
 Section 3 also retains its standalone package and CI. Its Proposition 3.8
 verification passed for 250 Lean files and 351 exact axiom reports; see
