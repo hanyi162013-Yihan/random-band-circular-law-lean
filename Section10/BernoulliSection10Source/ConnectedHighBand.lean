@@ -40,7 +40,7 @@ theorem planar_highBandLogLimit
     hp.1 hχ1 hp.2.1 hlsv z
   have hmom := BernoulliSection10Complex.SourceInputs.profileMatrix_row_moments
     hμ.normalized (fun n => physicalProfile (W n) (s n))
-    (fun n => physicalProfile_doublyStochastic (W n) (s n) (hW n))
+    (fun n => SourceInputs.physicalProfile_doublyStochastic (W n) (s n) (hW n))
   exact fullBlock_log_limit_from_source hBBV hBC12 μ id (planarAtomMoments hμ h3)
     W s hW hWtop hp hβ1 hhigh z hmom hmin
 
@@ -68,7 +68,7 @@ theorem real_highBandLogLimit
     hp.1 hχ1 hp.2.1 hlsv z
   have hmom := SourceInputs.profileMatrix_row_moments hμ
     (fun n => physicalProfile (W n) (s n))
-    (fun n => physicalProfile_doublyStochastic (W n) (s n) (hW n))
+    (fun n => SourceInputs.physicalProfile_doublyStochastic (W n) (s n) (hW n))
   have heq (n : ℕ) : actualProfileMatrix Complex.ofReal (physicalProfile (W n) (s n)) =
       SourceInputs.profileMatrix (physicalProfile (W n) (s n)) := by
     funext sample i j
