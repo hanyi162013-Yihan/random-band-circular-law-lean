@@ -30,11 +30,14 @@ theorem cyclicSamples_unequal_cdf (M N : ℕ) [NeZero M] [NeZero N]
       (ginibreMatrix N (cyclicSamples N ω) - z • 1) R =
     matrixSquaredSingularCdfDistanceOn
       (ginibreOnSequence M ω - z • 1) (ginibreOnSequence N ω - z • 1) R := by
-  rw [← cyclicSamples_matrix M ω, ← cyclicSamples_matrix N ω]
+  have hmean (D : ℕ) [NeZero D] (φ : ℝ → ℝ) :
+      matrixSquaredSingularAverage (ginibreOnSequence D ω - z • 1) φ =
+        matrixSquaredSingularAverage (ginibreMatrix D (cyclicSamples D ω) - z • 1) φ := by
+    rw [← cyclicSamples_matrix D ω]
+    exact matrixSquaredSingularAverage_shifted_reindex (ZMod.finEquiv D).toEquiv.symm
+      (ginibreMatrix D (cyclicSamples D ω)) z φ
   unfold matrixSquaredSingularCdfDistanceOn empiricalCdfDistanceOn
-  simp_rw [matrixSquaredSingularCdf_eq_average,
-    matrixSquaredSingularAverage_shifted_reindex (ZMod.finEquiv M).toEquiv.symm,
-    matrixSquaredSingularAverage_shifted_reindex (ZMod.finEquiv N).toEquiv.symm]
+  simp_rw [matrixSquaredSingularCdf_eq_average, hmean]
 
 /-- The target expectations are on the original finite cyclic laws, not
 on a renamed or hypothesized limiting law. The conclusion is uniform in

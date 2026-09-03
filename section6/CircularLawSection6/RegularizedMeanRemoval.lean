@@ -29,7 +29,7 @@ theorem tendsto_of_iterated_approximations
   obtain ⟨k, hk, hcsmall⟩ := ((herror (ε / 3) hthird).and hsmall).exists
   have hpoint := (hX k).eventually (Metric.ball_mem_nhds (c k) hthird)
   filter_upwards [hk, hpoint] with n hn hx
-  rw [Metric.mem_ball, Real.dist_eq] at hcsmall hx
+  rw [Real.dist_eq] at hcsmall hx
   rw [Real.dist_eq]
   have htri := abs_sub_le (Y n) (X k n) target
   have htri2 := abs_sub_le (X k n) (c k) target
@@ -48,6 +48,9 @@ theorem expected_regularized_raw_error_le_cutoff
         t ^ 2 / (2 * a ^ 2) := by
   have hreg := integrable_matrixRegularizedPotential hA hE ht
   have hcut := integrable_matrixCutoffPotential μ A hA hdet hE ha
+  have hcuterr : Integrable
+      (fun ω => |matrixCutoffPotential (A ω) a - matrixRawPotential (A ω)|) μ := by
+    simpa only [Pi.sub_apply] using (hcut.sub hraw).abs
   rw [← integral_sub hraw hreg]
   calc
     _ ≤ ∫ ω, |matrixRawPotential (A ω) - matrixRegularizedPotential (A ω) t| ∂μ :=
@@ -55,15 +58,17 @@ theorem expected_regularized_raw_error_le_cutoff
     _ ≤ ∫ ω, |matrixCutoffPotential (A ω) a - matrixRawPotential (A ω)| +
         t ^ 2 / (2 * a ^ 2) ∂μ := by
       apply integral_mono_ae (hraw.sub hreg).abs
-        (((hcut.sub hraw).abs).add (integrable_const _))
+        (hcuterr.add (integrable_const _))
       filter_upwards [hdet] with ω hω
+      change |matrixRawPotential (A ω) - matrixRegularizedPotential (A ω) t| ≤
+        |matrixCutoffPotential (A ω) a - matrixRawPotential (A ω)| + t ^ 2 / (2 * a ^ 2)
       rw [abs_sub_comm, abs_of_nonneg
         (sub_nonneg.2 (matrixRawPotential_le_regularized (A ω) hω t))]
       have hup := matrixRegularizedPotential_le_cutoff (A ω) ha ht
       have habs := le_abs_self (matrixCutoffPotential (A ω) a - matrixRawPotential (A ω))
       linarith
     _ = _ := by
-      rw [integral_add (hcut.sub hraw).abs (integrable_const _)]
+      rw [integral_add hcuterr (integrable_const _)]
       simp only [integral_const, probReal_univ, smul_eq_mul, one_mul]
 
 theorem matrixRaw_mean_of_regularized_mean_limits

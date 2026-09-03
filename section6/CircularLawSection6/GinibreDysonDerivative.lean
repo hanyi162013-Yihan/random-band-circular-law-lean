@@ -99,6 +99,7 @@ theorem continuousAt_dysonA (z : ℂ) {t : ℝ} (ht : 0 < t) : ContinuousAt (dys
 
 theorem continuousAt_dysonV (z : ℂ) {t : ℝ} (ht : 0 < t) : ContinuousAt (dysonV z) t := by
   have h := (continuousAt_dysonA z ht).sub continuousAt_id
+  change ContinuousAt (fun s : ℝ => dysonA z s - s) t at h
   simpa only [dysonA, add_sub_cancel_left] using h
 
 theorem continuousOn_dysonV (z : ℂ) : ContinuousOn (dysonV z) (Ioi 0) :=

@@ -85,10 +85,13 @@ run_cmd do
     `CircularLawSection6.GinibreReferenceSources.ginibre_regularizedMean_eq_cyclic,
     `CircularLawSection6.ginibre_raw_tight_of_bbv,
     `CircularLawSection6.ginibre_raw_uniform_secondMoment_of_bbv,
+    `CircularLawSection6.ginibreLowerCutoff_L1_of_bbv,
     `CircularLawSection6.ginibre_iterated_lowerCutoff_L1_of_bbv,
     `CircularLawSection6.ginibre_raw_mean_of_bbv,
     `CircularLawSection6.ginibre_raw_probability_of_bbv,
     `CircularLawSection6.ginibreLogPotential_of_bbv,
+    `CircularLawSection6.bc12_of_bbv,
+    `CircularLawSection6.ginibre_spectral_of_bbv,
     `CircularLawSection6.NoncompactProfile.GaussianProfileBBVSources,
     `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources,
     `Arxiv2410V3.normSq_mul_add_nonneg_le,
@@ -126,5 +129,7 @@ run_cmd do
 #check CircularLawSection6.GinibreBBV.ginibre_cyclic_regularizedMean_tendsto_of_bbv
 #check CircularLawSection6.ginibre_iterated_lowerCutoff_L1_of_bbv
 #check CircularLawSection6.ginibreLogPotential_of_bbv
+#check CircularLawSection6.bc12_of_bbv
+#check CircularLawSection6.ginibre_spectral_of_bbv
 #check CircularLawSection6.NoncompactProfile.GaussianProfileBBVSources
 #check CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources

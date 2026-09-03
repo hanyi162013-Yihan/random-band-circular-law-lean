@@ -1,5 +1,5 @@
 import CircularLawSection6.BBVProfileEndpoint
-import CircularLawSection6.GinibreBBVLogPotential
+import CircularLawSection6.GinibreBBVConsequences
 
 /-! # Actual profile circular law with no independent Ginibre source
 

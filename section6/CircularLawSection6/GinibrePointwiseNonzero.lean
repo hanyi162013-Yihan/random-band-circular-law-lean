@@ -1,6 +1,7 @@
 import CircularLawSection6.GinibreGaussianLaw
 import ShortRingAnchor.HighProbabilityTransfer
 import ShortRingAnchor.LeastSingularValueAdapter
+import Mathlib.Topology.Instances.Matrix
 
 /-! # Ginibre nonsingularity at every fixed complex shift
 
@@ -61,8 +62,7 @@ theorem ginibre_shifted_det_ne_zero (N : ℕ) [NeZero N] (z : ℂ) :
   have hmeas : Measurable (fun ω => (ginibreMatrix N ω - z • 1).det) := by
     have hA : Measurable (fun ω => ginibreMatrix N ω - z • 1) :=
       (ginibreMatrix_measurable N).sub measurable_const
-    simp only [Matrix.det_apply]
-    fun_prop
+    exact continuous_id.matrix_det.measurable.comp hA
   have heq (ω : ℕ → ℂ) : (ginibreOnSequence N ω - z • 1).det =
       (ginibreMatrix N (cyclicSamples N ω) - z • 1).det :=
     (congrArg Matrix.det (cyclicSamples_shifted_matrix N ω z).symm).trans

@@ -85,6 +85,7 @@ jobs:
           elif [[ "$BBV_INTERFACE_ONLY" == "true" ]]; then
             lake --no-cache build CircularLawSection6.BBVOnlyProfileEndpoint 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true BBVGinibreAudit.lean 2>&1 | tee verification-ci/axioms.log
+            lake --no-cache env lean -DwarningAsError=true BBVOnlyRegression.lean 2>&1 | tee verification-ci/bbv-regression.log
           else
             lake --no-cache build CircularLawSection6 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true AxiomAudit.lean 2>&1 | tee verification-ci/axioms.log
