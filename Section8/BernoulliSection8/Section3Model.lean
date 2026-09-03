@@ -39,9 +39,9 @@ theorem cyclicSiteSucc_eq_finRotate (s : ℕ) :
 theorem coefficient_eq_physicalProfile (W s : ℕ) :
     Proposition38.coefficient W s = physicalProfile W s := by
   funext i j
-  simp only [Proposition38.coefficient, physicalProfile, Proposition38.siteAdjacent,
-    physicalSiteAdjacent, cyclicSiteSucc_eq_finRotate, blockNormalization]
-  split_ifs <;> rfl
+  unfold Proposition38.coefficient physicalProfile blockNormalization
+  apply if_congr ?_ rfl rfl
+  simp only [Proposition38.siteAdjacent, physicalSiteAdjacent, cyclicSiteSucc_eq_finRotate]
 
 theorem fullBlockMatrix_eq_physical (A : Proposition38.Atom) (W s : ℕ) (sample : InputSpace) :
     Proposition38.fullBlockMatrix (ringArray A ((s + 3) * W)) sample =
