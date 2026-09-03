@@ -1,0 +1,18 @@
+import BernoulliSection10Source.DensityCircularLaw
+
+#print axioms BernoulliSection10Source.planar_highBandLogLimit
+#print axioms BernoulliSection10Source.real_highBandLogLimit
+#print axioms BernoulliSection10Source.planar_density_circular_law
+#print axioms BernoulliSection10Source.real_density_circular_law
+#print axioms BernoulliSection10Source.planar_density_ring_log_limit
+#print axioms BernoulliSection10Source.real_density_ring_log_limit
+
+-- The signature audit is essential: external theorem parameters do not
+-- appear in the kernel-axiom list.
+set_option pp.fullNames true
+#print BernoulliSection10Source.BBVComparisonInput
+#print BernoulliSection10Source.BC12GinibreInput
+#check @BernoulliSection10Source.planar_density_circular_law
+#check @BernoulliSection10Source.real_density_circular_law
+#check @BernoulliSection10Source.planar_density_ring_log_limit
+#check @BernoulliSection10Source.real_density_ring_log_limit
