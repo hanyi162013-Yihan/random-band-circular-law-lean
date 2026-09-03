@@ -704,3 +704,9 @@ example (σ : Measure ℝ) [IsProbabilityMeasure σ] {a C : ℝ} (ha : 0 < a) (h
     (∫ s, Real.log (max s a) - Real.log s ∂σ) =
       ∫ t in Set.Ioc 0 a, σ.real (Set.Iic t) / t :=
   integral_lowerLogError_eq_cdf σ ha hC h
+
+-- A second moment plus the linear hard edge suffices for the full logarithm.
+example (σ : Measure ℝ) [IsProbabilityMeasure σ] {a C : ℝ} (ha : 0 < a) (hC : 0 ≤ C)
+    (h : ∀ t, 0 < t → t ≤ a → σ.real (Set.Iic t) ≤ C * t)
+    (hsecond : Integrable (fun s : ℝ => s ^ 2) σ) : Integrable Real.log σ :=
+  integrable_log_of_hardEdge_secondMoment σ ha hC h hsecond

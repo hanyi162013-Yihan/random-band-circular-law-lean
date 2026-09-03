@@ -34,7 +34,7 @@ theorem integral_lowerLogKernel_right {s : ℝ} (hs : 0 < s) (a : ℝ) :
     apply setIntegral_eq_zero_of_forall_eq_zero
     intro t ht
     have hts : t < s := ht.2.trans_lt (lt_of_not_ge hsa)
-    simp only [lowerLogKernel, indicator_of_notMem (not_le_of_gt hts)]
+    exact indicator_of_notMem (show t ∉ Ici s from not_le_of_gt hts) _
 
 theorem integrable_lowerLogError (σ : Measure ℝ) [IsFiniteMeasure σ]
     {a C : ℝ} (ha : 0 < a) (hC : 0 ≤ C)
