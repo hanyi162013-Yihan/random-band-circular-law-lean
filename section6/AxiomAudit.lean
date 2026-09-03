@@ -51,7 +51,7 @@ run_cmd do
     `CircularLawSections56.Section5.publishedSection3ModelOfSamples]
   let mut checked := 0
   for (name, _) in env.constants do
-    if prefixes.any (fun prefix => prefix.isPrefixOf name) then
+    if prefixes.any (fun pfx => pfx.isPrefixOf name) then
       checked := checked + 1
       for axiomName in ← collectAxioms name do
         unless allowed.contains axiomName do
