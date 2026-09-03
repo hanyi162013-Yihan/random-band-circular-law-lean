@@ -610,3 +610,26 @@ example : CircularLawSections56.Section5.TendstoInProbabilityTri (fun n => cycli
       (fun _ _ => (0 : ℝ)) 0 := by
   simpa only [Nat.add_assoc] using tendstoInProbabilityTri_shift_iff
     (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian) (fun _ _ => (0 : ℝ)) 0 1
+
+-- Arbitrary nonnegative ratio sequences admit the precise sparse/dense extraction.
+example (x : ℕ → ℝ) (hx : ∀ n, 0 ≤ x n) :
+    ∃ φ : ℕ → ℕ, StrictMono φ ∧
+      (Filter.Tendsto (fun n => x (φ n)) Filter.atTop (nhds 0) ∨
+        ∃ c : ℝ, 0 < c ∧ ∀ n, c ≤ x (φ n)) :=
+  exists_sparse_or_dense_subsequence x hx
+
+-- Dense C/N variance bounds meet the explicit 11/12 source threshold.
+example (C : ℝ) : ∀ᶠ n in Filter.atTop,
+    C / ((n + 1 : ℕ) : ℝ) ≤ ((n + 1 : ℕ) : ℝ) ^ (-(11 / 12 : ℝ)) :=
+  eventually_dense_variance_threshold (fun n => n + 1) (Filter.tendsto_add_atTop_nat 1) C
+
+-- The final theorem requires no limit hypothesis on W/N and uses the actual profile matrix.
+example (p : NoncompactProfile) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
+    (hWlim : Filter.Tendsto W Filter.atTop Filter.atTop)
+    (hsource : p.GaussianProfileSourceInputs W) (hHan : HanGaussianDenseInput)
+    (f : ℂ → ℝ) (hf : Continuous f) (hc : HasCompactSupport f) :
+    TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
+      (fun n ω => TaoVuReplacement.realEsdTest
+        (cyclicPhysicalMatrix n (p.matrix (n + 1) (W n) (ω n).1)) f)
+      Filter.atTop (fun _ => ∫ z, f z ∂CircularLawSections56.Section5.circularMeasure) :=
+  p.gaussian_profile_circular_law W hW hWlim hsource hHan f hf hc

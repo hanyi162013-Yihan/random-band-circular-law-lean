@@ -1,4 +1,5 @@
 import CircularLawSection6.ProfileReplacement
+import CircularLawSection6.ProfileComparability
 import CircularLawSections56.Section5.DiskReferenceLaw
 import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
@@ -22,7 +23,7 @@ namespace CircularLawSection6
 theorem eventually_dense_variance_threshold (N : ℕ → ℕ) [∀ n, NeZero (N n)]
     (hN : Tendsto N atTop atTop) (C : ℝ) :
     ∀ᶠ n in atTop, C / (N n : ℝ) ≤ (N n : ℝ) ^ (-(11 / 12 : ℝ)) := by
-  have hp := (Real.tendsto_rpow_atTop (by norm_num : (0 : ℝ) < 1 / 12)).comp
+  have hp := (tendsto_rpow_atTop (by norm_num : (0 : ℝ) < 1 / 12)).comp
     (tendsto_natCast_atTop_atTop.comp hN)
   filter_upwards [hp.eventually_ge_atTop C] with n hn
   calc

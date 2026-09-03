@@ -57,13 +57,17 @@ theorem profile_ginibre_replacement_along_subsequence (p : NoncompactProfile)
     have hy' : TendstoInProbabilityTri (fun k => gaussianProfileLaw (k + 1))
         (fun k ω => matrixRawPotential (ginibreMatrix (k + 1) ω - z • 1)) (target z) := by
       simpa only [gaussianProfileLaw] using hy
-    have hfill := tendstoInProbabilityTri_subsequence_filler
-      (fun k => gaussianProfileLaw (k + 1))
-      (fun k ω => matrixRawPotential (p.matrix (k + 1) (W k) ω - z • 1))
-      (fun k ω => matrixRawPotential (ginibreMatrix (k + 1) ω - z • 1)) φ hφ hx hy'
-    apply hfill.congr ?_ rfl
-    intro k ω
-    by_cases hk : k ∈ Set.range φ <;> simp [A, hk]
+    intro ε hε
+    have hfill := tendsto_subsequence_filler φ hφ
+      (fun k => (gaussianProfileLaw (k + 1)).real
+        {ω | ε ≤ |matrixRawPotential (p.matrix (k + 1) (W k) ω - z • 1) - target z|})
+      (fun k => (gaussianProfileLaw (k + 1)).real
+        {ω | ε ≤ |matrixRawPotential (ginibreMatrix (k + 1) ω - z • 1) - target z|})
+      (hx ε hε) (hy' ε hε)
+    apply hfill.congr'
+    apply Eventually.of_forall
+    intro k
+    by_cases hk : k ∈ Set.range φ <;> simp only [A, hk, reduceIte]
   have hrep := cyclic_matrix_pair_replacement_of_log_limits A (fun k => ginibreMatrix (k + 1)) hA
     (fun k => ginibreMatrix_measurable (k + 1)) hAE (fun k => ginibre_expected_cyclicEnergy (k + 1))
     target hLog hGinibre
