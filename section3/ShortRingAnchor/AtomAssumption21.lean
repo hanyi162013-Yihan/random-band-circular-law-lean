@@ -78,13 +78,14 @@ end AtomMomentAssumption21
 /-- A finite essential upper bound for a density of `nu` with respect to a
 reference measure `lambda`.  This is only a record of a density hypothesis;
 it does not assert any anti-concentration or least-singular-value theorem. -/
+set_option autoImplicit false in
 structure HasBoundedDensityWithRespectTo
     {E : Type*} [MeasurableSpace E]
     (nu lambda : Measure E) where
   density : E -> ENNReal
   densityAEMeasurable : AEMeasurable density lambda
   bound : ENNReal
-  bound_lt_top : bound < top
+  bound_lt_top : bound < (⊤ : ENNReal)
   density_le_bound : ∀ᵐ x ∂lambda, density x <= bound
   law_eq_withDensity : nu = lambda.withDensity density
 

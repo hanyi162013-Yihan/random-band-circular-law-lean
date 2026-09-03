@@ -29,19 +29,6 @@ theorem circularComplexGaussian_publishedMoments :
   unitSecondMoment := circularComplexGaussian_secondMoment
   thirdMomentIntegrable := circularComplexGaussian_thirdMoment_integrable
 
-def circularComplexGaussian_publishedDensity :
-    HasBoundedDensityWithRespectTo (Measure.map id circularComplexGaussian) (volume : Measure ℂ) where
-  density := circularGaussianDensity
-  densityAEMeasurable := (Measure.measurable_rnDeriv circularComplexGaussian volume).aemeasurable
-  bound := 2
-  bound_lt_top := by norm_num
-  density_le_bound := circularGaussianDensity_le_two
-  law_eq_withDensity := by rw [Measure.map_id, circularGaussianDensity_withDensity]
-
-theorem circularComplexGaussian_publishedDensityAlternative :
-    AtomDensityAlternative21 circularComplexGaussian id :=
-  .complex circularComplexGaussian_publishedDensity
-
 def denseFinAtomCoordinate (N : ℕ) [NeZero N] (ij : Fin N × Fin N) : ZMod N × ZMod N :=
   (ZMod.finEquiv N ij.1, ZMod.finEquiv N ij.2 - ZMod.finEquiv N ij.1)
 
@@ -78,7 +65,7 @@ theorem publishedGinibreModel_matrix (N : ℕ) [NeZero N] (ω : ZMod N × ZMod N
       (ginibreMatrix N ω).submatrix (ZMod.finEquiv N) (ZMod.finEquiv N) := by
   ext i j
   simp [publishedGinibreModel, denseV3Model, denseFinAtoms, denseFinAtomCoordinate,
-    ginibreMatrix, weightedCyclicMatrix, Real.sqrt_div, div_eq_mul_inv, mul_comm]
+    ginibreMatrix, weightedCyclicMatrix, div_eq_mul_inv, mul_comm]
 
 theorem publishedGinibreModel_bandwidth (N : ℕ) [NeZero N] :
     IsBandwidth (publishedGinibreModel N).profile (N : ℝ) :=

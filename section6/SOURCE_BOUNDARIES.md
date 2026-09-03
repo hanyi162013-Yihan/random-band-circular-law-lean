@@ -1,5 +1,11 @@
 # Section 6 source boundaries
 
+The current branch includes a user-approved correction to Section 3's
+bounded-density record: its bound is explicitly below ENNReal top, not an
+auto-implicit variable. Concrete Gaussian instantiation and revalidation are
+pending. The historical 122-module checkpoint below predates this correction;
+see `../section3/INTEGRATION_CORRECTIONS.md`.
+
 The target declaration is
 `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_section3`
 in `CircularLawSection6/PublishedSection3GaussianProfile.lean`. The complete 122-module

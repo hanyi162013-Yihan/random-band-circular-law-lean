@@ -1,5 +1,13 @@
 # Direct integration of the checked Section 3 package
 
+**2026-09-03 integration correction:** the historical exact-copy statements
+below describe the initial import. The current development branch corrects
+Section 3's auto-implicit `top` density-bound field to explicit ENNReal top,
+with the user's approval. See `../section3/INTEGRATION_CORRECTIONS.md`.
+The previous green conditional proof did not test whether this density
+premise was inhabitable; the new actual Gaussian constructor does. Fresh
+cloud verification of the corrected dependency is pending.
+
 The Section 6 development branch reuses the exact `section3/` source tree
 from main commit `42c26b672faec82a8ea7999a9cd0778c31618495`.
 All 230 Lean files are byte-identical to the proof-source checkpoint

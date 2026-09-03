@@ -6,6 +6,13 @@ dependencies. No second mathlib checkout or large local download is needed.
 
 ## Main endpoint and verification status
 
+The newest integration is pending fresh cloud verification. A concrete
+Gaussian density constructor exposed an auto-implicit `top` in the imported
+Section 3 density record. The user-approved correction is documented in
+[Section 3 integration corrections](../section3/INTEGRATION_CORRECTIONS.md).
+The 122-module checkpoint below predates that correction and verifies
+conditional proofs, not satisfiability of the former density premise.
+
 The target declaration is
 `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_section3`
 in [PublishedSection3GaussianProfile.lean](CircularLawSection6/PublishedSection3GaussianProfile.lean).

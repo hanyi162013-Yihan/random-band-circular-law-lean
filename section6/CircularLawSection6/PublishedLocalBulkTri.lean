@@ -31,7 +31,7 @@ theorem tendstoInProbabilityTri_of_good_bound
     (hbound : ∀ᶠ n in atTop, ∀ ω ∈ good n, |X n ω| ≤ b n) :
     TendstoInProbabilityTri μ X 0 := by
   have hbadReal : Tendsto (fun n => (μ n).real (good n)ᶜ) atTop (𝓝 0) := by
-    simpa only [Measure.real, ENNReal.toReal_zero, Function.comp_apply] using
+    simpa only [Measure.real, ENNReal.toReal_zero, Function.comp_def] using
       (ENNReal.tendsto_toReal (by simp : (0 : ENNReal) ≠ ∞)).comp hbad
   intro ε hε
   apply squeeze_zero' (Eventually.of_forall fun _ => measureReal_nonneg) ?_ hbadReal
@@ -122,8 +122,13 @@ theorem published_localBulk_tri_of_v3_models
         (fun i => shiftedSingularValueFamily ((modelG n).matrix ω) z i ^ 2) := by
     have hdim : Module.finrank ℂ (EuclideanSpace ℂ (Fin (M n))) = M n := by simp
     unfold matrixSquaredSingularCdfDistanceOn empiricalCdfDistanceOn
-    simp only [shiftedSingularValueFamily, shiftedSingularValue, matrixSingularValue]
-    simp_rw [empiricalCdf_fin_dimension hdim]
+    apply congrArg (fun f : ℝ → ℝ => sSup (f '' Icc 0 (R ^ 2)))
+    funext t
+    exact congrArg₂ (fun x y : ℝ => |x - y|)
+      (empiricalCdf_fin_dimension hdim
+        (fun i => ((modelA n).matrix ω - z • 1).toEuclideanLin.singularValues i ^ 2) t)
+      (empiricalCdf_fin_dimension hdim
+        (fun i => ((modelG n).matrix ω - z • 1).toEuclideanLin.singularValues i ^ 2) t)
   rw [hid, abs_of_nonneg (empiricalCdfDistanceOn_nonneg (sq_nonneg R) _ _)]
   refine h.trans ?_
   calc

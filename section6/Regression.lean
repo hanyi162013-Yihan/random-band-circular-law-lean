@@ -715,6 +715,14 @@ example (σ : Measure ℝ) [IsProbabilityMeasure σ] {a C : ℝ} (ha : 0 < a) (h
 example : ShortRingAnchor.AtomMomentAssumption21 circularComplexGaussian id :=
   circularComplexGaussian_publishedMoments
 
+-- A concrete density constructor guards against vacuous source assumptions.
+example : ShortRingAnchor.HasBoundedDensityWithRespectTo
+    (Measure.map id circularComplexGaussian) (volume : Measure ℂ) :=
+  circularComplexGaussian_publishedDensity
+
+example : circularComplexGaussian_publishedDensity.bound < (⊤ : ENNReal) :=
+  circularComplexGaussian_publishedDensity.bound_lt_top
+
 -- Ordered singular values survive coordinate permutations, including zeros.
 example {ι κ : Type*} [Fintype ι] [DecidableEq ι] [Fintype κ] [DecidableEq κ]
     (e : ι ≃ κ) (A : Matrix ι ι ℂ) (i : ℕ) :

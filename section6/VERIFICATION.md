@@ -1,5 +1,15 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## New density-instantiation correction: cloud check pending
+
+Concrete Gaussian instantiation exposed an incorrectly auto-implicit `top`
+in Section 3's bounded-density record. The field is now the intended
+`bound < (⊤ : ENNReal)`, with auto-implicit variables disabled locally.
+See `../section3/INTEGRATION_CORRECTIONS.md`. The prior 122-module success
+checked conditional theorems with that old premise; it did not prove the
+premise could be instantiated. The new concrete constructor and two regression
+tests must pass with the corrected dependency before this revision is green.
+
 ## Verified 122-module published Section 3 integration
 
 Commit: `5301196f97a7de515d3602df4dc6a20924296f95`.
