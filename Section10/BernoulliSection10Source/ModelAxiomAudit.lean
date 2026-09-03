@@ -1,0 +1,22 @@
+import BernoulliSection10Source.PlanarHighBand
+import BernoulliSection10Source.RealHighBand
+import BernoulliSection10Source.GaussianReferenceModel
+
+#print axioms BernoulliSection10Source.copies_of_product_sampling
+#print axioms BernoulliSection10Source.physical_source_bandwidth
+#print axioms BernoulliSection10Source.physicalPlanarBandModel_identDistrib
+#print axioms BernoulliSection10Source.physical_planar_minimum_input
+#print axioms BernoulliSection10Source.boundedDensityOfMeasureLe
+#print axioms BernoulliSection10Source.exists_real_density_representative
+#print axioms BernoulliSection10Source.physicalRealBandModel_identDistrib
+#print axioms BernoulliSection10Source.physical_real_minimum_input
+
+#check @BernoulliSection10Source.physical_planar_minimum_input
+#check @BernoulliSection10Source.physical_real_minimum_input
+#print axioms BernoulliSection10Source.actualGinibre_nonsingular
+#print axioms BernoulliSection10Source.actualGinibre_row_moments
+
+-- Inspect the upstream density types as well as the constructed adapter.
+#check @ShortRingAnchor.HasBoundedDensityWithRespectTo
+#check @ShortRingAnchor.AtomDensityAlternative21
+#check @BernoulliSection10Source.boundedDensityOfMeasureLe

@@ -1,5 +1,16 @@
 # Section 10 formalization map
 
+The item-by-item real proof descriptions below retain the historical
+`BernoulliSection10` interface. The current final real and planar entry
+points instead live in `BernoulliSection10Source` and construct those
+Section 3 connections internally, retaining only the accepted BBV/BC12
+inputs and real-only geometric Brascamp–Lieb. They passed scoped cloud run
+`33719162307` at `362c47f`. See
+[SOURCE_CONNECTION_AUDIT.md](SOURCE_CONNECTION_AUDIT.md) for both final
+signatures and [COMPLEX_FORMALIZATION_MAP.md](COMPLEX_FORMALIZATION_MAP.md)
+for the planar counterpart of every item. Historical 857-report/full-root
+claims below refer only to the earlier release, not this verification run.
+
 ## Scope and source alignment
 
 The authoritative publication source is

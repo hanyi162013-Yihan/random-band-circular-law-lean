@@ -1,0 +1,157 @@
+structure BernoulliSection10Complex.IsPlanarDensityAtom (μ : MeasureTheory.Measure ℂ) (L : ℝ) : Prop
+number of parameters: 2
+fields:
+  BernoulliSection10Complex.IsPlanarDensityAtom.nonneg : 0 ≤ L
+  BernoulliSection10Complex.IsPlanarDensityAtom.probability : μ Set.univ = 1
+  BernoulliSection10Complex.IsPlanarDensityAtom.density_le : μ ≤ ENNReal.ofReal L • MeasureTheory.MeasureSpace.volume
+  BernoulliSection10Complex.IsPlanarDensityAtom.integrable_id : MeasureTheory.Integrable (fun x => x) μ
+  BernoulliSection10Complex.IsPlanarDensityAtom.centered : ∫ (x : ℂ), x ∂μ = 0
+  BernoulliSection10Complex.IsPlanarDensityAtom.integrable_sq : MeasureTheory.Integrable (fun x => ‖x‖ ^ 2) μ
+  BernoulliSection10Complex.IsPlanarDensityAtom.variance_one : ∫ (x : ℂ), ‖x‖ ^ 2 ∂μ = 1
+constructor:
+  BernoulliSection10Complex.IsPlanarDensityAtom.mk {μ : MeasureTheory.Measure ℂ} {L : ℝ} (nonneg : 0 ≤ L)
+    (probability : μ Set.univ = 1) (density_le : μ ≤ ENNReal.ofReal L • MeasureTheory.MeasureSpace.volume)
+    (integrable_id : MeasureTheory.Integrable (fun x => x) μ) (centered : ∫ (x : ℂ), x ∂μ = 0)
+    (integrable_sq : MeasureTheory.Integrable (fun x => ‖x‖ ^ 2) μ) (variance_one : ∫ (x : ℂ), ‖x‖ ^ 2 ∂μ = 1) :
+    BernoulliSection10Complex.IsPlanarDensityAtom μ L
+@planar_lemma_10_2_rho : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℂ E] {p : ℕ},
+      0 < p →
+        ∀ (v₀ : E) (v : Fin p → E),
+          0 < affineRho v₀ v →
+            (∫⁻ (x : Fin p → ℂ),
+                ENNReal.ofReal
+                  (|Real.log ‖affineValue v₀ v x‖ - Real.log (affineRho v₀ v)| ^ 2) ∂Measure.pi fun x => μ) ≤
+              ENNReal.ofReal (planarAffineLogConstant L * Real.log (Real.exp 1 * ↑p) ^ 2)
+@planar_lemma_10_2_resampling : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℂ E] {p : ℕ},
+      0 < p →
+        ∀ (v₀ : E) (v : Fin p → E),
+          Integrable (fun z => |Real.log ‖affineValue v₀ v z.1‖ - Real.log ‖affineValue v₀ v z.2‖| ^ 2)
+              ((Measure.pi fun x => μ).prod (Measure.pi fun x => μ)) ∧
+            (∫ (x : Fin p → ℂ),
+                ∫ (x' : Fin p → ℂ),
+                  |Real.log ‖affineValue v₀ v x‖ - Real.log ‖affineValue v₀ v x'‖| ^
+                    2 ∂Measure.pi fun x => μ ∂Measure.pi fun x => μ) ≤
+              planarAffineLogConstant L * Real.log (Real.exp 1 * ↑p) ^ 2
+@planar_corollary_10_3 : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℂ E] {ps : List ℕ}
+      {F : MultiAffineRows ps → E},
+      IsMultiAffine F →
+        (∀ p ∈ ps, 0 < p) →
+          F ≠ 0 →
+            ∫⁻ (x : MultiAffineRows ps),
+                  ENNReal.ofReal |Real.log ‖F x‖ - Real.log ‖multiAffineTensorOfFunction F‖| ∂multiAffineRowLaw μ ps ≤
+                multiAffineLogCost (max 1 L) ps ∧
+              ∀ᵐ (x : MultiAffineRows ps) ∂multiAffineRowLaw μ ps, F x ≠ 0
+@planar_lemma_10_5 : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W s : ℕ),
+      0 < W →
+        ∀ (z : ℂ),
+          ∫ (x : IntervalRows W s),
+              BernoulliSection10.maxCenteredDeviation (intervalDegreeLogs W s z) (intervalRowsLaw W s μ)
+                x ∂intervalRowsLaw W s μ ≤
+            √(∑ _r, 1 / 2 * ∑ _i, physicalRowResamplingEnergy W (max 1 L))
+@planar_intervalMaxHodgeEnvelope_memLp_two : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W s : ℕ), 0 < W → ∀ (z : ℂ), MemLp (intervalMaxHodgeEnvelope W s z) 2 (intervalRowsLaw W s μ)
+@planar_intervalMaxHodgeEnvelope_lintegral_le_W_log_eW : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W s : ℕ),
+      0 < W →
+        ∀ (z : ℂ),
+          ∫⁻ (x : IntervalRows W s), ENNReal.ofReal (intervalMaxHodgeEnvelope W s z x) ∂intervalRowsLaw W s μ ≤
+            ↑s * oneSiteMaxHodgeWLogConstant (max 1 L) z * oneSiteWLogScale W
+@planar_proposition_10_7_periodic_seam : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W : ℕ),
+      0 < W →
+        ∀ (z c : ℂ),
+          c ≠ 0 →
+            ∀ (R : Matrix (Fin W ⊕ Fin W) (Fin W ⊕ Fin W) ℂ),
+              IsUnit R.det →
+                ∫⁻ (ep : EndpointBlockPair W),
+                    ∫⁻ (x : PacketAtomRows W),
+                      ENNReal.ofReal
+                        |Real.log
+                              ‖c *
+                                  packetBoundaryEval W z (normalizedBlockMatrix W ep.1) (normalizedBlockMatrix W ep.2) R
+                                    x‖ -
+                            BernoulliSection10.outsideExteriorPressure c
+                              R| ∂packetAtomRowsLaw W μ ∂endpointBlockPairLaw W μ ≤
+                  packetProposition107WLogConstant (max 1 L) z * oneSiteWLogScale W
+@planar_proposition_10_8_integrated_endpoint_comparison : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W : ℕ),
+      0 < W →
+        ∀ (z : ℂ) (Theta : Matrix (Fin W ⊕ Fin W) (Fin W ⊕ Fin W) ℂ),
+          IsUnit Theta.det →
+            ∫⁻ (x : EndpointBlockPair W),
+                ENNReal.ofReal
+                  |Real.log
+                        (BernoulliSection10.packetBoundaryCoefficientNorm z (normalizedBlockMatrix W x.1)
+                          (normalizedBlockMatrix W x.2) Theta) -
+                      1 / 2 * Real.log (BernoulliLinearAlgebra.gramEnergy Theta)| ∂endpointBlockPairLaw W μ ≤
+              packetProposition108WLogConstant (max 1 L) z * oneSiteWLogScale W
+@planar_proposition_10_9 : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W : ℕ),
+      0 < W →
+        ∀ (z : ℂ) (CL BR : Matrix (Fin W) (Fin W) ℂ),
+          IsUnit CL.det →
+            IsUnit BR.det →
+              ∀ (Theta : Matrix (Fin W ⊕ Fin W) (Fin W ⊕ Fin W) ℂ),
+                IsUnit Theta.det →
+                  ∫⁻ (x : PacketAtomRows W),
+                        ENNReal.ofReal
+                          |Real.log ‖packetBoundaryEval W z CL BR Theta x‖ -
+                              Real.log ‖packetBoundaryCoefficientTensor W z CL BR Theta‖| ∂packetAtomRowsLaw W μ ≤
+                      multiAffineLogCost (max 1 L) (List.replicate (PacketAtomRowCount W) (PacketAtomRowCount W)) ∧
+                    ∀ᵐ (x : PacketAtomRows W) ∂packetAtomRowsLaw W μ, packetBoundaryEval W z CL BR Theta x ≠ 0
+@planar_proposition_10_10_packet_reset : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W : ℕ),
+      0 < W →
+        ∀ (r : ℕ) (z : ℂ) (U V : ↥(Matrix.unitaryGroup (Fin W ⊕ Fin W) ℂ)) (s : ↑(Set.powersetCard (Fin W ⊕ Fin W) r)),
+          ∫⁻ (ep : EndpointBlockPair W),
+              ∫⁻ (x : PacketAtomRows W),
+                ENNReal.ofReal
+                  ‖packetScalarCoefficientEval W r z (normalizedBlockMatrix W ep.1) (normalizedBlockMatrix W ep.2) U V s
+                          x‖⁻¹.posLog ∂packetAtomRowsLaw W μ ∂endpointBlockPairLaw W μ ≤
+            packetProposition1010WLogConstant (max 1 L) z * oneSiteWLogScale W
+@planar_physicalPacketResetLoss_integral_le : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W : ℕ),
+      0 < W →
+        ∀ (z : ℂ) (r : Fin (2 * W + 1)) (U V : ↥(Matrix.unitaryGroup (Fin W ⊕ Fin W) ℂ))
+          (s : ↑(Set.powersetCard (Fin W ⊕ Fin W) ↑r)),
+          ∫ (x : IntervalRows W 3), physicalPacketResetLoss W z r U V s x ∂intervalRowsLaw W 3 μ ≤
+            physicalPacketResetConstant (max 1 L) z * ↑W * BernoulliSection10.densityLogScale W
+@planar_intervalPressure_reset_increment : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W p q : ℕ),
+      0 < W →
+        ∀ (z : ℂ) (r : Fin (2 * W + 1)),
+          |intervalPressure μ W (q + 3 + p) z r - (intervalPressure μ W p z r + intervalPressure μ W q z r)| ≤
+            densityCellMeanErrorConstant (max 1 L) z * ↑W * BernoulliSection10.densityLogScale W
+@planar_cyclicPressure_normalized_L1_bound : ∀ {μ : Measure ℂ} {L : ℝ},
+  IsPlanarDensityAtom μ L →
+    ∀ (W s : ℕ),
+      0 < W →
+        ∀ (z : ℂ),
+          ∫ (x : IntervalRows W (s + 3)),
+              |densityCyclicLogDet W s z x / ↑((s + 3) * W) -
+                  intervalMaxPressure μ W s z / ↑((s + 3) * W)| ∂intervalRowsLaw W (s + 3) μ ≤
+            cyclicPressureErrorBound (max 1 L) W s z / ↑((s + 3) * W)
+density_ring_energy_limit_of_second_moment : ∀ (μ : Measure ℂ) [inst : IsProbabilityMeasure μ],
+  Integrable (fun x => ‖x‖ ^ 2) μ →
+    ∫ (x : ℂ), ‖x‖ ^ 2 ∂μ = 1 →
+      ∀ (W s : ℕ → ℕ),
+        (∀ (n : ℕ), 0 < W n) →
+          Filter.Tendsto W Filter.atTop Filter.atTop →
+            BernoulliSection10.ProbabilityLimits.TendstoInProbabilityTri (fun n => intervalRowsLaw (W n) (s n + 3) μ)
+              (fun n x => (∑ i, ∑ j, ‖densityCyclicMatrix (W n) (s n) x i j‖ ^ 2) / ↑((s n + 3) * W n)) 1

@@ -1,0 +1,77 @@
+[axiom-audit] Section10/BernoulliSection10Complex/GaussianReferenceAxiomAudit.lean: 5 reports expected
+'BernoulliSection10.SourceInputs.circularGaussianAtom_memLp' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10.SourceInputs.circularGaussianAtom_centered' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection10.SourceInputs.circularGaussianAtom_second_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection10.SourceInputs.circularGaussianAtom_third_integrable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection10.SourceInputs.circularGaussianAtom_law_le_volume' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+[axiom-audit] PASS Section10/BernoulliSection10Complex/GaussianReferenceAxiomAudit.lean: 5 reports
+[axiom-audit] Section10/BernoulliSection10Source/ModelAxiomAudit.lean: 10 reports expected
+'BernoulliSection10Source.copies_of_product_sampling' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.physical_source_bandwidth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.physicalPlanarBandModel_identDistrib' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BernoulliSection10Source.physical_planar_minimum_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.boundedDensityOfMeasureLe' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.exists_real_density_representative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.physicalRealBandModel_identDistrib' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.physical_real_minimum_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+@BernoulliSection10Source.physical_planar_minimum_input : ∀ {μ : MeasureTheory.Measure ℂ} {L : ℝ},
+  BernoulliSection10Complex.IsPlanarDensityAtom μ L →
+    MeasureTheory.Integrable (fun x => ‖x‖ ^ 3) μ →
+      ∀ (W s : ℕ → ℕ) (hW : ∀ (n : ℕ), 0 < W n),
+        Filter.Tendsto (fun n => (s n + 3) * W n) Filter.atTop Filter.atTop →
+          ∀ {χ κ : ℝ},
+            0 < χ →
+              χ ≤ 1 / 2 →
+                0 < κ →
+                  (∀ᶠ (n : ℕ) in Filter.atTop, ↑((s n + 3) * W n) ^ (1 / 2 + χ) ≤ ↑(W n)) →
+                    ∀ (z : ℂ),
+                      ∃ good,
+                        ShortRingAnchor.Theorem31MinimumSingularValueInput ⋯
+                          (BernoulliSection10Complex.SourceInputs.inputLaw μ)
+                          (fun n =>
+                            BernoulliSection10Complex.SourceInputs.profileMatrix
+                              (BernoulliSection10.physicalProfile (W n) (s n)))
+                          z (ShortRingAnchor.sourceHardEdgeScale (fun n => (s n + 3) * W n) W κ) good
+@BernoulliSection10Source.physical_real_minimum_input : ∀ {μ : MeasureTheory.Measure ℝ} {L : ℝ},
+  BernoulliSection10.IsBoundedDensityAtom μ L →
+    MeasureTheory.Integrable (fun x => |x| ^ 3) μ →
+      LivshytsProjectionFormalization.RealFiniteGeometricBrascampLieb →
+        ∀ (W s : ℕ → ℕ) (hW : ∀ (n : ℕ), 0 < W n),
+          Filter.Tendsto (fun n => (s n + 3) * W n) Filter.atTop Filter.atTop →
+            ∀ {χ κ : ℝ},
+              0 < χ →
+                χ ≤ 1 / 2 →
+                  0 < κ →
+                    (∀ᶠ (n : ℕ) in Filter.atTop, ↑((s n + 3) * W n) ^ (1 / 2 + χ) ≤ ↑(W n)) →
+                      ∀ (z : ℂ),
+                        ∃ good,
+                          ShortRingAnchor.Theorem31MinimumSingularValueInput ⋯
+                            (BernoulliSection10.SourceInputs.inputLaw μ)
+                            (fun n =>
+                              BernoulliSection10.SourceInputs.profileMatrix
+                                (BernoulliSection10.physicalProfile (W n) (s n)))
+                            z (ShortRingAnchor.sourceHardEdgeScale (fun n => (s n + 3) * W n) W κ) good
+'BernoulliSection10Source.actualGinibre_nonsingular' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.actualGinibre_row_moments' depends on axioms: [propext, Classical.choice, Quot.sound]
+@ShortRingAnchor.HasBoundedDensityWithRespectTo : {E : Type u_1} →
+  [inst : MeasurableSpace E] → MeasureTheory.Measure E → MeasureTheory.Measure E → Type u_1
+@ShortRingAnchor.AtomDensityAlternative21 : {Omega : Type u_1} →
+  [inst : MeasurableSpace Omega] → MeasureTheory.Measure Omega → (Omega → ℂ) → Prop
+@BernoulliSection10Source.boundedDensityOfMeasureLe : {E : Type u_1} →
+  [inst : MeasurableSpace E] →
+    {μ ν : MeasureTheory.Measure E} →
+      [MeasureTheory.SigmaFinite μ] →
+        [MeasureTheory.SigmaFinite ν] →
+          {L : ℝ} → μ ≤ ENNReal.ofReal L • ν → ShortRingAnchor.HasBoundedDensityWithRespectTo μ ν
+[axiom-audit] PASS Section10/BernoulliSection10Source/ModelAxiomAudit.lean: 10 reports
+[axiom-audit] PASS: 2 files, 15 reports; allowed axioms: Classical.choice, Quot.sound, propext

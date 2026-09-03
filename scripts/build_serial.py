@@ -11,6 +11,9 @@ With --start-at MODULE, still compute the full selected dependency closure,
 but omit earlier per-module commands. Every remaining command and the final
 target check uses normal Lake dependency validation; omitted modules are
 never treated as successfully verified by this script.
+With --cached-fast-path, first ask Lake whether every selected module is
+up to date. Only a successful no-build probe permits a single ordinary
+build of all those modules; otherwise use the serial loop unchanged.
 
 Requires Python 3.11+. Fetch the pinned dependency cache before running this
 script: project modules are serialized, but Lake manages external dependencies.
@@ -157,6 +160,17 @@ def dependency_closure(dependencies: dict[str, set[str]], targets: list[str]) ->
     return {name: dependencies[name] for name in sorted(selected)}
 
 
+def build_if_all_cached(root: Path, order: list[str]) -> bool:
+    """Fast path only if Lake validates every module; never rebuild in the probe."""
+    probe = subprocess.run(["lake", "--no-build", "build", *order], cwd=root, check=False)
+    if probe.returncode != 0:
+        return False
+    print("Lake validated every selected module as cached; checking all with normal lake build.",
+          flush=True)
+    subprocess.run(["lake", "build", *order], cwd=root, check=True)
+    return True
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dry-run", action="store_true", help="print module order; do not run Lake")
@@ -168,6 +182,8 @@ def main() -> int:
                         help="continue independent branches after a failed module")
     parser.add_argument("--start-at", metavar="MODULE",
                         help="start per-module commands here; normal Lake dependency and final checks remain")
+    parser.add_argument("--cached-fast-path", action="store_true",
+                        help="use one normal all-module build only if Lake first validates every cached target")
     args = parser.parse_args()
     root = args.root.resolve()
     targets = list(dict.fromkeys(args.target))
@@ -192,6 +208,11 @@ def main() -> int:
         if start_index:
             print(f"Starting at {args.start_at}; omitting {start_index} earlier per-module commands. "
                   "Lake still validates dependencies and final targets.", flush=True)
+        if args.cached_fast_path and build_if_all_cached(root, order):
+            final_command = ["lake", "build", *targets]
+            print(f"Checking final targets: {' '.join(final_command)}", flush=True)
+            subprocess.run(final_command, cwd=root, check=True)
+            return 0
         failed = set()
         skipped = set()
         for index, name in enumerate(commands, start_index + 1):

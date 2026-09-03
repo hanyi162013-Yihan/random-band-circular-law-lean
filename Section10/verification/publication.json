@@ -1,0 +1,16 @@
+{
+  "verified_proof_source": "362c47fe69c5330b18e1818497dcbbe4433df1be",
+  "verified_documentation_head": "a76fc3155b622b948b662c8782ff842cf9127453",
+  "publication_base_main": "4707c052a091c1398996a0ec99927c7fee101b66",
+  "canonical_density_fix": "5c7be7bf2bd843ccdbfb45fdc0144e3dc7163278",
+  "merge_conflicts": false,
+  "section10_lean_files_identical_to_verified_source": 207,
+  "combined_section10_import_closure_identical_modules": 463,
+  "configuration_and_verification_files_identical": 8,
+  "final_endpoint_import_closure_modules": 447,
+  "proposition38_modules_in_checked_closure": 0,
+  "unrelated_main_files_preserved": true,
+  "source_manifest_entries_verified": 286,
+  "additional_compilation": false,
+  "reason": "All Section 10 Lean source, actual dependencies, pins and verification configuration are byte-identical to the successful scoped cloud check. Main's unrelated additions are preserved but are not part of this formalization or verification claim."
+}
