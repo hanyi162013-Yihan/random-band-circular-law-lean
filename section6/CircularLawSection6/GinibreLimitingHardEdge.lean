@@ -12,6 +12,9 @@ proved. The only extra comparison source is the named BBV literature instance.
 open MeasureTheory Filter Topology Set Arxiv2410V3
 open CircularLawSections56.Section5
 noncomputable section
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option maxHeartbeats 800000
 
 namespace CircularLawSection6
 
@@ -29,12 +32,17 @@ theorem GinibreSquaredTestInput.toPublished (M : ℕ → ℕ+) (z : ℂ) (σ : M
         (fun n ω => matrixSquaredSingularAverage ((publishedGinibreModel (M n)).matrix ω - z • 1) φ)
         (∫ s, φ (s ^ 2) ∂σ) := by
   intro φ hφ hbound
-  apply tendstoInProbabilityTri_congr_ae _ _ _ _ _ (hweak φ hφ hbound)
-  intro n
-  filter_upwards with ω
-  rw [publishedGinibreModel_matrix]
-  exact (matrixSquaredSingularAverage_shifted_reindex (ZMod.finEquiv (M n)).symm
-    (ginibreMatrix (M n) ω) z φ).symm
+  have heq (n : ℕ) (ω : ZMod (M n) × ZMod (M n) → ℂ) :
+      matrixSquaredSingularAverage ((publishedGinibreModel (M n)).matrix ω - z • 1) φ =
+        matrixSquaredSingularAverage (ginibreMatrix (M n) ω - z • 1) φ := by
+    rw [publishedGinibreModel_matrix]
+    exact matrixSquaredSingularAverage_shifted_reindex (ZMod.finEquiv (M n)).symm
+      (ginibreMatrix (M n) ω) z φ
+  exact tendstoInProbabilityTri_congr_ae
+    (fun n => cyclicAtomLaw (M n) circularComplexGaussian)
+    (fun n ω => matrixSquaredSingularAverage (ginibreMatrix (M n) ω - z • 1) φ)
+    (fun n ω => matrixSquaredSingularAverage ((publishedGinibreModel (M n)).matrix ω - z • 1) φ)
+    (fun n => ae_of_all _ (fun ω => (heq n ω).symm)) _ (hweak φ hφ hbound)
 
 theorem ginibre_limiting_linearHardEdge (M : ℕ → ℕ+)
     (hM : Tendsto (fun n => (M n : ℕ)) atTop atTop) (z : ℂ)
@@ -48,7 +56,7 @@ theorem ginibre_limiting_linearHardEdge (M : ℕ → ℕ+)
     (gaussianSection3ComparisonConstant_ge_eight comparisonConstant)
     (fun n => publishedGinibreModel_bandwidth (M n))
     (fun n => publishedGinibreModel_thirdMoment_bound (M n) comparisonConstant)
-    (hweak.toPublished M z σ) hBBV
+    (GinibreSquaredTestInput.toPublished M z σ hweak) hBBV
 
 theorem ginibre_limiting_log_integrable (M : ℕ → ℕ+)
     (hM : Tendsto (fun n => (M n : ℕ)) atTop atTop) (z : ℂ)

@@ -10,6 +10,7 @@ its logarithmic normalization are explicit, not source assumptions.
 
 open MeasureTheory Set Filter Topology
 noncomputable section
+set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6

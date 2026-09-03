@@ -13,6 +13,7 @@ open MeasureTheory Set Filter Topology ShortRingAnchor Arxiv2410V3
 open CircularLawSections56.Section5
 open scoped ENNReal
 noncomputable section
+set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6

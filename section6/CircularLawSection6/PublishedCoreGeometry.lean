@@ -13,6 +13,7 @@ constant. Neither bound is an extra asymptotic hypothesis.
 open MeasureTheory Filter Topology ShortRingAnchor
 open CircularLawSections56.Section5
 noncomputable section
+set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6

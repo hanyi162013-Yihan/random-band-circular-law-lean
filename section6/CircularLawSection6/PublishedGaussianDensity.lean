@@ -9,6 +9,7 @@ can be inhabited. The finite-density bound must refer to the ENNReal top.
 open MeasureTheory ShortRingAnchor
 open CircularLawSections56.Section5
 noncomputable section
+set_option autoImplicit false
 
 namespace CircularLawSection6
 

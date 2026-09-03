@@ -11,6 +11,7 @@ raw/inverse-moment sources identify the full logarithmic integral.
 open MeasureTheory Filter Topology
 open CircularLawSections56.Section5
 noncomputable section
+set_option autoImplicit false
 
 namespace CircularLawSection6
 

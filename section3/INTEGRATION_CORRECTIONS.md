@@ -2,7 +2,10 @@
 
 The Section 6 development branch was initially an exact copy of main's
 Section 3 source at `42c26b672faec82a8ea7999a9cd0778c31618495`.
-Its original source manifest describes that imported snapshot.
+Its source manifest preserves the imported snapshot entries except for the
+corrected `AtomAssumption21.lean`, whose size and hash are updated explicitly.
+The original file had SHA256
+`4c2184cd8bb5a135f334d095d4ba3565d504c641f3f59e080a102fb252909b16`.
 
 Actual Gaussian-model instantiation exposed a source-definition error in
 `ShortRingAnchor/AtomAssumption21.lean`:

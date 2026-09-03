@@ -13,6 +13,7 @@ almost-everywhere spectral parameter; no uncountable intersection is used.
 open MeasureTheory Set Filter Topology
 open CircularLawSections56.Section5 CircularLawSections56.Section6
 noncomputable section
+set_option autoImplicit false
 
 namespace CircularLawSection6
 

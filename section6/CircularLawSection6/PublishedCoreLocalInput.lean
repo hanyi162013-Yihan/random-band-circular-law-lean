@@ -11,6 +11,7 @@ limiting Ginibre singular law remains the named classical bounded-test input.
 
 open MeasureTheory Filter Topology ShortRingAnchor Arxiv2410V3
 noncomputable section
+set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6.CoreRadiusBounds

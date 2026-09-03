@@ -11,6 +11,7 @@ coupling and Gaussian-law fields. BBV Theorem 2.8 remains the literature input.
 
 open MeasureTheory Filter Topology Arxiv2410V3
 noncomputable section
+set_option autoImplicit false
 
 namespace CircularLawSection6
 

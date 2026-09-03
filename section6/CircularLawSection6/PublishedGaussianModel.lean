@@ -14,6 +14,7 @@ and the matrix identity includes its exact square-root normalization.
 open MeasureTheory ProbabilityTheory ShortRingAnchor Arxiv2410V3
 open CircularLawSections56.Section5 CircularLawSection4
 noncomputable section
+set_option autoImplicit false
 
 namespace CircularLawSection6
 

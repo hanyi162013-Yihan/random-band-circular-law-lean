@@ -10,6 +10,7 @@ This argument also covers zero singular values and arbitrary spectral tests.
 -/
 
 noncomputable section
+set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 open scoped BigOperators
 

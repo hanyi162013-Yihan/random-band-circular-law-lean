@@ -14,7 +14,9 @@ open MeasureTheory Set Filter Topology ShortRingAnchor Arxiv2410V3
 open CircularLawSections56.Section5
 open scoped BigOperators
 noncomputable section
+set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
+set_option maxHeartbeats 800000
 
 namespace CircularLawSection6
 
