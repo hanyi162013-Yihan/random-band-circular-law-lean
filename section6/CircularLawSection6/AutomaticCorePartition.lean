@@ -37,7 +37,7 @@ theorem unitCore_cutoff_limit_of_local_inputs_ae (p : NoncompactProfile)
   have hfitN (n : ℕ) : 2 * H n + 1 ≤ N n := (hwidth n).symm.trans_le (hglobal n)
   choose q len hq hsum hsize hmin using
     (fun n => exists_one_or_periodic_block_lengths (hfitN n) (hfitm n))
-  letI : ∀ n j, NeZero (len n j) := fun n j => ⟨by have := (hsize n j).1; omega⟩
+  let : ∀ n j, NeZero (len n j) := fun n j => ⟨by have := (hsize n j).1; omega⟩
   have hN : (fun n => ∑ j, len n j) = N := funext hsum
   subst N
   let b (n : ℕ) := p.coreRoutedAmplitude (∑ j, len n j) (d n) (H n) (hwidth n) (center n) (W n)

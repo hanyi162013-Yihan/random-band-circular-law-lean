@@ -600,3 +600,11 @@ example : quadraticBlockScale 2 = 25 := by decide
 
 example (H : ℕ) : (H : ℝ) / quadraticBlockScale H ≤ 1 / ((H : ℝ) + 1) :=
   quadraticBlockScale_ratio_le H
+
+-- Varying-dimension probability limits survive removing a finite prefix.
+example : TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 2) circularComplexGaussian)
+    (fun _ _ => (0 : ℝ)) 0 ↔
+    TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
+      (fun _ _ => (0 : ℝ)) 0 := by
+  simpa only [Nat.add_assoc] using tendstoInProbabilityTri_shift_iff
+    (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian) (fun _ _ => (0 : ℝ)) 0 1
