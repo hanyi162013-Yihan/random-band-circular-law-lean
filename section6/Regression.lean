@@ -684,6 +684,19 @@ example {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} {νA νG : Measure �
       atTop (fun _ => ∫ z, f z ∂CircularLawSections56.Section5.circularMeasure) :=
   p.gaussian_profile_circular_law_of_published_section3 W hW hWlim hsource hHan f hf hc
 
+-- The newest entry derives local CDF comparison from the actual BBV source models.
+example {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} {νA νG : Measure ℂ}
+    [IsProbabilityMeasure μ] [IsProbabilityMeasure νA] [IsProbabilityMeasure νG]
+    (p : NoncompactProfile) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
+    (hWlim : Tendsto W atTop atTop)
+    (hsource : NoncompactProfile.GaussianProfilePublishedSources μ νA νG p W hW)
+    (hHan : HanGaussianDenseInput) (f : ℂ → ℝ) (hf : Continuous f) (hc : HasCompactSupport f) :
+    TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
+      (fun n ω => TaoVuReplacement.realEsdTest
+        (cyclicPhysicalMatrix n (p.matrix (n + 1) (W n) (ω n).1)) f)
+      atTop (fun _ => ∫ z, f z ∂CircularLawSections56.Section5.circularMeasure) :=
+  p.gaussian_profile_circular_law_of_published_sources W hW hWlim hsource hHan f hf hc
+
 -- The actual signed column placement agrees, not merely its cardinality.
 example (i : Fin 4) (s : Fin 3) :
     ZMod.finEquiv 4 (ShortRingAnchor.cyclicColumn (by norm_num : 2 * 1 + 1 ≤ 4) i s) =
@@ -736,3 +749,8 @@ example (M : ℕ → ℕ+) (hM : Tendsto (fun n => (M n : ℕ)) atTop atTop) (z 
     (hBBV : GinibreBBVInput M z comparisonConstant)
     {t : ℝ} (ht : 0 < t) : σ.real (Set.Iic t) ≤ 2 * t :=
   ginibre_limiting_linearHardEdge M hM z σ hpos hweak hBBV t ht
+
+example (σ : Measure ℝ) (hCDF : ∀ t, 0 < t → σ.real (Set.Iic t) ≤ 2 * t)
+    {v t : ℝ} (hv : (1 / 4 : ℝ) ≤ v) (ht : 0 < t) :
+    (varianceScaledSingularLaw v σ).real (Set.Iic t) ≤ 4 * t :=
+  varianceScaledSingularLaw_uniformHardEdge σ hCDF hv t ht

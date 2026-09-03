@@ -75,10 +75,10 @@ end AtomMomentAssumption21
 
 /-! ## The bounded-density alternative in Assumption 2.1 -/
 
+set_option autoImplicit false in
 /-- A finite essential upper bound for a density of `nu` with respect to a
 reference measure `lambda`.  This is only a record of a density hypothesis;
 it does not assert any anti-concentration or least-singular-value theorem. -/
-set_option autoImplicit false in
 structure HasBoundedDensityWithRespectTo
     {E : Type*} [MeasurableSpace E]
     (nu lambda : Measure E) where

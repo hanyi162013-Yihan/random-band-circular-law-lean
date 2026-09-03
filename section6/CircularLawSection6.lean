@@ -125,6 +125,7 @@ import CircularLawSection6.PublishedLocalBulkTri
 import CircularLawSection6.PublishedCyclicGinibre
 import CircularLawSection6.PublishedCoreGeometry
 import CircularLawSection6.PublishedCoreLocalInput
+import CircularLawSection6.PublishedSourceGaussianProfile
 import CircularLawSection6.ClampedCoreGeometry
 import CircularLawSection6.GaussianAtomTransfer
 import CircularLawSection6.ClampedCoreProfile
