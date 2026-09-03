@@ -1,0 +1,8 @@
+import BernoulliSection10Source.PlanarHighBand
+
+#print axioms BernoulliSection10Source.copies_of_product_sampling
+#print axioms BernoulliSection10Source.physical_source_bandwidth
+#print axioms BernoulliSection10Source.physicalPlanarBandModel_identDistrib
+#print axioms BernoulliSection10Source.physical_planar_minimum_input
+
+#check @BernoulliSection10Source.physical_planar_minimum_input

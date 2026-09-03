@@ -63,7 +63,7 @@ These are planned targets, not claims of completed verification.
 | 10.7 | Periodic seam, conditioned outside, all packet blocks integrated | Complex packet laws and actual cyclic determinant | Pending |
 | 10.8 | Coefficient/Gram-volume comparison integrated in endpoints | Complex endpoint law, unchanged deterministic comparison | Pending |
 | 10.9 | Conditional polynomial evaluation in physical row groups | `proposition_10_9`, complex grouped tensor evaluation and actual packet law | Core built in cloud run 33708332599; combined raw-model wrapper audit pending |
-| 10.10 | Fixed-degree unit-frame reset, uniform integrated negative-log bound | Actual complex packet reset; no caller certificate | Pending |
+| 10.10 | Fixed-degree unit-frame reset, uniform integrated negative-log bound | `proposition_10_10_packet_reset`, `physicalPacketResetLoss_integral_le`; actual complex packet law; no caller certificate | Core built in cloud run 33709639103; raw-model wrapper audit pending |
 | 10.30–10.57 | Concrete scales, pressure calibration, mean stitching, remainder, branch assembly, energy | Complex probability laws with shared deterministic scales | Pending |
 | Theorem 2.10 | Planar IID bounded-density finite-third-moment circular law, `W→∞` | Public complex final theorem for actual matrices | Pending |
 
@@ -81,6 +81,14 @@ an internal staging interface, not the requested final public theorem.
 The previously released real result is also in scope for direct Section 3
 instantiation. Its stable proof modules remain unchanged until this last
 integration step; both source-connected endpoints will be cloud-verified.
+
+The internal `HighBandClosure` modules now factor the common last step
+through the actual Proposition 10.1 conclusion. They allow the final source
+adapter to use the Section 3 estimates needed by the full-block model
+directly, without constructing unused stronger versions of every historical
+`Section3Inputs` field. These composition lemmas remain conditional until
+the source adapter is constructed and checked; they are not new permitted
+external inputs.
 
 This extension does not by itself claim directional conditional-density,
 heterogeneous atom-law, or finite-(2+α)-moment generalizations.
