@@ -688,7 +688,7 @@ example {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} {νA νG : Measure �
 example (i : Fin 4) (s : Fin 3) :
     ZMod.finEquiv 4 (ShortRingAnchor.cyclicColumn (by norm_num : 2 * 1 + 1 ≤ 4) i s) =
       ZMod.finEquiv 4 i - (1 : ZMod 4) + (s.val : ZMod 4) :=
-  CircularLawSections56.Section5.section3_cyclicColumn_finEquiv (by norm_num) i s
+  CircularLawSections56.Section5.section3_cyclicColumn_finEquiv (N := 4) (W := 1) (by norm_num) i s
 
 example (σ : Measure ℝ) [IsProbabilityMeasure σ] {t C : ℝ}
     (ht : 0 < t) (h : ‖singularStieltjesTransform σ t‖ ≤ C) :
