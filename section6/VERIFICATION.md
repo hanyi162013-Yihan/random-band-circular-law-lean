@@ -1,5 +1,29 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified seventy-module checkpoint
+
+Commit: `6b58072c4a29ca59db24e8c22a61353cdf78d09f`.
+[Dedicated GitHub run 33699458299](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33699458299),
+job `100475384470`: **success** on 2026-09-03 UTC.
+
+- All 70 modules plus umbrella compiled: 4117 dependency-inclusive jobs.
+- The transitive audit passed: 797 declarations, 702 theorem declarations;
+  only `propext`, `Classical.choice`, and `Quot.sound` are permitted.
+- All 84 strict regressions, source scanning, cache saving and log retention passed.
+
+The seven new modules prove bounded probability-to-mean transport, compact
+logarithmic clipping and energy-controlled upper tails, actual matrix cutoff
+limits from squared-singular tests, normalized routed Gaussian energy,
+periodic/full-band cutoff limit transfer and finite-CDF-to-expected-cutoff
+comparison. Neither a reference limiting singular law nor an expected cutoff
+comparison is silently supplied by the axiom audit: the precise Section 3
+comparison and reference-model hypotheses remain mathematical inputs to connect.
+
+The lower-cutoff uniform-second-moment and coordinate-reindexing additions
+are subsequent work, not covered by this historical green checkpoint. The
+new minimum-three-hour continuation remains active; the full Section 6
+circular law is not yet claimed.
+
 ## Verified sixty-three-module checkpoint
 
 Commit: `a70292fe16ee856c49d1de272798ecacf8a2cf2b`.
@@ -26,7 +50,8 @@ This is still a partial Section 6 result. Genuine compact squared-singular-law
 comparison and fixed-cutoff convergence, the shifted-Ginibre limiting-law
 hard-edge estimate, source-input/finite-prefix assembly, and the final
 dense/sparse replacement endpoint remain unfinished. The six-hour continuation
-was paused at its agreed deadline; that does not assert mathematical completion.
+was paused at its agreed deadline; a new minimum-three-hour continuation has
+since resumed. Neither checkpoint asserts mathematical completion.
 
 ## Verified fifty-seven-module checkpoint
 

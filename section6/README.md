@@ -7,10 +7,18 @@ No second mathlib checkout or large local download is needed.
 
 ## New proof layer
 
-The sixty-three-module checkpoint at commit `a70292f` passed the dedicated
-[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33695166043):
-the publication-layout build, transitive axiom audit (743 declarations,
-652 theorem declarations), and all 74 regression examples.
+The seventy-module checkpoint at commit `6b58072` passed the dedicated
+[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33699458299):
+the publication-layout build, transitive axiom audit (797 declarations,
+702 theorem declarations), and all 84 regression examples.
+
+The newest verified layer derives actual expected cutoff comparison from
+finite-matrix squared-singular CDF comparison in probability and normalized
+second-moment bounds. It also proves compact-test expectation convergence,
+upper logarithmic tail control, routed Gaussian energy bounds and the
+all-admissible-block-length cutoff limit transfer. The source CDF comparison
+and reference-model logarithmic limit still require concrete instantiation;
+these conclusions have not been assumed as expectation bounds.
 
 This includes the actual Gaussian density and atom-log control, core model
 identification, all-positive-dimension determinant concentration, and the
@@ -119,8 +127,8 @@ the indicator-model results, not the noncompact-profile conclusion itself.
 ## Verification
 
 [VERIFICATION.md](VERIFICATION.md) records the exact verified commit and scope:
-54 modules, 622 audited declarations (541 theorem declarations, including
-generated declarations), and 59 regression examples. This is not a proof of
+70 modules, 797 audited declarations (702 theorem declarations, including
+generated declarations), and 84 regression examples. This is not a proof of
 the entire manuscript section.
 
 For an integrated build in this repository layout:

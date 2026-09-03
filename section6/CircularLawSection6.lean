@@ -68,3 +68,6 @@ import CircularLawSection6.CompactCutoffExpectation
 import CircularLawSection6.RoutedCutoffExpectation
 import CircularLawSection6.PeriodicCutoffLimit
 import CircularLawSection6.FiniteCdfCutoffComparison
+import CircularLawSection6.SquareBoundedProbability
+import CircularLawSection6.LowerCutoffSecondMoment
+import CircularLawSection6.CutoffReindexing

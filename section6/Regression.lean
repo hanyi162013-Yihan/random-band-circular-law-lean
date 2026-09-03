@@ -205,214 +205,7 @@ example (z : ℂ) : MemLp (fun η : Fin 1 → ℂ =>
         (fun _ => (1 : ℂ)) (fun _ => (0 : ℂ →L[ℂ] ℂ)))|)
     2 (CircularLawSection4.iidMeasure circularComplexGaussian 1) :=
   (complex_affine_log_memLp_of_diagonal_all_scales circularComplexGaussian
-    circularComplexGaussian_ballBound (by norm_num) (0 : Fin 1) (fun _ => 1)
-    (fun _ => (0 : ℂ →L[ℂ] ℂ)) z (q := 1) zero_lt_one le_rfl (by norm_num)
-    circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment.le).1
-
--- Actual shifted determinants are square-integrable even in dimension one.
-example (z : ℂ) : MemLp (weightedRowsLogDet (1 : Matrix (Fin 1) (Fin 1) ℂ) z) 2
-    (CircularLawSection4.iidMeasure (CircularLawSection4.iidMeasure circularComplexGaussian 1) 1) :=
-  (weightedRowsLogDet_memLp_and_variance circularComplexGaussian circularComplexGaussian_ballBound
-    (by norm_num) (1 : Matrix (Fin 1) (Fin 1) ℂ) z (q := 1) zero_lt_one le_rfl
-    (by intro i; simp) circularComplexGaussian_sq_integrable
-    circularComplexGaussian_secondMoment.le).1
-
--- Column reindexing preserves the actual IID law, including dimension one.
-example : MeasurePreserving (cyclicColumnSample 1) (cyclicAtomLaw 1 circularComplexGaussian)
-    (CircularLawSection4.iidMeasure (CircularLawSection4.iidMeasure circularComplexGaussian 1) 1) :=
-  cyclicColumnSample_measurePreserving 1 circularComplexGaussian
-
--- The exact determinant identity also includes zero matrix scaling.
-example (q : ZMod 3 → ℝ) (z : ℂ) (ω : ZMod 3 × ZMod 3 → ℂ) :
-    weightedRowsLogDet (cyclicRowAmplitude 3 q 0) z (cyclicColumnSample 3 ω) =
-      cyclicRawLogDet 3 q 0 z ω := weightedRowsLogDet_cyclicColumnSample 3 q 0 z ω
-
--- No logarithmic rate limit is left as an additional hypothesis.
-example : Tendsto (fun n : ℕ => (Real.log (Real.exp 1 * (n : ℝ))) ^ 2 / (n : ℝ))
-    atTop (𝓝 0) := tendsto_logEN_sq_div id tendsto_id
-
--- Totalized zero normalization is preserved by the variance identity.
-example {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) (X : Ω → ℝ) :
-    ProbabilityTheory.variance (fun ω => X ω / 0) μ = 0 := by
-  rw [variance_div_const]
-  simp
-
--- The cutoff contraction is global, including negative test arguments.
-example (x y : ℝ) :
-    |Real.log (max x 1) - Real.log (max y 1)| ≤ |x - y| := by
-  simpa using log_max_lipschitz zero_lt_one x y
-
--- The singular-coefficient cost allows zero values without dividing by them.
-example (t : ℝ) (ht : 0 ≤ t) (a b : ℂ) :
-    (‖a‖ ^ 2 + ‖b‖ ^ 2) * (0 - t) ^ 2 ≤
-      ‖(0 : ℂ) * a - (t : ℂ) * b‖ ^ 2 +
-        ‖(0 : ℂ) * b - (t : ℂ) * a‖ ^ 2 :=
-  complex_two_coefficient_cost 0 t le_rfl ht a b
-
--- Dimension normalization is exact, not only an asymptotic constant bound.
-example (e : ℝ) : Real.sqrt (4 * e) / 4 = Real.sqrt e / 2 := by
-  have h4 : Real.sqrt (4 : ℝ) = 2 := by norm_num
-  simpa only [h4] using sqrt_mul_div_dimension (e := e) (by norm_num : (0 : ℝ) < 4)
-
--- Empty raw potentials are totalized, but positive-dimension scaling is not asserted for them.
-example (A : Matrix (Fin 0) (Fin 0) ℂ) : matrixRawPotential A = 0 := by
-  simp [matrixRawPotential]
-
--- Positive scaling is exact already for a one-dimensional nonsingular matrix.
-example (A : Matrix (Fin 1) (Fin 1) ℂ) (hA : A.det ≠ 0) :
-    matrixRawPotential ((2 : ℂ) • A) = Real.log 2 + matrixRawPotential A :=
-  matrixRawPotential_smul A hA (by norm_num)
-
--- A zero energy does not require a separate strictly-positive Cauchy--Schwarz case.
-example {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) [IsProbabilityMeasure μ] :
-    MemLp (fun _ : Ω => Real.sqrt 0) 2 μ :=
-  memLp_sqrt_of_integrable_nonneg μ (fun _ => 0) (integrable_const _)
-    (ae_of_all _ fun _ => le_rfl)
-
--- In dimension one the radius-zero core is already the whole matrix and the tail error vanishes.
-example (p : NoncompactProfile) (W : ℝ) :
-    ∀ᵐ z ∂(volume : Measure ℂ), ∀ a : ℝ, 0 < a →
-      (∫ ω, |matrixCutoffPotential (p.matrix 1 W ω - z • 1) a -
-        matrixCutoffPotential (p.coreMatrix 1 0 W ω - z • 1) a| ∂gaussianProfileLaw 1) ≤ 0 := by
-  have hs : coreOffsets 1 0 = Finset.univ := by decide
-  filter_upwards [p.gaussian_expected_tail_cutoff_ae 1 0 W] with z hz
-  intro a ha
-  simpa only [NoncompactProfile.tailMass, hs, Finset.compl_univ, Finset.sum_empty,
-    Real.sqrt_zero, zero_div] using (hz a ha).2
-
--- The actual upper comparison has no supplied singular-value, energy, or integrability premise.
-example (p : NoncompactProfile) (N H : ℕ) [NeZero N] (W : ℝ) :
-    ∀ᵐ z ∂(volume : Measure ℂ),
-      (∫ ω, p.rawProfileLogDet N W z ω ∂gaussianProfileLaw N) / (N : ℝ) ≤
-        (∫ ω, matrixCutoffPotential (p.coreMatrix N H W ω - z • 1) 1 ∂gaussianProfileLaw N) +
-          Real.sqrt (p.tailMass N H W) := by
-  filter_upwards [p.gaussian_expected_core_full_cutoff_sandwich_ae N H W] with z hz
-  simpa only [div_one] using (hz 1 zero_lt_one).2.2
-
--- Actual radial mean monotonicity includes dimension one and spectral parameter zero.
-example (p : NoncompactProfile) (W : ℝ) :
-    MonotoneOn (fun r => p.scaledUnitCoreMean 1 0 W r 0) (Ioi 0) :=
-  p.scaledUnitCoreMean_monotoneOn 1 0 W 0
-
--- Cutoff scaling permits a zero comparison scale; nonsingularity is a.e. in the parameter.
-example (p : NoncompactProfile) (N H : ℕ) [NeZero N] (W : ℝ) :
-    ∀ᵐ z ∂(volume : Measure ℂ),
-      (∫ ω, |matrixCutoffPotential ((0 : ℂ) • p.unitCoreMatrix N H W ω - z • 1) 1 -
-        matrixCutoffPotential ((1 : ℂ) • p.unitCoreMatrix N H W ω - z • 1) 1|
-        ∂gaussianProfileLaw N) ≤ 1 := by
-  filter_upwards [p.gaussian_unitCore_cutoff_scaling_ae N H W 0 1] with z hz
-  simpa only [zero_sub, abs_neg, abs_one, div_one, Complex.ofReal_zero,
-    Complex.ofReal_one] using (hz 1 zero_lt_one).2.2
-
--- The first positive half-width has exactly three active offsets.
-example : canonicalCoreBand 1 + 2 = 3 := canonicalCoreBand_width (by norm_num)
-
--- The center is the actual half-width, not a dummy boundary filler.
-example : (canonicalCoreCenter 1 (by norm_num)).val = 1 := rfl
-
--- Positive fixed-scale expectation transport also covers the one-dimensional core.
-example (p : NoncompactProfile) (W : ℝ) :
-    ∀ᵐ z ∂(volume : Measure ℂ), p.scaledUnitCoreMean 1 0 W 2 z =
-      Real.log 2 + ∫ ω, p.unitCoreLogPotential 1 0 W (z / (2 : ℂ)) ω ∂gaussianProfileLaw 1 :=
-  p.scaledUnitCoreMean_eq_log_add_ae 1 0 W (by norm_num)
-
--- The cutoff normalization transport itself does not assume a positive limiting mass.
-example (p : NoncompactProfile) (N H : ℕ → ℕ) [∀ n, NeZero (N n)] (W : ℕ → ℝ)
-    (hmass : Tendsto (fun n => p.coreMass (N n) (H n) (W n)) atTop (𝓝 0)) :
-    ∀ᵐ z ∂(volume : Measure ℂ),
-      Tendsto (fun n =>
-        |(∫ ω, matrixCutoffPotential (p.coreMatrix (N n) (H n) (W n) ω - z • 1) 1
-          ∂gaussianProfileLaw (N n)) -
-          ∫ ω, matrixCutoffPotential ((Real.sqrt 0 : ℂ) •
-            p.unitCoreMatrix (N n) (H n) (W n) ω - z • 1) 1
-            ∂gaussianProfileLaw (N n)|) atTop (𝓝 0) :=
-  p.gaussian_core_cutoff_normalization_error N H W hmass zero_lt_one
-
--- With no changed rows, the common-atom coupling has exactly zero error bound.
-example {ι κ : Type*} [Fintype ι] [DecidableEq ι] [Fintype κ]
-    (r₁ r₂ : ι → κ → ι) (h₁ : ∀ i, Function.Injective (r₁ i))
-    (h₂ : ∀ i, Function.Injective (r₂ i)) (h : ∀ i s, r₁ i s = r₂ i s)
-    (b : κ → ℂ) (ω : ι × κ → ℂ) :
-    TaoVuReplacement.hilbertSchmidtSq (routedBandMatrix r₁ b ω - routedBandMatrix r₂ b ω) ≤ 0 := by
-  simpa only [Finset.sum_empty, mul_zero] using
-    routedBand_difference_energy_le r₁ r₂ h₁ h₂ ∅ (fun i _ s => h i s) b ω
-
--- The finite routing constructor also allows an empty slot set.
-example {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (route : ι → Fin 0 → ι) (b : Fin 0 → ℂ) (ω : ι × Fin 0 → ℂ) :
-    routedBandMatrix route b ω = 0 := by
-  ext i j
-  simp [routedBandMatrix]
-
--- Negative displacement at the first row really wraps to the last column.
-example : cyclicFinSlot 1 (0 : Fin 5) (0 : Fin 3) = 4 := by decide
-
--- Two length-five blocks have four boundary rows for half-width one.
-example : (blockBoundaryRows (fun _ : Fin 2 => 5) 1).card = 4 := by decide
-
--- A nonzero remainder is absorbed into an actual block, without a terminal filler.
-example : ∃ (q : ℕ) (len : Fin q → ℕ), 0 < q ∧ (∑ b, len b) = 10 ∧
-    ∀ b, 3 ≤ len b ∧ len b < 6 :=
-  exists_periodic_block_lengths (by decide : 0 < 3) (by decide : 3 ≤ 10)
-
--- Parameter nonvanishing includes empty matrices, whose determinant is one.
-example {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) [IsFiniteMeasure μ] :
-    ∀ᵐ z ∂(volume : Measure ℂ), ∀ᵐ _ω ∂μ,
-      ((0 : Matrix (Fin 0) (Fin 0) ℂ) - z • 1).det ≠ 0 :=
-  ae_shifted_matrix_det_ne_zero μ (fun _ => 0) measurable_const
-
--- Half-width zero changes no matrix entries under block periodicization.
-example {q : ℕ} (len : Fin q → ℕ) [∀ j, NeZero (len j)] [NeZero (∑ j, len j)] :
-    (∫ ω, TaoVuReplacement.hilbertSchmidtSq
-      (routedBandMatrix (fullBlockRoute len 0) (fun _ => (1 : ℂ)) ω -
-        routedBandMatrix (periodicBlockRoute len 0) (fun _ => (1 : ℂ)) ω)
-      ∂Measure.pi (fun _ : ((j : Fin q) × Fin (len j)) × Fin 1 => circularComplexGaussian)) ≤ 0 := by
-  simpa using (periodicization_expected_energy len (H := 0) (fun j => NeZero.pos (len j))
-    (fun _ => 1) (by simp) circularComplexGaussian
-    circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment).2
-
--- The total block-expectation definition has an explicit inactive zero-dimensional branch.
-example (ν : Measure ℂ) (z : ℂ) : cyclicBlockExpectedCutoff 0 0 (fun _ => 1) ν z 1 = 0 := by
-  simp [cyclicBlockExpectedCutoff]
-
--- The exact finite squared-singular CDF controls the bounded matrix test.
-example (A : Matrix (Fin 1) (Fin 1) ℂ) (B : Matrix (Fin 2) (Fin 2) ℂ) :
-    |matrixClippedPotential A 1 2 - matrixClippedPotential B 1 2| ≤
-      matrixSquaredSingularCdfDistanceOn A B 2 * (Real.log 2 - Real.log 1) :=
-  matrixClipped_difference_le_cdf A B zero_lt_one (by norm_num)
-
--- Exact cutoff scaling includes a threshold change, not just an additive logarithm.
-example (A : Matrix (Fin 1) (Fin 1) ℂ) (hA : A.det ≠ 0) :
-    matrixCutoffPotential ((2 : ℂ) • A) 1 =
-      Real.log 2 + matrixCutoffPotential A (1 / 2) :=
-  matrixCutoffPotential_smul A hA (by norm_num) zero_lt_one
-
--- The scalar logarithmic identity holds even below the truncation threshold.
-example : Real.log (max ((2 : ℝ) * 0) 1) =
-    Real.log 2 + Real.log (max (0 : ℝ) (1 / 2)) :=
-  log_max_positive_scale (by norm_num) zero_lt_one 0
-
--- Dimension weights normalize for unequal block lengths as well.
-example : (∑ b : Fin 2, ((![3, 7] b : ℕ) : ℝ) / 10) = 1 :=
-  dimension_weights_sum_one ![3, 7] (by norm_num) (by norm_num [Fin.sum_univ_two])
-
--- A convex block average inherits the common error without a block-count factor.
-example {q : ℕ} (w x : Fin q → ℝ) (hw : ∀ b, 0 ≤ w b) (hsum : ∑ b, w b = 1)
-    (target : ℝ) (hx : ∀ b, |x b - target| ≤ (1 : ℝ) / 10) :
-    |(∑ b, w b * x b) - target| ≤ (1 : ℝ) / 10 :=
-  weighted_block_error_le w x hw hsum target (1 / 10) hx
-
--- Cyclic displacement agrees with the paper's ZMod indexing, including wraparound.
-example : ZMod.finEquiv 5 (cyclicFinSlot 1 (0 : Fin 5) (0 : Fin 3)) =
-    ZMod.finEquiv 5 0 - (1 : ZMod 5) + 0 :=
-  finEquiv_cyclicFinSlot 1 0 0
-
--- The flattened sample used for the original full route has the exact IID law.
-section
-local instance : NeZero (∑ _ : Fin 2, (5 : ℕ)) := ⟨by norm_num [Fin.sum_univ_two]⟩
-
-example (ν : Measure ℂ) [IsProbabilityMeasure ν] :
-    MeasurePreserving (fullBlockPaperSample (fun _ : Fin 2 => 5) 1 1 (by decide))
+ …2953 tokens truncated…ePreserving (fullBlockPaperSample (fun _ : Fin 2 => 5) 1 1 (by decide))
       (Measure.pi (fun _ : ((_b : Fin 2) × Fin 5) × Fin 3 => ν))
       (CircularLawSection4.paperIndicatorSampleMeasure 10 1 ν) :=
   fullBlockPaperSample_measurePreserving (fun _ : Fin 2 => 5) 1 1 (by decide) ν
@@ -506,3 +299,31 @@ example : (∫ ω, TaoVuReplacement.hilbertSchmidtSq (routedBandMatrix (cyclicFi
   simpa using (routedBand_expected_energy (cyclicFinSlot (N := 3) 0)
     (cyclicFinSlot_injective (by decide)) (fun _ => 1) (by simp) circularComplexGaussian
     circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment).2
+
+-- Uniform second moments turn triangular probability convergence into L1 convergence.
+example {Ω : ℕ → Type*} [∀ n, MeasurableSpace (Ω n)]
+    (μ : ∀ n, Measure (Ω n)) [∀ n, IsProbabilityMeasure (μ n)]
+    (X : ∀ n, Ω n → ℝ) (hX : ∀ n, MemLp (X n) 2 (μ n))
+    (hB : ∀ n, (∫ ω, X n ω ^ 2 ∂μ n) ≤ 1)
+    (hp : CircularLawSections56.Section5.TendstoInProbabilityTri μ X 0) :
+    Tendsto (fun n => ∫ ω, |X n ω| ∂μ n) atTop (𝓝 0) :=
+  tendsto_L1_of_ae_uniform_secondMoment_probability μ X hX 1 hB hp
+
+-- The positive logarithmic cutoff square is controlled by normalized matrix energy.
+example (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A.det ≠ 0) :
+    matrixCutoffPotential A 1 ^ 2 ≤ TaoVuReplacement.hilbertSchmidtSq A / 2 := by
+  simpa using matrixCutoffPotential_one_sq_le_energy A hA
+
+-- Lower-cutoff second-moment control is uniform all the way down to zero.
+example (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A.det ≠ 0) {a : ℝ}
+    (ha : 0 < a) (ha1 : a ≤ 1) :
+    (matrixCutoffPotential A a - matrixRawPotential A) ^ 2 ≤
+      2 * (TaoVuReplacement.hilbertSchmidtSq A / 2) + 2 * matrixRawPotential A ^ 2 := by
+  simpa using matrixLowerCutoff_correction_sq_le A hA ha ha1
+
+-- Simultaneous coordinate permutation preserves the actual shifted cutoff.
+example (e : Fin 2 ≃ Fin 2) (A : Matrix (Fin 2) (Fin 2) ℂ) (z : ℂ)
+    (hA : (A - z • 1).det ≠ 0) :
+    matrixCutoffPotential (A.submatrix e.symm e.symm - z • 1) 1 =
+      matrixCutoffPotential (A - z • 1) 1 :=
+  matrixCutoffPotential_shifted_reindex e A z hA zero_lt_one
