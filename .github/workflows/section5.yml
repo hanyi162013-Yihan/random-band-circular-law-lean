@@ -27,6 +27,10 @@ on:
         description: Verify the root and both child projects after Gaussian source migration
         type: boolean
         default: false
+      kernel_replay:
+        description: Additionally replay the Gaussian migration's changed proof modules
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -39,6 +43,8 @@ jobs:
   gaussian-migration:
     if: ${{ inputs.gaussian_migration == true }}
     uses: ./.github/workflows/gaussian-migration.yml
+    with:
+      kernel_replay: ${{ inputs.kernel_replay == true }}
   verify-section5:
     if: ${{ inputs.gaussian_migration != true }}
     runs-on: ubuntu-24.04

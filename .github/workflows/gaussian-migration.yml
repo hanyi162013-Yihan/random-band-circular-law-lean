@@ -1,7 +1,16 @@
 name: Gaussian source migration verification
 on:
   workflow_call:
+    inputs:
+      kernel_replay:
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      kernel_replay:
+        description: Replay the 22 changed proof modules with the pinned Lean kernel
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -86,11 +95,17 @@ jobs:
             section6/.lake/build
           key: ${{ steps.cache.outputs.cache-primary-key }}
       - name: Exact axiom and public-signature audit
+        id: audit
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: |
           set -o pipefail
           python3 scripts/build_gaussian_migration.py --project '${{ matrix.project }}' --audit 2>&1 | tee outputs/gaussian-migration/${{ matrix.project }}/audit.log
           git rev-parse HEAD | tee outputs/gaussian-migration/${{ matrix.project }}/verified-commit.txt
+      - name: Replay changed declarations with the Lean kernel
+        if: ${{ inputs.kernel_replay && steps.audit.outcome == 'success' }}
+        run: |
+          set -o pipefail
+          python3 scripts/replay_gaussian_migration.py --project '${{ matrix.project }}' 2>&1 | tee outputs/gaussian-migration/${{ matrix.project }}/kernel-replay.log
       - name: Preserve reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
