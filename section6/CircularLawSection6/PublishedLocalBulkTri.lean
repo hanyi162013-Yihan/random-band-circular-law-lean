@@ -11,10 +11,16 @@ between the two ensembles is assumed.
 
 open MeasureTheory Set Filter Topology ShortRingAnchor Arxiv2410V3
 open CircularLawSections56.Section5
+open scoped ENNReal
 noncomputable section
 set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
+
+theorem empiricalCdf_fin_dimension {m n : ℕ} (h : m = n) (s : ℕ → ℝ) (t : ℝ) :
+    empiricalCdf (fun i : Fin m => s i) t = empiricalCdf (fun i : Fin n => s i) t := by
+  subst n
+  rfl
 
 theorem tendstoInProbabilityTri_of_good_bound
     {Ω : ℕ → Type*} [∀ n, MeasurableSpace (Ω n)]
@@ -114,8 +120,10 @@ theorem published_localBulk_tri_of_v3_models
       empiricalCdfDistanceOn 0 (R ^ 2)
         (fun i => shiftedSingularValueFamily ((modelA n).matrix ω) z i ^ 2)
         (fun i => shiftedSingularValueFamily ((modelG n).matrix ω) z i ^ 2) := by
-    simp only [matrixSquaredSingularCdfDistanceOn, finrank_euclideanSpace,
-      Fintype.card_fin, shiftedSingularValueFamily, shiftedSingularValue, matrixSingularValue]
+    have hdim : Module.finrank ℂ (EuclideanSpace ℂ (Fin (M n))) = M n := by simp
+    unfold matrixSquaredSingularCdfDistanceOn empiricalCdfDistanceOn
+    simp only [shiftedSingularValueFamily, shiftedSingularValue, matrixSingularValue]
+    simp_rw [empiricalCdf_fin_dimension hdim]
   rw [hid, abs_of_nonneg (empiricalCdfDistanceOn_nonneg (sq_nonneg R) _ _)]
   refine h.trans ?_
   calc

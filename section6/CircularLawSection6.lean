@@ -121,6 +121,7 @@ import CircularLawSection6.GinibreLimitingHardEdge
 import CircularLawSection6.GinibreLimitingLogPotential
 import CircularLawSection6.VarianceScaledSingularLaw
 import CircularLawSection6.PublishedLocalBulkTri
+import CircularLawSection6.PublishedCyclicGinibre
 import CircularLawSection6.ClampedCoreGeometry
 import CircularLawSection6.GaussianAtomTransfer
 import CircularLawSection6.ClampedCoreProfile

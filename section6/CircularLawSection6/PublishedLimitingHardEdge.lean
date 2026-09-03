@@ -64,7 +64,7 @@ theorem matrix_stieltjes_im_eq_squaredPoissonAverage {N : ℕ} [NeZero N]
   apply Fintype.sum_equiv (finCongr hdim)
   intro i
   simp only [squaredPoissonTest_sq, ShortRingAnchor.shiftedSingularValueFamily,
-    ShortRingAnchor.shiftedSingularValue, ShortRingAnchor.matrixSingularValue]
+    ShortRingAnchor.shiftedSingularValue, ShortRingAnchor.matrixSingularValue, finCongr_apply_coe]
 
 theorem mean_poisson_tendsto_of_squaredTests
     {Ω : ℕ → Type*} [∀ n, MeasurableSpace (Ω n)]
