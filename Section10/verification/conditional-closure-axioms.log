@@ -1,0 +1,33 @@
+[axiom-audit] Section10/BernoulliSection10Complex/ClosureAxiomAudit.lean: 2 reports expected
+'BernoulliSection10.density_circular_law_of_highBand' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Complex.density_circular_law_of_highBand' depends on axioms: [propext, Classical.choice, Quot.sound]
+@BernoulliSection10.density_circular_law_of_highBand : ∀ {μ : MeasureTheory.Measure ℝ} {L : ℝ},
+  BernoulliSection10.IsBoundedDensityAtom μ L →
+    BernoulliSection10.HighBandLogLimit μ →
+      ∀ (W s : ℕ → ℕ),
+        (∀ (n : ℕ), 0 < W n) →
+          Filter.Tendsto W Filter.atTop Filter.atTop →
+            ∀ (f : BoundedContinuousFunction ℂ ℝ),
+              MeasureTheory.TendstoInMeasure (MeasureTheory.Measure.infinitePi fun x => μ)
+                (fun n ω =>
+                  TaoVuReplacement.realEsdTest
+                    (BernoulliSection10.densityCyclicMatrix (W n) (s n)
+                      (BernoulliSection10.physicalRowsFromSequence (W n) (s n) ω))
+                    ⇑f)
+                Filter.atTop fun x => ∫ (z : ℂ), f z ∂BernoulliSection10.DiskReference.circularMeasure
+@BernoulliSection10Complex.density_circular_law_of_highBand : ∀ {μ : MeasureTheory.Measure ℂ} {L : ℝ},
+  BernoulliSection10Complex.IsBoundedDensityAtom μ L →
+    BernoulliSection10Complex.HighBandLogLimit μ →
+      ∀ (W s : ℕ → ℕ),
+        (∀ (n : ℕ), 0 < W n) →
+          Filter.Tendsto W Filter.atTop Filter.atTop →
+            ∀ (f : BoundedContinuousFunction ℂ ℝ),
+              MeasureTheory.TendstoInMeasure (MeasureTheory.Measure.infinitePi fun x => μ)
+                (fun n ω =>
+                  TaoVuReplacement.realEsdTest
+                    (BernoulliSection10Complex.densityCyclicMatrix (W n) (s n)
+                      (BernoulliSection10Complex.physicalRowsFromSequence (W n) (s n) ω))
+                    ⇑f)
+                Filter.atTop fun x => ∫ (z : ℂ), f z ∂BernoulliSection10.DiskReference.circularMeasure
+[axiom-audit] PASS Section10/BernoulliSection10Complex/ClosureAxiomAudit.lean: 2 reports
+[axiom-audit] PASS: 1 files, 2 reports; allowed axioms: Classical.choice, Quot.sound, propext

@@ -1,5 +1,12 @@
 # Reproducibility and trust audit
 
+The verification records below belong to the earlier real conditional
+release at their stated commits. They are not verification certificates
+for the new planar/source-connected work on this branch. Its current
+evidence and outstanding checks are in
+[SOURCE_CONNECTION_AUDIT.md](SOURCE_CONNECTION_AUDIT.md), which records
+the successful scoped real/planar verification and 492 reports at `362c47f`.
+
 Scope: the real IID bounded-density finite-third-moment branch of
 [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1), Section 10,
 through its circular-law conclusion. Exact mathematical inputs and

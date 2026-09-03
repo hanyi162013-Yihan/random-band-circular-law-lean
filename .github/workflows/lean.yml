@@ -39,8 +39,10 @@ jobs:
           path: |
             .lake/build
           key: section8-section3-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          # Lake validates source/dependency traces after restoring older library registrations.
           restore-keys: |
             section8-section3-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+            section8-section3-v1-${{ runner.os }}-${{ runner.arch }}-
             subgaussian-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
       - name: Restore proved Section 3 artifacts on integration cache miss
         if: ${{ steps.cache.outputs.cache-matched-key == '' }}

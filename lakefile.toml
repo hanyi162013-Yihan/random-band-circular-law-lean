@@ -1,6 +1,6 @@
 name = "RandomBandCircularLaw"
 version = "0.1.0"
-defaultTargets = ["SubgaussianSection8"]
+defaultTargets = ["SubgaussianSection8", "BernoulliSection10", "BernoulliSection10Complex", "BernoulliSection10Source"]
 
 [[lean_lib]]
 name = "CircularLawSection4"
@@ -19,6 +19,10 @@ name = "BernoulliSection10"
 srcDir = "Section10"
 
 [[lean_lib]]
+name = "BernoulliSection10Complex"
+srcDir = "Section10"
+
+[[lean_lib]]
 name = "BernoulliSection8"
 srcDir = "Section8"
 
@@ -33,6 +37,11 @@ srcDir = "section3"
 [[lean_lib]]
 name = "Vendor"
 srcDir = "section3"
+
+
+[[lean_lib]]
+name = "BernoulliSection10Source"
+srcDir = "Section10"
 
 [[require]]
 name = "mathlib"

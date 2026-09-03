@@ -1,0 +1,10 @@
+import BernoulliSection10Complex.PlanarAnalyticResults
+
+#print axioms BernoulliSection10Complex.IsPlanarDensityAtom.normalized
+#print axioms BernoulliSection10Complex.IsPlanarDensityAtom.complexBallBound
+#print axioms BernoulliSection10Complex.IsBoundedDensityAtom.measure_norm_add_smul_le
+#print axioms BernoulliSection10Complex.IsBoundedDensityAtom.measure_norm_ge_le
+#print axioms BernoulliSection10Complex.planar_lemma_10_2_rho
+#print axioms BernoulliSection10Complex.planar_lemma_10_2_resampling
+#print axioms BernoulliSection10Complex.planar_affine_ne_zero_ae
+#print axioms BernoulliSection10Complex.planar_corollary_10_3

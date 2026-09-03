@@ -1,0 +1,7 @@
+import BernoulliSection10.GaussianReferenceFacts
+
+#print axioms BernoulliSection10.SourceInputs.circularGaussianAtom_memLp
+#print axioms BernoulliSection10.SourceInputs.circularGaussianAtom_centered
+#print axioms BernoulliSection10.SourceInputs.circularGaussianAtom_second_moment
+#print axioms BernoulliSection10.SourceInputs.circularGaussianAtom_third_integrable
+#print axioms BernoulliSection10.SourceInputs.circularGaussianAtom_law_le_volume

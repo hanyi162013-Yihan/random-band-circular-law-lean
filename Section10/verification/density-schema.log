@@ -1,0 +1,125 @@
+✔ [2975/2976] Built ShortRingAnchor.AtomAssumption21 (3.1s)
+ℹ [2976/2976] Built BernoulliSection10Source.DensitySchemaAudit (1.8s)
+info: Section10/BernoulliSection10Source/DensitySchemaAudit.lean:23:0: structure ShortRingAnchor.HasBoundedDensityWithRespectTo.{u_2} {E : Type u_2} [MeasurableSpace E]
+  (nu lambda : @MeasureTheory.Measure E inst✝) : Type u_2
+number of parameters: 4
+fields:
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.density : E → ENNReal
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.densityAEMeasurable : @AEMeasurable E ENNReal ENNReal.measurableSpace
+      inst✝ (@ShortRingAnchor.HasBoundedDensityWithRespectTo.density E inst✝ nu lambda self) lambda
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.bound : ENNReal
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.bound_lt_top : @LT.lt ENNReal
+      (@Preorder.toLT ENNReal (@PartialOrder.toPreorder ENNReal ENNReal.instPartialOrder))
+      (@ShortRingAnchor.HasBoundedDensityWithRespectTo.bound E inst✝ nu lambda self) (@Top.top ENNReal ENNReal.instTop)
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.density_le_bound : @Filter.Eventually E
+      (fun x =>
+        @LE.le ENNReal ENNReal.instLE (@ShortRingAnchor.HasBoundedDensityWithRespectTo.density E inst✝ nu lambda self x)
+          (@ShortRingAnchor.HasBoundedDensityWithRespectTo.bound E inst✝ nu lambda self))
+      (@MeasureTheory.ae E (@MeasureTheory.Measure E inst✝) (@MeasureTheory.Measure.instFunLike E inst✝) ⋯ lambda)
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.law_eq_withDensity : @Eq (@MeasureTheory.Measure E inst✝) nu
+      (@MeasureTheory.Measure.withDensity E inst✝ lambda
+        (@ShortRingAnchor.HasBoundedDensityWithRespectTo.density E inst✝ nu lambda self))
+constructor:
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.mk.{u_2} {E : Type u_2} [MeasurableSpace E]
+    {nu lambda : @MeasureTheory.Measure E inst✝} (density : E → ENNReal)
+    (densityAEMeasurable : @AEMeasurable E ENNReal ENNReal.measurableSpace inst✝ density lambda) (bound : ENNReal)
+    (bound_lt_top :
+      @LT.lt ENNReal (@Preorder.toLT ENNReal (@PartialOrder.toPreorder ENNReal ENNReal.instPartialOrder)) bound
+        (@Top.top ENNReal ENNReal.instTop))
+    (density_le_bound :
+      @Filter.Eventually E (fun x => @LE.le ENNReal ENNReal.instLE (density x) bound)
+        (@MeasureTheory.ae E (@MeasureTheory.Measure E inst✝) (@MeasureTheory.Measure.instFunLike E inst✝) ⋯ lambda))
+    (law_eq_withDensity :
+      @Eq (@MeasureTheory.Measure E inst✝) nu (@MeasureTheory.Measure.withDensity E inst✝ lambda density)) :
+    @ShortRingAnchor.HasBoundedDensityWithRespectTo E inst✝ nu lambda
+info: Section10/BernoulliSection10Source/DensitySchemaAudit.lean:24:0: @ShortRingAnchor.HasBoundedDensityWithRespectTo.bound_lt_top : ∀ {E : Type u_1} [inst : MeasurableSpace E]
+  {nu lambda : @MeasureTheory.Measure E inst} (self : @ShortRingAnchor.HasBoundedDensityWithRespectTo E inst nu lambda),
+  @LT.lt ENNReal (@Preorder.toLT ENNReal (@PartialOrder.toPreorder ENNReal ENNReal.instPartialOrder))
+    (@ShortRingAnchor.HasBoundedDensityWithRespectTo.bound E inst nu lambda self) (@Top.top ENNReal ENNReal.instTop)
+info: Section10/BernoulliSection10Source/DensitySchemaAudit.lean:25:0: inductive ShortRingAnchor.AtomDensityAlternative21.{u_1} : {Omega : Type u_1} →
+  [inst : MeasurableSpace Omega] → @MeasureTheory.Measure Omega inst → (Omega → Complex) → Prop
+number of parameters: 4
+constructors:
+ShortRingAnchor.AtomDensityAlternative21.real : ∀ {Omega : Type u_1} [inst : MeasurableSpace Omega]
+  {mu : @MeasureTheory.Measure Omega inst} {atom : Omega → Complex},
+  @Filter.Eventually Omega
+      (fun sample => @Eq Real (atom sample).im (@OfNat.ofNat Real (nat_lit 0) (@Zero.toOfNat0 Real Real.instZero)))
+      (@MeasureTheory.ae Omega (@MeasureTheory.Measure Omega inst) (@MeasureTheory.Measure.instFunLike Omega inst) ⋯
+        mu) →
+    ∀
+      (boundedDensity :
+        @ShortRingAnchor.HasBoundedDensityWithRespectTo Real Real.measurableSpace
+          (@MeasureTheory.Measure.map Omega Real inst Real.measurableSpace (fun sample => (atom sample).re) mu)
+          (@MeasureTheory.MeasureSpace.volume Real Real.measureSpace)),
+      @ShortRingAnchor.AtomDensityAlternative21 Omega inst mu atom
+ShortRingAnchor.AtomDensityAlternative21.complex : ∀ {Omega : Type u_1} [inst : MeasurableSpace Omega]
+  {mu : @MeasureTheory.Measure Omega inst} {atom : Omega → Complex}
+  (boundedDensity :
+    @ShortRingAnchor.HasBoundedDensityWithRespectTo Complex Complex.measurableSpace
+      (@MeasureTheory.Measure.map Omega Complex inst Complex.measurableSpace atom mu)
+      (@MeasureTheory.MeasureSpace.volume Complex
+        (@measureSpaceOfInnerProductSpace Complex Complex.instNormedAddCommGroup instInnerProductSpaceRealComplex ⋯
+          Complex.measurableSpace Complex.borelSpace))),
+  @ShortRingAnchor.AtomDensityAlternative21 Omega inst mu atom
+Build completed successfully (2976 jobs).
+structure ShortRingAnchor.HasBoundedDensityWithRespectTo.{u_2} {E : Type u_2} [MeasurableSpace E]
+  (nu lambda : @MeasureTheory.Measure E inst✝) : Type u_2
+number of parameters: 4
+fields:
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.density : E → ENNReal
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.densityAEMeasurable : @AEMeasurable E ENNReal ENNReal.measurableSpace
+      inst✝ (@ShortRingAnchor.HasBoundedDensityWithRespectTo.density E inst✝ nu lambda self) lambda
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.bound : ENNReal
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.bound_lt_top : @LT.lt ENNReal
+      (@Preorder.toLT ENNReal (@PartialOrder.toPreorder ENNReal ENNReal.instPartialOrder))
+      (@ShortRingAnchor.HasBoundedDensityWithRespectTo.bound E inst✝ nu lambda self) (@Top.top ENNReal ENNReal.instTop)
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.density_le_bound : @Filter.Eventually E
+      (fun x =>
+        @LE.le ENNReal ENNReal.instLE (@ShortRingAnchor.HasBoundedDensityWithRespectTo.density E inst✝ nu lambda self x)
+          (@ShortRingAnchor.HasBoundedDensityWithRespectTo.bound E inst✝ nu lambda self))
+      (@MeasureTheory.ae E (@MeasureTheory.Measure E inst✝) (@MeasureTheory.Measure.instFunLike E inst✝) ⋯ lambda)
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.law_eq_withDensity : @Eq (@MeasureTheory.Measure E inst✝) nu
+      (@MeasureTheory.Measure.withDensity E inst✝ lambda
+        (@ShortRingAnchor.HasBoundedDensityWithRespectTo.density E inst✝ nu lambda self))
+constructor:
+  ShortRingAnchor.HasBoundedDensityWithRespectTo.mk.{u_2} {E : Type u_2} [MeasurableSpace E]
+    {nu lambda : @MeasureTheory.Measure E inst✝} (density : E → ENNReal)
+    (densityAEMeasurable : @AEMeasurable E ENNReal ENNReal.measurableSpace inst✝ density lambda) (bound : ENNReal)
+    (bound_lt_top :
+      @LT.lt ENNReal (@Preorder.toLT ENNReal (@PartialOrder.toPreorder ENNReal ENNReal.instPartialOrder)) bound
+        (@Top.top ENNReal ENNReal.instTop))
+    (density_le_bound :
+      @Filter.Eventually E (fun x => @LE.le ENNReal ENNReal.instLE (density x) bound)
+        (@MeasureTheory.ae E (@MeasureTheory.Measure E inst✝) (@MeasureTheory.Measure.instFunLike E inst✝) ⋯ lambda))
+    (law_eq_withDensity :
+      @Eq (@MeasureTheory.Measure E inst✝) nu (@MeasureTheory.Measure.withDensity E inst✝ lambda density)) :
+    @ShortRingAnchor.HasBoundedDensityWithRespectTo E inst✝ nu lambda
+@ShortRingAnchor.HasBoundedDensityWithRespectTo.bound_lt_top : ∀ {E : Type u_1} [inst : MeasurableSpace E]
+  {nu lambda : @MeasureTheory.Measure E inst} (self : @ShortRingAnchor.HasBoundedDensityWithRespectTo E inst nu lambda),
+  @LT.lt ENNReal (@Preorder.toLT ENNReal (@PartialOrder.toPreorder ENNReal ENNReal.instPartialOrder))
+    (@ShortRingAnchor.HasBoundedDensityWithRespectTo.bound E inst nu lambda self) (@Top.top ENNReal ENNReal.instTop)
+inductive ShortRingAnchor.AtomDensityAlternative21.{u_1} : {Omega : Type u_1} →
+  [inst : MeasurableSpace Omega] → @MeasureTheory.Measure Omega inst → (Omega → Complex) → Prop
+number of parameters: 4
+constructors:
+ShortRingAnchor.AtomDensityAlternative21.real : ∀ {Omega : Type u_1} [inst : MeasurableSpace Omega]
+  {mu : @MeasureTheory.Measure Omega inst} {atom : Omega → Complex},
+  @Filter.Eventually Omega
+      (fun sample => @Eq Real (atom sample).im (@OfNat.ofNat Real (nat_lit 0) (@Zero.toOfNat0 Real Real.instZero)))
+      (@MeasureTheory.ae Omega (@MeasureTheory.Measure Omega inst) (@MeasureTheory.Measure.instFunLike Omega inst) ⋯
+        mu) →
+    ∀
+      (boundedDensity :
+        @ShortRingAnchor.HasBoundedDensityWithRespectTo Real Real.measurableSpace
+          (@MeasureTheory.Measure.map Omega Real inst Real.measurableSpace (fun sample => (atom sample).re) mu)
+          (@MeasureTheory.MeasureSpace.volume Real Real.measureSpace)),
+      @ShortRingAnchor.AtomDensityAlternative21 Omega inst mu atom
+ShortRingAnchor.AtomDensityAlternative21.complex : ∀ {Omega : Type u_1} [inst : MeasurableSpace Omega]
+  {mu : @MeasureTheory.Measure Omega inst} {atom : Omega → Complex}
+  (boundedDensity :
+    @ShortRingAnchor.HasBoundedDensityWithRespectTo Complex Complex.measurableSpace
+      (@MeasureTheory.Measure.map Omega Complex inst Complex.measurableSpace atom mu)
+      (@MeasureTheory.MeasureSpace.volume Complex
+        (@measureSpaceOfInnerProductSpace Complex Complex.instNormedAddCommGroup instInnerProductSpaceRealComplex ⋯
+          Complex.measurableSpace Complex.borelSpace))),
+  @ShortRingAnchor.AtomDensityAlternative21 Omega inst mu atom

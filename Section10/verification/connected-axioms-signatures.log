@@ -1,0 +1,133 @@
+[axiom-audit] Section10/BernoulliSection10Source/AxiomAudit.lean: 6 reports expected
+'BernoulliSection10Source.planar_highBandLogLimit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.real_highBandLogLimit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.planar_density_circular_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.real_density_circular_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.planar_density_ring_log_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BernoulliSection10Source.real_density_ring_log_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+def BernoulliSection10Source.BBVComparisonInput : Prop :=
+∃ C,
+  0 ≤ C ∧
+    ∀ (Ω E : Type) [inst : MeasurableSpace Ω] [inst_1 : MeasurableSpace E] (P : MeasureTheory.Measure Ω)
+      (μ : MeasureTheory.Measure E) [inst_2 : MeasureTheory.IsProbabilityMeasure P]
+      [inst_3 : MeasureTheory.IsProbabilityMeasure μ] (N : ℕ),
+      0 < N →
+        ∀ (model : Arxiv2410V3.RandomMatrixModelV3 N Ω E P μ) (B : ℝ),
+          Arxiv2410V3.IsBandwidth model.profile B → ∀ (z η : ℂ), 0 < η.im → ShortRingAnchor.CanonicalBBVAt model z η B C
+def BernoulliSection10Source.BC12GinibreInput : Prop :=
+∀ (N : ℕ → ℕ),
+  (∀ (n : ℕ), 0 < N n) →
+    Filter.Tendsto N Filter.atTop Filter.atTop →
+      ∀ (z : ℂ),
+        ∃ p,
+          0 < p ∧
+            ShortRingAnchor.BC12GinibreNegativeMomentTightness BernoulliSection10Source.gaussianSequenceLaw p
+                (ShortRingAnchor.shiftedSingularValueProcess (fun n => BernoulliSection10Source.ginibreOnSequence (N n))
+                  z) ∧
+              ShortRingAnchor.ConvergesInProbability BernoulliSection10Source.gaussianSequenceLaw
+                (fun n ω =>
+                  ShortRingAnchor.normalizedShiftLogDet (BernoulliSection10Source.ginibreOnSequence (N n) ω) z)
+                (ShortRingAnchor.circularLogPotential z)
+def LivshytsProjectionFormalization.RealFiniteGeometricBrascampLieb : Prop :=
+∀ {ι : Type} [inst : Fintype ι] {m : ℕ} (B : ι → LivshytsProjectionFormalization.CoordinateSpace ℝ m →L[ℝ] ℝ)
+  (c : ι → ℝ),
+  (∀ (i : ι), 0 ≤ c i) →
+    (∀ (i : ι), c i ≤ 1) →
+      (∀ (i : ι), ‖B i‖ = 1) →
+        (∀ (x : LivshytsProjectionFormalization.CoordinateSpace ℝ m), ∑ i, c i * ‖(B i) x‖ ^ 2 = ‖x‖ ^ 2) →
+          ∀ (f : ι → ℝ → ENNReal),
+            (∀ (i : ι), Measurable (f i)) →
+              ∫⁻ (x : LivshytsProjectionFormalization.CoordinateSpace ℝ m), ∏ i, (f i ((B i) x)).rpow (c i) ≤
+                ∏ i, (∫⁻ (t : ℝ), f i t).rpow (c i)
+structure BernoulliSection10Complex.IsPlanarDensityAtom (μ : MeasureTheory.Measure ℂ) (L : ℝ) : Prop
+number of parameters: 2
+fields:
+  BernoulliSection10Complex.IsPlanarDensityAtom.nonneg : 0 ≤ L
+  BernoulliSection10Complex.IsPlanarDensityAtom.probability : μ Set.univ = 1
+  BernoulliSection10Complex.IsPlanarDensityAtom.density_le : μ ≤ ENNReal.ofReal L • MeasureTheory.MeasureSpace.volume
+  BernoulliSection10Complex.IsPlanarDensityAtom.integrable_id : MeasureTheory.Integrable (fun x => x) μ
+  BernoulliSection10Complex.IsPlanarDensityAtom.centered : ∫ (x : ℂ), x ∂μ = 0
+  BernoulliSection10Complex.IsPlanarDensityAtom.integrable_sq : MeasureTheory.Integrable (fun x => ‖x‖ ^ 2) μ
+  BernoulliSection10Complex.IsPlanarDensityAtom.variance_one : ∫ (x : ℂ), ‖x‖ ^ 2 ∂μ = 1
+constructor:
+  BernoulliSection10Complex.IsPlanarDensityAtom.mk {μ : MeasureTheory.Measure ℂ} {L : ℝ} (nonneg : 0 ≤ L)
+    (probability : μ Set.univ = 1) (density_le : μ ≤ ENNReal.ofReal L • MeasureTheory.MeasureSpace.volume)
+    (integrable_id : MeasureTheory.Integrable (fun x => x) μ) (centered : ∫ (x : ℂ), x ∂μ = 0)
+    (integrable_sq : MeasureTheory.Integrable (fun x => ‖x‖ ^ 2) μ) (variance_one : ∫ (x : ℂ), ‖x‖ ^ 2 ∂μ = 1) :
+    BernoulliSection10Complex.IsPlanarDensityAtom μ L
+structure BernoulliSection10.IsBoundedDensityAtom (μ : MeasureTheory.Measure ℝ) (L : ℝ) : Prop
+number of parameters: 2
+fields:
+  BernoulliSection10.IsBoundedDensityAtom.nonneg : 0 ≤ L
+  BernoulliSection10.IsBoundedDensityAtom.probability : μ Set.univ = 1
+  BernoulliSection10.IsBoundedDensityAtom.density_le : μ ≤ ENNReal.ofReal L • MeasureTheory.MeasureSpace.volume
+  BernoulliSection10.IsBoundedDensityAtom.integrable_id : MeasureTheory.Integrable (fun x => x) μ
+  BernoulliSection10.IsBoundedDensityAtom.centered : ∫ (x : ℝ), x ∂μ = 0
+  BernoulliSection10.IsBoundedDensityAtom.integrable_sq : MeasureTheory.Integrable (fun x => x ^ 2) μ
+  BernoulliSection10.IsBoundedDensityAtom.variance_one : ∫ (x : ℝ), x ^ 2 ∂μ = 1
+constructor:
+  BernoulliSection10.IsBoundedDensityAtom.mk {μ : MeasureTheory.Measure ℝ} {L : ℝ} (nonneg : 0 ≤ L)
+    (probability : μ Set.univ = 1) (density_le : μ ≤ ENNReal.ofReal L • MeasureTheory.MeasureSpace.volume)
+    (integrable_id : MeasureTheory.Integrable (fun x => x) μ) (centered : ∫ (x : ℝ), x ∂μ = 0)
+    (integrable_sq : MeasureTheory.Integrable (fun x => x ^ 2) μ) (variance_one : ∫ (x : ℝ), x ^ 2 ∂μ = 1) :
+    BernoulliSection10.IsBoundedDensityAtom μ L
+BernoulliSection10Source.planar_density_circular_law : BernoulliSection10Source.BBVComparisonInput →
+  BernoulliSection10Source.BC12GinibreInput →
+    ∀ {μ : MeasureTheory.Measure ℂ} {L : ℝ},
+      BernoulliSection10Complex.IsPlanarDensityAtom μ L →
+        MeasureTheory.Integrable (fun x => ‖x‖ ^ 3) μ →
+          ∀ (W s : ℕ → ℕ),
+            (∀ (n : ℕ), 0 < W n) →
+              Filter.Tendsto W Filter.atTop Filter.atTop →
+                ∀ (f : BoundedContinuousFunction ℂ ℝ),
+                  MeasureTheory.TendstoInMeasure (MeasureTheory.Measure.infinitePi fun x => μ)
+                    (fun n ω =>
+                      TaoVuReplacement.realEsdTest
+                        (BernoulliSection10Complex.densityCyclicMatrix (W n) (s n)
+                          (BernoulliSection10Complex.physicalRowsFromSequence (W n) (s n) ω))
+                        ⇑f)
+                    Filter.atTop fun x => ∫ (z : ℂ), f z ∂BernoulliSection10.DiskReference.circularMeasure
+BernoulliSection10Source.real_density_circular_law : BernoulliSection10Source.BBVComparisonInput →
+  BernoulliSection10Source.BC12GinibreInput →
+    LivshytsProjectionFormalization.RealFiniteGeometricBrascampLieb →
+      ∀ {μ : MeasureTheory.Measure ℝ} {L : ℝ},
+        BernoulliSection10.IsBoundedDensityAtom μ L →
+          MeasureTheory.Integrable (fun x => |x| ^ 3) μ →
+            ∀ (W s : ℕ → ℕ),
+              (∀ (n : ℕ), 0 < W n) →
+                Filter.Tendsto W Filter.atTop Filter.atTop →
+                  ∀ (f : BoundedContinuousFunction ℂ ℝ),
+                    MeasureTheory.TendstoInMeasure (MeasureTheory.Measure.infinitePi fun x => μ)
+                      (fun n ω =>
+                        TaoVuReplacement.realEsdTest
+                          (BernoulliSection10.densityCyclicMatrix (W n) (s n)
+                            (BernoulliSection10.physicalRowsFromSequence (W n) (s n) ω))
+                          ⇑f)
+                      Filter.atTop fun x => ∫ (z : ℂ), f z ∂BernoulliSection10.DiskReference.circularMeasure
+BernoulliSection10Source.planar_density_ring_log_limit : BernoulliSection10Source.BBVComparisonInput →
+  BernoulliSection10Source.BC12GinibreInput →
+    ∀ {μ : MeasureTheory.Measure ℂ} {L : ℝ} (hμ : BernoulliSection10Complex.IsPlanarDensityAtom μ L),
+      MeasureTheory.Integrable (fun x => ‖x‖ ^ 3) μ →
+        ∀ (W s : ℕ → ℕ),
+          (∀ (n : ℕ), 0 < W n) →
+            Filter.Tendsto W Filter.atTop Filter.atTop →
+              ∀ (z : ℂ),
+                BernoulliSection10.ProbabilityLimits.TendstoInProbabilityTri
+                  (fun n => BernoulliSection10Complex.intervalRowsLaw (W n) (s n + 3) μ)
+                  (fun n x => BernoulliSection10Complex.densityCyclicLogDet (W n) (s n) z x / ↑((s n + 3) * W n))
+                  (ShortRingAnchor.circularLogPotential z)
+BernoulliSection10Source.real_density_ring_log_limit : BernoulliSection10Source.BBVComparisonInput →
+  BernoulliSection10Source.BC12GinibreInput →
+    LivshytsProjectionFormalization.RealFiniteGeometricBrascampLieb →
+      ∀ {μ : MeasureTheory.Measure ℝ} {L : ℝ} (hμ : BernoulliSection10.IsBoundedDensityAtom μ L),
+        MeasureTheory.Integrable (fun x => |x| ^ 3) μ →
+          ∀ (W s : ℕ → ℕ),
+            (∀ (n : ℕ), 0 < W n) →
+              Filter.Tendsto W Filter.atTop Filter.atTop →
+                ∀ (z : ℂ),
+                  BernoulliSection10.ProbabilityLimits.TendstoInProbabilityTri
+                    (fun n => BernoulliSection10.intervalRowsLaw (W n) (s n + 3) μ)
+                    (fun n x => BernoulliSection10.densityCyclicLogDet (W n) (s n) z x / ↑((s n + 3) * W n))
+                    (ShortRingAnchor.circularLogPotential z)
+[axiom-audit] PASS Section10/BernoulliSection10Source/AxiomAudit.lean: 6 reports
+[axiom-audit] PASS: 1 files, 6 reports; allowed axioms: Classical.choice, Quot.sound, propext
