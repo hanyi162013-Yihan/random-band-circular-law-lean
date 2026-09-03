@@ -13,6 +13,7 @@ open MeasureTheory Filter Topology ShortRingAnchor Arxiv2410V3
 open CircularLawSection4 CircularLawSection4.PaperIndicatorWeights
 noncomputable section
 set_option autoImplicit false
+set_option warningAsError true
 set_option maxHeartbeats 1200000
 
 namespace CircularLawSections56.Section5.PublishedSection3Concrete
@@ -31,7 +32,7 @@ def concreteModel
     PublishedSection3Model (sampleLaw ν) ν circularComplexGaussian (fun n => k n + 1) W c₀ C₀ :=
   publishedSection3ModelOfSamples (sampleLaw ν) ν circularComplexGaussian k d W profile hc₀
     hwidth hfit (fun n => samples ((k n + 1) * (d n + 2))) (fun n => denseSamples (k n + 1))
-    (fun n => samples_measurePreserving ν _) (fun n => denseSamples_measurePreserving ν _)
+    (fun _n => samples_measurePreserving ν _) (fun _n => denseSamples_measurePreserving ν _)
     hMom gaussianMoments gaussianDensityAlternative
 
 theorem concreteModel_sources

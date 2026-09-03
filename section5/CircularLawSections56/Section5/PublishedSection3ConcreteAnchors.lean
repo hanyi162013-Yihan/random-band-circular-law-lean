@@ -12,6 +12,7 @@ open MeasureTheory Filter Topology ShortRingAnchor
 open CircularLawSection4 CircularLawSection4.PaperIndicatorWeights
 noncomputable section
 set_option autoImplicit false
+set_option warningAsError true
 set_option maxHeartbeats 1400000
 
 namespace CircularLawSections56.Section5.PublishedSection3Concrete
@@ -80,9 +81,9 @@ theorem calibrationRaw_prefix_normalization
     simp only [Nat.succ_sub_one]
     unfold ringPotential
     rw [literalIndicatorMatrix_logPotential]
-    simp only [literalModelCalibrationRaw, dif_pos ⟨hm, hmN⟩, samples,
-      Nat.cast_add, Nat.cast_one, Nat.succ_eq_add_one]
-    rfl
+    have hvalid : 0 < m + 1 ∧ m + 1 ≤ n + 1 := ⟨hm, hmN⟩
+    simp only [literalModelCalibrationRaw, dif_pos hvalid, samples,
+      Nat.cast_add, Nat.cast_one]
 
 theorem short_anchor_on_common_space
     (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
@@ -154,13 +155,14 @@ theorem calibration_anchor_on_common_space
   apply hlim.congr _ rfl
   intro n ω
   change (if active n then ringPotential (m n - 1) (d n) (center n) (profile n).b z ω
-    else circularLogPotential z) = _
+    else circularLogPotential z) =
+      (if active n then literalModelCalibrationRaw n (d n) (m n) (center n) (profile n).b z
+        (samples ((n + 1) * (d n + 2)) ω) / (m n : ℝ) else circularLogPotential z)
   cases ha : active n with
-  | false => simp only [literalActiveNormalizedObservable, ← show active =
-      literalLongActive (paperSafeShortBranch W δ γ) from rfl, ha, Bool.false_eq_true, ↓reduceIte]
+  | false => simp only [ha, Bool.false_eq_true, ↓reduceIte]
   | true =>
     have hm := hg n ha
-    simpa only [literalActiveNormalizedObservable, ha, ↓reduceIte] using
+    simpa only [ha, ↓reduceIte] using
       (calibrationRaw_prefix_normalization n (d n) (m n) (center n) (profile n).b
         hm.1 hm.2.1 z ω).symm
 
@@ -176,7 +178,7 @@ theorem literal_anchors
     (δ γ : ℝ) (hδ : 0 < δ) (hδγ : δ < γ) (hγ : γ < 1 / 8)
     (hW : Tendsto W atTop atTop) (hfit : ∀ᶠ n in atTop, d n + 2 ≤ n + 1) (z : ℂ) :
     let : ∀ n, IsProbabilityMeasure (iidMeasure ν ((n + 1) * (d n + 2))) :=
-      fun n => iidMeasure_isProbability ν _
+      fun _n => iidMeasure_isProbability ν _
     Section3IndicatorAnchorsTri (fun n => iidMeasure ν ((n + 1) * (d n + 2)))
       (literalShortLogPotential d center (fun n => (profile n).b) (paperNaturalShortBranch W γ) z)
       (literalActiveNormalizedObservable (literalLongActive (paperSafeShortBranch W δ γ))
