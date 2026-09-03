@@ -2,6 +2,21 @@
 
 Date: 2026-09-02. Lean and mathlib: v4.33.0.
 
+## Concrete Section 3 adapter — passed 2026-09-03
+
+[Run 33725000131](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131),
+job `100551912095`, succeeded at commit
+`c992bff30e9af6ddabcba04f113447cd48c27f20` (tree
+`1007e290b1dcb2d5cb054882bef2b40de5e19622`). The targeted build completed
+4435 dependency-inclusive jobs; the concrete Section 5 audit checked all 93
+new declarations and their transitive foundations. Both real/complex final
+endpoints, prefix identity, sampling regressions and the actual Gaussian
+density witness passed. The related Section 6 audit checked 35 declarations.
+
+This checks the new final modules and actual dependencies, not a new replay
+of every old Section 5 proof. For the exact theorem scope and Section 5-only
+main publication, see [CONCRETE_SECTION3_INTERFACE.md](CONCRETE_SECTION3_INTERFACE.md).
+
 ## Original mathematical snapshot — passed
 
 | Check | Result | Evidence |

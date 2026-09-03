@@ -1,5 +1,19 @@
 # Direct integration of the checked Section 3 package
 
+## Current concrete interface — verified 2026-09-03
+
+The actual fixed-law short-ring/calibration construction and both real/complex
+Section 5 endpoints passed [run 33725000131](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131)
+at `c992bff30e9af6ddabcba04f113447cd48c27f20`, including the transitive audit
+of all 93 new concrete Section 5 declarations. No finite model, sampling or
+anchor certificate remains in those endpoint inputs. See
+[CONCRETE_SECTION3_INTERFACE.md](CONCRETE_SECTION3_INTERFACE.md) for the exact
+fixed-atom/uniform-profile scope and retained Section 4/literature assumptions.
+The shared density definition is already corrected on main; this publication
+does not modify Section 3 or any unrelated chapter/library configuration.
+
+## Historical source-facing integration
+
 **2026-09-03 integration correction:** the historical exact-copy statements
 below describe the initial import. The current development branch corrects
 Section 3's auto-implicit `top` density-bound field to explicit ENNReal top,
