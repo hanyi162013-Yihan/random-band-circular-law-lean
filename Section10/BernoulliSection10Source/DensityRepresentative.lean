@@ -15,10 +15,10 @@ def boundedDensityOfMeasureLe
     {E : Type*} [MeasurableSpace E] {μ ν : Measure E}
     [SigmaFinite μ] [SigmaFinite ν] {L : ℝ}
     (h : μ ≤ ENNReal.ofReal L • ν) :
-    HasBoundedDensityWithRespectTo μ ν := by
+    HasBoundedDensityWithRespectTo (top := ∞) μ ν := by
   have hac : μ ≪ ν := by
     intro s hs
-    apply le_antisymm ?_ (zero_le _)
+    apply le_antisymm ?_ zero_le
     simpa only [Measure.smul_apply, smul_eq_mul, hs, mul_zero] using h s
   refine
     { density := μ.rnDeriv ν

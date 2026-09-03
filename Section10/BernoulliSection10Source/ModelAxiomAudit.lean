@@ -15,3 +15,8 @@ import BernoulliSection10Source.GaussianReferenceModel
 #check @BernoulliSection10Source.physical_real_minimum_input
 #print axioms BernoulliSection10Source.actualGinibre_nonsingular
 #print axioms BernoulliSection10Source.actualGinibre_row_moments
+
+-- Inspect the upstream density index as well as the constructed adapter.
+#check @ShortRingAnchor.HasBoundedDensityWithRespectTo
+#check @ShortRingAnchor.AtomDensityAlternative21
+#check @BernoulliSection10Source.boundedDensityOfMeasureLe

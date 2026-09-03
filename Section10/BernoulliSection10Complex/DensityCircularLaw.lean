@@ -50,9 +50,9 @@ theorem density_profile_circular_law
     tendsto_atTop_mono' atTop
       (Eventually.of_forall fun n => Nat.le_mul_of_pos_left (W n) (by omega)) hWtop
   let σ := fun n => physicalProfile (W n) (s n)
-  let X := fun n ω => positiveMatrixIndex (hN n) (profileMatrix (σ n) ω)
+  let X := fun n ω => positiveMatrixIndex (hN n) (SourceInputs.profileMatrix (σ n) ω)
   have hX : ∀ n i j, Measurable (fun ω => X n ω i j) := fun n i j =>
-    measurable_positiveMatrixIndex_entry (hN n) (profileMatrix (σ n))
+    measurable_positiveMatrixIndex_entry (hN n) (SourceInputs.profileMatrix (σ n))
       (measurable_profileMatrix_entry (σ n)) i j
   have hXi (n : ℕ) : Integrable (fun ω => physicalEnergy (X n ω)) (inputLaw μ) := by
     simp only [X, positiveMatrixIndex_energy]
@@ -94,6 +94,7 @@ theorem density_circular_law
     (fun n ω => realEsdTest
       (densityCyclicMatrix (W n) (s n) (physicalRowsFromSequence (W n) (s n) ω)) f)
     (∫ z, f z ∂circularMeasure)).mp
-  simpa only [← densityCyclicMatrix_physicalRowsFromInput, physicalRowsFromInput, inputLaw] using h
+  simpa only [← densityCyclicMatrix_physicalRowsFromInput, physicalRowsFromInput,
+    SourceInputs.inputLaw] using h
 
 end BernoulliSection10Complex
