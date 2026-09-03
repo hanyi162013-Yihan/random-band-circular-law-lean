@@ -114,3 +114,4 @@ import CircularLawSection6.ClampedCoreProfile
 import CircularLawSection6.ClampedSection5Source
 import CircularLawSection6.ClampedCoreSubsequence
 import CircularLawSection6.Section34GaussianProfileTheorem
+import CircularLawSections56.Section5.PublishedSection3Source

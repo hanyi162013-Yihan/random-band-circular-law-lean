@@ -7,22 +7,22 @@ dependencies. No second mathlib checkout or large local download is needed.
 ## Main endpoint and verification status
 
 The target declaration is
-`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law`
-in [GaussianProfileTheorem.lean](CircularLawSection6/GaussianProfileTheorem.lean).
+`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_section34`
+in [Section34GaussianProfileTheorem.lean](CircularLawSection6/Section34GaussianProfileTheorem.lean).
 For a strictly positive continuous integrable BV profile of integral one
 and positive bandwidths tending to infinity, it gives the circular law in
 probability for the actual normalized Gaussian cyclic matrix. It does not
 assume that the bandwidth/dimension ratio has a limit.
 
-The complete 110-module checkpoint and 107 strict regression examples passed
-[cloud verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33708812493)
-at commit `b4106b56f5a5a79086194e5bb5181e514ebc9644`.
-The transitive axiom audit checked 999 declarations, including 873 theorem
+The complete 116-module checkpoint and 113 strict regression examples passed
+[cloud verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33710633794)
+at commit `d37151b820b450007747b679390135ce205ed0b0`.
+The transitive axiom audit checked 1103 declarations, including 938 theorem
 declarations. See [VERIFICATION.md](VERIFICATION.md) for the exact scope.
 
 This theorem is conditional on explicitly stated mathematical sources.
 [SOURCE_BOUNDARIES.md](SOURCE_BOUNDARIES.md) lists their exact content:
-Section 5's literal core endpoint, local Section 3 singular-value comparison,
+finite Section 3/4 inputs to the internally called Section 5 theorem, local Section 3 singular-value comparison,
 classical Ginibre inputs, and Han's Gaussian dense-bandwidth theorem.
 No full-profile convergence or full-matrix cutoff comparison is assumed.
 The axiom audit checks for forbidden axioms; it does not discharge hypotheses.
@@ -46,15 +46,15 @@ The axiom audit checks for forbidden axioms; it does not discharge hypotheses.
   exactly one, dimension-preserving subsequence fillers, the dense-source
   threshold, and sparse/dense recombination.
 
-These are included in the verified 110-module checkpoint. Subsequent work
+These and the direct Section 5 call are included in the verified 116-module checkpoint. Subsequent work
 must receive its own verification and is not covered by that historical run.
 
 ## Boundaries not concealed by the endpoint
 
 The cited Han, BC12 and classical Ginibre results are not reproved here.
-Section 3 is not silently implemented by declaring its input. The Section 5
-endpoint remains an explicit manuscript-boundary input, rather than a final
-parameter-free call to a bundled Section 3/4/5 instance.
+Section 5 is now called inside the proof, from finite Section 4 estimates and
+Section 3 anchors. Integrating the newly verified Section 3 density endpoints
+is subsequent work; merely importing those files does not discharge an anchor.
 
 The circular-law chain uses an inverse-moment/uniform-L2 route. The separate
 `StieltjesHardEdge` module proves that a bounded Poisson transform implies

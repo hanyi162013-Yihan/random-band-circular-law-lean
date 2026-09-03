@@ -24,7 +24,11 @@ srcDir = "vendor/tao-vu-replacement"
 
 [[lean_lib]]
 name = "ShortRingAnchor"
-srcDir = "vendor/short-ring-analysis"
+srcDir = "section3"
+
+[[lean_lib]]
+name = "Vendor"
+srcDir = "section3"
 
 [[require]]
 name = "mathlib"

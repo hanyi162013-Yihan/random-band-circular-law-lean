@@ -1,5 +1,26 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified 116-module direct Section 5 checkpoint
+
+Commit: `d37151b820b450007747b679390135ce205ed0b0`.
+[GitHub run 33710633794](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33710633794),
+job `100509133540`: success on 2026-09-03 UTC.
+Exact source tree: `789b8c41671a719a4ff6024e4ce15aa9d3940d15`.
+
+All 116 modules, 113 strict regression examples and the transitive audit passed.
+The build completed 4181 jobs; the audit covered 1103 declarations and 938
+theorems using only the three standard foundations. The clamped-subsequence
+adapter compiled in 4.7 seconds and the new final theorem in 2.4 seconds.
+
+`gaussian_profile_circular_law_of_section34` now calls Section 5 internally.
+The Gaussian atom transfer, globally clamped core weights, small-index fillers
+and all subsequence identifications are proved. The remaining Section 5
+premises are two finite quantitative Section 4 estimates and the Section 3
+short/calibration anchors, not an assumed Section 5 core-limit conclusion.
+Local Section 3 singular-law comparison and the classical reference/Han
+inputs remain explicit. Subsequent integration of the newly checked Section 3
+package is not covered by this historical run.
+
 ## Verified 110-module conditional circular-law checkpoint
 
 Commit: `b4106b56f5a5a79086194e5bb5181e514ebc9644`.

@@ -112,6 +112,7 @@ import CircularLawSections56.Section5.TaperCutoffDominance
 import CircularLawSections56.Section5.TaperSection3Estimates
 import CircularLawSections56.Section5.LiteralSourceMoments
 import CircularLawSections56.Section5.TaperShortRingSource
+import CircularLawSections56.Section5.PublishedSection3Source
 
 /-!
 # Section 5: mesoscopic calibration and global pressure lifting

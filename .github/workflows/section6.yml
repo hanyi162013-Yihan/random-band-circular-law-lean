@@ -4,10 +4,16 @@ on:
   push:
     paths:
       - "section6/**"
+      - "section5/**"
+      - "section3/**"
+      - "lakefile.toml"
       - ".github/workflows/section6.yml"
   pull_request:
     paths:
       - "section6/**"
+      - "section5/**"
+      - "section3/**"
+      - "lakefile.toml"
       - ".github/workflows/section6.yml"
   workflow_dispatch:
 
@@ -42,6 +48,7 @@ jobs:
           key: section6-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'section5/lakefile.toml', 'section5/lake-manifest.json', 'section6/lakefile.toml', 'section6/lake-manifest.json') }}-${{ github.sha }}
           restore-keys: |
             section6-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml', 'section5/lakefile.toml', 'section5/lake-manifest.json', 'section6/lakefile.toml', 'section6/lake-manifest.json') }}-
+            section6-${{ runner.os }}-${{ runner.arch }}-
       - name: Install pinned Lean and shared mathlib cache
         uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
         with:

@@ -1,10 +1,10 @@
 # Section 6 source boundaries
 
 The target declaration is
-`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law`
-in `CircularLawSection6/GaussianProfileTheorem.lean`. The complete 110-module
+`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_section34`
+in `CircularLawSection6/Section34GaussianProfileTheorem.lean`. The complete 116-module
 checkpoint, including this theorem, passed strict compilation, the transitive
-axiom audit and all 107 regressions in GitHub run 33708812493. See
+axiom audit and all 113 regressions in GitHub run 33710633794. See
 `VERIFICATION.md` for the exact commit and scope.
 
 ## What the endpoint says
@@ -29,7 +29,7 @@ The axiom audit cannot and does not discharge these hypotheses.
 
 | Input | Exact mathematical content | Location |
 | --- | --- | --- |
-| `coreSection5` | Section 5's literal normalized Gaussian core log-potential limit in probability, after any required finite prefix | `FinitePrefixCoreBridge.lean` |
+| `coreSection34` | Two finite quantitative Section 4 pressure estimates and Section 3 short/calibration anchors; the Section 5 core limit is derived internally | `ClampedSection5Source.lean` |
 | `coreSection3` | Local finite squared-singular CDF comparison with finite Ginibre, plus the Ginibre bounded-test singular-law limit with nonnegative support and finite second moment | `CanonicalSourceComparison.lean` |
 | `ginibreRaw` | Classical normalized Ginibre raw log-potential convergence in probability for planar-a.e. shift | `SubsequenceSourceEndpoint.lean` |
 | `ginibreNegative` | Tightness in probability of one positive-order inverse singular-value moment of shifted Ginibre | `GinibreLowerCutoff.lean` |
@@ -77,9 +77,10 @@ is used.
 
 This package does not reprove the cited Han, BC12 or classical Ginibre source
 theorems. Section 3 has not been silently formalized by naming an input.
-The Section 5 endpoint is an explicitly declared input at the manuscript
-boundary; the final theorem does not yet call a fully bundled external
-Section 3/4/5 instance with no parameters.
+The Section 5 endpoint is called internally, with all core geometry and
+Gaussian atom transfer proved. Its finite Section 3/4 inputs remain explicit.
+Integration of the newly checked Section 3/density theorem is subsequent work
+and must pass a separate combined cloud verification.
 
 The proof uses an inverse-moment/uniform-L2 alternative to the manuscript's
 separate linear limiting-singular-density hard-edge estimate. That stronger

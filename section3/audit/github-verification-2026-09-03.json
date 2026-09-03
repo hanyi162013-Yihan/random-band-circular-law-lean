@@ -1,0 +1,31 @@
+{
+  "sourceCommit": "79798346f1cc9dda9cfd0c5bf2c3044aea5162a9",
+  "runId": 33702782802,
+  "jobId": 100485440146,
+  "status": "success",
+  "runURL": "https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33702782802",
+  "startedUTC": "2026-09-03T01:13:30Z",
+  "kernelAuditCompletedUTC": "2026-09-03T01:23:53.7398490Z",
+  "jobCompletedUTC": "2026-09-03T01:23:55Z",
+  "elapsedJobSeconds": 625,
+  "sourceFiles": 230,
+  "serialTargetsPassed": 230,
+  "normalLakeBuild": "passed",
+  "auditReports": 271,
+  "distinctAuditedDeclarations": 260,
+  "audits": {
+    "ShortRingAnchor/Audit.lean": 207,
+    "ShortRingAnchor/HighBandIntegrationAudit.lean": 64
+  },
+  "allowedAxioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "artifact": {
+    "id": 9874344264,
+    "sha256": "9384dfc11749b3ff9bc3315a13480c6aefb9faaf92de9ac813af2b46061daee0",
+    "url": "https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33702782802/artifacts/9874344264"
+  },
+  "note": "Summary transcribed from the successful GitHub job log. Exact per-declaration kernel reports and the generated summary.json are in the run artifact. This checks the conditional Lean statements, not the truth or removal of their explicit literature premises."
+}

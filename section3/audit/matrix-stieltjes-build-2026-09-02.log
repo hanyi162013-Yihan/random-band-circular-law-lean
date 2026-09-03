@@ -1,0 +1,126 @@
+ℹ [3186/3225] Replayed ShortRingAnchor.BC12.NegativeMomentCounting
+info: ShortRingAnchor/BC12/NegativeMomentCounting.lean:125:8: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+⚠ [3196/3225] Replayed ShortRingAnchor.PoissonSmoothingKernel
+warning: ShortRingAnchor/PoissonSmoothingKernel.lean:126:2: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3201/3225] Replayed ShortRingAnchor.HermitizationResolventBlocks
+warning: ShortRingAnchor/HermitizationResolventBlocks.lean:54:29: This simp argument is unused:
+  Matrix.one_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Matrix.toBlocks₂₁]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3223/3423] Replayed ShortRingAnchor.MatrixLocalBulk
+warning: ShortRingAnchor/MatrixLocalBulk.lean:74:20: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+⚠ [3381/3423] Replayed Vendor.Arxiv2410.V3.BVH.ModelMoments
+warning: Vendor/Arxiv2410/V3/BVH/ModelMoments.lean:112:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: Vendor/Arxiv2410/V3/BVH/ModelMoments.lean:157:4: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+⚠ [3383/3423] Replayed Vendor.Arxiv2410.V3.BVH.GaussianConstruction
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:244:5: Variable name `model` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _model
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:250:5: Variable name `model` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _model
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:260:7: Variable name `h` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: Vendor/Arxiv2410/V3/BVH/GaussianConstruction.lean:302:6: This simp argument is unused:
+  Matrix.diagonal_apply
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [canonicalCircularizedMatrix, canonicalDiagonalDifference, hij]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3386/3423] Replayed Vendor.Arxiv2410.V3.BVH.EntryResolvent
+warning: Vendor/Arxiv2410/V3/BVH/EntryResolvent.lean:176:67: This simp argument is unused:
+  hstar
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [entryHermitianSummand, singleEntryMatrix, Matrix.single]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: Vendor/Arxiv2410/V3/BVH/EntryResolvent.lean:279:6: This simp argument is unused:
+  smul_smul
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Matrix.mul_add, Matrix.add_mul, Matrix.mul_smul, Matrix.smul_mul]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+⚠ [3388/3423] Replayed Vendor.Arxiv2410.V3.BVH.ProductLindeberg
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:120:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:129:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:108:0: automatically included section variable(s) unused in theorem `Arxiv2410V3.BVH.norm_integral_pi_sub_integral_pi_update_le`:
+  [CompleteSpace E]
+consider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:
+  omit [CompleteSpace E] in theorem ...
+
+Note: This linter can be disabled with `set_option linter.unusedSectionVars false`
+warning: Vendor/Arxiv2410/V3/BVH/ProductLindeberg.lean:248:8: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3390/3423] Replayed Vendor.Arxiv2410.V3.BVH.TraceUniversality
+warning: Vendor/Arxiv2410/V3/BVH/TraceUniversality.lean:129:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+warning: Vendor/Arxiv2410/V3/BVH/TraceUniversality.lean:132:2: Try this: 
+  letI̵
+
+The goal is a proposition, so `let` is preferred over `letI`.
+The difference between `let` and `letI` is that `letI` inlines the value.
+But this is not relevant for proofs because of proof irrelevance.
+
+Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+⚠ [3420/3423] Replayed ShortRingAnchor.V3MatrixLocalBulk
+warning: ShortRingAnchor/V3MatrixLocalBulk.lean:52:32: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+✔ [3421/3423] Built ShortRingAnchor.Lemma35FromV3 (78s)
+✔ [3422/3423] Built ShortRingAnchor (61s)
+Build completed successfully (3423 jobs).
