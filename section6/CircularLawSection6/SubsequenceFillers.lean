@@ -11,6 +11,7 @@ open MeasureTheory Filter Topology
 open CircularLawSections56.Section5
 
 noncomputable section
+attribute [local instance] Classical.propDecidable
 
 namespace CircularLawSection6
 

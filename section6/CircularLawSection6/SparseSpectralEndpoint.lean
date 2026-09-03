@@ -52,7 +52,11 @@ theorem sparse_profile_probability_of_sources (p : NoncompactProfile)
       boundedInProbabilityTri_shift (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
         (fun n ω => matrixNegativeMoment (ginibreMatrix (n + 1) ω - z • 1) q) hn 1
   have hs : Tendsto (fun n => W (n + 1) / (n + 2 : ℕ)) atTop (𝓝 0) := by
-    simpa only [Function.comp_apply, Nat.add_assoc] using hsparse.comp (tendsto_add_atTop_nat 1)
+    apply (hsparse.comp (tendsto_add_atTop_nat 1)).congr'
+    apply Eventually.of_forall
+    intro n
+    change W (n + 1) / ((n + 1 + 1 : ℕ) : ℝ) = W (n + 1) / ((n + 2 : ℕ) : ℝ)
+    rw [Nat.add_assoc]
   have htail := p.sparse_profile_probability_of_section3_section5 (fun n => n)
     (tendsto_add_atTop_nat 2) (fun n => W (n + 1)) (fun n => hW (n + 1))
     (hWlim.comp (tendsto_add_atTop_nat 1)) hs hsource.coreSection5 hsource.coreSection3 hGin hNeg

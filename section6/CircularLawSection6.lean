@@ -102,3 +102,5 @@ import CircularLawSection6.ProbabilityFinitePrefix
 import CircularLawSection6.SparseSpectralEndpoint
 import CircularLawSection6.CyclicMatrixReplacement
 import CircularLawSection6.SubsequenceFillers
+import CircularLawSection6.SubsequenceProfileReplacement
+import CircularLawSection6.SparseDenseSubsequences
