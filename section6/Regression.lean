@@ -371,6 +371,10 @@ example {q : ℕ} (len : Fin q → ℕ) [∀ j, NeZero (len j)] [NeZero (∑ j, 
     (fun _ => 1) (by simp) circularComplexGaussian
     circularComplexGaussian_sq_integrable circularComplexGaussian_secondMoment).2
 
+-- The total block-expectation definition has an explicit inactive zero-dimensional branch.
+example (ν : Measure ℂ) (z : ℂ) : cyclicBlockExpectedCutoff 0 0 (fun _ => 1) ν z 1 = 0 := by
+  simp [cyclicBlockExpectedCutoff]
+
 -- Exact cutoff scaling includes a threshold change, not just an additive logarithm.
 example (A : Matrix (Fin 1) (Fin 1) ℂ) (hA : A.det ≠ 0) :
     matrixCutoffPotential ((2 : ℂ) • A) 1 =

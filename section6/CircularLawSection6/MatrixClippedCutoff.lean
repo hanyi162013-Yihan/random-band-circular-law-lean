@@ -64,9 +64,6 @@ theorem matrixClippedPotential_eq_cutoff_difference (A : Matrix ι ι ℂ)
 theorem matrixClippedPotential_abs_le (A : Matrix ι ι ℂ)
     {a R : ℝ} (ha : 0 < a) (haR : a ≤ R) :
     |matrixClippedPotential A a R| ≤ max |Real.log a| |Real.log R| := by
-  have hn : (Module.finrank ℂ (EuclideanSpace ℂ ι) : ℝ) ≠ 0 := by
-    simp only [finrank_euclideanSpace]
-    exact Nat.cast_ne_zero.mpr Fintype.card_ne_zero
   have hnabs : |(Module.finrank ℂ (EuclideanSpace ℂ ι) : ℝ)| =
       (Module.finrank ℂ (EuclideanSpace ℂ ι) : ℝ) := abs_of_nonneg (Nat.cast_nonneg _)
   unfold matrixClippedPotential
@@ -79,8 +76,9 @@ theorem matrixClippedPotential_abs_le (A : Matrix ι ι ℂ)
         max |Real.log a| |Real.log R|) / _ :=
       div_le_div_of_nonneg_right (Finset.sum_le_sum fun _ _ => clippedLog_abs_le ha haR _)
         (Nat.cast_nonneg _)
-    _ = _ := by simp [hn]
+    _ = _ := by simp
 
+omit [Nonempty ι] in
 theorem matrixCutoff_clipped_error_le (A : Matrix ι ι ℂ) (hA : A.det ≠ 0)
     {a R : ℝ} (ha : 0 < a) (haR : a ≤ R) (hR : 1 ≤ R) :
     |matrixCutoffPotential A a - matrixClippedPotential A a R| ≤
