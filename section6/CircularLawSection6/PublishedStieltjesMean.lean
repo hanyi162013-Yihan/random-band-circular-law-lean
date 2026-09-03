@@ -75,7 +75,7 @@ theorem published_dense_meanStieltjes_tendsto
       (show 0 ≤ C by linarith) (le_refl (0 : ℝ))
       (show (0 : ℝ) < 1 / 2 by norm_num))
   have hlim : Tendsto (fun n => (N n : ℝ) ^ (-((1 / 2 : ℝ) / 32))) atTop (𝓝 0) :=
-    (Real.tendsto_rpow_neg_atTop (by norm_num)).comp
+    (tendsto_rpow_neg_atTop (by norm_num)).comp
       (tendsto_natCast_atTop_atTop.comp hN)
   apply tendsto_iff_norm_sub_tendsto_zero.mpr
   apply squeeze_zero' (Eventually.of_forall fun _ => norm_nonneg _) ?_ hlim

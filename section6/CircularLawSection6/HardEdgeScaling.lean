@@ -24,10 +24,11 @@ theorem scaledSingularLaw_cdf (σ : Measure ℝ) {r : ℝ} (hr : 0 < r) (t : ℝ
     (scaledSingularLaw r σ).real (Iic t) = σ.real (Iic (t / r)) := by
   unfold scaledSingularLaw Measure.real
   rw [Measure.map_apply (by fun_prop) measurableSet_Iic]
-  congr 1
-  ext s
-  change r * s ≤ t ↔ s ≤ t / r
-  simpa only [mul_comm] using (le_div_iff₀ hr).symm
+  have hset : (fun s : ℝ => r * s) ⁻¹' Iic t = Iic (t / r) := by
+    ext s
+    change r * s ≤ t ↔ s ≤ t / r
+    simpa only [mul_comm] using (le_div_iff₀ hr).symm
+  rw [hset]
 
 theorem scaledSingularLaw_linearHardEdge (σ : Measure ℝ) {r C : ℝ} (hr : 0 < r)
     (hCDF : ∀ t, 0 < t → σ.real (Iic t) ≤ C * t) :
@@ -49,7 +50,8 @@ theorem scaledSingularLaw_secondMoment (σ : Measure ℝ) (r : ℝ)
     Integrable (fun s : ℝ => s ^ 2) (scaledSingularLaw r σ) := by
   unfold scaledSingularLaw
   apply (integrable_map_measure (by fun_prop) (by fun_prop)).2
-  simpa only [Function.comp_apply, mul_pow] using hsecond.const_mul (r ^ 2)
+  change Integrable (fun s : ℝ => (r * s) ^ 2) σ
+  simpa only [mul_pow] using hsecond.const_mul (r ^ 2)
 
 theorem scaledSingularLaw_log (σ : Measure ℝ) [IsProbabilityMeasure σ]
     {r : ℝ} (hr : 0 < r) (hpos : ∀ᵐ s ∂σ, 0 < s) (hlog : Integrable Real.log σ) :
@@ -67,7 +69,8 @@ theorem scaledSingularLaw_logCutoff (σ : Measure ℝ) [IsProbabilityMeasure σ]
     (hcut : Integrable (fun s => Real.log (max s (a / r))) σ) :
     (∫ s, Real.log (max s a) ∂scaledSingularLaw r σ) =
       Real.log r + ∫ s, Real.log (max s (a / r)) ∂σ := by
-  rw [scaledSingularLaw, integral_map (by fun_prop) (by fun_prop)]
+  rw [scaledSingularLaw, integral_map (by fun_prop)
+    (Real.measurable_log.comp (measurable_id.max measurable_const)).aestronglyMeasurable]
   simp_rw [log_max_positive_scale hr ha]
   rw [integral_add (integrable_const _) hcut, integral_const]
   simp

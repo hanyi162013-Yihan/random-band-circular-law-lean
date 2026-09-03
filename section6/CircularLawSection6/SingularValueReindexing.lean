@@ -55,9 +55,12 @@ theorem matrixSquaredSingularAverage_reindex (e : ι ≃ κ) (A : Matrix ι ι �
     matrixSquaredSingularAverage (A.submatrix e.symm e.symm) φ =
       matrixSquaredSingularAverage A φ := by
   unfold matrixSquaredSingularAverage
-  simp_rw [matrix_singularValues_reindex]
-  simp only [finrank_euclideanSpace]
+  simp only [Fin.sum_univ_eq_sum_range, finrank_euclideanSpace]
   rw [Fintype.card_congr e]
+  congr 1
+  apply Finset.sum_congr rfl
+  intro i hi
+  rw [matrix_singularValues_reindex]
 
 theorem matrixSquaredSingularAverage_shifted_reindex (e : ι ≃ κ)
     (A : Matrix ι ι ℂ) (z : ℂ) (φ : ℝ → ℝ) :
