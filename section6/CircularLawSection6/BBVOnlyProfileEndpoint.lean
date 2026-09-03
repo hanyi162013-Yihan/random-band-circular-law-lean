@@ -11,11 +11,13 @@ raw-log limit, or limiting squared-singular-value test law is a field here.
 -/
 
 open MeasureTheory Filter Topology TaoVuReplacement
+open CircularLawSections56.Section5 CircularLawSections56.Section6
 open CircularLawSections56.Section5.PublishedSection3Concrete (BBVComparisonInput)
 
 noncomputable section
 set_option autoImplicit false
 set_option warningAsError true
+set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6.NoncompactProfile
 

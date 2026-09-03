@@ -6,7 +6,7 @@ These examples retain BBV and Section 4 explicitly and provide no separate
 Ginibre log, squared-test, or Han input. -/
 
 open MeasureTheory Filter Topology ShortRingAnchor TaoVuReplacement
-open CircularLawSections56.Section5
+open CircularLawSections56.Section5 CircularLawSections56.Section6
 open CircularLawSections56.Section5.PublishedSection3Concrete
   (BBVComparisonInput BC12GinibreInput gaussianSequenceLaw ginibreOnSequence)
 open CircularLawSection6 CircularLawSection6.NoncompactProfile
@@ -14,6 +14,7 @@ open CircularLawSection6 CircularLawSection6.NoncompactProfile
 noncomputable section
 set_option autoImplicit false
 set_option warningAsError true
+set_option backward.isDefEq.respectTransparency false
 
 example (z : ℂ) :
     ∀ᵐ ω ∂gaussianSequenceLaw, (ginibreOnSequence 1 ω - z • 1).det ≠ 0 :=
