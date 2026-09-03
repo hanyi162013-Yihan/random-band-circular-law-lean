@@ -40,6 +40,7 @@ jobs:
       - name: Check front-end source scope
         run: |
           python3 scripts/check_axioms.py --self-test
+          python3 -m unittest discover -s scripts -p test_build_serial.py
           python3 scripts/check_placeholders.py --path Section10/BernoulliSection10Complex
           python3 scripts/check_placeholders.py --path Section10/BernoulliSection10Source
           python3 scripts/build_serial.py --target BernoulliSection10Complex.Front --dry-run
@@ -123,7 +124,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python3 scripts/build_serial.py --keep-going 2>&1 | tee verification-section10/full-build.log
+          python3 scripts/build_serial.py --keep-going --cached-fast-path 2>&1 | tee verification-section10/full-build.log
           python3 scripts/check_placeholders.py 2>&1 | tee verification-section10/full-source-scan.log
       - name: Save checked artifacts for resumable verification
         if: ${{ always() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure') && steps.cache.outputs.cache-primary-key != '' }}
