@@ -30,7 +30,7 @@ theorem cyclicPhysicalMatrix_logPotential (k : ℕ)
       (A - z • 1).submatrix (ZMod.finEquiv (k + 1)).toEquiv (ZMod.finEquiv (k + 1)).toEquiv := by
     ext i j
     simp only [cyclicPhysicalMatrix, Matrix.submatrix_apply, Matrix.sub_apply, Matrix.smul_apply,
-      Matrix.one_apply, (ZMod.finEquiv (k + 1)).injective.eq_iff]
+      Matrix.one_apply, (ZMod.finEquiv (k + 1)).toEquiv.injective.eq_iff]
   unfold physicalLogPotential
   rw [hm, Matrix.det_submatrix_equiv_self]
   simp only [matrixRawPotential, ZMod.card, Nat.cast_add, Nat.cast_one]
@@ -89,7 +89,7 @@ theorem profile_ginibre_replacement_of_log_limits (p : NoncompactProfile) (W : �
   apply triangular_physical_replacement profileGinibrePairLaw
     (fun k ω => X k ω.1) (fun k ω => Y k ω.2)
     (fun k i j => (hX k i j).comp measurable_fst) (fun k i j => (hY k i j).comp measurable_snd)
-    2 (by norm_num) _ _ target
+    2 (by norm_num) ?_ ?_ target ?_ ?_
   · intro k
     exact (measurePreserving_fst.integrable_comp_of_integrable (hEX k).1).add
       (measurePreserving_snd.integrable_comp_of_integrable (hEY k).1)

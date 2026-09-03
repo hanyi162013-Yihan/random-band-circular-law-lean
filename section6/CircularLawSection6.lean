@@ -89,3 +89,4 @@ import CircularLawSection6.FinitePrefixCoreBridge
 import CircularLawSection6.ProfileCompactSourceBridge
 import CircularLawSection6.ProfileProbability
 import CircularLawSection6.ProfileReplacement
+import CircularLawSection6.OneBlockPeriodicization

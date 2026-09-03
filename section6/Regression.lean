@@ -585,3 +585,7 @@ example (A : Matrix (ZMod 2) (ZMod 2) ℂ) (z : ℂ) :
 example (A : Matrix (ZMod 2) (ZMod 2) ℂ) :
     CircularLawSections56.Section6.physicalEnergy (cyclicPhysicalMatrix 1 A) = cyclicEnergy 2 A :=
   cyclicPhysicalMatrix_energy 1 A
+
+-- One block is already periodic: there is no boundary cost, even for large widths.
+example : fullBlockRoute (fun _ : Fin 1 => 3) 10 = periodicBlockRoute (fun _ : Fin 1 => 3) 10 :=
+  oneBlock_routes_eq (fun _ => 3) 10
