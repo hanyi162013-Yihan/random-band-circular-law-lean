@@ -205,17 +205,16 @@ theorem packetBoundaryEvalRecursive_corner_le_rawCoefficientNorm
     exact Classical.not_not.mp he
   have hnorm : ∀ e, ‖packetAtomAssignment W rows e‖ ≤ 1 := by
     intro e
-    simp only [packetAtomAssignment, Complex.norm_real, Real.norm_eq_abs,
-      abs_mul]
+    simp only [packetAtomAssignment, norm_mul, Complex.norm_real, Real.norm_eq_abs]
     calc
       |blockNormalization W| *
-          |rows (packetIndexEquiv W e.1.1)
-            (packetIndexEquiv W e.1.2)| ≤ 1 * 1 :=
+          ‖rows (packetIndexEquiv W e.1.1)
+            (packetIndexEquiv W e.1.2)‖ ≤ 1 * 1 :=
         mul_le_mul (abs_blockNormalization_le_one W hW)
           (abs_multiAffineRowsToFinRows_le_one_of_corner
             (PacketAtomRowCount W) (PacketAtomRowCount W) y hy
               (packetIndexEquiv W e.1.1) (packetIndexEquiv W e.1.2))
-          (abs_nonneg _) (by norm_num)
+          (norm_nonneg _) (by norm_num)
       _ = 1 := one_mul 1
   have hgeneric := norm_eval_squarefree_le_pow_card_support_mul_coeffNorm
     (packetBoundaryPolynomial z CL BR Theta)

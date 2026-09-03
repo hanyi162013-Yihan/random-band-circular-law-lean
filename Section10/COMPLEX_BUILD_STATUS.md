@@ -46,6 +46,15 @@ cloud. No local build of that final integration has been run.
   the next cloud run must check it and the 17 skipped dependent modules.
 - The source-token scan passed on all 77 then-present complex Lean files;
   this scan is not a substitute for compilation.
+- [Run 33709639103](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33709639103)
+  checked the corrected tensor scaling, packet reset, physical reset,
+  conditional reset, mean stitching, stitched pressure and remainder L1.
+  The remaining failure was a real absolute-value expression on a complex
+  coordinate in the deterministic reverse tensor comparison; it is now
+  expressed with the complex norm. Ten dependent modules were skipped.
+- Both density branches now have an internal `HighBandClosure` composition
+  lemma. Its explicit high-band premise is pending construction from
+  Section 3; it is not being counted as the final source connection.
 
 ## Outstanding delivery work
 
