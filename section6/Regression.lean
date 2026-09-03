@@ -633,3 +633,8 @@ example (p : NoncompactProfile) (W : ℕ → ℝ) (hW : ∀ n, 0 < W n)
         (cyclicPhysicalMatrix n (p.matrix (n + 1) (W n) (ω n).1)) f)
       Filter.atTop (fun _ => ∫ z, f z ∂CircularLawSections56.Section5.circularMeasure) :=
   p.gaussian_profile_circular_law W hW hWlim hsource hHan f hf hc
+
+-- The separate linear hard-edge adapter uses the actual imaginary Stieltjes kernel.
+example (σ : Measure ℝ) [IsProbabilityMeasure σ] {t C : ℝ} (ht : 0 < t)
+    (hbound : (∫ s, singularPoissonKernel t s ∂σ) ≤ C) :
+    σ.real (Set.Icc 0 t) ≤ 2 * C * t := hardEdge_mass_le_of_poisson_bound σ ht hbound

@@ -107,3 +107,4 @@ import CircularLawSection6.SparseDenseSubsequences
 import CircularLawSection6.DenseGaussianSourceAdapter
 import CircularLawSection6.SubsequenceSourceEndpoint
 import CircularLawSection6.GaussianProfileTheorem
+import CircularLawSection6.StieltjesHardEdge

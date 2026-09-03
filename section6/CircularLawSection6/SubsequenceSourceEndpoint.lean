@@ -16,8 +16,8 @@ def subsequenceCoreSize (φ : ℕ → ℕ) (n : ℕ) : ℕ := φ (n + 1) - 1
 
 theorem subsequenceCoreSize_dimension (φ : ℕ → ℕ) (hφ : StrictMono φ) (n : ℕ) :
     subsequenceCoreSize φ n + 2 = φ (n + 1) + 1 := by
-  have h := hφ.id_le (n + 1)
-  unfold subsequenceCoreSize
+  have h : n + 1 ≤ φ (n + 1) := hφ.id_le (n + 1)
+  change φ (n + 1) - 1 + 2 = φ (n + 1) + 1
   omega
 
 namespace NoncompactProfile
@@ -54,7 +54,8 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
     apply (hsparse.comp (tendsto_add_atTop_nat 1)).congr'
     apply Eventually.of_forall
     intro n
-    change W (φ (n + 1)) / ((φ (n + 1) + 1 : ℕ) : ℝ) = _
+    change W (φ (n + 1)) / ((φ (n + 1) + 1 : ℕ) : ℝ) =
+      W (φ (n + 1)) / ((subsequenceCoreSize φ n + 2 : ℕ) : ℝ)
     rw [subsequenceCoreSize_dimension φ hφ n]
   have hg : ∀ᵐ z ∂(volume : Measure ℂ),
       TendstoInProbabilityTri (fun n => cyclicAtomLaw (subsequenceCoreSize φ n + 2) circularComplexGaussian)
@@ -64,7 +65,7 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
     have h : TendstoInProbabilityTri (fun n => cyclicAtomLaw (φ (n + 1) + 1) circularComplexGaussian)
         (fun n ω => matrixRawPotential (ginibreMatrix (φ (n + 1) + 1) ω - z • 1))
         (circularRadialPotential ‖z‖) := fun ε hε => (hz ε hε).comp hφ'
-    simpa only [subsequenceCoreSize_dimension φ hφ] using h
+    simpa only [TendstoInProbabilityTri, subsequenceCoreSize_dimension φ hφ] using h
   have hn : ∀ᵐ z ∂(volume : Measure ℂ), ∃ q : ℝ, 0 < q ∧
       BC12GinibreNegativeMomentTightnessTri (fun n => subsequenceCoreSize φ n + 2) z q := by
     filter_upwards [hsource.ginibreNegative] with z hz
@@ -74,7 +75,8 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
       intro δ hδ
       obtain ⟨C, hC, hbound⟩ := hneg δ hδ
       exact ⟨C, hC, hφ'.eventually hbound⟩
-    simpa only [BC12GinibreNegativeMomentTightnessTri, subsequenceCoreSize_dimension φ hφ] using h
+    simpa only [BC12GinibreNegativeMomentTightnessTri, BoundedInProbabilityTri,
+      subsequenceCoreSize_dimension φ hφ] using h
   have hp := p.sparse_profile_probability_of_section3_section5 (subsequenceCoreSize φ) hdim
     (fun n => W (φ (n + 1))) (fun n => hW (φ (n + 1))) (hWlim.comp hφ') hs
     (hsource.coreSection5 φ hφ) (hsource.coreSection3 φ hφ) hg hn
@@ -82,7 +84,7 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
   apply (tendstoInProbabilityTri_shift_iff (fun n => gaussianProfileLaw (φ n + 1))
     (fun n ω => matrixRawPotential (p.matrix (φ n + 1) (W (φ n)) ω - z • 1))
     (circularRadialPotential ‖z‖) 1).mp
-  simpa only [subsequenceCoreSize_dimension φ hφ] using hz
+  simpa only [TendstoInProbabilityTri, subsequenceCoreSize_dimension φ hφ] using hz
 
 theorem profile_spectral_limit_along_sparse_subsequence (p : NoncompactProfile)
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n) (hWlim : Tendsto W atTop atTop)
