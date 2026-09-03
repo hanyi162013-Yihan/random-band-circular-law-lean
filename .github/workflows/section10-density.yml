@@ -164,6 +164,7 @@ jobs:
           set -o pipefail
           python3 scripts/check_axioms.py 2>&1 | tee verification-section10/full-axioms.log
           python3 scripts/check_axioms.py --audit-file section3/ShortRingAnchor/Audit.lean --audit-file section3/ShortRingAnchor/HighBandIntegrationAudit.lean 2>&1 | tee verification-section10/section3-upstream-axioms.log
+          python3 scripts/check_axioms.py --audit-file SubgaussianSection8/AxiomAudit.lean 2>&1 | tee verification-section10/subgaussian-baseline-axioms.log
       - name: Preserve build and audit logs
         if: ${{ always() }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
