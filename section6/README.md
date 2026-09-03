@@ -8,6 +8,18 @@ mathlib checkout or large local download is needed. See
 
 ## Main endpoint and verification status
 
+**Current migration:** the new source changes and expanded full regression
+are being checked separately; see
+[the cross-chapter audit](../GAUSSIAN_INPUT_MIGRATION.md).
+The actual Ginibre raw-log and spectral limits now have proved constructors
+without BBV; its negative moment still uses BBV. The historical sparse,
+subsequence and published-source records no longer ask for those three
+Gaussian conclusions. The separate squared-singular/Han routes are retained
+as optional conditional results, not inputs of the preferred endpoint.
+
+The following is the earlier verified BBV-only checkpoint, not a certificate
+for the newer migration changes.
+
 The new endpoint `NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources`
 passed [run 33740349647](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33740349647)
 at `9d98ca87d112a240fc5b596d1a27801450b15cbe`: complete target/import build,
@@ -106,14 +118,13 @@ adapters, including the concrete Gaussian density record with the shared fix.
 
 ## Boundaries not concealed by the endpoint
 
-The historical endpoints do not reprove the cited Han, BC12 and classical
-Ginibre results. The newer Han-free endpoint and its remaining inputs are
-described above and in `DENSE_GINIBRE_ADAPTERS.md`.
-Section 5 and the newly verified Section 3 density endpoints are called inside
-the proof. The new source-facing endpoint takes finite model/sampling identities
-and the published BBV/BC12 literature premises, not the short-ring probability
-limit again. Real-density sources additionally retain geometric Brascamp--Lieb.
-The broad older interfaces remain available for other source models.
+Historical conditional routes do not reprove Han or the limiting
+squared-singular law. Neither is required by the preferred BBV-only endpoint.
+The current Section 5 source record takes finite model/sampling identities,
+the actual Gaussian law, and BBV comparisons; Gaussian log and negative-moment
+estimates are constructed internally, not supplied as BC12 premises.
+Real-density routes additionally retain geometric Brascamp--Lieb.
+Generic conditional helper theorems remain available for other source models.
 
 The circular-law chain uses an inverse-moment/uniform-L2 route. The separate
 hard-edge modules prove that a bounded Poisson transform implies a linear CDF
@@ -131,12 +142,15 @@ every intermediate statement of Section 6 has been formalized line by line.
 ```sh
 cd section6
 LEAN_NUM_THREADS=1 lake --no-cache build CircularLawSection6
-lake --no-cache env lean -DwarningAsError=true AxiomAudit.lean
-lake --no-cache env lean -DwarningAsError=true Regression.lean
+python3 ../scripts/build_gaussian_migration.py --project section6 --audit
 ```
 
-`AxiomAudit.lean` checks every declaration in the new Section 6 namespace
-and permits only `propext`, `Classical.choice`, and `Quot.sound` transitively.
-Section 6 compiler warnings are errors. GitHub retains build, audit and
+The current audit checks every named public source theorem in
+`PublicTheoremAxiomAudit.lean`, the focused migration checks, and both original
+regression suites. It uses default checking limits and permits only
+`propext`, `Classical.choice`, and `Quot.sound` transitively. Private helpers
+are covered transitively when used, not counted separately.
+The older `AxiomAudit.lean` is retained only as historical tooling.
+GitHub retains build, audit and
 regression logs, and saves completed dependency builds even after a failed
 new-module check.

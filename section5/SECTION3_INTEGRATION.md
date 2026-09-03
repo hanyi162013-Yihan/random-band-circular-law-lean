@@ -1,6 +1,6 @@
 # Direct integration of the checked Section 3 package
 
-## Current Gaussian-source migration — verified 2026-09-03
+## Gaussian-source migration checkpoint — verified 2026-09-03
 
 The current concrete endpoints no longer take `BC12GinibreInput`.
 `CircularLawSections56.Section5.VerifiedGinibreSources` identifies the actual
@@ -18,6 +18,13 @@ foundations were reported. Artifact SHA-256:
 `e3a359ff3097b43f179e67cbd61bcf2afbbacb85e2001ce403c365595f6744ac`.
 The whole run had a separate root audit-import failure; this is a Section 5
 certificate, not a claim that every matrix job of that run succeeded.
+
+**Later source-record migration is pending its own cloud check:**
+`PublishedSection3Model.Sources` now replaces its old Gaussian conclusion
+fields by the exact normalized Ginibre law, with dense BBV available at all
+positive heights. The negative moment and full-log limit are proved methods,
+and the concrete source constructor proves the Gaussian law internally.
+The checkpoint above does not certify these later changes.
 
 ## Historical concrete interface — verified 2026-09-03
 

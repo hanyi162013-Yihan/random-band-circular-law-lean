@@ -5,6 +5,10 @@ using `provedGinibreInput` in the `PublishedSection3Concrete` namespace,
 defined in `VerifiedGinibreSources.lean`. These signature changes passed
 at `c4e8078`, with all 240 Section 5 reports and the normal target build;
 see [the current certificate](SECTION3_INTEGRATION.md).
+The later migration of the general `PublishedSection3Model.Sources` record
+to an actual Gaussian-law field is awaiting its own cloud check. That record
+no longer contains a negative exponent or either BC12 estimate; it uses
+the fixed proved exponent `1/128` internally.
 See [the whole-paper migration audit](../GAUSSIAN_INPUT_MIGRATION.md).
 
 The new entry points construct the actual short-ring and calibration matrices
@@ -65,7 +69,8 @@ uses only BBV and this pressure record; the BBV-core caller is also migrated.
 The following older conditional route remains for compatibility:
 `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_concrete_sources`
 also constructs the local Section 3 input from universal BBV and the classical
-actual-Ginibre bounded-test limit. It retains the named Ginibre and Han sources;
+actual-Ginibre squared-singular bounded-test limit. It retains that specific
+limiting-law source and Han, but not Gaussian log/negative/spectral fields;
 there is no finite anchor or local-CDF certificate in the new caller record.
 
 ## Historical verification before the BC12 migration
