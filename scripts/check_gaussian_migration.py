@@ -38,11 +38,25 @@ for filename, structure, fields in [
      ["bbv", "ginibreSquared", "coreSection4"]),
     ("GinibreReducedSources", "GaussianProfileReducedSources",
      ["bbv", "ginibreSquared", "coreSection4"]),
+    ("SparseSpectralEndpoint", "SparseGaussianSourceInputs",
+     ["coreSection5", "coreSection3", "bbv"]),
+    ("SubsequenceSourceEndpoint", "GaussianProfileSourceInputs",
+     ["coreSection5", "coreSection3", "bbv"]),
+    ("Section34GaussianProfileTheorem", "GaussianProfileSection34Inputs",
+     ["coreSection34", "coreSection3", "bbv"]),
+    ("PublishedSection3GaussianProfile", "GaussianProfilePublishedSection3Inputs",
+     ["coreSection34", "coreSection3", "bbv"]),
+    ("PublishedSourceGaussianProfile", "GaussianProfilePublishedSources",
+     ["coreSection34", "coreLocal", "bbv"]),
 ]:
     source = code_only((root / f"section6/CircularLawSection6/{filename}.lean").read_text())
     match = re.search(rf"^structure {structure} .*? where\n(.*?)(?=^\S)", source, re.M | re.S)
     if not match or re.findall(r"^  (\w+)\s*:", match[1], re.M) != fields:
         raise SystemExit(f"Unexpected fields in {structure}")
+
+consequences = code_only((root / "section6/CircularLawSection6/GinibreSourceConsequences.lean").read_text())
+if re.search(r"\b(sorry|admit|unsafe|axiom|native_decide|set_option)\b", consequences):
+    raise SystemExit("Forbidden checking escape/option in Gaussian reference consequences")
 
 taper = code_only((root / "section5/CircularLawSections56/Section5/TaperVerifiedGinibre.lean").read_text())
 if re.search(r"\b(sorry|admit|unsafe|axiom|native_decide|set_option)\b", taper):

@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       kernel_replay:
-        description: Replay the 22 changed proof modules with the pinned Lean kernel
+        description: Replay the changed proof modules with the pinned Lean kernel
         type: boolean
         default: false
 permissions:

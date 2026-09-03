@@ -1,6 +1,7 @@
 import CircularLawSection6.SparseProfileSourceEndpoint
 import CircularLawSection6.SubsequenceProfileReplacement
 import CircularLawSections56.Section5.DiskReferenceLaw
+import CircularLawSection6.GinibreSourceConsequences
 
 /-! # Source-level sparse theorem on any increasing dimension sequence -/
 
@@ -54,15 +55,7 @@ structure GaussianProfileSourceInputs (p : NoncompactProfile) (W : ℕ → ℝ) 
     p.CanonicalCoreSection5Input (subsequenceCoreSize φ) (fun n => W (φ (n + 1))) (R + 1)
   coreSection3 : ∀ (φ : ℕ → ℕ), StrictMono φ → ∀ R : ℕ,
     p.CanonicalCoreSection3Input (fun n => subsequenceCoreSize φ n + 2) (fun n => W (φ (n + 1))) (R + 1)
-  ginibreRaw : ∀ᵐ z ∂(volume : Measure ℂ),
-    TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
-      (fun n ω => matrixRawPotential (ginibreMatrix (n + 1) ω - z • 1)) (circularRadialPotential ‖z‖)
-  ginibreNegative : ∀ᵐ z ∂(volume : Measure ℂ), ∃ q : ℝ, 0 < q ∧
-    BC12GinibreNegativeMomentTightnessTri (fun n => n + 1) z q
-  ginibreSpectral : ∀ f : ℂ → ℝ, Continuous f → HasCompactSupport f →
-    TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
-      (fun n ω => realEsdTest (cyclicPhysicalMatrix n (ginibreMatrix (n + 1) (ω n).2)) f)
-      atTop (fun _ => ∫ z, f z ∂circularMeasure)
+  bbv : CircularLawSections56.Section5.PublishedSection3Concrete.BBVComparisonInput
 
 theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n) (hWlim : Tendsto W atTop atTop)
@@ -88,7 +81,7 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
       TendstoInProbabilityTri (fun n => cyclicAtomLaw (subsequenceCoreSize φ n + 2) circularComplexGaussian)
         (fun n ω => matrixRawPotential (ginibreMatrix (subsequenceCoreSize φ n + 2) ω - z • 1))
         (circularRadialPotential ‖z‖) := by
-    filter_upwards [hsource.ginibreRaw] with z hz
+    filter_upwards [ginibre_raw_verified_ae] with z hz
     have h : TendstoInProbabilityTri (fun n => cyclicAtomLaw (φ (n + 1) + 1) circularComplexGaussian)
         (fun n ω => matrixRawPotential (ginibreMatrix (φ (n + 1) + 1) ω - z • 1))
         (circularRadialPotential ‖z‖) := fun ε hε => (hz ε hε).comp hφ'
@@ -98,7 +91,7 @@ theorem profile_probability_along_sparse_subsequence (p : NoncompactProfile)
       (subsequenceCoreSize_dimension φ hφ n).symm z (circularRadialPotential ‖z‖) ε
   have hn : ∀ᵐ z ∂(volume : Measure ℂ), ∃ q : ℝ, 0 < q ∧
       BC12GinibreNegativeMomentTightnessTri (fun n => subsequenceCoreSize φ n + 2) z q := by
-    filter_upwards [hsource.ginibreNegative] with z hz
+    filter_upwards [ginibre_negative_of_bbv_ae hsource.bbv] with z hz
     obtain ⟨q, hq, hneg⟩ := hz
     refine ⟨q, hq, ?_⟩
     have h : BC12GinibreNegativeMomentTightnessTri (fun n => φ (n + 1) + 1) z q := by
@@ -134,11 +127,12 @@ theorem profile_spectral_limit_along_sparse_subsequence (p : NoncompactProfile)
         atTop (fun _ => ∫ z, f z ∂circularMeasure) := by
   have hrep := p.profile_ginibre_replacement_along_subsequence W φ hφ
     (fun z => circularRadialPotential ‖z‖)
-    (p.profile_probability_along_sparse_subsequence W hW hWlim hsource φ hφ hsparse) hsource.ginibreRaw
+    (p.profile_probability_along_sparse_subsequence W hW hWlim hsource φ hφ hsparse)
+    ginibre_raw_verified_ae
   intro f hf hc
   have hdiff := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ 0).1 (hrep f hf hc)
   have hgin := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _
-    (∫ z, f z ∂circularMeasure)).1 ((hsource.ginibreSpectral f hf hc).comp hφ.tendsto_atTop)
+    (∫ z, f z ∂circularMeasure)).1 ((ginibre_spectral_verified f hf hc).comp hφ.tendsto_atTop)
   apply (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ _).2
   simpa only [esdDifference, Function.comp_apply, sub_add_cancel, zero_add] using
     hdiff.add (fun _ => Measure.infinitePi profileGinibrePairLaw) hgin

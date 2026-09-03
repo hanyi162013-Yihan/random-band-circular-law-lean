@@ -77,9 +77,7 @@ theorem GaussianProfileConcreteSources.toSection34 (p : NoncompactProfile)
       (fun n => subsequenceCoreSize φ n + 2) (fun n => W (φ (n + 1)))
       (fun n => hW (φ (n + 1))) (by positivity)
       (hWlim.comp (hφ.tendsto_atTop.comp (tendsto_add_atTop_nat 1))) h.bbv h.ginibreSquared
-  ginibreRaw := h.ginibreRaw
-  ginibreNegative := h.ginibreNegative
-  ginibreSpectral := h.ginibreSpectral
+  bbv := h.bbv
 
 theorem gaussian_profile_circular_law_of_concrete_sources (p : NoncompactProfile)
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n) (hWlim : Tendsto W atTop atTop)

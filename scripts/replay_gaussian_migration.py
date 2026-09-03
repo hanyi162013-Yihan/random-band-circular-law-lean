@@ -33,6 +33,12 @@ TARGETS = {
     ],
     "section6": [
         "CircularLawSection6.GinibreReferenceSources",
+        "CircularLawSection6.GinibreSourceConsequences",
+        "CircularLawSection6.SparseSpectralEndpoint",
+        "CircularLawSection6.SubsequenceSourceEndpoint",
+        "CircularLawSection6.Section34GaussianProfileTheorem",
+        "CircularLawSection6.PublishedSection3GaussianProfile",
+        "CircularLawSection6.PublishedSourceGaussianProfile",
         "CircularLawSection6.GinibreReducedSources",
         "CircularLawSection6.GinibreFiniteFormulaSources",
         "CircularLawSection6.PublishedConcreteGaussianProfile",

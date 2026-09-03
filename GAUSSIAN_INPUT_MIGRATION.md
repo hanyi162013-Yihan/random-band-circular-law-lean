@@ -79,6 +79,13 @@ Even the historical concrete/reduced bundles no longer ask callers for
 BC12, raw-log, negative-moment, spectral or full-log fields; their former
 accessors are proved methods where needed for compatibility.
 
+The sparse/subsequence, Section 3/4 and published-source records have also
+been reduced: their old `ginibreRaw`, `ginibreNegative` and `ginibreSpectral`
+fields are replaced by one explicit `bbv` field. Their proofs call the
+verified raw/spectral limit and the BBV-derived negative moment internally.
+This is an intentional change to those older generic source APIs; it does
+not eliminate their separate core-local, pressure or optional Han inputs.
+
 The regression guard checks the selected public signatures and record fields;
 it does not establish that every historical conditional theorem in the
 repository has been deleted or generalized. The cloud audit must inspect the
@@ -103,8 +110,8 @@ changes still require cloud validation.
 - Each project ends with ordinary `lake --no-cache build` of its public targets.
 - Separate compiled axiom/signature audits require the usual
   `propext`, `Classical.choice`, `Quot.sound` allowlist with exact report counts.
-- The final expanded audit covers 1379 root, 240 Section 5 and 20 Section 6
-  reports. Optional kernel replay checks the 22 changed proof modules with
+- The final expanded audit covers 1379 root, 240 Section 5 and 31 Section 6
+  reports. Optional kernel replay checks the 28 changed proof modules with
   one worker and exact module coverage. This uses Lean's own kernel, not an
   external independent verifier, and does not replay all of mathlib.
 - The upstream signature audit prints the genuine Gaussian model definitions

@@ -1,5 +1,7 @@
 import CircularLawSection6.BBVOnlyProfileEndpoint
 import CircularLawSection6.GinibreFiniteFormulaSources
+import CircularLawSection6.SparseSpectralEndpoint
+import CircularLawSection6.PublishedSourceGaussianProfile
 
 #print axioms CircularLawSection6.verifiedGinibreFiniteFormulaInput
 #print axioms CircularLawSection6.verifiedGinibreLogPotentialInput
@@ -21,6 +23,17 @@ import CircularLawSection6.GinibreFiniteFormulaSources
 #print axioms CircularLawSection6.NoncompactProfile.sparse_profile_probability_of_bbv_section5
 #print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_core_sources
 #print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources
+#print axioms CircularLawSection6.ginibre_raw_verified_ae
+#print axioms CircularLawSection6.ginibre_negative_of_bbv_ae
+#print axioms CircularLawSection6.NoncompactProfile.sparse_profile_probability_of_sources
+#print axioms CircularLawSection6.NoncompactProfile.sparse_profile_ginibre_spectral_replacement
+#print axioms CircularLawSection6.NoncompactProfile.profile_probability_along_sparse_subsequence
+#print axioms CircularLawSection6.NoncompactProfile.profile_spectral_limit_along_sparse_subsequence
+#print axioms CircularLawSection6.NoncompactProfile.GaussianProfileSection34Inputs.toSourceInputs
+#print axioms CircularLawSection6.NoncompactProfile.GaussianProfilePublishedSection3Inputs.toSection34
+#print axioms CircularLawSection6.NoncompactProfile.GaussianProfilePublishedSources.toPublishedSection3
+#print axioms CircularLawSection6.NoncompactProfile.GaussianProfileConcreteSources.toSection34
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_published_sources
 
 -- Regression: no projection/correlation or log-potential premise is needed.
 example : CircularLawSection6.GinibreFiniteFormulaInput :=
@@ -48,6 +61,11 @@ example (p : NoncompactProfile) (W : ℕ → ℝ) (hBBV : BBVComparisonInput)
 #print CircularLawSection6.NoncompactProfile.GaussianProfileBBVSources
 #print CircularLawSection6.NoncompactProfile.GaussianProfileConcreteSources
 #print CircularLawSection6.NoncompactProfile.GaussianProfileReducedSources
+#print CircularLawSection6.NoncompactProfile.SparseGaussianSourceInputs
+#print CircularLawSection6.NoncompactProfile.GaussianProfileSourceInputs
+#print CircularLawSection6.NoncompactProfile.GaussianProfileSection34Inputs
+#print CircularLawSection6.NoncompactProfile.GaussianProfilePublishedSection3Inputs
+#print CircularLawSection6.NoncompactProfile.GaussianProfilePublishedSources
 #check @CircularLawSection6.DenseProfile.profile_conclusion
 #check @CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources
 #check @CircularLawSection6.ginibre_raw_verified
