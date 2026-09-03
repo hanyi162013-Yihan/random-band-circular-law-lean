@@ -27,7 +27,10 @@ theorem normalizedGaussianPair_map {N : ℕ} (hN : 0 < N) :
   let r : ℝ := (Real.sqrt (N : ℝ))⁻¹
   let v : ℝ≥0 := ⟨r ^ 2, sq_nonneg _⟩ * (1 / 2)
   have hr : 0 < r := by dsimp [r]; positivity
-  have hv : 0 < v := mul_pos (sq_pos_of_pos hr) (by norm_num)
+  have hv : 0 < v := by
+    change (0 : ℝ) < (v : ℝ)
+    dsimp [v]
+    positivity
   have hav : 2 * (v : ℝ) = (N : ℝ)⁻¹ := by
     simp only [v, NNReal.coe_mul, NNReal.coe_mk, NNReal.coe_div,
       NNReal.coe_one, NNReal.coe_ofNat]
