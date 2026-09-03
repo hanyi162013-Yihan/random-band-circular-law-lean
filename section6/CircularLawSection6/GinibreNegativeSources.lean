@@ -16,6 +16,7 @@ open CircularLawSections56.Section5.PublishedSection3Concrete (BBVComparisonInpu
 noncomputable section
 set_option autoImplicit false
 set_option warningAsError true
+set_option backward.isDefEq.respectTransparency false
 
 namespace CircularLawSection6
 namespace GinibreReferenceSources
@@ -26,7 +27,11 @@ theorem cyclicSamples_negative (N : ℕ) [NeZero N] (ω : ℕ → ℂ) (z : ℂ)
         (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence N ω) z) := by
   have hm := cyclicSamples_shifted_matrix N ω z
   rw [← matrixNegativeMoment_reindex (ZMod.finEquiv N).toEquiv.symm
-    (ginibreMatrix N (cyclicSamples N ω) - z • 1) p, hm]
+    (ginibreMatrix N (cyclicSamples N ω) - z • 1) p]
+  change matrixNegativeMoment
+    ((ginibreMatrix N (cyclicSamples N ω) - z • 1).submatrix
+      (ZMod.finEquiv N) (ZMod.finEquiv N)) p = _
+  rw [hm]
   simp only [matrixNegativeMoment, Fintype.card_fin, shiftedSingularValueFamily,
     shiftedSingularValue, matrixSingularValue]
 
@@ -43,9 +48,11 @@ theorem negative_on_sequence_to_tri
   filter_upwards [htail] with n hn
   have hm : Measurable (fun ω : ZMod (N n) × ZMod (N n) → ℂ =>
       |matrixNegativeMoment (ginibreMatrix (N n) ω - z • 1) p|) := by
-    simpa only [Real.norm_eq_abs] using
-      ((measurable_matrixNegativeMoment p).comp
-        ((ginibreMatrix_measurable (N n)).sub measurable_const)).norm
+    have hmat : Measurable (fun ω : ZMod (N n) × ZMod (N n) → ℂ =>
+        ginibreMatrix (N n) ω - z • 1) :=
+      (ginibreMatrix_measurable (N n)).sub measurable_const
+    simpa only [Function.comp_def, Real.norm_eq_abs] using
+      ((measurable_matrixNegativeMoment (ι := ZMod (N n)) p).comp hmat).norm
   have hprob : (cyclicAtomLaw (N n) circularComplexGaussian)
       {ω | C < |matrixNegativeMoment (ginibreMatrix (N n) ω - z • 1) p|} < ENNReal.ofReal δ := by
     rw [← (cyclicSamples_measurePreserving (N n)).measure_preimage
