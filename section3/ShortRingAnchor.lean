@@ -17,12 +17,23 @@ import ShortRingAnchor.Proposition38.AtomMoments
 import ShortRingAnchor.Proposition38.Scales
 import ShortRingAnchor.Proposition38.BlockNorm
 import ShortRingAnchor.Proposition38.Assembly
+import ShortRingAnchor.Proposition36VerifiedGinibre
+import ShortRingAnchor.Proposition38.VerifiedGinibre
 
 /-!
 # The finite-moment short-ring anchor
 
 Root module for a Lean reconstruction of Proposition 3.6 in
 `Circular_Law_Combined_Manuscript.pdf`.
+
+The BC12-free endpoints are now
+`ShortRingAnchor.proposition36_cyclicShortRing_withoutBC12` and
+`ShortRingAnchor.Proposition38.proposition38_withoutBC12`.
+They specify the genuine Gaussian reference law and derive all BC12 inputs
+internally from the pinned Ginibre proof dependency and the existing
+Gaussian small-ball / v3 counting route. See `BC12_INTEGRATION.md` for the
+precise remaining non-BC12 hypotheses and the compatibility policy.
+The descriptions below refer to the retained generic conditional APIs.
 
 The planar-density source-model conditional theorem is
 `ShortRingAnchor.proposition36_cyclicShortRing_planar_from_published_theorem31`.

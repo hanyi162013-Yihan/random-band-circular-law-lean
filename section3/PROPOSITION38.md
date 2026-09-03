@@ -1,12 +1,19 @@
 # Proposition 3.8 — subgaussian full-block high-band anchor
 
+**BC12 integration:** the new endpoint
+`ShortRingAnchor.Proposition38.proposition38_withoutBC12` in
+[`VerifiedGinibre.lean`](ShortRingAnchor/Proposition38/VerifiedGinibre.lean)
+constructs all BC12 inputs. The conditional `Assembly.lean` endpoint below
+is preserved unchanged. See [BC12_INTEGRATION.md](BC12_INTEGRATION.md) for
+the law bridge, precise retained hypotheses, and final-commit audit requirements.
+
 Target: arXiv:2609.01295v1, **Proposition 3.8 (High-band log potential for
 subgaussian full-block rings)**, equations (3.18)–(3.25), PDF pp. 16–17.
 The checked `main.tex` SHA-256 is
 `eb737f3e1541e7949cf71354fa7cd18a49f2d779d2c71108dda262339e8d98fe`.
 The manuscript is read-only and is not copied into this project.
 
-The source-facing endpoint is
+The original source-facing conditional endpoint is
 `ShortRingAnchor.Proposition38.proposition38` in
 [`Assembly.lean`](ShortRingAnchor/Proposition38/Assembly.lean).
 Successful build/audit records, not the presence of theorem source text,
@@ -36,7 +43,7 @@ The dense reference is the same explicit normalized independent-atom
 array used by section3. Its moment data and finite Ginibre formulas remain
 visible, rather than asserting that an arbitrary reference is Ginibre.
 
-## Exact external boundary
+## Original conditional boundary (before the BC12-free wrapper)
 
 The two **newly authorized** literature inputs are centralized in
 [`ExternalInputs.lean`](ShortRingAnchor/Proposition38/ExternalInputs.lean):
