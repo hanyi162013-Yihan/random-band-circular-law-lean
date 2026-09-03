@@ -32,7 +32,9 @@ theorem singularPoissonKernel_integrable (σ : Measure ℝ) [IsFiniteMeasure σ]
   apply (integrable_const (1 / t)).mono'
   · have hc : Continuous (singularPoissonKernel t) := by
       unfold singularPoissonKernel
-      fun_prop (disch := positivity)
+      apply Continuous.div continuous_const (by fun_prop)
+      intro s
+      exact ne_of_gt (add_pos_of_nonneg_of_pos (sq_nonneg s) (sq_pos_of_pos ht))
     exact hc.measurable.aestronglyMeasurable
   · filter_upwards with s
     rw [Real.norm_eq_abs, abs_of_nonneg (singularPoissonKernel_nonneg ht s)]
@@ -55,7 +57,7 @@ theorem hardEdge_mass_le_of_poisson_bound (σ : Measure ℝ) [IsFiniteMeasure σ
   have h : (1 / (2 * t)) * σ.real (Icc 0 t) ≤ C :=
     (mul_le_mul_of_nonneg_left hm (by positivity)).trans (hmark.trans hbound)
   have hdiv : σ.real (Icc 0 t) / (2 * t) ≤ C := by
-    simpa only [one_div, div_eq_mul_inv, mul_comm] using h
+    simpa only [div_eq_mul_inv, one_mul, mul_comm] using h
   exact ((div_le_iff₀ (by positivity : 0 < 2 * t)).mp hdiv).trans_eq (by ring)
 
 theorem hardEdge_cdf_le_of_poisson_bound (σ : Measure ℝ) [IsFiniteMeasure σ]
@@ -65,7 +67,8 @@ theorem hardEdge_cdf_le_of_poisson_bound (σ : Measure ℝ) [IsFiniteMeasure σ]
   have heq : σ (Iic t) = σ (Icc 0 t) := by
     apply measure_congr
     filter_upwards [hpos] with s hs
-    simp only [mem_Iic, mem_Icc, hs, true_and]
+    change (s ≤ t) = (0 ≤ s ∧ s ≤ t)
+    exact propext ⟨fun h => ⟨hs, h⟩, fun h => h.2⟩
   change (σ (Iic t)).toReal ≤ _
   rw [heq]
   exact hardEdge_mass_le_of_poisson_bound σ ht hbound
