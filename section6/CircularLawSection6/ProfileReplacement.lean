@@ -94,12 +94,17 @@ theorem profile_ginibre_replacement_of_log_limits (p : NoncompactProfile) (W : �
     exact (measurePreserving_fst.integrable_comp_of_integrable (hEX k).1).add
       (measurePreserving_snd.integrable_comp_of_integrable (hEY k).1)
   · intro k
-    unfold profileGinibrePairLaw
-    rw [integral_add (measurePreserving_fst.integrable_comp_of_integrable (hEX k).1)
-      (measurePreserving_snd.integrable_comp_of_integrable (hEY k).1),
-      integral_comp_of_measurePreserving_aes measurePreserving_fst _ (hEX k).1.aestronglyMeasurable,
-      integral_comp_of_measurePreserving_aes measurePreserving_snd _ (hEY k).1.aestronglyMeasurable,
-      (hEX k).2, (hEY k).2]
+    have hiX : Integrable (fun ω => physicalEnergy (X k ω.1)) (profileGinibrePairLaw k) :=
+      measurePreserving_fst.integrable_comp_of_integrable (hEX k).1
+    have hiY : Integrable (fun ω => physicalEnergy (Y k ω.2)) (profileGinibrePairLaw k) :=
+      measurePreserving_snd.integrable_comp_of_integrable (hEY k).1
+    have heX : (∫ ω, physicalEnergy (X k ω.1) ∂profileGinibrePairLaw k) = 1 :=
+      (integral_comp_of_measurePreserving_aes measurePreserving_fst _
+        (hEX k).1.aestronglyMeasurable).trans (hEX k).2
+    have heY : (∫ ω, physicalEnergy (Y k ω.2) ∂profileGinibrePairLaw k) = 1 :=
+      (integral_comp_of_measurePreserving_aes measurePreserving_snd _
+        (hEY k).1.aestronglyMeasurable).trans (hEY k).2
+    rw [integral_add hiX hiY, heX, heY]
     norm_num
   · filter_upwards [hProfile] with z hz
     have hp : TendstoInProbabilityTri (fun k => gaussianProfileLaw (k + 1))

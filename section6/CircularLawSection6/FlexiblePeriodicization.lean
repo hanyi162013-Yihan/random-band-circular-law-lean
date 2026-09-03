@@ -27,6 +27,7 @@ theorem exists_one_or_periodic_block_lengths {N H m₀ : ℕ}
       Or.inr (fun j => (hlen j).1)⟩
   · refine ⟨1, fun _ => N, by decide, by simp, ?_, Or.inl rfl⟩
     intro j
+    change 2 * H + 1 ≤ N ∧ N ≤ 2 * m₀
     exact ⟨hfitN, by omega⟩
 
 theorem one_or_periodicization_expected_cutoff_ae

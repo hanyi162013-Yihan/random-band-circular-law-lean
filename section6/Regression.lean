@@ -594,3 +594,9 @@ example : fullBlockRoute (fun _ : Fin 1 => 3) 10 = periodicBlockRoute (fun _ : F
 example : ∃ (q : ℕ) (len : Fin q → ℕ), 0 < q ∧ (∑ j, len j) = 5 ∧
     (∀ j, 3 ≤ len j ∧ len j ≤ 200) ∧ (q = 1 ∨ ∀ j, 100 ≤ len j) := by
   exact exists_one_or_periodic_block_lengths (H := 1) (m₀ := 100) (by decide) (by decide)
+
+-- The block scale is a fixed quadratic polynomial, independent of the global dimension.
+example : quadraticBlockScale 2 = 25 := by decide
+
+example (H : ℕ) : (H : ℝ) / quadraticBlockScale H ≤ 1 / ((H : ℝ) + 1) :=
+  quadraticBlockScale_ratio_le H
