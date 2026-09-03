@@ -1,19 +1,22 @@
 # Direct Section 3 connection: exact proof route
 
-This file records implementation work still pending, not completed results.
+This file records the implemented proof route. Both source-connected endpoints
+compiled in cloud run `33717194294` at `e7ca00c`; the canonical shared version
+and all final fresh audits passed scoped run `33719162307` at `362c47f`. No whole-root recheck
+is required under the user's updated instructions. See `SOURCE_CONNECTION_AUDIT.md` for the
+current release gates.
 The selected Section 3 baseline is `section3/` at commit `42c26b6`, with
 the density-field correction documented in `DENSITY_SCHEMA_CORRECTION.md`.
 The user explicitly excluded the later, unrelated Proposition 3.8 additions
 from this verification task; they are not imported into this work branch.
 Root Lake now selects `section3/` instead of the older
-`vendor/short-ring-analysis/`. The concrete `IIDModels` and
-`PlanarHighBand`, `DensityRepresentative`, and `RealHighBand` adapters have been written; their integration is being
-compiled in cloud CI only. This does not yet complete the source connection.
+`vendor/short-ring-analysis/`. The concrete `IIDModels`, `PlanarHighBand`,
+`DensityRepresentative`, and `RealHighBand` adapters have compiled in cloud
+CI. No local integration compilation has been performed.
 
-At `ee286a8`, all steps below have written implementations, including
-`LiteratureInputs`, `FullBlockLogLimit`, `ConnectedHighBand`, and the public
-`DensityCircularLaw` module. Their source-connected proofs remain pending
-cloud compilation and the separate final signature/axiom audit.
+All steps below have compiled implementations, including `LiteratureInputs`,
+`FullBlockLogLimit`, `ConnectedHighBand`, and the public `DensityCircularLaw`
+module. The separate final signature/axiom audit also passed.
 
 ## Why the old record is not the final interface
 
@@ -55,7 +58,7 @@ model-validity certificate may remain in the final caller signature.
    theorem and does not require a scalar-indicator profile.
 6. Construct the Gaussian atom's moments and planar density from
    `circularGaussianPairLaw`; `GaussianReferenceFacts` supplies this
-   elementary part (cloud verification pending). Transfer its IID laws,
+   cloud-verified elementary part. Transfer its IID laws,
    prove nonsingularity by the existing source theorem, and transport the
    explicitly retained BC12 conclusions to the product sample space.
 7. Connect the resulting high-band limit to both Section 10 closures and

@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "proof_source_commit": "362c47fe69c5330b18e1818497dcbbe4433df1be",
+  "run_id": 33719162307,
+  "job_id": 100534595796,
+  "url": "https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307",
+  "started_at": "2026-09-03T05:31:03Z",
+  "completed_at": "2026-09-03T05:35:16Z",
+  "scope": "Section 10 and its actual imported dependencies; not a whole-repository build",
+  "targets": [
+    "BernoulliSection10",
+    "BernoulliSection10Complex",
+    "BernoulliSection10Source"
+  ],
+  "placeholder_scan_files": 207,
+  "audit_files": 9,
+  "axiom_reports": 492,
+  "audit_groups": {
+    "real_baseline": 446,
+    "planar_front": 23,
+    "source_models_and_gaussian": 15,
+    "conditional_closure": 2,
+    "source_connected_endpoints": 6
+  },
+  "allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "theorem_parameter_audit": "passed; BBV and BC12, real-only geometric Brascamp-Lieb, and original model assumptions",
+  "density_schema_construction": "passed; actual ENNReal top, no implicit top quantifier",
+  "shared_density_commit": "5c7be7bf2bd843ccdbfb45fdc0144e3dc7163278",
+  "shared_density_sha256": "f96c9a78fb9c59b098e3207da87c6a7e0abbecb46cf934a5d652478163dfe7d5",
+  "github_artifact_sha256": "77d24d02d7cdecb9cf7309a0176ec0dc71d7110541a1a82988f1b08fe846250a",
+  "local_integration_compilation": false,
+  "restored_project_cache_from_run": 33717194294,
+  "independent_downloaded_report_validation": true
+}

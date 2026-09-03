@@ -5,6 +5,15 @@ alignment in `FORMALIZATION_MAP.md`. The earlier Section 10 local estimates
 and the Section 9 deterministic library are retained as module dependencies.
 The original external workspaces have not been edited.
 
+The current source-connected extension is verified by scoped run
+`33719162307` at `362c47f`. Root Lake now uses `section3/`, at common baseline
+`42c26b6` with shared density correction `5c7be7b`; the old generic vendor
+snapshot below remains only as historical provenance. Actual BBV/BC12
+applications and the real-only geometric Brascamp–Lieb boundary are recorded
+in [SOURCE_CONNECTION_AUDIT.md](SOURCE_CONNECTION_AUDIT.md) and
+[COMPLEX_REUSE_AUDIT.md](COMPLEX_REUSE_AUDIT.md). No newer Proposition 3.8
+result is used by the Section 10 endpoint.
+
 ## Proved dependencies included in this repository
 
 - `vendor/tao-vu-replacement`: the user's Tao–Vu project, pinned at
@@ -46,7 +55,7 @@ current results and source-item mappings use arXiv v1's Section 10 numbering.
 identities needed for the paper's actual dimension `(s+3)W`. These are
 checked proof adaptations, not casts of an unavailable theorem.
 
-## Explicit permitted theorem inputs
+## Historical conditional endpoint's permitted theorem inputs
 
 `SourceInputs.Section3Inputs` records exactly the real-IID specializations
 of Theorem 3.1, Proposition 3.3, Lemma 3.4, and Proposition 3.5. It is an

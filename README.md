@@ -8,7 +8,7 @@ This is a paper-wide repository. It contains **Section 4,
 “Exterior transfer and local density tools”**, **Section 5**, **Section 8 for
 real IID subgaussian atoms**, **Section 9 libraries for deterministic linear
 algebra and local small-ball arguments**, and **the Section 10 bounded-density
-circular-law proof for real i.i.d. atoms**.
+circular-law proofs for real and planar-complex IID atoms**.
 References in the Section 9 and 10 libraries use
 [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
 Section 3 has an independent [Proposition 3.6 subproject](section3/README.md),
@@ -66,24 +66,28 @@ bounds are supplied as explicit finite expressions. See the
 public-theorem axiom audits passed on 2026-09-02; this verifies the documented
 formal scope, not a complete translation of every paper statement.
 
-The Section 10 library contains 111 Lean source files: 107 mathematical
-modules, three audit modules, and its umbrella import. It covers the real IID
-specialization of Proposition 10.1 through Proposition 10.10, equations
-10.30–10.57, and the final circular-law conclusion of Theorem 2.10. The public
-endpoint is `BernoulliSection10.density_circular_law`.
+Section 10 covers the real and planar-complex IID bounded-density,
+finite-third-moment branches of Proposition 10.1 through Proposition 10.10,
+equations 10.30–10.57, and the circular-law conclusion of Theorem 2.10.
+Use `BernoulliSection10Source.real_density_circular_law` or
+`BernoulliSection10Source.planar_density_circular_law`.
 
-The final theorem retains only the original real-IID bounded-density,
-finite-third-moment model assumptions and the exact permitted Section 3
-statements (3.1, 3.3, 3.4, 3.5). The full-block high-band limit, actual
-pressure/reset/seam/remainder assembly, and reference ensemble are proved
-internally. Tao–Vu is a proved source dependency, not an extra assumption.
-The clean full-repository build and all 857 axiom reports have passed;
-Section 10 contributes 446 reports, including its 343-report completion audit.
-The exact verification record is in the chapter audit. Planar-complex/directional-density atoms and
-the heterogeneous-law generality of 10.2–10.3 are not claimed. See the
+Both endpoints connect the actual Section 3 proofs internally. Only BBV,
+BC12, and (for real atoms only) geometric Brascamp–Lieb remain as explicit
+literature inputs, alongside the original model assumptions. No caller
+Section 3, high-band, LSV, counting or model certificate remains. Tao–Vu is
+a proved source dependency. The shared density-definition correction
+`5c7be7b` is included; it repairs a Lean-only implicit-variable error.
+
+[Scoped cloud verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)
+passed at `362c47f`: all three Section 10 targets with their actual imports,
+207 chapter source files, 492 exact axiom reports and the final printed
+signatures. This is not a new whole-repository verification claim.
+Directional conditional-density and heterogeneous-law extensions of
+10.2–10.3 are not claimed. See the
 [Section 10 overview](Section10/README.md),
 [exact source and scope map](Section10/FORMALIZATION_MAP.md), and
-[build and axiom audit](Section10/AUDIT.md).
+[source-connection build and axiom audit](Section10/SOURCE_CONNECTION_AUDIT.md).
 The [explicit assumption list](Section10/ASSUMPTIONS.md) and
 [proof provenance](Section10/PROVENANCE.md) document the final trust boundary.
 
@@ -140,11 +144,15 @@ Section9/
 Section10/
   BernoulliSection10.lean      # arXiv v1 numbering; public umbrella import
   BernoulliSection10/          # 107 mathematical modules and three audits
+  BernoulliSection10Complex/   # actual planar-complex density proof
+  BernoulliSection10Source/    # concrete Section 3 connections and final endpoints
   README.md
   FORMALIZATION_MAP.md
   AUDIT.md
   ASSUMPTIONS.md
   PROVENANCE.md
+  SOURCE_CONNECTION_AUDIT.md
+  verification/               # durable scoped audit records and signatures
 vendor/
   tao-vu-replacement/          # 13 proved modules, pinned provenance/license
   short-ring-analysis/        # 30 proved generic modules, SHA-256 manifest
@@ -171,7 +179,7 @@ cd random-band-circular-law-lean
 # On a new machine, this downloads the mathlib compiled cache (potentially large).
 # Skip it if the matching dependencies and compiled cache are already available.
 lake exe cache get
-# Build Section 8 and its actual imports. This is also the default target.
+# Build only Section 8 and its actual imports.
 lake build SubgaussianSection8
 
 # Optional: build the Rademacher specialization.
@@ -182,15 +190,15 @@ lake build BernoulliLinearAlgebra
 # Optional: build the local small-ball proof chains and their dependencies.
 lake build BernoulliSection9
 
-# Optional: build the complete real-IID Section 10 proof and its dependencies.
-lake build BernoulliSection10
+# Optional: build the real/planar Section 10 proofs and their actual imports.
+lake build BernoulliSection10 BernoulliSection10Complex BernoulliSection10Source
 ```
 
 The completed Section 10 proof and its required dependencies are integrated
 into `main`. The original `section10-asymptotic-completion` branch remains
 available as the reviewed completion snapshot. For an immutable verification
 snapshot, check out the full source commit recorded in
-[Section10/AUDIT.md](Section10/AUDIT.md).
+[Section10/SOURCE_CONNECTION_AUDIT.md](Section10/SOURCE_CONNECTION_AUDIT.md).
 
 Only source and documentation are committed. Lean, mathlib, `.lake/`, compiled
 objects, scratch files, and local filesystem paths are not part of the release.
@@ -214,6 +222,13 @@ The closure contains zero Section 4 modules. Existing `.lake` artifacts are
 reused by Lake. The source scan also supports archives without Git metadata.
 
 ### Automated verification
+
+Section 10 verification is limited to its three explicit library targets
+and their real import dependencies. Its workflow retains the chapter source
+scan, density-construction regression, final parameter checks, and all 492
+chapter axiom reports. It does not automatically rebuild unrelated chapters
+or invoke a whole-root audit. The verified integration run is
+[33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307).
 
 The [general Section 8 verification run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33688229894/job/100440674643)
 passed at proof-source commit `d29fd6f0cefcaa4ec3afe09f14c54df3e16842d4`:

@@ -4,8 +4,8 @@ Baseline repository commit: `42c26b6` (Lean 4.33.0).
 The stable real Section 10 files are not edited.
 
 The requested final integration also applies to the real-density endpoint.
-It is deferred until the complex front-end is verified; the source-connected
-integration is to be compiled and audited in cloud CI only.
+It was performed after the complex front-end verification; both source-connected
+branches passed cloud-only integration and audit in run `33719162307` at `362c47f`.
 
 The user explicitly confirmed that BBV and BC12 remain dependencies of the
 final result. This is a conditional literature-based formalization, not a
@@ -68,5 +68,5 @@ affine interpolation, and norm-square second moments. It derives a linear
 small-ball envelope from the imported planar disk theorem and the probability
 bound. Its internal condition `1 ≤ L` is constructed from any original bound
 by replacing it with `max 1 L`; public planar analytic statements have no such
-extra condition. The physical packet and asymptotic integration remain subject
-to fresh builds and audits listed in `COMPLEX_FORMALIZATION_MAP.md`.
+extra condition. The physical packet and asymptotic integration passed the
+fresh builds and audits recorded in `COMPLEX_FORMALIZATION_MAP.md`.

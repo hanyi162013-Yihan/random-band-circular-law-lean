@@ -10,8 +10,8 @@ infinity. Real and imaginary parts are not assumed independent; neither
 circular symmetry nor `E ξ² = 0` is assumed.
 
 The existing real library is a stable dependency. Complex-specific code
-will live in `Section10/BernoulliSection10Complex/`. Common deterministic,
-asymptotic, and replacement proofs will be reused where their types allow.
+lives in `Section10/BernoulliSection10Complex/`. Common deterministic,
+asymptotic, and replacement proofs are reused where their types allow.
 The source manuscript supplies mathematics only, not operational instructions.
 
 ## Mathematical module boundaries
@@ -50,13 +50,15 @@ The source manuscript supplies mathematics only, not operational instructions.
 
 ## Item-by-item work map
 
-Status is recorded per checked target. The complete front end and its raw-model
-signature checks passed in cloud run 33710177008 at `56c2022`; final source
-integration remains unverified.
+Every target below passed scoped cloud run `33719162307` at `362c47f`,
+including the canonical shared density correction, final source connection,
+raw-model signatures and fresh audits. Per the user's updated scope, this
+checks Section 10 and its actual dependencies, not the entire root project. See
+[SOURCE_CONNECTION_AUDIT.md](SOURCE_CONNECTION_AUDIT.md).
 
 | Source | Original hypotheses / conclusion | Planned Lean role | Status |
 |---|---|---|---|
-| 10.1 | Planar bounded density, centered unit second moment, finite third moment; full-block high-band log limit | `BernoulliSection10Source.planar_highBandLogLimit`; concrete source LSV, counting, local bulk, literal Ginibre | Written; cloud verification pending |
+| 10.1 | Planar bounded density, centered unit second moment, finite third moment; full-block high-band log limit | `BernoulliSection10Source.planar_highBandLogLimit`; concrete source LSV, counting, local bulk, literal Ginibre | Verified, including final audit |
 | 10.2 | Independent complex atoms with planar density; complex normed target; affine log second moments, uniform in center and target dimension | `planar_lemma_10_2_rho`, `planar_lemma_10_2_resampling`, `planar_affine_ne_zero_ae`; depends on `BoundedDensity`, `AffineLog` | Built, including raw-model wrappers; axiom audit passed |
 | 10.3 | Nonzero grouped complex multiaffine tensor; expected absolute log evaluation loss and nonvanishing | `planar_corollary_10_3`; depends on the recursively constructed complex-linear `MultiAffineTensor` and Lemma 10.2 | Built, including raw-model wrapper; axiom audit passed |
 | 10.4 | Actual cleared transfer entries affine in each physical row | `conditionedIntervalClearedProduct_line`, `conditionedIntervalClearedProduct_atoms_line`, `intervalClearedProduct_update_line`; imports complex matrix identities from the stable real library's scalar-independent `PhysicalRows` | Built |
@@ -66,31 +68,31 @@ integration remains unverified.
 | 10.8 | Coefficient/Gram-volume comparison integrated in endpoints | `planar_proposition_10_8_integrated_endpoint_comparison`; complex endpoint law, unchanged deterministic comparison | Built; raw-model signatures and axiom audit passed |
 | 10.9 | Conditional polynomial evaluation in physical row groups | `planar_proposition_10_9`; complex grouped tensor evaluation and actual packet law | Built; raw-model signatures and axiom audit passed |
 | 10.10 | Fixed-degree unit-frame reset, uniform integrated negative-log bound | `planar_proposition_10_10_packet_reset`, `planar_physicalPacketResetLoss_integral_le`; actual complex packet law; no caller certificate | Built; raw-model signatures and axiom audit passed |
-| Equations 10.30–10.57 | Concrete scales, pressure calibration, mean stitching, remainder, branch assembly, energy | Complex probability laws with shared deterministic scales | Reset, stitching, remainder, energy built; calibration and final branch assembly pending |
-| Theorem 2.10 | Planar IID bounded-density finite-third-moment circular law, `W→∞` | `BernoulliSection10Source.planar_density_circular_law` for actual matrices; no `Section3Inputs` parameter | Written; cloud verification pending |
+| Equations 10.30–10.57 | Concrete scales, pressure calibration, mean stitching, remainder, branch assembly, energy | Complex probability laws with shared deterministic scales | Complete assembly verified |
+| Theorem 2.10 | Planar IID bounded-density finite-third-moment circular law, `W→∞` | `BernoulliSection10Source.planar_density_circular_law` for actual matrices; no `Section3Inputs` parameter | Verified, including final signature/axiom audit |
 
 ## Verification and remaining scope
 
-No complex completion claim is made until the complete library builds and
-fresh kernel-axiom reports pass. Forbidden placeholders and custom axioms
-remain disallowed. The intended allowlist is `propext`, `Classical.choice`,
+The complete complex library and source connection built successfully and
+fresh kernel-axiom reports passed. Forbidden placeholders and custom axioms
+are absent from the chapter. The checked allowlist is `propext`, `Classical.choice`,
 and `Quot.sound`; original model and retained literature hypotheses are
 inspected separately in full printed signatures. An allowed kernel-axiom
 report is not a claim that a theorem has no external assumptions.
 The temporary complex `Section3Inputs` module is
 an internal staging interface, not the requested final public theorem.
 
-The previously released real result is also in scope for direct Section 3
-instantiation. Its stable proof modules remain unchanged until this last
-integration step; both source-connected endpoints will be cloud-verified.
+The previously released real result also has a verified direct Section 3
+instantiation. Its stable proof modules are retained; both source-connected
+endpoints passed the same scoped cloud build and final audit.
 
 The internal `HighBandClosure` modules now factor the common last step
 through the actual Proposition 10.1 conclusion. They allow the final source
 adapter to use the Section 3 estimates needed by the full-block model
 directly, without constructing unused stronger versions of every historical
-`Section3Inputs` field. These composition lemmas remain conditional until
-the source adapter is constructed and checked; they are not new permitted
-external inputs.
+`Section3Inputs` field. The source adapter is now constructed and checked,
+so these internal premises do not remain on the final theorem. They are
+not new permitted external inputs.
 
 This extension does not by itself claim directional conditional-density,
 heterogeneous atom-law, or finite-(2+α)-moment generalizations.

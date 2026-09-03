@@ -3,11 +3,11 @@
 The source-connection work exposed and corrected an uninhabitable upstream
 density record caused by an automatically generalized `top` identifier.
 See [DENSITY_SCHEMA_CORRECTION.md](DENSITY_SCHEMA_CORRECTION.md) for the
-cloud-printed evidence, exact impact, correction and pending revalidation.
+cloud-printed evidence, exact impact, correction and successful revalidation.
 Older conditional axiom audits do not establish that the former density
 record could be instantiated.
 
-## Source-connected extension (awaiting cloud verification)
+## Verified source-connected real and planar extension
 
 The new `BernoulliSection10Source.planar_density_circular_law` and
 `BernoulliSection10Source.real_density_circular_law` instantiate the actual
@@ -16,8 +16,18 @@ real-only `RealFiniteGeometricBrascampLieb`, alongside the original density,
 moment and bandwidth assumptions. BBV includes the source's canonical
 Gaussian/free-transform comparison; BC12 is restricted to literal circular
 Ginibre. No `Section3Inputs`, high-band, model, LSV or counting certificate
-is a public argument. This is a statement of the written interfaces, not
-yet a successful compilation claim. See `BernoulliSection10Source/AxiomAudit.lean`.
+is a public argument. These statements and their printed parameters passed
+[cloud run 33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)
+at `362c47f`. See [SOURCE_CONNECTION_AUDIT.md](SOURCE_CONNECTION_AUDIT.md)
+and `BernoulliSection10Source/AxiomAudit.lean`.
+
+Both atom laws are IID probability measures with mean zero, unit second
+moment and a finite density bound, together with a finite third absolute
+moment. The widths are positive integers tending to infinity, and
+`N n = (s n + 3) * W n`. Complex density refers to the joint planar law:
+no real/imaginary independence, circular symmetry or vanishing complex
+second moment is required. The finite-row probability instances and all
+auxiliary model certificates are constructed internally.
 
 The remainder of this document records the previously verified real
 conditional endpoint and must not be read as saying that Section 3's BBV,
@@ -31,7 +41,7 @@ The final entry point is
 recorded in `AUDIT.md`; the list below describes its explicit statement,
 not a substitute for the compilation and axiom audit.
 
-## Model assumptions retained by the final theorem
+## Historical real endpoint's model assumptions
 
 1. `μ : Measure ℝ` is a probability law with mean zero, second moment one,
    and density bounded by `L`. These are the fields of
@@ -53,7 +63,7 @@ is used to realize the entries. This does not impose independence between
 matrices of different sizes; convergence in probability to a deterministic
 law only depends on each matrix's marginal distribution.
 
-## The four permitted inputs
+## Historical real endpoint's four Section 3 inputs
 
 All numbering refers to [arXiv:2609.01295v1](https://arxiv.org/abs/2609.01295v1).
 The complete Lean statements are in `BernoulliSection10/Section3Inputs.lean`.
@@ -97,7 +107,7 @@ The replacement input's provenance and the reused generic short-ring analysis
 are documented in `PROVENANCE.md` and the two `vendor/` provenance files.
 None is declared as an additional mathematical axiom.
 
-## Scope boundary
+## Historical real endpoint's scope boundary
 
 The atom law is real and identically distributed. Planar-complex laws,
 directional conditional-density alternatives, and heterogeneous atom laws in
