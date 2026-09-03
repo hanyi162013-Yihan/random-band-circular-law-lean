@@ -1,5 +1,29 @@
 # Section 6 continuation checkpoint — 2026-09-02
 
+## Verified eighty-module checkpoint
+
+Commit: `bbb5d66a6b81121240e6b7d3bfa87588bf5af168`.
+[Dedicated GitHub run 33701538973](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33701538973),
+job `100481688321`: **success** on 2026-09-03 UTC.
+
+- All 80 modules plus umbrella compiled: 4130 dependency-inclusive jobs.
+- The transitive audit passed: 859 declarations, 758 theorem declarations;
+  only `propext`, `Classical.choice`, and `Quot.sound` are permitted.
+- All 93 strict regressions, the 613-file source-token scan, cache saving and log retention passed.
+
+The actual coordinate/sample-law cutoff adapters, positive-log and lower-
+correction second moments, normalized circular Ginibre reference, triangular
+negative-moment comparison, and size-before-cutoff L1 control are checked.
+The reference-cutoff squeeze does not assume convergence of a limiting
+singular law. It does retain the two explicit BC12 probability inputs;
+the audit does not discharge these hypotheses. The final source-to-core
+instantiation, noncompact-profile theorem and replacement endpoint are
+still being assembled. The manuscript's separate linear limiting-density
+hard-edge estimate is not claimed as proved by this alternative route.
+
+Subsequent coupled-CDF, unit-core upper sandwich, normalization error and
+noncompact mean modules are not covered by this historical green run.
+
 ## Verified seventy-module checkpoint
 
 Commit: `6b58072c4a29ca59db24e8c22a61353cdf78d09f`.

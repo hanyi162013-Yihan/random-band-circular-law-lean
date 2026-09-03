@@ -78,3 +78,7 @@ import CircularLawSection6.GinibreLowerCutoff
 import CircularLawSection6.IteratedLowerCutoff
 import CircularLawSection6.GinibreIteratedCutoff
 import CircularLawSection6.ReferenceCutoffSqueeze
+import CircularLawSection6.CoupledCdfComparison
+import CircularLawSection6.UnitCoreUpperSandwich
+import CircularLawSection6.FourthRootNormalizationError
+import CircularLawSection6.NoncompactReferenceMean

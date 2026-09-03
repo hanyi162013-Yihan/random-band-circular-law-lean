@@ -560,3 +560,9 @@ example (N : ℕ → ℕ) [∀ n, NeZero (N n)] :
   refine ⟨1, zero_lt_one, Eventually.of_forall fun n => ?_⟩
   simpa only [abs_zero, not_lt_of_ge (zero_le_one : (0 : ℝ) ≤ 1),
     Set.ofPred_false, measureReal_empty] using hδ
+
+-- Complementary core/tail masses share the same fourth-root error bound.
+example {v t : ℝ} (hv : 0 ≤ v) (ht : 0 < t) (hsum : v + t = 1) :
+    (Real.sqrt t + |Real.sqrt v - 1|) / CircularLawSections56.Section6.fourthRoot t ≤
+      2 * CircularLawSections56.Section6.fourthRoot t :=
+  normalized_tail_error_le_two_fourthRoot hv ht hsum

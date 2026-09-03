@@ -7,10 +7,18 @@ No second mathlib checkout or large local download is needed.
 
 ## New proof layer
 
-The seventy-module checkpoint at commit `6b58072` passed the dedicated
-[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33699458299):
-the publication-layout build, transitive axiom audit (797 declarations,
-702 theorem declarations), and all 84 regression examples.
+The eighty-module checkpoint at commit `bbb5d66` passed the dedicated
+[GitHub verification](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33701538973):
+the publication-layout build, transitive axiom audit (859 declarations,
+758 theorem declarations), and all 93 regression examples.
+
+This now includes the concrete normalized circular Ginibre model, its IID
+entry-law identification, energy and logarithmic L2/variance estimates,
+actual lower-cutoff correction bounds from negative moments, and the
+size-before-cutoff expectation control. The two BC12 probability statements
+remain explicit source inputs. This supplies an alternative final-squeeze
+route; it is not a proof of the manuscript's stronger linear limiting-law
+hard-edge density statement.
 
 The newest verified layer derives actual expected cutoff comparison from
 finite-matrix squared-singular CDF comparison in probability and normalized
@@ -127,8 +135,8 @@ the indicator-model results, not the noncompact-profile conclusion itself.
 ## Verification
 
 [VERIFICATION.md](VERIFICATION.md) records the exact verified commit and scope:
-70 modules, 797 audited declarations (702 theorem declarations, including
-generated declarations), and 84 regression examples. This is not a proof of
+80 modules, 859 audited declarations (758 theorem declarations, including
+generated declarations), and 93 regression examples. This is not a proof of
 the entire manuscript section.
 
 For an integrated build in this repository layout:
