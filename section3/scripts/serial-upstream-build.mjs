@@ -17,6 +17,7 @@ function visit(module) {
   if (module === 'Mathlib') throw new Error('Refusing an umbrella Mathlib build.');
   let base;
   if (module === 'Vendor' || module === 'ShortRingAnchor' || module.startsWith('Vendor.') || module.startsWith('ShortRingAnchor.')) base = root;
+  else if (module === 'Ginibre' || module.startsWith('Ginibre.')) base = path.join(root, '.lake/packages/GinibreCorrelationIdentities');
   else if (module.startsWith('Mathlib.')) base = path.join(root, '.lake/packages/mathlib');
   else return; // The already installed auxiliary packages are managed by Lake.
   const rel = module.replaceAll('.', '/');

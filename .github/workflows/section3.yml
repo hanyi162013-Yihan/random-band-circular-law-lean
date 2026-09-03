@@ -40,18 +40,22 @@ jobs:
       - uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25
         id: cache
         with:
-          path: section3/.lake/build
+          path: |
+            section3/.lake/build
+            section3/.lake/packages/GinibreCorrelationIdentities/.lake/build
           key: section3-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('section3/lean-toolchain', 'section3/lake-manifest.json', 'section3/lakefile.toml') }}-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             section3-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('section3/lean-toolchain', 'section3/lake-manifest.json', 'section3/lakefile.toml') }}-
       - name: Serial import-closure build (Section 3 only)
         id: build
-        run: node scripts/serial-upstream-build.mjs ShortRingAnchor.Audit ShortRingAnchor.HighBandIntegrationAudit ShortRingAnchor.Proposition38.Audit
+        run: node scripts/serial-upstream-build.mjs ShortRingAnchor.BC12.VerifiedAudit ShortRingAnchor.Audit ShortRingAnchor.HighBandIntegrationAudit ShortRingAnchor.Proposition38.Audit
       - name: Save completed artifacts for resumable verification
         if: ${{ always() && (steps.build.outcome == 'success' || steps.build.outcome == 'failure') && steps.cache.outputs.cache-primary-key != '' }}
         uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25
         with:
-          path: section3/.lake/build
+          path: |
+            section3/.lake/build
+            section3/.lake/packages/GinibreCorrelationIdentities/.lake/build
           key: ${{ steps.cache.outputs.cache-primary-key }}
       - name: Normal lake build and exact axiom audit
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}

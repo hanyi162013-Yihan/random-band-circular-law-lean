@@ -1,0 +1,9 @@
+import ShortRingAnchor.BC12.VerifiedKernel
+import Ginibre.AllDimensionsStatistics
+
+#print axioms ShortRingAnchor.BC12.ginibreOnePointDensity_eq_verified
+#print axioms ShortRingAnchor.BC12.ginibreKernel_eq_verified
+#print axioms ShortRingAnchor.BC12.ginibreKernelWeight_eq_verified
+#print axioms ShortRingAnchor.BC12.verifiedGinibreProjection
+#print axioms Ginibre.gaussianMatrix_integral_linearStatistic_all
+#print axioms Ginibre.gaussianEigenvalueVariance_all_energy

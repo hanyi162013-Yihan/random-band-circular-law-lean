@@ -9,7 +9,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const proposition38Only = process.argv.includes('--proposition38-only');
 const audits = proposition38Only ? ['ShortRingAnchor/Proposition38/Audit.lean'] :
   ['ShortRingAnchor/Audit.lean', 'ShortRingAnchor/HighBandIntegrationAudit.lean',
-    'ShortRingAnchor/Proposition38/Audit.lean'];
+    'ShortRingAnchor/Proposition38/Audit.lean', 'ShortRingAnchor/BC12/VerifiedAudit.lean'];
 const allowed = new Set(['propext', 'Classical.choice', 'Quot.sound']);
 function checkReports(output, expected) {
   const reports = new Map();
