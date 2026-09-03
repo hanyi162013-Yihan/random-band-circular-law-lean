@@ -45,8 +45,13 @@ def normalizedColumnEntries (N : ℕ) (C : Fin N → Fin N → ℂ) :
 
 theorem normalizedColumnEntries_measurable (N : ℕ) :
     Measurable (normalizedColumnEntries N) := by
-  unfold normalizedColumnEntries
-  fun_prop
+  have hc : Continuous (normalizedColumnEntries N) := by
+    apply continuous_pi
+    intro i
+    apply continuous_pi
+    intro j
+    exact ((continuous_apply i).comp (continuous_apply j)).div_const _
+  exact hc.measurable
 
 /-- Exact law identity, including both factors `1/sqrt 2` and `1/sqrt N`. -/
 theorem normalizedGinibreLaw_eq_map_iidColumns (N : ℕ) :
@@ -67,9 +72,11 @@ theorem normalizedGinibreLaw_eq_map_iidColumns (N : ℕ) :
   congr 1
   funext C
   ext i j
-  simp [Function.comp_def, normalizedColumnEntries, BC12.normalizedGinibreMatrix,
-    GinibreLSV.normalizedComplexGinibreMatrix, GinibreLSV.matrixOfColumns,
-    scale, complexGaussianScale, Algebra.smul_def, div_eq_mul_inv, mul_comm, mul_left_comm]
+  change ((Real.sqrt (N : ℝ))⁻¹ : ℂ) *
+      ((((Real.sqrt 2)⁻¹ : ℝ) : ℂ) * C j i) =
+    ((Real.sqrt 2)⁻¹ • C j i) / (Real.sqrt (N : ℝ) : ℂ)
+  simp only [Algebra.smul_def, Complex.ofReal_inv, div_eq_mul_inv]
+  ring
 
 def sequenceColumns (N : ℕ) (ω : ℕ → ℂ) : Fin N → Fin N → ℂ :=
   fun j i => ω (CircularLawSections56.Section5.PublishedSection3Concrete.denseCoordinate (i, j))

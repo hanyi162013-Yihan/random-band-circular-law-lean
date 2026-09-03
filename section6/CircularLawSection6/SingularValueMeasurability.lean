@@ -69,7 +69,7 @@ theorem continuous_matrix_singularValue
     {ι : Type*} [Fintype ι] [DecidableEq ι] (i : Fin (Fintype.card ι)) :
     Continuous (fun A : Matrix ι ι ℂ => A.toEuclideanLin.singularValues i) := by
   have hCLM : Continuous (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℂ)) :=
-    (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℂ)).toLinearEquiv.toLinearMap.continuous_of_finiteDimensional
+    (Matrix.toEuclideanCLM (n := ι) (𝕜 := ℂ)).toAlgEquiv.toLinearMap.continuous_of_finiteDimensional
   have hLip : LipschitzWith 1 (fun T : EuclideanSpace ℂ ι →L[ℂ] EuclideanSpace ℂ ι =>
       T.toLinearMap.singularValues i) :=
     singularValue_lipschitz (E := EuclideanSpace ℂ ι) (F := EuclideanSpace ℂ ι)
