@@ -61,6 +61,7 @@ theorem clampedCoreBadProbability_eq_literal (B : CoreRadiusBounds p R)
     funext s
     change (Real.sqrt ((B.clampedWeights (W n) n).q s) : ℂ) = _
     rw [B.clampedWeights_q (W n) n hn hW hH]
+    rfl
   have hfirst : clampedCoreBadProbability B W n z a ε =
       literalCoreBadProbability p n (clampedCoreHalfWidth R (W n) n)
         (clampedCoreHalfWidth_pos R (W n) n) (W n) z a ε := by
