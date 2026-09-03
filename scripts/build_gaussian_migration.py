@@ -53,6 +53,14 @@ def sources(ginibre_root: Path) -> dict[str, Path]:
     return modules
 
 
+def audit_roots(project: Path, audits: list[str], modules: dict[str, Path]) -> set[str]:
+    """Audit-only umbrella imports must also exist before `lake env lean`."""
+    roots = set()
+    for path in audits:
+        roots.update(header_imports((project / path).read_text()) & modules.keys())
+    return roots
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project", choices=TARGETS, required=True)
@@ -72,7 +80,8 @@ def main() -> int:
                     for name, path in modules.items()}
     # Reject cycles in the entire source graph, including legacy adapters.
     dependency_order(dependencies)
-    selected = dependency_closure(dependencies, TARGETS[args.project])
+    roots = TARGETS[args.project] + sorted(audit_roots(project, AUDITS[args.project], modules))
+    selected = dependency_closure(dependencies, roots)
     order = dependency_order(selected)
     if args.dry_run:
         print("\n".join(order))
