@@ -2,14 +2,35 @@
 
 ## Verification status
 
-The planar Proposition 3.6 endpoint, including counting and the copied
-Theorem 3.1, has passed `lake --no-cache build`. This includes the cyclic
-law adapter, numerical reindexing, and HS cutoff removal. The real-density
-endpoint is still being checked. Full-build and final axiom-audit results
-will be recorded here only after those commands succeed.
+The complete build and axiom audit **passed on 2026-09-03 UTC**, at proof-source
+commit `79798346f1cc9dda9cfd0c5bf2c3044aea5162a9`.
+[Successful GitHub run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33702782802).
+
+- All **230 Lean source files** are included in the successfully checked
+  serial import closure, including both Proposition 3.6 endpoints.
+- The normal `lake --no-cache build` passed.
+- `Audit.lean` produced **207** exact reports and `HighBandIntegrationAudit.lean`
+  produced **64**: **271 reports covering 260 distinct declarations**.
+- Every report uses only `propext`, `Classical.choice`, and/or `Quot.sound`.
+  Missing, duplicate, unexpected, or nonstandard-axiom reports fail the check.
+- The source scan found no active proof placeholder, custom axiom, unsafe
+  declaration, native-decide shortcut, or unapproved option.
+- The cached remote verification took approximately **10 minutes 25 seconds**,
+  including toolchain/dependency setup, the complete scoped build, and audits.
+
+Both density endpoints were also built locally. This includes their cyclic
+law adapters, numerical reindexing, and HS cutoff removal. The real theorem
+retains its explicit geometric BL premise; an axiom audit does not discharge it.
+The complete local repeat subsequently passed as well: normal `lake build`,
+all 271 exact reports, and the 230-file source scan.
+
+The durable [GitHub job log](audit/github-verification-2026-09-03.log) and
+[verification summary](audit/github-verification-2026-09-03.json) record this run.
+Exact individual kernel reports and the generated `summary.json` are in the
+[run artifact](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33702782802/artifacts/9874344264).
 
 The independent package is published under the paper-wide repository's
-`section3/` directory. The first complete remote verification is
+`section3/` directory. The historical first remote attempt was
 [GitHub Actions run 33701162416](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33701162416),
 at source commit `3a16167bb50baa1446d037734617716f6a13c674`.
 That run checked 221 of its 227 selected modules, then stopped at a `simp`
@@ -68,7 +89,7 @@ Neither a radius-five condition nor a bound `|z| <= 2.5` is introduced.
 
 ## Endpoint boundary
 
-The intended most concrete planar endpoint is
+The most concrete planar endpoint is
 `proposition36_cyclicShortRing_planar_from_published_theorem31`.
 The real/complex-alternative endpoint is
 `proposition36_cyclicShortRing_from_published_theorem31`.

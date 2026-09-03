@@ -19,6 +19,8 @@ const paths = [
   ...fs.readdirSync(path.join(root, 'scripts')).filter(p => p.endsWith('.mjs')).map(p => 'scripts/' + p),
   ...['stieltjes-smoothing', 'matrix-stieltjes-build', 'matrix-stieltjes',
     'concrete-models-build', 'concrete-models'].map(p => `audit/${p}-2026-09-02.log`),
+  ...fs.readdirSync(path.join(root, 'audit')).filter(p => /^github-verification-\d{4}-\d{2}-\d{2}\.(log|json)$/.test(p))
+    .map(p => 'audit/' + p),
 ].sort();
 if (new Set(paths).size !== paths.length) throw new Error('Duplicate publication path.');
 const entries = paths.map(p => {

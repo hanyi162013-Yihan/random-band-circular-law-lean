@@ -1,8 +1,14 @@
 # Build and axiom audits
 
-The current integration status is recorded in
+The current integration **passed on GitHub on 2026-09-03 UTC**:
+all 230 Lean files in the selected closure, normal `lake build`, and
+271 axiom reports covering 260 distinct declarations. The verified source
+commit is `79798346f1cc9dda9cfd0c5bf2c3044aea5162a9`.
+[Successful run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33702782802).
+The exact status and remaining mathematical premises are recorded in
 [Hermitization counting and Theorem 3.1](HIGH_BAND_INTEGRATION.md).
-The complete GitHub audit is tracked separately from the historical checks below.
+Only standard `propext`, `Classical.choice`, and `Quot.sound` dependencies
+occur in the reports. The checks below are historical checkpoints.
 
 The preceding checkpoint is [Concrete models and Proposition 3.6 integration](CONCRETE_MODELS_AUDIT.md):
 both commands passed with **3432 jobs**, and the audit covers **196 distinct

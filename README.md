@@ -153,6 +153,11 @@ vendor/
 The root libraries use the same Lake project and dependency cache. Section 5
 is a subproject that depends on this root project and shares its mathlib
 package directory; see [its build instructions](section5/README.md).
+Section 3 is a separate, pinned Lake package: build it from `section3/`.
+Its dedicated verification passed for all 230 Lean files, normal `lake build`,
+and 271 axiom reports covering 260 declarations; see
+[the verified Section 3 run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33702782802).
+The documented BBV/BC12 and real-branch geometric BL hypotheses remain explicit.
 
 ## Build
 

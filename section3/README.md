@@ -21,7 +21,13 @@ and every fixed `z : ℂ`,
 in probability.  There is no restriction such as `|z| <= 2.5` in this
 formalization: `z` is arbitrary and fixed, and constants may depend on `z`.
 
-## Main checked theorem
+## Main checked theorems
+
+Both density endpoints have passed the complete build and kernel audit.
+They remain conditional on BBV and the two named BC12 inputs. The real-density
+branch also retains the copied theorem's geometric Brascamp--Lieb premise.
+Neither a counting conclusion nor a least-singular-value conclusion is
+supplied as an extra input to these endpoints.
 
 `ShortRingAnchor.proposition36_cyclicShortRing_planar_from_published_theorem31`
 is the most concrete checked planar-density theorem: its target matrix is exactly the
@@ -169,9 +175,10 @@ of all eleven new source files.  The theorem can be passed directly as
 
 ## Deliberately not claimed
 
-The planar endpoint now discharges the Theorem 3.1 least-value input and
-the Hermitization counting input. The real-density adapter is being checked
-separately and retains the upstream `RealFiniteGeometricBrascampLieb` premise;
+Both density endpoints now discharge the Theorem 3.1 least-value input and
+the Hermitization counting input. The real-density endpoint
+`proposition36_cyclicShortRing_from_published_theorem31` has also passed its
+local build and retains the upstream `RealFiniteGeometricBrascampLieb` premise;
 see [HIGH_BAND_INTEGRATION.md](HIGH_BAND_INTEGRATION.md) for its verification status.
 The shifted Ginibre negative-moment input is not yet discharged from its
 most primitive model assumptions.
@@ -324,7 +331,7 @@ the source formula used, and the proved Poisson-smoothing estimate.
 
 The high-band project's **real-density** branch also exposes
 `RealFiniteGeometricBrascampLieb`; its planar-density branch does not. It
-would be incorrect to describe the future real-atom assembly as depending
+would be incorrect to describe the real-atom assembly as depending
 only on BBV without discharging or explicitly retaining that premise.
 
 An underlying probability space and atom arrays are supplied by the caller;
@@ -337,6 +344,16 @@ but `hasNullMvPolynomialZeroSets_pi` and
 applications.  It is no longer an external geometric-measure input.
 
 ## Build and audit
+
+The complete integration passed on GitHub on **2026-09-03 UTC**:
+**230 Lean files**, the normal `lake build`, and **271 exact axiom reports
+covering 260 distinct declarations**. All reported axioms belong to
+`propext`, `Classical.choice`, and `Quot.sound`.
+The verified proof-source commit is `79798346f1cc9dda9cfd0c5bf2c3044aea5162a9`.
+See the [successful run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33702782802)
+and [integration report](HIGH_BAND_INTEGRATION.md) for the complete new-file
+and theorem inventory, conditional-premise classification, and shortest
+remaining BC12 route. The cached remote job took about 10 minutes 25 seconds.
 
 The previous 2026-09-02 checkpoint's full build and **196-declaration audit** both passed
 (3432 jobs each). See [CONCRETE_MODELS_AUDIT.md](CONCRETE_MODELS_AUDIT.md)
