@@ -59,11 +59,13 @@ theorem dense_profile_spectral_limit_of_Han (p : NoncompactProfile)
   obtain ⟨c₀, C, _, _, hweights⟩ := p.dense_weights_comparable hc
   have hbound (n : ℕ) (s : ZMod (φ n + 1)) : p.weight (φ n + 1) (W (φ n)) s ≤ C / (φ n + 1 : ℕ) :=
     (hweights (φ n + 1) (W (φ n)) ((le_div_iff₀ (by positivity)).mp (hratio n)) s).2
-  apply hHan φ hφ (fun n => p.weight (φ n + 1) (W (φ n)))
-    (fun n s => (p.weight_pos _ _ s).le) (fun n => p.sum_weight _ _) ?_
-  filter_upwards [eventually_dense_variance_threshold (fun n => φ n + 1)
-    ((tendsto_add_atTop_nat 1).comp hφ.tendsto_atTop) C] with n hn
-  exact fun s => (hbound n s).trans hn
+  have hthreshold : ∀ᶠ n in atTop, ∀ s,
+      p.weight (φ n + 1) (W (φ n)) s ≤ ((φ n + 1 : ℕ) : ℝ) ^ (-(11 / 12 : ℝ)) := by
+    filter_upwards [eventually_dense_variance_threshold (fun n => φ n + 1)
+      ((tendsto_add_atTop_nat 1).comp hφ.tendsto_atTop) C] with n hn
+    exact fun s => (hbound n s).trans hn
+  simpa only [matrix] using hHan φ hφ (fun n => p.weight (φ n + 1) (W (φ n)))
+    (fun n s => (p.weight_pos _ _ s).le) (fun n => p.sum_weight _ _) hthreshold
 
 end NoncompactProfile
 end CircularLawSection6

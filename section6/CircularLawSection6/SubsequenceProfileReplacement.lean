@@ -58,16 +58,18 @@ theorem profile_ginibre_replacement_along_subsequence (p : NoncompactProfile)
         (fun k ω => matrixRawPotential (ginibreMatrix (k + 1) ω - z • 1)) (target z) := by
       simpa only [gaussianProfileLaw] using hy
     intro ε hε
-    have hfill := tendsto_subsequence_filler φ hφ
-      (fun k => (gaussianProfileLaw (k + 1)).real
-        {ω | ε ≤ |matrixRawPotential (p.matrix (k + 1) (W k) ω - z • 1) - target z|})
-      (fun k => (gaussianProfileLaw (k + 1)).real
-        {ω | ε ≤ |matrixRawPotential (ginibreMatrix (k + 1) ω - z • 1) - target z|})
-      (hx ε hε) (hy' ε hε)
-    apply hfill.congr'
-    apply Eventually.of_forall
-    intro k
-    by_cases hk : k ∈ Set.range φ <;> simp only [A, hk, reduceIte]
+    apply Metric.tendsto_nhds.2
+    intro δ hδ
+    obtain ⟨Kx, hKx⟩ := eventually_atTop.1
+      ((hx ε hε).eventually (Metric.ball_mem_nhds 0 hδ))
+    obtain ⟨Ky, hKy⟩ := eventually_atTop.1
+      ((hy' ε hε).eventually (Metric.ball_mem_nhds 0 hδ))
+    refine eventually_atTop.2 ⟨max (φ Kx) Ky, fun k hk => ?_⟩
+    by_cases hrange : k ∈ Set.range φ
+    · obtain ⟨i, rfl⟩ := hrange
+      have hi : Kx ≤ i := hφ.le_iff_le.mp ((le_max_left _ _).trans hk)
+      simpa only [A, if_pos (Set.mem_range_self i), Metric.mem_ball] using hKx i hi
+    · simpa only [A, if_neg hrange, Metric.mem_ball] using hKy k ((le_max_right _ _).trans hk)
   have hrep := cyclic_matrix_pair_replacement_of_log_limits A (fun k => ginibreMatrix (k + 1)) hA
     (fun k => ginibreMatrix_measurable (k + 1)) hAE (fun k => ginibre_expected_cyclicEnergy (k + 1))
     target hLog hGinibre
