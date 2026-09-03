@@ -5,6 +5,7 @@ name: Section 10 density verification
     paths:
       - 'Section10/BernoulliSection10Complex/**'
       - 'Section10/BernoulliSection10/HighBandClosure.lean'
+      - 'Section10/BernoulliSection10/GaussianReferenceFacts.lean'
       - 'lakefile.toml'
       - '.github/workflows/section10-density.yml'
   workflow_dispatch:
@@ -57,7 +58,7 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p verification-section10
-          python3 scripts/build_serial.py --target BernoulliSection10Complex.Front --keep-going 2>&1 | tee verification-section10/front-build.log
+          python3 scripts/build_serial.py --target BernoulliSection10Complex.Front --target BernoulliSection10.GaussianReferenceFacts --keep-going 2>&1 | tee verification-section10/front-build.log
       - name: Build conditional high-band closure for both density branches
         id: assembly
         if: ${{ !cancelled() && steps.build.outcome == 'success' }}
@@ -78,6 +79,7 @@ jobs:
           set -o pipefail
           python3 scripts/check_axioms.py --audit-file Section10/BernoulliSection10Complex/AnalyticAxiomAudit.lean --audit-file Section10/BernoulliSection10Complex/FrontAxiomAudit.lean 2>&1 | tee verification-section10/front-axioms.log
           lake env lean Section10/BernoulliSection10Complex/FrontSignatureAudit.lean 2>&1 | tee verification-section10/front-signatures.log
+          python3 scripts/check_axioms.py --audit-file Section10/BernoulliSection10Complex/GaussianReferenceAxiomAudit.lean 2>&1 | tee verification-section10/gaussian-reference-axioms.log
       - name: Audit conditional closure (not a final source-integration claim)
         if: ${{ !cancelled() && steps.assembly.outcome == 'success' }}
         shell: bash
