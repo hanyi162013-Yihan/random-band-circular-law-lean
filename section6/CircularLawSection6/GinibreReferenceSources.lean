@@ -1,7 +1,7 @@
 import CircularLawSection6.ProfileReplacement
 import CircularLawSection6.GaussianTailJensen
 import CircularLawSections56.Section5.CircularLawFromPotential
-import CircularLawSections56.Section5.PublishedSection3Literature
+import CircularLawSections56.Section5.VerifiedGinibreSources
 
 /-! # The actual Ginibre circular law is not a second literature assumption
 
@@ -11,7 +11,8 @@ constructs the exact common law and preserves the square-root normalization.
 The existing, proved disk-reference replacement theorem then supplies the
 Ginibre spectral limit. No Ginibre circular law is assumed separately.
 
-This module does not prove the retained BC12 logarithmic-potential input.
+The verified route uses Section 5's proved Gaussian log limit, with no BBV
+or BC12 premise. Older conditional helpers remain as compatibility wrappers.
 -/
 
 open MeasureTheory Filter Topology TaoVuReplacement ShortRingAnchor
@@ -80,15 +81,18 @@ theorem cyclicSamples_raw (N : ℕ) [NeZero N] (ω : ℕ → ℂ) (z : ℂ) :
 
 end GinibreReferenceSources
 
-/-- The raw-potential source for every growing sequence of actual cyclic
-Ginibre matrices follows from the single retained Section 5 BC12 source. -/
-theorem ginibre_raw_of_bc12
-    (hBC12 : BC12GinibreInput) (N : ℕ → ℕ) [∀ n, NeZero (N n)]
-    (hN : Tendsto N atTop atTop) (z : ℂ) :
+/-- Transport a single common-array Gaussian log limit to the cyclic law.
+No negative-moment estimate is needed for this measure-preserving transport. -/
+theorem ginibre_raw_of_sequence_log_limit
+    (N : ℕ → ℕ) [∀ n, NeZero (N n)] (z : ℂ)
+    (hraw : ConvergesInProbability
+      CircularLawSections56.Section5.PublishedSection3Concrete.gaussianSequenceLaw
+      (fun n ω => normalizedShiftLogDet
+        (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence (N n) ω) z)
+      (circularLogPotential z)) :
     TendstoInProbabilityTri (fun n => cyclicAtomLaw (N n) circularComplexGaussian)
       (fun n ω => matrixRawPotential (ginibreMatrix (N n) ω - z • 1))
       (circularRadialPotential ‖z‖) := by
-  obtain ⟨_p, _hp, _hnegative, hraw⟩ := hBC12 N (fun n => NeZero.pos (N n)) hN z
   have htri := (tendstoInMeasure_iff_tri
     CircularLawSections56.Section5.PublishedSection3Concrete.gaussianSequenceLaw
     (fun n ω => normalizedShiftLogDet
@@ -113,10 +117,34 @@ theorem ginibre_raw_of_bc12
   simpa only [Set.preimage_ofPred_eq, GinibreReferenceSources.cyclicSamples_raw,
     circularRadialPotential, circularLogPotential] using he
 
+/-- Compatibility wrapper for callers with the historical BC12 bundle. -/
+theorem ginibre_raw_of_bc12
+    (hBC12 : BC12GinibreInput) (N : ℕ → ℕ) [∀ n, NeZero (N n)]
+    (hN : Tendsto N atTop atTop) (z : ℂ) :
+    TendstoInProbabilityTri (fun n => cyclicAtomLaw (N n) circularComplexGaussian)
+      (fun n ω => matrixRawPotential (ginibreMatrix (N n) ω - z • 1))
+      (circularRadialPotential ‖z‖) := by
+  obtain ⟨_p, _hp, _hnegative, hraw⟩ := hBC12 N (fun n => NeZero.pos (N n)) hN z
+  exact ginibre_raw_of_sequence_log_limit N z hraw
+
+/-- The actual cyclic Ginibre log limit, with no external mathematical input. -/
+theorem ginibre_raw_verified
+    (N : ℕ → ℕ) [∀ n, NeZero (N n)] (hN : Tendsto N atTop atTop) (z : ℂ) :
+    TendstoInProbabilityTri (fun n => cyclicAtomLaw (N n) circularComplexGaussian)
+      (fun n ω => matrixRawPotential (ginibreMatrix (N n) ω - z • 1))
+      (circularRadialPotential ‖z‖) :=
+  ginibre_raw_of_sequence_log_limit N z
+    (CircularLawSections56.Section5.PublishedSection3Concrete.ginibre_logPotential_on_sequence
+      N (fun n => NeZero.pos (N n)) hN z)
+
 /-- Actual Ginibre ESD convergence on the Section 6 product sample space.
 The comparison law, its energy, its potential, and replacement are all proved
 inside Section 5; none is an additional Ginibre premise here. -/
-theorem ginibre_spectral_of_bc12 (hBC12 : BC12GinibreInput) :
+theorem ginibre_spectral_of_raw_limit
+    (hraw : ∀ z : ℂ,
+      TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
+        (fun n ω => matrixRawPotential (ginibreMatrix (n + 1) ω - z • 1))
+        (circularRadialPotential ‖z‖)) :
     ∀ f : ℂ → ℝ, Continuous f → HasCompactSupport f →
       TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
         (fun n ω => realEsdTest (cyclicPhysicalMatrix n (ginibreMatrix (n + 1) (ω n).2)) f)
@@ -143,7 +171,7 @@ theorem ginibre_spectral_of_bc12 (hBC12 : BC12GinibreInput) :
       (hE n).1.aestronglyMeasurable).trans (hE n).2).le
   · apply ae_of_all
     intro z
-    have hr := ginibre_raw_of_bc12 hBC12 (fun n => n + 1) (tendsto_add_atTop_nat 1) z
+    have hr := hraw z
     have hp : TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
         (fun n ω => physicalLogPotential (cyclicPhysicalMatrix n (ginibreMatrix (n + 1) ω)) z)
         (circularLogPotential z) := by
@@ -154,5 +182,24 @@ theorem ginibre_spectral_of_bc12 (hBC12 : BC12GinibreInput) :
       (fun _ => measurePreserving_snd) _
       (fun n => measurable_physicalLogPotential _
         (cyclicPhysicalMatrix_entry_measurable n _ (ginibreMatrix_measurable _)) z) hp
+
+/-- Compatibility wrapper; only the log-limit component of BC12 is used. -/
+theorem ginibre_spectral_of_bc12 (hBC12 : BC12GinibreInput) :
+    ∀ f : ℂ → ℝ, Continuous f → HasCompactSupport f →
+      TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
+        (fun n ω => realEsdTest (cyclicPhysicalMatrix n (ginibreMatrix (n + 1) (ω n).2)) f)
+        atTop (fun _ => ∫ z, f z ∂circularMeasure) :=
+  ginibre_spectral_of_raw_limit
+    (fun z => ginibre_raw_of_bc12 hBC12 (fun n => n + 1) (tendsto_add_atTop_nat 1) z)
+
+/-- The actual Ginibre circular law, without BBV or BC12 as a premise.
+The disk-reference replacement and Gaussian log limit are both proved. -/
+theorem ginibre_spectral_verified :
+    ∀ f : ℂ → ℝ, Continuous f → HasCompactSupport f →
+      TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
+        (fun n ω => realEsdTest (cyclicPhysicalMatrix n (ginibreMatrix (n + 1) (ω n).2)) f)
+        atTop (fun _ => ∫ z, f z ∂circularMeasure) :=
+  ginibre_spectral_of_raw_limit
+    (fun z => ginibre_raw_verified (fun n => n + 1) (tendsto_add_atTop_nat 1) z)
 
 end CircularLawSection6

@@ -6,8 +6,8 @@ import CircularLawSection6.DenseProfileEndpoint
 The sparse branch uses actual local BBV comparisons and moving Ginibre
 cutoff means. The dense branch uses the proved general Section 3 route.
 The two branches are merged without any assumption on the limit of W/N.
-The logarithmic Ginibre source remains explicit; it is not inferred from
-the bounded-cutoff comparison.
+The logarithmic Ginibre source is constructed by the proved Section 5
+reference, not inferred from a bounded-cutoff comparison.
 -/
 
 open MeasureTheory Filter Topology TaoVuReplacement ShortRingAnchor
@@ -53,7 +53,7 @@ theorem profile_probability_along_sparse_subsequence_of_bbv_sources (p : Noncomp
       (p.coreRadiusBounds (by positivity : (0 : ℝ) ≤ (R : ℝ) + 1)) W
       (by positivity) hW hWlim
       (GaussianProfileBBVCoreSources.coreSection34 p W hWlim hsource R) φ hφ
-  have hp := p.sparse_profile_probability_of_bbv_section5 hsource.bbv hsource.ginibreLog
+  have hp := p.sparse_profile_probability_of_bbv_section5 hsource.bbv
     (subsequenceCoreSize φ) hdim (fun n => W (φ (n + 1)))
     (fun n => hW (φ (n + 1))) (hWlim.comp hφ') hs hSection5
   filter_upwards [hp] with z hz
@@ -74,24 +74,23 @@ theorem profile_spectral_limit_along_sparse_subsequence_of_bbv_sources (p : Nonc
         (fun n ω => realEsdTest (cyclicPhysicalMatrix (φ n)
           (p.matrix (φ n + 1) (W (φ n)) (ω (φ n)).1)) f)
         atTop (fun _ => ∫ z, f z ∂circularMeasure) := by
-  have hBC12 := bc12_of_bbv_and_logPotential hsource.bbv hsource.ginibreLog
   have hrep := p.profile_ginibre_replacement_along_subsequence W φ hφ
     (fun z => circularRadialPotential ‖z‖)
     (p.profile_probability_along_sparse_subsequence_of_bbv_sources W hW hWlim hsource φ hφ hsparse)
-    (ae_of_all _ fun z => ginibre_raw_of_bc12 hBC12 (fun n => n + 1)
+    (ae_of_all _ fun z => ginibre_raw_verified (fun n => n + 1)
       (tendsto_add_atTop_nat 1) z)
   intro f hf hc
   have hdiff := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ 0).1
     (hrep f hf hc)
   have hgin := (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _
     (∫ z, f z ∂circularMeasure)).1
-    ((ginibre_spectral_of_bc12 hBC12 f hf hc).comp hφ.tendsto_atTop)
+    ((ginibre_spectral_verified f hf hc).comp hφ.tendsto_atTop)
   apply (tendstoInMeasure_iff_tri (Measure.infinitePi profileGinibrePairLaw) _ _).2
   simpa only [esdDifference, Function.comp_apply, sub_add_cancel, zero_add] using
     hdiff.add (fun _ => Measure.infinitePi profileGinibrePairLaw) hgin
 
-/-- Final actual-profile endpoint. Its source bundle contains only BBV,
-the explicit Ginibre logarithmic reference, and the two Section 4 inputs. -/
+/-- Final actual-profile endpoint. Its source bundle contains only BBV
+and the two Section 4 inputs; the Ginibre reference is proved internally. -/
 theorem gaussian_profile_circular_law_of_bbv_core_sources (p : NoncompactProfile)
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n) (hWlim : Tendsto W atTop atTop)
     (hsource : GaussianProfileBBVCoreSources p W) :
@@ -109,6 +108,6 @@ theorem gaussian_profile_circular_law_of_bbv_core_sources (p : NoncompactProfile
       φ hφ hsparse f hf hc
   · intro φ hφ hdense
     exact p.dense_profile_spectral_limit_of_section3 W φ hφ hdense
-      hsource.bbv (bc12_of_bbv_and_logPotential hsource.bbv hsource.ginibreLog) f hf hc
+      hsource.bbv f hf hc
 
 end CircularLawSection6.NoncompactProfile

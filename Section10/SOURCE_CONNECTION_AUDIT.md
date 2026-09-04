@@ -1,6 +1,23 @@
 # Section 10: real and planar source-connection audit
 
-## Current verification boundary
+## Current migration status
+
+The BC12-free signatures, all three Section 10 targets and all 502 exact
+Section 10 axiom reports passed at
+`c4e807877fefef8339a6ff01ec4ed75bc08ded81`, in
+[run 33815655602](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33815655602/job/100847217601).
+That root job subsequently failed on a missing Section 9 audit-only import;
+this is a Section 10 checkpoint, not an overall green run. The import issue
+is fixed. The expanded root check passed at `d7d732c`, including all nine
+public targets, 1379 reports, all 502 Section 10 reports, the density schema
+and seven selected module replays. See the
+[completed certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md).
+`VerifiedGinibreSources` supplies the old BC12 compatibility proposition
+internally from BBV. The certificates and tables below describe the
+**historical pre-migration commit** and are not certificates for current
+source changes. See [the migration audit](../GAUSSIAN_INPUT_MIGRATION.md).
+
+## Historical verification boundary
 
 **PASS.** Proof-source commit: `362c47fe69c5330b18e1818497dcbbe4433df1be`.
 [Cloud run 33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)

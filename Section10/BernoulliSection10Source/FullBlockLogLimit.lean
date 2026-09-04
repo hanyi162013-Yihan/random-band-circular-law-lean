@@ -1,4 +1,4 @@
-import BernoulliSection10Source.LiteratureInputs
+import BernoulliSection10Source.VerifiedGinibreSources
 import BernoulliSection10.Section3Counting
 import ShortRingAnchor.HermitizationCountingFromV3
 import ShortRingAnchor.Lemma35FromV3
@@ -10,7 +10,7 @@ import ShortRingAnchor.Proposition36
 This internal theorem is shared by real and complex atoms. Its LSV and
 row-moment inputs are discharged in the two density-specific public adapters.
 All counting events, comparison rates, cutoff choices and Gaussian models
-are constructed here from the accepted BBV and BC12 hypotheses.
+are constructed here from BBV and the proved Ginibre source.
 -/
 
 open MeasureTheory Filter
@@ -24,7 +24,7 @@ set_option maxHeartbeats 2400000
 set_option backward.isDefEq.respectTransparency false
 
 theorem fullBlock_log_limit_from_source
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     {E : Type} [MeasurableSpace E] (μ : Measure E) [IsProbabilityMeasure μ]
     (atom : E → ℂ) (hatom : AtomMomentAssumption21 μ atom)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop)
@@ -66,6 +66,7 @@ theorem fullBlock_log_limit_from_source
     intro n
     simpa only [Real.rpow_one] using
       Real.rpow_le_rpow_of_exponent_le (by exact_mod_cast hN n) hβ1
+  have hGinibre := provedGinibreInput hBBV
   obtain ⟨C0, _hC0, hbbv⟩ := hBBV
   let mA := (∫ x, ‖atom x‖ ^ 3 ∂μ) + BVH.complexGaussianThirdMomentConstant
   let mG := (∫ x, ‖circularGaussianAtom x‖ ^ 3 ∂circularGaussianPairLaw) +
@@ -119,7 +120,7 @@ theorem fullBlock_log_limit_from_source
     (fun n u => bbvG n _ (by
       simpa [spectralParameter, localBulkHeight] using
         Real.rpow_pos_of_pos (Nat.cast_pos.mpr (hN n)) (-(localBulkEffectiveExponent β / 16))))
-  obtain ⟨p, hpp, hneg, hfull⟩ := bc12_on_sampleLaw hBC12 μ N hN hNtop z
+  obtain ⟨p, hpp, hneg, hfull⟩ := bc12_on_sampleLaw hGinibre μ N hN hNtop z
   obtain ⟨goodLSV, hLSV⟩ := hmin
   exact proposition36_matrix_form_highProbability
     (fun n => actualProfileMatrix atom (σ n)) (fun n => actualGinibre (N n)) z

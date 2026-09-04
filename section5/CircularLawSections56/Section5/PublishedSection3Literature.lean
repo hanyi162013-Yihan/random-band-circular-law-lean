@@ -1,10 +1,12 @@
 import CircularLawSections56.Section5.PublishedSection3ConcreteSampling
 
-/-! # The only retained literature inputs for concrete Section 5 anchors
+/-! # Literature boundary and compatibility proposition for Section 5 anchors
 
-These are hypotheses, not axioms. BBV concerns the canonical companion and
+These are ordinary propositions, not axioms. BBV concerns the canonical companion and
 BC12 only the literal circular Gaussian matrix divided by sqrt N. Neither
 contains a Section 5 conclusion, sampling certificate, or non-Gaussian LSV.
+The BC12 proposition is constructed from BBV in `VerifiedGinibreSources`;
+it is no longer an external argument of the concrete public endpoints.
 -/
 
 open MeasureTheory Filter Topology ShortRingAnchor Arxiv2410V3

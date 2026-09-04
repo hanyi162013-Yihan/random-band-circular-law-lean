@@ -6,8 +6,8 @@ import CircularLawSection6.GinibreReducedSources
 
 The local finite Gaussian models, their exact bandwidths and the finite
 CDF comparison are constructed before calling the moving-reference core
-theorem. No bounded-test Ginibre singular law is retained. The separate
-raw logarithmic reference source remains explicit in the reduced bundle.
+theorem. No bounded-test Ginibre singular law or raw logarithmic reference
+source is retained in the BBV-core bundle.
 -/
 
 open MeasureTheory Filter Topology ShortRingAnchor Arxiv2410V3
@@ -90,11 +90,10 @@ theorem canonical_core_cutoff_comparison_of_bbv (B : CoreRadiusBounds p R)
 end CoreRadiusBounds
 namespace NoncompactProfile
 
-/-- Unlike the legacy bundle, this has no squared-singular-test field.
-The logarithmic reference source is deliberately still explicit. -/
+/-- Both Gaussian limit fields are discharged by the proved Section 5 reference.
+Only BBV and the concrete Section 4 pressure inputs remain. -/
 structure GaussianProfileBBVCoreSources (p : NoncompactProfile) (W : ℕ → ℝ) : Prop where
   bbv : BBVComparisonInput
-  ginibreLog : GinibreLogPotentialInput
   coreSection4 : ∀ R : ℕ,
     (p.coreRadiusBounds (by positivity : (0 : ℝ) ≤ (R : ℝ) + 1)).ConcreteSection4Input W
 
@@ -104,13 +103,13 @@ theorem GaussianProfileBBVCoreSources.coreSection34 (p : NoncompactProfile)
     (p.coreRadiusBounds (by positivity : (0 : ℝ) ≤ (R : ℝ) + 1)).Section34Input W :=
   CoreRadiusBounds.ConcreteSection4Input.toSection34
     (p.coreRadiusBounds (by positivity : (0 : ℝ) ≤ (R : ℝ) + 1))
-    W (by positivity) hWlim h.bbv (bc12_of_bbv_and_logPotential h.bbv h.ginibreLog)
+    W (by positivity) hWlim h.bbv
     (h.coreSection4 R)
 
 /-- Sparse actual-profile probability convergence, with local comparisons
 constructed from BBV instead of an assumed limiting singular law. -/
 theorem sparse_profile_probability_of_bbv_section5 (p : NoncompactProfile)
-    (hBBV : BBVComparisonInput) (hLog : GinibreLogPotentialInput)
+    (hBBV : BBVComparisonInput)
     (size : ℕ → ℕ) (hsize : Tendsto (fun n => size n + 2) atTop atTop)
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n) (hWlim : Tendsto W atTop atTop)
     (hsparse : Tendsto (fun n => W n / (size n + 2 : ℕ)) atTop (𝓝 0))
@@ -127,7 +126,7 @@ theorem sparse_profile_probability_of_bbv_section5 (p : NoncompactProfile)
       (p.coreRadiusBounds (by positivity : (0 : ℝ) ≤ (R : ℝ) + 1))
       hBBV (fun n => size n + 2) hsize W hW hWlim hsparse (by positivity)
       (p.referenceCoreCutoff_pos R))
-    (ae_of_all _ fun z => ginibre_raw_of_bc12 (bc12_of_bbv_and_logPotential hBBV hLog)
+    (ae_of_all _ fun z => ginibre_raw_verified
       (fun n => size n + 2) hsize z)
     (ae_of_all _ fun z => ⟨1 / 128, by norm_num,
       ginibre_negative_of_bbv hBBV (fun n => size n + 2) hsize z⟩)

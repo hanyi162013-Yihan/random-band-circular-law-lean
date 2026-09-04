@@ -6,11 +6,13 @@ The extension belongs to the root Lake project of `random-band-circular-law-lean
 
 ## Current integration
 
-The public final theorems now take `Section3UpstreamInputs`, and `section3_input` constructs the former high-band interface using `ShortRingAnchor.Proposition38.proposition38`. The concrete Gaussian reference moments, IID coordinates and matrix/probability transports are proved in the new bridge modules. The integration passed at `b6c379836fcc6cf166881768d1a0ad6782c5c552`: both Section 8 targets, 56 strict axiom reports, both public-signature audits, and 94 source files without placeholders. The bridge keeps the default proof-checking limits. [Verified integration proof map and cloud run](../Section8/SECTION3_INTEGRATION.md).
+The public final theorems take the reduced `Section3UpstreamInputs`, and `section3_input` constructs the former high-band interface using `ShortRingAnchor.Proposition38.proposition38_withoutBC12`. The concrete Gaussian reference moments, IID coordinates, normalized matrix law and matrix/probability transports are proved internally. BC12 estimates and finite Ginibre formulas are no longer public fields. The bridge keeps the default proof-checking limits. [Integration proof map and verification boundary](../Section8/SECTION3_INTEGRATION.md).
+
+The historical conditional integration passed at `b6c379836fcc6cf166881768d1a0ad6782c5c552`: both Section 8 targets, 56 strict axiom reports, both public-signature audits, and 94 source files without placeholders. The BC12-free migration receives a separate cloud check; that historical certificate is not its verification certificate.
 
 ## Scope
 
-The fixed real atom law is a probability measure with mean zero, second moment one, and a finite subgaussian MGF parameter. No bounded-support, symmetry, or density hypothesis is imposed. Cook and Nguyen remain explicit inputs with their quantitative ranges covering the atom parameter. The concrete Section 3.8 proof retains its named Proposition 3.2, Cook 1.12, canonical BBV and BC12/finite Ginibre formula inputs.
+The fixed real atom law is a probability measure with mean zero, second moment one, and a finite subgaussian MGF parameter. No bounded-support, symmetry, or density hypothesis is imposed. Cook and Nguyen remain explicit inputs with their quantitative ranges covering the atom parameter. The concrete Section 3.8 proof retains its named Proposition 3.2, Cook 1.12 and canonical BBV inputs; its former BC12 inputs are proved.
 
 The conclusion uses the exact cyclic-band dimension `N=(s+3)W`, physical normalization `1/sqrt(3W)`, `W → ∞`, and `W/log N → ∞`. It covers every bounded continuous real test function on the complex plane.
 

@@ -7,7 +7,19 @@ cloud-printed evidence, exact impact, correction and successful revalidation.
 Older conditional axiom audits do not establish that the former density
 record could be instantiated.
 
-## Verified source-connected real and planar extension
+## Current Gaussian-input migration
+
+The current branch removes `BC12GinibreInput` from all four
+`BernoulliSection10Source` endpoints. `VerifiedGinibreSources` constructs
+the exact Gaussian matrix law, negative-moment bound and full-log limit.
+BBV and real-only geometric Brascamp–Lieb remain explicit.
+The Section 10 builds, all 502 chapter reports and new signatures passed
+at `c4e8078` in run `33815655602`. A subsequent missing Section 9 audit
+import made that root job fail overall; the expanded whole-chapter check
+is separate. The historical runs below certify earlier signatures.
+See [the migration audit](../GAUSSIAN_INPUT_MIGRATION.md).
+
+## Previously verified source-connected real and planar extension
 
 The new `BernoulliSection10Source.planar_density_circular_law` and
 `BernoulliSection10Source.real_density_circular_law` instantiate the actual
@@ -29,9 +41,10 @@ no real/imaginary independence, circular symmetry or vanishing complex
 second moment is required. The finite-row probability instances and all
 auxiliary model certificates are constructed internally.
 
-The remainder of this document records the previously verified real
-conditional endpoint and must not be read as saying that Section 3's BBV,
-BC12 or geometric Brascamp--Lieb inputs have themselves been eliminated.
+The remainder records older conditional endpoints and their historical
+certificates, not the current migration certificate. In the current source
+route above, BBV and real geometric Brascamp--Lieb remain explicit; the
+former BC12 estimates are constructed internally.
 
 ## Previously verified conditional real endpoint
 

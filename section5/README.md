@@ -1,5 +1,16 @@
 # Section 5: calibration, pressure lifting and circular-law conclusions
 
+## Gaussian-source migration — verified 2026-09-04 UTC
+
+The concrete endpoints and general source record no longer request either
+BC12 estimate. The actual Gaussian law and both estimates are constructed
+internally, with BBV retained for the negative moment. The whole public target,
+1109 axiom reports (including all 865 named public source theorems) and six
+module kernel replays passed at `d7d732c`. See the
+[exact certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md) and
+[remaining-input map](../GAUSSIAN_INPUT_MIGRATION.md).
+The two finite Section 4 pressure inputs still remain at this checkpoint.
+
 ## New concrete Section 3 integration — verified 2026-09-03
 
 The actual fixed-atom short/calibration matrices, sample maps and both real/complex

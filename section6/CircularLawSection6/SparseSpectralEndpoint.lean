@@ -1,13 +1,14 @@
 import CircularLawSection6.SparseProfileSourceEndpoint
 import CircularLawSection6.ProbabilityFinitePrefix
 import CircularLawSection6.ProfileReplacement
+import CircularLawSection6.GinibreSourceConsequences
 
 /-! # Sparse noncompact profiles: spectral replacement from source inputs
 
 All model transports and finite prefixes are proved. The source bundle
-names the local Section 3 comparison, literal Section 5 endpoint, and the
-two classical Ginibre probability inputs. It contains no assumption about
-the full profile's log potential or spectral distribution.
+names the local Section 3 comparison, literal Section 5 endpoint, and BBV.
+The Gaussian reference limits and negative moment are constructed internally.
+It contains no assumption about the full profile's log potential or spectrum.
 -/
 
 open MeasureTheory Filter Topology TaoVuReplacement
@@ -21,11 +22,7 @@ namespace CircularLawSection6.NoncompactProfile
 structure SparseGaussianSourceInputs (p : NoncompactProfile) (W : ℕ → ℝ) : Prop where
   coreSection5 : ∀ R : ℕ, p.CanonicalCoreSection5Input (fun n => n) (fun n => W (n + 1)) (R + 1)
   coreSection3 : ∀ R : ℕ, p.CanonicalCoreSection3Input (fun n => n + 2) (fun n => W (n + 1)) (R + 1)
-  ginibreRaw : ∀ᵐ z ∂(volume : Measure ℂ),
-    TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
-      (fun n ω => matrixRawPotential (ginibreMatrix (n + 1) ω - z • 1)) (circularRadialPotential ‖z‖)
-  ginibreNegative : ∀ᵐ z ∂(volume : Measure ℂ), ∃ q : ℝ, 0 < q ∧
-    BC12GinibreNegativeMomentTightnessTri (fun n => n + 1) z q
+  bbv : CircularLawSections56.Section5.PublishedSection3Concrete.BBVComparisonInput
 
 theorem sparse_profile_probability_of_sources (p : NoncompactProfile)
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n) (hWlim : Tendsto W atTop atTop)
@@ -38,14 +35,14 @@ theorem sparse_profile_probability_of_sources (p : NoncompactProfile)
   have hGin : ∀ᵐ z ∂(volume : Measure ℂ),
       TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 2) circularComplexGaussian)
         (fun n ω => matrixRawPotential (ginibreMatrix (n + 2) ω - z • 1)) (circularRadialPotential ‖z‖) := by
-    filter_upwards [hsource.ginibreRaw] with z hz
+    filter_upwards [ginibre_raw_verified_ae] with z hz
     simpa only [Nat.add_assoc] using (tendstoInProbabilityTri_shift_iff
       (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
       (fun n ω => matrixRawPotential (ginibreMatrix (n + 1) ω - z • 1))
       (circularRadialPotential ‖z‖) 1).mpr hz
   have hNeg : ∀ᵐ z ∂(volume : Measure ℂ), ∃ q : ℝ, 0 < q ∧
       BC12GinibreNegativeMomentTightnessTri (fun n => n + 2) z q := by
-    filter_upwards [hsource.ginibreNegative] with z hz
+    filter_upwards [ginibre_negative_of_bbv_ae hsource.bbv] with z hz
     obtain ⟨q, hq, hn⟩ := hz
     refine ⟨q, hq, ?_⟩
     simpa only [BC12GinibreNegativeMomentTightnessTri, Nat.add_assoc] using
@@ -75,6 +72,6 @@ theorem sparse_profile_ginibre_spectral_replacement (p : NoncompactProfile)
         (fun k ω => esdDifference (cyclicPhysicalMatrix k (p.matrix (k + 1) (W k) (ω k).1))
           (cyclicPhysicalMatrix k (ginibreMatrix (k + 1) (ω k).2)) f) atTop 0 :=
   p.profile_ginibre_replacement_of_log_limits W (fun z => circularRadialPotential ‖z‖)
-    (p.sparse_profile_probability_of_sources W hW hWlim hsparse hsource) hsource.ginibreRaw
+    (p.sparse_profile_probability_of_sources W hW hWlim hsparse hsource) ginibre_raw_verified_ae
 
 end CircularLawSection6.NoncompactProfile

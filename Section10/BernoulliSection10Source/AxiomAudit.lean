@@ -1,5 +1,15 @@
 import BernoulliSection10Source.DensityCircularLaw
 
+#print axioms BernoulliSection10Source.normalizedGaussianPair_map
+#print axioms BernoulliSection10Source.sequencePairs_measurePreserving
+#print axioms BernoulliSection10Source.ginibreOnSequence_hasEntryLaw
+#print axioms BernoulliSection10Source.gaussianMatrixEntriesEquiv
+#print axioms BernoulliSection10Source.ginibreOnSequence_hasLaw
+#print axioms BernoulliSection10Source.sequenceDenseModel
+#print axioms BernoulliSection10Source.ginibre_negative_on_sequence_of_bbv
+#print axioms BernoulliSection10Source.ginibre_logPotential_on_sequence
+#print axioms BernoulliSection10Source.provedGinibreInput
+#print axioms BernoulliSection10Source.fullBlock_log_limit_from_source
 #print axioms BernoulliSection10Source.planar_highBandLogLimit
 #print axioms BernoulliSection10Source.real_highBandLogLimit
 #print axioms BernoulliSection10Source.planar_density_circular_law
@@ -11,7 +21,7 @@ import BernoulliSection10Source.DensityCircularLaw
 -- appear in the kernel-axiom list.
 set_option pp.fullNames true
 #print BernoulliSection10Source.BBVComparisonInput
-#print BernoulliSection10Source.BC12GinibreInput
+#check @BernoulliSection10Source.provedGinibreInput
 #print LivshytsProjectionFormalization.RealFiniteGeometricBrascampLieb
 #print BernoulliSection10Complex.IsPlanarDensityAtom
 #print BernoulliSection10.IsBoundedDensityAtom

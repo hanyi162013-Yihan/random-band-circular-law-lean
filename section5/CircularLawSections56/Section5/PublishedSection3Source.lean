@@ -1,5 +1,7 @@
 import ShortRingAnchor.Proposition36Planar
 import ShortRingAnchor.Proposition36PublishedTheorem31
+import ShortRingAnchor.BC12.GinibreNegativeMoments
+import ShortRingAnchor.BC12.GaussianMatrixLawBridge
 import CircularLawSections56.Section6.PhysicalReplacementBridge
 
 /-! # Direct calls to the checked Section 3 density endpoints
@@ -15,14 +17,13 @@ open ShortRingAnchor Arxiv2410V3
 noncomputable section
 set_option autoImplicit false
 set_option warningAsError true
-set_option maxHeartbeats 800000
 
 namespace CircularLawSections56.Section5
 
 variable {Ω : Type*} [MeasurableSpace Ω]
 variable {μ : Measure Ω} {νA νG : Measure ℂ}
 variable [IsProbabilityMeasure μ] [IsProbabilityMeasure νA] [IsProbabilityMeasure νG]
-variable {M W : ℕ → ℕ} [∀ n, Nonempty (Fin (M n))] {c₀ C₀ : ℝ}
+variable {M W : ℕ → ℕ} {c₀ C₀ : ℝ}
 
 /-- Fixed-law ensemble data for the actual cyclic and normalized dense models.
 No independence across different dimensions or between the two models is required. -/
@@ -47,9 +48,9 @@ def matrix (D : PublishedSection3Model μ νA νG M W c₀ C₀) :
     ∀ n, Ω → Matrix (Fin (M n)) (Fin (M n)) ℂ :=
   fun n => cyclicShortRingRandomMatrix (D.weights n) (D.fit n) (D.ringEntry n)
 
-/-- The remaining source conditions in the published Section 3 theorem.
-The deterministic scale choices are explicit. BBV and BC12 are ordinary
-mathematical hypotheses and are not discharged by the axiom audit. -/
+/-- The source data for the published Section 3 theorem. Only BBV estimates
+are external mathematical inputs. The dense reference has its actual
+Gaussian law, from which both former BC12 estimates are proved below. -/
 structure Sources (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ) where
   comparisonConstant : ℝ
   omega : ℝ
@@ -57,7 +58,6 @@ structure Sources (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ
   kappa : ℝ
   tau : ℝ
   K : ℝ
-  p : ℝ
   R : ℕ → ℝ
   omega_range : 0 < omega ∧ omega < 1 / 9
   parameters : HardEdgeAdmissible (v3BandwidthExponent omega) chi kappa tau
@@ -71,16 +71,54 @@ structure Sources (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ
     (cyclicV3Model (D.weights n) (D.fit n) (D.ringEntry n) id D.momentsA (D.copiesA n)) z
     eta (D.weights n).bandwidthParameter
     (max comparisonConstant (sourceV3MomentBudget νA νG id id))
-  bbvG : ∀ n u, CanonicalBBVAt
+  bbvG : ∀ n eta, 0 < eta.im → CanonicalBBVAt
     (denseV3Model (D.dimension_pos n) (D.denseAtom n) id D.momentsG (D.copiesG n)) z
-    (spectralParameter u (localBulkHeight (v3BandwidthExponent omega / 2) (M n)))
+    eta
     (M n) (max comparisonConstant (sourceV3MomentBudget νA νG id id))
-  negative_exponent_pos : 0 < p
-  bc12_negative : BC12GinibreNegativeMomentTightness μ p
-    (shiftedSingularValueProcess (normalizedDenseMatrixProcess D.denseAtom) z)
-  bc12_full : ConvergesInProbability μ
+  ginibreLaw : ∀ n, HasLaw (normalizedDenseMatrixProcess D.denseAtom n)
+    (BC12.normalizedGinibreLaw (M n)) μ
+
+/-- Proposition 3.6 / manuscript (3.14): the Gaussian negative moment
+is derived from the actual law and the displayed dense BBV comparison. -/
+theorem Sources.ginibre_negative_moment
+    (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ) (h : D.Sources z) :
+    BC12GinibreNegativeMomentTightness μ (1 / 128)
+      (shiftedSingularValueProcess (normalizedDenseMatrixProcess D.denseAtom) z) := by
+  have hC : 8 ≤ max h.comparisonConstant (sourceV3MomentBudget νA νG id id) :=
+    (sourceV3MomentBudget_ge_eight id id).trans (le_max_right _ _)
+  have hthird : (∫ x, ‖id x‖ ^ 3 ∂νG) + BVH.complexGaussianThirdMomentConstant ≤
+      max h.comparisonConstant (sourceV3MomentBudget νA νG id id) :=
+    (sourceV3MomentBudget_ge_right id id).trans (le_max_right _ _)
+  exact BC12.negativeMomentTightness_normalizedDenseMatrixProcess
+    D.dimension_pos h.dimension_tendsto D.denseAtom id D.momentsG D.copiesG h.ginibreLaw
+    z hC hthird
+    (fun n v hv => h.bbvG n (spectralParameter 0 v) (by simpa [spectralParameter] using hv))
+
+/-- Proposition 3.6 reference step: exact Ginibre correlations prove the
+full-log limit. This is a proved consequence, not a source record field. -/
+theorem Sources.ginibre_logPotential
+    (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ) (h : D.Sources z) :
+    ConvergesInProbability μ
     (fun n sample => normalizedShiftLogDet (normalizedDenseMatrixProcess D.denseAtom n sample) z)
-    (circularLogPotential z)
+    (circularLogPotential z) :=
+  BC12.ginibre_logdet_convergesInProbability_of_ginibreLaw D.dimension_pos h.dimension_tendsto
+    (normalizedDenseMatrixProcess D.denseAtom) h.ginibreLaw z
+
+/-- Lemma 3.5 local smoothing height: specialize the same dense comparison
+used for the negative-moment bound, without introducing a second input. -/
+theorem Sources.ginibre_local_comparison
+    (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ) (h : D.Sources z) :
+    ∀ n u, CanonicalBBVAt
+      (denseV3Model (D.dimension_pos n) (D.denseAtom n) id D.momentsG (D.copiesG n)) z
+      (spectralParameter u (localBulkHeight (v3BandwidthExponent h.omega / 2) (M n)))
+      (M n) (max h.comparisonConstant (sourceV3MomentBudget νA νG id id)) := by
+  intro n u
+  apply h.bbvG n
+  simpa [spectralParameter, localBulkHeight] using
+    Real.rpow_pos_of_pos (by exact_mod_cast D.dimension_pos n : (0 : ℝ) < M n)
+      (-(localBulkEffectiveExponent (v3BandwidthExponent h.omega / 2) / 16))
+
+variable [∀ n, Nonempty (Fin (M n))]
 
 theorem Sources.planar_conclusion
     (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ) (h : D.Sources z)
@@ -89,10 +127,10 @@ theorem Sources.planar_conclusion
   exact proposition36_cyclicShortRing_planar_from_published_theorem31
     D.weights D.fit D.ringEntry D.denseAtom id id D.momentsA D.momentsG
     D.copiesA D.copiesG hDensity D.densityG z h.comparisonConstant h.omega h.chi
-    h.kappa h.tau h.K h.p h.R h.omega_range h.parameters D.dimension_pos
+    h.kappa h.tau h.K (1 / 128) h.R h.omega_range h.parameters D.dimension_pos
     h.dimension_tendsto h.bandwidth_tendsto h.bandwidth_lower h.cutoff_constant
-    h.radius_tendsto h.radius_lower h.bbvA h.bbvG h.negative_exponent_pos
-    h.bc12_negative h.bc12_full
+    h.radius_tendsto h.radius_lower h.bbvA (h.ginibre_local_comparison D z) (by norm_num)
+    (h.ginibre_negative_moment D z) (h.ginibre_logPotential D z)
 
 theorem Sources.density_conclusion
     (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ) (h : D.Sources z)
@@ -102,10 +140,10 @@ theorem Sources.density_conclusion
   exact proposition36_cyclicShortRing_from_published_theorem31
     D.weights D.fit D.ringEntry D.denseAtom id id D.momentsA D.momentsG
     D.copiesA D.copiesG hDensity hGBL D.densityG z h.comparisonConstant h.omega h.chi
-    h.kappa h.tau h.K h.p h.R h.omega_range h.parameters D.dimension_pos
+    h.kappa h.tau h.K (1 / 128) h.R h.omega_range h.parameters D.dimension_pos
     h.dimension_tendsto h.bandwidth_tendsto h.bandwidth_lower h.cutoff_constant
-    h.radius_tendsto h.radius_lower h.bbvA h.bbvG h.negative_exponent_pos
-    h.bc12_negative h.bc12_full
+    h.radius_tendsto h.radius_lower h.bbvA (h.ginibre_local_comparison D z) (by norm_num)
+    (h.ginibre_negative_moment D z) (h.ginibre_logPotential D z)
 
 theorem Sources.planar_tri
     (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ) (h : D.Sources z)

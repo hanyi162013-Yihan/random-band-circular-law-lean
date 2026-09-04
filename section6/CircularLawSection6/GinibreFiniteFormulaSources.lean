@@ -1,12 +1,12 @@
 import CircularLawSection6.DenseProfileEndpoint
 import ShortRingAnchor.BC12.LogdetConvergence
+import ShortRingAnchor.BC12.VerifiedKernel
 
 /-! # Reusing Section 3's proved finite-formula logarithmic-potential route
 
-Only the exact finite-dimensional formulas for the actual Gaussian matrix
-are inputs. The full logarithmic-potential limit, including the unbounded
-log test and circular center, is supplied by the existing Section 3 theorem.
-The exact correlation formulas are not proved by this adapter.
+The exact finite-dimensional formulas for the actual Gaussian matrix are
+constructed from Section 3's proved kernel and Gaussian-law theorems.
+The older conditional adapters remain reusable compatibility lemmas.
 -/
 
 open MeasureTheory Filter Topology ShortRingAnchor
@@ -23,6 +23,12 @@ structure GinibreFiniteFormulaInput : Prop where
   projection : ∀ N : ℕ, 0 < N → BC12.GinibreProjectionIntegralFormula N
   correlation : ∀ N : ℕ, 0 < N → BC12.GinibreCorrelationFormulas gaussianSequenceLaw
     (fun ω => BC12.matrixEigenvalues (ginibreOnSequence N ω))
+
+/-- Both finite Ginibre formulas, with no correlation or projection hypothesis. -/
+theorem verifiedGinibreFiniteFormulaInput : GinibreFiniteFormulaInput where
+  projection N _hN := BC12.verifiedGinibreProjection N
+  correlation N hN := BC12.normalizedGinibre_correlations hN
+    (CircularLawSections56.Section5.PublishedSection3Concrete.ginibreOnSequence_hasLaw N)
 
 theorem ginibreLogPotential_of_finiteFormulas (h : GinibreFiniteFormulaInput) :
     GinibreLogPotentialInput := by

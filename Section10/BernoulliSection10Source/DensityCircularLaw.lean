@@ -5,7 +5,8 @@ import BernoulliSection10Source.ConnectedHighBand
 
 Every Section 3 model, count, LSV event, rate and high-band anchor is
 constructed by the imported proofs. The only literature parameters are
-BBV and BC12, and, for real atoms only, geometric Brascamp--Lieb.
+BBV and, for real atoms only, geometric Brascamp--Lieb.
+The former BC12 bundle is constructed by `VerifiedGinibreSources`.
 -/
 
 open MeasureTheory Filter
@@ -17,7 +18,7 @@ open BernoulliSection10 Replacement DiskReference TaoVuReplacement
 open LivshytsProjectionFormalization
 
 theorem planar_density_circular_law
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     {μ : Measure ℂ} {L : ℝ} (hμ : BernoulliSection10Complex.IsPlanarDensityAtom μ L)
     (h3 : Integrable (fun x : ℂ => ‖x‖ ^ 3) μ)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop)
@@ -28,10 +29,10 @@ theorem planar_density_circular_law
           (BernoulliSection10Complex.physicalRowsFromSequence (W n) (s n) ω)) f)
       atTop (fun _ => ∫ z, f z ∂circularMeasure) :=
   BernoulliSection10Complex.density_circular_law_of_highBand hμ.normalized
-    (planar_highBandLogLimit hBBV hBC12 hμ h3) W s hW hWtop f
+    (planar_highBandLogLimit hBBV hμ h3) W s hW hWtop f
 
 theorem real_density_circular_law
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (hGBL : RealFiniteGeometricBrascampLieb)
     {μ : Measure ℝ} {L : ℝ} (hμ : BernoulliSection10.IsBoundedDensityAtom μ L)
     (h3 : Integrable (fun x : ℝ => |x| ^ 3) μ)
@@ -42,10 +43,10 @@ theorem real_density_circular_law
         (densityCyclicMatrix (W n) (s n) (physicalRowsFromSequence (W n) (s n) ω)) f)
       atTop (fun _ => ∫ z, f z ∂circularMeasure) :=
   BernoulliSection10.density_circular_law_of_highBand hμ
-    (real_highBandLogLimit hBBV hBC12 hGBL hμ h3) W s hW hWtop f
+    (real_highBandLogLimit hBBV hGBL hμ h3) W s hW hWtop f
 
 theorem planar_density_ring_log_limit
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     {μ : Measure ℂ} {L : ℝ} (hμ : BernoulliSection10Complex.IsPlanarDensityAtom μ L)
     (h3 : Integrable (fun x : ℂ => ‖x‖ ^ 3) μ)
     (W s : ℕ → ℕ) (hW : ∀ n, 0 < W n) (hWtop : Tendsto W atTop atTop) (z : ℂ) :
@@ -55,10 +56,10 @@ theorem planar_density_ring_log_limit
       (fun n x => BernoulliSection10Complex.densityCyclicLogDet (W n) (s n) z x /
         (((s n + 3) * W n : ℕ) : ℝ)) (ShortRingAnchor.circularLogPotential z) :=
   BernoulliSection10Complex.density_ring_log_limit_of_highBand hμ.normalized
-    (planar_highBandLogLimit hBBV hBC12 hμ h3) W s hW hWtop z
+    (planar_highBandLogLimit hBBV hμ h3) W s hW hWtop z
 
 theorem real_density_ring_log_limit
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (hGBL : RealFiniteGeometricBrascampLieb)
     {μ : Measure ℝ} {L : ℝ} (hμ : BernoulliSection10.IsBoundedDensityAtom μ L)
     (h3 : Integrable (fun x : ℝ => |x| ^ 3) μ)
@@ -68,6 +69,6 @@ theorem real_density_ring_log_limit
       (fun n x => densityCyclicLogDet (W n) (s n) z x /
         (((s n + 3) * W n : ℕ) : ℝ)) (ShortRingAnchor.circularLogPotential z) :=
   BernoulliSection10.density_ring_log_limit_of_highBand hμ
-    (real_highBandLogLimit hBBV hBC12 hGBL hμ h3) W s hW hWtop z
+    (real_highBandLogLimit hBBV hGBL hμ h3) W s hW hWtop z
 
 end BernoulliSection10Source

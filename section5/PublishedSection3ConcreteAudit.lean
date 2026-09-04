@@ -36,6 +36,11 @@ example (L K : ℕ) (h : L ≤ K) (ω : Sample) :
   samples_prefix L K h ω
 
 #check ringPotential_limit
+#print axioms ginibreOnSequence_hasLaw
+#print axioms ginibre_negative_on_sequence_of_bbv
+#print axioms ginibre_logPotential_on_sequence
+#print axioms provedGinibreInput
+#check @provedGinibreInput
 #check calibrationRaw_prefix_normalization
 #check literal_anchors
 #check indicator_complex_full_of_published_literature

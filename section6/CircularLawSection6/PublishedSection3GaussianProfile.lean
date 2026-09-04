@@ -30,15 +30,7 @@ structure GaussianProfilePublishedSection3Inputs (μ : Measure Ω) (νA νG : Me
   coreSection3 : ∀ (φ : ℕ → ℕ), StrictMono φ → ∀ R : ℕ,
     p.CanonicalCoreSection3Input (fun n => subsequenceCoreSize φ n + 2)
       (fun n => W (φ (n + 1))) (R + 1)
-  ginibreRaw : ∀ᵐ z ∂(volume : Measure ℂ),
-    TendstoInProbabilityTri (fun n => cyclicAtomLaw (n + 1) circularComplexGaussian)
-      (fun n ω => matrixRawPotential (ginibreMatrix (n + 1) ω - z • 1)) (circularRadialPotential ‖z‖)
-  ginibreNegative : ∀ᵐ z ∂(volume : Measure ℂ), ∃ q : ℝ, 0 < q ∧
-    BC12GinibreNegativeMomentTightnessTri (fun n => n + 1) z q
-  ginibreSpectral : ∀ f : ℂ → ℝ, Continuous f → HasCompactSupport f →
-    TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
-      (fun n ω => realEsdTest (cyclicPhysicalMatrix n (ginibreMatrix (n + 1) (ω n).2)) f)
-      atTop (fun _ => ∫ z, f z ∂circularMeasure)
+  bbv : CircularLawSections56.Section5.PublishedSection3Concrete.BBVComparisonInput
 
 theorem GaussianProfilePublishedSection3Inputs.toSection34 (p : NoncompactProfile)
     (W : ℕ → ℝ) (h : GaussianProfilePublishedSection3Inputs μ νA νG p W) :
@@ -46,9 +38,7 @@ theorem GaussianProfilePublishedSection3Inputs.toSection34 (p : NoncompactProfil
   coreSection34 R := CoreRadiusBounds.PublishedSection34Input.toSection34
     (p.coreRadiusBounds (by positivity : (0 : ℝ) ≤ (R : ℝ) + 1)) W (h.coreSection34 R)
   coreSection3 := h.coreSection3
-  ginibreRaw := h.ginibreRaw
-  ginibreNegative := h.ginibreNegative
-  ginibreSpectral := h.ginibreSpectral
+  bbv := h.bbv
 
 theorem gaussian_profile_circular_law_of_published_section3 (p : NoncompactProfile)
     (W : ℕ → ℝ) (hW : ∀ n, 0 < W n) (hWlim : Tendsto W atTop atTop)

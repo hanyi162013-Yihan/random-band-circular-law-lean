@@ -5,6 +5,9 @@ import argparse, re, tomllib
 root = Path(__file__).resolve().parents[1]
 config = tomllib.loads((root / 'lakefile.toml').read_text())
 roots = {lib['name']: root / lib.get('srcDir', '') for lib in config['lean_lib']}
+# The new Section 3 endpoint imports this pinned proof package. Traverse it
+# explicitly so a cold runner never launches its whole closure in parallel.
+roots['Ginibre'] = root / '.lake/packages/GinibreCorrelationIdentities'
 p = argparse.ArgumentParser()
 p.add_argument('targets', nargs='*', default=['SubgaussianSection8'])
 a = p.parse_args()

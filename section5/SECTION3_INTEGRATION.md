@@ -1,6 +1,33 @@
 # Direct integration of the checked Section 3 package
 
-## Current concrete interface — verified 2026-09-03
+## Gaussian-source migration checkpoint — verified 2026-09-03
+
+The current concrete endpoints no longer take `BC12GinibreInput`.
+`CircularLawSections56.Section5.VerifiedGinibreSources` identifies the actual
+reference with Section 3's Gaussian law and constructs its log limit and
+negative-moment tightness (the latter from BBV). The additional taper adapter
+constructs nonsingularity, negative moments, log limits and row moments;
+its remaining analytic fields concern only the taper matrix.
+See [the cross-chapter status](../GAUSSIAN_INPUT_MIGRATION.md).
+These changes passed the Section 5 job of
+[run 33815655602](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33815655602/job/100847217827)
+at `c4e807877fefef8339a6ff01ec4ed75bc08ded81`: normal public-target build,
+224 existing and 16 migration axiom reports, plus the printed signatures.
+`TaperVerifiedGinibre` compiled in 2.6 seconds. Only the three standard
+foundations were reported. Artifact SHA-256:
+`e3a359ff3097b43f179e67cbd61bcf2afbbacb85e2001ce403c365595f6744ac`.
+The whole run had a separate root audit-import failure; this is a Section 5
+certificate, not a claim that every matrix job of that run succeeded.
+
+**Later source-record migration also passed at `d7d732c`:**
+`PublishedSection3Model.Sources` now replaces its old Gaussian conclusion
+fields by the exact normalized Ginibre law, with dense BBV available at all
+positive heights. The negative moment and full-log limit are proved methods,
+and the concrete source constructor proves the Gaussian law internally.
+The later check covers the normal public target, 1109 axiom reports and six
+module kernel replays. See [the exact certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md).
+
+## Historical concrete interface — verified 2026-09-03
 
 The actual fixed-law short-ring/calibration construction and both real/complex
 Section 5 endpoints passed [run 33725000131](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131)

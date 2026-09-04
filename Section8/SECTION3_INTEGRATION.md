@@ -2,9 +2,25 @@
 
 The public Bernoulli and general real-subgaussian Section 8 theorems now
 construct their high-band anchor by calling
-`ShortRingAnchor.Proposition38.proposition38` in
-[`section3/ShortRingAnchor/Proposition38/Assembly.lean`](../section3/ShortRingAnchor/Proposition38/Assembly.lean).
-**Verified:** proof-source commit `b6c379836fcc6cf166881768d1a0ad6782c5c552`
+`ShortRingAnchor.Proposition38.proposition38_withoutBC12` in
+[`section3/ShortRingAnchor/Proposition38/VerifiedGinibre.lean`](../section3/ShortRingAnchor/Proposition38/VerifiedGinibre.lean).
+The former negative-moment, projection and correlation fields are removed
+from the public upstream structure. No Gaussian-law field replaces them:
+the law of the existing explicit reference array is proved internally.
+**BC12-free migration: PASS.** Proof-source commit
+`7012b1ef2e13d63154e4436d0b201581dafa7954` passed
+[cloud run 33814530370](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33814530370)
+on 2026-09-03 at 22:48:28 UTC. Both normal Section 8 targets, all 62 exact
+axiom reports and both compiled public-signature audits passed.
+The scoped build took 42 seconds and the audit step 19 seconds after setup.
+The report artifact SHA-256 is
+`e6240a778e89d7adafc7d5bb8e2d5665b2661d01631cbb206600ddf1a8914e57`.
+This is a Section 8 certificate, not a certificate for the subsequent
+Section 5/6/10 migration.
+This includes the extraction of Gaussian normalization into the shared
+Section 3 theorem `ShortRingAnchor.BC12.normalizedGaussianPair_map`.
+
+**Historical conditional integration:** proof-source commit `b6c379836fcc6cf166881768d1a0ad6782c5c552`
 passed [cloud run 33720016599](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33720016599/job/100537065421)
 on 2026-09-03. [PR #2](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/pull/2)
 integrates it into the root project. The [audit excerpt](SECTION3_CLOUD_AUDIT.txt)
@@ -18,12 +34,10 @@ endpoints take `SubgaussianSection8.Section3UpstreamInputs A`. Both specialize
 
 - Proposition 3.2 for the fixed real atom and each fixed complex shift;
 - Cook (2018) Theorem 1.12 with its norm guard;
-- canonical BBV comparisons for the literal ring and dense Gaussian models;
-- named BC12 negative-moment tightness for the actual Ginibre array;
-- finite Ginibre projection and correlation formulas.
+- canonical BBV comparisons for the literal ring and dense Gaussian models.
 
-The comparison constant is shared across dimensions. The positive
-negative-moment exponent is chosen for each dimension sequence and fixed shift.
+The comparison constant is shared across dimensions. The negative-moment
+exponent `1/128` is constructed inside the proved Section 3 endpoint.
 The Section 8 square-deformation Cook and Nguyen inputs remain separate, with
 their existing quantitative ranges. No density, symmetry or support restriction
 is added to the atom. Gaussian moments, IID laws and matrix identities are
@@ -40,6 +54,7 @@ callers to supply the high-band log-potential conclusion.
 | --- | --- |
 | `BernoulliSection8/Section3Gaussian.lean` | Prove the Gaussian pair's mean, second moment and finite third moment. |
 | `BernoulliSection8/Section3Model.lean` | Construct IID arrays; identify cyclic successors, coefficients, ring matrices and the actual Gaussian reference. |
+| `BernoulliSection8/Section3GaussianLaw.lean` | Prove the normalized real-pair entry law, independent-entry matrix law, and equality with the Section 3 Gaussian-column model. |
 | `BernoulliSection8/Section3Integration.lean` | Specialize BBV through separate model-conversion lemmas, invoke Proposition 3.8, and transfer its probability limit to the original real IID sequence. |
 | `../SubgaussianSection8/Section3Integration.lean` | Instantiate the adapter at the general Section 8 atom. |
 
@@ -52,20 +67,24 @@ The root Lake project resolves `ShortRingAnchor` and `Vendor` directly from
 `section3/`; the older `vendor/short-ring-analysis` snapshot is retained for
 provenance. The standalone Section 3 package and workflow remain available.
 
-Cloud verification selects `SubgaussianSection8` and `BernoulliSection8`:
-420 project modules, zero Section 4 modules. It reuses available artifacts,
-serializes a cold import closure, and runs both normal explicit Lake targets.
-When the integration cache is available, only the six bridge/endpoint entry
+Cloud verification selects `SubgaussianSection8` and `BernoulliSection8`,
+with zero Section 4 modules. It reuses available artifacts, serializes a
+cold import closure including the pinned Ginibre proof dependency, and runs
+both normal explicit Lake targets.
+When the integration cache is available, only the seven bridge/endpoint entry
 points receive separate serial commands; Lake still validates their imports
 and the two complete Section 8 targets normally.
 No local Lean compilation or whole-repository build is used.
 
 The gate includes the existing 13-report general and 28-report Bernoulli audits,
-a new 15-report integration audit, and both public-signature audits. The new
-audit includes Proposition 3.8 and the four final Section 8 endpoints. Only
+a 21-report integration audit, and both public-signature audits. The new
+audit includes the BC12-free Proposition 3.8, the Gaussian-law constructors,
+the shared normalization lemma, and the four final Section 8 endpoints. A source regression check requires
+exactly the five upstream fields (one comparison constant and four theorem
+premises), and rejects returning the former BC12 fields. Only
 `propext`, `Classical.choice`, and `Quot.sound` are allowed.
 
-All gates passed, including scans of 59 Bernoulli and 35 general Section 8
+The historical conditional integration passed all gates, including scans of 59 Bernoulli and 35 general Section 8
 Lean files and both compiled public-signature audits. The final run restored
 the integration cache and completed the normal
 `lake build SubgaussianSection8 BernoulliSection8` target.

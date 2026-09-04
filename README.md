@@ -7,10 +7,21 @@ periodic profile and discrete law*](https://arxiv.org/abs/2609.01295).
 This repository contains checked proof chains for the paper's high-band
 estimates, transfer and small-ball tools, and several circular-law conclusions.
 The guide below follows the paper's section order and describes the public
-interfaces on `main`. It does **not** claim a complete formalization of every
+interfaces in this checkout, subject to the migration status below.
+It does **not** claim a complete formalization of every
 statement in the paper. Exact hypotheses, quantitative variants and coverage
 are recorded in the linked theorem maps and Lean declarations. Several endpoints
 remain conditional on the [explicit mathematical inputs listed below](#inputs-still-assumed-at-public-interfaces).
+
+**Verified Gaussian-source migration:** removal of external Gaussian inputs from
+Sections 5, 6, 8 and 10 is tracked in
+[GAUSSIAN_INPUT_MIGRATION.md](GAUSSIAN_INPUT_MIGRATION.md).
+Section 3 and the later root/Section 5/Section 6 source-record reductions have
+passed their cloud checks, including the Section 8/10 endpoints: 3327 axiom
+reports, public-call regressions and 29 module kernel replays. See the
+[exact commits and verification evidence](GAUSSIAN_MIGRATION_VERIFICATION.md).
+This checkpoint still retains the pressure inputs documented below; separate
+pressure-input development is not part of its certification.
 
 ## Results in paper order
 
@@ -30,7 +41,10 @@ conclusion in place of these proofs.
 - Proposition 3.8: fixed real centered, variance-one subgaussian atoms,
   including discrete laws, for the three-neighbor full-block ring.
 - Both give the normalized shifted log-determinant limit for every fixed
-  complex shift, subject to their explicit inputs below.
+  complex shift, subject to their explicit inputs below. Their
+  `proposition36_cyclicShortRing_withoutBC12` and
+  `Proposition38.proposition38_withoutBC12` endpoints construct the Gaussian
+  negative moment and log limit from the proved Ginibre source and BBV.
 
 See the [density endpoint map](section3/HIGH_BAND_INTEGRATION.md) and
 [Proposition 3.8 statement and assumptions](section3/PROPOSITION38.md).
@@ -65,8 +79,9 @@ use `indicator_real_full_of_published_literature` or
 `indicator_complex_full_of_published_literature` in the namespace
 `CircularLawSections56.Section5.PublishedSection3Concrete`.
 
-These endpoints retain two quantitative Section 4 pressure inputs as well as
-the named literature inputs; these pressure hypotheses have not been eliminated
+These endpoints retain BBV and two quantitative Section 4 pressure inputs
+(and real geometric Brascamp–Lieb for real atoms); the Gaussian reference
+estimates are constructed internally. These pressure hypotheses have not been eliminated
 merely because Section 4 source is present in this repository.
 Broader taper and varying-atom results are available with their documented
 Section 3/4 interfaces. The concrete fixed-law integration does not automatically
@@ -89,7 +104,7 @@ Its source record contains only the comparison of
 [Bandeira, Boedihardjo and van Handel (2023)][bandeira-2023] and the two finite
 Section 4 pressure estimates for each compact core. Ginibre negative-moment
 tightness, logarithmic-potential and spectral limits are derived internally
-from that comparison; no independent Ginibre limit or correlation-formula
+from proved Ginibre facts and that comparison; no independent Ginibre limit or correlation-formula
 premise is required.
 See the [exact input boundary and proof route](section6/BBV_ONLY_ENDPOINT.md).
 
@@ -165,9 +180,9 @@ real/imaginary parts and circular symmetry are not assumed.
 
 Actual matrix laws, Section 3 applications, counting, Gaussian reference,
 pressure and replacement steps are connected internally. The comparison of
-[Bandeira, Boedihardjo and van Handel (2023)][bandeira-2023] and the Ginibre
-results described in [Bordenave and Chafaï (2012)][bordenave-2012] remain
-explicit inputs. Real atoms additionally require the geometric form of the
+[Bandeira, Boedihardjo and van Handel (2023)][bandeira-2023] remains
+an explicit input. The literal Gaussian law, negative moment and log limit
+are constructed internally, without a BC12 premise. Real atoms additionally require the geometric form of the
 [Brascamp–Lieb inequality (1976)][brascamp-1976].
 Directional conditional-density, heterogeneous-law and general
 finite-`(2+α)`-moment extensions are not included in these endpoints.
@@ -189,8 +204,6 @@ verbatim so that the documented imports and commands remain executable.
 | Undischarged input | Where it is required |
 | --- | --- |
 | Canonical Gaussian/free comparison: [Bandeira, Boedihardjo and van Handel (2023)][bandeira-2023], Theorem 2.8 | Section 3 anchors and the public Section 5, 6, 8 and 10 endpoints. |
-| Shifted-Ginibre negative-moment tightness and full normalized log-determinant limit: [Bordenave and Chafaï (2012)][bordenave-2012] | Proposition 3.6 density endpoints and the concrete Section 5 and Section 10 endpoints. |
-| Negative-moment tightness and finite Ginibre correlation/projection formulas: [Bordenave and Chafaï (2012)][bordenave-2012] | Proposition 3.8 and Section 8. The full Ginibre log limit is derived from those formulas, not separately assumed there. |
 | Real geometric Brascamp–Lieb inequality: [Brascamp and Lieb (1976)][brascamp-1976] | Real-density branches of Proposition 3.6, Section 5 and Section 10; not the planar or discrete-subgaussian branches. |
 | Structured-matrix least-singular-value estimate: [Cook (2018)][cook-2018], Theorem 1.12, with its norm guard | Proposition 3.8 and, through that anchor, Section 8. |
 | Deformed-square least-singular-value estimates: [Cook (2018)][cook-2018], Theorem 1.24, including the conditional versions used in the manuscript | Section 9 terminal/frame small-ball results and Section 8. |
@@ -200,11 +213,15 @@ verbatim so that the documented imports and commands remain executable.
 
 The table concerns the concrete endpoints described above; more general
 conditional APIs may expose additional intermediate inputs, as recorded in
-their chapter maps. A result proved elsewhere in the repository does not
-automatically remove a parameter from an endpoint: Section 6's Ginibre
-derivation from the Gaussian/free comparison does not, by itself, remove the
-Ginibre limit, negative-moment or finite-formula parameters still present
-in Sections 3, 5, 8 and 10.
+their chapter maps. The former BC12/Ginibre parameters are now constructed
+at concrete call sites from the pinned
+[Ginibre proof dependency](https://github.com/hanyi162013-Yihan/ginibre-correlation-identities-lean)
+and BBV. The migration includes the adapters, not just an unused import;
+chapter-by-chapter verification status is in the migration notice above.
+Historical conditional APIs for squared-singular-law tests and Han's dense
+Gaussian theorem remain available, but are not required by the preferred
+Section 6 BBV-only endpoint. The full limiting squared-singular law is not
+claimed as a new theorem of this migration.
 
 The replacement principle of [Tao and Vu (2010)][tao-vu-2010], Theorem 2.1,
 is a [proved source dependency](vendor/tao-vu-replacement/), not a remaining

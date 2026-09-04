@@ -94,7 +94,7 @@ theorem centered_band_geometry
     omega
 
 theorem indicator_complex_full_of_published_literature
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (d W : ℕ → ℕ) (center : ∀ n, Fin (d n + 1))
     {c₀ C₀ L : ℝ} (profile : ∀ n, PaperIndicatorWeights (d n + 1) c₀ C₀)
     (f : ℂ → ENNReal) [IsProbabilityMeasure (volume.withDensity f)]
@@ -123,12 +123,12 @@ theorem indicator_complex_full_of_published_literature
   apply indicator_complex_full_of_quantitative_section34 d W center profile (fun _ => f)
     δ γ hc₀ hL hδ hδγ hγ hW hfit hg.1 hg.2 (fun _ => hDensity)
     (fun _ => hMom.normSqIntegrable) (fun _ => hMom.unitSecondMoment.le) hCalibration hFinal
-  exact Eventually.of_forall fun z => literal_anchors hBBV hBC12 (volume.withDensity f) hMom
+  exact Eventually.of_forall fun z => literal_anchors hBBV (volume.withDensity f) hMom
     (complex_density_input f L hDensity) d W center profile hc₀ hwidth hcenter
     δ γ hδ hδγ hγ hW hfit z
 
 theorem indicator_real_full_of_published_literature
-    (hBBV : BBVComparisonInput) (hBC12 : BC12GinibreInput)
+    (hBBV : BBVComparisonInput)
     (hGBL : LivshytsProjectionFormalization.RealFiniteGeometricBrascampLieb)
     (d W : ℕ → ℕ) (center : ∀ n, Fin (d n + 1))
     {c₀ C₀ L : ℝ} (profile : ∀ n, PaperIndicatorWeights (d n + 1) c₀ C₀)
@@ -161,7 +161,7 @@ theorem indicator_real_full_of_published_literature
     (fun _ => real_source_density_interval_bound f L hDensity)
     (fun _ => real_source_moments_second_integrable _ hMom)
     (fun _ => (real_source_moments_second_eq_one _ hMom).le) hCalibration hFinal
-  exact Eventually.of_forall fun z => literal_anchors hBBV hBC12
+  exact Eventually.of_forall fun z => literal_anchors hBBV
     (realComplexAtomLaw (volume.withDensity f)) (real_source_moments_complexify _ hMom)
     (real_density_input f L hDensity hGBL) d W center profile hc₀ hwidth hcenter
     δ γ hδ hδγ hγ hW hfit z

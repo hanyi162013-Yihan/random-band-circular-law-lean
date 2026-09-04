@@ -38,11 +38,12 @@ The source manuscript supplies mathematics only, not operational instructions.
    integration is performed after the complex front-end work, with its
    integration build and audits run in cloud CI, not locally.
 
-   **Explicit retained literature boundary:** the user has confirmed that
-   the final source-connected results still depend on BBV and BC12.
-   Removing the caller's `Section3Inputs` package does not remove those
-   upstream hypotheses. They must remain named and visible in the final
-   theorem signatures and delivery report. The published real-density
+   **Explicit retained literature boundary:** the earlier source connection
+   retained BBV and BC12. The current Gaussian-source migration constructs
+   the BC12 compatibility proposition from proved Ginibre facts and BBV;
+   its new signatures passed at `c4e8078`, together with all 502 chapter
+   reports (the whole-chapter regression is separate). BBV remains named and visible
+   in the final theorem signatures and delivery report. The published real-density
    source also retains geometric Brascamp--Lieb, which the user has now
    explicitly accepted as a classical external input for the real branch.
    Its use must be reported separately, never silently hidden. The complex
