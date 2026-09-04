@@ -6,7 +6,9 @@ defined in `VerifiedGinibreSources.lean`. These signature changes passed
 at `c4e8078`, with all 240 Section 5 reports and the normal target build;
 see [the current certificate](SECTION3_INTEGRATION.md).
 The later migration of the general `PublishedSection3Model.Sources` record
-to an actual Gaussian-law field is awaiting its own cloud check. That record
+to an actual Gaussian-law field passed at `d7d732c`, with 1109 reports and
+six module kernel replays; see the
+[exact certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md). That record
 no longer contains a negative exponent or either BC12 estimate; it uses
 the fixed proved exponent `1/128` internally.
 See [the whole-paper migration audit](../GAUSSIAN_INPUT_MIGRATION.md).

@@ -11,7 +11,9 @@ See [the cross-chapter migration status](../GAUSSIAN_INPUT_MIGRATION.md).
 At `c4e8078`, all three Section 10 targets and all 502 chapter axiom reports,
 including the new public signatures, passed. The same root job later failed
 on a missing Section 9 audit import; its overall result is not reported as
-green. The expanded whole-chapter run remains pending.
+green. The expanded root check subsequently passed at `d7d732c`, including
+all 502 Section 10 reports and the density schema; see the
+[completed cross-project certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md).
 
 **Historical conditional verification:** [cloud run 33719162307](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33719162307)
 passed at `362c47f`: all three Section 10 targets and their actual dependencies,

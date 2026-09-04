@@ -1,6 +1,6 @@
 # Verified BBV-only Ginibre and concrete profile endpoint
 
-**Current migration pending:** both `GaussianProfileBBVSources` and
+**Current migration verified:** both `GaussianProfileBBVSources` and
 `GaussianProfileBBVCoreSources` now have exactly the two fields below.
 The core route uses the shared proved Section 5 Gaussian reference; the
 independent BBV-only derivation remains available. The finite-formula and
@@ -8,7 +8,8 @@ log-potential records also have proved constructors with no premise.
 The legacy concrete/reduced routes still expose the separate classical
 squared-singular-law input, but no longer expose BC12, raw-log, negative
 moment or spectral-limit fields. See
-[the cross-chapter status](../GAUSSIAN_INPUT_MIGRATION.md).
+[the cross-chapter status](../GAUSSIAN_INPUT_MIGRATION.md) and
+[completed verification](../GAUSSIAN_MIGRATION_VERIFICATION.md).
 
 The earlier independent BBV-only chain passed
 [run 33740349647](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33740349647)

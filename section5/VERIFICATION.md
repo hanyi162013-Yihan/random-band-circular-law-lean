@@ -2,6 +2,15 @@
 
 Date: 2026-09-02. Lean and mathlib: v4.33.0.
 
+## Gaussian-source migration — passed 2026-09-04 UTC
+
+The current source-record reduction and concrete Gaussian constructors passed
+the normal public-target build, 1109 exact axiom reports and six module kernel
+replays at `d7d732c`. This includes all 865 named public source theorems.
+See [the exact cross-project certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md)
+for run/job IDs, source identity across the focused Section 6 correction,
+artifact hashes and the distinction from earlier checks below.
+
 ## Concrete Section 3 adapter — passed 2026-09-03
 
 [Run 33725000131](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131),

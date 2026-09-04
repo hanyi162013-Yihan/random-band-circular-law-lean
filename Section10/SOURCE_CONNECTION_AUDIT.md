@@ -8,7 +8,10 @@ Section 10 axiom reports passed at
 [run 33815655602](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33815655602/job/100847217601).
 That root job subsequently failed on a missing Section 9 audit-only import;
 this is a Section 10 checkpoint, not an overall green run. The import issue
-is fixed and the expanded whole-chapter check is pending.
+is fixed. The expanded root check passed at `d7d732c`, including all nine
+public targets, 1379 reports, all 502 Section 10 reports, the density schema
+and seven selected module replays. See the
+[completed certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md).
 `VerifiedGinibreSources` supplies the old BC12 compatibility proposition
 internally from BBV. The certificates and tables below describe the
 **historical pre-migration commit** and are not certificates for current

@@ -1,5 +1,15 @@
 # Section 6 continuation checkpoints — 2026-09-03
 
+## Gaussian-source migration — passed 2026-09-04 UTC
+
+The current source-record reductions passed both normal public targets,
+839 exact axiom reports (including all 808 named public source theorems),
+`Regression.lean`, `BBVOnlyRegression.lean` and sixteen module kernel replays
+at `55b3dfe`. See
+[the exact cross-project certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md)
+for the complete source-identity and cloud evidence. The historical records
+below retain their original verification scopes and hypotheses.
+
 ## Publication on main
 
 The verified proof snapshot below is now published on main without changing

@@ -8,9 +8,11 @@ mathlib checkout or large local download is needed. See
 
 ## Main endpoint and verification status
 
-**Current migration:** the new source changes and expanded full regression
-are being checked separately; see
-[the cross-chapter audit](../GAUSSIAN_INPUT_MIGRATION.md).
+**Current migration verified:** the new source changes, all 808 named public
+source theorems, both old regression files and sixteen module kernel replays
+passed at `55b3dfe`. See the
+[exact cross-project certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md) and
+[input map](../GAUSSIAN_INPUT_MIGRATION.md).
 The actual Ginibre raw-log and spectral limits now have proved constructors
 without BBV; its negative moment still uses BBV. The historical sparse,
 subsequence and published-source records no longer ask for those three

@@ -19,12 +19,13 @@ foundations were reported. Artifact SHA-256:
 The whole run had a separate root audit-import failure; this is a Section 5
 certificate, not a claim that every matrix job of that run succeeded.
 
-**Later source-record migration is pending its own cloud check:**
+**Later source-record migration also passed at `d7d732c`:**
 `PublishedSection3Model.Sources` now replaces its old Gaussian conclusion
 fields by the exact normalized Ginibre law, with dense BBV available at all
 positive heights. The negative moment and full-log limit are proved methods,
 and the concrete source constructor proves the Gaussian law internally.
-The checkpoint above does not certify these later changes.
+The later check covers the normal public target, 1109 axiom reports and six
+module kernel replays. See [the exact certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md).
 
 ## Historical concrete interface — verified 2026-09-03
 

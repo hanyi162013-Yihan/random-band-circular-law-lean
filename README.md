@@ -13,13 +13,15 @@ statement in the paper. Exact hypotheses, quantitative variants and coverage
 are recorded in the linked theorem maps and Lean declarations. Several endpoints
 remain conditional on the [explicit mathematical inputs listed below](#inputs-still-assumed-at-public-interfaces).
 
-**Branch migration notice:** the new removal of external Gaussian inputs from
+**Verified Gaussian-source migration:** removal of external Gaussian inputs from
 Sections 5, 6, 8 and 10 is tracked in
 [GAUSSIAN_INPUT_MIGRATION.md](GAUSSIAN_INPUT_MIGRATION.md).
-Section 3 is merged. The base migration passed root, Section 5 and Section 6
-together, including the Section 8/10 endpoints. The later generic source-record
-cleanup, exhaustive audits and kernel replay are still being checked;
-earlier certificates do not certify these latest changes.
+Section 3 and the later root/Section 5/Section 6 source-record reductions have
+passed their cloud checks, including the Section 8/10 endpoints: 3327 axiom
+reports, public-call regressions and 29 module kernel replays. See the
+[exact commits and verification evidence](GAUSSIAN_MIGRATION_VERIFICATION.md).
+This checkpoint still retains the pressure inputs documented below; separate
+pressure-input development is not part of its certification.
 
 ## Results in paper order
 
