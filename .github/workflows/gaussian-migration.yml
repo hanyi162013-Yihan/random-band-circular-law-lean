@@ -2,11 +2,19 @@ name: Gaussian source migration verification
 on:
   workflow_call:
     inputs:
+      project:
+        type: string
+        default: all
       kernel_replay:
         type: boolean
         default: false
   workflow_dispatch:
     inputs:
+      project:
+        description: Verify only the affected project, or all three
+        type: choice
+        options: [all, root, section5, section6]
+        default: all
       kernel_replay:
         description: Replay the changed proof modules with the pinned Lean kernel
         type: boolean
@@ -19,7 +27,7 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        project: [root, section5, section6]
+        project: ${{ fromJSON(inputs.project == 'root' && '["root"]' || inputs.project == 'section5' && '["section5"]' || inputs.project == 'section6' && '["section6"]' || '["root", "section5", "section6"]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     env:

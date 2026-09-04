@@ -9,6 +9,7 @@ These are consequences, not fields that a caller has to supply.
 
 open MeasureTheory Filter Topology TaoVuReplacement
 open CircularLawSections56.Section5
+open CircularLawSections56.Section6 (circularRadialPotential)
 open CircularLawSections56.Section5.PublishedSection3Concrete (BBVComparisonInput)
 
 noncomputable section
