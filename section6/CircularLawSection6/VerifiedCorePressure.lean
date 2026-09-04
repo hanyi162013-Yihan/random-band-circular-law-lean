@@ -59,15 +59,15 @@ theorem verifiedClampedLogPotential_at {p : NoncompactProfile} {R : ℝ}
   have hGaussianLaw (m : ℕ) :
       iidMeasure (volume.withDensity circularGaussianDensity) m =
         iidMeasure circularComplexGaussian m := by
-    rw [circularGaussianDensity_withDensity]
+    cases circularGaussianDensity_withDensity
+    rfl
   intro ε hε
   apply (h ε hε).congr'
   exact Eventually.of_forall fun n => by
     simp only [clampedCoreSampleLaw]
     rw [hGaussianLaw]
     apply measureReal_congr
-    exact Eventually.of_forall fun _ => by
-      simp only [circularLogPotential, circularRadialPotential]
+    exact Eventually.of_forall fun _ => rfl
 
 /-- Section 6 compact-core application of the proved Section 4 density estimates.
 Both the calibration and full-size pressure contracts are constructed here. -/
