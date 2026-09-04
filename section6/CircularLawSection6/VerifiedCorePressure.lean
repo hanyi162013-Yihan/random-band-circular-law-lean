@@ -23,7 +23,6 @@ namespace CoreRadiusBounds
 
 /-- Section 6 compact-core application of the proved Section 4 density estimates.
 Both the calibration and full-size pressure contracts are constructed here. -/
-set_option pp.fullNames true in
 theorem verifiedConcreteSection4Input {p : NoncompactProfile} {R : ℝ}
     (B : CoreRadiusBounds p R) (W : ℕ → ℝ) : B.ConcreteSection4Input W := by
   let H := fun n => clampedCoreHalfWidth R (W n) n
@@ -63,7 +62,8 @@ theorem verifiedConcreteSection4Input {p : NoncompactProfile} {R : ℝ}
       (fun _ _ => hc) (fun n _ => hsqrt n) (fun n _ => hcenter n)
       (by norm_num) (fun _ _ => hf) (fun _ _ => hInt) (fun _ _ => hSecond)
     simp only [active, H, circularGaussianDensity_withDensity] at h
-    convert h using 1 <;> rfl
+    convert h using 1
+    rfl
   · apply ae_of_all
     intro z
     unfold clampedCoreSampleLaw
@@ -74,7 +74,8 @@ theorem verifiedConcreteSection4Input {p : NoncompactProfile} {R : ℝ}
       (fun _ _ => hc) (fun n _ => hsqrt n) (fun n _ => hcenter n)
       (by norm_num) (fun _ _ => hf) (fun _ _ => hInt) (fun _ _ => hSecond)
     simp only [active, H, circularGaussianDensity_withDensity] at h
-    convert h using 1 <;> rfl
+    convert h using 1
+    rfl
 
 end CoreRadiusBounds
 namespace NoncompactProfile
