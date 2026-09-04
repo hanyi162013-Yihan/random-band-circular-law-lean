@@ -59,8 +59,11 @@ theorem verifiedClampedLogPotential_at {p : NoncompactProfile} {R : ℝ}
   have hGaussianLaw (m : ℕ) :
       iidMeasure (volume.withDensity circularGaussianDensity) m =
         iidMeasure circularComplexGaussian m := by
-    cases circularGaussianDensity_withDensity
-    rfl
+    induction m with
+    | zero => rfl
+    | succ m ih =>
+        simp only [iidMeasure]
+        rw [ih, circularGaussianDensity_withDensity]
   intro ε hε
   apply (h ε hε).congr'
   exact Eventually.of_forall fun n => by
