@@ -35,12 +35,15 @@ theorem indicator_complex_logPotential_at_of_bbv
     (hDensity : ∀ᵐ w ∂(volume : Measure ℂ), f w ≤ ENNReal.ofReal L)
     (hMom : AtomMomentAssumption21 (volume.withDensity f) id)
     (z : ℂ) :
+    let : ∀ n, IsProbabilityMeasure
+        (iidMeasure (volume.withDensity f) ((n + 1) * (d n + 2))) :=
+      fun n => iidMeasure_isProbability (volume.withDensity f) _
     TendstoInProbabilityTri
       (fun n => iidMeasure (volume.withDensity f) ((n + 1) * (d n + 2)))
       (fun n ω => physicalLogPotential
         (literalIndicatorMatrix n (d n) (center n) (profile n).b ω) z)
       (circularLogPotential z) := by
-  letI : ∀ n, IsProbabilityMeasure
+  let : ∀ n, IsProbabilityMeasure
       (iidMeasure (volume.withDensity f) ((n + 1) * (d n + 2))) :=
     fun n => iidMeasure_isProbability (volume.withDensity f) _
   have hg := centered_band_geometry d W center hwidth hcenter

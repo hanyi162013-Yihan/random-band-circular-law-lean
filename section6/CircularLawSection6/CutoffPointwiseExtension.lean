@@ -46,13 +46,14 @@ theorem tendsto_zero_everywhere_of_ae_lipschitz
         nlinarith
   calc
     |F n z| = |(F n z - F n w) + F n w| := by rw [sub_add_cancel]
-    _ ≤ |F n z - F n w| + |F n w| := abs_add _ _
+    _ ≤ |F n z - F n w| + |F n w| := abs_add_le _ _
     _ < ε / 2 + ε / 2 := add_lt_add_of_le_of_lt ((hLip n z w).trans hfirst.le) hn
     _ = ε := by ring
 
 variable {ι Ω : Type*} [Fintype ι] [DecidableEq ι] [Nonempty ι]
     [MeasurableSpace Ω]
 
+omit [Nonempty ι] in
 theorem hilbertSchmidtSq_smul_one (c : ℂ) :
     hilbertSchmidtSq (c • (1 : Matrix ι ι ℂ)) = ‖c‖ ^ 2 * (Fintype.card ι : ℝ) := by
   rw [hilbertSchmidtSq_smul]
