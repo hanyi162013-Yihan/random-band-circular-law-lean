@@ -113,19 +113,13 @@ theorem literal_canonical_profile_logPotential_at_of_section34
       (fun n hn => (paperSafeShortBranch_active W δ γ n hn).2.1)
       (fun n hn => hDim n)
       (fun n hn => (hG n hn).1)
+      (fun n hn => (Nat.le_succ (2 * W n)).trans (hG n hn).2.1)
       (fun n hn => (paperSafeShortBranch_active W δ γ n hn).2.2.2)
-      (fun n hn => by
-        have h := (hG n hn).2.1
-        have hd := hDim n
-        omega)
-      (fun n hn => (paperSafeShortBranch_active W δ γ n hn).2.2.2.2.2)
       (fun _ _ => rfl) (fun _ _ => rfl)
       (fun n hn => by
         rw [hDim n]
         exact (hG n hn).2.2.2.2.1)
-      (fun n hn => by
-        have h := (hG n hn).2.1
-        omega)
+      (fun n hn => (hG n hn).2.2.2.2.2)
       (fun n _ => hcenter n)
       (hCalibration.mono (le_max_left _ _)
         (fun n hn => (paperSafeShortBranch_active W δ γ n hn).2.1))

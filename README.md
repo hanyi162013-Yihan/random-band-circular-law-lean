@@ -78,7 +78,9 @@ profiles with fixed positive lower and upper bounds, the
 public endpoints construct the sampled matrices and invoke Section 3 internally.
 For complex atoms, import
 `CircularLawSections56.Section5.VerifiedComplexSection5Endpoint` and use
-`indicator_complex_full_of_bbv` in
+`indicator_complex_logPotential_at_of_bbv` for the logarithmic-potential
+statement at an arbitrary prescribed `z : ℂ`, or `indicator_complex_full_of_bbv` for
+the full spectral conclusion, in
 `CircularLawSections56.Section5.PublishedSection3Concrete`. Its finite
 determinant/pressure and concentration contracts are constructed from the proved
 Section 4 estimates on the actual matrix sample space. BBV is its only external
@@ -103,8 +105,12 @@ The bandwidth is positive and tends to infinity; its ratio to the dimension
 need not converge. The public statement uses every continuous compactly
 supported real test function on the complex plane.
 
-Import `CircularLawSection6.VerifiedCorePressure`. The preferred endpoint is
-`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv`.
+Import `CircularLawSection6.VerifiedPointwiseProfileEndpoint`. The preferred
+logarithmic-potential endpoint is
+`CircularLawSection6.NoncompactProfile.gaussian_profile_logPotential_of_bbv`:
+for every prescribed `z : ℂ`, the normalized shifted log determinant converges
+in probability to the circular potential. The corresponding spectral endpoint is
+`gaussian_profile_circular_law_of_pointwise_bbv`.
 The comparison of
 [Bandeira, Boedihardjo and van Handel (2023)][bandeira-2023] is its only external
 literature premise, besides the stated profile and bandwidth assumptions.
@@ -114,6 +120,13 @@ and spectral limits are derived internally; no separate Gaussian limit,
 correlation-formula or pressure certificate is requested. The older two-field
 `gaussian_profile_circular_law_of_bbv_sources` API remains available.
 See the [exact input boundary and proof route](section6/BBV_ONLY_ENDPOINT.md).
+
+Here and in Sections 3, 8 and 10, “every prescribed `z`” means a pointwise
+theorem whose caller may choose any finite complex shift. It is stronger than
+an almost-everywhere-in-`z` endpoint, but it does not assert one probability-one
+sample event that works simultaneously for the uncountable set `ℂ`. The general
+Tao--Vu replacement interface still asks for an almost-everywhere family; the
+pointwise theorem supplies it there via `ae_of_all`.
 
 ### Section 7 — Local estimates used by the block argument
 

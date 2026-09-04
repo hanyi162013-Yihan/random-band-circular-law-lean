@@ -8,8 +8,21 @@ mathlib checkout or large local download is needed. See
 
 ## Preferred endpoint without pressure inputs — verified 2026-09-04 UTC
 
-Import `CircularLawSection6.VerifiedCorePressure` and use
-`NoncompactProfile.gaussian_profile_circular_law_of_bbv`. Its only external
+For the strengthened fixed-shift route, import
+`CircularLawSection6.VerifiedPointwiseProfileEndpoint` and use
+`NoncompactProfile.gaussian_profile_logPotential_of_bbv`. It proves the
+logarithmic-potential limit in probability at every prescribed `z : ℂ`.
+`NoncompactProfile.gaussian_profile_circular_law_of_pointwise_bbv` feeds this
+pointwise family into the general replacement theorem. The historical
+`NoncompactProfile.gaussian_profile_circular_law_of_bbv` remains available from
+`CircularLawSection6.VerifiedCorePressure`.
+
+The pointwise theorem does not remove a null subset of spectral parameters.
+It also does not assert a single sample event that works simultaneously for all
+uncountably many `z`; the replacement boundary obtains its required planar-a.e.
+family by applying `ae_of_all` to the fixed-shift result.
+
+The endpoint's only external
 literature premise is uniform BBV, besides the stated deterministic profile
 and bandwidth assumptions. Both finite Section 4 pressure contracts are
 constructed for the actual clamped Gaussian cores; no pressure or Gaussian-limit

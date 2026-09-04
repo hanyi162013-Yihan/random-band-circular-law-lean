@@ -21,8 +21,9 @@ namespace CircularLawSection6
 def weightedCyclicShiftedDetPolynomial (N : ℕ) [NeZero N]
     (q : ZMod N → ℝ) (z : ℂ) :
     MvPolynomial (ZMod N × ZMod N) ℂ :=
-  ((fun i j =>
-      MvPolynomial.C (Real.sqrt (q (j - i)) : ℂ) * MvPolynomial.X (i, j - i)) -
+  (((fun i j =>
+      MvPolynomial.C (Real.sqrt (q (j - i)) : ℂ) * MvPolynomial.X (i, j - i)) :
+        Matrix (ZMod N) (ZMod N) (MvPolynomial (ZMod N × ZMod N) ℂ)) -
     (MvPolynomial.C z : MvPolynomial (ZMod N × ZMod N) ℂ) •
       (1 : Matrix (ZMod N) (ZMod N) (MvPolynomial (ZMod N × ZMod N) ℂ))).det
 
@@ -49,9 +50,9 @@ theorem weightedCyclicShiftedDetPolynomial_ne_zero
     by_cases hij : i = j
     · subst j
       simp only [weightedCyclicMatrix, sub_self, ω, if_pos, Matrix.smul_apply,
-        Matrix.one_apply_eq, mul_one]
-      exact mul_div_cancel₀ (z + 1) hsqrt
-    · have hji : j - i ≠ 0 := sub_ne_zero.mpr hij.symm
+        Matrix.one_apply_eq]
+      simpa only [smul_eq_mul, mul_one] using mul_div_cancel₀ (z + 1) hsqrt
+    · have hji : j - i ≠ 0 := sub_ne_zero.mpr (Ne.symm hij)
       simp [weightedCyclicMatrix, ω, hji, hij]
   intro hp
   have heval := eval_weightedCyclicShiftedDetPolynomial N q z ω
@@ -74,7 +75,7 @@ theorem weightedCyclicMatrix_shifted_det_ne_zero
     (mu := cyclicAtomLaw N ν) (nu := cyclicAtomLaw N ν)
     (id : (ZMod N × ZMod N → ℂ) → (ZMod N × ZMod N → ℂ))
     measurable_id.aemeasurable
-    (by rw [Measure.map_id]; exact Measure.AbsolutelyContinuous.rfl)
+    (by rw [Measure.map_id])
     (by
       unfold cyclicAtomLaw
       exact hasNullMvPolynomialZeroSets_pi (fun _ : ZMod N × ZMod N => ν))

@@ -128,6 +128,7 @@ theorem logarithmic_profile_logPotential_of_section34 :
 
 /-- Fixed-spectral-parameter actual-matrix conclusion.  Removing the filler
 uses only eventual band fit and therefore preserves the chosen `z`. -/
+omit h4 h3 in
 theorem logarithmic_profile_actual_logPotential_at_of_section34
     (z : ℂ)
     (h4z : Nonempty (CompletedSection4LongBranchData

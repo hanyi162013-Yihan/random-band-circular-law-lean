@@ -2,11 +2,22 @@
 
 ## Preferred endpoint: no caller-supplied pressure estimates
 
-`NoncompactProfile.gaussian_profile_circular_law_of_bbv`, in
-`CircularLawSection6/VerifiedCorePressure.lean`, constructs both compact-core
+`NoncompactProfile.gaussian_profile_logPotential_of_bbv`, in
+`CircularLawSection6/VerifiedPointwiseProfileEndpoint.lean`, proves the actual
+Gaussian profile logarithmic-potential limit for every prescribed `z : ℂ`.
+Its spectral consequence is
+`NoncompactProfile.gaussian_profile_circular_law_of_pointwise_bbv`.
+The earlier `NoncompactProfile.gaussian_profile_circular_law_of_bbv`, in
+`CircularLawSection6/VerifiedCorePressure.lean`, remains available. These routes construct both compact-core
 pressure estimates from the proved Section 4/5 theorems. Only uniform BBV and
 the model's profile/bandwidth assumptions remain. The real-density Section 5
 and taper routes are not premises of this Gaussian endpoint.
+
+The fixed-shift conclusion contains no planar exceptional set. This is a
+pointwise-in-parameter statement, not a claim of one probability-one event
+simultaneously valid for every element of `ℂ`. At the generic Tao--Vu
+replacement boundary, `ae_of_all` converts the proved pointwise family into the
+almost-everywhere family required by that reusable interface.
 
 At `0b33ba4`, the ordinary build, all 841 axiom reports, three regression files
 and seventeen module kernel replays passed
