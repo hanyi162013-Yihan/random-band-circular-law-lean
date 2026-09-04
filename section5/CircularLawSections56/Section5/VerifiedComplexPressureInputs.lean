@@ -160,10 +160,12 @@ theorem complex_literalModelCalibrationRaw_seam
     funext ω
     simp only [literalModelCalibrationRaw, dif_pos (And.intro hmpos hm),
       literalModelPressure, literalCalibrationRows_eq_prefix_suffix k d m hm hd,
-      gap, Function.comp_apply, literalPressurePrefix, literalPhysicalSuffixPressureMaximum]
+      gap, Function.comp_apply, literalPhysicalSuffixPressureMaximum]
+    rfl
   dsimp only
   rw [heq]
   refine ⟨hp.integrable_comp_of_integrable h.1, ?_⟩
+  dsimp only [Function.comp_def]
   rw [integral_comp_measurePreserving_eq hp gap h.1]
   exact h.2
 
