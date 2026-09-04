@@ -57,8 +57,9 @@ theorem verifiedClampedLogPotential_at {p : NoncompactProfile} {R : ℝ}
     (by simpa only [ENNReal.ofReal_ofNat] using circularGaussianDensity_le_two)
     hMom z
   unfold clampedCoreSampleLaw
-  simpa only [circularGaussianDensity_withDensity,
-    circularLogPotential, circularRadialPotential] using h
+  intro ε hε
+  simpa only [circularGaussianDensity_withDensity, circularLogPotential,
+    circularRadialPotential] using h ε hε
 
 /-- Section 6 compact-core application of the proved Section 4 density estimates.
 Both the calibration and full-size pressure contracts are constructed here. -/
