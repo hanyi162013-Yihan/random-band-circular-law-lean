@@ -79,11 +79,11 @@ theorem gaussian_core_cutoff_normalization_error_at (p : NoncompactProfile)
         ∫ ω, matrixCutoffPotential (B ω - w • 1) a
           ∂gaussianProfileLaw (N n))| := by
         dsimp only [B]
-        ring
+        ring_nf
       _ ≤ ‖u - w‖ / a + ‖u - w‖ / a := (abs_sub _ _).trans (add_le_add hp hg)
-      _ = (2 / a) * dist u w := by rw [dist_eq]; ring
+      _ = (2 / a) * dist u w := by rw [dist_eq_norm]; ring
   have hF := tendsto_zero_everywhere_of_ae_lipschitz F (2 / a)
     (by positivity) hAE hLip z
-  simpa only [F, Real.norm_eq_abs] using hF.norm
+  simpa only [F, Real.norm_eq_abs, norm_zero] using hF.norm
 
 end CircularLawSection6.NoncompactProfile

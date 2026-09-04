@@ -73,7 +73,7 @@ theorem canonical_core_cutoff_comparison_of_bbv_at (B : CoreRadiusBounds p R)
         ∫ ω, matrixCutoffPotential (ginibreMatrix (N n) ω - v • 1) a
           ∂cyclicAtomLaw (N n) circularComplexGaussian)| := by ring_nf
       _ ≤ ‖u - v‖ / a + ‖u - v‖ / a := (abs_sub _ _).trans (add_le_add hp hg)
-      _ = (2 / a) * dist u v := by rw [dist_eq]; ring
+      _ = (2 / a) * dist u v := by rw [dist_eq_norm]; ring
   simpa only [F] using tendsto_zero_everywhere_of_ae_lipschitz F (2 / a)
     (by positivity) hAE hLip z
 

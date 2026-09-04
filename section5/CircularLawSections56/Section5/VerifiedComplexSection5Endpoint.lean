@@ -37,7 +37,7 @@ theorem indicator_complex_logPotential_at_of_bbv
     (z : ℂ) :
     let : ∀ n, IsProbabilityMeasure
         (iidMeasure (volume.withDensity f) ((n + 1) * (d n + 2))) :=
-      fun n => iidMeasure_isProbability (volume.withDensity f) _
+      fun _n => iidMeasure_isProbability (volume.withDensity f) _
     TendstoInProbabilityTri
       (fun n => iidMeasure (volume.withDensity f) ((n + 1) * (d n + 2)))
       (fun n ω => physicalLogPotential
@@ -45,7 +45,7 @@ theorem indicator_complex_logPotential_at_of_bbv
       (circularLogPotential z) := by
   let : ∀ n, IsProbabilityMeasure
       (iidMeasure (volume.withDensity f) ((n + 1) * (d n + 2))) :=
-    fun n => iidMeasure_isProbability (volume.withDensity f) _
+    fun _n => iidMeasure_isProbability (volume.withDensity f) _
   have hg := centered_band_geometry d W center hwidth hcenter
   have hgeom (n : ℕ) (hn : literalLongActive (paperSafeShortBranch W δ γ) n = true) :=
     paperTransferReady_geometry W δ n (paperSafeShortBranch_active W δ γ n hn).2
