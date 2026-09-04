@@ -106,7 +106,8 @@ theorem ginibreOnSequence_hasLaw (N : ℕ) :
 /-- Adding the independent target array preserves the actual Ginibre law. -/
 theorem actualGinibre_hasLaw (ν : Measure ℂ) [IsProbabilityMeasure ν] (N : ℕ) :
     HasLaw (actualGinibre N) (BC12.normalizedGinibreLaw N) (sampleLaw ν) :=
-  HasLaw.fun_comp (ginibreOnSequence_hasLaw N)
+  HasLaw.fun_comp (Y := ginibreOnSequence N) (X := fun ω : Sample => ω.2)
+    (ginibreOnSequence_hasLaw N)
     (show HasLaw Prod.snd gaussianSequenceLaw (sampleLaw ν) from
       ⟨measurable_snd.aemeasurable, measurePreserving_snd.map_eq⟩)
 
