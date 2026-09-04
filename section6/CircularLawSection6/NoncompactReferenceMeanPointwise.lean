@@ -101,7 +101,7 @@ theorem sparse_profile_mean_of_bbv_section5_at (p : NoncompactProfile)
     (fun R => p.canonical_core_raw_mean_of_eventual_section5_at size hsize W hW hWlim
       hsparse (by positivity) (hSection5 R) z)
     htarget
-    (by simpa only [circularLogPotential, circularRadialPotential] using
+    (by simpa only [ShortRingAnchor.circularLogPotential, circularRadialPotential] using
       ginibre_raw_mean_of_bbv hBBV N hsize z)
     (fun R => CoreRadiusBounds.canonical_core_cutoff_comparison_of_bbv_at
       (p.coreRadiusBounds (by positivity : (0 : ℝ) ≤ (R : ℝ) + 1))
