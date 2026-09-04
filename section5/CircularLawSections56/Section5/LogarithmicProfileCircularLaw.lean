@@ -49,7 +49,66 @@ variable (d q m W : ℕ → ℕ) (center : ∀ n, Fin (d n + 1))
           (fun n => literalModelCalibrationRaw n (d n) (m n) (center n) (profile n).b z)
           m (circularLogPotential z)) (circularLogPotential z))
 
-include hδ hδγ hγ hW hLong hsize h4 h3
+include hδ hδγ hγ hW hLong hsize
+
+/-- Fixed-spectral-parameter form of the Section 3/4 assembly.  This is the
+actual proof kernel: no planar exceptional set is used once the two inputs are
+available at the chosen `z`.  The historical a.e.-parameter theorem below is
+obtained from this theorem by filtering the corresponding inputs. -/
+theorem logarithmic_profile_logPotential_at_of_section34 (z : ℂ)
+    (h4z : Nonempty (CompletedSection4LongBranchData
+      (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2))) (literalLongActive shortBranch)
+      (fun n => literalModelCalibrationRaw n (d n) (m n) (center n) (profile n).b z)
+      (fun n => literalModelRawDeterminant n (d n) (center n) (profile n).b z)
+      (fun n => literalModelPressure n (d n) (m n) (profile n) (center n) z)
+      (fun n => literalModelPressure n (d n) (n + 1) (profile n) (center n) z)
+      (logarithmicModelLiftedPressure d q m ν profile center z) q m (fun n => n + 1) W δ
+      (C z)))
+    (h3z :
+      let : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
+        fun n => iidMeasure_isProbability (ν n) _
+      Section3IndicatorAnchorsTri
+        (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2)))
+        (literalShortLogPotential d center (fun n => (profile n).b) shortBranch z)
+        (literalActiveNormalizedObservable (literalLongActive shortBranch)
+          (fun n => literalModelCalibrationRaw n (d n) (m n) (center n) (profile n).b z)
+          m (circularLogPotential z)) (circularLogPotential z)) :
+    let : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
+      fun n => iidMeasure_isProbability (ν n) _
+    TendstoInProbabilityTri
+      (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2)))
+      (fun n ω => physicalLogPotential
+        (filledLiteralIndicatorMatrix n (d n) (center n) (profile n).b ω) z)
+      (circularLogPotential z) := by
+  let : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
+    fun n => iidMeasure_isProbability (ν n) _
+  have hgrowth : ∀ᶠ n in atTop, literalLongActive shortBranch n = true →
+      (W n : ℝ) ^ (1 + γ) < ((fun n : ℕ => n + 1) n : ℝ) := by
+    simpa only [Nat.cast_add, Nat.cast_one] using hLong
+  let cert := completedSection4_literalCertificate
+    (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2))) shortBranch
+    (literalShortLogPotential d center (fun n => (profile n).b) shortBranch z)
+    (fun n => literalModelCalibrationRaw n (d n) (m n) (center n) (profile n).b z)
+    (fun n => literalModelRawDeterminant n (d n) (center n) (profile n).b z)
+    (fun n => literalModelPressure n (d n) (m n) (profile n) (center n) z)
+    (fun n => literalModelPressure n (d n) (n + 1) (profile n) (center n) z)
+    (logarithmicModelLiftedPressure d q m ν profile center z) q m (fun n => n + 1) W
+    (circularLogPotential z) δ γ (C z)
+    hδ hδγ hγ hW hgrowth h4z.some h3z
+  have hSelected := tendstoInProbabilityTri_branchSelected
+    (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2))) shortBranch
+    (literalShortLogPotential d center (fun n => (profile n).b) shortBranch z)
+    (literalActiveNormalizedObservable (literalLongActive shortBranch)
+      (fun n => literalModelRawDeterminant n (d n) (center n) (profile n).b z)
+      (fun n => n + 1) (circularLogPotential z)) (circularLogPotential z)
+    h3z.target_size cert.tendstoInProbability
+  apply hSelected.congr (fun n ω => ?_) rfl
+  have heq := literalModel_logPotential_branch d center (fun n => (profile n).b)
+    shortBranch (circularLogPotential z) z hsize n ω
+  rw [heq]
+  cases hb : shortBranch n <;> simp [branchSelectedTri, literalShortLogPotential, hb]
+
+include h4 h3
 
 /-- Actual log-determinant convergence, using the two branch-restricted Section 3
 anchors and the finite Section 4 data, with no comparison-model assumption. -/
@@ -64,31 +123,46 @@ theorem logarithmic_profile_logPotential_of_section34 :
   let : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
     fun n => iidMeasure_isProbability (ν n) _
   filter_upwards [h4, h3] with z hz4 hz3
-  have hgrowth : ∀ᶠ n in atTop, literalLongActive shortBranch n = true →
-      (W n : ℝ) ^ (1 + γ) < ((fun n : ℕ => n + 1) n : ℝ) := by
-    simpa only [Nat.cast_add, Nat.cast_one] using hLong
-  let cert := completedSection4_literalCertificate
-    (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2))) shortBranch
-    (literalShortLogPotential d center (fun n => (profile n).b) shortBranch z)
-    (fun n => literalModelCalibrationRaw n (d n) (m n) (center n) (profile n).b z)
-    (fun n => literalModelRawDeterminant n (d n) (center n) (profile n).b z)
-    (fun n => literalModelPressure n (d n) (m n) (profile n) (center n) z)
-    (fun n => literalModelPressure n (d n) (n + 1) (profile n) (center n) z)
-    (logarithmicModelLiftedPressure d q m ν profile center z) q m (fun n => n + 1) W
-    (circularLogPotential z) δ γ (C z)
-    hδ hδγ hγ hW hgrowth hz4.some hz3
-  have hSelected := tendstoInProbabilityTri_branchSelected
-    (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2))) shortBranch
-    (literalShortLogPotential d center (fun n => (profile n).b) shortBranch z)
-    (literalActiveNormalizedObservable (literalLongActive shortBranch)
+  exact logarithmic_profile_logPotential_at_of_section34 d q m W center profile C ν
+    shortBranch δ γ hδ hδγ hγ hW hLong hsize z hz4 hz3
+
+/-- Fixed-spectral-parameter actual-matrix conclusion.  Removing the filler
+uses only eventual band fit and therefore preserves the chosen `z`. -/
+theorem logarithmic_profile_actual_logPotential_at_of_section34
+    (z : ℂ)
+    (h4z : Nonempty (CompletedSection4LongBranchData
+      (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2))) (literalLongActive shortBranch)
+      (fun n => literalModelCalibrationRaw n (d n) (m n) (center n) (profile n).b z)
       (fun n => literalModelRawDeterminant n (d n) (center n) (profile n).b z)
-      (fun n => n + 1) (circularLogPotential z)) (circularLogPotential z)
-    hz3.target_size cert.tendstoInProbability
-  apply hSelected.congr (fun n ω => ?_) rfl
-  have heq := literalModel_logPotential_branch d center (fun n => (profile n).b)
-    shortBranch (circularLogPotential z) z hsize n ω
-  rw [heq]
-  cases hb : shortBranch n <;> simp [branchSelectedTri, literalShortLogPotential, hb]
+      (fun n => literalModelPressure n (d n) (m n) (profile n) (center n) z)
+      (fun n => literalModelPressure n (d n) (n + 1) (profile n) (center n) z)
+      (logarithmicModelLiftedPressure d q m ν profile center z) q m (fun n => n + 1) W δ
+      (C z)))
+    (h3z :
+      let : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
+        fun n => iidMeasure_isProbability (ν n) _
+      Section3IndicatorAnchorsTri
+        (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2)))
+        (literalShortLogPotential d center (fun n => (profile n).b) shortBranch z)
+        (literalActiveNormalizedObservable (literalLongActive shortBranch)
+          (fun n => literalModelCalibrationRaw n (d n) (m n) (center n) (profile n).b z)
+          m (circularLogPotential z)) (circularLogPotential z))
+    (hfit : ∀ᶠ n in atTop, d n + 2 ≤ n + 1) :
+    let : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
+      fun n => iidMeasure_isProbability (ν n) _
+    TendstoInProbabilityTri
+      (fun n => iidMeasure (ν n) ((n + 1) * (d n + 2)))
+      (fun n ω => physicalLogPotential
+        (literalIndicatorMatrix n (d n) (center n) (profile n).b ω) z)
+      (circularLogPotential z) := by
+  let : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
+    fun n => iidMeasure_isProbability (ν n) _
+  have hFilled := logarithmic_profile_logPotential_at_of_section34 d q m W center profile C ν
+    shortBranch δ γ hδ hδγ hγ hW hLong hsize z h4z h3z
+  intro ε hε
+  apply (hFilled ε hε).congr' ?_
+  filter_upwards [hfit] with n hn
+  simp only [filledLiteralIndicatorMatrix, if_pos hn]
 
 /-- The stronger log-potential conclusion also holds for the unfilled paper
 matrix; changing the finitely many non-fitting indices has no effect. -/
