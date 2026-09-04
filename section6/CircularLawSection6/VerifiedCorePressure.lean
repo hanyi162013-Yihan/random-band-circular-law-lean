@@ -56,11 +56,15 @@ theorem verifiedClampedLogPotential_at {p : NoncompactProfile} {R : ℝ}
     (clampedCoreHalfWidth_atTop W hWlim hR) hfit hwidth hcenter
     (by simpa only [ENNReal.ofReal_ofNat] using circularGaussianDensity_le_two)
     hMom z
+  have hGaussianLaw (m : ℕ) :
+      iidMeasure (volume.withDensity circularGaussianDensity) m =
+        iidMeasure circularComplexGaussian m := by
+    rw [circularGaussianDensity_withDensity]
   intro ε hε
   apply (h ε hε).congr'
   exact Eventually.of_forall fun n => by
     simp only [clampedCoreSampleLaw]
-    rw [circularGaussianDensity_withDensity]
+    rw [hGaussianLaw]
     apply measureReal_congr
     exact Eventually.of_forall fun _ => by
       simp only [circularLogPotential, circularRadialPotential]
