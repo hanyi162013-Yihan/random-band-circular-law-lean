@@ -61,7 +61,7 @@ theorem verifiedConcreteSection4Input {p : NoncompactProfile} {R : ℝ}
       (fun n hn => by rw [hdim n]; exact (hgeom n hn).2.2.2.2.1)
       (fun _ _ => hc) (fun n _ => hsqrt n) (fun n _ => hcenter n)
       (by norm_num) (fun _ _ => hf) (fun _ _ => hInt) (fun _ _ => hSecond)
-    simpa only [circularGaussianDensity_withDensity] using h
+    simpa only [active, H, circularGaussianDensity_withDensity] using h
   · apply ae_of_all
     intro z
     unfold clampedCoreSampleLaw
@@ -71,7 +71,7 @@ theorem verifiedConcreteSection4Input {p : NoncompactProfile} {R : ℝ}
       (fun n hn => by rw [hdim n]; exact (Nat.le_succ _).trans (hgeom n hn).2.1)
       (fun _ _ => hc) (fun n _ => hsqrt n) (fun n _ => hcenter n)
       (by norm_num) (fun _ _ => hf) (fun _ _ => hInt) (fun _ _ => hSecond)
-    simpa only [circularGaussianDensity_withDensity] using h
+    simpa only [active, H, circularGaussianDensity_withDensity] using h
 
 end CoreRadiusBounds
 namespace NoncompactProfile
