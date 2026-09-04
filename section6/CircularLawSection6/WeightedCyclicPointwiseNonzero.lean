@@ -18,12 +18,16 @@ set_option warningAsError true
 
 namespace CircularLawSection6
 
+def weightedCyclicPolynomialMatrix (N : ℕ) [NeZero N]
+    (q : ZMod N → ℝ) :
+    Matrix (ZMod N) (ZMod N) (MvPolynomial (ZMod N × ZMod N) ℂ) :=
+  fun i j =>
+    MvPolynomial.C (Real.sqrt (q (j - i)) : ℂ) * MvPolynomial.X (i, j - i)
+
 def weightedCyclicShiftedDetPolynomial (N : ℕ) [NeZero N]
     (q : ZMod N → ℝ) (z : ℂ) :
     MvPolynomial (ZMod N × ZMod N) ℂ :=
-  (((fun i j =>
-      MvPolynomial.C (Real.sqrt (q (j - i)) : ℂ) * MvPolynomial.X (i, j - i)) :
-        Matrix (ZMod N) (ZMod N) (MvPolynomial (ZMod N × ZMod N) ℂ)) -
+  (weightedCyclicPolynomialMatrix N q -
     (MvPolynomial.C z : MvPolynomial (ZMod N × ZMod N) ℂ) •
       (1 : Matrix (ZMod N) (ZMod N) (MvPolynomial (ZMod N × ZMod N) ℂ))).det
 
@@ -36,7 +40,7 @@ theorem eval_weightedCyclicShiftedDetPolynomial
   rw [RingHom.map_det]
   congr 1
   ext i j
-  simp [weightedCyclicMatrix]
+  simp [weightedCyclicPolynomialMatrix, weightedCyclicMatrix]
 
 theorem weightedCyclicShiftedDetPolynomial_ne_zero
     (N : ℕ) [NeZero N] (q : ZMod N → ℝ) (hq : 0 < q 0) (z : ℂ) :
