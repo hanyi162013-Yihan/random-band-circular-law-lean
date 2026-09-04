@@ -157,6 +157,7 @@ theorem logarithmic_profile_actual_logPotential_at_of_section34
       (circularLogPotential z) := by
   let : ∀ n, IsProbabilityMeasure (iidMeasure (ν n) ((n + 1) * (d n + 2))) :=
     fun n => iidMeasure_isProbability (ν n) _
+  dsimp only
   have hFilled := logarithmic_profile_logPotential_at_of_section34 d q m W center profile C ν
     shortBranch δ γ hδ hδγ hγ hW hLong hsize z h4z h3z
   intro ε hε
