@@ -19,7 +19,7 @@ example (p : NoncompactProfile) (W : ℕ → ℝ)
     ∀ f : ℂ → ℝ, Continuous f → HasCompactSupport f →
       TendstoInMeasure (Measure.infinitePi profileGinibrePairLaw)
         (fun n ω => realEsdTest (cyclicPhysicalMatrix n (p.matrix (n + 1) (W n) (ω n).1)) f)
-        atTop (fun _ => ∫ z, f z ∂circularMeasure) :=
+        atTop (fun _ => ∫ z, f z ∂CircularLawSections56.Section5.circularMeasure) :=
   p.gaussian_profile_circular_law_of_bbv W hW hWlim hBBV
 
 #check @CoreRadiusBounds.verifiedConcreteSection4Input
