@@ -1,5 +1,20 @@
 # Concrete Section 3 → Section 5 interface
 
+## Stronger complex-density endpoint
+
+`PublishedSection3Concrete.indicator_complex_full_of_bbv`, in
+`VerifiedComplexSection5Endpoint.lean`, constructs both finite Section 4
+pressure contracts on the actual matrix sample space. Its only external
+literature premise is BBV; density, moments, profile and bandwidth assumptions
+remain explicit. It passed the ordinary build, 1118 axiom reports, a direct
+no-pressure-premise call and eight module kernel replays at `7136329`.
+See [the separate verification evidence](../PRESSURE_INPUT_MIGRATION.md).
+The real-density endpoint still retains its pressure and geometric
+Brascamp–Lieb premises. These are separate branches, not extra premises of
+the Gaussian Section 6 endpoint.
+
+## Earlier Gaussian-source migration
+
 **Migration status:** the current branch removes the external BC12 parameter
 using `provedGinibreInput` in the `PublishedSection3Concrete` namespace,
 defined in `VerifiedGinibreSources.lean`. These signature changes passed
@@ -18,7 +33,7 @@ and invoke the checked Section 3 theorem internally. The caller no longer
 supplies a Section 3 anchor limit, finite sampling certificate, matrix identity,
 or a model-by-model comparison certificate.
 
-## Scope and remaining mathematical inputs
+## Earlier conditional endpoints and their remaining inputs
 
 `PublishedSection3ConcreteEndpoint.lean` exports
 `indicator_complex_full_of_published_literature` and
@@ -32,7 +47,8 @@ assumptions, centered indicator-band geometry, fixed positive lower/upper profil
 bounds, bandwidth tending to infinity, and eventual dimension/bandwidth fit.
 Real atoms are returned on their original real IID space. The source hypotheses
 are universal BBV for the canonical Gaussian companions and the two quantitative Section 4
-pressure estimates. The real branch also retains geometric Brascamp–Lieb.
+pressure estimates. The stronger complex endpoint above supplies these
+estimates internally. The real branch also retains geometric Brascamp–Lieb.
 These are ordinary theorem hypotheses, not new axioms. The actual normalized
 Ginibre law, negative-moment tightness and full-log limit are constructed
 internally, rather than requested as a BC12 parameter.
@@ -65,9 +81,13 @@ matrix conclusion.
 
 `CircularLawSection6.CoreRadiusBounds.ConcreteSection4Input.toSection34`
 constructs these anchors for the actual clamped Gaussian core. Its input record
-contains only the two Section 4 pressure estimates. The preferred
-`NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources` route
-uses only BBV and this pressure record; the BBV-core caller is also migrated.
+contains only the two Section 4 pressure estimates. These are now constructed
+by `CoreRadiusBounds.verifiedConcreteSection4Input`; the preferred
+`NoncompactProfile.gaussian_profile_circular_law_of_bbv` endpoint requests
+only BBV and the profile/bandwidth assumptions. Its build, public-call tests,
+841 axiom reports and seventeen module kernel replays passed at `0b33ba4`;
+see [the separate certificate](../PRESSURE_INPUT_MIGRATION.md).
+The older `gaussian_profile_circular_law_of_bbv_sources` API remains available.
 The following older conditional route remains for compatibility:
 `CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_concrete_sources`
 also constructs the local Section 3 input from universal BBV and the classical

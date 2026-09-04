@@ -6,9 +6,26 @@ package and shares the pinned Lean 4.33.0/mathlib dependencies. No second
 mathlib checkout or large local download is needed. See
 [main integration and exact verification scope](MAIN_INTEGRATION.md).
 
-## Main endpoint and verification status
+## Preferred endpoint without pressure inputs — verified 2026-09-04 UTC
 
-**Current migration verified:** the new source changes, all 808 named public
+Import `CircularLawSection6.VerifiedCorePressure` and use
+`NoncompactProfile.gaussian_profile_circular_law_of_bbv`. Its only external
+literature premise is uniform BBV, besides the stated deterministic profile
+and bandwidth assumptions. Both finite Section 4 pressure contracts are
+constructed for the actual clamped Gaussian cores; no pressure or Gaussian-limit
+certificate is supplied by the caller.
+
+At `0b33ba4`, [run 33831340031](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33831340031)
+passed the ordinary public targets, 841 axiom reports (all 810 public source
+theorems included), all three regression files and seventeen module kernel
+replays. See the [separate verification certificate](../PRESSURE_INPUT_MIGRATION.md).
+The old two-field source API is retained unchanged. Real-density Section 5
+and taper interfaces are separate, pre-existing branches outside this task,
+not extra premises of this Gaussian endpoint.
+
+## Earlier endpoint and verification checkpoints
+
+**Gaussian-source migration verified:** the source changes, all 808 named public
 source theorems, both old regression files and sixteen module kernel replays
 passed at `55b3dfe`. See the
 [exact cross-project certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md) and

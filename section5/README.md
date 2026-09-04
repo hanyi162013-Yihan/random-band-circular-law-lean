@@ -1,5 +1,20 @@
 # Section 5: calibration, pressure lifting and circular-law conclusions
 
+## Complex-density endpoint without pressure inputs — verified 2026-09-04 UTC
+
+Import `CircularLawSections56.Section5.VerifiedComplexSection5Endpoint` and use
+`PublishedSection3Concrete.indicator_complex_full_of_bbv`. Both finite pressure
+contracts are now constructed from Section 4 on the actual matrix sample space;
+BBV is the only external literature premise, besides the stated density,
+moment, profile and bandwidth assumptions. The shift may be any fixed complex
+number, with constants depending on it.
+
+At `7136329`, the public target, 1118 axiom reports (all 874 public source
+theorems included), the pressure-free calling example and eight module kernel
+replays passed. See the [separate evidence and remaining scope](../PRESSURE_INPUT_MIGRATION.md).
+The real-density endpoint and generic taper interfaces retain their documented
+inputs. Earlier conditional endpoints remain available unchanged.
+
 ## Gaussian-source migration — verified 2026-09-04 UTC
 
 The concrete endpoints and general source record no longer request either
@@ -100,5 +115,6 @@ Section 3 inputs. The presence of support code does not claim that all of
 Section 3 has been proved.
 
 The namespace `CircularLawSections56.Section6` contains earlier helper modules
-required by the existing project. Including them does not claim completion of
-the deferred Section 6 Gaussian-profile proof.
+required by this project. The Gaussian-profile continuation is the separate
+[`section6/`](../section6/README.md) package; its endpoint and verification
+scope are documented there, not inferred from these helper imports.
