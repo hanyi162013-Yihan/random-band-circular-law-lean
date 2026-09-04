@@ -52,6 +52,7 @@ theorem verifiedConcreteSection4Input {p : NoncompactProfile} {R : ℝ}
   constructor
   · apply ae_of_all
     intro z
+    unfold clampedCoreSampleLaw
     have h := complex_literalModelCalibration_quantitative active
       (clampedCoreBand R W) (paperBandCellLength H coreSection5Delta)
       (fun n => B.clampedWeights (W n) n) (clampedCoreCenter R W) z
@@ -60,16 +61,17 @@ theorem verifiedConcreteSection4Input {p : NoncompactProfile} {R : ℝ}
       (fun n hn => by rw [hdim n]; exact (hgeom n hn).2.2.2.2.1)
       (fun _ _ => hc) (fun n _ => hsqrt n) (fun n _ => hcenter n)
       (by norm_num) (fun _ _ => hf) (fun _ _ => hInt) (fun _ _ => hSecond)
-    simpa only [clampedCoreSampleLaw, circularGaussianDensity_withDensity] using h
+    simpa only [circularGaussianDensity_withDensity] using h
   · apply ae_of_all
     intro z
+    unfold clampedCoreSampleLaw
     have h := complex_literalModelFinal_quantitative active (clampedCoreBand R W)
       (fun n => B.clampedWeights (W n) n) (clampedCoreCenter R W) z
       (fun _ => circularGaussianDensity)
       (fun n hn => by rw [hdim n]; exact (Nat.le_succ _).trans (hgeom n hn).2.1)
       (fun _ _ => hc) (fun n _ => hsqrt n) (fun n _ => hcenter n)
       (by norm_num) (fun _ _ => hf) (fun _ _ => hInt) (fun _ _ => hSecond)
-    simpa only [clampedCoreSampleLaw, circularGaussianDensity_withDensity] using h
+    simpa only [circularGaussianDensity_withDensity] using h
 
 end CoreRadiusBounds
 namespace NoncompactProfile
