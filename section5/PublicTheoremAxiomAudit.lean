@@ -985,6 +985,19 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSections56.Section5.rawSeamLoss_le_uniform_logEW
 #print axioms CircularLawSections56.Section5.fiberSquare_le_uniform_logEW
 
+-- Section5/VerifiedComplexPressureInputs.lean
+#print axioms CircularLawSections56.Section5.normalized_profile_lower_scale_le_one
+#print axioms CircularLawSections56.Section5.complex_literalModelPressure_inputs
+#print axioms CircularLawSections56.Section5.complex_literalModelRawDeterminant_seam
+#print axioms CircularLawSections56.Section5.literalPressurePrefix_measurePreserving
+#print axioms CircularLawSections56.Section5.literalCalibrationRows_eq_prefix_suffix
+#print axioms CircularLawSections56.Section5.complex_literalModelCalibrationRaw_seam
+#print axioms CircularLawSections56.Section5.complex_literalModelCalibration_quantitative
+#print axioms CircularLawSections56.Section5.complex_literalModelFinal_quantitative
+
+-- Section5/VerifiedComplexSection5Endpoint.lean
+#print axioms CircularLawSections56.Section5.PublishedSection3Concrete.indicator_complex_full_of_bbv
+
 -- Section5/VerifiedGinibreSources.lean
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.complexGaussian_pi_toLp
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.complexGaussian_columns_measurePreserving

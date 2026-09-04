@@ -7,6 +7,10 @@ The Section 3 construction is already verified and merged in PR #3, at
 The exact completed evidence is in
 [GAUSSIAN_MIGRATION_VERIFICATION.md](GAUSSIAN_MIGRATION_VERIFICATION.md):
 3327 axiom reports, public-call regressions and 29 module kernel replays.
+The later [pressure-input construction](PRESSURE_INPUT_MIGRATION.md) separately
+constructs the Section 4 contracts for complex-density Section 5 and Gaussian
+Section 6. The table and counts here describe the earlier BC12-migration
+checkpoint, not the remaining hypotheses of those newer stronger endpoints.
 
 Section 8's BC12-free adapter and both final theorem families passed
 [run 33814530370](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33814530370)
@@ -49,7 +53,7 @@ and Cook 1.12 inputs, the separate Cook/Nguyen Section 8/9 inputs, real
 geometric Brascamp–Lieb, and generic Section 4 pressure interfaces are not
 silently discarded. Eliminating BC12 does not prove these different results.
 
-## Current chapter map
+## Chapter map at the BC12-migration checkpoint
 
 | Chapter | Concrete public route | Gaussian premise after migration | Verification |
 |---|---|---|---|

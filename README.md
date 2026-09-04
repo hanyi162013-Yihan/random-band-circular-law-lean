@@ -20,8 +20,10 @@ Section 3 and the later root/Section 5/Section 6 source-record reductions have
 passed their cloud checks, including the Section 8/10 endpoints: 3327 axiom
 reports, public-call regressions and 29 module kernel replays. See the
 [exact commits and verification evidence](GAUSSIAN_MIGRATION_VERIFICATION.md).
-This checkpoint still retains the pressure inputs documented below; separate
-pressure-input development is not part of its certification.
+The later [pressure-input construction](PRESSURE_INPUT_MIGRATION.md) has its own
+verification evidence. It removes both finite pressure hypotheses from the
+complex-density Section 5 endpoint and the Gaussian-profile Section 6 endpoint;
+the earlier Gaussian-migration certificate retains its original scope.
 
 ## Results in paper order
 
@@ -74,15 +76,18 @@ For fixed centered, unit-second-moment real or planar-complex atom laws with
 bounded density and finite third absolute moment, and centered indicator-band
 profiles with fixed positive lower and upper bounds, the
 public endpoints construct the sampled matrices and invoke Section 3 internally.
-Import `CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint` and
-use `indicator_real_full_of_published_literature` or
-`indicator_complex_full_of_published_literature` in the namespace
-`CircularLawSections56.Section5.PublishedSection3Concrete`.
+For complex atoms, import
+`CircularLawSections56.Section5.VerifiedComplexSection5Endpoint` and use
+`indicator_complex_full_of_bbv` in
+`CircularLawSections56.Section5.PublishedSection3Concrete`. Its finite
+determinant/pressure and concentration contracts are constructed from the proved
+Section 4 estimates on the actual matrix sample space. BBV is its only external
+literature premise; constants may depend on any fixed complex shift.
 
-These endpoints retain BBV and two quantitative Section 4 pressure inputs
-(and real geometric Brascamp–Lieb for real atoms); the Gaussian reference
-estimates are constructed internally. These pressure hypotheses have not been eliminated
-merely because Section 4 source is present in this repository.
+The real endpoint `indicator_real_full_of_published_literature` remains in
+`PublishedSection3ConcreteEndpoint`. It still retains two finite pressure
+inputs and real geometric Brascamp–Lieb, in addition to BBV. Both branches
+construct their Gaussian reference estimates internally.
 Broader taper and varying-atom results are available with their documented
 Section 3/4 interfaces. The concrete fixed-law integration does not automatically
 cover taper profiles whose lower bounds vanish. See the
@@ -98,14 +103,16 @@ The bandwidth is positive and tends to infinity; its ratio to the dimension
 need not converge. The public statement uses every continuous compactly
 supported real test function on the complex plane.
 
-Import `CircularLawSection6.BBVOnlyProfileEndpoint`. The endpoint is
-`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources`.
-Its source record contains only the comparison of
-[Bandeira, Boedihardjo and van Handel (2023)][bandeira-2023] and the two finite
-Section 4 pressure estimates for each compact core. Ginibre negative-moment
-tightness, logarithmic-potential and spectral limits are derived internally
-from proved Ginibre facts and that comparison; no independent Ginibre limit or correlation-formula
-premise is required.
+Import `CircularLawSection6.VerifiedCorePressure`. The preferred endpoint is
+`CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv`.
+The comparison of
+[Bandeira, Boedihardjo and van Handel (2023)][bandeira-2023] is its only external
+literature premise, besides the stated profile and bandwidth assumptions.
+Both finite Section 4 pressure estimates are constructed for each actual
+clamped Gaussian core. Ginibre negative-moment tightness, logarithmic-potential
+and spectral limits are derived internally; no separate Gaussian limit,
+correlation-formula or pressure certificate is requested. The older two-field
+`gaussian_profile_circular_law_of_bbv_sources` API remains available.
 See the [exact input boundary and proof route](section6/BBV_ONLY_ENDPOINT.md).
 
 ### Section 7 — Local estimates used by the block argument
@@ -209,7 +216,7 @@ verbatim so that the documented imports and commands remain executable.
 | Deformed-square least-singular-value estimates: [Cook (2018)][cook-2018], Theorem 1.24, including the conditional versions used in the manuscript | Section 9 terminal/frame small-ball results and Section 8. |
 | Bottom-singular-value fixed-index and overcrowding estimates: [Nguyen (2018)][nguyen-2018], Theorem 1.4 | Section 9 interface control and Section 8. |
 | Paper Proposition 3.2, full-block least-singular-value estimate | Proposition 3.8 and, through it, Section 8. This is a retained result of this paper, not an external-paper citation. |
-| Two finite quantitative Section 4 pressure estimates, for calibration and the final ring | Concrete Section 5 endpoints; Section 6 requires them for each compact core. These remain endpoint hypotheses, not yet supplied by a closed Section 4-to-caller adapter. |
+| Two finite quantitative Section 4 pressure estimates, for calibration and the final ring | Still explicit at the real-density Section 5 and generic conditional interfaces. Constructed internally at the preferred complex-density Section 5 and Gaussian-profile Section 6 endpoints. |
 
 The table concerns the concrete endpoints described above; more general
 conditional APIs may expose additional intermediate inputs, as recorded in
@@ -255,8 +262,8 @@ required for a chapter change.
 | --- | --- | --- |
 | Section 3 | repository root | `lake build ShortRingAnchor` |
 | Section 4 | repository root | `lake build CircularLawSection4` |
-| Section 5 concrete endpoints | `section5/` | `lake build CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint` |
-| Section 6 Gaussian-profile endpoint | `section6/` | `lake build CircularLawSection6.BBVOnlyProfileEndpoint` |
+| Section 5 concrete endpoints | `section5/` | `lake build CircularLawSections56.Section5.VerifiedComplexSection5Endpoint` |
+| Section 6 Gaussian-profile endpoint | `section6/` | `lake build CircularLawSection6.VerifiedCorePressure` |
 | Section 8, general and Rademacher | repository root | `lake build SubgaussianSection8 BernoulliSection8` |
 | Section 9, algebra and small ball | repository root | `lake build BernoulliLinearAlgebra BernoulliSection9` |
 | Section 10, real and complex endpoints | repository root | `lake build BernoulliSection10Source` |

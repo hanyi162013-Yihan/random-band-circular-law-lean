@@ -1,5 +1,20 @@
 # Verified BBV-only Ginibre and concrete profile endpoint
 
+## Preferred endpoint: no caller-supplied pressure estimates
+
+`NoncompactProfile.gaussian_profile_circular_law_of_bbv`, in
+`CircularLawSection6/VerifiedCorePressure.lean`, constructs both compact-core
+pressure estimates from the proved Section 4/5 theorems. Only uniform BBV and
+the model's profile/bandwidth assumptions remain. The real-density Section 5
+and taper routes are not premises of this Gaussian endpoint.
+
+At `0b33ba4`, the ordinary build, all 841 axiom reports, three regression files
+and seventeen module kernel replays passed
+[run 33831340031](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33831340031).
+See [the exact certificate](../PRESSURE_INPUT_MIGRATION.md).
+
+## Preserved earlier source API
+
 **Current migration verified:** both `GaussianProfileBBVSources` and
 `GaussianProfileBBVCoreSources` now have exactly the two fields below.
 The core route uses the shared proved Section 5 Gaussian reference; the
@@ -16,7 +31,7 @@ The earlier independent BBV-only chain passed
 at `9d98ca87d112a240fc5b596d1a27801450b15cbe` on
 `codex/section6-formalization`, tree `9007110012caebaf30a10e2d1a3cc30efb44fe9b`.
 
-## Result and exact remaining inputs
+## Earlier result and exact source-record fields
 
 `NoncompactProfile.gaussian_profile_circular_law_of_bbv_sources`, in
 `CircularLawSection6/BBVOnlyProfileEndpoint.lean`, proves convergence in
@@ -33,8 +48,10 @@ no limit of bandwidth divided by dimension is assumed.
 | `bbv` | Uniform published BBV comparison from the existing concrete Section 3 interface |
 | `coreSection4` | Two finite quantitative Section 4 pressure estimates for each compact core |
 
-These are explicit hypotheses. This work does not reprove the BBV literature
-theorem or discharge the pre-given Section 4 estimates. The axiom audit does
+These are explicit hypotheses of this older API. The preferred endpoint above
+supplies `coreSection4` using `CoreRadiusBounds.verifiedConcreteSection4Input`;
+the record itself is preserved for compatibility. The BBV literature theorem
+is not reproved. The axiom audit does
 not turn hypotheses into theorems. There is no Han, BC12, separate Ginibre
 raw-log/spectral, or limiting squared-singular-test field in this bundle.
 Section 3 model, sample, density and anchor constructions use repository-root

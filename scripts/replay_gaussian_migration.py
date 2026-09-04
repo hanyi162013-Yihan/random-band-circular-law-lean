@@ -31,6 +31,8 @@ TARGETS = {
         "CircularLawSections56.Section5.PublishedSection3ConcreteRings",
         "CircularLawSections56.Section5.PublishedSection3ConcreteAnchors",
         "CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint",
+        "CircularLawSections56.Section5.VerifiedComplexPressureInputs",
+        "CircularLawSections56.Section5.VerifiedComplexSection5Endpoint",
     ],
     "section6": [
         "CircularLawSection6.GinibreReferenceSources",
@@ -49,6 +51,7 @@ TARGETS = {
         "CircularLawSection6.BBVCoreSources",
         "CircularLawSection6.BBVProfileEndpoint",
         "CircularLawSection6.BBVOnlyProfileEndpoint",
+        "CircularLawSection6.VerifiedCorePressure",
     ],
 }
 
