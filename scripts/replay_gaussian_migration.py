@@ -51,7 +51,16 @@ TARGETS = {
         "CircularLawSection6.BBVCoreSources",
         "CircularLawSection6.BBVProfileEndpoint",
         "CircularLawSection6.BBVOnlyProfileEndpoint",
+        "CircularLawSection6.WeightedCyclicPointwiseNonzero",
+        "CircularLawSection6.CutoffPointwiseExtension",
+        "CircularLawSection6.FixedScaleCoreBridgePointwise",
+        "CircularLawSection6.CanonicalCoreComparisonPointwise",
+        "CircularLawSection6.CoreNormalizationPointwise",
+        "CircularLawSection6.GaussianSandwichPointwise",
         "CircularLawSection6.VerifiedCorePressure",
+        "CircularLawSection6.FinitePrefixCoreBridgePointwise",
+        "CircularLawSection6.NoncompactReferenceMeanPointwise",
+        "CircularLawSection6.VerifiedPointwiseProfileEndpoint",
     ],
 }
 

@@ -19,6 +19,14 @@ simultaneously valid for every element of `ℂ`. At the generic Tao--Vu
 replacement boundary, `ae_of_all` converts the proved pointwise family into the
 almost-everywhere family required by that reusable interface.
 
+At `fba7f05`, the focused pointwise build and audits passed
+[run 33921454440](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33921454440):
+all 4589 dependency-inclusive targets, the BBV/Ginibre and pointwise axiom
+audits, and both focused regression files succeeded. The corresponding
+Section 5 fixed-shift endpoint passed its complete repository-layout build and
+axiom audit in
+[run 33916638215](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33916638215).
+
 At `0b33ba4`, the ordinary build, all 841 axiom reports, three regression files
 and seventeen module kernel replays passed
 [run 33831340031](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33831340031).
