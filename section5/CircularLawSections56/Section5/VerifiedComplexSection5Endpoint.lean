@@ -10,6 +10,7 @@ The older conditional endpoint remains available as a reusable assembly lemma.
 
 open MeasureTheory Filter Topology ShortRingAnchor
 open CircularLawSection4 CircularLawSection4.PaperIndicatorWeights
+open scoped ENNReal
 
 noncomputable section
 set_option autoImplicit false

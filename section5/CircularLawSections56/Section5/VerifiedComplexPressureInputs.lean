@@ -13,7 +13,7 @@ finite geometry. These statements also apply to the circular Gaussian atom law.
 
 open MeasureTheory Filter Topology
 open CircularLawSection4 CircularLawSection4.PaperIndicatorWeights
-open scoped BigOperators
+open scoped BigOperators ENNReal
 
 noncomputable section
 set_option autoImplicit false
@@ -33,7 +33,11 @@ theorem normalized_profile_lower_scale_le_one
         (fun s _ => (profile.q_pos hc₀ s).le) (Finset.mem_univ 0)
       _ = 1 := profile.normalized
   apply Real.sqrt_le_one.mpr
-  convert (profile.lower 0).trans hq using 1 <;> norm_num
+  have hden : ((d + 1 : ℕ) : ℝ) + 1 = (d + 2 : ℝ) := by
+    norm_num [Nat.cast_add, Nat.cast_one, add_assoc]
+  have hlow := profile.lower 0
+  rw [hden] at hlow
+  exact hlow.trans hq
 
 /-- Section 4 pressure concentration, transported to Section 5's actual full
 sample and its calibration suffix. The empty suffix is included. -/
@@ -53,7 +57,7 @@ theorem complex_literalModelPressure_inputs
       ∂iidMeasure ν ((k + 1) * (d + 2))) ≤
       Real.sqrt ((d + 2 : ℝ) * 2 * (m - (d + 1) : ℕ) *
         complexPaperPressureFiberL2Bound d c₀ L z) := by
-  letI := iidMeasure_isProbability ν ((k + 1) * (d + 2))
+  let := iidMeasure_isProbability ν ((k + 1) * (d + 2))
   have h := complex_literalPhysicalPressure_restriction_inputs
     (iidMeasure ν ((k + 1) * (d + 2))) d (m - (d + 1)) ν hν hL
     profile hc₀ hsqrt center z (literalCalibrationRows k d m)
@@ -98,10 +102,11 @@ theorem literalPressurePrefix_measurePreserving (k d m : ℕ) (hm : m ≤ k + 1)
     (ν : Measure ℂ) [IsProbabilityMeasure ν] :
     MeasurePreserving (literalPressurePrefix k d m hm)
       (iidMeasure ν ((k + 1) * (d + 2))) (iidMeasure ν (m * (d + 2))) := by
-  simpa only [literalPressurePrefix, iidMeasure_eq_pi] using
-    measurePreserving_pi_restrict_injective
-      (Fin.castLE (Nat.mul_le_mul_right (d + 2) hm))
-      (Fin.castLE_injective _) ν
+  unfold literalPressurePrefix
+  rw [iidMeasure_eq_pi, iidMeasure_eq_pi]
+  exact measurePreserving_pi_restrict_injective
+    (Fin.castLE (Nat.mul_le_mul_right (d + 2) hm))
+    (Fin.castLE_injective _) ν
 
 /-- The calibration suffix is exactly the suffix of the prefix matrix,
 not merely an equal-in-law replacement. -/
@@ -139,7 +144,7 @@ theorem complex_literalModelCalibrationRaw_seam
       paperIsolatedCoefficientLoss d c₀ + complexFreshNegativeBound d L +
         paperFreshPositiveBound d z := by
   have hmpos : 0 < m := by omega
-  letI : NeZero m := ⟨hmpos.ne'⟩
+  let : NeZero m := ⟨hmpos.ne'⟩
   have h := complex_paperIndicatorXSubZI_det_suffixPressure_absLog_seam_withDensity
     m d hd profile hc₀ hsqrt center hcenter z f hL hf hsecondInt hsecond
   let gap : (Fin (m * (d + 2)) → ℂ) → ℝ := fun ω =>

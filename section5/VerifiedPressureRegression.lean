@@ -7,6 +7,7 @@ open MeasureTheory Filter Topology ShortRingAnchor
 open CircularLawSection4 CircularLawSection4.PaperIndicatorWeights
 open CircularLawSections56.Section5 CircularLawSections56.Section6
 open CircularLawSections56.Section5.PublishedSection3Concrete
+open scoped ENNReal
 
 noncomputable section
 set_option autoImplicit false
