@@ -29,8 +29,8 @@ theorem gaussian_rawProfileLogDet_integrable_at (p : NoncompactProfile)
   have h := (gaussian_cyclic_memLp_and_variance_all N (p.weight N W)
     p.diagonalComparisonConstant_pos (r := 1) zero_lt_one z
     (p.diagonal_weight_ge N W)).1
-  simpa only [cyclicRawLogDet, rawProfileLogDet, matrix, gaussianProfileLaw,
-    Complex.ofReal_one, one_smul] using h.integrable (by norm_num)
+  refine (h.integrable (by norm_num)).congr (Filter.Eventually.of_forall fun ω => ?_)
+  simp [cyclicRawLogDet, rawProfileLogDet, matrix]
 
 theorem gaussian_rawCoreLogDet_integrable_at (p : NoncompactProfile)
     (N H : ℕ) [NeZero N] (W : ℝ) (z : ℂ) :
@@ -41,8 +41,8 @@ theorem gaussian_rawCoreLogDet_integrable_at (p : NoncompactProfile)
       p.diagonal_weight_ge N W
   have h := (gaussian_cyclic_memLp_and_variance_all N _
     p.diagonalComparisonConstant_pos (r := 1) zero_lt_one z hq).1
-  simpa only [cyclicRawLogDet, rawCoreLogDet, coreMatrix, gaussianProfileLaw,
-    Complex.ofReal_one, one_smul] using h.integrable (by norm_num)
+  refine (h.integrable (by norm_num)).congr (Filter.Eventually.of_forall fun ω => ?_)
+  simp [cyclicRawLogDet, rawCoreLogDet, coreMatrix]
 
 theorem gaussian_expected_tail_jensen_at (p : NoncompactProfile)
     (N H : ℕ) [NeZero N] (W : ℝ) (z : ℂ) :

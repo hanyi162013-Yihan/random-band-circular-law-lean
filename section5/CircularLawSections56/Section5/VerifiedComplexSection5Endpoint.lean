@@ -40,7 +40,7 @@ theorem indicator_complex_logPotential_at_of_bbv
       (fun n ω => physicalLogPotential
         (literalIndicatorMatrix n (d n) (center n) (profile n).b ω) z)
       (circularLogPotential z) := by
-  let : ∀ n, IsProbabilityMeasure
+  letI : ∀ n, IsProbabilityMeasure
       (iidMeasure (volume.withDensity f) ((n + 1) * (d n + 2))) :=
     fun n => iidMeasure_isProbability (volume.withDensity f) _
   have hg := centered_band_geometry d W center hwidth hcenter

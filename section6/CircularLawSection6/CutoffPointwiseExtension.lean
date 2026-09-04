@@ -32,7 +32,9 @@ theorem tendsto_zero_everywhere_of_ae_lipschitz
   have hδ : 0 < ε / (2 * (C + 1)) := div_pos hε hdenom
   obtain ⟨w, hw, hzw⟩ := hdense.exists_dist_lt z hδ
   have hwε := (Metric.tendsto_atTop.1 hw) (ε / 2) (half_pos hε)
-  filter_upwards [hwε] with n hn
+  obtain ⟨N, hN⟩ := hwε
+  refine ⟨N, fun n hnN => ?_⟩
+  have hn := hN n hnN
   rw [Real.dist_eq, sub_zero] at hn ⊢
   have hfirst : C * dist z w < ε / 2 := by
     calc
@@ -55,8 +57,12 @@ theorem hilbertSchmidtSq_smul_one (c : ℂ) :
     hilbertSchmidtSq (c • (1 : Matrix ι ι ℂ)) = ‖c‖ ^ 2 * (Fintype.card ι : ℝ) := by
   rw [hilbertSchmidtSq_smul]
   congr 1
+  have hentry (i j : ι) : ‖(if i = j then (1 : ℂ) else 0)‖ ^ 2 =
+      if i = j then (1 : ℝ) else 0 := by
+    split_ifs <;> norm_num
   unfold hilbertSchmidtSq
-  simp [Matrix.one_apply]
+  simp_rw [Matrix.one_apply, hentry]
+  simp
 
 /-- Expected positive-cutoff potentials are Lipschitz in the scalar shift.
 The nonsingularity assumption is pointwise in the shift and almost sure only
