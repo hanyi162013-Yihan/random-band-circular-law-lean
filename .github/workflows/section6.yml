@@ -81,9 +81,11 @@ jobs:
             lake --no-cache build CircularLawSection6.GinibreFiniteFormulaSources 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true DenseGinibreAudit.lean 2>&1 | tee verification-ci/axioms.log
           elif [[ "$BBV_INTERFACE_ONLY" == "true" ]]; then
-            lake --no-cache build CircularLawSection6.BBVOnlyProfileEndpoint 2>&1 | tee verification-ci/build.log
+            lake --no-cache build CircularLawSection6.BBVOnlyProfileEndpoint CircularLawSection6.VerifiedPointwiseProfileEndpoint CircularLawSection6.CoreNormalizationPointwise 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true BBVGinibreAudit.lean 2>&1 | tee verification-ci/axioms.log
             lake --no-cache env lean -DwarningAsError=true BBVOnlyRegression.lean 2>&1 | tee verification-ci/bbv-regression.log
+            lake --no-cache env lean -DwarningAsError=true PointwiseAxiomAudit.lean 2>&1 | tee verification-ci/pointwise-axioms.log
+            lake --no-cache env lean -DwarningAsError=true PointwiseRegression.lean 2>&1 | tee verification-ci/pointwise-regression.log
           else
             lake --no-cache build CircularLawSection6 2>&1 | tee verification-ci/build.log
             lake --no-cache env lean -DwarningAsError=true AxiomAudit.lean 2>&1 | tee verification-ci/axioms.log

@@ -57,6 +57,9 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSection6.canonical_floor_core_eventually_fits
 #print axioms CircularLawSection6.NoncompactProfile.canonical_core_paper_weights
 
+-- CanonicalCoreComparisonPointwise.lean
+#print axioms CircularLawSection6.CoreRadiusBounds.canonical_core_cutoff_comparison_of_bbv_at
+
 -- CanonicalCoreLimits.lean
 #print axioms CircularLawSection6.NoncompactProfile.canonical_core_raw_mean_of_section5
 #print axioms CircularLawSection6.NoncompactProfile.gaussian_core_cutoff_normalization_error
@@ -152,6 +155,9 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSection6.NoncompactProfile.sum_coreBandWeight
 #print axioms CircularLawSection6.NoncompactProfile.unitCoreMatrix_eq_paperIndicatorX
 
+-- CoreNormalizationPointwise.lean
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_core_cutoff_normalization_error_at
+
 -- CoupledCdfComparison.lean
 #print axioms CircularLawSection6.integral_comp_of_measurePreserving_aes
 #print axioms CircularLawSection6.matrixCutoff_expectation_difference_of_coupled_cdf
@@ -166,6 +172,11 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSection6.continuousOn_matrixCutoffPotential
 #print axioms CircularLawSection6.measurable_goodMatrixCutoffPotential
 #print axioms CircularLawSection6.aestronglyMeasurable_matrixCutoffPotential
+
+-- CutoffPointwiseExtension.lean
+#print axioms CircularLawSection6.tendsto_zero_everywhere_of_ae_lipschitz
+#print axioms CircularLawSection6.hilbertSchmidtSq_smul_one
+#print axioms CircularLawSection6.expected_matrixCutoff_shift_lipschitz
 
 -- CutoffReindexing.lean
 #print axioms CircularLawSection6.toEuclideanLin_reindex
@@ -275,11 +286,21 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 -- FinitePrefixCoreBridge.lean
 #print axioms CircularLawSection6.NoncompactProfile.canonical_core_raw_mean_of_eventual_section5
 
+-- FinitePrefixCoreBridgePointwise.lean
+#print axioms CircularLawSection6.NoncompactProfile.canonical_core_raw_mean_of_eventual_section5_at
+#print axioms CircularLawSection6.CoreRadiusBounds.verifiedToCanonicalPointwise
+
 -- FixedScaleCoreBridge.lean
 #print axioms CircularLawSection6.ae_div_real
 #print axioms CircularLawSection6.NoncompactProfile.scaledUnitCoreMean_eq_log_add_ae
 #print axioms CircularLawSection6.NoncompactProfile.scaledUnitCore_mean_of_section5
 #print axioms CircularLawSection6.NoncompactProfile.rawCore_mean_of_section5
+
+-- FixedScaleCoreBridgePointwise.lean
+#print axioms CircularLawSection6.NoncompactProfile.scaledUnitCoreMean_eq_log_add
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_core_raw_mean_of_fixed_scales_at
+#print axioms CircularLawSection6.NoncompactProfile.scaledUnitCore_mean_of_section5_at
+#print axioms CircularLawSection6.NoncompactProfile.rawCore_mean_of_section5_at
 
 -- FlexibleCompactSourceAssembly.lean
 #print axioms CircularLawSection6.one_or_fullBlock_cutoff_limit_of_section3_inputs_ae
@@ -352,6 +373,15 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSection6.NoncompactProfile.scaledUnitCoreMean_monotoneOn
 #print axioms CircularLawSection6.NoncompactProfile.rawCoreMean_eq_scaledUnitCoreMean
 #print axioms CircularLawSection6.NoncompactProfile.gaussian_core_raw_mean_of_fixed_scales
+
+-- GaussianSandwichPointwise.lean
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_rawProfileLogDet_integrable_at
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_rawCoreLogDet_integrable_at
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_expected_tail_jensen_at
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_expected_tail_cutoff_at
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_expected_core_full_cutoff_sandwich_at
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_unitCore_cutoff_scaling_at
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_expected_unitCore_upper_at
 
 -- GaussianTailCutoff.lean
 #print axioms CircularLawSection6.NoncompactProfile.shifted_full_sub_core
@@ -708,6 +738,11 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSection6.NoncompactProfile.referenceCoreCutoff_le_one
 #print axioms CircularLawSection6.NoncompactProfile.referenceCoreCutoff_tendsto_zero
 #print axioms CircularLawSection6.NoncompactProfile.sparse_profile_mean_of_core_and_reference_inputs
+
+-- NoncompactReferenceMeanPointwise.lean
+#print axioms CircularLawSection6.ginibre_iterated_cutoff_error_of_bbv_at
+#print axioms CircularLawSection6.NoncompactProfile.sparse_profile_mean_of_bbv_section5_at
+#print axioms CircularLawSection6.NoncompactProfile.sparse_profile_probability_of_bbv_section5_at
 
 -- NormalizedConcentration.lean
 #print axioms CircularLawSection6.integral_abs_centered_le_sqrt_variance
@@ -1157,8 +1192,24 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSection6.ae_tendsto_varying_radius_of_countable_dense
 
 -- VerifiedCorePressure.lean
+#print axioms CircularLawSection6.CoreRadiusBounds.verifiedClampedLogPotential_at
 #print axioms CircularLawSection6.CoreRadiusBounds.verifiedConcreteSection4Input
 #print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv
+
+-- VerifiedPointwiseProfileEndpoint.lean
+#print axioms CircularLawSection6.tendstoInProbabilityTri_of_every_subsequence_has_further
+#print axioms CircularLawSection6.tendstoInProbabilityTri_of_sparse_dense_subsequences
+#print axioms CircularLawSection6.NoncompactProfile.profile_probability_along_sparse_subsequence_of_bbv_at
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_logPotential_of_bbv
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_pointwise_bbv
+
+-- WeightedCyclicPointwiseNonzero.lean
+#print axioms CircularLawSection6.eval_weightedCyclicShiftedDetPolynomial
+#print axioms CircularLawSection6.weightedCyclicShiftedDetPolynomial_ne_zero
+#print axioms CircularLawSection6.weightedCyclicMatrix_shifted_det_ne_zero
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_det_nonzero
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_core_det_nonzero
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_unitCore_det_nonzero
 
 -- WeightedSpectralCoupling.lean
 #print axioms CircularLawSection6.weighted_abs_difference_le_sqrt

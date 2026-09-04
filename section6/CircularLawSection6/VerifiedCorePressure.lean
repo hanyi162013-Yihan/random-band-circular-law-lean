@@ -21,6 +21,44 @@ set_option warningAsError true
 namespace CircularLawSection6
 namespace CoreRadiusBounds
 
+/-- The constructed complex-density Section 5 theorem at one prescribed
+spectral parameter.  This is the pointwise counterpart of the historical
+`Section34Input.logPotential` route; it uses the same BBV literature input but
+does not pass through an almost-everywhere wrapper. -/
+theorem verifiedClampedLogPotential_at {p : NoncompactProfile} {R : ℝ}
+    (B : CoreRadiusBounds p R) (W : ℕ → ℝ) (hR : 0 < R)
+    (hWlim : Tendsto W atTop atTop) (hBBV : BBVComparisonInput) (z : ℂ) :
+    TendstoInProbabilityTri (clampedCoreSampleLaw R W)
+      (fun n ω => physicalLogPotential (literalIndicatorMatrix n (clampedCoreBand R W n)
+        (clampedCoreCenter R W n) (B.clampedWeights (W n) n).b ω) z)
+      (circularRadialPotential ‖z‖) := by
+  let H := fun n => clampedCoreHalfWidth R (W n) n
+  have hfit : ∀ᶠ n in atTop, clampedCoreBand R W n + 2 ≤ n + 1 := by
+    filter_upwards [eventually_ge_atTop 2] with n hn
+    exact (canonicalCoreBand_width (clampedCoreHalfWidth_pos R (W n) n)).trans_le
+      (clampedCoreHalfWidth_fits R (W n) hn)
+  have hwidth (n : ℕ) : clampedCoreBand R W n + 2 = 2 * H n + 1 := by
+    have h := canonicalCoreCenter_symmetric (clampedCoreHalfWidth_pos R (W n) n)
+    dsimp only [clampedCoreBand, H] at h ⊢
+    omega
+  have hcenter (n : ℕ) : (clampedCoreCenter R W n).val = H n := rfl
+  have hMom : AtomMomentAssumption21
+      (volume.withDensity circularGaussianDensity) id := by
+    rw [circularGaussianDensity_withDensity]
+    exact PublishedSection3Concrete.gaussianMoments
+  have h := PublishedSection3Concrete.indicator_complex_logPotential_at_of_bbv hBBV
+    (clampedCoreBand R W) H (clampedCoreCenter R W)
+    (fun n => B.clampedWeights (W n) n) circularGaussianDensity
+    coreSection5Delta coreSection5Gamma (div_pos B.lower_pos B.upper_pos)
+    (by norm_num : (0 : ℝ) ≤ 2)
+    (by norm_num [coreSection5Delta])
+    (by norm_num [coreSection5Delta, coreSection5Gamma])
+    (by norm_num [coreSection5Gamma])
+    (clampedCoreHalfWidth_atTop W hWlim hR) hfit hwidth hcenter
+    (by simpa only [ENNReal.ofReal_ofNat] using circularGaussianDensity_le_two)
+    hMom z
+  simpa only [clampedCoreSampleLaw, circularGaussianDensity_withDensity] using h
+
 /-- Section 6 compact-core application of the proved Section 4 density estimates.
 Both the calibration and full-size pressure contracts are constructed here. -/
 theorem verifiedConcreteSection4Input {p : NoncompactProfile} {R : ℝ}
