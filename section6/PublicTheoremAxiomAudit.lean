@@ -1156,6 +1156,10 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSection6.tendsto_varying_radius_of_monotone_dense
 #print axioms CircularLawSection6.ae_tendsto_varying_radius_of_countable_dense
 
+-- VerifiedCorePressure.lean
+#print axioms CircularLawSection6.CoreRadiusBounds.verifiedConcreteSection4Input
+#print axioms CircularLawSection6.NoncompactProfile.gaussian_profile_circular_law_of_bbv
+
 -- WeightedSpectralCoupling.lean
 #print axioms CircularLawSection6.weighted_abs_difference_le_sqrt
 #print axioms CircularLawSection6.sum_difference_eq_weighted

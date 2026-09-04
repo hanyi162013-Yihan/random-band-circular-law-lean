@@ -48,8 +48,8 @@ AUDITS = {
 REGRESSIONS = {
     "root": ["Section8/PublicSignatureAudit.lean", "SubgaussianSection8/PublicSignatureAudit.lean",
              "Section10/BernoulliSection10Source/DensitySchemaAudit.lean"],
-    "section5": [],
-    "section6": ["Regression.lean", "BBVOnlyRegression.lean"],
+    "section5": ["VerifiedPressureRegression.lean"],
+    "section6": ["Regression.lean", "BBVOnlyRegression.lean", "VerifiedPressureRegression.lean"],
 }
 
 
