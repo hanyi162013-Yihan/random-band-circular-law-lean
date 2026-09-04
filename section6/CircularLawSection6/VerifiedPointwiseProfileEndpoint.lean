@@ -87,6 +87,8 @@ theorem profile_probability_along_sparse_subsequence_of_bbv_at (p : NoncompactPr
     apply (hsparse.comp (tendsto_add_atTop_nat 1)).congr'
     apply Eventually.of_forall
     intro n
+    change W (φ (n + 1)) / (φ (n + 1) + 1 : ℕ) =
+      W (φ (n + 1)) / (subsequenceCoreSize φ n + 2 : ℕ)
     rw [subsequenceCoreSize_dimension φ hφ n]
   have hSection5 (R : ℕ) : p.CanonicalCoreSection5InputPointwise
       (subsequenceCoreSize φ) (fun n => W (φ (n + 1))) (R + 1) :=
