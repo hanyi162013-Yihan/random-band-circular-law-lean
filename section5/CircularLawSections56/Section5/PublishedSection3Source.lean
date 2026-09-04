@@ -23,7 +23,7 @@ namespace CircularLawSections56.Section5
 variable {Ω : Type*} [MeasurableSpace Ω]
 variable {μ : Measure Ω} {νA νG : Measure ℂ}
 variable [IsProbabilityMeasure μ] [IsProbabilityMeasure νA] [IsProbabilityMeasure νG]
-variable {M W : ℕ → ℕ} [∀ n, Nonempty (Fin (M n))] {c₀ C₀ : ℝ}
+variable {M W : ℕ → ℕ} {c₀ C₀ : ℝ}
 
 /-- Fixed-law ensemble data for the actual cyclic and normalized dense models.
 No independence across different dimensions or between the two models is required. -/
@@ -117,6 +117,8 @@ theorem Sources.ginibre_local_comparison
   simpa [spectralParameter, localBulkHeight] using
     Real.rpow_pos_of_pos (by exact_mod_cast D.dimension_pos n : (0 : ℝ) < M n)
       (-(localBulkEffectiveExponent (v3BandwidthExponent h.omega / 2) / 16))
+
+variable [∀ n, Nonempty (Fin (M n))]
 
 theorem Sources.planar_conclusion
     (D : PublishedSection3Model μ νA νG M W c₀ C₀) (z : ℂ) (h : D.Sources z)
