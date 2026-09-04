@@ -1,5 +1,5 @@
 import CircularLawSection6.BBVOnlyProfileEndpoint
-import CircularLawSections56.Section5.VerifiedComplexPressureInputs
+import CircularLawSections56.Section5.VerifiedComplexSection5Endpoint
 
 /-! # Constructing the Gaussian compact-core pressure inputs
 
@@ -9,7 +9,7 @@ seam and pressure estimates can therefore be assembled without any external
 pressure premise. The final profile theorem below retains only uniform BBV.
 -/
 
-open MeasureTheory Filter Topology TaoVuReplacement
+open MeasureTheory Filter Topology TaoVuReplacement ShortRingAnchor
 open CircularLawSection4
 open CircularLawSections56.Section5 CircularLawSections56.Section6
 open CircularLawSections56.Section5.PublishedSection3Concrete (BBVComparisonInput)
@@ -38,9 +38,8 @@ theorem verifiedClampedLogPotential_at {p : NoncompactProfile} {R : ℝ}
     exact (canonicalCoreBand_width (clampedCoreHalfWidth_pos R (W n) n)).trans_le
       (clampedCoreHalfWidth_fits R (W n) hn)
   have hwidth (n : ℕ) : clampedCoreBand R W n + 2 = 2 * H n + 1 := by
-    have h := canonicalCoreCenter_symmetric (clampedCoreHalfWidth_pos R (W n) n)
-    dsimp only [clampedCoreBand, H] at h ⊢
-    omega
+    simpa only [clampedCoreBand, H] using
+      canonicalCoreBand_width (clampedCoreHalfWidth_pos R (W n) n)
   have hcenter (n : ℕ) : (clampedCoreCenter R W n).val = H n := rfl
   have hMom : AtomMomentAssumption21
       (volume.withDensity circularGaussianDensity) id := by

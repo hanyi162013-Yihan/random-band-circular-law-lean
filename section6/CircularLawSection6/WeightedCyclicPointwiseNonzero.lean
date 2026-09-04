@@ -40,7 +40,10 @@ theorem eval_weightedCyclicShiftedDetPolynomial
   rw [RingHom.map_det]
   congr 1
   ext i j
-  simp [weightedCyclicPolynomialMatrix, weightedCyclicMatrix]
+  by_cases hij : i = j
+  · subst j
+    simp [weightedCyclicPolynomialMatrix, weightedCyclicMatrix]
+  · simp [weightedCyclicPolynomialMatrix, weightedCyclicMatrix, hij]
 
 theorem weightedCyclicShiftedDetPolynomial_ne_zero
     (N : ℕ) [NeZero N] (q : ZMod N → ℝ) (hq : 0 < q 0) (z : ℂ) :
