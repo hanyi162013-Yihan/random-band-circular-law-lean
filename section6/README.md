@@ -21,6 +21,8 @@ The pointwise theorem does not remove a null subset of spectral parameters.
 It also does not assert a single sample event that works simultaneously for all
 uncountably many `z`; the replacement boundary obtains its required planar-a.e.
 family by applying `ae_of_all` to the fixed-shift result.
+The exact all-project build, public-axiom audit and kernel-replay evidence is in
+the [fixed-shift verification certificate](../POINTWISE_Z_VERIFICATION.md).
 
 The endpoint's only external
 literature premise is uniform BBV, besides the stated deterministic profile

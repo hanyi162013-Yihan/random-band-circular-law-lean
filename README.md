@@ -24,6 +24,10 @@ The later [pressure-input construction](PRESSURE_INPUT_MIGRATION.md) has its own
 verification evidence. It removes both finite pressure hypotheses from the
 complex-density Section 5 endpoint and the Gaussian-profile Section 6 endpoint;
 the earlier Gaussian-migration certificate retains its original scope.
+The subsequent [fixed-shift verification](POINTWISE_Z_VERIFICATION.md) records
+the everywhere-`z` logarithmic-potential endpoints, their exact remaining
+interface, and the final cross-project build, axiom-audit and kernel-replay
+evidence.
 
 ## Results in paper order
 
