@@ -1,23 +1,48 @@
 # General subgaussian Section 8
 
-Verified extension of the Rademacher specialization to every fixed real IID law with mean zero, second moment one and a finite subgaussian MGF parameter. No bounded-support, symmetry or density hypothesis is imposed. Cook and Nguyen remain explicit external inputs. Proposition 3.8 is now constructed from the concrete Section 3 proof under its existing named literature inputs; see [the integration record](../Section8/SECTION3_INTEGRATION.md).
+This library proves logarithmic-potential convergence and the circular law for
+every fixed real IID atom law with mean zero, second moment one and a finite
+subgaussian MGF parameter. Bounded support, symmetry and density are not required.
 
-The final results are `SubgaussianSection8.section8_subgaussian_log_potential` and `SubgaussianSection8.section8_subgaussian_circular_law` in [Results.lean](Results.lean). For the exact cyclic-band dimension `N=(s+3)W`, they assume positive widths and core-site counts, `W → ∞` and `W/log N → ∞`. The circular-law result covers every bounded continuous real test function on the complex plane. The quantitative Cook and Nguyen ranges must cover the fixed atom parameter.
+## Public endpoints and assumptions
 
-This library belongs to the root Lake project of `random-band-circular-law-lean`. [PR #1](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/pull/1) integrates both the verified Rademacher specialization and this general extension into `main`. Development uses a separate local checkout on `codex/section8-subgaussian`. It extends verified Rademacher commit `24a1e37550a7e471bec4bb668ce4bde92fae3cbb`; existing Section 4/8/9/10 and vendor source files are unchanged by the extension.
+Import `SubgaussianSection8`. The results in [Results.lean](Results.lean) are:
 
-## Verification
+| Theorem | Conclusion |
+| --- | --- |
+| `section8_subgaussian_log_potential` | Normalized log-determinant convergence in probability for every fixed complex shift |
+| `section8_subgaussian_circular_law` | Circular empirical spectral convergence against every bounded continuous real test function |
 
-The Section 3 integration passed its [separate cloud gate](../Section8/SECTION3_INTEGRATION.md) at `b6c379836fcc6cf166881768d1a0ad6782c5c552`: both Section 8 targets, 56 combined axiom reports, and both compiled public signatures. The new bridge uses default proof-checking limits. The following records the earlier baseline.
+The actual normalized full-block ring has dimension `N = (s + 3)W`.
+The assumptions include positive widths and core-site counts, `W → ∞` and
+`W / log N → ∞`.
 
-Proof-source commit: `d29fd6f0cefcaa4ec3afe09f14c54df3e16842d4`.
+The external estimates are Cook's deformed-square least-singular-value bounds
+and Nguyen's bottom-singular-value bounds, with quantitative ranges covering
+the fixed atom parameter. The high-band anchor is proved by the concrete
+Section 3 Proposition 3.8, using its Proposition 3.2, Cook Theorem 1.12 and BBV
+comparison inputs. The proof constructs the Gaussian reference law, pressure,
+reset, seam and energy estimates internally.
 
-[Successful GitHub Actions run](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33688229894/job/100440674643) completed on 2026-09-02:
+See the [proof map](STATUS.md), the
+[Section 3 connection](../Section8/SECTION3_INTEGRATION.md), and the
+[Rademacher specialization](../Section8/README.md).
 
-- All 32 new modules and the normal `lake build SubgaussianSection8` target passed.
-- The selected import closure contains zero Section 4 modules.
-- All 34 extension files, including both audit files, passed the placeholder scan.
-- All 13 strict axiom reports contain only `propext`, `Classical.choice`, and `Quot.sound`.
-- Compiled public signatures expose only the ordinary distribution and bandwidth conditions and the approved external inputs. No pressure, reset, seam, energy or reference-ensemble certificate is required.
+## Build and verification
 
-CI restores available integration and Section 3 artifacts, then builds only the two explicit Section 8 targets and their actual imports. See [STATUS.md](STATUS.md) for the proof map.
+This is a library in the root Lake project. With the pinned dependencies
+available, run from the repository root:
+
+```sh
+lake build SubgaussianSection8 BernoulliSection8
+python3 scripts/check_axioms.py --audit-file SubgaussianSection8/AxiomAudit.lean
+lake env lean SubgaussianSection8/PublicSignatureAudit.lean
+python3 scripts/check_placeholders.py --path SubgaussianSection8
+```
+
+[GitHub Actions](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/workflows/lean.yml)
+builds the two Section 8 targets and their actual imports, then audits the
+public conclusions and Section 3 connection. The
+[verification certificate](../POINTWISE_Z_VERIFICATION.md) records the
+cross-project checks. Transitive axiom reports permit only `propext`,
+`Classical.choice` and `Quot.sound`.

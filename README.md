@@ -6,28 +6,11 @@ periodic profile and discrete law*](https://arxiv.org/abs/2609.01295).
 
 This repository contains checked proof chains for the paper's high-band
 estimates, transfer and small-ball tools, and several circular-law conclusions.
-The guide below follows the paper's section order and describes the public
-interfaces in this checkout, subject to the migration status below.
-It does **not** claim a complete formalization of every
-statement in the paper. Exact hypotheses, quantitative variants and coverage
-are recorded in the linked theorem maps and Lean declarations. Several endpoints
-remain conditional on the [explicit mathematical inputs listed below](#inputs-still-assumed-at-public-interfaces).
-
-**Verified Gaussian-source migration:** removal of external Gaussian inputs from
-Sections 5, 6, 8 and 10 is tracked in
-[GAUSSIAN_INPUT_MIGRATION.md](GAUSSIAN_INPUT_MIGRATION.md).
-Section 3 and the later root/Section 5/Section 6 source-record reductions have
-passed their cloud checks, including the Section 8/10 endpoints: 3327 axiom
-reports, public-call regressions and 29 module kernel replays. See the
-[exact commits and verification evidence](GAUSSIAN_MIGRATION_VERIFICATION.md).
-The later [pressure-input construction](PRESSURE_INPUT_MIGRATION.md) has its own
-verification evidence. It removes both finite pressure hypotheses from the
-complex-density Section 5 endpoint and the Gaussian-profile Section 6 endpoint;
-the earlier Gaussian-migration certificate retains its original scope.
-The subsequent [fixed-shift verification](POINTWISE_Z_VERIFICATION.md) records
-the everywhere-`z` logarithmic-potential endpoints, their exact remaining
-interface, and the final cross-project build, axiom-audit and kernel-replay
-evidence.
+The guide follows the paper's section order. Each result is proved under its
+explicit model assumptions and the [mathematical inputs listed below](#mathematical-inputs).
+The linked theorem maps and Lean declarations specify the exact hypotheses,
+quantitative variants and coverage; the repository covers the results described
+here, rather than every statement of the paper.
 
 ## Results in paper order
 
@@ -47,10 +30,10 @@ conclusion in place of these proofs.
 - Proposition 3.8: fixed real centered, variance-one subgaussian atoms,
   including discrete laws, for the three-neighbor full-block ring.
 - Both give the normalized shifted log-determinant limit for every fixed
-  complex shift, subject to their explicit inputs below. Their
-  `proposition36_cyclicShortRing_withoutBC12` and
-  `Proposition38.proposition38_withoutBC12` endpoints construct the Gaussian
-  negative moment and log limit from the proved Ginibre source and BBV.
+  complex shift. Gaussian negative moments and the reference log limit are
+  constructed from the proved Ginibre source and BBV. The concrete proofs are in
+  [Proposition36VerifiedGinibre.lean](section3/ShortRingAnchor/Proposition36VerifiedGinibre.lean)
+  and [VerifiedGinibre.lean](section3/ShortRingAnchor/Proposition38/VerifiedGinibre.lean).
 
 See the [density endpoint map](section3/HIGH_BAND_INTEGRATION.md) and
 [Proposition 3.8 statement and assumptions](section3/PROPOSITION38.md).
@@ -90,8 +73,8 @@ determinant/pressure and concentration contracts are constructed from the proved
 Section 4 estimates on the actual matrix sample space. BBV is its only external
 literature premise; constants may depend on any fixed complex shift.
 
-The real endpoint `indicator_real_full_of_published_literature` remains in
-`PublishedSection3ConcreteEndpoint`. It still retains two finite pressure
+The real endpoint `indicator_real_full_of_published_literature` is in
+`PublishedSection3ConcreteEndpoint`. It takes two finite pressure
 inputs and real geometric Brascamp–Lieb, in addition to BBV. Both branches
 construct their Gaussian reference estimates internally.
 Broader taper and varying-atom results are available with their documented
@@ -102,14 +85,14 @@ cover taper profiles whose lower bounds vanish. See the
 
 ### Section 6 — Gaussian noncompact profiles
 
-[`section6/`](section6/BBV_ONLY_ENDPOINT.md) proves the circular-law endpoint
+[`section6/`](section6/README.md) proves the circular-law endpoint
 for the actual normalized Gaussian cyclic matrices with a strictly positive,
 continuous, integrable profile of bounded variation and integral one.
 The bandwidth is positive and tends to infinity; its ratio to the dimension
 need not converge. The public statement uses every continuous compactly
 supported real test function on the complex plane.
 
-Import `CircularLawSection6.VerifiedPointwiseProfileEndpoint`. The preferred
+Import `CircularLawSection6.VerifiedPointwiseProfileEndpoint`. The
 logarithmic-potential endpoint is
 `CircularLawSection6.NoncompactProfile.gaussian_profile_logPotential_of_bbv`:
 for every prescribed `z : ℂ`, the normalized shifted log determinant converges
@@ -120,17 +103,14 @@ The comparison of
 literature premise, besides the stated profile and bandwidth assumptions.
 Both finite Section 4 pressure estimates are constructed for each actual
 clamped Gaussian core. Ginibre negative-moment tightness, logarithmic-potential
-and spectral limits are derived internally; no separate Gaussian limit,
-correlation-formula or pressure certificate is requested. The older two-field
-`gaussian_profile_circular_law_of_bbv_sources` API remains available.
-See the [exact input boundary and proof route](section6/BBV_ONLY_ENDPOINT.md).
+and spectral limits are derived internally. See the
+[input boundary and proof route](section6/README.md).
 
-Here and in Sections 3, 8 and 10, “every prescribed `z`” means a pointwise
-theorem whose caller may choose any finite complex shift. It is stronger than
-an almost-everywhere-in-`z` endpoint, but it does not assert one probability-one
-sample event that works simultaneously for the uncountable set `ℂ`. The general
-Tao--Vu replacement interface still asks for an almost-everywhere family; the
-pointwise theorem supplies it there via `ae_of_all`.
+In these logarithmic-potential statements, convergence in probability holds
+separately for each prescribed `z : ℂ`, with constants allowed to depend on `z`.
+This does not assert a common probability-one event for all complex shifts.
+The pointwise family supplies the almost-everywhere hypothesis of the general
+Tao–Vu replacement theorem via `ae_of_all`.
 
 ### Section 7 — Local estimates used by the block argument
 
@@ -206,7 +186,7 @@ Actual matrix laws, Section 3 applications, counting, Gaussian reference,
 pressure and replacement steps are connected internally. The comparison of
 [Bandeira, Boedihardjo and van Handel (2023)][bandeira-2023] remains
 an explicit input. The literal Gaussian law, negative moment and log limit
-are constructed internally, without a BC12 premise. Real atoms additionally require the geometric form of the
+are constructed internally. Real atoms additionally require the geometric form of the
 [Brascamp–Lieb inequality (1976)][brascamp-1976].
 Directional conditional-density, heterogeneous-law and general
 finite-`(2+α)`-moment extensions are not included in these endpoints.
@@ -214,7 +194,7 @@ See the [real map](Section10/FORMALIZATION_MAP.md),
 [complex map](Section10/COMPLEX_FORMALIZATION_MAP.md), and
 [source-connection audit](Section10/SOURCE_CONNECTION_AUDIT.md).
 
-## Inputs still assumed at public interfaces
+## Mathematical inputs
 
 The following are mathematical hypotheses, not custom Lean axioms.
 Ordinary model conditions—independence, normalization, moments, density,
@@ -225,27 +205,23 @@ Author–year citations link to the literature; full bibliographic details appea
 in [References](#references). Lean module and theorem identifiers are preserved
 verbatim so that the documented imports and commands remain executable.
 
-| Undischarged input | Where it is required |
+| Input | Where it is required |
 | --- | --- |
 | Canonical Gaussian/free comparison: [Bandeira, Boedihardjo and van Handel (2023)][bandeira-2023], Theorem 2.8 | Section 3 anchors and the public Section 5, 6, 8 and 10 endpoints. |
-| Real geometric Brascamp–Lieb inequality: [Brascamp and Lieb (1976)][brascamp-1976] | Real-density branches of Proposition 3.6, Section 5 and Section 10; not the planar or discrete-subgaussian branches. |
+| Real geometric Brascamp–Lieb inequality: [Brascamp and Lieb (1976)][brascamp-1976] | Real-density branches of Proposition 3.6, Section 5 and Section 10; also explicit in the general Section 3 density-alternative wrapper. Specialized planar and discrete-subgaussian routes use their own inputs. |
 | Structured-matrix least-singular-value estimate: [Cook (2018)][cook-2018], Theorem 1.12, with its norm guard | Proposition 3.8 and, through that anchor, Section 8. |
 | Deformed-square least-singular-value estimates: [Cook (2018)][cook-2018], Theorem 1.24, including the conditional versions used in the manuscript | Section 9 terminal/frame small-ball results and Section 8. |
 | Bottom-singular-value fixed-index and overcrowding estimates: [Nguyen (2018)][nguyen-2018], Theorem 1.4 | Section 9 interface control and Section 8. |
 | Paper Proposition 3.2, full-block least-singular-value estimate | Proposition 3.8 and, through it, Section 8. This is a retained result of this paper, not an external-paper citation. |
-| Two finite quantitative Section 4 pressure estimates, for calibration and the final ring | Still explicit at the real-density Section 5 and generic conditional interfaces. Constructed internally at the preferred complex-density Section 5 and Gaussian-profile Section 6 endpoints. |
+| Two finite quantitative Section 4 pressure estimates, for calibration and the final ring | Explicit at the real-density Section 5 and generic conditional interfaces. Constructed internally at the complex-density Section 5 and Gaussian-profile Section 6 endpoints. |
 
-The table concerns the concrete endpoints described above; more general
-conditional APIs may expose additional intermediate inputs, as recorded in
-their chapter maps. The former BC12/Ginibre parameters are now constructed
-at concrete call sites from the pinned
+The table concerns the concrete endpoints described above. General conditional
+APIs expose their intermediate inputs in their chapter maps and declarations.
+The pinned
 [Ginibre proof dependency](https://github.com/hanyi162013-Yihan/ginibre-correlation-identities-lean)
-and BBV. The migration includes the adapters, not just an unused import;
-chapter-by-chapter verification status is in the migration notice above.
-Historical conditional APIs for squared-singular-law tests and Han's dense
-Gaussian theorem remain available, but are not required by the preferred
-Section 6 BBV-only endpoint. The full limiting squared-singular law is not
-claimed as a new theorem of this migration.
+derives the finite Gaussian spectral law and correlation identities from
+independent complex Gaussian entries. The chapter proofs construct the
+Gaussian reference estimates they use from this source and BBV.
 
 The replacement principle of [Tao and Vu (2010)][tao-vu-2010], Theorem 2.1,
 is a [proved source dependency](vendor/tao-vu-replacement/), not a remaining
@@ -280,7 +256,7 @@ required for a chapter change.
 | Section 3 | repository root | `lake build ShortRingAnchor` |
 | Section 4 | repository root | `lake build CircularLawSection4` |
 | Section 5 concrete endpoints | `section5/` | `lake build CircularLawSections56.Section5.VerifiedComplexSection5Endpoint` |
-| Section 6 Gaussian-profile endpoint | `section6/` | `lake build CircularLawSection6.VerifiedCorePressure` |
+| Section 6 Gaussian-profile endpoint | `section6/` | `lake build CircularLawSection6.VerifiedPointwiseProfileEndpoint` |
 | Section 8, general and Rademacher | repository root | `lake build SubgaussianSection8 BernoulliSection8` |
 | Section 9, algebra and small ball | repository root | `lake build BernoulliLinearAlgebra BernoulliSection9` |
 | Section 10, real and complex endpoints | repository root | `lake build BernoulliSection10Source` |
@@ -299,22 +275,22 @@ regression proofs. Released proofs contain no `sorry`, `admit` or custom
 mathematical axioms. Audits allow only the three standard Lean foundations
 listed above; the explicit mathematical hypotheses remain visible.
 
-For precise checked source revisions and reproducible audit commands, see:
+Builds, public-signature checks, axiom audits and selected kernel replays are
+recorded in the [verification certificate](POINTWISE_Z_VERIFICATION.md).
+The [GitHub Actions page](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions)
+provides the build logs. Chapter-specific coverage and audit commands are in:
 
 - Section 3: [density integration](section3/HIGH_BAND_INTEGRATION.md) and
   [Proposition 3.8](section3/PROPOSITION38.md).
 - Section 4: [coverage and audit commands](Section4/FORMALIZATION_MAP.md).
 - Section 5: [concrete integration](section5/CONCRETE_SECTION3_INTERFACE.md).
-- Section 6: [endpoint verification and main integration](section6/MAIN_INTEGRATION.md).
+- Section 6: [public endpoints and verification](section6/README.md).
 - Section 8: [Section 3 integration verification](Section8/SECTION3_INTEGRATION.md).
 - Section 9: [deterministic map](Section9/FORMALIZATION_MAP.md) and
   [small-ball audit](Section9/SMALL_BALL_AUDIT.md).
 - Section 10: [source, signatures and axiom audit](Section10/SOURCE_CONNECTION_AUDIT.md).
 
-A successful scoped run certifies its recorded source and checked statements,
-not all chapters at every later `main` commit. Historical logs and development
-details remain in the chapter documentation rather than serving as a global
-completion claim.
+A verification run certifies the recorded commit and the targets it checks.
 
 ## References
 
@@ -322,10 +298,6 @@ completion claim.
   [Matrix concentration inequalities and free probability][bandeira-2023].
   *Inventiones Mathematicae* 234, 419–487.
   [arXiv:2108.06312](https://arxiv.org/abs/2108.06312).
-- Bordenave, C., and Chafaï, D. (2012).
-  [Around the circular law][bordenave-2012].
-  *Probability Surveys* 9, 1–89.
-  [arXiv:1109.3343](https://arxiv.org/abs/1109.3343).
 - Brascamp, H. J., and Lieb, E. H. (1976).
   [Best constants in Young's inequality, its converse, and its generalization
   to more than three functions][brascamp-1976].
@@ -344,7 +316,6 @@ completion claim.
   [arXiv:0807.4898](https://arxiv.org/abs/0807.4898).
 
 [bandeira-2023]: https://doi.org/10.1007/s00222-023-01204-6
-[bordenave-2012]: https://doi.org/10.1214/11-PS183
 [brascamp-1976]: https://doi.org/10.1016/0001-8708%2876%2990184-5
 [cook-2018]: https://doi.org/10.1214/17-AOP1251
 [nguyen-2018]: https://doi.org/10.1016/j.jfa.2018.06.010

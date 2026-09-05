@@ -1,127 +1,88 @@
 # Section 5: calibration, pressure lifting and circular-law conclusions
 
-## Complex-density endpoint without pressure inputs — verified 2026-09-04 UTC
+This package formalizes calibration, pressure lifting, logarithmic-potential
+limits, energy tightness and empirical spectral convergence for band profiles.
+It depends on the repository's Section 3 and Section 4 proofs.
 
-Import `CircularLawSections56.Section5.VerifiedComplexSection5Endpoint` and use
-`PublishedSection3Concrete.indicator_complex_logPotential_at_of_bbv` for the
-logarithmic-potential limit at any prescribed `z : ℂ`, or
-`PublishedSection3Concrete.indicator_complex_full_of_bbv` for the full spectral
-conclusion. Both finite pressure
-contracts are now constructed from Section 4 on the actual matrix sample space;
-BBV is the only external literature premise, besides the stated density,
-moment, profile and bandwidth assumptions. The shift may be any fixed complex
-number, with constants depending on it.
+## Concrete endpoints
 
-The fixed-shift theorem has no exceptional planar null set in its conclusion.
-It does not claim a common probability-one event uniform over all complex shifts;
-the probability convergence is asserted separately for each caller-chosen `z`.
+For a fixed centered complex atom law with unit second moment, bounded planar
+density and finite third absolute moment, use:
 
-At `7136329`, the public target, 1118 axiom reports (all 874 public source
-theorems included), the pressure-free calling example and eight module kernel
-replays passed. See the [separate evidence and remaining scope](../PRESSURE_INPUT_MIGRATION.md).
-The real-density endpoint and generic taper interfaces retain their documented
-inputs. Earlier conditional endpoints remain available unchanged.
+```lean
+import CircularLawSections56.Section5.VerifiedComplexSection5Endpoint
+```
 
-## Gaussian-source migration — verified 2026-09-04 UTC
+The results are in `CircularLawSections56.Section5.PublishedSection3Concrete`:
 
-The concrete endpoints and general source record no longer request either
-BC12 estimate. The actual Gaussian law and both estimates are constructed
-internally, with BBV retained for the negative moment. The whole public target,
-1109 axiom reports (including all 865 named public source theorems) and six
-module kernel replays passed at `d7d732c`. See the
-[exact certificate](../GAUSSIAN_MIGRATION_VERIFICATION.md) and
-[remaining-input map](../GAUSSIAN_INPUT_MIGRATION.md).
-The two finite Section 4 pressure inputs still remain at this checkpoint.
+| Theorem | Conclusion |
+| --- | --- |
+| `indicator_complex_logPotential_at_of_bbv` | Normalized shifted log-determinant convergence in probability for every prescribed `z : ℂ` |
+| `indicator_complex_full_of_bbv` | Empirical spectral convergence against every bounded continuous real test function |
 
-## New concrete Section 3 integration — verified 2026-09-03
+These endpoints use centered indicator-band profiles with fixed positive lower
+and upper bounds, under the stated bandwidth assumptions. The matrices and
+sample laws are constructed explicitly. The proof applies Section 3 internally
+and derives both finite pressure estimates from Section 4 on the actual sample
+space. The BBV Gaussian/free comparison is the only external literature input.
 
-The actual fixed-atom short/calibration matrices, sample maps and both real/complex
-Section 5 endpoints now call the checked Section 3 theorem internally. Their
-[cloud build and transitive audit passed](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33725000131).
-Import `CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint`.
-See [CONCRETE_SECTION3_INTERFACE.md](CONCRETE_SECTION3_INTERFACE.md) for the exact
-uniformly positive indicator-profile scope and retained Section 4/literature
-inputs. The broader taper/varying-atom interfaces below keep their documented
-source boundary; they are not claimed to be automatically instantiated here.
+Convergence in probability holds separately for each fixed complex shift, with
+constants allowed to depend on it. The statement does not assert a common
+probability-one sample event for all shifts.
 
-## Original Section 5 package
+For real atoms, use
+`PublishedSection3Concrete.indicator_real_full_of_published_literature` from
+`CircularLawSections56.Section5.PublishedSection3ConcreteEndpoint`.
+This endpoint takes BBV, real geometric Brascamp–Lieb, and two finite Section 4
+pressure estimates, in addition to the model and bandwidth assumptions.
+Both atom branches construct their Gaussian reference estimates internally.
 
-This directory contains the checked Section 5 formalization for the combined
-circular-law manuscript. The agreed Section 3 results, finite Section 4
-estimates, and explicit model assumptions remain ordinary theorem hypotheses.
-There are no new mathematical axioms or placeholder proofs.
+The [concrete interface map](CONCRETE_SECTION3_INTERFACE.md) and
+[coverage map](SECTION5_COVERAGE.md) give the exact declarations and assumptions.
 
-See [SECTION5_COVERAGE.md](SECTION5_COVERAGE.md) for the declaration-level
-coverage and exact input boundary.
+## Proof coverage
 
-[Section 5 verification on GitHub Actions](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/workflows/section5.yml)
-builds this repository layout and runs the final audits. The original local
-mathematical snapshot passed all checks below; the extra publication-layout
-check was moved to GitHub at the user's request. See
-[VERIFICATION.md](VERIFICATION.md) for the distinction and actual CI status.
+- Real atoms on their IID sample spaces and complex atoms with bounded planar
+  density; indicator profiles and sampled, normalized polynomial taper profiles.
+- Complementary exterior-power operator-norm identities, including degree zero
+  and top degree, and uniform forward/inverse row costs.
+- Uniform mesoscopic calibration, pressure lifting for all cell counts,
+  remainder control, normalization and inactive-branch removal.
+- Logarithmic-potential limits, Hilbert–Schmidt tightness and empirical spectral
+  convergence against bounded continuous real tests.
+- Convergence of differences of spectral test integrals under the specified
+  whole-sequence marginal coupling, including independent product realization.
 
-## What is proved
+The disk-diagonal comparison model's energy and potential limits are proved
+internally. Taper and varying-atom theorems use the Section 3/4 hypotheses stated
+in their declarations; the concrete indicator-profile endpoints do not cover
+tapers whose lower bounds vanish.
 
-- Real atoms on their original IID sample spaces, as well as complex atoms
-  with bounded planar density.
-- Indicator profiles and actual sampled, normalized polynomial taper profiles.
-- Exact complementary exterior-power operator-norm identities, including
-  degrees zero and the top degree, and uniform forward/inverse row costs.
-- Uniform mesoscopic calibration, all-cell-count pressure lifting, remainder
-  control, normalization and inactive-branch removal.
-- Actual logarithmic-potential limits, Hilbert–Schmidt tightness, and ESD
-  convergence against every bounded continuous real test function.
-- Differences of the two models' spectral test integrals tend to zero under
-  the specified whole-sequence marginal coupling; independent product
-  realization is included. This is not total-variation convergence.
+## Build and verification
 
-The comparison disk-diagonal model's energy and potential limits are proved
-internally, not supplied as convergence assumptions.
-
-## Build from this repository
-
-The subproject depends on the parent repository and reuses its shared mathlib
-package directory. It does not alter the parent's targets or existing chapters.
+The subproject uses the pinned Lean 4.33.0/mathlib dependencies and shares the
+root `.lake/packages` directory. With those dependencies available:
 
 ```sh
 cd section5
-LEAN_NUM_THREADS=1 lake --no-cache build CircularLawSections56
+lake build CircularLawSections56.Section5.VerifiedComplexSection5Endpoint
 bash verify_section5.sh audit
 ```
 
-With compatible local dependencies already available, the full extended check is:
+For the full package and extended verification:
 
 ```sh
+lake build CircularLawSections56
 bash verify_section5.sh all
 ```
 
-For routine changes, keep the checkout, Lake configuration, and `.lake` caches
-in place and use the first two commands above. Lake rebuilds affected dependency
-chains; a changed upstream module can still cause many downstream rebuilds.
-Replacing an accepted Section 3 input with a proved theorem through the same
-interface is intended to isolate the mathematical changes in the adapter.
-The `all` phase also repeats strict re-elaboration and the extra kernel replay;
-it is a full verification option, not a requirement for every incremental edit.
+[GitHub Actions](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/workflows/section5.yml)
+checks the repository layout, source integrity, public signatures and axioms.
+The [verification certificate](../POINTWISE_Z_VERIFICATION.md) records build,
+audit and kernel-replay coverage. Axiom reports permit only `propext`,
+`Classical.choice` and `Quot.sound`; the mathematical inputs above are explicit
+theorem hypotheses.
 
-The original local snapshot passed the 4079-job integrated build, strict
-re-elaboration of all 65 extension modules, 15 regression proofs, selected and
-exhaustive axiom audits (1561 declarations, 1215 theorems), and kernel replay of
-all 118 Section 5 modules. The repository-layout build is recorded separately
-in [DEPENDENCIES.md](DEPENDENCIES.md). Only the standard Lean foundations
-`propext`, `Classical.choice`, and `Quot.sound` occur in the audit.
-
-No mathlib, toolchain, compiled cache, or scratch files are included in this
-directory. Do not run `lake update` merely to reuse an existing installation.
-
-## Upstream boundary
-
-[DEPENDENCIES.md](DEPENDENCIES.md) records repository paths, versions, and the
-five small support modules under `upstream/`. [UPSTREAM_INPUTS.md](UPSTREAM_INPUTS.md)
-distinguishes the existing Theorem 3.1 LSV project from the other accepted
-Section 3 inputs. The presence of support code does not claim that all of
-Section 3 has been proved.
-
-The namespace `CircularLawSections56.Section6` contains earlier helper modules
-required by this project. The Gaussian-profile continuation is the separate
-[`section6/`](../section6/README.md) package; its endpoint and verification
-scope are documented there, not inferred from these helper imports.
+[DEPENDENCIES.md](DEPENDENCIES.md) describes the dependency layout and support
+modules. The Gaussian noncompact-profile result is in the separate
+[Section 6 package](../section6/README.md).
