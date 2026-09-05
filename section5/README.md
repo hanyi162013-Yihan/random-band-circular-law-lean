@@ -3,11 +3,18 @@
 ## Complex-density endpoint without pressure inputs — verified 2026-09-04 UTC
 
 Import `CircularLawSections56.Section5.VerifiedComplexSection5Endpoint` and use
-`PublishedSection3Concrete.indicator_complex_full_of_bbv`. Both finite pressure
+`PublishedSection3Concrete.indicator_complex_logPotential_at_of_bbv` for the
+logarithmic-potential limit at any prescribed `z : ℂ`, or
+`PublishedSection3Concrete.indicator_complex_full_of_bbv` for the full spectral
+conclusion. Both finite pressure
 contracts are now constructed from Section 4 on the actual matrix sample space;
 BBV is the only external literature premise, besides the stated density,
 moment, profile and bandwidth assumptions. The shift may be any fixed complex
 number, with constants depending on it.
+
+The fixed-shift theorem has no exceptional planar null set in its conclusion.
+It does not claim a common probability-one event uniform over all complex shifts;
+the probability convergence is asserted separately for each caller-chosen `z`.
 
 At `7136329`, the public target, 1118 axiom reports (all 874 public source
 theorems included), the pressure-free calling example and eight module kernel

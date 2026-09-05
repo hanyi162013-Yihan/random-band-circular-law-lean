@@ -43,13 +43,15 @@ AUDITS = {
              "Section10/BernoulliSection10Source/AxiomAudit.lean",
              "Section9/AxiomAudit.lean", "Section9/SmallBallAxiomAudit.lean"],
     "section5": ["AxiomAudit.lean", "GaussianMigrationAudit.lean", "PublicTheoremAxiomAudit.lean"],
-    "section6": ["GaussianMigrationAudit.lean", "PublicTheoremAxiomAudit.lean"],
+    "section6": ["GaussianMigrationAudit.lean", "PublicTheoremAxiomAudit.lean",
+                 "PointwiseAxiomAudit.lean"],
 }
 REGRESSIONS = {
     "root": ["Section8/PublicSignatureAudit.lean", "SubgaussianSection8/PublicSignatureAudit.lean",
              "Section10/BernoulliSection10Source/DensitySchemaAudit.lean"],
     "section5": ["VerifiedPressureRegression.lean"],
-    "section6": ["Regression.lean", "BBVOnlyRegression.lean", "VerifiedPressureRegression.lean"],
+    "section6": ["Regression.lean", "BBVOnlyRegression.lean", "VerifiedPressureRegression.lean",
+                 "PointwiseRegression.lean"],
 }
 
 

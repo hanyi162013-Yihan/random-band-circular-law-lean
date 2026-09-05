@@ -2,11 +2,30 @@
 
 ## Preferred endpoint: no caller-supplied pressure estimates
 
-`NoncompactProfile.gaussian_profile_circular_law_of_bbv`, in
-`CircularLawSection6/VerifiedCorePressure.lean`, constructs both compact-core
+`NoncompactProfile.gaussian_profile_logPotential_of_bbv`, in
+`CircularLawSection6/VerifiedPointwiseProfileEndpoint.lean`, proves the actual
+Gaussian profile logarithmic-potential limit for every prescribed `z : ℂ`.
+Its spectral consequence is
+`NoncompactProfile.gaussian_profile_circular_law_of_pointwise_bbv`.
+The earlier `NoncompactProfile.gaussian_profile_circular_law_of_bbv`, in
+`CircularLawSection6/VerifiedCorePressure.lean`, remains available. These routes construct both compact-core
 pressure estimates from the proved Section 4/5 theorems. Only uniform BBV and
 the model's profile/bandwidth assumptions remain. The real-density Section 5
 and taper routes are not premises of this Gaussian endpoint.
+
+The fixed-shift conclusion contains no planar exceptional set. This is a
+pointwise-in-parameter statement, not a claim of one probability-one event
+simultaneously valid for every element of `ℂ`. At the generic Tao--Vu
+replacement boundary, `ae_of_all` converts the proved pointwise family into the
+almost-everywhere family required by that reusable interface.
+
+At `fba7f05`, the focused pointwise build and audits passed
+[run 33921454440](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33921454440):
+all 4589 dependency-inclusive targets, the BBV/Ginibre and pointwise axiom
+audits, and both focused regression files succeeded. The corresponding
+Section 5 fixed-shift endpoint passed its complete repository-layout build and
+axiom audit in
+[run 33916638215](https://github.com/hanyi162013-Yihan/random-band-circular-law-lean/actions/runs/33916638215).
 
 At `0b33ba4`, the ordinary build, all 841 axiom reports, three regression files
 and seventeen module kernel replays passed

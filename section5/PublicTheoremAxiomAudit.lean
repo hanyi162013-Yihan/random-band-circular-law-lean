@@ -44,6 +44,7 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSections56.Section5.final_closure_tendsto
 
 -- Section5/CanonicalSection5Endpoint.lean
+#print axioms CircularLawSections56.Section5.literal_canonical_profile_logPotential_at_of_section34
 #print axioms CircularLawSections56.Section5.literal_canonical_profile_endpoint_of_section34
 
 -- Section5/CircularLawFromPotential.lean
@@ -508,7 +509,9 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSections56.Section5.literal_uniform_mesoscopic_calibration
 
 -- Section5/LogarithmicProfileCircularLaw.lean
+#print axioms CircularLawSections56.Section5.logarithmic_profile_logPotential_at_of_section34
 #print axioms CircularLawSections56.Section5.logarithmic_profile_logPotential_of_section34
+#print axioms CircularLawSections56.Section5.logarithmic_profile_actual_logPotential_at_of_section34
 #print axioms CircularLawSections56.Section5.logarithmic_profile_actual_logPotential_of_section34
 #print axioms CircularLawSections56.Section5.logarithmic_profile_circularLaw_of_section34
 
@@ -996,6 +999,7 @@ Private lemmas are checked transitively, not listed as public declarations. -/
 #print axioms CircularLawSections56.Section5.complex_literalModelFinal_quantitative
 
 -- Section5/VerifiedComplexSection5Endpoint.lean
+#print axioms CircularLawSections56.Section5.PublishedSection3Concrete.indicator_complex_logPotential_at_of_bbv
 #print axioms CircularLawSections56.Section5.PublishedSection3Concrete.indicator_complex_full_of_bbv
 
 -- Section5/VerifiedGinibreSources.lean

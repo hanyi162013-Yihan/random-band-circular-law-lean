@@ -67,3 +67,7 @@ example (b : Fin 3 → ℂ) (ω : Fin 3 → ℂ) :
     filledLiteralIndicatorMatrix 0 1 ⟨1, by decide⟩ b ω = 0 := by
   simp only [filledLiteralIndicatorMatrix]
   norm_num
+
+-- The preferred complex-density endpoint takes an arbitrary fixed shift;
+-- no planar almost-everywhere quantifier occurs in its signature.
+#check @PublishedSection3Concrete.indicator_complex_logPotential_at_of_bbv
