@@ -7,11 +7,6 @@
       "sha256": "fad6275dc5df6c94e4496ca07ea4c3baefa284e123e1446fd0e32c285cd7ff38"
     },
     {
-      "path": "BC12_PLAN.md",
-      "bytes": 8119,
-      "sha256": "a7e61d4cc70fa7809622b6cd5dc9503ce725a21d18966e8f44786d4304a8ac0f"
-    },
-    {
       "path": "BUILD_AUDIT.md",
       "bytes": 9213,
       "sha256": "4a9e86493874ee8d719f4642cdf16b52273241bb5f49270abc32274bdb937915"
