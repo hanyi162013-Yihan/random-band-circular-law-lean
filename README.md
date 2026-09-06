@@ -74,8 +74,9 @@ Section 4 estimates on the actual matrix sample space. BBV is its only external
 literature premise; constants may depend on any fixed complex shift.
 
 The real endpoint `indicator_real_full_of_published_literature` is in
-`PublishedSection3ConcreteEndpoint`. It takes two finite pressure
-inputs and real geometric Brascamp–Lieb, in addition to BBV. Both branches
+`PublishedSection3ConcreteEndpoint`. It takes two finite Section 4 pressure
+estimates as internal interfaces, and real geometric Brascamp–Lieb in addition
+to BBV. Both branches
 construct their Gaussian reference estimates internally.
 Broader taper and varying-atom results are available with their documented
 Section 3/4 interfaces. The concrete fixed-law integration does not automatically
@@ -212,8 +213,15 @@ verbatim so that the documented imports and commands remain executable.
 | Structured-matrix least-singular-value estimate: [Cook (2018)][cook-2018], Theorem 1.12, with its norm guard | Proposition 3.8 and, through that anchor, Section 8. |
 | Deformed-square least-singular-value estimates: [Cook (2018)][cook-2018], Theorem 1.24, including the conditional versions used in the manuscript | Section 9 terminal/frame small-ball results and Section 8. |
 | Bottom-singular-value fixed-index and overcrowding estimates: [Nguyen (2018)][nguyen-2018], Theorem 1.4 | Section 9 interface control and Section 8. |
-| Paper Proposition 3.2, full-block least-singular-value estimate | Proposition 3.8 and, through it, Section 8. This is a retained result of this paper, not an external-paper citation. |
-| Two finite quantitative Section 4 pressure estimates, for calibration and the final ring | Explicit at the real-density Section 5 and generic conditional interfaces. Constructed internally at the complex-density Section 5 and Gaussian-profile Section 6 endpoints. |
+| Full-block least-singular-value estimate: [Jain, Jana, Luh and O’Rourke (2021)][jain-2021], Theorem 2.1, in the paper’s repaired formulation (Proposition 3.2) | Proposition 3.8 and, through it, Section 8; accepted as `Proposition32Input`. |
+
+Proposition 3.2 retains the main least-singular-value argument of
+[Jain, Jana, Luh and O’Rourke (2021)][jain-2021]. The paper repairs the
+auxiliary good-event construction by using an exponential block-operator-norm
+tail under its subgaussian hypothesis; see
+[Remark 3.3 and Appendix A](https://arxiv.org/html/2609.01295v1).
+Lean accepts this repaired statement as the explicit `Proposition32Input`
+hypothesis; its proof, including the repair, is not formalized here.
 
 The table concerns the concrete endpoints described above. General conditional
 APIs expose their intermediate inputs in their chapter maps and declarations.
@@ -306,6 +314,10 @@ A verification run certifies the recorded commit and the targets it checks.
   [Lower bounds for the smallest singular value of structured random matrices][cook-2018].
   *The Annals of Probability* 46(6), 3442–3500.
   [arXiv:1608.07347](https://arxiv.org/abs/1608.07347).
+- Jain, V., Jana, I., Luh, K., and O’Rourke, S. (2021).
+  [Circular law for random block band matrices with genuinely sublinear bandwidth][jain-2021].
+  *Journal of Mathematical Physics* 62(8), 083306.
+  [arXiv:2008.03850](https://arxiv.org/abs/2008.03850).
 - Nguyen, H. H. (2018).
   [Random matrices: overcrowding estimates for the spectrum][nguyen-2018].
   *Journal of Functional Analysis* 275(8), 2197–2224.
@@ -318,6 +330,7 @@ A verification run certifies the recorded commit and the targets it checks.
 [bandeira-2023]: https://doi.org/10.1007/s00222-023-01204-6
 [brascamp-1976]: https://doi.org/10.1016/0001-8708%2876%2990184-5
 [cook-2018]: https://doi.org/10.1214/17-AOP1251
+[jain-2021]: https://doi.org/10.1063/5.0042590
 [nguyen-2018]: https://doi.org/10.1016/j.jfa.2018.06.010
 [tao-vu-2010]: https://doi.org/10.1214/10-AOP534
 

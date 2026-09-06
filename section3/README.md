@@ -12,6 +12,15 @@ to depend on the shift.
 | Proposition 3.6 | Bounded-density finite-moment atoms; normalized shifted log-determinant convergence in the high-band regime | Canonical BBV comparisons; the density-alternative wrapper also takes geometric Brascamp–Lieb |
 | Proposition 3.8 | Centered variance-one real subgaussian atoms, including discrete laws, on a three-neighbor full-block ring; the same high-band log-potential conclusion | Proposition 3.2, Cook Theorem 1.12 and canonical BBV comparisons |
 
+Proposition 3.2 is the paper’s repaired form of
+[Jain, Jana, Luh and O’Rourke (2021), Theorem 2.1](https://doi.org/10.1063/5.0042590).
+It retains their main least-singular-value argument and replaces the auxiliary
+block-operator-norm good-event estimate with an exponential tail under the
+subgaussian hypothesis; see
+[Remark 3.3 and Appendix A](https://arxiv.org/html/2609.01295v1).
+The repaired statement is accepted as `Proposition32Input`; its proof,
+including the repair, is not formalized here.
+
 For Proposition 3.6, dimensions and bandwidths tend to infinity and satisfy
 
 ```text
